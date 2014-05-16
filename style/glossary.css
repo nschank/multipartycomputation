@@ -1,0 +1,42 @@
+div.glossaryBlock {
+	position:fixed;
+	min-width:150px;
+	min-height:50px;
+	max-width:300px;
+	left:0px;
+	top:0px;
+	display:none;
+	background-color:#F3F0DD;
+	font-family:alice;
+	border:1px solid #ABA98E;
+	border-right: 10px solid #3A3603;
+}
+
+div.glossaryBlock  h2{
+	margin-top:3px;
+}
+
+p.glossaryhelp {
+	font-size:8pt;
+	margin-top:20px;
+	margin-left:30px;
+}
+
+div.glossaryBlock a {
+	color:#3A3603;
+	text-decoration:none;
+}
+
+div.glossaryBlock a:hover {
+	color:#330000;
+	text-decoration:none;
+}
+
+span.definable {
+	font-family:def;
+}
+
+@font-face {
+	font-family:def;
+	src:url('../font/Walkway.ttf');
+}
