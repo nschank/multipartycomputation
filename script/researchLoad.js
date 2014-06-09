@@ -27,8 +27,8 @@ function createSection(authorSection,titleSection,yearSection,tagSection)
 	{
 		var researchPiece = document.createElement("div");
 		researchPiece.className = "paper";
-		researchPiece.innerHTML = "<span class=\"title\">" + paper.title + "</span><br /><span class=\"year\">" + paper.year + "</span><span class=\"authors\">" 
-					+ authorsOf(paper, 0) + "</span>";
+		researchPiece.innerHTML = "<span class=\"title\">" + paper.title + "</span><br /><i><span class=\"year\">" + paper.year + "</span><span class=\"authors\">" 
+					+ authorsOf(paper, 0) + "</span></i>";
 		
 		if(authorSection)
 			addToAuthors(paper, authorSection, researchPiece);
