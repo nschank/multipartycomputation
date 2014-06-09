@@ -15,10 +15,10 @@ function initResearchSection()
 	
 	if(authorSection)
 		for(var child in authorSection.childNodes)
-			sortChildren(child);
+			sortChildren(authorSection.childNodes.item(child));
 	if(tagSection)
 		for(var child in tagSection.childNodes)
-			sortChildren(child);
+			sortChildren(tagSection.childNodes.item(child));
 }
 
 function createSection(authorSection,titleSection,yearSection,tagSection)
@@ -27,7 +27,8 @@ function createSection(authorSection,titleSection,yearSection,tagSection)
 	{
 		var researchPiece = document.createElement("div");
 		researchPiece.className = "paper";
-		researchPiece.innerHTML = paper.authors[0] + paper.year + paper.title;
+		researchPiece.innerHTML = "<span class=\"title\">" + paper.title + "</span><br /><span class=\"year\">" + paper.year + "</span><span class=\"authors\">" 
+					+ authorsOf(paper, 0) + "</span>";
 		
 		if(authorSection)
 			addToAuthors(paper, authorSection, researchPiece);
@@ -46,6 +47,18 @@ function createSection(authorSection,titleSection,yearSection,tagSection)
 	}
 }
 
+function authorsOf(paper, from)
+{
+	if(paper.authors.length <= from) return "";
+	else
+	{
+		var currentAuthor = paper.authors[from];
+		var linkedAuthor = "<a href=\"authors/" + currentAuthor + ".html\">" + currentAuthor + "</a>"
+		if(paper.authors.length-1 == from) return linkedAuthor;
+		else return linkedAuthor + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + authorsOf(paper,from+1);
+	}
+}
+
 function addToAuthors(paper, section, node)
 {
 	for(var i = 0; i < paper.authors.length; i++)
@@ -55,7 +68,7 @@ function addToAuthors(paper, section, node)
 		{
 			var newAuthorDiv = document.createElement("div");
 			newAuthorDiv.id = "research:author:" + paper.authors[i];
-			newAuthorDiv.innerHTML = "<h2>" + paper.authors[i] + "</h2>";
+			newAuthorDiv.innerHTML = "<h2 class=\"authorname\">" + paper.authors[i] + "</h2>";
 			section.appendChild(newAuthorDiv);
 			authorSub = newAuthorDiv;
 		}
