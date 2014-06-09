@@ -8,6 +8,7 @@ function addEquationListeners()
 	{
 		addFunctionsE(equation);
 		addDOME(equation, counter);
+		
 		counter++;
 		equation = document.getElementById("equation"+counter);
 	}
