@@ -2,40 +2,48 @@ window.addEventListener("load", initResearchSection, true);
 
 function initResearchSection()
 {
-	researchInfo.forEach(createSection);
-}
-
-function createSection(paper)
-{
 	var authorSection = document.getElementById("researchByAuthor");
 	var titleSection = document.getElementById("researchByTitle");
 	var yearSection = document.getElementById("researchByYear");
 	var tagSection = document.getElementById("researchByTag");
-	
-	var researchPiece = document.createElement("div");
-	researchPiece.className = "paper";
-	researchPiece.innerHTML = paper.authors[0] + paper.year + paper.title;
-	
-	addToAuthors(paper, authorSection, researchPiece);
-	addSection(paper, titleSection, researchPiece, function(p)
-		{
-			return "papers:title:" + p.title;
-		});
-	addSection(paper, yearSection, researchPiece, function(p)
-		{
-			return "papers:year:" + p.year;
-		});
-	addToTags(paper, tagSection, researchPiece);
-	
+
+	researchInfo.forEach(createSection(authorSection,titleSection,yearSection,tagSection));
 	sortChildren(titleSection);
 	sortChildren(authorSection);
 	sortChildren(yearSection);
 	sortChildren(tagSection);
 	
-	for(var child in authorSection.childNodes)
-		sortChildren(child);
-	for(var child in tagSection.childNodes)
-		sortChildren(child);
+	if(authorSection)
+		for(var child in authorSection.childNodes)
+			sortChildren(child);
+	if(tagSection)
+		for(var child in tagSection.childNodes)
+			sortChildren(child);
+}
+
+function createSection(authorSection,titleSection,yearSection,tagSection)
+{	
+	return function(paper)
+	{
+		var researchPiece = document.createElement("div");
+		researchPiece.className = "paper";
+		researchPiece.innerHTML = paper.authors[0] + paper.year + paper.title;
+		
+		if(authorSection)
+			addToAuthors(paper, authorSection, researchPiece);
+		if(titleSection)
+			addSection(paper, titleSection, researchPiece, function(p)
+				{
+					return "papers:title:" + p.title;
+				});
+		if(yearSection)
+			addSection(paper, yearSection, researchPiece, function(p)
+				{
+					return "papers:year:" + p.year;
+				});
+		if(tagSection)
+			addToTags(paper, tagSection, researchPiece);
+	}
 }
 
 function addToAuthors(paper, section, node)
@@ -85,6 +93,7 @@ function addSection(paper, section, node, createID)
 
 function sortChildren(element)
 {
+	if(!element) return;
 	var items = element.childNodes;
 	var itemsArr = [];
 	for (var i in items) {
