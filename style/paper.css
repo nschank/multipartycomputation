@@ -5,9 +5,10 @@ div.paper {
 	margin:8px auto;
 }
 
-div.paper span.title {
+div.paper span.title a {
 	font-weight:bold;
 	font-size:14pt;
+	text-decoration:none;
 }
 
 div.paper span.year {
