@@ -5,9 +5,15 @@ function addGlossaryListeners()
 	var definable = document.getElementsByClassName("definable");
 	for(var i = 0; i < definable.length; i++)
 	{
-		var definition = define(definable.item(i).innerHTML);
+		var word = definable.item(i).innerHTML;
+		var definition = define(word);
+		if(definition == null)
+		{
+			word = definable.item(i).id;
+			definition = define(word);
+		}
 		if(definition == null) continue;
-		addDOMG(i, definable.item(i).innerHTML, definition);
+		addDOMG(i, word, definition);
 		definable.item(i).id = "glossary"+i;
 		addFunctionsG(definable.item(i));
 	}
