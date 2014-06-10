@@ -7,26 +7,31 @@ function addReferenceListeners()
 	for(var i = 0; i < elements.length; i++)
 	{
 		var elem = elements.item(i);
-		addDOMR(elem.id.substring(3), i);
+		if(!addDOMR(elem.id.substring(3), i)) continue;
 		elem.id += "-"+i;
 		addFunctionsR(elem);
 	}
 }
 
-function addDOMR(id, secondid)
+function addDOMR(id, secondid, text)
 {
+
+	var reference = document.getElementById("citation"+id);
+	if(reference == null) return false;
+	
 	var block = document.createElement("div");
 	block.className="refBlock";
 	block.id = "ref"+id+"-"+secondid+"block";
 	
 	block.innerHTML += "<h2>Reference</h2>";
-	block.innerHTML += "<p>"+document.getElementById("citation"+id).innerHTML+"</p>";
+	block.innerHTML += "<p>"+reference.innerHTML+"</p>";
 	block.innerHTML += "<p><a href=\"" + authorLink(id) + "\">See more by this author</a></p>";
 	
 	block.innerHTML += "<p class=\"refrefer\"><a href=\"#references\">See complete reference list</a></p>";
 	document.body.appendChild(block);
 	block.addEventListener('mouseover',keepOpenR);
 	block.addEventListener('mouseout',maybeCloseR);
+	return true;
 }
 
 function addFunctionsR(reference)
