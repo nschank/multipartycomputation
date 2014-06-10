@@ -18,7 +18,10 @@
 			{
 				switch(box)
 				{
-					case 0: return "<h3>The Pythagorean Equation</h3><p>The sum of the squared lengths of the two legs of a right triangle are equal to the squared length of the hypotenuse.</p>";
+					case 0:
+					case 1: return "Any function on <span class=\"equation\">m</span> integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer.";
+					case 2: return "The encryption of the <span class=\"equation\">N</span>-bit integer <span class=\"equation\">x</span> under Alice's public key.";
+					case 3: return "The decryption of ten values under Alice's private key.";
 					default: return "No info on this equation yet.";
 				}
 			}
@@ -35,7 +38,8 @@
 			{
 				switch(word)
 				{
-					case "smite": return "<ol><li>to strike sharply or heavily</li><li>to kill or severely injure by striking</li><li>to affect as if by striking</li></ol>";
+					case "one-way function": return "A function which is easy to evaluate but hard to invert. We will have more information about one-way functions soon, and they will be part of a tutorial.";
+					case "permutation": return "Any bijective (onto and 1-1) function with the same domain and range. In other words, any function that arranges its entire domain into a one-way cycle (or group of cycles) and, on any input, returns whatever is 'next' in the cycle.";
 					default: return null;
 				}
 			}
@@ -56,28 +60,240 @@
 				<a href="../../aboutus.html"><div class="navbox"><center><h2>about us</h2></center></div></a>
 			</div>
 			<div class="main">
-				<div class="researchnav">
-					<div class="researchh">Research Navigation</div>
-					<div class="middlefifty">
-						<div class="researchl"><a href="../timeline.html">Timeline</a></div>
-						<div class="researchl"><a href="../title.html">By Title</a></div>
-						<div class="researchl"><a href="../authors.html">By Author</a></div>
-						<div class="researchl"><a href="../tag.html">By Category</a></div>
-					</div>
+				<div class="middlefifty">
+					<div class="researchl"><a href="../timeline.html">Timeline</a></div>
+					<div class="researchl"><a href="../title.html">By Title</a></div>
+					<div class="researchl"><a href="../authors.html">By Author</a></div>
+					<div class="researchl"><a href="../tag.html">By Category</a></div>
 				</div>
-				<div class="papertitle">Protocols for Secure Computations</div>
-				<div class="paperinfo">1982
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<i><a href="../authors/Andrew C. Yao.html">Andrew C. Yao</a></i></div>
-				<div class="paperexpl">
+				<div class="researchanalysis"><a name="_A"></a>
+					<div class="pdfbox">HALLO</div>
+					<div class="papertitle">Protocols for Secure Computations</div>
+					<div class="paperinfo">1982
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<i><a href="../authors/Andrew C. Yao.html">Andrew C. Yao</a></i></div>
 					<div class="papertoc">
 						<h4 style="color:#333333">Table of Contents</h4>
-						<ol style="margin-left:10px">
-							<a href="#_1"><li value="1">Introduction</li></a>
+						<ol type="A">
+							<a href="#_A"><li>Overview</li></a>
+							<ol>
+								<li>Introduction</li>
+								<li>Goals</li>
+								<li>Definitions</li>
+								<li>Theorems</li>
+								<li>Results</li>
+								<li>Effect</li>
+							</ol>
+							<a href="#_B"><li>Annotated Extended Abstract</li></a>
 						</ol>
 					</div>
-					<a name="_1"></a><h2>Introduction</h2>
+					<div class="keysection">Suppose <span class="equation">m</span> people wish to compute the value of a function 
+						<span class="equation" id="equation0">f(x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>,&hellip;, x<sub>m</sub>)</span>,
+						which is an integer-valued function of <span class="equation">m</span> integer variables <span class="equation">x<sub>i</sub></span> of bounded range. 
+						Assume initially person <span class="equation">P<sub>i</sub></span> knows the value of <span class="equation">x<sub>i</sub></span> and no other 
+						<span class="equation">x</span>’s. Is it possible for them to compute the value of <span class="equation">f</span>, by communicating among themselves, without unduly giving away any information about the values of their own variables?</div>
+					<a name="_intro"></a><h2>Introduction</h2>
+					<p>Etc etc.</p>
+					<a name="_goals"></a><h2>Goals</h2>
+					<p>Etc etc.</p>
+					<a name="_defs"></a><h2>Definitions</h2>
+					<p>Etc etc.</p>
+					<a name="_theorems"></a><h2>Theorems</h2>
+					<p>Etc etc.</p>
+					<a name="_results"></a><h2>Results</h2>
+					<p>Etc etc.</p>
+						
+				</div>
+			</div>
+			<div class="papermain"><a name="_B"></a>
+				<div class="researchanalysis">
+					<div class="papertoc">
+						<h4 style="color:#333333">Table of Contents</h4>
+						<ol type="A">
+							<a href="#_A"><li>Overview</li></a>
+							<a href="#_B"><li>Annotated Extended Abstract</li></a>
+							<ol>
+								<a href="#sec1"><li>Introduction</li></a>
+								<a href="#sec2"><li>A Unified View of Secure Computation</li></a>
+								<a href="#sec3"><li>Deterministic Computations</li></a>
+								<ol>
+									<a href="#sec3.1"><li>Solution to the Millionaire's Problem</li></a>
+									<li>Model for the General Problem</li>
+									<li>Additional Requirements</li>
+									<li>Applications</li>
+								</ol>
+								<li>Probabilistic Computations</li>
+								<li>Generalization to <span class="equation">m</span> Party Case</li>
+								<li>What Cannot Be Done?</li>
+							</ol>
+						</ol>
+					</div>
+					<a name="sec1"></a><h2>Introduction</h2>
+					<p class="paperoriginaltext">
+						Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other’s wealth. How can they carry out such a conversation?
+					</p>
+					<p class="paperoriginaltext">
+						This is a special case of the following general problem. Suppose <span class="equation">m</span> people wish to compute the value of a function 
+						<span class="equation" id="equation1">f(x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>,&hellip;, x<sub>m</sub>)</span>,
+						which is an integer-valued function of <span class="equation">m</span> integer variables <span class="equation">x<sub>i</sub></span> of bounded range. 
+						Assume initially person <span class="equation">P<sub>i</sub></span> knows the value of <span class="equation">x<sub>i</sub></span> and no other 
+						<span class="equation">x</span>’s. Is it possible for them to compute the value of <span class="equation">f</span>, by communicating among themselves, without unduly giving away any information about the values of their own variables? Assume initially person <span class="equation">P<sub>i</sub></span> knows the value of <span class="equation">x<sub>i</sub></span> and no other <span class="equation">x</span>'s. Is it possible for them to compute the value of <span class="equation">f</span>, by communicating among themselves, without unduly giving away any information about the values of their own variables? The millionaire’s problem corresponds to the case when <span class="equation">m = 2</span> and 
+						<span class="equation">f(x<sub>1</sub>, x<sub>2</sub>) = 1</span> if <span class="equation">x<sub>1</sub> < x<sub>2</sub></span>, 
+						and <span class="equation">0</span> otherwise. In this paper, we will give precise formulation of this general problem and describe three ways of solving it by use of <span class="definable">one-way function</span>s. These results have applications to secret voting, private querying of database, oblivious negotiation, playing mental poker, etc. We will also discuss the complexity question “How many bits need to be exchanged for the computation”, and describe methods to prevent participants from cheating. Finally, we study the question “What cannot be accomplished with one-way functions”.
+					</p>
+					<p class="paperoriginaltext">
+						Before describing these results, we would like to put this work in perspective by first considering a unified view of secure computation in the next section.
+					</p>
 					
+					<a name="sec2"></a><h2>A Unified View of Secure Computation</h2>
+					<p class="paperoriginaltext">
+						Since <span class="definable">one-way function</span>s were first proposed in 1976 <a href="#citation1"><sup class="reference" id="ref1">[1]</sup></a>, they have been used in two kinds of applications. 
+						
+						The first kind is concerned with the encryption and transmission of messages to make them unreadable and unalterable for eavesdroppers and saboteurs <a href="#citation1"><sup class="reference" id="ref1">[1]</sup></a><a href="#citation2"><sup class="reference" id="ref2">[2]</sup></a><a href="#citation3"><sup class="reference" id="ref3">[3]</sup></a><a href="#citation4"><sup class="reference" id="ref4">[4]</sup></a>. 
+						
+						The second kind of applications includes “<span class="definable">mental poker</span>”<a href="#citation5"><sup class="reference" id="ref5">[5]</sup></a>, in which two players deal cards by communicating over a telephone line, and “<span class="definable">coin flipping</span>” <a href="#citation6"><sup class="reference" id="ref6">[6]</sup></a>, in which two mutually suspecting parties are to generate an unbiased bit. 
+						
+						It would be desirable to have a unified framework where all these applications can be related, and where common proof techniques can be developed for proving the security of protocols. 
+						
+						More fundamentally, such a framework is essential if we are ever to understand the intrinsic power and limitation of one-way functions. 
+						
+						For example, without a precise model it would be hard to answer a question such as “Is it possible for three mutually suspecting parties to interactively generate a bit with <span class="definable">bias</span> <span class="equation">1/e</span>?”
+					</p>
+					<p class="paperoriginaltext">
+						In response to this need, we propose to adopt the following view. 
+						
+						Two parties Alice and Bob, in possession of private variables <span class="equation">i</span> and <span class="equation">j</span> respectively, 
+						wish to communicate so that Alice can evaluate a function <span class="equation">f(i, j)</span>, and Bob a function <span class="equation">g(i, j)</span>. 
+						
+						There may be some eavesdroppers or saboteurs on the communication line. 
+						
+						The purpose of a protocol would be to design an algorithm for Alice and Bob to follow, such that certain <span class="definable">security constraints</span> (against saboteur) and <span class="definable">privacy constraints</span> (Alice may not wish to reveal the exact value of <span class="equation">i</span>) can be satisfied.
+					</p>
+					<p class="paperoriginaltext">
+						In one extreme, when the computation component is trivial, e.g. if <span class="equation">f</span> = constant and <span class="equation">g(i, j) = i</span>, 
+						then we get the first kind of applications mentioned before, in which the basic concern is eavesdropping and sabotage. 
+						
+						In the other extreme, when such external threats can be ignored, but the computation of <span class="equation">f</span> and <span class="equation">g</span> is nontrivial, then we get the problem which is to be studied in this paper.
+						
+						(Mental poker and coin flipping represent a stochastic version of this problem which will also be discussed.)
+						
+						Note that, although we have used Alice and Bob in the above description, all discussions can be extended to the case of <span class="equation">m</span> parties communicating.
+					</p>
+					<p class="paperoriginaltext">
+						It would be natural to discuss these two special cases together. 
+						
+						However, due to length consideration, we will report here only the results corresponding to the computation-intense case with no outside saboteurs.
+						
+						Results on the other case will be reported elsewhere.
+					</p>
+					
+					<a name="sec3"></a><h2>Deterministic Computations</h2>
+					<a name="sec3.1"></a><h3>Solutions to the Millionaire's Problem</h3>
+					
+					<p class="paperoriginaltext">
+						In this abstract, we will describe in detail only one of the three solutions we have.
+					</p>
+					<p class="paperoriginaltext">
+						For definiteness, suppose Alice has <span class="equation">i</span> millions and Bob has <span class="equation">j</span> millions, 
+						where <span class="equation">1 &lt; i, j &lt; 10</span>. 
+						
+						We need a protocol for them to decide whether <span class="equation">i &lt; j</span>, such that this is also the only thing they know in the end 
+						(aside from their own values). 
+						
+						Let <span class="equation">M</span> be the set of all <span class="equation">N</span>-bit nonnegative integers, 
+						and <span class="equation">Q<sub>N</sub></span> be the set of all <span class="definable" id="permutation">1-1 onto functions from
+<span class="equation">M</span> to <span class="equation">M</span></span>. 
+
+						Let <span class="equation">E<sub>a</sub></span> be the public key of Alice, generated by choosing a random element from <span class="equation">Q<sub>N</sub></span>.
+					</p>
+					<p class="paperoriginaltext">
+						The protocol proceeds as follows:
+					</p>
+					<ol class="paperoriginaltext">
+						<li>
+							Bob picks a random <span class="equation">N</span>-bit integer <span class="equation">x</span> and computes privately the value of <span class="equation" id="equation2">E<sub>a</sub>(x)</span>; call the result <span class="equation">k</span>.
+						</li>
+						<li>
+							Bob sends Alice the number <span class="equation">k−j+1</span>.
+						</li>
+						<li>
+							Alice computes privately the values of <span class="equation" id="equation3">y<sub>u</sub>=D<sub>a</sub>(k−j+u)</span> for <span class="equation">u = 1,2,&hellip;,10</span>.
+						</li>
+						<li>
+							Alice generates a random prime <span class="equation">p</span> of <span class="equation">N/2</span> bits, 
+							and computes the values <span class="equation">z<sub>u</sub> = y<sub>u</sub>(mod p)</span> for all <span class="equation">u</span>; 
+							if all <span class="equation">z<sub>u</sub></span> differ by at least <span class="equation">2</span> in the <span class="equation">mod p</span> sense, stop;
+							otherwise generates another random prime and repeat the process until all <span class="equation">z<sub>u</sub></span> 
+							differ by at least <span class="equation">2</span>; 
+							let <span class="equation">p, z<sub>u</sub></span> denote this final set of numbers.
+						</li>
+						<li>
+							Alice sends the prime <span class="equation">p</span> and the following 10 numbers to Bob: 
+							<span class="equation">z<sub>1</sub>,z<sub>2</sub>,&hellip;,z<sub>i-1</sub></span> followed by 
+							<span class="equation">z<sub>i</sub>+1,z<sub>i+1</sub>+1,&hellip;,z<sub>10</sub>+1</span>; 
+							the above numbers should be interpreted in the <span class="equation">mod p</span> sense.
+						</li>
+						<li>
+							Bob looks at the <span class="equation">j</span>-th number (not counting <span class="equation">p</span>) sent from Alice, 
+							and decides that <span class="equation">i&#8805;j</span> if it is equal to <span class="equation">x mod p</span>, 
+							and <span class="equation">i&lt;j</span> otherwise.
+						</li>
+						<li>
+							Bob tells Alice what the conclusion is.
+						</li>
+					</ol>
+					<p class="paperoriginaltext">
+						This protocol clearly enables Alice and Bob to decide correctly who is the richer person. 
+						To show that it meets the requirement that they cannot get any more information about the wealth of the other party, we need to define a precise model which will be done in <a href="#sec3.2">Section 3.2</a>.
+						Here we will informally argue why the requirement is met.
+					</p>
+					<p class="paperoriginaltext">
+						Firstly, Alice will not know anything about Bob’s wealth <span class="equation">j</span>, 
+						except for the constraint on <span class="equation">j</span> implied by the final result that Bob told her, 
+						because the only other information coming from Bob is that Bob knows the value of <span class="equation">D<sub>a</sub>(s)</span> for
+						some <span class="equation">s</span> between <span class="equation">k-j+1</span> to <span class="equation">k-j+10</span>. 
+						As the function <span class="equation">E<sub>a</sub></span> is random all the 10 possibilities are equally likely.
+					</p>
+					<p class="paperoriginaltext">
+						What does Bob know? He knows <span class="equation">y<sub>j</sub></span> 
+						(which is <span class="equation">x</span>) and hence <span class="equation">z<sub>j</sub></span>. 
+						However, he has no information about the values of other <span class="equation">z<sub>u</sub></span>, 
+						and by looking at the numbers Alice sent him, he cannot tell if they are <span class="equation">z<sub>u</sub></span>
+						or <span class="equation">z<sub>u</sub>+1</span>.
+					</p>
+					<p class="paperoriginaltext">
+						This has not finished the argument yet, as Alice or Bob might try to figure out the other person’s value by making more calculations. 
+						For example, Bob might try to randomly choose a number <span class="equation">t</span> and check if <span class="equation">E<sub>a</sub>(t)=k-j+9</span>;
+						if he succeeds, he then knows the value <span class="equation">y<sub>9</sub></span> to be <span class="equation">t</span>, 
+						and knows the value of <span class="equation">z<sub>9</sub></span>, 
+						which enables him to find out whether <span class="equation">i&#8805;9</span>.
+						That would be an extra piece of information that Bob is not supposed to find out, 
+						if <span class="equation">i&#8805;9</span> has been the outcome of the previous conclusion. 
+						Thus, one also has to include in the formal definition that not only the participants do not gain information as a result of the exchange specified by the protocol, but also they cannot perform calculation within a reasonable amount of time to gain this information. 
+						In the formal definition to be given in <a href="#sec3.2">Section 3.2</a>, we will define this precisely.
+					</p>
+					<p class="paperoriginaltext">
+						One may have noticed the possibility that some party may cheat in the process, by deviating from the agreed protocol. 
+						For example, Bob may lie to Alice in the final step and tell Alice the wrong conclusion. 
+						Is there a way of designing a protocol such that the chance of a successful cheating becomes vanishingly small, 
+						without revealing the values of <span class="equation">i</span> and <span class="equation">j</span>? 
+						We will show that this is possible in <a href="#sec3.3">Section 3.3</a>. 
+						(Note that this is a stronger requirement than the verifiability requirement used in the mental poker protocol in Shamir et. al.
+						<a href="#citation5"><sup class="reference" id="ref5">[5]</sup></a>).
+					</p>
+					<p class="paperoriginaltext">
+						We have two other solutions to the millionaire’s problem based on different principles. 
+						The first of them assumes that Alice and Bob each owns a private one-way function, 
+						where these functions satisfy the commutativity property, i.e. 
+						<span class="equation">E<sub>a</sub>E<sub>b</sub>(x) = E<sub>b</sub>E<sub>a</sub>(x)</span>. 
+						The other solution makes use of a probabilistic encryption method invented by Goldwasser and Micali <a href="#citation2"><sup class="reference" id="ref2">[2]</sup></a>.
+					</p>
+					
+					<a name="sec3.2"></a><h3>Model for the General Problem</h3>
+					<p class="paperoriginaltext">
+						As these three solutions base their security on different assumptions, 
+						a precise model has to be specified in detail for each solution. In this abstract, we will only give the model that corresponds to the first solution.
+					</p>
 				</div>
 			</div>
 			<div class="referencecontainer">
