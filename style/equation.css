@@ -33,5 +33,8 @@ div.equationBlock a:hover {
 }
 
 span.equation {
-	font-weight:bold;
+	font-weight:boldest;
+	font-family:monospace;
+	font-style:none;
+	margin:0px 5px;
 }

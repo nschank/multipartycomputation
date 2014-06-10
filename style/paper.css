@@ -31,10 +31,10 @@ h2.authorname {
 	border-top:1px dotted black;
 }
 
-div.researchnav {
+div.researchanalysis {
 	width:95%;
 	margin-left:2.5%;
-	margin-top:5px;
+	margin-top:50px;
 	float:left;
 	padding-bottom:5px;
 	background-color:#F3F0DD;
@@ -56,14 +56,21 @@ div.researchl {
 	float:left;
 	width:25%;
 	font-size:9pt;
+	text-align:center;
 }
 
 div.researchl a {
 	text-decoration:none;
 }
 
+div.pdfbox {
+	float:right;
+	width:50px;
+	height:50px;
+}
+
 div.papertitle {
-	margin:80px 10% 0px 10%;
+	margin:10px 10% 0px 10%;
 	border-bottom:1px dotted #555555;
 	text-align:center;
 	font-size:24pt;
@@ -80,7 +87,7 @@ div.paperexpl {
 
 div.papertoc {
 	margin:10px 3%;
-	width:20%;
+	width:25%;
 	background-color:#C9C7AD;
 	border:1px solid #8A8194;
 	min-height:100px;
@@ -99,4 +106,36 @@ h2,h3,h4,h5 {
 div.paperfloatleft {
 	float:left;
 	margin-left:50px;
+}
+
+div.papermain {
+	margin-top:20px;
+	background-color:#E7E5CB;
+	min-height:400px;
+	font-family:alice;
+	overflow-x:hidden;
+	border-left:10px solid #805355;
+	padding-bottom:10px;
+	margin-bottom:25px;
+}
+
+.keysection {
+	font-style:italic;
+	margin:10px 5%;
+	color:#666666;
+	float:left;
+	width:55%;
+	
+}
+
+.paperoriginaltext {
+	margin:11px 10px;
+	font-size:12pt;
+}
+
+.paperannotation {
+	color:#444444;
+	font-size:10pt;
+	margin:13px auto;
+	width:80%;
 }
