@@ -38,6 +38,7 @@
 			{
 				switch(word)
 				{
+					case "collusion": return "Secret or illegal cooperation or conspiracy, especially in order to cheat or deceive others.";
 					case "one-way function": return "A function which is easy to evaluate but hard to invert. We will have more information about one-way functions soon, and they will be part of a tutorial.";
 					case "permutation": return "Any bijective (onto and 1-1) function with the same domain and range. In other words, any function that arranges its entire domain into a one-way cycle (or group of cycles) and, on any input, returns whatever is 'next' in the cycle.";
 					default: return null;
@@ -293,6 +294,49 @@
 					<p class="paperoriginaltext">
 						As these three solutions base their security on different assumptions, 
 						a precise model has to be specified in detail for each solution. In this abstract, we will only give the model that corresponds to the first solution.
+					</p>
+                    <p class="paperoriginaltext">
+						For simplicity, we will only give the definitions and results for the case when <span class="equation">f</span>
+						is <span class="equation">0-1</span> valued and <span class="equation">m=2</span> (Alice and Bob).
+						Generalization of the results to general <span class="equation">m</span> will be briefly discussed in
+						<a href="#sec5">Section 5</a>.  The proofs for the general case involve additional technical complications, and
+						there are extra security considerations such as possible “<span class="definable" id="collusion">collusions</span>” that are absent in the 2-person case.
+                    </p>
+					<h4>Protocol</h4>
+					<p class="paperoriginaltext">
+						Assume Alice has a public one-way function <span class="equation">E<sub>a</sub></span>,
+						whose inverse function <span class="equation">D<sub>a</sub></span> is known only to Alice;
+						similarly Bob has a public <span class="equation">E<sub>b</sub></span>, and a private inverse
+						<span class="equation">D<sub>b</sub></span>. Assume that <span
+							class="equation">E<sub>a</sub></span> and <span class="equation">E<sub>b</sub></span> are independently and randomly
+						drawn from <span class="equation">Q<sub>N</sub></span>, the set of all the possible <span class="definable" id="permutation">1-1
+						onto functions</span> on <span class="equation">N</span>-bit integers.
+						A protocol <span class="equation">A</span> for computing a function <span class="equation">f(i,j)</span> specifies exactly how Alice and
+						Bob should communicate as follows.
+						Alice and Bob send strings to each other alternately.
+						Each time after Bob has finished transmission, Alice examines the information so far in her possession,
+						which consists of some sequence of strings <span class="equation">&alpha;<sub>1</sub>,&alpha;<sub>2</sub>,&hellip;,&alpha;<sub>t</sub></span>, and some relations among the
+						strings (e.g. <span class="equation">E<sub>b</sub>(&alpha;<sub>3</sub>)=&alpha;<sub>9</sub></span>, <span
+							class="equation">&alpha;<sub>8</sub></span> has an odd number of
+						1’s);
+						based on the bits that have so far been transmitted between her and Bob,
+						the protocol specifies how she should compute in private strings <span class="equation">&alpha;<sub>t+1</sub>,&alpha;<sub>t+2</sub>,&hellip;,&alpha;<sub>s</sub></span>
+						where each new string <span class="equation">&alpha;<sub>u</sub></span> is a function of the earlier strings,
+						or of the form <span class="equation">E<sub>a</sub>(y)</span>,
+						<span class="equation">E<sub>b</sub>(y)</span> or <span class="equation">D<sub>a</sub>(y)</span>
+						where y is a string already obtained.
+						The choice of which function to apply or whether to evaluate <span
+							class="equation">E<sub>b</sub></span> or <span class="equation">D<sub>a</sub></span> is in general
+						probabilistic, i.e. she will decide to evaluate <span class="equation">E(&alpha;<sub>4</sub>)</span>,
+						or to compute &alpha;<sub>2</sub> + 3&alpha;<sub>8</sub> based on the outcomes of some coin tosses.
+						After she has finished this computation, she will send a string to Bob, and again the string is chosen probabilistically.
+						Now it is Bob’s turn to compute strings and send a string according to the protocol.
+						We agree that there is a special symbol whose appearance means the end of the execution of the protocol.
+						By that time, the protocol has an instruction for each participant to compute
+						the function value <span class="equation">f</span> in private.
+						Finally, we require that, in a protocol, the total number of evaluations of <span class="equation">E</span>’s
+						and <span class="equation">D</span>’s by Bob and Alice be bounded by <span class="equation">O(N<sup>k</sup>)</span>, where
+						<span class="equation">k</span> is an integer chosen in advance.
 					</p>
 				</div>
 			</div>
