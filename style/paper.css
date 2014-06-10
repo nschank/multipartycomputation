@@ -139,3 +139,9 @@ div.papermain {
 	margin:13px auto;
 	width:80%;
 }
+
+.theorem {
+	font-style:italic;
+	font-size:110%;
+	margin-top:0px;
+}
