@@ -416,7 +416,28 @@
 								\((\epsilon,\delta)\)-privacy constraint such that
 								\(O(C(f)\log{\frac{1}{\epsilon\cdot\delta}})\).
 							</p>
+							<p class="paperoriginaltext">
+								In fact, if \(f\) can be computed by a Turing machine in time \(S\), then the protocol can
+								be implemented such that both Alice and Bob have Turing machine algorithms to execute the
+								protocol with a time bound \(O(S\log{\frac{1}{\epsilon\cdot\delta}})\).
+							</p>
+							<p class="paperoriginaltext">
+								However, there exist functions that need exponentially many bits transmitted between Bob
+								and Alice with the privacy constraint. Let \(F_n\) be the family of \(0-1\) valued function
+								\(f(i,j)\) with \(i\) and \(j\) being \(n\)-bit integers. Clearly, at most \(n\) bits of
+								transmitted information can compute \(f\), in the absence of the privacy constraint. (See
+								<a href="#citation7"><span class="reference" id="ref7">[7]</span></a> for further discussion).
+							</p>
+							<h5>Theorem 3</h5>
+							<p class="paperoriginaltext theorem">
+								Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(f\) be a random element of \(F_n\),
+								then any protocol \(A\) that computes \(f\) with \((\epsilon,\delta)\)-privacy constraint
+								must have \(T(A)>2^\frac{n}{2}\) for all large \(n\).
+							</p>
 							<h4>Mutually-Suspecting Participants</h4>
+							<p class="paperoriginaltext">
+
+							</p>
 						</section>
 					</section>
 				</div>
@@ -425,7 +446,7 @@
 				<a name="references"></a>
 				<h1>References</h1>
 				<ol class="referencelist">
-					<li value="1" id="citation1">Whitfield Diffie and Martin E. Hellman. New directions
+					<li id="citation1">Whitfield Diffie and Martin E. Hellman. New directions
 												 in cryptography. <i>IEEE Transactions on Information
 												 Theory</i>, IT-22(6):644–654, 1976.</li>
 					<li id="citation2">S. Goldwasser and S. Micali. Probabilistic encryption
@@ -450,6 +471,11 @@
 									   How to exchange secrets; part III: How to send certified
 									   electronic mail. Technical report, University of
 									   California, Berkeley, CA, USA, 1981.</li>
+					<li id="citation7">Andrew C. Yao. Some complexity questions related
+										to distributive computing. In <i>Conference Record of
+										the 11th ACM Symposium on Theory of Computing
+										(STOC’79)</i>, pages 209–213, Atlanta, GA, USA, April
+										1979.</li>
 				</ol>
 			</div>
 			<div class="copyright">
