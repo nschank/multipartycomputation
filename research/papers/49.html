@@ -100,7 +100,12 @@
 					<a name="_defs"></a><h2>Definitions</h2>
 					<p>Etc etc.</p>
 					<a name="_theorems"></a><h2>Theorems</h2>
-					<p>Etc etc.</p>
+					<h4>Theorem 1</h4>
+					<p class="theorem">
+						For any <span class="equation">&epsilon;,&delta;&gt;0</span> and any function <span
+							class="equation">f</span>, there exists a protocol for computing <span
+							class="equation">f</span> that satisfies the (&epsilon;,&delta;)-privacy constraint.
+					</p>
 					<a name="_results"></a><h2>Results</h2>
 					<p>Etc etc.</p>
 						
@@ -377,6 +382,43 @@
 									the above requirement is also true for Bob.
 								</li>
 							</ol>
+							<h4>Theorem 1</h4>
+							<p class="paperoriginaltext theorem">
+								For any <span class="equation">&epsilon;,&delta;&gt;0</span> and any function <span
+									class="equation">f</span>, there exists a protocol for computing <span
+									class="equation">f</span> that satisfies the (&epsilon;,&delta;)-privacy constraint.
+							</p>
+							<p class="paperoriginaltext">
+								It is possible to consider the more general case when the initial distribution of <span
+									class="equation">(i,j)</span> is nonuniform. We will not go into that here. In <a href="#sec4">Section 4</a>a,
+								that becomes a special case of probabilistic computations.
+							</p>
+						</section>
+						<section name="Additional Requirements">
+							<a name="sec3.3"><h3>Additional Requirements</h3></a>
+							<h4>Complexity</h4>
+							<p class="paperoriginaltext">
+								The solution given earlier for the millionaire's problem will become impractical if the range
+								<span class="equation">n</span> of <span class="equation">i,j</span> become large,
+								since the number of bits transmitted is proportional to <span class="equation">n</span>.
+								An interesting question is then to determine the minimum number of bits needed by any
+								protocol to compute <span class="equation">f</span> that satisfies the (&epsilon;,&delta;)-privacy constraint.
+								Conceivably, there are functions that are easily computable without the privacy requirement,
+								but become infeasible with the extra privacy constraint.
+								Fortunately, we can prove that this is not the case.
+								Let <span class="equation">A</span> be a protocol, let <span class="equation">T(A)</span> denote the maximum number of bits exchanged
+								between Alice and Bob when <span class="equation">A</span> is used.
+							</p>
+							<h5>Theorem 2</h5>
+							<p class="paperoriginaltext theorem">
+								Let <span class="equation">1&gt;&epsilon;,&delta;&gt;0</span> and <span class="equation">f(i,j)</span>
+								be a <span class="equation">0-1</span> function. If <span class="equation">f</span> can be
+								computed by a boolean circuit of size <span class="equation">C(f)</span>, then there is a protocol
+								<span class="equation">A</span> computing <span class="equation">f</span> satisfying the
+								(&epsilon;,&delta;)-privacy constraint such that
+								<span class="equation" style="font-size:150%">T(A)=O(<span style="font-size:75%">C(f)log(<span style="font-size:75%"><sup>1</sup>/<sub>&epsilon;&delta;</sub></span>)</span>)</span>.
+							</p>
+							<h4>Mutually-Suspecting Participants</h4>
 						</section>
 					</section>
 				</div>
