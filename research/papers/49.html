@@ -436,7 +436,89 @@
 							</p>
 							<h4>Mutually-Suspecting Participants</h4>
 							<p class="paperoriginaltext">
+								So far the discussions
+								have assumed that Bob and Alice observe the
+								rules specified by an agreed protocol. What if either of
+								them might cheat in order to gain additional information
+								or to mislead the other party to receive a wrong answer?
+								It is true that with our protocol, any cheating will be discovered
+								if there is a verification stage afterwards where
+								both parties are required to reveal all their private computation.
+								However, that will force both parties to reveal
+								their variables. As will become clear in the applications
+								to be given later, this sometimes can be a serious drawback.
+								The following results will show that one can thwart
+								cheating, without asking either to reveal the variable.
+							</p>
+							<p class="paperoriginaltext">
+								Since a protocol can never prohibit Alice (or Bob) from
+								behaving as if she had a different variable value \(i'\), the
+								most that a protocol can achieve is to make sure that this
+								is the only cheating that Alice (or Bob) can do.
+							</p>
+							<h5>Definition 1</h5>
+							<p class="paperoriginaltext definition">
+								Consider an instance in the execution of a
+								protocol. We will consider it to be a <strong>successful cheating</strong>
+								by Alice, if Alice does not behave consistently with
+								any value of \(i\) and yet Bob does not detect it. A successful
+								cheating by Bob is defined similarly.
+							</p>
+							<h5>Theorem 4</h5>
+							<p class="paperoriginaltext theorem">
+								Let \(1 > \gamma > 0\). Under the same assumption of Theorem 2, there exists a protocol \(A\)
+								for computing \(f\) such that
+							</p>
+							<ol class="paperoriginaltext theorem">
+								<li>\(T(A)=O(C(f)\log{\frac{1}{\epsilon\cdot\delta\cdot\gamma}}\log{\frac{1}{\gamma}})\), and</li>
+								<li>if one participant behaves according to \(A\), the probability of a successful cheating by the other
+								participant is at most \(\gamma\)</li>
+							</ol>
+						</section>
+						<section name="Applications">
+							<a name="sec3.4"><h3>Applications</h3></a>
 
+							<h4>Secret Voting</h4>
+							<p class="paperoriginaltext">
+								Suppose a committee of \(m\) members
+								wish to decide on a yes-no action. Each member is to
+								write an opinion \(x_i\), and the final action can be regarded
+								as a function \(f(x_1, x_2, x_3,&hellip;, x_m)\). The results obtained
+								in this paper means that it is possible to agree on the
+								final action \(f\), without anyone knowing the opinion of any
+								other member’s. Furthermore, the protocol makes the probability of anyone having a
+								successful cheating very
+								remote.
+							</p>
+
+							<h4>Oblivious Negotiation</h4>
+							<p class="paperoriginaltext">
+								Suppose that Alice is trying to
+								sell Bob a house. In principle, each one has a strategy
+								of negotiation in mind. If we number all the possible
+								strategies of Alice as \(A_1,A_2,&hellip;,A_t\), and those of Bob’
+								as \(B_1,B_2,&hellip;,B_u\), then the outcome (no deal, or sell at
+								\(x\) dollars, . . . ) will be decided once the actual strategies
+								\(A_i, B_j\) used have been determined. Write the outcome
+								as \(f(i, j)\), then it is possible to carry out the negotiation
+								obliviously, in the sense that Alice will not gain any
+								information on Bob’s negotiation tactics except that it is
+								consistent with the outcome, and vice versa.
+							</p>
+
+							<h4>Private Querying of a Database</h4>
+							<p class="paperoriginaltext">
+								The theorems we have
+								proved can be extended to the case when each person
+								\(P_i\) is computing a different function \(f_i\). In particular, Alice
+								may wish to compute a function \(f(i, j)\) and Bob wishes
+								to compute a trivial function \(g(i, j) =\) constant, meaning
+								that Bob will know nothing about i in the end. If we regard
+								Bob as a database query system with \(j\) the state of
+								the database, and Alice is asking query number \(i\), then
+								Alice can get answer to the query without knowing anything
+								else about the data in it, while the database system
+								does not know what Alice has queried.
 							</p>
 						</section>
 					</section>
