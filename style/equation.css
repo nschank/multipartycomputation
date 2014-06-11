@@ -39,3 +39,8 @@ span.equation {
 	margin:0px 5px;
 	display:inline-block;
 }
+
+.bigequation {
+	font-size:200%;
+	text-align:center;
+}

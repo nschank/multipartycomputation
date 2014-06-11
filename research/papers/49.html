@@ -513,7 +513,7 @@
 								\(P_i\) is computing a different function \(f_i\). In particular, Alice
 								may wish to compute a function \(f(i, j)\) and Bob wishes
 								to compute a trivial function \(g(i, j) =\) constant, meaning
-								that Bob will know nothing about i in the end. If we regard
+								that Bob will know nothing about \(i\) in the end. If we regard
 								Bob as a database query system with \(j\) the state of
 								the database, and Alice is asking query number \(i\), then
 								Alice can get answer to the query without knowing anything
@@ -521,6 +521,231 @@
 								does not know what Alice has queried.
 							</p>
 						</section>
+					</section>
+					<section name="Probabilistic">
+						<a name="sec4"><h2>Probabilistic Computations</h2></a>
+						<p class="paperoriginaltext">
+							Let us consider the case with two parties Bob and Alice
+							\((m = 2)\). Let \(V\) and \(W\) be finite sets. A function \(p\) from
+							\(V \times W\) to the interval \([0, 1]\) is called a probability density
+							if the sum of \(p(v,w)\) over \(v\) and \(w\) is equal to \(1\). Let
+							\(P(V,W)\) be the set of all such probability densities.
+						</p>
+
+						<p class="paperoriginaltext">
+							Let \(I, J\) be finite sets of integers. Let \(F = \{f_{ij} | i \in I, j \in J\} \subseteq P(V,W)\)
+							be a family of probability densities.
+							Initially, Alice knows the value of \(i \in I\), and Bob
+							knows \(j \in J\); the values of \((i, j)\) obey a certain initial
+							probability density \(q \in P(I, J)\). They wish to send messages
+							between them, so that at the end Alice will obtain
+							a value \(v \in V\) and Bob a value \(w \in W\) with probability
+							\(f_{ij}(v,w)\). The privacy constraint is that the information
+							Alice can obtain about \(j\) and \(w\) is no more than what
+							can be inferred from her values of \(i\) and \(v\) (plus a corresponding
+							constraint on Bob). This statement can be
+							made precise in terms of \(q\) and \(F\); we omit its full generality
+							here but simply give an illustration for the special
+							case \(q\) = constant. In this special case, the distribution
+							\(h(w)\) that Alice can infer from the computation she has
+							done should, according to the privacy constraint, is equal
+							to
+						</p>
+
+						<p class="bigequation">
+							$$\frac{1}{|J|}\sum\limits_{j\in J}\frac{f_{ij}(v,w)}{\sum\nolimits_{x\in W} f_{ij}(v,x)}$$
+						</p>
+
+						<p class="paperoriginaltext">
+							For example, mental poker would correspond to the
+							following situation: \(I = J = {0}\), \(q\) is a constant, \(V =
+							W\) is the set of all 5-element subsets of \({1, 2,&hellip;, 52}\),
+							\(f_{00}(v,w)\) is \(0\) if \(v\) and \(w\) are not disjoint and equal to a
+							constant otherwise.
+						</p>
+
+						<p class="paperoriginaltext">
+							The results in <a href="#sec3">Section 3</a> have generalizations to the
+							probabilistic case. Basically, a reasonable probabilistic
+							computation remains feasible when the privacy constraints
+							are imposed. We will not give the details here.
+						</p>
+
+						<p class="paperoriginaltext">
+							One interesting corollary of our results is that mental
+							poker can be played with any general public-key system.
+							It differs from Shamir et. al’s solution <a href="#citation5"><sup class="reference" id="ref5">[5]</sup></a>
+							in that we do
+							not require the one-way functions used to be commutative,
+							and that we can play it with a public-key system
+							(instead of using private keys). (A solution with a special
+							one-way function with publicized keys for playing mental
+							poker was known in <a href="#citation2"><span class="reference" id="ref2">[2]</span></a>, but that solution depends on
+							the special properties of the one-way function involved.)
+							Moreover, the present solution uses much fewer bits as
+							the number of cards becomes greater. Suppose we
+							have a deck of \(n\) cards, and Alice and Bob each want
+							to draw a random card from the deck in turn. All the previously
+							known solutions transmit \(cn\) bits of information
+							between Bob and Alice, while our scheme only needs
+							about \(c(\log{n})^2\) bits.
+						</p>
+					</section>
+					<section name="Generalization">
+						<a name="sec5"><h2>Generalization to \(m\)-Party Case</h2></a>
+						<p class="paperoriginaltext">
+							When m parties \(A_1,A_2,&hellip;,A_m\) collaborate to compute
+							a function \(f(x_1, x_2,&hellip;,x_m)\), more than one parties may
+							<span class="reference" id="collusion">collude</span> to cheat.
+							We will show that even the most severe
+							constraint can be met in the following sense: No matter
+							how many participants may collude, any cheating act will
+							be detected and identified by all the honest parties (even
+							if as many as \(m−1\) dishonest guys try to help cover up).
+							We now make it precise.
+						</p>
+
+						<p class="paperoriginaltext">
+							Let \(V\) be the range of the function \(f(x_1, x_2,&hellip;,x_m)\),
+							where \(x_i \in X_i\). For any nonempty \(K \subseteq \{1, 2,&hellip;,m\}\),
+							define \(H_K = X_{t_1} \times X_{t_2} \times \cdots \times X_{t_{|K|}}\) , where
+							\(\{t_1, t_2,&hellip;, t_{|K|}\} = K\). Let \(K' = \{1, 2,&hellip;,m\} − K\), and
+							define \(H_K'\) similarly. For any \(i \in H_K'\) and \(v \in V\) , let
+							\(G_i(v)\) \subseteqH_K\) be the set of all \(j \in H_K\) such that the
+							(unique vector) \(x = (x_1, x_2,&hellip;, x_m)\), whose projection
+							on \(H_K'\) and \(H_K\) equals \(i\) and \(j\) respectively, satisfies
+							\(f(x) = v\). Let \(q_{i,v}(j) = \frac{1}{|G_i(v)|}\) for \(j \in G_i(v)\) and \(0\)
+							otherwise. (If all the participants \(A_r\) with \(r \in K'\) collude
+							to infer the probability distribution of the variable values of
+							other participants, and if the only information available,
+							in addition to their only variable values \(i\), is that the function
+							\(f\) has value v, then \(q_{i,v}(j)\) is the distribution they
+							can infer.) Let \(\epsilon,\delta > 0\). A protocol \(A\) is said to <i>satisfy the
+							\(\epsilon,\delta)\)-private constraint</i> if for every nonempty \(K\), even if
+							the participants in \(K\) are allowed to perform in private an
+							amount of calculation polynomial in \(T(A)\), they will still
+							infer, with probability at least \(1 − \delta\), that the distribution
+							on \(j\) is equal to \(q_{i,v}(j)(1 + O(\epsilon))\). A <i>successful cheating</i>
+							by \(K'\) (with respect to a protocol \(A\)) is an instance of the
+							execution of \(A\), in which at least one participant \(A_r\) with
+							\(r \in K'\) behaves inconsistently with any \(x_r \in X_r\) without
+							being detected by all the participants of \(K\).
+						</p>
+
+						<h5>Theorem 5</h5>
+						<p class="paperoriginaltext theorem">
+							For any \(\epsilon,\delta,\gamma > 0\), there exists a protocol
+							\(A\) for computing \(f\) which satisfies the \(\epsilon,\delta\)-private constraint
+							and which has the property that, for any \(K' \neq \{1,&hellip;,m\}\), the probability for
+							\(K'\) to have a successful cheating can not be more than \(\gamma\).
+						</p>
+
+						<p class="paperoriginaltext">
+							The value of \(T(A)\) in the above theorem is \(O(|X_1|\cdot |X_2|\cdot\cdots\cdot|X_m|\cdot|V|)\), which is almost optimal in general
+							as the next theorem shows.
+						</p>
+
+						<h5>Theorem 6</h5>
+						<p class="paperoriginaltext theorem">
+							There exist functions \(f\) for which any protocol
+							\(A\) satisfying the conditions in Theorem 5 must have
+							\(T(A) = \Omega((|X_1|\cdot |X_2|\cdot\cdots\cdot|X_m|)^\frac{1}{4})\)
+						</p>
+
+						<p class="paperoriginaltext">
+							In special cases protocols can be designed with better
+							running time than the bound given in Theorem 5. For
+							example, the parity function \(f(x_1, x_2, &hellip;, x_m) = x_1 \bigoplus x_2 \bigoplus
+							\cdots \bigoplus x_m\) and the tally function \(f(x_1, x_2,&hellip;, x_m) =\)
+							# of \(1\)’s in the \(x\)’s (the \(x\)’s are boolean variables) both
+							have protocols satisfying Theorem 5 with running time
+							polynomial in \(m\).
+						</p>
+
+						<p class="paperoriginaltext">
+							The security measure as we considered above is a
+							strong one. For some purposes, less stringent measures
+							would be adequate. (For example, one may only
+							require that no subset \(K'\) be able to force the outcome of
+							the computation to be a certain value.) Sometimes protocols
+							with better running time can be designed under
+							such less stringent requirements. For example, there is
+							a protocol with running time \(O(p(m) \log{q})\), where \(p(m)\)
+							is a polynomial, for \(m\) parties to compute the function
+							\(f(x_1, x_2, &hellip;, x_m) = x_1 +x_2 +\cdots+x_m\pmod{q}\), under a
+							security criterion only slightly relaxed from that given in
+							Theorem 5.
+						</p>
+					</section>
+					<section name="Cannot">
+						<a name="sec6"><h2>What Cannot Be Done?</h2></a>
+						<p class="paperoriginaltext">
+							There are security constraints that can not be achieved
+							by any protocols. We will only mention two results here.
+						</p>
+
+						<p class="paperoriginaltext">
+							The first impossibility result is valid for all three models
+							given in this paper. Suppose \(m\) people try to generate a
+							bit with bias \(\alpha\). It is easy to see how it can be done for
+							\(m > 2\). For example, A generates a random unbiased
+							bit \(\alpha_1\) and sends it to B, B generates a random \(\alpha_2\) and
+							sends it to C, C generates a random \(\alpha_3\) and sends it to
+							A. Now let \(\alpha = \alpha_1 + \alpha_2 + \alpha_3\), and we get an unbiased
+							\(\alpha\) with the property that it remains unbiased even if one
+							of the persons cheats by generating a biased bit. Let us
+							call a protocol for generating a bit with bias \(\alpha\)<i>robust</i>, if
+							the bias remains correct if somebody has cheated.
+						</p>
+
+						<h5>Theorem 7</h5>
+						<p class="paperoriginaltext theorem">
+							No protocol \(A\) with finite \(T(A)\) which generates
+							a bit with a transcendental bias \(\alpha\) can be robust.
+						</p>
+
+						<p class="paperoriginaltext">
+							The second result is valid for the model defined in <a href="#sec3.2">Section
+							3.2</a>. Suppose Alice and Bob wish to exchange a pair
+							of solutions \(x, y\) with \(E_a(x) = 1\) and \(E_b(y) = 1\). Is there
+							a protocol such that an honest party will not be doublecrossed,
+							i.e. swindled out of its secret without getting the
+							secret from the other party.
+						</p>
+
+						<h5>Theorem 8</h5>
+						<p class="paperoriginaltext theorem">
+							Let \(A\) be any protocol for exchanging secrets.
+							Then either Alice or Bob will be able to doublecross
+							successfully with probability at least \(\frac{1}{2}\).
+						</p>
+
+						<p class="paperoriginaltext">
+							It is of interest to mention that a different type of exchanging
+							secrets is possible in the same model. Suppose
+							Alice wants to know the solution \(y\) to \(E_b(y) = w\)
+							and Bob wants to know the solution \(x\) to \(E_a(x) = u\), but
+							Bob does not know the value of \(w\) and Alice does not
+							know \(u\). Let \(N\) be the number of bits that the encryption
+							functions \(E_a\) and \(E_b\) operate on.
+						</p>
+
+						<h5>Theorem 9</h5>
+						<p class="paperoriginaltext theorem">
+							Let \(\epsilon > 0\) be fixed. There is a protocol \(A\)
+							with polynomial (in \(N\)) running time which exchanges secrets
+							\(D_b(w)\) and \(D_a(u)\), and under which the probability
+							of anyone double-crossing successfully is bounded by \(\epsilon\).
+						</p>
+
+						<p class="paperoriginaltext">
+							Different kinds of exchanging secrets have been considered
+							previously. Blum <a href="#citation6"><span class="reference" id="ref6">[6]</span></a> showed that it is possible to
+							exchange factors of a large composite numbers (a special
+							type of secrets) with vanishing chance for cheating.
+							Even (private communication, 1981) also devised some
+							protocols for exchanging secrets.
+						</p>
 					</section>
 				</div>
 			</div>
