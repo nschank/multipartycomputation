@@ -37,4 +37,5 @@ span.equation {
 	font-family:monospace;
 	font-style:none;
 	margin:0px 5px;
+	display:inline-block;
 }

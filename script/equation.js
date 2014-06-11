@@ -6,7 +6,7 @@ function addEquationListeners()
 	var equation = document.getElementById("equation"+counter);
 	while(equation != null)
 	{
-		addFunctionsE(equation);
+		addFunctionsE(equation,counter);
 		addDOME(equation, counter);
 		
 		counter++;
@@ -28,31 +28,35 @@ function addDOME(equation,id)
 	block.addEventListener('mouseout',maybeCloseE);
 }
 
-function addFunctionsE(equation)
+function addFunctionsE(equation,counter)
 {
-	equation.addEventListener('mouseover',mouseOverListenerE);
-	equation.addEventListener('mouseout',mouseOutListenerE);
+	equation.addEventListener('mouseover',mouseOverListenerE(equation,counter));
+	equation.addEventListener('mouseout',mouseOutListenerE(equation,counter));
 }
 
-function mouseOverListenerE(event)
+function mouseOverListenerE(equation,counter)
 {
-	var thisEquation = event.target;
-	var thisBlock = document.getElementById(thisEquation.id+"block");
-	thisBlock.style.display="block";
-	thisBlock.style.left=thisEquation.getBoundingClientRect().right+"px";
-	thisBlock.style.top=thisEquation.getBoundingClientRect().top+"px";
+	return function(event)
+	{
+		var thisBlock = document.getElementById("equation" + counter+"block");
+		thisBlock.style.display="block";
+		thisBlock.style.left=equation.getBoundingClientRect().right+"px";
+		thisBlock.style.top=equation.getBoundingClientRect().top+"px";
+	};
 }
 
-function mouseOutListenerE(event)
+function mouseOutListenerE(equation,counter)
 {
-	var thisEquation = event.target;
-	var right = thisEquation.getBoundingClientRect().right;
-	var top = thisEquation.getBoundingClientRect().top;
-	if(event.clientX > right && event.clientX < right+10)
-		if(top < event.clientY)
-			return;
-	var thisBlock = document.getElementById(thisEquation.id+"block");
-	thisBlock.style.display="none";
+	return function(event)
+	{
+		var right = equation.getBoundingClientRect().right;
+		var top = equation.getBoundingClientRect().top;
+		if(event.clientX > right && event.clientX < right+10)
+			if(top < event.clientY)
+				return;
+		var thisBlock = document.getElementById("equation" + counter+"block");
+		thisBlock.style.display="none";
+	};
 }
 
 function keepOpenE(event)
