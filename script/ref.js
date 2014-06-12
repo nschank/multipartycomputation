@@ -6,20 +6,17 @@ function addReferenceListeners()
 	for(var i = 0; i < elements.length; i++)
 	{
 		var elem = elements.item(i);
-		if(!addDOMR(elem.getAttribute("data-citation"), i)) continue;
-		elem.id += "-"+i;
-		addFunctionsR(elem);
+		addDOMR(elem.getAttribute("data-citation"), elem);
 	}
 }
 
-function addDOMR(id, secondid)
+function addDOMR(id, elem)
 {
 	var reference = document.getElementById("citation"+id);
 	if(reference === null) return false;
 	
 	var block = document.createElement("div");
 	block.className="ref_block";
-	block.id = "ref"+id+"-"+secondid+"block";
 	
 	block.innerHTML += "<h2>Reference</h2>";
 	block.innerHTML += "<p>"+reference.innerHTML+"</p>";
@@ -27,51 +24,53 @@ function addDOMR(id, secondid)
 	
 	block.innerHTML += "<p class=\"ref_goto_citations\"><a href=\"#referencelist\">See complete reference list</a></p>";
 	document.body.appendChild(block);
-	block.addEventListener('mouseover',keepOpenR);
-	block.addEventListener('mouseout',maybeCloseR);
+	block.addEventListener('mouseover',keepOpenR(block));
+	block.addEventListener('mouseout',maybeCloseR(block));
+        elem.addEventListener('mouseover',mouseOverListenerR(elem,block));
+	elem.addEventListener('mouseout',mouseOutListenerR(elem,block));
 	return true;
 }
 
-function addFunctionsR(reference)
+
+function mouseOverListenerR(elem, block)
 {
-	reference.addEventListener('mouseover',mouseOverListenerR);
-	reference.addEventListener('mouseout',mouseOutListenerR);
+    return function()
+    {
+	block.style.display="block";
+	block.style.left=elem.getBoundingClientRect().right+"px";
+	block.style.top=elem.getBoundingClientRect().top+"px";
+    };
+	
 }
 
-function mouseOverListenerR(event)
+function mouseOutListenerR(elem,block)
 {
-	var thisreference = event.target;
-	if(thisreference.className !== "reference") return;
-	var thisBlock = document.getElementById(thisreference.id+"block");
-	thisBlock.style.display="block";
-	thisBlock.style.left=thisreference.getBoundingClientRect().right+"px";
-	thisBlock.style.top=thisreference.getBoundingClientRect().top+"px";
-}
-
-function mouseOutListenerR(event)
-{
-	var thisreference = event.target;
-	if(thisreference.className !== "reference") return;
-	var right = thisreference.getBoundingClientRect().right;
+    return function(event)
+    {
+        var right = elem.getBoundingClientRect().right;
 	if(event.clientX > right && event.clientX < right+10) return;
-	var thisBlock = document.getElementById(thisreference.id+"block");
-	thisBlock.style.display="none";
+	block.style.display="none";
+    };	
 }
 
-function keepOpenR(event)
+function keepOpenR(block)
 {
-	var thisBlock = event.target;
-	if(event.target.className === "ref_block")
-		thisBlock.style.display="block";
+    return function()
+    {
+	block.style.display="block";
+    };
 }
 
-function maybeCloseR(event)
+function maybeCloseR(block)
 {
-	var thisBlock = event.target;
-	var rect = thisBlock.getBoundingClientRect();
-	if(rect.left < event.clientX && event.clientX < rect.right)
+    return function(event)
+    {
+        var rect = block.getBoundingClientRect();
+        var thisBlock = event.target;
+        if(rect.left < event.clientX && event.clientX < rect.right)
 		if(rect.top < event.clientY && event.clientY < rect.bottom)
 			return;
 	if(event.target.className === "ref_block")
 		thisBlock.style.display="none";
+    };
 }
