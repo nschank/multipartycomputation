@@ -7,12 +7,12 @@ function addGlossaryListeners()
 	{
 		var word = definable.item(i).innerHTML;
 		var definition = define(word);
-		if(definition == null)
+		if(definition === null)
 		{
 			word = definable.item(i).id;
 			definition = define(word);
 		}
-		if(definition == null) continue;
+		if(definition === null) continue;
 		addDOMG(i, word, definition);
 		definable.item(i).id = "glossary"+i;
 		addFunctionsG(definable.item(i));
@@ -27,12 +27,12 @@ function toTitleCase(str)
 function addDOMG(id, word, definition)
 {
 	var block = document.createElement("div");
-	block.className="glossaryBlock";
+	block.className="gl_block";
 	block.id = "glossary"+id+"block";
 	
-	block.innerHTML += "<h2>Definition: " + toTitleCase(word) + "</h2>";
+	block.innerHTML += "<h2 class=\"gl_word\">Definition: " + toTitleCase(word) + "</h2><p class=\"gl_definition\">";
 	block.innerHTML += definition;
-	block.innerHTML += "<p class=\"glossaryhelp\">Visit the full <a href=\"glossary.html\">glossary</a>.</p>";
+	block.innerHTML += "</p><p class=\"gl_help\">Visit the full <a href=\"glossary.html\">glossary</a>.</p>";
 	document.body.appendChild(block);
 	block.addEventListener('mouseover',keepOpenG);
 	block.addEventListener('mouseout',maybeCloseG);
@@ -68,7 +68,7 @@ function mouseOutListenerG(event)
 function keepOpenG(event)
 {
 	var thisBlock = event.target;
-	if(event.target.className == "glossaryBlock")
+	if(event.target.className === "gl_block")
 		thisBlock.style.display="block";
 }
 
@@ -79,6 +79,6 @@ function maybeCloseG(event)
 	if(rect.left < event.clientX && event.clientX < rect.right)
 		if(rect.top < event.clientY && event.clientY < rect.bottom)
 			return;
-	if(event.target.className == "glossaryBlock")
+	if(event.target.className === "gl_block")
 		thisBlock.style.display="none";
 }

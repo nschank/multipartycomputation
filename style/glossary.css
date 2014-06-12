@@ -1,4 +1,17 @@
-div.glossaryBlock {
+@font-face {
+    font-family:def;
+    src:url('../font/Walkway.ttf');
+}
+
+.definable {
+    font-family:def;
+}
+
+.gl_definition {
+    
+}
+
+div.gl_block {
 	position:fixed;
 	min-width:150px;
 	min-height:50px;
@@ -12,31 +25,23 @@ div.glossaryBlock {
 	border-right: 10px solid #3A3603;
 }
 
-div.glossaryBlock  h2{
-	margin-top:3px;
-}
-
-p.glossaryhelp {
-	font-size:8pt;
-	margin-top:20px;
-	margin-left:30px;
-}
-
-div.glossaryBlock a {
+div.gl_block > a {
 	color:#3A3603;
 	text-decoration:none;
 }
 
-div.glossaryBlock a:hover {
+div.gl_block > a:hover {
 	color:#330000;
 	text-decoration:none;
 }
 
-span.definable {
-	font-family:def;
+.gl_help {
+    font-size:8pt;
+    margin-top:20px;
+    margin-left:30px;
 }
 
-@font-face {
-	font-family:def;
-	src:url('../font/Walkway.ttf');
+.gl_word {
+    margin-top:3px;
 }
+
