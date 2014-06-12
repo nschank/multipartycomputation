@@ -9,7 +9,7 @@ function addGlossaryListeners()
 		var definition = define(word);
 		if(definition === null)
 		{
-			word = definable.item(i).id;
+			word = definable.item(i).getAttribute("data-define");
 			definition = define(word);
 		}
 		if(definition === null) continue;
@@ -32,7 +32,7 @@ function addDOMG(id, word, definition)
 	
 	block.innerHTML += "<h2 class=\"gl_word\">Definition: " + toTitleCase(word) + "</h2><p class=\"gl_definition\">";
 	block.innerHTML += definition;
-	block.innerHTML += "</p><p class=\"gl_help\">Visit the full <a href=\"glossary.html\">glossary</a>.</p>";
+	block.innerHTML += "</p><p class=\"gl_help\">Visit the full <a href=\"multipartycomputation.org/glossary.html\">glossary</a>.</p>";
 	document.body.appendChild(block);
 	block.addEventListener('mouseover',keepOpenG);
 	block.addEventListener('mouseout',maybeCloseG);
