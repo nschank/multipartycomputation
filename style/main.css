@@ -81,6 +81,7 @@ div.navbox {
 	width:16.6666%;
 	color:black;
 	float:left;
+        text-align:center;
 }
 
 div.navbox:hover {
