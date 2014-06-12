@@ -2,7 +2,6 @@ window.addEventListener("load", addReferenceListeners, true);
 
 function addReferenceListeners()
 {
-	var counter = 0;
 	var elements = document.getElementsByClassName("reference");
 	for(var i = 0; i < elements.length; i++)
 	{
@@ -13,21 +12,20 @@ function addReferenceListeners()
 	}
 }
 
-function addDOMR(id, secondid, text)
+function addDOMR(id, secondid)
 {
-
 	var reference = document.getElementById("citation"+id);
-	if(reference == null) return false;
+	if(reference === null) return false;
 	
 	var block = document.createElement("div");
-	block.className="refBlock";
+	block.className="ref_block";
 	block.id = "ref"+id+"-"+secondid+"block";
 	
 	block.innerHTML += "<h2>Reference</h2>";
 	block.innerHTML += "<p>"+reference.innerHTML+"</p>";
 	block.innerHTML += "<p><a href=\"" + authorLink(id) + "\">See more by this author</a></p>";
 	
-	block.innerHTML += "<p class=\"refrefer\"><a href=\"#references\">See complete reference list</a></p>";
+	block.innerHTML += "<p class=\"ref_goto_citations\"><a href=\"#referencelist\">See complete reference list</a></p>";
 	document.body.appendChild(block);
 	block.addEventListener('mouseover',keepOpenR);
 	block.addEventListener('mouseout',maybeCloseR);
@@ -43,7 +41,7 @@ function addFunctionsR(reference)
 function mouseOverListenerR(event)
 {
 	var thisreference = event.target;
-	if(thisreference.className != "reference") return;
+	if(thisreference.className !== "reference") return;
 	var thisBlock = document.getElementById(thisreference.id+"block");
 	thisBlock.style.display="block";
 	thisBlock.style.left=thisreference.getBoundingClientRect().right+"px";
@@ -53,7 +51,7 @@ function mouseOverListenerR(event)
 function mouseOutListenerR(event)
 {
 	var thisreference = event.target;
-	if(thisreference.className != "reference") return;
+	if(thisreference.className !== "reference") return;
 	var right = thisreference.getBoundingClientRect().right;
 	if(event.clientX > right && event.clientX < right+10) return;
 	var thisBlock = document.getElementById(thisreference.id+"block");
@@ -63,7 +61,7 @@ function mouseOutListenerR(event)
 function keepOpenR(event)
 {
 	var thisBlock = event.target;
-	if(event.target.className == "refBlock")
+	if(event.target.className === "ref_block")
 		thisBlock.style.display="block";
 }
 
@@ -74,6 +72,6 @@ function maybeCloseR(event)
 	if(rect.left < event.clientX && event.clientX < rect.right)
 		if(rect.top < event.clientY && event.clientY < rect.bottom)
 			return;
-	if(event.target.className == "refBlock")
+	if(event.target.className === "ref_block")
 		thisBlock.style.display="none";
 }

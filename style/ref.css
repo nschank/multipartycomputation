@@ -1,4 +1,4 @@
-div.refBlock {
+div.ref_block {
 	position:fixed;
 	min-width:150px;
 	min-height:50px;
@@ -12,49 +12,37 @@ div.refBlock {
 	border-right: 10px solid #6A6174;
 }
 
-div.refBlock  h2{
+div.ref_block > h2{
 	margin-top:3px;
 }
 
-p.refrefer {
-	font-size:8pt;
-	margin-top:20px;
-	margin-left:30px;
-}
-
-div.refBlock a {
+div.ref_block a {
 	color:#3A3603;
+        text-decoration:none;
 }
 
-div.refBlock a:hover {
+div.ref_block a:hover {
 	color:#330000;
 	text-decoration:none;
-}
-
-sup.reference{
-	font-family:monospace;
-	color:#6A6174;
 }
 
 ol.referencelist {
 	
 }
 
-ol.referencelist li a {
+ol.referencelist a {
 	text-decoration:none;
 	color:#6A6174;
 }
 
-div.referencecontainer {
-	min-width:800px;
-	width:100%;
-	max-width:1480px;
+.ref_goto_citations {
+	font-size:8pt;
 	margin-top:20px;
-	background-color:#E7E5CB;
-	min-height:100px;
-	font-family:alice;
-	overflow-x:hidden;
-	border-left:10px solid #954535;
-	padding-bottom:10px;
-	margin-bottom:25px;
+	margin-left:30px;
+}
+
+.reference {
+	font-family:monospace;
+	color:#6A6174;
+        text-decoration:none;
 }
