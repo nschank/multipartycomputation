@@ -1,60 +1,27 @@
 
-
-div.researchanalysis {
-	width:95%;
-	margin-left:2.5%;
-	margin-top:50px;
-	float:left;
-	padding-bottom:5px;
-	background-color:#F3F0DD;
-	border:1px solid #8A8194;
-}
-
-div.middlefifty {
+div.rp_nav_container {
 	width:50%;
 	margin:0px auto;
 }
 
-div.researchh {
-	text-align:center;
-	font-size:13pt;
-	color:#222222;
-}
-
-div.researchl {
+div.rp_nav_box {
 	float:left;
 	width:25%;
 	font-size:9pt;
 	text-align:center;
 }
 
-div.researchl a {
+div.rp_nav_box > a {
 	text-decoration:none;
 }
 
-div.pdfbox {
+div.rp_linkbox {
 	float:right;
 	width:50px;
 	height:50px;
 }
 
-div.papertitle {
-	margin:10px 10% 0px 10%;
-	border-bottom:1px dotted #555555;
-	text-align:center;
-	font-size:24pt;
-}
-div.paperinfo {
-	margin:0px 10% 20px 10%;
-	text-align:center;
-	font-size:12pt;
-}
-
-div.paperexpl {
-	margin:5px 3%;
-}
-
-div.papertoc {
+div.rp_toc {
 	margin:10px 3%;
 	width:25%;
 	background-color:#C9C7AD;
@@ -64,28 +31,36 @@ div.papertoc {
 	font-size:10pt;
 }
 
-div.papertoc h4 {
-	font-size:12pt;
+img.rp_link {
+	width:95%;
+	height:95%;
 }
 
 
-div.paperfloatleft {
+.rp_title {
+	margin:10px 10% 0px 10%;
+	border-bottom:1px dotted #555555;
+	text-align:center;
+	font-size:24pt;
+        display:block;
+}
+.rp_info {
+	margin:0px 10% 20px 10%;
+	text-align:center;
+	font-size:12pt;
+        display:block;
+}
+
+.rp_author {
+    font-style:italic;
+}
+
+.rp_problems {
 	float:left;
 	margin-left:50px;
 }
 
-div.papermain {
-	margin-top:20px;
-	background-color:#E7E5CB;
-	min-height:400px;
-	font-family:alice;
-	overflow-x:hidden;
-	border-left:10px solid #805355;
-	padding-bottom:10px;
-	margin-bottom:25px;
-}
-
-.keysection {
+.rp_snippet {
 	font-style:italic;
 	margin:10px 5%;
 	color:#666666;
@@ -94,31 +69,27 @@ div.papermain {
 	
 }
 
-.paperoriginaltext {
+.rp_original {
 	margin:11px 10px;
 	font-size:12pt;
 }
 
-.paperannotation {
+.rp_annotation {
 	color:#444444;
 	font-size:10pt;
 	margin:13px auto;
 	width:80%;
 }
 
-.theorem {
+.rp_theorem {
 	font-style:italic;
 	font-size:110%;
 	margin-top:0px;
 }
 
-.definition {
+.rp_definition {
 	font-size:110%;
 	margin-top:0px;
 }
 
-img.pdf {
-	width:95%;
-	height:95%;
-}
 
