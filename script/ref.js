@@ -6,7 +6,7 @@ function addReferenceListeners()
 	for(var i = 0; i < elements.length; i++)
 	{
 		var elem = elements.item(i);
-		if(!addDOMR(elem.id.substring(3), i)) continue;
+		if(!addDOMR(elem.getAttribute("data-citation"), i)) continue;
 		elem.id += "-"+i;
 		addFunctionsR(elem);
 	}

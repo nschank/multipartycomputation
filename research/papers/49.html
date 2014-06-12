@@ -61,7 +61,7 @@
 				<a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
 				<a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
 				<a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
-				<a href="../../aboutus.html"><div class="main_navbox"><center><h2>about us</h2></center></div></a>
+				<a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
 			</div>
 			<div class="main_toplevel main_section main_color1">
 				<div class="rp_nav_container">
@@ -70,25 +70,27 @@
 					<div class="rp_nav_box"><a href="../authors.html">By Author</a></div>
 					<div class="rp_nav_box"><a href="../tag.html">By Category</a></div>
 				</div>
-				<div class="main_window main_fullwidth"><a name="_A"></a>
-					<div class="rp_linkbox"><a href="pdf/49.pdf"><img src="../../img/PDF.png" class="rp_link" /></a></div>
+				<div class="main_window main_fullwidth"><a id="_A"></a>
+					<div class="rp_linkbox"><a href="pdf/49.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					<span class="rp_title">Protocols for Secure Computations</span>
 					<span class="rp_info">1982
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<i><a class="rp_author" href="../authors/Andrew C. Yao.html">Andrew C. Yao</a></i></div>
+							<a class="rp_author" href="../authors/Andrew C. Yao.html">Andrew C. Yao</a></span>
 					<div class="rp_toc">
 						<h4 style="color:#333333">Table of Contents</h4>
 						<ol type="A">
-							<a href="#_A"><li>Overview</li></a>
-							<ol>
+                                                    <li><a href="#_A">Overview</a></li>
+                                                    <li>
+                                                        <ol>
 								<li>Introduction</li>
 								<li>Goals</li>
 								<li>Definitions</li>
 								<li>Theorems</li>
 								<li>Results</li>
 								<li>Effect</li>
-							</ol>
-							<a href="#_B"><li>Annotated Extended Abstract</li></a>
+                                                        </ol>
+                                                    </li>
+                                                    <li><a href="#_B">Annotated Extended Abstract</a></li>
 						</ol>
 					</div>
 					<div class="rp_snippet">Suppose \(m\) people wish to compute the value of a function 
@@ -96,23 +98,24 @@
 						which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range. 
 						Assume initially person \(P_i\) knows the value of \(x_i\) and no other 
 						\(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?</div>
-					<a name="_intro"></a><h2>Introduction</h2>
+					<h2 id="_intro">Introduction</h2>
 					<p>Etc etc.</p>
-					<a name="_goals"></a><h2>Goals</h2>
+					<h2 id="_goals">Goals</h2>
 					<p>Etc etc.</p>
-					<a name="_defs"></a><h2>Definitions</h2>
+					<h2 id="_defs">Definitions</h2>
 					<p>Etc etc.</p>
-					<a name="_theorems"></a><h2>Theorems</h2>
+					<h2 id="_theorems">Theorems</h2>
 					<h4>Theorem 1</h4>
 					<p class="rp_theorem">
 						For any \(\epsilon,\delta > 0\) and any function \(f\), there exists a protocol for computing \(f\)
 						that satisfies the \((\epsilon,\delta)\)-privacy constraint.
 					</p>
-					<a name="_results"></a><h2>Results</h2>
+					<h2 id="_results">Results</h2>
 					<p>Etc etc.</p>
 						
 				</div>
-			<div class="main_toplevel main_section main_color5"><a name="_B"></a>
+                        </div>
+			<div class="main_toplevel main_section main_color5"><a id="_B"></a>
 				<div class="main_window main_fullwidth">
 					<div class="rp_toc">
 						<h4 style="color:#333333">Table of Contents</h4>
@@ -139,8 +142,8 @@
 							</li>
 						</ol>
 					</div>
-					<section name="Introduction">
-						<a name="sec1"></a><h2>Introduction</h2>
+					<section id="sec1">
+						<h2>Introduction</h2>
 						<p class="rp_original">
 							Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other’s wealth. How can they carry out such a conversation?
 						</p>
@@ -151,21 +154,21 @@
 							Assume initially person \(P_i\) knows the value of \(x_i\) and no other
 							\(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?
 							The millionaire’s problem corresponds to the case when \(m = 2\) and
-							\(f(x_1, x_2) = 1\) if \(x_1 < x_2\),
+							\(f(x_1, x_2) = 1\) if \(x_1 &lt; x_2\),
 							and \(0\) otherwise. In this paper, we will give precise formulation of this general problem and describe three ways of solving it by use of <span class="definable">one-way function</span>s. These results have applications to secret voting, private querying of database, oblivious negotiation, playing mental poker, etc. We will also discuss the complexity question “How many bits need to be exchanged for the computation”, and describe methods to prevent participants from cheating. Finally, we study the question “What cannot be accomplished with one-way functions”.
 						</p>
 						<p class="rp_original">
 							Before describing these results, we would like to put this work in perspective by first considering a unified view of secure computation in the next section.
 						</p>
 					</section>
-					<section name="Unified View">
-						<a name="sec2"></a><h2>A Unified View of Secure Computation</h2>
+					<section id="sec2">
+						<h2>A Unified View of Secure Computation</h2>
 						<p class="rp_original">
-							Since <span class="definable">one-way function</span>s were first proposed in 1976 <a href="#citation1"><sup class="reference" id="ref1">[1]</sup></a>, they have been used in two kinds of applications.
+							Since <span class="definable">one-way function</span>s were first proposed in 1976 <a href="#citation1"><sup class="reference" data-citation="1">[1]</sup></a>, they have been used in two kinds of applications.
 
-							The first kind is concerned with the encryption and transmission of messages to make them unreadable and unalterable for eavesdroppers and saboteurs <a href="#citation1"><sup class="reference" id="ref1">[1]</sup></a><a href="#citation2"><sup class="reference" id="ref2">[2]</sup></a><a href="#citation3"><sup class="reference" id="ref3">[3]</sup></a><a href="#citation4"><sup class="reference" id="ref4">[4]</sup></a>.
+							The first kind is concerned with the encryption and transmission of messages to make them unreadable and unalterable for eavesdroppers and saboteurs <a href="#citation1"><sup class="reference" data-citation="1">[1]</sup></a><a href="#citation2"><sup class="reference" data-citation="2">[2]</sup></a><a href="#citation3"><sup class="reference" data-citation="3">[3]</sup></a><a href="#citation4"><sup class="reference" data-citation="4">[4]</sup></a>.
 
-							The second kind of applications includes “<span class="definable">mental poker</span>”<a href="#citation5"><sup class="reference" id="ref5">[5]</sup></a>, in which two players deal cards by communicating over a telephone line, and “<span class="definable">coin flipping</span>” <a href="#citation6"><sup class="reference" id="ref6">[6]</sup></a>, in which two mutually suspecting parties are to generate an unbiased bit.
+							The second kind of applications includes “<span class="definable">mental poker</span>”<a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a>, in which two players deal cards by communicating over a telephone line, and “<span class="definable">coin flipping</span>” <a href="#citation6"><sup class="reference" data-citation="6">[6]</sup></a>, in which two mutually suspecting parties are to generate an unbiased bit.
 
 							It would be desirable to have a unified framework where all these applications can be related, and where common proof techniques can be developed for proving the security of protocols.
 
@@ -202,19 +205,19 @@
 							Results on the other case will be reported elsewhere.
 						</p>
 					</section>
-					<section name="Deterministic">
-						<a name="sec3"></a><h2>Deterministic Computations</h2>
-						<section name="Solutions">
-							<a name="sec3.1"><h3>Solutions to the Millionaire's Problem</h3></a>
+					<section id="Deterministic">
+						<h2 id="sec3">Deterministic Computations</h2>
+						<section id="Solutions">
+							<a id="sec3.1"><h3>Solutions to the Millionaire's Problem</h3></a>
 					
 							<p class="rp_original">
 								In this abstract, we will describe in detail only one of the three solutions we have.
 							</p>
 							<p class="rp_original">
 								For definiteness, suppose Alice has \(i\) millions and Bob has \(j\) millions,
-								where \(1 < i,j < 10\).
+								where \(1 &lt; i,j &lt; 10\).
 
-								We need a protocol for them to decide whether \(i  <  j\), such that this is also the only thing they know in the end
+								We need a protocol for them to decide whether \(i  &lt;  j\), such that this is also the only thing they know in the end
 								(aside from their own values).
 
 								Let \(M\) be the set of all \(N\)-bit nonnegative integers,
@@ -253,7 +256,7 @@
 								<li>
 									Bob looks at the \(j\)-th number (not counting \(p\)) sent from Alice,
 									and decides that \(i \geq j\) if it is equal to \(x \bmod{p}\),
-									and \(i < j\) otherwise.
+									and \(i &lt; j\) otherwise.
 								</li>
 								<li>
 									Bob tells Alice what the conclusion is.
@@ -296,18 +299,18 @@
 								without revealing the values of \(i\) and \(j\)?
 								We will show that this is possible in <a href="#sec3.3">Section 3.3</a>.
 								(Note that this is a stronger requirement than the verifiability requirement used in the mental poker protocol in Shamir et. al.
-								<a href="#citation5"><sup class="reference" id="ref5">[5]</sup></a>).
+								<a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a>).
 							</p>
 							<p class="rp_original">
 								We have two other solutions to the millionaire’s problem based on different principles.
 								The first of them assumes that Alice and Bob each owns a private one-way function,
 								where these functions satisfy the commutativity property, i.e.
 								\(E_aE_b(x) = E_bE_a(x)\).
-								The other solution makes use of a probabilistic encryption method invented by Goldwasser and Micali <a href="#citation2"><sup class="reference" id="ref2">[2]</sup></a>.
+								The other solution makes use of a probabilistic encryption method invented by Goldwasser and Micali <a href="#citation2"><sup class="reference" data-citation="2">[2]</sup></a>.
 							</p>
 						</section>
-						<section name="Model">
-							<a name="sec3.2"><h3>Model for the General Problem</h3></a>
+						<section id="Model">
+							<a id="sec3.2"><h3>Model for the General Problem</h3></a>
 							<p class="rp_original">
 								As these three solutions base their security on different assumptions,
 								a precise model has to be specified in detail for each solution. In this abstract, we will only give the model that corresponds to the first solution.
@@ -331,8 +334,7 @@
 								Bob should communicate as follows.
 								Alice and Bob send strings to each other alternately.
 								Each time after Bob has finished transmission, Alice examines the information so far in her possession,
-								which consists of some sequence of strings \(\alpha_1,\alpha_2,&hellip;,\alpha_t\), and some relations among the
-								strings (e.g. \(E_b(\alpha_3)=\alpha_9\), \(\alpha_8\) has an odd number of
+								which consists of some sequence of strings \(\alpha_1,\alpha_2,&hellip;,\alpha_t\), and some relations among the strings (e.g. \(E_b(\alpha_3)=\alpha_9\), \(\alpha_8\) has an odd number of
 								1’s);
 								based on the bits that have so far been transmitted between her and Bob,
 								the protocol specifies how she should compute in private strings \(\alpha_t+1,\alpha_t+2,&hellip;,\alpha_s\)
@@ -391,8 +393,8 @@
 								In <a href="#sec4">Section 4</a>, that becomes a special case of probabilistic computations.
 							</p>
 						</section>
-						<section name="Additional Requirements">
-							<a name="sec3.3"><h3>Additional Requirements</h3></a>
+						<section id="sec3.3">
+							<h3>Additional Requirements</h3>
 							<h4>Complexity</h4>
 							<p class="rp_original">
 								The solution given earlier for the millionaire's problem will become impractical if the range
@@ -425,7 +427,7 @@
 								and Alice with the privacy constraint. Let \(F_n\) be the family of \(0-1\) valued function
 								\(f(i,j)\) with \(i\) and \(j\) being \(n\)-bit integers. Clearly, at most \(n\) bits of
 								transmitted information can compute \(f\), in the absence of the privacy constraint. (See
-								<a href="#citation7"><span class="reference" id="ref7">[7]</span></a> for further discussion).
+								<a href="#citation7"><span class="reference" data-citation="7">[7]</span></a> for further discussion).
 							</p>
 							<h5>Theorem 3</h5>
 							<p class="rp_original rp_theorem">
@@ -474,8 +476,8 @@
 								participant is at most \(\gamma\)</li>
 							</ol>
 						</section>
-						<section name="Applications">
-							<a name="sec3.4"><h3>Applications</h3></a>
+						<section id="Applications">
+							<a id="sec3.4"><h3>Applications</h3></a>
 
 							<h4>Secret Voting</h4>
 							<p class="rp_original">
@@ -521,8 +523,8 @@
 							</p>
 						</section>
 					</section>
-					<section name="Probabilistic">
-						<a name="sec4"></a><h2>Probabilistic Computations</h2>
+					<section id="Probabilistic">
+						<h2 id="sec4">Probabilistic Computations</h2>
 						<p class="rp_original">
 							Let us consider the case with two parties Bob and Alice
 							\((m = 2)\). Let \(V\) and \(W\) be finite sets. A function \(p\) from
@@ -573,13 +575,13 @@
 						<p class="rp_original">
 							One interesting corollary of our results is that mental
 							poker can be played with any general public-key system.
-							It differs from Shamir et. al’s solution <a href="#citation5"><sup class="reference" id="ref5">[5]</sup></a>
+							It differs from Shamir et. al’s solution <a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a>
 							in that we do
 							not require the one-way functions used to be commutative,
 							and that we can play it with a public-key system
 							(instead of using private keys). (A solution with a special
 							one-way function with publicized keys for playing mental
-							poker was known in <a href="#citation2"><span class="reference" id="ref2">[2]</span></a>, but that solution depends on
+							poker was known in <a href="#citation2"><span class="reference" data-citation="2">[2]</span></a>, but that solution depends on
 							the special properties of the one-way function involved.)
 							Moreover, the present solution uses much fewer bits as
 							the number of cards becomes greater. Suppose we
@@ -590,8 +592,8 @@
 							about \(c(\log{n})^2\) bits.
 						</p>
 					</section>
-					<section name="Generalization">
-						<a name="sec5"></a><h2>Generalization to \(m\)-Party Case</h2>
+					<section id="Generalization">
+						<a id="sec5"></a><h2>Generalization to \(m\)-Party Case</h2>
 						<p class="rp_original">
 							When m parties \(A_1,A_2,&hellip;,A_m\) collaborate to compute
 							a function \(f(x_1, x_2,&hellip;,x_m)\), more than one parties may
@@ -610,7 +612,7 @@
 							define \(H_K = X_{t_1} \times X_{t_2} \times \cdots \times X_{t_{|K|}}\) , where
 							\(\{t_1, t_2,&hellip;, t_{|K|}\} = K\). Let \(K' = \{1, 2,&hellip;,m\} − K\), and
 							define \(H_K'\) similarly. For any \(i \in H_K'\) and \(v \in V\) , let
-							\(G_i(v)\) \subseteqH_K\) be the set of all \(j \in H_K\) such that the
+							\(G_i(v)\) \subseteq H_K\) be the set of all \(j \in H_K\) such that the
 							(unique vector) \(x = (x_1, x_2,&hellip;, x_m)\), whose projection
 							on \(H_K'\) and \(H_K\) equals \(i\) and \(j\) respectively, satisfies
 							\(f(x) = v\). Let \(q_{i,v}(j) = \frac{1}{|G_i(v)|}\) for \(j \in G_i(v)\) and \(0\)
@@ -619,11 +621,11 @@
 							other participants, and if the only information available,
 							in addition to their only variable values \(i\), is that the function
 							\(f\) has value v, then \(q_{i,v}(j)\) is the distribution they
-							can infer.) Let \(\epsilon,\delta > 0\). A protocol \(A\) is said to <i>satisfy the
+							can infer.) Let \(\epsilon,\delta > 0\). A protocol \(A\) is said to <i>satisfy the
 							\(\epsilon,\delta)\)-private constraint</i> if for every nonempty \(K\), even if
 							the participants in \(K\) are allowed to perform in private an
 							amount of calculation polynomial in \(T(A)\), they will still
-							infer, with probability at least \(1 − \delta\), that the distribution
+							infer, with probability at least \(1 − \delta\), that the distribution
 							on \(j\) is equal to \(q_{i,v}(j)(1 + O(\epsilon))\). A <i>successful cheating</i>
 							by \(K'\) (with respect to a protocol \(A\)) is an instance of the
 							execution of \(A\), in which at least one participant \(A_r\) with
@@ -633,7 +635,7 @@
 
 						<h5>Theorem 5</h5>
 						<p class="rp_original rp_theorem">
-							For any \(\epsilon,\delta,\gamma > 0\), there exists a protocol
+							For any \(\epsilon,\delta,\gamma > 0\), there exists a protocol
 							\(A\) for computing \(f\) which satisfies the \(\epsilon,\delta\)-private constraint
 							and which has the property that, for any \(K' \neq \{1,&hellip;,m\}\), the probability for
 							\(K'\) to have a successful cheating can not be more than \(\gamma\).
@@ -676,8 +678,8 @@
 							Theorem 5.
 						</p>
 					</section>
-					<section name="Cannot">
-						<a name="sec6"></a><h2>What Cannot Be Done?</h2>
+					<section id="Cannot">
+						<a id="sec6"></a><h2>What Cannot Be Done?</h2>
 						<p class="rp_original">
 							There are security constraints that can not be achieved
 							by any protocols. We will only mention two results here.
@@ -691,9 +693,9 @@
 							bit \(\alpha_1\) and sends it to B, B generates a random \(\alpha_2\) and
 							sends it to C, C generates a random \(\alpha_3\) and sends it to
 							A. Now let \(\alpha = \alpha_1 + \alpha_2 + \alpha_3\), and we get an unbiased
-							\(\alpha\) with the property that it remains unbiased even if one
+							\(\alpha\) with the property that it remains unbiased even if one
 							of the persons cheats by generating a biased bit. Let us
-							call a protocol for generating a bit with bias \(\alpha\)<i>robust</i>, if
+							call a protocol for generating a bit with bias \(\alpha\) <i>robust</i>, if
 							the bias remains correct if somebody has cheated.
 						</p>
 
@@ -731,7 +733,7 @@
 
 						<h5>Theorem 9</h5>
 						<p class="rp_original rp_theorem">
-							Let \(\epsilon > 0\) be fixed. There is a protocol \(A\)
+							Let \(\epsilon &gt; 0\) be fixed. There is a protocol \(A\)
 							with polynomial (in \(N\)) running time which exchanges secrets
 							\(D_b(w)\) and \(D_a(u)\), and under which the probability
 							of anyone double-crossing successfully is bounded by \(\epsilon\).
@@ -739,7 +741,7 @@
 
 						<p class="rp_original">
 							Different kinds of exchanging secrets have been considered
-							previously. Blum <a href="#citation6"><span class="reference" id="ref6">[6]</span></a> showed that it is possible to
+							previously. Blum <a href="#citation6"><span class="reference" data-citation="6">[6]</span></a> showed that it is possible to
 							exchange factors of a large composite numbers (a special
 							type of secrets) with vanishing chance for cheating.
 							Even (private communication, 1981) also devised some
@@ -749,7 +751,7 @@
 				</div>
 			</div>
 			<div class="main_toplevel main_section main_color8">
-				<a name="references"></a>
+				<a id="references"></a>
 				<h1>References</h1>
 				<ol class="referencelist">
 					<li id="citation1">Whitfield Diffie and Martin E. Hellman. New directions
