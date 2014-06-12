@@ -99,9 +99,6 @@ div.papertoc h4 {
 	font-size:12pt;
 }
 
-h2,h3,h4,h5 {
-	text-decoration:underline;
-}
 
 div.paperfloatleft {
 	float:left;
@@ -149,4 +146,9 @@ div.papermain {
 .definition {
 	font-size:110%;
 	margin-top:0px;
+}
+
+img.pdf {
+	width:95%;
+	height:95%;
 }
