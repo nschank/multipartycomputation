@@ -26,8 +26,8 @@ function createSection(authorSection,titleSection,yearSection,tagSection)
 	return function(paper)
 	{
 		var researchPiece = document.createElement("div");
-		researchPiece.className = "paper";
-		researchPiece.innerHTML = "<span class=\"title\"><a href=\"papers/" + paper.id + ".html\">" + paper.title + "</a></span><br /><i><span class=\"year\">" + paper.year + "</span><span class=\"authors\">" + authorsOf(paper, 0) + "</span></i>";
+		researchPiece.className = "rl_element";
+		researchPiece.innerHTML = "<a class=\"rl_title\" href=\"papers/" + paper.id + ".html\">" + paper.title + "</a><br /><span class=\"rl_year\">" + paper.year + "</span>" + authorsOf(paper, 0);
 		
 		if(authorSection)
 			addToAuthors(paper, authorSection, researchPiece);
@@ -52,8 +52,8 @@ function authorsOf(paper, from)
 	else
 	{
 		var currentAuthor = paper.authors[from];
-		var linkedAuthor = "<a href=\"authors/" + currentAuthor + ".html\">" + currentAuthor + "</a>"
-		if(paper.authors.length-1 == from) return linkedAuthor;
+		var linkedAuthor = "<a class=\"rl_author\" href=\"authors/" + currentAuthor + ".html\">" + currentAuthor + "</a>"
+		if(paper.authors.length-1 === from) return linkedAuthor;
 		else return linkedAuthor + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + authorsOf(paper,from+1);
 	}
 }
@@ -67,7 +67,7 @@ function addToAuthors(paper, section, node)
 		{
 			var newAuthorDiv = document.createElement("div");
 			newAuthorDiv.id = "research:author:" + paper.authors[i];
-			newAuthorDiv.innerHTML = "<h2 class=\"authorname\">" + paper.authors[i] + "</h2>";
+			newAuthorDiv.innerHTML = "<h2 class=\"rl_heading\">" + paper.authors[i] + "</h2>";
 			section.appendChild(newAuthorDiv);
 			authorSub = newAuthorDiv;
 		}
@@ -86,7 +86,7 @@ function addToTags(paper, section, node)
 		{
 			var newTagDiv = document.createElement("div");
 			newTagDiv.id = "research:tag:" + paper.tags[i];
-			newTagDiv.innerHTML = "<h2>" + paper.tags[i] + "</h2>";
+			newTagDiv.innerHTML = "<h2 class=\"rl_heading\">" + paper.tags[i] + "</h2>";
 			section.appendChild(newTagDiv);
 			tagSub = newTagDiv;
 		}
@@ -109,13 +109,13 @@ function sortChildren(element)
 	var items = element.childNodes;
 	var itemsArr = [];
 	for (var i in items) {
-		if (items[i].nodeType == 1) { // get rid of the whitespace text nodes
+		if (items[i].nodeType === 1) { // get rid of the whitespace text nodes
 			itemsArr.push(items[i]);
 		}
 	}
 
 	itemsArr.sort(function(a, b) {
-	  return a.id == b.id
+	  return a.id === b.id
 			  ? 0
 			  : (a.id > b.id ? 1 : -1);
 	});

@@ -1,0 +1,37 @@
+.rl_element {
+	display:block;
+	width:95%;
+	min-height:50px;
+	margin:8px auto;
+}
+
+.rl_title {
+	font-weight:bold;
+	font-size:14pt;
+	text-decoration:none;
+}
+
+.rl_year {
+	font-size:10pt;
+	margin-left:5px;
+	margin-right:20px;
+	color:#555555;
+        font-style:italic;
+}
+
+.rl_authors {
+    
+}
+
+.rl_author {
+	font-size:11pt;
+	color:#444444;
+	text-decoration:none;
+}
+
+.rl_heading {
+	margin-bottom:0px;
+	margin-top:0px;
+	padding-top:10px;
+	border-top:1px dotted black;
+}

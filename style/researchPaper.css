@@ -1,35 +1,4 @@
-div.paper {
-	display:block;
-	width:95%;
-	min-height:50px;
-	margin:8px auto;
-}
 
-div.paper span.title a {
-	font-weight:bold;
-	font-size:14pt;
-	text-decoration:none;
-}
-
-div.paper span.year {
-	font-size:10pt;
-	margin-left:5px;
-	margin-right:20px;
-	color:#555555;
-}
-
-div.paper span.authors a {
-	font-size:11pt;
-	color:#444444;
-	text-decoration:none;
-}
-
-h2.authorname {
-	margin-bottom:0px;
-	margin-top:0px;
-	padding-top:10px;
-	border-top:1px dotted black;
-}
 
 div.researchanalysis {
 	width:95%;
@@ -152,3 +121,4 @@ img.pdf {
 	width:95%;
 	height:95%;
 }
+
