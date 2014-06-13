@@ -21,8 +21,7 @@
 			{
 				switch(box)
 				{
-					case 0:
-					case 1: return "Any function on <span class=\"equation\">m</span> integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer.";
+					case "1": return "Any function on <span class=\"equation\">m</span> integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer.";
 					case 2: return "The encryption of the <span class=\"equation\">N</span>-bit integer <span class=\"equation\">x</span> under Alice's public key.";
 					case 3: return "The decryption of ten values under Alice's private key.";
 					default: return "No info on this equation yet.";
@@ -145,11 +144,14 @@
 					<section id="sec1">
 						<h2>Introduction</h2>
 						<p class="rp_original">
-							Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other’s wealth. How can they carry out such a conversation?
+                                                    Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other’s wealth. How can they carry out such a conversation?
 						</p>
+                                                <p class="rp_annotation">
+                                                    
+                                                </p>
 						<p class="rp_original">
 							This is a special case of the following general problem. Suppose \(m\) people wish to compute the value of a function
-							<span class="equation" id="equation1">\(f(x_1, x_2, &hellip;, x_m)\)</span>,
+							<span class="equation" data-equation="1">\(f(x_1, x_2, &hellip;, x_m)\)</span>,
 							which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range.
 							Assume initially person \(P_i\) knows the value of \(x_i\) and no other
 							\(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?
