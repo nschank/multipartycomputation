@@ -16,12 +16,6 @@ div.equationBlock  h2{
 	margin-top:3px;
 }
 
-p.equationhelp {
-	font-size:8pt;
-	margin-top:20px;
-	margin-left:30px;
-}
-
 div.equationBlock a {
 	color:#3A3603;
 	text-decoration:none;
@@ -33,14 +27,20 @@ div.equationBlock a:hover {
 }
 
 span.equation {
-	font-weight:boldest;
-	font-family:monospace;
-	font-style:none;
-	margin:0px 5px;
-	display:inline-block;
+        border-bottom:1px dotted #555555;
 }
 
-.bigequation {
-	font-size:200%;
-	text-align:center;
+.equationhelp {
+	font-size:8pt;
+	margin-top:20px;
+	margin-left:30px;
+}
+
+.equationInfo {
+    margin-top:5px;
+}
+
+.equationInfo > p {
+    margin-left:5%;
+    margin-right:5%;
 }

@@ -18,7 +18,7 @@ function addDOME(equation,id)
 	block.className="equationBlock";
 	
 	block.innerHTML += "<h2>Equation Info</h2>";
-	block.innerHTML += fill(id);
+	block.innerHTML += "<span class=\"equationInfo\">" + fill(id) + "</span>";
 	block.innerHTML += "<p class=\"equationhelp\">For more help reading equations like these, visit our <a href=\"equations.html\">equations page</a></p>";
 	document.body.appendChild(block);
 	block.addEventListener('mouseover',keepOpenE(block));
