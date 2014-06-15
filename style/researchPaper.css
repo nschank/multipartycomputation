@@ -96,12 +96,13 @@ img.rp_link {
     margin-bottom:2px;
     margin-left:20px; 
     color:#665;
+    display:inline-block;
 }
 
 .rp_theorem {
 	font-style:italic;
 	font-size:110%;
-	margin-top:0px;
+	margin:0px auto auto auto;
         width:90%;
 }
 
