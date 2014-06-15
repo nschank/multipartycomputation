@@ -26,6 +26,7 @@ function addDOMR(id, elem)
 	document.body.appendChild(block);
 	block.addEventListener('mouseover',keepOpenR(block));
 	block.addEventListener('mouseout',maybeCloseR(block));
+        window.addEventListener('scroll', definitelyCloseR(block));
         elem.addEventListener('mouseover',mouseOverListenerR(elem,block));
 	elem.addEventListener('mouseout',mouseOutListenerR(elem,block));
 	return true;
@@ -58,6 +59,14 @@ function keepOpenR(block)
     return function()
     {
 	block.style.display="block";
+    };
+}
+
+function definitelyCloseR(block)
+{
+    return function()
+    {
+	block.style.display="none";
     };
 }
 
