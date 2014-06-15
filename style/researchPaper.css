@@ -1,34 +1,34 @@
 
 div.rp_nav_container {
-	width:50%;
-	margin:0px auto;
+    width:50%;
+    margin:0px auto;
 }
 
 div.rp_nav_box {
-	float:left;
-	width:25%;
-	font-size:9pt;
-	text-align:center;
+    float:left;
+    width:25%;
+    font-size:9pt;
+    text-align:center;
 }
 
 div.rp_nav_box > a {
-	text-decoration:none;
+    text-decoration:none;
 }
 
 div.rp_linkbox {
-	float:right;
-	width:50px;
-	height:50px;
+    float:right;
+    width:50px;
+    height:50px;
 }
 
 div.rp_toc {
-	margin:10px 3%;
-	width:25%;
-	background-color:#C9C7AD;
-	border:1px solid #8A8194;
-	min-height:100px;
-	float:left;
-	font-size:10pt;
+    margin:10px 3%;
+    width:25%;
+    background-color:#C9C7AD;
+    border:1px solid #8A8194;
+    min-height:100px;
+    float:left;
+    font-size:10pt;
 }
 
 div.rp_toc ol {
@@ -42,23 +42,23 @@ div.rp_toc > ol {
 
 
 img.rp_link {
-	width:95%;
-	height:95%;
+    width:95%;
+    height:95%;
 }
 
 
 .rp_title {
-	margin:10px 10% 0px 10%;
-	border-bottom:1px dotted #555555;
-	text-align:center;
-	font-size:24pt;
-        display:block;
+    margin:10px 10% 0px 10%;
+    border-bottom:1px dotted #555555;
+    text-align:center;
+    font-size:24pt;
+    display:block;
 }
 .rp_info {
-	margin:0px 10% 20px 10%;
-	text-align:center;
-	font-size:12pt;
-        display:block;
+    margin:0px 10% 20px 10%;
+    text-align:center;
+    font-size:12pt;
+    display:block;
 }
 
 .rp_author {
@@ -66,33 +66,34 @@ img.rp_link {
 }
 
 .rp_problems {
-	float:left;
-	margin-left:50px;
+    float:left;
+    margin-left:50px;
 }
 
 .rp_snippet {
-	font-style:italic;
-	margin:10px 5%;
-	color:#666666;
-	float:left;
-	width:55%;
-	
+    font-style:italic;
+    margin:10px 5%;
+    color:#666666;
+    float:left;
+    width:55%;
+
 }
 
 .rp_original {
-	margin:11px 10px;
-	font-size:12pt;
+    margin:11px 10px;
+    font-size:12pt;
 }
 
 .rp_annotation {
-	color:#444444;
-	font-size:10pt;
-	margin:13px auto;
-	width:80%;
+    color:#444444;
+    font-size:10pt;
+    margin:13px auto;
+    width:80%;
 }
 
-.rp_theorem_header {
+.rp_theorem_header, .rp_definition_header {
     font-family:questrial;
+    margin-top:8px;
     margin-bottom:2px;
     margin-left:20px; 
     color:#665;
@@ -100,15 +101,17 @@ img.rp_link {
 }
 
 .rp_theorem {
-	font-style:italic;
-	font-size:110%;
-	margin:0px auto auto auto;
-        width:90%;
+    font-style:italic;
 }
 
-.rp_definition {
-	font-size:110%;
-	margin-top:0px;
+.rp_definition, .rp_theorem {
+    font-size:110%;
+    margin:0px auto auto auto;
+    width:90%;   
+}
+
+ol.rp_theorem, ol.rp_definition {
+    width:85%;
 }
 
 

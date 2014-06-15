@@ -31,8 +31,12 @@
 						return "<p>Any function on \\(m\\) integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer.</p>";
 					case "NbitZ+":
 						return "<p>All integers between 0 and \\(2^{N}-1\\). For example, if \\(N=3\\), then all numbers from \\(0 = 000_b\\) to \\(7 = 111_b\\).</p>";
+					case "O(N^k)":
+						return "<p>A function that grows more slowly than \\(N^k\\), where \\(N\\) is the number of bits being used, and \\(k\\) is some integer chosen in advance.</p>";
+					case "quartic":
+						return "<p>The number of bits exchanged is lower-bounded by the product of the quartic roots of the cardinality of the domain. In this case, the domain of the entire function is being represented by the product of the domains of each individual variable.</p>";
 					case "th2":
-						return "<p>Read: <i>the runtime of that algorithm is in big-oh \\(C(f)\\) times the log of the inverses of epsilon times delta</i>.</p><p> Basically, the privacy constraint increases the complexity of the algorithm by at most \\(\\log{\\frac{1}{\\epsilon\\cdot\\delta}}\\). This value grows from 1 (when both variables are 1 and offer no security) to \\(\\infty\\) the closer either or both values get to 0 (complete security). Logarithms grow <u>slowly</u>, so you can get pretty close to zero before this increase in complexity is particularly large.</p><p>You can look at this function <a href=\"http://www.wolframalpha.com/input/?i=z%3Dlog%281%2F%28epsilon+*+delta%29%29+from+epsilon+%3D+0+to+1%3B+delta+%3D+0+to+1\">on WolframAlpha</a>.</p>";
+						return "<p>Read: <i>the runtime of that algorithm is in big-oh \\(C(f)\\) times the log of the inverse of epsilon times delta</i>.</p><p> Basically, the privacy constraint increases the complexity of the algorithm by at most \\(\\log{\\frac{1}{\\epsilon\\cdot\\delta}}\\). This value grows from 1 (when both variables are 1 and offer no security) to \\(\\infty\\) the closer either or both values get to 0 (complete security). Logarithms grow <u>slowly</u>, so you can get pretty close to zero before this increase in complexity is particularly large.</p><p>You can look at this function <a href=\"http://www.wolframalpha.com/input/?i=z%3Dlog%281%2F%28epsilon+*+delta%29%29+from+epsilon+%3D+0+to+1%3B+delta+%3D+0+to+1\">on WolframAlpha</a>.</p>";
 					case "yu":
 						return "<p>The decryption of ten values under Alice's private key.</p>";
 					default:
@@ -49,7 +53,8 @@
 				}
 			}
 
-			self_def["successful cheating"] = "<p><a href=\"#def1\">Definition 1</a></p><p>An instance of an execution of a protocol in which a party does not behave consistently with any possible input, yet any other party is unable to detect it.</p>";
+			self_def["successful cheating"] = "<a href=\"#def2\">Definition 2</a></p><p>An instance of an execution of a protocol in which a party does not behave consistently with any possible input, yet any other party is unable to detect it.";
+			self_def["robust"] = "A robust bit-producing protocol is one in which the bit produced has the correct <span class=\"definable\">bias</span> even if someone has cheated.";
 			//-->
         </script>
     </head>
@@ -86,10 +91,11 @@
 								<ol>
 									<li>Introduction</li>
 									<li>Goals</li>
-									<li>Definitions</li>
-									<li>Theorems</li>
-									<li>Results</li>
-									<li>Effect</li>
+									<li><a href="#a_defs">Definitions</a></li>
+									<li><a href="#a_theorems">Theorems</a></li>
+									<li>Summary of Results</li>
+									<li>Effects and Uses</li>
+									<li>Referencing This Paper</li>
 								</ol>
 							</li>
                             <li><a href="#_B">Annotated Extended Abstract</a></li>
@@ -100,21 +106,127 @@
                         which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range. 
                         Assume initially person \(P_i\) knows the value of \(x_i\) and no other 
                         \(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?</div>
-                    <h2 id="_intro">Introduction</h2>
+                    <h2 id="a_intro">Introduction</h2>
                     <p>Etc etc.</p>
-                    <h2 id="_goals">Goals</h2>
+                    <h2 id="a_goals">Goals</h2>
                     <p>Etc etc.</p>
-                    <h2 id="_defs">Definitions</h2>
+					<section id="a_defs">
+						<h2>Definitions</h2>
+						<a href="#def1"><span class="rp_definition_header">Definition 1 - \((\epsilon,\delta)\)-Privacy Constraint</span></a>
+						<p class="rp_original rp_definition">
+                                Let \(\epsilon,\delta > 0\),
+                                and \(f(i,j)\) be a \(0-1\) valued function.
+                                Assume that initially all pairs of \((i,j)\)
+                                values are equally likely.
+                                Suppose Bob and Alice carry out the computation faithfully according to the protocol.
+                                At the end, Alice can in principle, from her computed value \(v\) of the function and the strings in her possession,
+                                compute a probability distribution of the values of \(j\);
+                                call this \(p_i(j)\). A protocol is said to satisfy the \((\epsilon,\delta)\)-privacy
+                                constraint if the following conditions are satisfied:
+                            </p>
+                            <ol class="rp_original rp_definition">
+                                <li>
+                                    \(p_i(j)=\frac{1}{|G_i|}(1+O(\epsilon))\)
+                                    for \(j \in G_i\), and \(0\) otherwise, where
+                                    \(G_i\) is the set of \(j\)
+                                    for which \(f(i,j)=v\),
+                                </li>
+                                <li>
+                                    if Alice tries afterwards to perform more calculations with no more than \(O(N^k)\) evaluations of
+                                    \(E\)'s and \(D\)'s, then with
+                                    probability at least \(1-\delta\) she will still get the
+                                    above distribution on \(j\), and
+                                </li>
+                                <li>
+                                    the above requirement is also true for Bob.
+                                </li>
+                            </ol>
+						<a href="#def2"><span class="rp_definition_header">Definition 2 - Successful Cheating</span></a>
+						<p class="rp_definition">
+							Consider an instance in the execution of a
+							protocol. We will consider it to be a successful cheating
+							by Alice, if Alice does not behave consistently with
+							any value of \(i\) and yet Bob does not detect it. A successful
+							cheating by Bob is defined similarly.
+						</p>
+					</section>
+					<section id="a_theorems">
+						<h2>Theorems</h2>
+						<p class="rp_original">Let \(A\) be a protocol, let \(T(A)\) denote the maximum number of bits exchanged
+							 between Alice and Bob when \(A\) is used.</p>
+						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
+						<p class="rp_original rp_theorem">
+							For any \(\epsilon,\delta > 0\) and any function \(f\), there exists a protocol for computing \(f\)
+							that satisfies the \((\epsilon,\delta)\)-privacy constraint.
+						</p>
+						<a href="#theorem2"><span class="rp_theorem_header">Theorem 2</span></a>
+						<p class="rp_original rp_theorem">
+							Let \(1 > \epsilon,\delta > 0\) and \(f(i,j)\)
+							be a \(0-1\) function. If \(f\) can be
+							computed by a boolean circuit of size \(C(f)\), then there is a protocol
+							\(A\) computing \(f\) satisfying the
+							\((\epsilon,\delta)\)-privacy constraint such that
+							<span class="equation" data-equation="th2">\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta}})\)</span>.
+						</p>
+						<a href="#theorem3"><span class="rp_theorem_header">Theorem 3</span></a>
+						<p class="rp_original rp_theorem">
+							Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(F_n\) be the family of \(0-1\) valued function
+                                \(f(i,j)\) with \(i\) and \(j\) being \(n\)-bit integers. Let \(f\) be a random element of \(F_n\),
+							then any protocol \(A\) that computes \(f\) with \((\epsilon,\delta)\)-privacy constraint
+							must have \(T(A)>2^\frac{n}{2}\) for all large \(n\).
+						</p>
+						<a href="#theorem4"><span class="rp_theorem_header">Theorem 4</span></a>
+						<p class="rp_original rp_theorem">
+							Let \(1 > \gamma > 0\). Under the same assumption of <a href="#theorem2">Theorem 2</a>, there exists a protocol \(A\)
+							for computing \(f\) such that
+						</p>
+						<ol class="rp_original rp_theorem">
+							<li>\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta\cdot\gamma}}\log{\frac{1}{\gamma}})\), and</li>
+							<li>if one participant behaves according to \(A\), the probability of a successful cheating by the other
+								participant is at most \(\gamma\)</li>
+						</ol>
+						<a href="#theorem5"><span class="rp_theorem_header">Theorem 5</span></a>
+						<p class="rp_theorem rp_annotation">
+							Let \(K'\) be defined such that the set \(\{P_i | i \in K'\}\) is the set of people who are attempting to collude with each
+							other in order to cheat. 
+						</p>
+                        <p class="rp_original rp_theorem">
+                            For any \(\epsilon,\delta,\gamma > 0\), there exists a protocol
+                            \(A\) for computing \(f\) which satisfies the \((\epsilon,\delta)\)-private constraint
+                            and which has the property that, for any \(K' \neq \{1,&hellip;,m\}\), the probability for
+                            \(K'\) to have a successful cheating can not be more than \(\gamma\).
+                        </p>
+						<a href="#theorem6"><span class="rp_theorem_header">Theorem 6</span></a>
+                        <p class="rp_original rp_theorem">
+                            There exist functions \(f\) for which any protocol
+                            \(A\) satisfying the conditions in Theorem 5 must have
+                            \(T(A) = \Omega((|X_1|\cdot |X_2|\cdot\cdots\cdot|X_m|)^\frac{1}{4})\)
+                        </p>
+						<a href="#theorem7"><span class="rp_theorem_header">Theorem 7</span></a>
+						<p class="rp_original rp_theorem">
+                            No protocol \(A\) with finite \(T(A)\) which generates
+                            a bit with a <span class="definable">transcendental</span> bias \(\alpha\) can be <span class="definable">robust</span>.
+                        </p>
+						<a href="#theorem8"><span class="rp_theorem_header">Theorem 8</span></a>
+						<p class="rp_original rp_theorem">
+                            Let \(A\) be any protocol for exchanging secrets.
+                            Then either Alice or Bob will be able to doublecross
+                            successfully with probability at least \(\frac{1}{2}\).
+                        </p>
+						<a href="#theorem9"><span class="rp_theorem_header">Theorem 9</span></a>
+						<p class="rp_original rp_theorem">
+                            Let \(\epsilon &gt; 0\) be fixed. There is a protocol \(A\)
+                            with polynomial (in \(N\)) running time which exchanges secrets
+                            \(D_b(w)\) and \(D_a(u)\), and under which the probability
+                            of anyone double-crossing successfully is bounded by \(\epsilon\).
+                        </p>
+					</section>
+                    <h2 id="a_results">Summary of Results</h2>
                     <p>Etc etc.</p>
-                    <h2 id="_theorems">Theorems</h2>
-                    <h4>Theorem 1</h4>
-                    <p class="rp_theorem">
-                        For any \(\epsilon,\delta > 0\) and any function \(f\), there exists a protocol for computing \(f\)
-                        that satisfies the \((\epsilon,\delta)\)-privacy constraint.
-                    </p>
-                    <h2 id="_results">Results</h2>
-                    <p>Etc etc.</p>
-
+					<h2 id="a_use">Effects and Uses</h2>
+					<p>Etc etc.</p>
+					<h2 id="a_ref">Referencing This Paper</h2>
+					
                 </div>
             </div>
             <div class="main_toplevel main_section main_color5"><a id="_B"></a>
@@ -358,11 +470,12 @@
                                 By that time, the protocol has an instruction for each participant to compute
                                 the function value \(f\) in private.
                                 Finally, we require that, in a protocol, the total number of evaluations of \(E\)’s
-                                and \(D\)’s by Bob and Alice be bounded by \(O(N^k)\), where
+                                and \(D\)’s by Bob and Alice be bounded by <span class="equation" data-equation="O(n^k)">\(O(N^k)\)</span>, where
                                 \(k\) is an integer chosen in advance.
                             </p>
                             <h4>Privacy Constraint</h4>
-                            <p class="rp_original">
+							<span class="rp_definition_header" id="def1">Definition 1</span>
+                            <p class="rp_definition">
                                 Let \(\epsilon,\delta > 0\),
                                 and \(f(i,j)\) be a \(0-1\) valued function.
                                 Assume that initially all pairs of \((i,j)\)
@@ -373,7 +486,7 @@
                                 call this \(p_i(j)\). A protocol is said to satisfy the \((\epsilon,\delta)\)-privacy
                                 constraint if the following conditions are satisfied:
                             </p>
-                            <ol>
+                            <ol class="rp_definition">
                                 <li>
                                     \(p_i(j)=\frac{1}{|G_i|}(1+O(\epsilon))\)
                                     for \(j \in G_i\), and \(0\) otherwise, where
@@ -390,7 +503,7 @@
                                     the above requirement is also true for Bob.
                                 </li>
                             </ol>
-                            <h4>Theorem 1</h4>
+                            <span class="rp_theorem_header" id="theorem1">Theorem 1</span>
                             <p class="rp_original rp_theorem">
                                 For any \(\epsilon,\delta > 0\) and any function \(f\), there exists a protocol for computing \(f\)
                                 that satisfies the \((\epsilon,\delta)\)-privacy constraint.
@@ -415,7 +528,7 @@
                                 Let \(A\) be a protocol, let \(T(A)\) denote the maximum number of bits exchanged
                                 between Alice and Bob when \(A\) is used.
                             </p>
-                            <h5>Theorem 2</h5>
+                            <span class="rp_theorem_header" id="theorem2">Theorem 2</span>
                             <p class="rp_original rp_theorem">
                                 Let \(1 > \epsilon,\delta > 0\) and \(f(i,j)\)
                                 be a \(0-1\) function. If \(f\) can be
@@ -425,7 +538,7 @@
                                 <span class="equation" data-equation="th2">\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta}})\)</span>.
                             </p>
                             <p class="rp_original">
-                                In fact, if \(f\) can be computed by a Turing machine in time \(S\), then the protocol can
+                                In fact, if \(f\) can be computed by a <span class="definable">Turing machine</span> in time \(S\), then the protocol can
                                 be implemented such that both Alice and Bob have Turing machine algorithms to execute the
                                 protocol with a time bound \(O(S\log{\frac{1}{\epsilon\cdot\delta}})\).
                             </p>
@@ -436,7 +549,7 @@
                                 transmitted information can compute \(f\), in the absence of the privacy constraint. (See
                                 <a href="#citation7"><span class="reference" data-citation="7">[7]</span></a> for further discussion).
                             </p>
-                            <h5>Theorem 3</h5>
+                            <span class="rp_theorem_header" id="theorem3">Theorem 3</span>
                             <p class="rp_original rp_theorem">
                                 Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(f\) be a random element of \(F_n\),
                                 then any protocol \(A\) that computes \(f\) with \((\epsilon,\delta)\)-privacy constraint
@@ -464,7 +577,7 @@
                                 most that a protocol can achieve is to make sure that this
                                 is the only cheating that Alice (or Bob) can do.
                             </p>
-                            <h5 id="def1">Definition 1</h5>
+                            <span class="rp_definition_header" id="def2">Definition 2</span>
                             <p class="rp_original rp_definition">
                                 Consider an instance in the execution of a
                                 protocol. We will consider it to be a <span class="definable">successful cheating</span>
@@ -472,19 +585,19 @@
                                 any value of \(i\) and yet Bob does not detect it. A successful
                                 cheating by Bob is defined similarly.
                             </p>
-                            <h5>Theorem 4</h5>
+                            <span class="rp_theorem_header" id="theorem4">Theorem 4</span>
                             <p class="rp_original rp_theorem">
-                                Let \(1 > \gamma > 0\). Under the same assumption of Theorem 2, there exists a protocol \(A\)
+                                Let \(1 > \gamma > 0\). Under the same assumption of <a href="#theorem2">Theorem 2</a>, there exists a protocol \(A\)
                                 for computing \(f\) such that
                             </p>
                             <ol class="rp_original rp_theorem">
-                                <li>\(T(A)=O(C(f)\log{\frac{1}{\epsilon\cdot\delta\cdot\gamma}}\log{\frac{1}{\gamma}})\), and</li>
+                                <li>\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta\cdot\gamma}}\log{\frac{1}{\gamma}})\), and</li>
                                 <li>if one participant behaves according to \(A\), the probability of a successful cheating by the other
                                     participant is at most \(\gamma\)</li>
                             </ol>
                         </section>
-                        <section id="Applications">
-                            <a id="sec3.4"><h3>Applications</h3></a>
+                        <section id="sec3.4">
+                            <h3>Applications</h3>
 
                             <h4>Secret Voting</h4>
                             <p class="rp_original">
@@ -555,7 +668,7 @@
                             here but simply give an illustration for the special
                             case \(q\) = constant. In this special case, the distribution
                             \(h(w)\) that Alice can infer from the computation she has
-                            done should, according to the privacy constraint, is equal
+                            done, according to the privacy constraint, is equal
                             to
                         </p>
 
@@ -564,7 +677,7 @@
                         </p>
 
                         <p class="rp_original">
-                            For example, mental poker would correspond to the
+                            For example, <span class="definable">mental poker</span> would correspond to the
                             following situation: \(I = J = {0}\), \(q\) is a constant, \(V =
                             W\) is the set of all 5-element subsets of \({1, 2,&hellip;, 52}\),
                             \(f_{00}(v,w)\) is \(0\) if \(v\) and \(w\) are not disjoint and equal to a
@@ -598,12 +711,12 @@
                             about \(c(\log{n})^2\) bits.
                         </p>
                     </section>
-                    <section id="Generalization">
-                        <a id="sec5"></a><h2>Generalization to \(m\)-Party Case</h2>
+                    <section id="sec5">
+                        <h2>Generalization to \(m\)-Party Case</h2>
                         <p class="rp_original">
                             When m parties \(A_1,A_2,&hellip;,A_m\) collaborate to compute
                             a function \(f(x_1, x_2,&hellip;,x_m)\), more than one parties may
-                            <span class="reference" id="collusion">collude</span> to cheat.
+                            <span class="definable" data-define="collusion">collude</span> to cheat.
                             We will show that even the most severe
                             constraint can be met in the following sense: No matter
                             how many participants may collude, any cheating act will
@@ -617,18 +730,18 @@
                             where \(x_i \in X_i\). For any nonempty \(K \subseteq \{1, 2,&hellip;,m\}\),
                             define \(H_K = X_{t_1} \times X_{t_2} \times \cdots \times X_{t_{|K|}}\) , where
                             \(\{t_1, t_2,&hellip;, t_{|K|}\} = K\). Let \(K' = \{1, 2,&hellip;,m\} − K\), and
-                            define \(H_K'\) similarly. For any \(i \in H_K'\) and \(v \in V\) , let
-                            \(G_i(v)\) \subseteq H_K\) be the set of all \(j \in H_K\) such that the
+                            define \(H_{K'}\) similarly. For any \(i \in H_{K'}\) and \(v \in V\) , let
+                            \(G_i(v) \subseteq H_K\) be the set of all \(j \in H_K\) such that the
                             (unique vector) \(x = (x_1, x_2,&hellip;, x_m)\), whose projection
-                            on \(H_K'\) and \(H_K\) equals \(i\) and \(j\) respectively, satisfies
+                            on \(H_{K'}\) and \(H_K\) equals \(i\) and \(j\) respectively, satisfies
                             \(f(x) = v\). Let \(q_{i,v}(j) = \frac{1}{|G_i(v)|}\) for \(j \in G_i(v)\) and \(0\)
                             otherwise. (If all the participants \(A_r\) with \(r \in K'\) collude
                             to infer the probability distribution of the variable values of
                             other participants, and if the only information available,
                             in addition to their only variable values \(i\), is that the function
-                            \(f\) has value v, then \(q_{i,v}(j)\) is the distribution they
+                            \(f\) has value \(v\), then \(q_{i,v}(j)\) is the distribution they
                             can infer.) Let \(\epsilon,\delta > 0\). A protocol \(A\) is said to <i>satisfy the
-                                \(\epsilon,\delta)\)-private constraint</i> if for every nonempty \(K\), even if
+                                \((\epsilon,\delta)\)-private constraint</i> if for every nonempty \(K\), even if
                             the participants in \(K\) are allowed to perform in private an
                             amount of calculation polynomial in \(T(A)\), they will still
                             infer, with probability at least \(1 − \delta\), that the distribution
@@ -639,10 +752,10 @@
                             being detected by all the participants of \(K\).
                         </p>
 
-                        <h5>Theorem 5</h5>
+                        <span class="rp_theorem_header" id="theorem5">Theorem 5</span>
                         <p class="rp_original rp_theorem">
                             For any \(\epsilon,\delta,\gamma > 0\), there exists a protocol
-                            \(A\) for computing \(f\) which satisfies the \(\epsilon,\delta\)-private constraint
+                            \(A\) for computing \(f\) which satisfies the \((\epsilon,\delta)\)-private constraint
                             and which has the property that, for any \(K' \neq \{1,&hellip;,m\}\), the probability for
                             \(K'\) to have a successful cheating can not be more than \(\gamma\).
                         </p>
@@ -652,11 +765,11 @@
                             as the next theorem shows.
                         </p>
 
-                        <h5>Theorem 6</h5>
+                        <span class="rp_theorem_header" id="theorem6">Theorem 6</span>
                         <p class="rp_original rp_theorem">
                             There exist functions \(f\) for which any protocol
                             \(A\) satisfying the conditions in Theorem 5 must have
-                            \(T(A) = \Omega((|X_1|\cdot |X_2|\cdot\cdots\cdot|X_m|)^\frac{1}{4})\)
+                            <span class="equation" data-equation="quartic">\(T(A) = \Omega((|X_1|\cdot |X_2|\cdot\cdots\cdot|X_m|)^\frac{1}{4})\)</span>
                         </p>
 
                         <p class="rp_original">
@@ -684,8 +797,8 @@
                             Theorem 5.
                         </p>
                     </section>
-                    <section id="Cannot">
-                        <a id="sec6"></a><h2>What Cannot Be Done?</h2>
+                    <section id="sec6">
+                        <h2>What Cannot Be Done?</h2>
                         <p class="rp_original">
                             There are security constraints that can not be achieved
                             by any protocols. We will only mention two results here.
@@ -701,14 +814,14 @@
                             A. Now let \(\alpha = \alpha_1 + \alpha_2 + \alpha_3\), and we get an unbiased
                             \(\alpha\) with the property that it remains unbiased even if one
                             of the persons cheats by generating a biased bit. Let us
-                            call a protocol for generating a bit with bias \(\alpha\) <i>robust</i>, if
+                            call a protocol for generating a bit with bias \(\alpha\) <span class="definable">robust</span>, if
                             the bias remains correct if somebody has cheated.
                         </p>
 
-                        <h5>Theorem 7</h5>
+                        <span class="rp_theorem_header" id="theorem7">Theorem 7</span>
                         <p class="rp_original rp_theorem">
                             No protocol \(A\) with finite \(T(A)\) which generates
-                            a bit with a transcendental bias \(\alpha\) can be robust.
+                            a bit with a <span class="definable">transcendental</span> bias \(\alpha\) can be <span class="definable">robust</span>.
                         </p>
 
                         <p class="rp_original">
@@ -717,10 +830,10 @@
                             of solutions \(x, y\) with \(E_a(x) = 1\) and \(E_b(y) = 1\). Is there
                             a protocol such that an honest party will not be doublecrossed,
                             i.e. swindled out of its secret without getting the
-                            secret from the other party.
+                            secret from the other party?
                         </p>
 
-                        <h5>Theorem 8</h5>
+                        <span class="rp_theorem_header" id="theorem8">Theorem 8</span>
                         <p class="rp_original rp_theorem">
                             Let \(A\) be any protocol for exchanging secrets.
                             Then either Alice or Bob will be able to doublecross
@@ -737,7 +850,7 @@
                             functions \(E_a\) and \(E_b\) operate on.
                         </p>
 
-                        <h5>Theorem 9</h5>
+                        <span class="rp_theorem_header" id="theorem9">Theorem 9</span>
                         <p class="rp_original rp_theorem">
                             Let \(\epsilon &gt; 0\) be fixed. There is a protocol \(A\)
                             with polynomial (in \(N\)) running time which exchanges secrets
@@ -748,7 +861,7 @@
                         <p class="rp_original">
                             Different kinds of exchanging secrets have been considered
                             previously. Blum <a href="#citation6"><span class="reference" data-citation="6">[6]</span></a> showed that it is possible to
-                            exchange factors of a large composite numbers (a special
+                            exchange factors of large composite numbers (a special
                             type of secrets) with vanishing chance for cheating.
                             Even (private communication, 1981) also devised some
                             protocols for exchanging secrets.
