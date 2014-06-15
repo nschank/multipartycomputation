@@ -21,51 +21,9 @@ function addDOME(equation,id)
 	block.innerHTML += "<span class=\"equationInfo\">" + fill(id) + "</span>";
 	block.innerHTML += "<p class=\"equationhelp\">For more help reading equations like these, visit our <a href=\"equations.html\">equations page</a></p>";
 	document.body.appendChild(block);
-	block.addEventListener('mouseover',keepOpenE(block));
-	block.addEventListener('mouseout',maybeCloseE(block));
-        equation.addEventListener('mouseover',mouseOverListenerE(equation,block));
-	equation.addEventListener('mouseout',mouseOutListenerE(equation,block));
-}
-
-function mouseOverListenerE(equation,block)
-{
-	return function(event)
-	{
-		block.style.display="block";
-		block.style.left=equation.getBoundingClientRect().right+"px";
-		block.style.top=equation.getBoundingClientRect().top+"px";
-	};
-}
-
-function mouseOutListenerE(equation,block)
-{
-	return function(event)
-	{
-		var right = equation.getBoundingClientRect().right;
-		var top = equation.getBoundingClientRect().top;
-		if(event.clientX > right && event.clientX < right+10)
-			if(top < event.clientY)
-				return;
-		block.style.display="none";
-	};
-}
-
-function keepOpenE(block)
-{
-    return function(event)
-    {
-        block.style.display="block";
-    };		
-}
-
-function maybeCloseE(block)
-{
-    return function(event)
-    {
-        var rect = block.getBoundingClientRect();
-	if(rect.left < event.clientX && event.clientX < rect.right)
-		if(rect.top < event.clientY && event.clientY < rect.bottom)
-			return;
-	block.style.display="none";
-    };
+	block.addEventListener('mouseover',keepOpen(block));
+	block.addEventListener('mouseout',maybeClose(block));
+        window.addEventListener('scroll', definitelyClose(block));
+        equation.addEventListener('mouseover',mouseOverListener(equation,block));
+	equation.addEventListener('mouseout',mouseOutListener(equation,block));
 }
