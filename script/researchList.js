@@ -57,7 +57,7 @@ var researchInfo = [
 	{authors:["Martin Hirt","Ueli Maurer"], title:"Player Simulation and General Adversary Structures in Perfect Multiparty Computation", year:1999, id:46, length:30, tags:["Unsorted"]},
 	{authors:["Manas A. Pathak","Bhiksha Raj"], title:"Privacy-Preserving Protocols for Eigenvector Computation", year:2010.5, id:47, length:14, tags:["Unsorted"]},
 	{authors:["Yehuda Lindell"], title:"Protocols for Bounded-Concurrent Secure Two-Party Computation in the Plain Model", year:2004, id:48, length:48, tags:["Unsorted"]},
-	{authors:["Andrew C. Yao"], title:"Protocols for Secure Computations", year:1982, id:49, length:5, tags:["Unsorted"]},
+	{authors:["Andrew C. Yao"], title:"Protocols for Secure Computations", year:1982, id:49, length:5, hasPage:true, tags:["Protocols","Probabilistic Computation", "Significant Papers"]},
 	
 	{authors:["Roger Colbeck"], title:"Quantum and Relativistic Protocols for Secure Multi-Party Computation", year:2006, id:50, length:150, tags:["Unsorted","Quantum","Thesis"]},
 	{authors:["Ramij Rahaman","Marcin Wies'niak","Marek Zukowski"], title:"Quantum Anonymous Veto with Hardy Paradox", year:-1, id:51, length:6, tags:["Unsorted","Anonymous Veto","Quantum"]},
