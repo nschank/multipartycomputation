@@ -8,9 +8,10 @@
 		<link rel="stylesheet" type="text/css" href="style/ref.css">
 		<link rel="stylesheet" type="text/css" href="style/glossary.css">
 		<link rel="icon" href="img/favicon.png" type="image/x-icon">
-		<script type="text/javascript" src="../../script/blockShare.js"></script>
+		<script type="text/javascript" src="./script/blockShare.js"></script>
 		<script type="text/javascript" src="./script/equation.js"></script>
 		<script type="text/javascript" src="./script/ref.js"></script>
+		<script type="text/javascript" src="./script/def.js"></script>
 		<script type="text/javascript" src="./script/glossary.js"></script>
 		<script type="text/javascript">
 		<!--
@@ -18,7 +19,7 @@
 			{
 				switch(box)
 				{
-					case 0: return "<h3>The Pythagorean Equation</h3><p>The sum of the squared lengths of the two legs of a right triangle are equal to the squared length of the hypotenuse.</p>";
+					case "0": return "<h3>The Pythagorean Equation</h3><p>The sum of the squared lengths of the two legs of a right triangle are equal to the squared length of the hypotenuse.</p>";
 					default: return "No info on this equation yet.";
 				}
 			}
@@ -31,14 +32,8 @@
 				}
 			}
 			
-			function define(word)
-			{
-				switch(word)
-				{
-					case "smite": return "<ol><li>to strike sharply or heavily</li><li>to kill or severely injure by striking</li><li>to affect as if by striking</li></ol>";
-					default: return null;
-				}
-			}
+			self_def["smite"]="<ol><li>to strike sharply or heavily</li><li>to kill or severely injure by striking</li><li>to affect as if by striking</li></ol>";
+
 		//-->
 		</script>
 	</head>
@@ -84,8 +79,8 @@
 					<h2>Website Features</h2>
 					<p>To make this website as comprehensive as possible, a few extra features have been added.</p>
 					<ul>
-						<li>Try hovering over an equation: <span class="equation" id="equation0">a<sup>2</sup>+b<sup>2</sup>=c<sup>2</sup></span></li>
-						<li>Or hovering over a reference: <a href="#citation2"><sup class="reference" id="ref2">[2]</sup></a></li>
+						<li>Try hovering over an equation: <span class="equation" data-equation="0">a<sup>2</sup>+b<sup>2</sup>=c<sup>2</sup></span></li>
+						<li>Or hovering over a reference: <a href="#citation2"><sup class="reference" data-citation="2">[2]</sup></a></li>
 						<li>There is also a built-in glossary: <span class="definable">smite</span></li>
 					</ul>
 				</div>
