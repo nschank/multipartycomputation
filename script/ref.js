@@ -75,11 +75,9 @@ function maybeCloseR(block)
     return function(event)
     {
         var rect = block.getBoundingClientRect();
-        var thisBlock = event.target;
         if(rect.left < event.clientX && event.clientX < rect.right)
 		if(rect.top < event.clientY && event.clientY < rect.bottom)
 			return;
-	if(event.target.className === "ref_block")
-		thisBlock.style.display="none";
+	block.style.display="none";
     };
 }
