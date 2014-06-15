@@ -91,10 +91,18 @@ img.rp_link {
 	width:80%;
 }
 
+.rp_theorem_header {
+    font-family:questrial;
+    margin-bottom:2px;
+    margin-left:20px; 
+    color:#665;
+}
+
 .rp_theorem {
 	font-style:italic;
 	font-size:110%;
 	margin-top:0px;
+        width:90%;
 }
 
 .rp_definition {
