@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="../../style/glossary.css">
         <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
         <link rel="icon" href="img/favicon.png" type="image/x-icon">
+		<script type="text/javascript" src="../../script/blockShare.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
@@ -17,35 +18,39 @@
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
         <script type="text/javascript">
-            <!--
-                function fill(box)
-            {
-                switch (box)
-                {
-                    case "Eax":
-                        return "<p>The encryption of the \\(N\\)-bit integer \\(x\\) under Alice's public key.</p>";
-                    case "fx1xm":
-                        return "<p>Any function on \\(m\\) integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer.</p>";
-                    case "NbitZ+":
-                        return "<p>All integers between 0 and \\(2^{N}-1\\). For example, if \\(N=3\\), then all numbers from \\(0 = 000_b\\) to \\(7 = 111_b\\).</p>";
-                    case "th2":
-                        return "<p>Read: <i>the runtime of that algorithm is in big-oh \\(C(f)\\) times the log of the inverses of epsilon times delta</i>.</p><p> Basically, the privacy constraint increases the complexity of the algorithm by at most \\(\\log{\\frac{1}{\\epsilon\\cdot\\delta}}\\). This value grows from 1 (when both variables are 1 and offer no security) to \\(\\infty\\) the closer either or both values get to 0 (complete security). Logarithms grow <u>slowly</u>, so you can get pretty close to zero before this increase in complexity is particularly large.</p><p>You can look at this function <a href=\"http://www.wolframalpha.com/input/?i=z%3Dlog%281%2F%28epsilon+*+delta%29%29+from+epsilon+%3D+0+to+1%3B+delta+%3D+0+to+1\">on WolframAlpha</a>.</p>";
-                    case "yu":
-                        return "<p>The decryption of ten values under Alice's private key.</p>";
-                    default:
-                        return "No info on this equation yet.";
-                }
-            }
+			<!--
+            function fill(box)
+			{
+				switch (box)
+				{
+					case "cartesianproduct":
+						return "<p>Read: <i>the Cartesian product of V and W.</i></p><p>The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\times\\){♠, ♥, ♦, ♣}</p><p>A function with domain \\(V\\timesW\\) can be rephrased as a function \\(f(v,w\\) where the domain of \\(v\\) is \\(V\\) and the domain of \\(w\\) is \\(W\\).</p></p>";
+					case "Eax":
+						return "<p>The encryption of the \\(N\\)-bit integer \\(x\\) under Alice's public key.</p>";
+					case "fx1xm":
+						return "<p>Any function on \\(m\\) integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer.</p>";
+					case "NbitZ+":
+						return "<p>All integers between 0 and \\(2^{N}-1\\). For example, if \\(N=3\\), then all numbers from \\(0 = 000_b\\) to \\(7 = 111_b\\).</p>";
+					case "th2":
+						return "<p>Read: <i>the runtime of that algorithm is in big-oh \\(C(f)\\) times the log of the inverses of epsilon times delta</i>.</p><p> Basically, the privacy constraint increases the complexity of the algorithm by at most \\(\\log{\\frac{1}{\\epsilon\\cdot\\delta}}\\). This value grows from 1 (when both variables are 1 and offer no security) to \\(\\infty\\) the closer either or both values get to 0 (complete security). Logarithms grow <u>slowly</u>, so you can get pretty close to zero before this increase in complexity is particularly large.</p><p>You can look at this function <a href=\"http://www.wolframalpha.com/input/?i=z%3Dlog%281%2F%28epsilon+*+delta%29%29+from+epsilon+%3D+0+to+1%3B+delta+%3D+0+to+1\">on WolframAlpha</a>.</p>";
+					case "yu":
+						return "<p>The decryption of ten values under Alice's private key.</p>";
+					default:
+						return "No info on this equation yet.";
+				}
+			}
 
-            function authorLink(ref)
-            {
-                switch (ref)
-                {
-                    default:
-                        return "#";
-                }
-            }
-            //-->
+			function authorLink(ref)
+			{
+				switch (ref)
+				{
+					default:
+						return "#";
+				}
+			}
+
+			self_def["successful cheating"] = "<p><a href=\"#def1\">Definition 1</a></p><p>An instance of an execution of a protocol in which a party does not behave consistently with any possible input, yet any other party is unable to detect it.</p>";
+			//-->
         </script>
     </head>
     <body>
@@ -77,17 +82,16 @@
                     <div class="rp_toc">
                         <h4 style="color:#333333">Table of Contents</h4>
                         <ol type="A">
-                            <li><a href="#_A">Overview</a></li>
-                            <li>
-                                <ol>
-                                    <li>Introduction</li>
-                                    <li>Goals</li>
-                                    <li>Definitions</li>
-                                    <li>Theorems</li>
-                                    <li>Results</li>
-                                    <li>Effect</li>
-                                </ol>
-                            </li>
+                            <li><a href="#_A">Overview</a>
+								<ol>
+									<li>Introduction</li>
+									<li>Goals</li>
+									<li>Definitions</li>
+									<li>Theorems</li>
+									<li>Results</li>
+									<li>Effect</li>
+								</ol>
+							</li>
                             <li><a href="#_B">Annotated Extended Abstract</a></li>
                         </ol>
                     </div>
@@ -146,9 +150,7 @@
                             Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other’s wealth. 
                             How can they carry out such a conversation?
                         </p>
-                        <p class="rp_annotation">
 
-                        </p>
                         <p class="rp_original">
                             This is a special case of the following general problem. Suppose \(m\) people wish to compute the value of a function
                             <span class="equation" data-equation="fx1xm">\(f(x_1, x_2, &hellip;, x_m)\)</span>,
@@ -178,6 +180,9 @@
 
                             For example, without a precise model it would be hard to answer a question such as “Is it possible for three mutually suspecting parties to interactively generate a bit with <span class="definable">bias</span>
                             \(\frac{1}{e}\)?”
+                        </p>
+                        <p class="rp_annotation">
+                            This is an annotation on the above paragraph!
                         </p>
                         <p class="rp_original">
                             In response to this need, we propose to adopt the following view.
@@ -417,12 +422,12 @@
                                 computed by a boolean circuit of size \(C(f)\), then there is a protocol
                                 \(A\) computing \(f\) satisfying the
                                 \((\epsilon,\delta)\)-privacy constraint such that
-                                \(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta}})\).
+                                <span class="equation" data-equation="th2">\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta}})\)</span>.
                             </p>
                             <p class="rp_original">
                                 In fact, if \(f\) can be computed by a Turing machine in time \(S\), then the protocol can
                                 be implemented such that both Alice and Bob have Turing machine algorithms to execute the
-                                protocol with a time bound <span class="equation" data-equation="th2">\(O(S\log{\frac{1}{\epsilon\cdot\delta}})\)</span>.
+                                protocol with a time bound \(O(S\log{\frac{1}{\epsilon\cdot\delta}})\).
                             </p>
                             <p class="rp_original">
                                 However, there exist functions that need exponentially many bits transmitted between Bob
@@ -459,10 +464,10 @@
                                 most that a protocol can achieve is to make sure that this
                                 is the only cheating that Alice (or Bob) can do.
                             </p>
-                            <h5>Definition 1</h5>
+                            <h5 id="def1">Definition 1</h5>
                             <p class="rp_original rp_definition">
                                 Consider an instance in the execution of a
-                                protocol. We will consider it to be a <strong>successful cheating</strong>
+                                protocol. We will consider it to be a <span class="definable">successful cheating</span>
                                 by Alice, if Alice does not behave consistently with
                                 any value of \(i\) and yet Bob does not detect it. A successful
                                 cheating by Bob is defined similarly.
@@ -486,12 +491,11 @@
                                 Suppose a committee of \(m\) members
                                 wish to decide on a yes-no action. Each member is to
                                 write an opinion \(x_i\), and the final action can be regarded
-                                as a function \(f(x_1, x_2, x_3,&hellip;, x_m)\). The results obtained
+                                as a function <span class="equation" data-equation="fx1xm">\(f(x_1, x_2, x_3,&hellip;, x_m)\)</span>. The results obtained
                                 in this paper means that it is possible to agree on the
                                 final action \(f\), without anyone knowing the opinion of any
                                 other member’s. Furthermore, the protocol makes the probability of anyone having a
-                                successful cheating very
-                                remote.
+                                <span class="definable">successful cheating</span> very remote.
                             </p>
 
                             <h4>Oblivious Negotiation</h4>
@@ -530,7 +534,7 @@
                         <p class="rp_original">
                             Let us consider the case with two parties Bob and Alice
                             \((m = 2)\). Let \(V\) and \(W\) be finite sets. A function \(p\) from
-                            \(V \times W\) to the interval \([0, 1]\) is called a probability density
+                            <span class="equation" data-equation="cartesianproduct">\(V \times W\)</span> to the interval \([0, 1]\) is called a <span class="definable" data-define="probability density function">probability density</span>
                             if the sum of \(p(v,w)\) over \(v\) and \(w\) is equal to \(1\). Let
                             \(P(V,W)\) be the set of all such probability densities.
                         </p>
@@ -555,7 +559,7 @@
                             to
                         </p>
 
-                        <p class="bigequation">
+                        <p style="font-size:150%">
                             $$\frac{1}{|J|}\sum\limits_{j\in J}\frac{f_{ij}(v,w)}{\sum\nolimits_{x\in W} f_{ij}(v,x)}$$
                         </p>
 
