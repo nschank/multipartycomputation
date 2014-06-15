@@ -271,7 +271,7 @@
                             \(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?
                             The millionaire’s problem corresponds to the case when \(m = 2\) and
                             \(f(x_1, x_2) = 1\) if \(x_1 &lt; x_2\),
-                            and \(0\) otherwise. In this paper, we will give precise formulation of this general problem and describe three ways of solving it by use of <span class="definable" data-define="one-way function">one-way functions</span>. These results have applications to secret voting, private querying of database, oblivious negotiation, playing mental poker, etc. We will also discuss the complexity question “How many bits need to be exchanged for the computation”, and describe methods to prevent participants from cheating. Finally, we study the question “What cannot be accomplished with one-way functions”.
+                            and \(0\) otherwise. In this paper, we will give precise formulation of this general problem and describe three ways of solving it by use of <span class="definable" data-define="one-way function">one-way functions</span>. These results have applications to secret voting, private querying of database, oblivious negotiation, playing <span class="definable">mental poker</span>, etc. We will also discuss the complexity question “How many bits need to be exchanged for the computation”, and describe methods to prevent participants from cheating. Finally, we study the question “What cannot be accomplished with one-way functions”.
                         </p>
                         <p class="rp_original">
                             Before describing these results, we would like to put this work in perspective by first considering a unified view of secure computation in the next section.
@@ -293,9 +293,6 @@
                             For example, without a precise model it would be hard to answer a question such as “Is it possible for three mutually suspecting parties to interactively generate a bit with <span class="definable">bias</span>
                             \(\frac{1}{e}\)?”
                         </p>
-                        <p class="rp_annotation">
-                            This is an annotation on the above paragraph!
-                        </p>
                         <p class="rp_original">
                             In response to this need, we propose to adopt the following view.
 
@@ -316,6 +313,10 @@
 
                             Note that, although we have used Alice and Bob in the above description, all discussions can be extended to the case of \(m\) parties communicating.
                         </p>
+						<p class="rp_annotation">
+                            The 'unified view of secure computation' as defined in the above two paragraphs is perhaps the most general useful definition that can be applied to the whole of multiparty computation. 
+							In the spirit of that unification, and considering this paper is the formative paper for the field, a slightly reworded version of this very definition is the one used in the tutorials and across the site in order to link specific papers and protocols to the more general problem.
+                        </p>
                         <p class="rp_original">
                             It would be natural to discuss these two special cases together.
 
@@ -323,6 +324,9 @@
 
                             Results on the other case will be reported elsewhere.
                         </p>
+						<p class="rp_annotation">
+							There is soon to be a <span data-broken=true>tutorial section</span> dealing with adversaries, as it is one of the most varied and well-studied aspects of cryptography.
+						</p>
                     </section>
                     <section id="sec3">
                         <h2>Deterministic Computations</h2>
@@ -332,9 +336,12 @@
                             <p class="rp_original">
                                 In this abstract, we will describe in detail only one of the three solutions we have.
                             </p>
+							<p class="rp_annotation">
+								It should be noted that, to our knowledge, no complete version of this paper was ever released. If Yao ever published his other two solutions, it was likely in a different paper.
+							</p>
                             <p class="rp_original">
                                 For definiteness, suppose Alice has \(i\) millions and Bob has \(j\) millions,
-                                where \(1 &lt; i,j &lt; 10\).
+                                where \(1 \leq i,j \eq 10\).
 
                                 We need a protocol for them to decide whether \(i  &lt;  j\), such that this is also the only thing they know in the end
                                 (aside from their own values).
@@ -345,6 +352,10 @@
 
                                 Let \(E_a\) be the public key of Alice, generated by choosing a random element from \(Q_N\).
                             </p>
+							<p class="rp_annotation">
+								Firstly, it should be noted that in the original paper, Yao put that \(1 &lt; i,j &lt; 10\); however, the protocol is not at any way affected by allowing \(i\) or \(j\) to be \(1\) or \(10\).
+								Secondly, beginning readers should note that, while Bob can calculate \(E_a(x)\), he is unable to calculate \(D_a(x)\)&mdash;the decryption of \(E_a(x)\)&mdash; in a reasonable (polynomial) amount of time.
+							</p>
                             <p class="rp_original">
                                 The protocol proceeds as follows:
                             </p>
@@ -358,7 +369,13 @@
                                 <li>
                                     Alice computes privately the values of <span class="equation" data-equation="yu">\(y_u=D_a(k−j+u)\)</span> for \(u = 1,2,&hellip;,10\).
                                 </li>
-                                <li>
+							</ol>
+							<p class="rp_annotation">
+								Alice now has the original value of \(x\), since \(y_j=D_a(k-j+j)=D_a(k)=x\). 
+								However, since \(E_a\) was chosen randomly, she views each \(y\) as being \(x\) with equal probability.
+							</p>
+							<ol class="rp_original">
+                                <li value="4">
                                     Alice generates a random prime \(p\) of \(N/2\) bits,
                                     and computes the values \(z_u = y_u\pmod{p}\) for all \(u\);
                                     if all \(z_u\) differ by at least \(2\) in the \(\bmod{p}\) sense, stop;
@@ -366,12 +383,25 @@
                                     differ by at least \(2\);
                                     let \(p, z_u\) denote this final set of numbers.
                                 </li>
-                                <li>
+							</ol>
+							<p class="rp_annotation">
+								In this step, it's possible Yao made a mistake. The restriction that no two \(z_u\) have a difference less than \(2\) allows Bob to learn something about \(i\) in some cases.
+								Let's, for the sake of an example, say that \(i=5\). Alice chooses a \(p\) such that \(z_4 = z_6 + 2\), but their difference is at least \(2\), so this should be okay.
+								However, in the next step, she adds \(1\) to all \(z_u\) for \(u \geq 5\); now \(z_4 = z_6 + 1\), which according to the rule is not allowed. Bob now knows that \(i\in\{5,6\}\):
+								those are the only two cases in which \(z_4 = z_6 + 1\) could be possible with the restriction on step 4. Without the restriction, he learns nothing.
+							</p>
+							<p class="rp_annotation">
+								The above reasoning works for <u>any</u> value that two \(z_u\)'s 'should' be apart, since the addition of \(1\) can always move a \(z_u\) too close to another in the next step.
+							</p>
+							<ol class="rp_original">
+                                <li value="5">
                                     Alice sends the prime \(p\) and the following 10 numbers to Bob:
                                     \(z_1,z_2,&hellip;,z_{i}\) followed by
                                     \(z_{i+1}+1,&hellip;, z_{10} +1\);
                                     the above numbers should be interpreted in the \(\bmod{p}\) sense.
                                 </li>
+							</ol>
+							<ol class="rp_original">
                                 <li>
                                     Bob looks at the \(j\)-th number (not counting \(p\)) sent from Alice,
                                     and decides that \(i \geq j\) if it is equal to \(x \bmod{p}\),
