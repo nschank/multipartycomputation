@@ -31,6 +31,16 @@ div.rp_toc {
 	font-size:10pt;
 }
 
+div.rp_toc ol {
+    padding-left:1em;
+}
+
+div.rp_toc > ol {
+    padding-left:2em;
+}
+
+
+
 img.rp_link {
 	width:95%;
 	height:95%;
