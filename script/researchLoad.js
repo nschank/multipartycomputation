@@ -27,7 +27,9 @@ function createSection(authorSection,titleSection,yearSection,tagSection)
 	{
 		var researchPiece = document.createElement("div");
 		researchPiece.className = "rl_element";
-		researchPiece.innerHTML = "<a class=\"rl_title\" href=\"papers/" + paper.id + ".html\">" + paper.title + "</a><br /><span class=\"rl_year\">" + paper.year + "</span>" + authorsOf(paper, 0);
+		researchPiece.innerHTML = "<a class=\"rl_title\" href=\"papers/" + paper.id + ".html\">" + paper.title + "</a>";
+                researchPiece.innerHTML += "<br /><span class=\"rl_year\">" + paper.year + "</span>" + authorsOf(paper, 0);
+                researchPiece.innerHTML += "<div class=\"rl_length\">" + paper.length + " pages</div>";
 		
 		if(authorSection)
 			addToAuthors(paper, authorSection, researchPiece);
@@ -43,7 +45,7 @@ function createSection(authorSection,titleSection,yearSection,tagSection)
 				});
 		if(tagSection)
 			addToTags(paper, tagSection, researchPiece);
-	}
+	};
 }
 
 function authorsOf(paper, from)
