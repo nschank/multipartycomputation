@@ -95,7 +95,7 @@ function addToTags(paper, section, node)
 		if(!tagSub)
 		{
 			var newTagDiv = document.createElement("div");
-			newTagDiv.id = "research:tag:" + paper.tags[i];
+			newTagDiv.id = "research:tag:" + removeSpaces(paper.tags[i]);
 			newTagDiv.innerHTML = "<h2 class=\"rl_heading\">" + paper.tags[i] + "</h2>";
 			section.appendChild(newTagDiv);
 			tagSub = newTagDiv;
@@ -104,6 +104,13 @@ function addToTags(paper, section, node)
 		addnode.id = "papers:tag:" + paper.tags[i] + ":" + paper.year + ":" + paper.id;
 		tagSub.appendChild(addnode);
 	}
+}
+
+function removeSpaces(str)
+{
+	if(str.length == 0) return "";
+	else if(str.charAt(0) == ' ') return removeSpaces(str.substring(1));
+	else return str.charAt(0) + removeSpaces(str.substring(1));
 }
 	
 function addSection(paper, section, node, createID)
