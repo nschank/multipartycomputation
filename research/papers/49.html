@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="../../style/ref.css">
         <link rel="stylesheet" type="text/css" href="../../style/glossary.css">
         <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
-        <link rel="icon" href="img/favicon.png" type="image/x-icon">
+        <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
@@ -35,6 +35,8 @@
 						return "<p>A function that grows more slowly than \\(N^k\\), where \\(N\\) is the number of bits being used, and \\(k\\) is some integer chosen in advance.</p>";
 					case "quartic":
 						return "<p>The number of bits exchanged is lower-bounded by the product of the quartic roots of the cardinality of the domain. In this case, the domain of the entire function is being represented by the product of the domains of each individual variable.</p>";
+					case "search":
+						return "<p>\\(2^N-1\\) is the maximum value that an encryption under \\(E_a\\) can take.</p><p>We must check every \\(p\\)-th number within that bound in each search, for a total of \\(\\frac{2^N-1}{p}\\) items to search for each \\(z_u\\) value.</p><p>We must additionally check each \\(z_u+1\\) value, doubling the search space.</p>";
 					case "th2":
 						return "<p>Read: <i>the runtime of that algorithm is in big-oh \\(C(f)\\) times the log of the inverse of epsilon times delta</i>.</p><p> Basically, the privacy constraint increases the complexity of the algorithm by at most \\(\\log{\\frac{1}{\\epsilon\\cdot\\delta}}\\). This value grows from 1 (when both variables are 1 and offer no security) to \\(\\infty\\) the closer either or both values get to 0 (complete security). Logarithms grow <u>slowly</u>, so you can get pretty close to zero before this increase in complexity is particularly large.</p><p>You can look at this function <a href=\"http://www.wolframalpha.com/input/?i=z%3Dlog%281%2F%28epsilon+*+delta%29%29+from+epsilon+%3D+0+to+1%3B+delta+%3D+0+to+1\">on WolframAlpha</a>.</p>";
 					case "yu":
@@ -325,7 +327,7 @@
                             Results on the other case will be reported elsewhere.
                         </p>
 						<p class="rp_annotation">
-							There is soon to be a <span data-broken=true>tutorial section</span> dealing with adversaries, as it is one of the most varied and well-studied aspects of cryptography.
+							There is soon to be a <span data-broken-link=true>tutorial section</span> dealing with adversaries, as it is one of the most varied and well-studied aspects of cryptography.
 						</p>
                     </section>
                     <section id="sec3">
@@ -341,7 +343,7 @@
 							</p>
                             <p class="rp_original">
                                 For definiteness, suppose Alice has \(i\) millions and Bob has \(j\) millions,
-                                where \(1 \leq i,j \eq 10\).
+                                where \(1 \leq i,j \leq 10\).
 
                                 We need a protocol for them to decide whether \(i  &lt;  j\), such that this is also the only thing they know in the end
                                 (aside from their own values).
@@ -401,13 +403,24 @@
                                     the above numbers should be interpreted in the \(\bmod{p}\) sense.
                                 </li>
 							</ol>
+							<p class="rp_annotation">
+								There was an error in the original document that had an extra term (\(z_i+1\)) after \(z_i\).
+								This protocol can be simply altered to calculate \(i\leq j\) instead of \(i&lt;j\) by changing \(z_i\) to \(z_i+1\) (and accordingly changing
+								\(\geq\) and \(&lt;\) in the next step to \(&gt;\) and \(\leq\) respectively).
+							</p>
 							<ol class="rp_original">
-                                <li>
+                                <li value="6">
                                     Bob looks at the \(j\)-th number (not counting \(p\)) sent from Alice,
                                     and decides that \(i \geq j\) if it is equal to \(x \bmod{p}\),
                                     and \(i &lt; j\) otherwise.
                                 </li>
-                                <li>
+							</ol>
+							<p class="rp_annotation">
+								To reiterate, the \(j\)-th number is either \(z_j\pmod{p}=x\pmod{p}\), as discussed above, or \(z_j+1\pmod{p}=x+1\pmod{p}\). It is only the former
+								if she has not added one, which is only true if \(i\geq j\).
+							</p>
+							<ol class="rp_original">	
+                                <li value="7">
                                     Bob tells Alice what the conclusion is.
                                 </li>
                             </ol>
@@ -441,10 +454,13 @@
                                 Thus, one also has to include in the formal definition that not only the participants do not gain information as a result of the exchange specified by the protocol, but also they cannot perform calculation within a reasonable amount of time to gain this information.
                                 In the formal definition to be given in <a href="#sec3.2">Section 3.2</a>, we will define this precisely.
                             </p>
+							<p class="rp_annotation">
+								This precise example will be addressed in the annotations, because Yao does not return to it.
+							</p>
                             <p class="rp_original">
                                 One may have noticed the possibility that some party may cheat in the process, by deviating from the agreed protocol.
                                 For example, Bob may lie to Alice in the final step and tell Alice the wrong conclusion.
-                                Is there a way of designing a protocol such that the chance of a successful cheating becomes vanishingly small,
+                                Is there a way of designing a protocol such that the chance of a <span class="definable">successful cheating</span> becomes vanishingly small,
                                 without revealing the values of \(i\) and \(j\)?
                                 We will show that this is possible in <a href="#sec3.3">Section 3.3</a>.
                                 (Note that this is a stronger requirement than the verifiability requirement used in the mental poker protocol in Shamir et. al.
@@ -457,6 +473,9 @@
                                 \(E_aE_b(x) = E_bE_a(x)\).
                                 The other solution makes use of a probabilistic encryption method invented by Goldwasser and Micali <a href="#citation2"><sup class="reference" data-citation="2">[2]</sup></a>.
                             </p>
+							<p class="rp_annotation">
+								Neither is mentioned. <span data-broken-link=true>Yet.</span>
+							</p>
                         </section>
                         <section id="Model">
                             <a id="sec3.2"><h3>Model for the General Problem</h3></a>
@@ -483,10 +502,10 @@
                                 Bob should communicate as follows.
                                 Alice and Bob send strings to each other alternately.
                                 Each time after Bob has finished transmission, Alice examines the information so far in her possession,
-                                which consists of some sequence of strings \(\alpha_1,\alpha_2,&hellip;,\alpha_t\), and some relations among the strings (e.g. \(E_b(\alpha_3)=\alpha_9\), \(\alpha_8\) has an odd number of
+                                which consists of some sequence of strings \(\alpha_1,\alpha_2,&hellip;,\alpha_t\), and some relations among the strings (e.g. \(E_b(\alpha_3)=\alpha_9\), \(\alpha_8\) has an odd number of
                                 1’s);
                                 based on the bits that have so far been transmitted between her and Bob,
-                                the protocol specifies how she should compute in private strings \(\alpha_{t+1},\alpha_{t+2},&hellip;,\alpha_s\)
+                                the protocol specifies how she should compute in private strings \(\alpha_{t+1},\alpha_{t+2},&hellip;,\alpha_s\)
                                 where each new string \(\alpha_u\) is a function of the earlier strings,
                                 or of the form \(E_a(y)\),
                                 \(E_b(y)\) or \(D_a(y)\)
@@ -503,6 +522,9 @@
                                 and \(D\)’s by Bob and Alice be bounded by <span class="equation" data-equation="O(n^k)">\(O(N^k)\)</span>, where
                                 \(k\) is an integer chosen in advance.
                             </p>
+							<p class="rp_annotation">
+								While not mentioned, it is important to note that random (or pseudorandom) number generation must also be allowed, even just for the above millionaire protocol.
+							</p>
                             <h4>Privacy Constraint</h4>
 							<span class="rp_definition_header" id="def1">Definition 1</span>
                             <p class="rp_definition">
@@ -523,7 +545,13 @@
                                     \(G_i\) is the set of \(j\)
                                     for which \(f(i,j)=v\),
                                 </li>
-                                <li>
+							</ol>
+							<p class="rp_annotation">
+								More informally, if Alice iterates through all of the \(j\) that Bob could have had in order to produce \(v\) (here called the set \(G_i\)),
+								she will not find any of them significantly (by a factor of more than a constant times \(\epsilon\)) more likely than the other possibilities.
+							</p>
+							<ol class="rp_definition">
+                                <li value="2">
                                     if Alice tries afterwards to perform more calculations with no more than \(O(N^k)\) evaluations of
                                     \(E\)'s and \(D\)'s, then with
                                     probability at least \(1-\delta\) she will still get the
@@ -533,11 +561,32 @@
                                     the above requirement is also true for Bob.
                                 </li>
                             </ol>
+							<p class="rp_annotation">
+								Let's quickly see what \(\epsilon\) and \(\delta\) we can apply to the millionaire protocol.
+								Without loss of generality, assume that Bob has more money (e.g. \(i&lt;j\) and therefore \(f(i,j)=1\)).
+								Fixing \(i,j\), we'll first look at what Alice can learn. 
+							</p>
+							<p class="rp_annotation">
+								Obviously, she knows that \(p_i(x)=0\) for \(x\leq i\). For the remainder of possible \(j\)'s, however, she can decrypt them using her private key,
+								producing \(10-i\) possible \(x\) values. Since \(x\) was chosen randomly, she cannot possibly figure out which one Bob chose. \(G_i=\{i+1,i+2,&hellip;,10\}\)
+								and, with no way of choosing between them, \(p_i(j)=\frac{1}{|G_i|}\) for \(j\in G_i\).
+							</p>
+							<p class="rp_annotation">
+								Bob, conversely, knows that \(i\) must be within \(G_j=\{1,2,&hellip;,j-1\}\). He has slightly more information from Alice, and can try to guess another value of \(y_u\) in order to further restrict \(i\)&mdash;information that would drastically alter his probability distribution. He knows \(p\), the
+								random prime Alice has used to \(\bmod{} y_u\), and he knows either \(y_i\pmod{p}\) or \(y_i+1\pmod{p}\) for all of \(i\in G_j\). He must correctly guess a value \(g\) such that \(E_a(g)\) or \(E_a(g+1)\) is \(k+j-u\) for some \(u&lt;j\); knowing only their value \(\bmod{p}\) and their upper bound \(2^N-1\), he can narrow the search field to \(j-1\) different searches of <span class="equation" data-equation="search">\(\frac{2^N-1)}{p}\times2\)</span> different values. Since \(p\) is of length \(\frac{N}{2}\), this is a total search space lower bounded by \(O(j\cdot 2^{N/2})\), with \(j-1\) values to be found, for a total average time of finding more information of \(O(2^{N/2})\).
+							</p>
+							<p class="rp_annotation">
+								This means that we can set both \(\epsilon\) and \(\delta\) very low: even with additional calculations, the probability that either learns anything at all
+								is <span class="definable">negligible</span>.
+							</p>
                             <span class="rp_theorem_header" id="theorem1">Theorem 1</span>
                             <p class="rp_original rp_theorem">
                                 For any \(\epsilon,\delta > 0\) and any function \(f\), there exists a protocol for computing \(f\)
                                 that satisfies the \((\epsilon,\delta)\)-privacy constraint.
                             </p>
+							<p class="rp_annotation">
+								Yao did not present a proof for this theorem in this paper, but we are <span data-broken-link=true>still looking</span>.
+							</p>
                             <p class="rp_original">
                                 It is possible to consider the more general case when the initial distribution of \((i,j)\) is nonuniform. We will not go into that here.
                                 In <a href="#sec4">Section 4</a>, that becomes a special case of probabilistic computations.
@@ -558,6 +607,10 @@
                                 Let \(A\) be a protocol, let \(T(A)\) denote the maximum number of bits exchanged
                                 between Alice and Bob when \(A\) is used.
                             </p>
+							<p class="rp_annotation">
+								If we set \((\epsilon,\delta)=(1,1)\)&mdash;that is, if we don't require privacy at all&mdash;then the only information that needs to be sent is \(i\) to Bob, followed by \(f(i,j)\) back to Alice, meaning \(T(A)=\log_2{i}+1\); this is the lowest bound possible. This would be increased further by the need for
+								security, of course.
+							</p>
                             <span class="rp_theorem_header" id="theorem2">Theorem 2</span>
                             <p class="rp_original rp_theorem">
                                 Let \(1 > \epsilon,\delta > 0\) and \(f(i,j)\)
@@ -567,6 +620,9 @@
                                 \((\epsilon,\delta)\)-privacy constraint such that
                                 <span class="equation" data-equation="th2">\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta}})\)</span>.
                             </p>
+							<p class="rp_annotation">
+								Some clarification <span data-broken-link=true>here</span> may be necessary for \(C(f)\).
+							</p>
                             <p class="rp_original">
                                 In fact, if \(f\) can be computed by a <span class="definable">Turing machine</span> in time \(S\), then the protocol can
                                 be implemented such that both Alice and Bob have Turing machine algorithms to execute the
@@ -579,12 +635,18 @@
                                 transmitted information can compute \(f\), in the absence of the privacy constraint. (See
                                 <a href="#citation7"><span class="reference" data-citation="7">[7]</span></a> for further discussion).
                             </p>
+							<p class="rp_annotation">
+								Yao is referring to the lower bound mentioned above, though has forgotten to mention the extra bit necessary to tell the other the answer.
+							</p>
                             <span class="rp_theorem_header" id="theorem3">Theorem 3</span>
                             <p class="rp_original rp_theorem">
                                 Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(f\) be a random element of \(F_n\),
                                 then any protocol \(A\) that computes \(f\) with \((\epsilon,\delta)\)-privacy constraint
                                 must have \(T(A)>2^\frac{n}{2}\) for all large \(n\).
                             </p>
+							<p class="rp_annotation">
+								We <span data-broken-link=true>hope</span> to find the proof of the above in reference 7.
+							</p>
                             <h4>Mutually-Suspecting Participants</h4>
                             <p class="rp_original">
                                 So far the discussions
@@ -607,6 +669,13 @@
                                 most that a protocol can achieve is to make sure that this
                                 is the only cheating that Alice (or Bob) can do.
                             </p>
+							<p class="rp_annotation">
+								So, in particular, Alice and Bob can never:
+							</p>
+							<ol class="rp_annotation">
+								<li>Start with one \(i\), then change to another \(i'\) at a different time during the computation.</li>
+								<li>Start with an invalid \(i\), although this is sometimes impossible to do at all (as with Alice in the millionaire protocol)</li>
+							</ol>
                             <span class="rp_definition_header" id="def2">Definition 2</span>
                             <p class="rp_original rp_definition">
                                 Consider an instance in the execution of a
@@ -625,6 +694,10 @@
                                 <li>if one participant behaves according to \(A\), the probability of a successful cheating by the other
                                     participant is at most \(\gamma\)</li>
                             </ol>
+							<p class="rp_annotation">
+								Cheating and colluding are addressed in a <span data-broken-link=true>tutorial section</span>, or under the tags <a href="../tag.html#research:tag:Collusion">Collusion</a> and <a href="../tag.html#research:tag:DishonestParties">Dishonest Parties</a> in the
+								research-by-category section.
+							</p>
                         </section>
                         <section id="sec3.4">
                             <h3>Applications</h3>
@@ -640,6 +713,11 @@
                                 other member’s. Furthermore, the protocol makes the probability of anyone having a
                                 <span class="definable">successful cheating</span> very remote.
                             </p>
+							
+							<p class="rp_annotation">
+								Definitely the most relatable and understandable use of multiparty computation mentioned! <span data-broken-link=true>Voting</span>
+								is dealt with elsewhere, and further research can be found under the <a href="../tag.html#research:tag:Voting">Voting</a> tag.
+							</p>
 
                             <h4>Oblivious Negotiation</h4>
                             <p class="rp_original">
@@ -670,6 +748,10 @@
                                 else about the data in it, while the database system
                                 does not know what Alice has queried.
                             </p>
+							
+							<p class="rp_annotation">
+								An abstract but definitely extremely useful category of multiparty computation that is also a subproblem of Oblivious Transfer.
+							</p>
                         </section>
                     </section>
                     <section id="Probabilistic">
@@ -705,7 +787,10 @@
                         <p style="font-size:150%">
                             $$\frac{1}{|J|}\sum\limits_{j\in J}\frac{f_{ij}(v,w)}{\sum\nolimits_{x\in W} f_{ij}(v,x)}$$
                         </p>
-
+						
+						<p class="rp_annotation">
+							Keep in mind that this is the probability of \(w\) given a particular \(i\); Bob's equation would be the same, but with \(j\) and \(v\) instead.
+						</p>
                         <p class="rp_original">
                             For example, <span class="definable">mental poker</span> would correspond to the
                             following situation: \(I = J = {0}\), \(q\) is a constant, \(V =
@@ -726,7 +811,7 @@
                             poker can be played with any general public-key system.
                             It differs from Shamir et. al’s solution <a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a>
                             in that we do
-                            not require the one-way functions used to be commutative,
+                            not require the one-way functions used to be <span class="definable" data-define="commutativity">commutative</span>,
                             and that we can play it with a public-key system
                             (instead of using private keys). (A solution with a special
                             one-way function with publicized keys for playing mental
@@ -744,7 +829,7 @@
                     <section id="sec5">
                         <h2>Generalization to \(m\)-Party Case</h2>
                         <p class="rp_original">
-                            When m parties \(A_1,A_2,&hellip;,A_m\) collaborate to compute
+                            When \(m\) parties \(A_1,A_2,&hellip;,A_m\) collaborate to compute
                             a function \(f(x_1, x_2,&hellip;,x_m)\), more than one parties may
                             <span class="definable" data-define="collusion">collude</span> to cheat.
                             We will show that even the most severe
@@ -754,6 +839,14 @@
                             if as many as \(m−1\) dishonest guys try to help cover up).
                             We now make it precise.
                         </p>
+						
+						<p class="rp_annotation">
+							Remember, however, that some collusions and types of cheating are impossible to fight against: Yao is only referring to collusions and cheating which
+							involve inconsistencies in input variables. As an example, if ten people are trying to compute the sum of their private variables securely, but nine of them
+							collude in order to determine the tenth's private variable, the protocol will not make a difference: they need only share those nine values and follow the
+							protocol correctly, and they will all know the tenth value as well, by subtracting from the total sum. The guarantee Yao is making is that none of those 
+							people could convince someone they did the protocol correctly if they actually used changing random numbers throughout.
+						</p>
 
                         <p class="rp_original">
                             Let \(V\) be the range of the function \(f(x_1, x_2,&hellip;,x_m)\),
