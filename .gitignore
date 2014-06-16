@@ -1,3 +1,5 @@
 mpcorg.iml
 .idea/*
 /nbproject/
+*.pdf
+*~
