@@ -79,7 +79,7 @@ img.rp_link {
 
 }
 
-.rp_original {
+.rp_original, .rp_analysis {
     margin:11px 10px;
     font-size:12pt;
 }
