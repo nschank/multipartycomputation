@@ -22,3 +22,7 @@ div.l_toc_link {
 div.l_toc_link > a {
 	text-decoration:none;
 }
+
+.l_no_link {
+	color:#888888;
+}
