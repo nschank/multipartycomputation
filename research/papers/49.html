@@ -92,9 +92,9 @@
                             <li><a href="#_A">Overview</a>
 								<ol>
 									<li><a href="#a_intro">Introduction</a></li>
+									<li><a href="#a_goals">Goals and Results</a></li>
 									<li><a href="#a_defs">Definitions</a></li>
 									<li><a href="#a_theorems">Theorems</a></li>
-									<li><a href="#a_goals">Goals and Results</a></li>
 									<li><a href="#a_protocols">Protocols</a></li>
 									<li><a href="#a_ref">Referencing This Paper</a></li>
 								</ol>
@@ -117,6 +117,22 @@
 						</p>
 						<p class="rp_analysis">
 							The significance of this particular paper to this field is difficult to overstate. Despite its shortcomings (namely, its lack of proof and its limited direct application), its focus on defining a general problem as opposed to being limited to a specific one ultimately vaulted it into the realm of influence, and most research into multiparty computation which followed it can be framed within the definitions he specified.
+						</p>
+					</section>
+					<section id="a_goals">
+						<h2>Goals and Results</h2>
+						<p class="rp_analysis">
+							Yao's main goal was to lay the groundwork for later research by outlining the framework of a few different basic types of problems, as well as citing a few basic applications. He defined the problem of multiparty computation in terms of:
+						</p>
+						<ul class="rp_analysis">
+							<li><b>The limitations of privacy and security constraints.</b> Yao cited two extreme examples to display the difference. On the extreme privacy side, he gave the Millionaire Problem as an example, in which it is assumed that no saboteurs are on the line, but in which both parties want the other to learn nothing about their own input. On the extreme security side, he cited any basic encryption/decryption scheme in which a message needs to be sent over an unsecure line from one party to the other. Multiparty Computation protocols can be private, secure, or both, and all in varying degrees.</li>
+							<li><b>Deterministic vs. probabilistic computation.</b> Yao mentions that both are possible, though the latter is rather obviously more difficult to prove secure, especially if the probability density of the inputs is not constant.</li>
+							<li><b>Number of parties.</b> Yao assumes the two-party case for the majority of the paper, but expands the ideas to any \(m\) parties near his conclusions. The \(m\) party case is generally more difficult to deal with due to <span class="definable" data-define="collusion">collusions</span> that are impossible in the two-party case; however, Yao states that it is possible to create a protocol for any \(m\) parties with any function.</li>
+							<li><b>Trust, cheating, and collusion.</b> Parties may not trust that the other parties are following the protocol correctly, and that must be built into some protocols in order to ensure that the results are still viable. Cheating (as opposed to sabotage, below) may affect correctness, privacy, or both. Collusion is a particular subset of cheating under which multiple cheaters work together. Yao states that any computable function \(f\) can be turned into a protocol with an upper-bounded probability of successful cheating.</li>
+							<li><b>Sabotage and eavesdropping.</b> Parties may not be able to communicate without interference or eavesdropping by outside parties, affecting correctness, security, or both. Yao mentions these as issues to be discussed elsewhere, but implies them to be as possible to overcome as cheating.</li>
+						</ul>
+						<p class="rp_analysis">
+							Yao specifically mentions, as an aside, that his theorems prove that <span class="definable">mental poker</span> can be played with any public-key system, a generalization of previous research.
 						</p>
 					</section>
 					<section id="a_defs">
@@ -230,25 +246,9 @@
                             of anyone double-crossing successfully is bounded by \(\epsilon\).
                         </p>
 					</section>
-					<section id="a_goals">
-						<h2>Goals and Results</h2>
-						<p class="rp_analysis">
-							Yao's main goal was to lay the groundwork for later research by outlining the framework of a few different basic types of problems, as well as citing a few basic applications. He defined the problem of multiparty computation in terms of:
-						</p>
-						<ul class="rp_analysis">
-							<li><b>The limitations of privacy and security constraints.</b> Yao cited two extreme examples to display the difference. On the extreme privacy side, he gave the Millionaire Problem as an example, in which it is assumed that no saboteurs are on the line, but in which both parties want the other to learn nothing about their own input. On the extreme security side, he cited any basic encryption/decryption scheme in which a message needs to be sent over an unsecure line from one party to the other. Multiparty Computation protocols can be private, secure, or both, and all in varying degrees.</li>
-							<li><b>Deterministic vs. probabilistic computation.</b> Yao mentions that both are possible, though the latter is rather obviously more difficult to prove secure, especially if the probability density of the inputs is not constant.</li>
-							<li><b>Number of parties.</b> Yao assumes the two-party case for the majority of the paper, but expands the ideas to any \(m\) parties near his conclusions. The \(m\) party case is generally more difficult to deal with due to <span class="definable" data-define="collusion">collusions</span> that are impossible in the two-party case; however, Yao states that it is possible to create a protocol for any \(m\) parties with any function.</li>
-							<li><b>Trust, cheating, and collusion.</b> Parties may not trust that the other parties are following the protocol correctly, and that must be built into some protocols in order to ensure that the results are still viable. Cheating (as opposed to sabotage, below) may affect correctness, privacy, or both. Collusion is a particular subset of cheating under which multiple cheaters work together. Yao states that any computable function \(f\) can be turned into a protocol with an upper-bounded probability of successful cheating.</li>
-							<li><b>Sabotage and eavesdropping.</b> Parties may not be able to communicate without interference or eavesdropping by outside parties, affecting correctness, security, or both. Yao mentions these as issues to be discussed elsewhere, but implies them to be as possible to overcome as cheating.</li>
-						</ul>
-						<p class="rp_analysis">
-							Yao specifically mentions, as an aside, that his theorems prove that <span class="definable">mental poker</span> can be played with any public-key system, a generalization of previous research.
-						</p>
-					</section>
 					<section id="a_protocol">
 						<h2>Protocols</h2>
-						<h3>Millionaire Protocol</h3>
+						<h3><a href="#sec3.1">Millionaire Protocol</a></h3>
 						<ul class="rp_analysis">
 							<li><b>Number of parties: </b>2</li>
 							<li><b>Function(s): </b>Comparisons between \(x_0\) and \(x_1\) (i.e. \(&lt;, &gt;, \leq ,\geq\)). Two honest parties will find the same return value.</li>
