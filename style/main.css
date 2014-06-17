@@ -168,3 +168,37 @@ div.main_navbox h2 {
 	font-size:11pt;
 	margin:0px auto;
 }
+
+div.main_section_nav_container {
+    width:50%;
+    margin:0px auto;
+}
+
+div.main_section_nav_box {
+    float:left;
+    width:25%;
+    font-size:9pt;
+    text-align:center;
+}
+
+div.main_section_nav_box > a {
+    text-decoration:none;
+}
+
+div.main_toc {
+    margin:10px 3%;
+    width:25%;
+    background-color:#C9C7AD;
+    border:1px solid #8A8194;
+    min-height:100px;
+    float:left;
+    font-size:10pt;
+}
+
+div.main_toc ol {
+    padding-left:1em;
+}
+
+div.main_toc > ol {
+    padding-left:2em;
+}
