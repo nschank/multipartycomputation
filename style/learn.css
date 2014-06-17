@@ -1,0 +1,24 @@
+.l_chapter {
+	margin:10px 10% 0px 10%;
+    border-bottom:1px dotted #555555;
+    text-align:center;
+    font-size:24pt;
+    display:block;
+}
+
+.l_section {
+	margin:0px 10% 20px 10%;
+    text-align:center;
+    font-size:12pt;
+    display:block;
+}
+
+div.l_toc_link {
+	width:100%;
+	font-size:9pt;
+    text-align:center;
+}
+
+div.l_toc_link > a {
+	text-decoration:none;
+}
