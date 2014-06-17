@@ -91,5 +91,11 @@ var researchInfo = [
 	{authors:["Dominique Unruh"], title:"Universally Composable Quantum Multi-Party Computation", year:2009, id:74, length:33, tags:["Unsorted"]},
 	
 	{authors:["Ran Canetti","Yehuda Lindell","Rafail Ostrovsky","Amit Sahai"], title:"Universally Composable Two-Party and Multi-Party Secure Computation", year:2002, id:75, length:81, tags:["Unsorted"]},
-	{authors:["Tal Rabin","Michael Ben-Or"], title:"Verifiable Secret Sharing and Multiparty Protocols with Honest Majority", year:1989, id:76, length:13, tags:["Unsorted"]}
+	{authors:["Tal Rabin","Michael Ben-Or"], title:"Verifiable Secret Sharing and Multiparty Protocols with Honest Majority", year:1989, id:76, length:13, tags:["Unsorted"]},
+	{authors:["Yehuda Lindell","Benny Pinkas"], title:"A Proof of Security of Yao’s Protocol for Two-Party Computation", year:2006, id:77, length:25, tags:["Unsorted"]},
+	{authors:["Ivan Damgård","Marcel Keller", "Enrique Larraia", "Valerio Pastro", "Peter Scholl", "Nigel P. Smart"], title:"Practical Covertly Secure MPC for Dishonest Majority – or: Breaking the SPDZ Limits", year:2013, id:78, length:45, tags:["Unsorted"]},
+	{authors:["Juan A. Garay","Philip MacKenzie", "Ke Yang"], title:"Efficient and Secure Multi-Party Computation with Faulty Majority and Complete Fairness", year:2004, id:79, length:27, tags:["Unsorted"]},
+	
+	{authors:["Ronald Cramer","Ivan Damgård", "Jesper Buus Nielsen"], title:"Multiparty Computation, an Introduction", year:2009, id:80, length:83, tags:["Unsorted"]},
+	{authors:["Andrew C. Yao"], title:"Some Complexity Questions Related to Distributive Computing", year:1979, id:81, length:5, tags:["Unsorted"]}
 ];
