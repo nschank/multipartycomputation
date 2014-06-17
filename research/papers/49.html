@@ -673,7 +673,7 @@
                                 <a href="#citation7"><span class="reference" data-citation="7">[7]</span></a> for further discussion).
                             </p>
 							<p class="rp_annotation">
-								Yao is referring to the lower bound mentioned above, though has forgotten to mention the extra bit necessary to tell the other the answer.
+								Yao is referring to the lower bound mentioned above, though does not include in the calculation the final bit exchanged which would exchange the answer.
 							</p>
                             <span class="rp_theorem_header" id="theorem3">Theorem 3</span>
                             <p class="rp_original rp_theorem">
@@ -681,9 +681,6 @@
                                 then any protocol \(A\) that computes \(f\) with \((\epsilon,\delta)\)-privacy constraint
                                 must have \(T(A)>2^\frac{n}{2}\) for all large \(n\).
                             </p>
-							<p class="rp_annotation">
-								We <span data-broken-link=true>hope</span> to find the proof of the above in reference 7.
-							</p>
                             <h4>Mutually-Suspecting Participants</h4>
                             <p class="rp_original">
                                 So far the discussions
@@ -1043,7 +1040,7 @@
             <div class="main_toplevel main_section main_color8">
                 <a id="references"></a>
                 <h1>References</h1>
-                <ol id="referencelist">
+                <ol class="rp_original" id="referencelist">
                     <li id="citation1">Whitfield Diffie and Martin E. Hellman. New directions
                         in cryptography. <i>IEEE Transactions on Information
                             Theory</i>, IT-22(6):644–654, 1976.</li>
@@ -1075,6 +1072,9 @@
                             (STOC’79)</i>, pages 209–213, Atlanta, GA, USA, April
                         1979.</li>
                 </ol>
+				<p class="rp_annotation">
+					His previous research on the minimum number of bits exchanges is an interesting read, but is not necessary to understand this paper. It is much more about minimizing the <i>amount</i> of information exchanged (in a more information theoretical way) than about privacy, so has much less bearing here.
+				</p>
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">
