@@ -91,13 +91,13 @@
                         <ol type="A">
                             <li><a href="#_A">Overview</a>
 								<ol>
-									<li>Introduction</li>
+									<li><a href="#a_intro">Introduction</a></li>
 									<li>Goals</li>
 									<li><a href="#a_defs">Definitions</a></li>
 									<li><a href="#a_theorems">Theorems</a></li>
 									<li>Summary of Results</li>
 									<li>Effects and Uses</li>
-									<li>Referencing This Paper</li>
+									<li><a href="#a_ref">Referencing This Paper</a></li>
 								</ol>
 							</li>
                             <li><a href="#_B">Annotated Extended Abstract</a></li>
@@ -108,10 +108,24 @@
                         which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range. 
                         Assume initially person \(P_i\) knows the value of \(x_i\) and no other 
                         \(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?</div>
-                    <h2 id="a_intro">Introduction</h2>
-                    <p>Etc etc.</p>
-                    <h2 id="a_goals">Goals</h2>
-                    <p>Etc etc.</p>
+                    <section id="a_intro">
+						<h2>Introduction</h2>
+						<p class="rp_analysis">
+							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaire Problem, and for being the first paper to look into Multiparty Computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) Multiparty Computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
+						</p>
+						<p class="rp_analysis">
+							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaire Problem, or Yao's Millionaire Problem. Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it the perfect case study into secure two-party computation (as can be seen in the <span data-broken-link=true>tutorial page</span> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaire Problem nonetheless remains the most common example of multiparty computation to date.
+						</p>
+						<p class="rp_analysis">
+							The significance of this particular paper to this field is difficult to overstate. Despite its shortcomings (namely, its lack of proof and its limited direct application), its focus on defining a general problem as opposed to being limited to a specific one ultimately vaulted it into the realm of influence.
+						</p>
+					</section>
+                    <section id="a_goals">
+						<h2>Goals</h2>
+						<p class="rp_analysis">
+						
+						</p>
+					</section>
 					<section id="a_defs">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - \((\epsilon,\delta)\)-Privacy Constraint</span></a>
@@ -227,8 +241,13 @@
                     <p>Etc etc.</p>
 					<h2 id="a_use">Effects and Uses</h2>
 					<p>Etc etc.</p>
-					<h2 id="a_ref">Referencing This Paper</h2>
-					
+					<section id="a_ref">
+						<h2>Referencing This Paper</h2>
+						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
+						<p class="rp_self_reference">
+							A.C. Yao. Protocols for secure computations. In <i>Proc. of the 23rd Annu. IEEE Symp. on Foundations of Computer Science.</i> pages 160-164. 1982.
+						</p>
+					</section>
                 </div>
             </div>
             <div class="main_toplevel main_section main_color5"><a id="_B"></a>
@@ -874,7 +893,10 @@
                             \(r \in K'\) behaves inconsistently with any \(x_r \in X_r\) without
                             being detected by all the participants of \(K\).
                         </p>
-
+						
+						<p class="rp_annotation">
+							The above paragraph is extremely dense, so let's clarify a bit. \(K\) is the set of all honest parties, while \(K'\) is the set of all dishonest parties. The \((\epsilon,\delta)\)-privacy constraint is defined by specifying that all members of \(K\) (and therefore all honest parties) are only able to infer the probability distribution \(q_{i,v}(j)(1+O(\epsilon))\). A successful cheating is defined by specifying that <i>all</i> of \(K'\) together was able to trick a <i>single</i> member of \(K\) into not realizing they had behaved inconsistently with at least one value of \(x\).
+						</p>
                         <span class="rp_theorem_header" id="theorem5">Theorem 5</span>
                         <p class="rp_original rp_theorem">
                             For any \(\epsilon,\delta,\gamma > 0\), there exists a protocol
@@ -894,6 +916,10 @@
                             \(A\) satisfying the conditions in Theorem 5 must have
                             <span class="equation" data-equation="quartic">\(T(A) = \Omega((|X_1|\cdot |X_2|\cdot\cdots\cdot|X_m|)^\frac{1}{4})\)</span>
                         </p>
+						
+						<p class="rp_annotation">
+							We should take a second to notice that this is an unreasonably high lower bound for a lot of real world applications. As an example, if there are \(m\) parties trying to calculate \(f\) on \(n\)-digit numbers, then that leaves a lower bound of \(\Omega(2^{\frac{nm}{4}})\).
+						</p>
 
                         <p class="rp_original">
                             In special cases protocols can be designed with better
@@ -980,6 +1006,10 @@
                             \(D_b(w)\) and \(D_a(u)\), and under which the probability
                             of anyone double-crossing successfully is bounded by \(\epsilon\).
                         </p>
+						
+						<p class="rp_annotation">
+							As a short summary of theorems 8 and 9, when viewed together: either Alice or Bob can doublecross the other easily assuming that they know the value they are decrypting. If they do not know the value they are decrypting, their ability to doublecross can be bounded.
+						</p>
 
                         <p class="rp_original">
                             Different kinds of exchanging secrets have been considered
@@ -995,7 +1025,7 @@
             <div class="main_toplevel main_section main_color8">
                 <a id="references"></a>
                 <h1>References</h1>
-                <ol class="referencelist">
+                <ol id="referencelist">
                     <li id="citation1">Whitfield Diffie and Martin E. Hellman. New directions
                         in cryptography. <i>IEEE Transactions on Information
                             Theory</i>, IT-22(6):644–654, 1976.</li>
