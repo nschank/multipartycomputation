@@ -26,11 +26,11 @@ div.ref_block a:hover {
 	text-decoration:none;
 }
 
-ol#referencelist {
+ol#referencelist, ol.referencelist {
 	
 }
 
-ol#referencelist a {
+ol#referencelist a, ol.referenceList a {
 	text-decoration:none;
 	color:#6A6174;
 }

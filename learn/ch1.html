@@ -70,13 +70,31 @@
                     <div class="main_toc">
                         <h4 style="color:#333333">Sections</h4>
                         <ol type="A">
-                            
+                            <li><a href="#sec1">The Millionaire Problem</a></li>
+							<li><a href="#sec2">Secret Voting</a></li>
+							<li><a href="#sec3">The Fourth Grader Problem</a></li>
+							<li><a href="#sec4">Defining MPC</a></li>
                         </ol>
                     </div>
 					
-                    <a href="#citation1"><span class="reference" data-citation="1">[A citation]</span></a>
-					<span class="definable" data-define="collusion">definable</span>
-					<span class="equation" data-equation="equationname">An equation</span>
+					<p class="l_content">
+						There's a reason that multiparty computation remains so obscure and esoteric among all but cryptographers. Example problems, when offered, are somewhat complex at best, or overtly so at worst; the most basic of protocols tend to be difficult to follow for the uninitiated; and the research itself tends to be on the most subtle differences between problems.
+					</p>
+					<p class="l_content">
+						With that in mind, in this chapter we will examine three different multiparty computation problems (and some of their solutions) that offer the most intuitive look into the field, subtleties and all.
+					</p>
+					<p class="l_content">
+						The first, the Millionaire Problem, is a classic cryptography problem offered by Andrew Yao in his <a href="../research/papers/49/html">1982 paper</a> which helped to found the entire field of multiparty computation. It gives the perfect example of a two-party computation, complete with a short and easy-to-understand protocol, while also offering an easy demonstration of how dishonest parties can cheat each other in non-optimally private protocols.
+					</p>
+					<p class="l_content">
+						The second, Secret Voting, is an extremely intuitive example with a large amount of research behind it. It expands the problem from two parties into many, and demonstrates the difficulties that come with that extended utility. It also allows us to look into the different subtleties that can come up in these types of problems, and how those different (seemingly minute) alterations in the problem can drastically alter the protocol.
+					</p>
+					<p class="l_content">
+						The third, the Fourth Grader Problem, is a problem and protocol created here as a final intuitive example. It is the first time we will look at a protocol in which multiple functions are included, and we can contrast the problems created by cheating and those created by <span class="definable">collusion</span>, a special type of cheating. 
+					</p>
+					<p class="l_content">
+						With all of that behind us, we can look at a more technical definition of multiparty computation, and analyze the different variations built into that definition. There, we will look at the type of descriptions used on protocols throughout this website (especially in the research section) in order to describe what variations a particular protocol uses.
+					</p>
                 </div>
             </div>
 			<div class="main_toplevel main_section main_color2" id="sec1">
@@ -89,6 +107,113 @@
                 <div class="main_window main_fullwidth">
 					<span class="l_section">Section 1: The Millionaire Problem</span>
 					
+					<p class="l_content">
+						Alice and Bob are millionaires. One day, they get to arguing, both insisting fervently that they are the richer of the two. Neither of them is willing to tell the other <i>exactly</i> how much money they have, though&mdash;that's far too private! Thankfully, they're both computer scientists (why did you think they were millionaires?), so they design a protocol by which they can determine which one is richer without having to tell the other too much information.
+					</p>
+					<p class="l_content">
+						To formalize this problem a little bit, let's say that Alice has \(i\) million dollars, and Bob has \(j\) million. This is only an example, so we'll say that \(i,j\) are integers and \(1\leq i,j\leq 10\): <a href="../research/papers/49.html#sec3.1">Yao's protocol</a> originally did the same, after all. Alice and Bob want to devise a scheme so that they both learn the value of \(f(i,j) = i&lt;j\), but so that Bob does not learn \(i\) and Alice does not learn \(j\).
+					</p>
+					<h2>The Protocol</h2>
+					<p class="l_content">
+						Let's look at (a rewording of) Yao's <a href="../research/papers/49.html#sec3.1">original protocol</a>:
+					</p>
+					<ol class="l_content">
+						<li>
+							Alice and Bob agree on a number of bits to use for encryption, \(N\).
+						</li>	
+						<li>
+							Alice creates a public/private-key pair. If you don't know what that means, check out the <span data-broken-link=true>refresher page</span>.
+						</li>
+						<li>
+							Bob picks an \(N\)-bit random number \(x\), and encrypts it under Alice's public key to get \(k\).
+						</li>
+						<li>
+							Bob sends Alice the number \(k−j+1\).
+						</li>
+						<li>
+							Alice adds the values \(0\) through \(9\) to this value, getting \(k-j+1 ... k-j+10\).
+						</li>
+						<li>
+							Alice decrypts each of these values under her private key, getting a list of random-looking numbers \(y_u\). The \(j\)-th, \(y_j\), is \(x\), but she can't determine which one that is.
+						</li>
+						<li>
+							Alice picks a random \(\frac{N}{2}\)-bit prime number \(p\).
+						</li>
+						<li>
+							Alice finds the remainder of each value of \(y_u\pmod{p}\), and calls this set \(z_u\).
+						</li>
+						<li>
+							Alice sends Bob eleven values: the first \(i\) values of \(z_u\) unchanged; the remaining values of \(z_u\) with 1 added to each one; and \(p\).
+						</li>
+						<li>
+							Bob calculates \(x\pmod{p}\).
+						</li>
+						<li>
+							Bob decides that, if the \(j\)-th number Alice sent is equal to \(x\pmod{p}\), \(i\geq j\). Otherwise, \(i&lt;j\).
+						</li>
+						<li>
+							Bob tells Alice what the conclusion is.
+						</li>
+					</ol>
+					<p class="l_content">
+						It can be hard to visualize this protocol in action, so here's an interactive animation that will allow you to see it step by step:
+					</p>
+					<object style="display:block; margin:0px auto" width="700" height="500" data="../research/papers/interaction/49.swf">
+						You may be missing a plugin. <a href=""../research/papers/interaction/49.swf">Here</a>'s a direct link to the animation.
+					</object>
+					<h2>Making Protocols Private</h2>
+					<p class="l_content">
+						This protocol definitely gets Alice and Bob their answer, but does it satisfy that other requirement: that neither of them learns the other's variable? It's here that we can start talking about what 'privacy' really means. 
+					</p>
+					<p class="l_content">
+						One tempting option is to say that in order for the protocol to preserve Alice's privacy, Bob can't know what \(i\) is at the end of the protocol. Sadly, we can't quite define it this way. 
+					</p>
+					<p class="l_content">
+						Let's say, for example, that Bob just guesses, and decides that \(i=5\). If he happens to be correct, he's learned something, even if the protocol is secure. You may say he hasn't 'learned' anything, but what if this were her password, or her SSN? No matter how he arrived at his answer, if he's correct, he can still use it. That may seem semantic, but semantics are paramount here: they are what will allow us to turn the abstract idea of 'privacy' into a concrete, mathematical primitive. So what if we specify that Bob can't know what \(i\) is, but using only information he got from the protocol?
+					</p>
+					<p class="l_content">
+						That doesn't really work either. Let's say that Bob truly, TRULY wants to know how much money Alice has, so he tries <u>every number</u> until he finds the ones that Alice got from the decryptions of \(k-j+1\dots k-j+10\). If he does that, it's very easy to figure out \(i\): he just needs to see which ones she added 1 to! The barrier here is that such a calculation could take Bob years, decades, <i>centuries</i> if they chose a good enough encryption. So we need to add in some concept of what Bob could <i>reasonably</i> do. Otherwise, if you give someone an infinite amount of time, they will crack any code.
+					</p>
+					<p class="l_content">
+						In cryptography, we tend to talk about 'reasonableness' in terms of <span class="definable">polynomial time</span> (sometimes P-time, though in this website we will almost always write "polynomial"). In general, if the amount of time spent breaking a protocol is in \(O(n^k)\) for any constant \(k\), we can say that something private might be learned by the wrong party. On the other hand, if the amount of time spent would be in \(O(b^n)\) for a constant \(b\), we can feel safe calling it unreasonable that it can be brute-forced. In this case, the amount of time spent is in \(O(2^N)\) where \(N\) is the number of bits in \(i\), so it's unreasonable that Bob would brute force it.
+					</p>
+					<p class="l_content">
+						As a short aside, let's note that Bob still <i>technically</i> could learn something in a 'reasonable' amount of time, no matter how hard a problem is. The chance is minute, but he may end up guessing the correct answer, even on his first try. This is where cryptography focuses on the idea of <span class="definable">negligible</span> probabilities. Just like how we called polynomial time 'reasonable,' negligible probabilities are so unreasonably tiny that we don't worry about it&mdash;and, accordingly, negligible functions are any functions which can be bounded from above by an inverse polynomial.
+					</p>
+					<p class="l_content">
+						So we specify that Bob can't learn \(i\) using information from the protocol in a reasonable amount of time. Even so, we aren't quite done. Let's say that Bob started with the value \(j=9\), Alice and Bob do Yao's protocol, and Bob learns that \(i&gt;j\). Bob knows that, according to the initial conditions of the protocol, \(1\leq i\leq 10\), so \(i\) must be equal to 10!
+					</p>
+					<p class="l_content">
+						Yet again, we're missing something in our definition. We need to specify that anything that could be learned from the final function value does <i>not</i> count as information that can be called private. If we want to talk about multiparty privacy, we should say that <b>Bob can't learn anything extra about Alice's information <i>other</i> than what he could have already learned from \(j\) and \(f(i,j)\), all in a reasonable amount of time.</b>
+					</p>
+					<p class="l_content">
+						The above concept goes by many names in the research, because researchers love nothing more than to play with definitions in order to see what changes. If a protocol fits the definition above, it may be said to <i>preserve optimum privacy</i>; if it does not, it is usually not called anything at all, because it is probably being used as a stepping stone towards a different protocol that does. If Bob is attempting to breach that privacy, he may be called a <i>passive adversary</i>, making a protocol that defeats him <i>resistant to passive adversaries</i>. For more information on adversaries, see the next chapter.
+					</p>
+					<h3>Cheating</h3>
+					<p class="l_content">
+						That's all well and good then, as long as Alice and Bob agree to follow the protocol exactly as it's written. Alice doesn't know which value Bob will be able to interpret since he picked \(x\) randomly, and Bob would have to spend an unreasonable amount of time to figure out how to decrypt all ten values \(k-j+1\dots k-j+10\).
+					</p>
+					<p class="l_content">
+						But what if Bob gets to the end of the protocol and has gotten the answer that \(i&gt;j\), but he's unhappy enough about that to lie? The next step is for him to tell Alice what he's learned, so he can just tell her that \(i\leq j\) and she'll never know (and will presumably be forever cowed by his enormous bankroll)!
+					</p>
+					<p class="l_content">
+						This is what we call <i>cheating</i>, and we would call Bob <i>dishonest</i>, a <i>cheater</i>, or, sometimes, a <i>malicious adversary</i>. Cheating is one of the most difficult things for protocols to deal with because, in order for a protocol to be useful practically, we need to ensure that honest parties (non-cheaters) will catch the cheaters. Since there are always flukes and dumb luck, we generally say that cheaters should only succeed in cheating&mdash;that is, convince any honest party that they weren't cheating&mdash;with <span class="definable">negligible</span> probability.
+					</p>
+					<p class="l_content">
+						Using the word <i>dishonesty</i> does cause a small amount of confusion, however, because we have to draw the difference between Bob <i>lying</i> and Bob being <i>dishonest</i>. It is absolutely impossible for a protocol to alert honest parties that Bob is being dishonest if he is simply lying about his value of \(j\) from the very beginning. There is absolutely nothing preventing Bob from lying to Alice by having only 3 million dollars in the bank, but running the protocol with \(j=6\) in order to (hopefully) impress her.
+					</p>
+					<p class="l_content">
+						Dishonesty in this context could mean a few different things. If Bob uses \(j=5\) up to step 5 above, then switches to \(j=8\) afterwards, that is dishonesty, even if he's technically 'following the rules' of the protocol. If Bob were to lie in the final step in order to convince Alice that the opposite result was true, as we mentioned above, that would also clearly be dishonest.
+					</p>
+					<p class="l_content">
+						A protocol which prevents <u>any</u> cheating would not allow any of these to occur: it would put the most strict constraints on itself, and would generally say that <i>no</i> malicious adversary can convince <i>any</i> honest party that the protocol was done correctly. Obviously, Yao's protocol does not stand up to this: Bob could switch \(j\)'s and Alice wouldn't notice.
+					</p>
+					<p class="l_content">
+						But both of those examples represents a different type of cheating that a protocol can defend against. Bob switching \(j\)'s is a case of a malicious adversary not using their input consistently; if Bob didn't even use a \(j\) at all and simply used a random number throughout, that would be another case of this type of dishonesty. Bob lying in the final step represents a type of malicious adversary that any practical protocol should definitely defend against: a malicious adversary being able to alter the outcome of the computation to a value of their choosing.
+					</p>
+					<p class="l_content">
+						Generally, an insecure protocol (one that is not built against cheating) cannot prevent either. But a protocol may also only defend against the latter type, which would allow cheaters to act abnormally without being caught, but to be unable to turn the outcome of the protocol to their particular advantage.
+					</p>
                     <!--<a href="#citation1"><span class="reference" data-citation="1">[A citation]</span></a>
 					<span class="definable" data-define="collusion">definable</span>
 					<span class="equation" data-equation="equationname">An equation</span>-->
@@ -121,6 +246,29 @@
                     
                 </div>
             </div>
+			
+			<div class="main_toplevel main_section main_color4" id="sec4">
+                <div class="main_section_nav_container">
+                    <div class="main_section_nav_box l_no_link">&#8606; Previous Chapter</div>
+                    <div class="main_section_nav_box"><a href="#sec3">&#8592; Previous Section</a></div>
+                    <div class="main_section_nav_box"><a href="ch2.html">Next Section &#8594;</a></div>
+                    <div class="main_section_nav_box"><a href="ch2.html">Next Chapter &#8608;</a></div>
+                </div>
+                <div class="main_window main_fullwidth">
+					<span class="l_section">Section 4: Defining Multiparty Computation</span>
+					
+                    <p class="l_content">
+						A set of \(m\) people \(P\) are trying to communicate with each other to evaluate the values of some set of up to \(m\) functions \(F\).
+						Each person \(P_i\) is in possession of some private variable \(x_i\). When the communication is done, each person \(P_i\) wants to know the value of \(F_i(x_1,x_2,x_3,\cdots,x_m)\).
+						
+						The <span class="definable" data-define="security constraint">security constraints</span> and <span class="definable" data-define="privacy constraint">privacy constraints</span> under which
+						everyone is operating change problem to problem. Generally, however, every person in \(P\) wants their privacy maintained, in that, they want no other person in P to
+						learn the value of their private variable \(x_i\). Additionally, the protocol may guarantee some security: no people <i>not</i> in \(P\)&mdash;or <span class="definable" data-define="adversary">adversaries</span>&mdash;to learn anything at all, or to be
+						able to alter the evaluation of any of their functions.
+					</p>
+                </div>
+            </div>
+			
             <div class="main_toplevel main_section main_color8">
                 <h1>References</h1>
                 <ol id="referencelist">

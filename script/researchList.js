@@ -20,7 +20,7 @@ var researchInfo = [
 	{authors:["Moni Naor", "Kobbi Nissim"], title:"Communication Preserving Protocols for Secure Function Evaluation", year:2001, id:15, length:10, tags:["Unsorted"]},
 	{authors:["Martin Hirt", "Ueli Maurer"], title:"Complete Characterization of Adversaries Tolerable in Secure Multi-Party Computation", year:1997, id:16, length:10, tags:["Unsorted"]},
 	{authors:["Michael Ben-Or", "Shafi Goldwasser", "Avi Wigderson"], title:"Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation", year:1988, id:17, length:10, tags:["Unsorted"]},
-	{authors:["Ivan Damgård", "Yuval Ishai"], title:"Constant-Round Multiparty Computation Using a Black-Box Pseudorandom Generator", year:2005, id:18, length:-20, tags:["Unsorted"]},
+	{authors:["Ivan Damgård", "Yuval Ishai"], title:"Constant-Round Multiparty Computation Using a Black-Box Pseudorandom Generator", year:2005, id:18, length:20, tags:["Unsorted"]},
 	{authors:["Ronald Cramer", "Ivan Damgård", "Stefan Dziembowski", "Martin Hirt", "Tal Rabin"], title:"Efficient Multiparty Computations Secure Against an Adaptive Adversary", year:1999, id:19, length:16, tags:["Unsorted"]},
 	
 	{authors:["Martin Hirt", "Ueli Maurer", "Bartosz Przydatek"], title:"Efficient Secure Multi-Party Computation", year:2000, id:20, length:18, tags:["Unsorted"]},
@@ -97,5 +97,5 @@ var researchInfo = [
 	{authors:["Juan A. Garay","Philip MacKenzie", "Ke Yang"], title:"Efficient and Secure Multi-Party Computation with Faulty Majority and Complete Fairness", year:2004, id:79, length:27, tags:["Unsorted"]},
 	
 	{authors:["Ronald Cramer","Ivan Damgård", "Jesper Buus Nielsen"], title:"Multiparty Computation, an Introduction", year:2009, id:80, length:83, tags:["Unsorted"]},
-	{authors:["Andrew C. Yao"], title:"Some Complexity Questions Related to Distributive Computing", year:1979, id:81, length:5, tags:["Unsorted"]}
+	{authors:["Oded Goldreich","Silvio Micali", "Avi Wigderson"], title:"How To Play Any Mental Game", year:1987, hasPage:true, id:81, length:12, tags:["Unsorted"]}
 ];
