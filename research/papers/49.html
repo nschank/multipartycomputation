@@ -113,7 +113,7 @@
 							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaire Problem, and for being the first paper to look into Multiparty Computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) Multiparty Computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
 						</p>
 						<p class="rp_analysis">
-							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaire Problem, or Yao's Millionaire Problem. Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it the perfect case study into secure two-party computation (as can be seen in the <span data-broken-link=true>tutorial page</span> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaire Problem nonetheless remains the most common example of multiparty computation to date.
+							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaire Problem, or Yao's Millionaire Problem. Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it an excellent case study into secure two-party computation (as can be seen in the <a href="../../learn/ch1.html#sec1">tutorial page</a> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaire Problem nonetheless remains the most common example of multiparty computation to date.
 						</p>
 						<p class="rp_analysis">
 							The significance of this particular paper to this field is difficult to overstate. Despite its shortcomings (namely, its lack of proof and its limited direct application), its focus on defining a general problem as opposed to being limited to a specific one ultimately vaulted it into the realm of influence, and most research into multiparty computation which followed it can be framed within the definitions he specified.
@@ -253,8 +253,8 @@
 							<li><b>Number of parties: </b>2</li>
 							<li><b>Function(s): </b>Comparisons between \(x_0\) and \(x_1\) (i.e. \(&lt;, &gt;, \leq ,\geq\)). Two honest parties will find the same return value.</li>
 							<li><b>Privacy constraints: </b><span class="definable" data-define="negligible">Negligible probability</span> that \(P_i\) learns \(x_{(1-i)}\)</li>
+							<li><b>Cheating: </b><span class="definable" data-define="malicious adversary">Malicious adversaries</span> can change the outcome of the protocol to a value of their choosing.</li>
 							<li><b>Security constraints: </b>None</li>
-							<li><b>Cheating: </b>Very possible to do without detection</li>
 							<li><b>Bits exchanged: </b>\(O(Nn)\) where \(N\) is the bit-length of \(i\) and \(j\), and \(n\) is the size of their range.</li>
 							<li><b>Runtime:</b> \(O(n)\), where \(n\) is the size of the range of \(i\) and \(j\)</li>
 						</ul>

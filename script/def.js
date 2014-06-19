@@ -3,6 +3,8 @@
 var def_internal = {
 	"algorithm":"A sequence of steps followed in order to determine a value. In complexity theory, an algorithm is any Turing machine that is guaranteed to halt.",
 
+	"associativity":"A function \\(f(\\cdot,\\cdot)\\) is associative if, for any \\(a,b,c\\), \\(f(f(a,b),c)=f(a,f(b,c))\\). In other words, application order of the function does not matter. Keep in mind that this does NOT mean that order of <i>inputs</i> doesn't matter; there is no guarantee that \\(f(a,b)=f(b,a)\\).",
+	
     "bias":"A systematic error which skews all values in a particular direction or towards a particular value.",
 	
 	"cartesian product":"The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\times\\){♠, ♥, ♦, ♣}. The Cartesian product is often extended into many dimensions, as in the expression \\(A\\times B\\times C\\times D\\), which would be the set of all ordered quadruples \\((a,b,c,d)\\) that can be formed from an \\(a\in A, b\\in B, c\\in C, d\\in D\\).",
@@ -16,6 +18,8 @@ var def_internal = {
 	"commitment":"A commitment scheme is a cryptographic primitive in which Alice wants to ensure Bob does not try to change his secret value mid-computation in order to alter a result to his benefit. Alice asks Bob for a <i>commitment</i> to his secret value \\(x\\): a value \\(C\\) and fixed <span class=\"definable\">PPT</span> opening-algorithm \\(O\\) which satisfies the following properties: <ul><li>\\(\\nexists\\) PPT algorithm \\(A\\) such that \\(A(C)=x\\). In other words, \\(C\\) doesn't break the privacy of \\(x\\) by itself.</li><li>Bob can later give Alice some \\(o\\) such that \\(O(C,o)=x\\). In other words, Bob knows a value which 'opens' the commitment, and proves to Alice that the value was what he started with.</li><li>\\(\\nexists\\) PPT cheating-algorithm that, given a commitment \\(C\\), can with more than <span class=\"definable\" data-define=\"negligible\">negligible</span> probability produce a second pair \\((\\bar{x},\\bar{o})\\) where \\(x\\neq\\bar{x}\\) and \\(O(C,\\bar{o})=\\bar{x}\\). In other words, Bob can't reliably produce <i>any</i> value that he could convince Alice he started with other than \\(x\\) itself.</li></ul>",
     
 	"commutativity":"The state of being independent of order, when referring to a binary function. As an example, addition of numbers is commutative because \\(a+b=b+a   \\forall a,b\\). Subtraction is not commutative because \\(a-b\\neq b-a\\) for most values of \\(a,b\\).",
+	
+	"completeness":"In complexity, completeness refers to the property of a problem being the 'hardest' or 'most expressive' in its class. In other words, this problem can be reduced to from any other problem within the class under which it is complete.",
 	
 	"discrete logarithm problem":"A discrete logarithm is any integer \\(k\\) solving the equation \\(b^k=g\\), where \\(b,g\\) are two elements in a <span class=\"definable\">group</span>. At current time, the discrete log problem is believed to be computationally hard; that is, no method currently exists that solves it in time polynomial in the size of the group.",
     
@@ -57,7 +61,7 @@ var def_internal = {
     
 	"probability density function":"A function (often called \\(p(i)\\)) used to calculate the probability of a particular instance \\(i\\) within the entire domain of possible inputs \\(I\\). Must satisfy the constraints that:<ol><li>Given any \\(i\\in I\\), \\(0\lte p(i)\lte 1\\)</li><li>\\(\\sum\\limits_{i\\in I} p(i) = 1\\)</li></ol>Basically, all possibilities must have a well-defined probability, and no possibilities may be missing.",
 	
-	"quadratic residue":"An integer \\(q\\) is a quadratic residue \\(\\bmod{n}\\) if there exists some \\(x\\) such that \\(q \\equiv x^2\\pmod{n}\\). Determining whether a number is a quadratic residue \\(\\bmod{n}\\ is a member of the complexity class <span class=\"definable\">NP</span>.",
+	"quadratic residue":"An integer \\(q\\) is a quadratic residue \\(\\bmod{n}\\) if there exists some \\(x\\) such that \\(q \\equiv x^2\\pmod{n}\\). Determining whether a number is a quadratic residue \\(\\bmod{n}\\) is a member of the complexity class <span class=\"definable\">NP</span>.",
 	
     "security constraint":"A constraint on what information (that you own) can be learned by other parties who are not intended to be members of the computation (or <i>adversaries</i>).",
     
@@ -67,12 +71,12 @@ var def_internal = {
     
 	"transcendental":"non-algebraic; not the root of a non-zero polynomial equation with rational coefficients. All transcendental numbers are irrational, and technically most irrational numbers are transcendental, but most irrational numbers commonly used are non-transcendental. The most commonly used transcendental numbers are \\(\\pi\\) and \\(e\\).",
 	
-	"trapdoor function":"Informally, a trapdoor function is a function that can be computed efficiently, but cannot be inverted efficiently without using a piece of special information called the 'trapdoor'. More formally, a function \\(f\\) is a trapdoor function if, for \\(\\forall x\\in Domain_{f,k}\\) (where \\(k\\) is the security parameter) \\(\\exists y\\) such that \\(\\exists c_0\\) where \\(T(f(x))\\in O(k^{c_0})\\), \\(nexists c_1\\) where \\(T(f^{-1}(x))\\in O(k^{c_1})\\), and \\(\\exists\\) algorithm \\(A\\) and integer \\(c_2\\) such that \\(A(f(x),y)=f^{-1}(x)\\) and \\(T(A)\\in O(k^{c_2})\\).",
+	"trapdoor function":"Informally, a trapdoor function is a function that can be computed efficiently, but cannot be inverted efficiently without using a piece of special information called the 'trapdoor'. More formally, a function \\(f\\) is a trapdoor function if, for \\(\\forall x\\in Domain_{f,k}\\) (where \\(k\\) is the security parameter) \\(\\exists y\\) such that \\(\\exists c_0\\) where \\(T(f(x))\\in O(k^{c_0})\\), \\(\\nexists c_1\\) where \\(T(f^{-1}(x))\\in O(k^{c_1})\\), and \\(\\exists\\) algorithm \\(A\\) and integer \\(c_2\\) such that \\(A(f(x),y)=f^{-1}(x)\\) and \\(T(A)\\in O(k^{c_2})\\).",
 	
 	
 	"trapdoor permutation":"A trapdoor <span class=\"definable\">permutation</span> is a <span class=\"definable\">trapdoor function</span> \\(f\\) which satisfies the property that \\(Domain_f = Codomain_f\\).",
 	
-	"trusted party":"Any entity not participating directly on a protocol on which both parties can depend to be totally honest and to maintain complete privacy.",
+	"trusted party":"Any entity not participating directly in a protocol on which both parties can depend to be totally honest and to maintain complete privacy.",
     
 	"Turing machine":"A theoretical machine often used in computer science to analyze the complexity or limits of a computation. It is imagined as an infinitely long 'tape' separated into discrete boxes or squares. At any given moment, there is a specific square being 'scanned'; based on the symbol within that square, the machine may choose either to write to that square or not, and then to move either left or right one square.",
 	

@@ -33,8 +33,10 @@
 						return "<p>For \\(T\\subset \\{1,…,n\\}\\), the function \\(HS_T(x_1,\\dots,x_n)\\) denotes the vector of the private histories of the members of \\(T\\) in an execution of \\(S\\).</p>";
 					case "OSi":
 						return "<p>The function \\(OS_i(x_1,\\dots,x_n,CI)\\) denotes the RV consisting of the private output of machine \\(i\\) in an execution of \\(S\\).</p>";
-					case "PUCk":
-						return "<p>The probability function \\(P(U,C,k)\\) calculates the probability that \\(C_k\\) outputs 1 on input a random string from \\(U_k\\), where \\(U\\) is a <span class=\"definable\">poly-bounded family of random variables</span> and \\(C\\) is a <span class=\"definable\">poly-size family of circuits</span>. We assume that the length of the strings that are assigned positive probability by \\(U_k\\) equals the number of Boolean inputs of \\(C_k\\).</p>";
+					case "PA":
+						return "<p>The set of all probabilistic polynomial time algorithms.</p>";
+					case "PDA":
+						return "<p>The set of all distributed probabilistic polynomial time algorithms.</p>";
 					default:
 						return "No info on this equation yet.";
 				}
@@ -48,13 +50,11 @@
 						return "#";
 				}
 			}
-
-			self_def["computational indistinguishability"] = "<a href=\"#def1\">Definition 1</a></p><p class=\"gl_definition\">Informally, groups of random variables are indistinguishable from each other when large groups of them can't be differentiated consistently.";
+			
 			self_def["dynamic adversary"] = "A good machine can choose, during the run of the protocol, to become an adversary.";
-			self_def["engagement protocol"] = "A protocol to perform before playing a Tm-game that will 'lock in' players and force them to play the game. If they stop playing, the other players in the game can team up in order to perfectly simulate that player's interactions, assuming a majority of the original players is still playing.";
 			self_def["game network"] = "A network of \\(n\\) interacting polynomial-time Turing machines";
 			self_def["knowledge function"] = "A function \\(K_i\\) that takes a state in a game \\(\\sigma\\) and returns all information that player \\(i\\) knows during that state.";
-			self_def["one-out-of-two oblivious transfer"] = "Alice has two messages, \\(m_0\\) and \\(m_1\\). By using a cryptosystem \\(E\\) she computes \\(\\sigma_0=E(m_0)\\) and \\(\\sigma_1=E(m_1)\\) and sends \\(\\sigma_0, \\sigma_1\\) to Bob. Bob chooses one of these encryptions, \\(\\sigma_i\\). A one-out-of-two OT allows Bob to read the corresponding message \\(m_i\\), while Alice will not know which message Bob has read (whenever \\(m_0\\neq m_1\\)).";
+			self_def["one-out-of-two oblivious transfer"] = "Alice has two messages, \\(m_0\\) and \\(m_1\\). By using a cryptosystem \\(E\\) she computes \\(\\sigma_0=E(m_0)\\) and \\(\\sigma_1=E(m_1)\\) and sends \\(\\sigma_0, \\sigma_1\\) to Bob. Bob chooses one (and only one) of these encryptions, \\(\\sigma_i\\). A one-out-of-two OT allows Bob to read the corresponding message \\(m_i\\), while Alice will not know which message Bob has read (whenever \\(m_0\\neq m_1\\)).";
 			self_def["pay-off function"] = "A function \\(p\\) that takes in the final state of a game and returns the outcome of the game based on that state. As an example, the pay-off function for poker takes in the state of everyone's hands after the last turn is played, and would return information like who won, how much they won, and how much everyone else lost.";
 			self_def["poly-bounded family of random variables"] = "A family \\(U=\\{U_k\\}\\) such that, for some constant \\(e&gt;0\\), all RVs \\(U_k\\in U\\) assign positive probability only to strings whose length is exactly \\(k^e\\).";
 			self_def["poly-size family of circuits"] = "A family \\(C=\\{C_k\\}\\) of Boolean circuits \\(C_k\\) with one Boolean output such that, for some constants \\(e,d&gt;0\\), all \\(C_k\\in C\\) have at most \\(k^e\\) gates and \\(k^d\\) Boolean inputs.";
@@ -90,7 +90,7 @@
                     <span class="rp_title">How to Play Any Mental Game or A Completeness Theorem for Protocols with Honest Majority</span>
                     <span class="rp_info">1987
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="rp_author" href="../authors/goldreich.html">Oded Goldreich</a> <a class="rp_author" href="../authors/micali.html">Silvio Micali</a> <a class="rp_author" href="../authors/wigderson.html">Avi Wigderson</a></span>
+                        <a class="rp_author" href="../authors/Oded Goldreich.html">Oded Goldreich</a> <a class="rp_author" href="../authors/Silvio Micali.html">Silvio Micali</a> <a class="rp_author" href="../authors/Avi Wigderson.html">Avi Wigderson</a></span>
 						
                     <div class="main_toc">
                         <h4 style="color:#333333">Table of Contents</h4>
@@ -110,37 +110,83 @@
                     </div>
 					
                     <div class="rp_snippet">
-						Our algorithm automatically solves all the multi-party protocol problems addressed in complexity-based cryptography during the last 10 years.
+						As long as the majority of the players is honest, all protocols may be correctly played.
 					</div>
 						
                     <section id="a_intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Paper Title</b> is...
+							<b>How to Play Any Mental Game</b> is a 1987 work by Goldreich, Micali, and Widgerson that offers a completeness theorem for any protocol with honest majority. Based on their 1986 work <i>How to Solve Any Protocol Problem</i><a href="pdf/81.1.pdf"><sup>(PDF)</sup></a>, it brings together essentially every major piece of cryptography into one central paper, providing a key piece in the development of multiparty computation protocols. By providing the building blocks necessary to build any general problem into a private and robust protocol, this paper provides the benchmark by which every new protocol is measured. 
+						</p>
+						<p class="rp_analysis">
+							In particular, Goldreich et al. incorporate oblivious transfer, hardcore bits, zero knowledge proofs, 5-permutations, game theory concepts, and the translation from Turing machine to circuits to straight line programs into their meta-protocol.
+						</p>
+						<p class="rp_analysis">
+							This paper is a demonstration of how <span class="definable">oblivious transfer</span> is <span class="definable" data-define="completeness">complete</span> with respect to multiparty computation; that is, any oblivious transfer primitive can construct a multiparty computation evaluator for any function.
 						</p>
 					</section>
 					<section id="a_goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
-							Some goals that they had.
+							<i>How to Play Any Mental Game</i> makes a big promise with both its title and its premise, and it delivers on that promise fully. Given any <span class="definable">Turing machine</span> \(M\) for \(n\) players, it provides a meta-protocol by which we can produce a new distributed protocol \(D\), making the following guarantees:
+						</p>
+						<ul class="rp_analysis">
+							<li>No number of <span class="definable" data-define="passive adversary">passive adversaries</span> will be able to learn anything from \(D\) that they could not have learned by using a <span class="definable">trusted party</span> instead.</li>
+							<li>As long as the majority of players are not <span class="definable" data-define="malicious adversary">malicious</span>, the output of \(D\) will be identical to \(M\) (or, in the case of \(M\) being probabilistic, will have an identical probability distribution).</li>
+						</ul>
+						<p class="rp_analysis">
+							Since this is true for <i>any</i> Turing machine, this means that this paper provides a completeness theorem. <b>Any singular function can be computed using multiparty computation, assuming honest majority.</b> This paper does not address problems in which different people compute different functions, nor does it make any efficiency promises about the produced protocol (which is polynomial in the running time of \(M\) and in \(n\)).
 						</p>
 						<p class="rp_analysis">
-							Don't forget some results, too!
+							All of the above operates under the assumption that <span class="definable" data-define="trapdoor function">trapdoor functions</span> exist, a relatively low burden of assumption.
 						</p>
 					</section>
 					<section id="a_defs">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - Computational Indistinguishability</span></a>
 						<p class="rp_definition">
-							Two <span class="definable" data-define="poly-bounded family of random variables">poly-bounded families of RV's</span> are <span class="definable">computationally indistinguishable</span> if, for all <span class="definable" data-define="poly-size family of circuits">poly-size families of circuits</span> \(C\), for all constants \(f&gt;0\) and all sufficiently large \(k\in N\),
+							Two <span class="definable" data-define="poly-bounded family of random variables">poly-bounded families of RV's</span> are <span class="definable" data-define="indistinguishable">computationally indistinguishable</span> if, for all <span class="definable" data-define="poly-size family of circuits">poly-size families of circuits</span> \(C\), for all constants \(f&gt;0\) and all sufficiently large \(k\in N\),
 						</p>
 						<p class="rp_definition">
 							$$|P(U,c,k)-P(V,C,k)|&lt;k^{-f}$$
+						</p>
+						<p class="rp_definition">
+							where \(P(U,C,k)\) denotes the probability that \(C_k\) outputs 1 on input a random string from \(U_k\).
 						</p>
 						<a href="#def2"><span class="rp_definition_header">Definition 2 - Turing machine game</span></a>
 						<p class="rp_original rp_definition">
 							A <span class="definable" data-define="Turing machine game">Tm-game</span> problem consists of a pair \((\bar{M},1^k)\), that is, the description of a <span class="definable">Turing machine</span> \(M\) and an integer \(k\), the security parameter, presented in unary. \(n\) parties, respectfully and individually owning secret inputs \(x_1,\dots,x_n\) would like to correctly run \(M(x_1,\dots,x_n)\) without revealing (to the other players) more about the \(x_i\)'s than is already contained in the output of the Turing machine itself.
 						</p>
+						<a href="#def3"><span class="rp_definition_header">Definition 3 - Turing Machine game solver for Passive Adversaries</span></a>
+						<p class="rp_original rp_definition">
+							Let <span class="equation" data-equation="PDA">\(S\in PDA\)</span>. We say that \(S\) is a <span class="definable" data-define="Turing machine game">Tm-game solver</span> for <span class="definable" data-define="passive adversary">passive adversaries</span> if, for all Tm-game problems \((\bar{M},1^k)\) given as common input and for all (respective) private inputs \(x_1,\dots,x_n\),
+						</p>
+						<ol class="rp_original rp_definition">
+							<li value="1">
+								<i>(Agreement constraint)</i>
+								<p>
+									At the end of each execution of \(S\), for all machines \(i\) and \(j\), \(i\)'s private output equals \(j\)'s private output.
+								</p>
+							</li>
+							<li value="2">
+								<i>(Correctness constraint)</i>
+								<p>
+									<span class="equation" data-equation="OSi">\(OS_1(x_1,\dots,x_n,(\bar{M},1^k))\)</span>\(=M(x_1,\dots,x_n)\), and
+								</p>
+							</li>
+							<li value="3">
+								<i>(Privacy constraint)</i>
+								<p>
+									\(\forall T\subset\{1,\dots,n\}\) and \(\forall A\in PPT, \exists B\in PPT\) such that \(\{A_k\}\) and \(\{B_k\}\) are computationally undistinguishable RVs. Here</p>
+								<p>
+									\(A_k=A((\bar{M},1^k),\)<span class="equation" data-equation="HS">\(HS((\bar{M},1^k))\)</span>,<span class="equation" data-equation="HST">\(HS_T((\bar{M},1^k))\)</span>\()\)
+								</p>
+								<p>and</p>
+								<p>
+								\(B_k=B((\bar{M},1^k),M(x_1,\dots,x_n),\{(i,x_i):i\in T\})\)
+								</p>
+							</li>
+						</ol>
 					</section>
 					<section id="a_theorems">
 						<h2>Theorems</h2>
@@ -150,7 +196,7 @@
 						</p>
 						<a href="#theorem2"><span class="rp_theorem_header">Theorem 2</span></a>
 						<p class="rp_original rp_theorem">
-							Given \(n\) players willing to play, less than half of which are <span class="definable" data-define="malicious adversary">malicious</span>, all <span class="definable" data-define="Turing machine game">Tm-games</span> are playable.
+							Given \(n\) players willing to play, less than half of which are <span class="definable" data-define="malicious adversary">malicious</span>, all <span class="definable" data-define="Turing machine game">Tm-games</span> are <span class="definable" data-define="purely playable game">playable</span>.
 						</p>
 						<a href="#theorem3"><span class="rp_theorem_header">Theorem 3</span></a>
 						<p class="rp_original rp_theorem">
@@ -174,7 +220,7 @@
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
-							A reference for this paper
+							Oded Goldreich, Silvio Micali, and Avi Wigderson. How to play any mental game or a completeness theorem for protocols with honest majority. In <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229, New York City, 25–27 May 1987.
 						</p>
 					</section>
                 </div>
@@ -199,13 +245,13 @@
 											<li><a href="#sec2.4">Indistinguishability of Random Variables</a></li>
 										</ol>
 									</li>
-									<li><a href="#sec3">Tm-games with Passive ADversaries</a></li>
+									<li><a href="#sec3">Tm-games with Passive Adversaries</a></li>
 									<li>
 										<a href="#sec4">Hints on How to Play Tm-games with Passive Adversaries</a>
 										<ol>
 											<li><a href="#sec4.1">A New and General Oblivious Transfer Protocol</a></li>
 											<li><a href="#sec4.2">Strengthening Yao's Combined Oblivious Transfer</a></li>
-											<li><a href="#sec4.3">The TM-game Solver for passive adversaries</a></li>
+											<li><a href="#sec4.3">The Tm-game Solver for passive adversaries</a></li>
 										</ol>
 									</li>
 									<li><a href="#sec5">Malicious Adversaries</a></li>
@@ -237,10 +283,10 @@
 					<section id="sec1">
 						<h2>Introduction</h2>
 						<p class="rp_original">
-							Before discussing how to “make playable" a general game with incomplete information (which we do in section 6) let us address the problem of making playable a special class of games, the <span class="definable">Turing machine</span> games (<i>Tm-games</i> for short).
+							Before discussing how to "make <span class="definable" data-define="purely playable game">playable</span>" a general game with incomplete information (which we do in section 6) let us address the problem of making playable a special class of games, the <span class="definable" data-define="Turing machine game">Turing machine games</span> (<i>Tm-games</i> for short).
 						</p>
 						<p class="rp_original">
-							Informally, \(n\) parties, respectively and individually owning secret inputs \(x_1,\dots,x_n\) would like to <i>correctly</i> run a given Turing machine \(M\) on these \(x_i\)‘s while keeping the maximum possible privacy about them. That is, they want to compute \(y=M(x_1,\dots,x_n)\) without revealing more about the \(x_i\)’s than it is already contained in the value \(y\) itself. For instance, if \(M\) computes the sum of the \(x_i\)’s, every single player should not be able to learn more than the sum of the inputs of the other parties. Here \(M\) may very well be a probabilistic Turing machine. In this case, all player want to agree on a single string \(y\), selected with the right probability distribution, as \(M\)’s output.
+							Informally, \(n\) parties, respectively and individually owning secret inputs \(x_1,\dots,x_n\) would like to <i>correctly</i> run a given <span class="definable">Turing machine</span> \(M\) on these \(x_i\)‘s while keeping the maximum possible privacy about them. That is, they want to compute \(y=M(x_1,\dots,x_n)\) without revealing more about the \(x_i\)’s than it is already contained in the value \(y\) itself. For instance, if \(M\) computes the sum of the \(x_i\)’s, every single player should not be able to learn more than the sum of the inputs of the other parties. Here \(M\) may very well be a probabilistic Turing machine. In this case, all player want to agree on a single string \(y\), selected with the right probability distribution, as \(M\)’s output.
 						</p>
 						<p class="rp_original">
 							The correctness and privacy constraint of a Tm-game can be easily met with the help of an extra, <span class="definable">trusted party</span> \(P\). Each player \(i\) simply gives his secret input \(x_i\) to \(P\). \(P\) will privately run the prescribed Turing machine, \(M\), on these inputs and publicly announce \(M\)’s output. Making a Tm-game playable essentially means that the correctness and privacy constraints can be satisfied by the \(n\) players themselves, without invoking any extra party. Proving that Tm-games are playable retains most of the flavor and difficulties of our general theorem.
@@ -275,7 +321,7 @@
 								Let us start by briefly describing the communication networks in which games will be played. This is the standard network supporting the execution of multi-party protocols.
 							</p>
 							<p class="rp_original">
-								Informally, a <span class="definable">game network</span> of size \(n\) is a collection of (interacting) probabilistic polynomial-time Turing machines. Each machine has a private read-only input tape, a private write-only output tape and a private read-write work tape. All machines share a common read-only input tape and a common write-only output tape. The \(n\) machines communicate by means of \(n\cdot(n-1)\) special tapes. Machine \(i\) publically sends messages (strings) to machine \(j\) by means of a special tape \(i \rightarrow j\) on which only \(i\) can write and that all other machines can read. There is a common clock whose pulses define time intervals \(1,2,\dots\). Messages are sent at the beginning of a time interval and are received within the same time interval. We stress, though, that our result is largely independent from the specific communication mechanism, and also holds for "less equipped" communication networks.<sup id="fref1"><a href="#footnote1">(1)</a></sup>
+								Informally, a <span class="definable">game network</span> of size \(n\) is a collection of (interacting) probabilistic polynomial-time <span class="definable" data-define="Turing machine">Turing machines</span>. Each machine has a private read-only input tape, a private write-only output tape and a private read-write work tape. All machines share a common read-only input tape and a common write-only output tape. The \(n\) machines communicate by means of \(n\cdot(n-1)\) special tapes. Machine \(i\) publically sends messages (strings) to machine \(j\) by means of a special tape \(i \rightarrow j\) on which only \(i\) can write and that all other machines can read. There is a common clock whose pulses define time intervals \(1,2,\dots\). Messages are sent at the beginning of a time interval and are received within the same time interval. We stress, though, that our result is largely independent from the specific communication mechanism, and also holds for "less equipped" communication networks.<sup id="fref1"><a href="#footnote1">(1)</a></sup>
 							</p>
 							<p class="rp_original">
 								A probabilistic distributed algorithm \(S\) running in a game network of size \(n\) is a sequence of programs \(S=(S_1,\dots,S_n)\), where \(S_i\) is the program of the \(i\)-th Turing machine in the network. We denote by PDA the class of all probabilistic polynomial-time distributed algorithms.
@@ -287,13 +333,13 @@
 						<section id="sec2.3">
 							<h3>Adversaries</h3>
 							<p class="rp_original">
-								We consider two interesting types of adversaries (faulty machines) in a game network: passive ones (a new notion) and malicious ones (a more standard notion).
+								We consider two interesting types of adversaries (faulty machines) in a <span class="definable">game network</span>: passive ones (a new notion) and malicious ones (a more standard notion).
 							</p>
 							<p class="rp_original">
 								A <span class="definable">passive adversary</span> is a machine that may compute more than required by its prescribed program, but the messages it sends and what it outputs are in accordance to its original program. (Passive adversaries may be thought of as machines who only try to violate the privacy constraint. They keep on running their prescribed programs correctly, but also run, “on the side”, their favorite polynomial time program to try to compute more than their due share of knowledge. In an election protocol, a passive adversary may be someone who respects the majority’s opinion&mdash;and thus does not want to corrupt the tally&mdash;and yet wants to discover who voted for whom.)
 							</p>
 							<p class="rp_original">
-								A <span class="definable">malicious adversary</span> is, instead, a machine that deviates from its prescribed program in any possible action. That is, we allow the program of such a machine to be replaced by any fixed probabilistic polynomial-time program. (Malicious adversaries not only have a better change of disrupting the privacy constraint, but could also make the outcome of a Tm-game vastly different than in an ideal run with a <span class="definable">trusted party</span>.)
+								A <span class="definable">malicious adversary</span> is, instead, a machine that deviates from its prescribed program in any possible action. That is, we allow the program of such a machine to be replaced by any fixed probabilistic polynomial-time program. (Malicious adversaries not only have a better change of disrupting the privacy constraint, but could also make the outcome of a <span class="definable" data-define="Turing machine game">Tm-game</span> vastly different than in an ideal run with a <span class="definable">trusted party</span>.)
 							</p>
 							<p class="rp_original">
 								We allow machines in a game network to become adversarial in a <span class="definable" data-define="dynamic adversary">dynamic</span> fashion, during the execution of a protocol. We also allow adversarial machines (of either type) to undetectedly cooperate. Adversarial machines are not allowed, however, to monitor the private tapes or the internal state of good machines.
@@ -302,7 +348,7 @@
 								We believe the malicious-adversary scenario to be the most adversarial among all the natural scenarios in which cryptography may help.
 							</p>
 							<p class="rp_original">
-								Jumping ahead, we will show that all Tm-games are playable with any number of passive adversaries or with \(&lt;\frac{n}{2}\) malicious adversaries. 
+								Jumping ahead, we will show that all Tm-games are <span class="definable" data-define="purely playable game">playable</span> with any number of passive adversaries or with \(&lt;\frac{n}{2}\) malicious adversaries. 
 							</p>
 						</section>
 						<section id="sec2.4">
@@ -311,11 +357,11 @@
 								Throughout this paper, we will only consider families of RVs \(U=\{U_k\}\) where the parameter \(k\) ranges in the natural numbers. Let \(U=\{U_k\}\) and \(V=\{V_k\}\) be two families of RVs. The following notion of computational indistinguishability expresses the fact that, when the length of \(k\) increases, \(U_k\) becomes “replaceable” by \(V_k\), in the following sense. A random sample is selected either from \(U\), or from \(V\), and it is handed to a “judge”. After studying the sample, the judge will proclaim his verdict: 0 or 1. (We may interpret 0 as the judge’s decision that that the sample came from \(U_k\); 1 as the decision that the sample came from \(V_k\).) It is then natural to say that \(U_k\) becomes “replaceable” by \(V_k\) for \(k\) large enough if, when \(k\) increases, the verdict of any computationally bounded judge becomes “meaningless”, that is essentially uncorrelated to which of the two distributions the sample came from.
 							</p>
 							<p class="rp_original">
-								To formalize the notion of computational indistinguishability we make use of nonuniformity. Thus, our "judge", rather than polynomial time Turing machine, will be a <span class="definable">poly-size family of circuits</span>. That is a family \(C=\{C_k\}\) of Boolean circuits \(C_k\) with one Boolean output such that, for some constants \(e,d&gt;0\), all \(C_k\in C\) have at most \(k^e\) gates and \(k^d\) Boolean inputs. In order to feed samples from our probability distributions to such circuits, we will consider only <span class="definable" data-define="poly-bounded family of random variables">poly-bounded families of RVs</span>. That is families \(U=\{U_k\}\) such that, for some constant \(e&gt;0\), all RV \(U_k\in U\) assigns positive probability only to strings whose length is exactly \(k^e\). If \(U=\{U_k\}\) is a poly-bounded family of RVs and \(C=\{C_k\}\) a poly-bounded sequence of circuits, we denote by <span class="equation" data-equation="PUCk">\(P(U,C,k)\)</span> the probability that \(C_k\) outputs 1 on input a random string from \(U_k\). (Here we assume that the length of the strings that are assigned positive probability by \(U_k\) equals the number of Boolean inputs of \(C_k\).)
+								To formalize the notion of computational indistinguishability we make use of nonuniformity. Thus, our "judge", rather than polynomial time <span class="definable">Turing machine</span>, will be a <span class="definable">poly-size family of circuits</span>. That is a family \(C=\{C_k\}\) of Boolean circuits \(C_k\) with one Boolean output such that, for some constants \(e,d&gt;0\), all \(C_k\in C\) have at most \(k^e\) gates and \(k^d\) Boolean inputs. In order to feed samples from our probability distributions to such circuits, we will consider only <span class="definable" data-define="poly-bounded family of random variables">poly-bounded families of RVs</span>. That is families \(U=\{U_k\}\) such that, for some constant \(e&gt;0\), all RV \(U_k\in U\) assigns positive probability only to strings whose length is exactly \(k^e\). If \(U=\{U_k\}\) is a poly-bounded family of RVs and \(C=\{C_k\}\) a poly-bounded sequence of circuits, we denote by \(P(U,C,k)\) the probability that \(C_k\) outputs 1 on input a random string from \(U_k\). (Here we assume that the length of the strings that are assigned positive probability by \(U_k\) equals the number of Boolean inputs of \(C_k\).)
 							</p>
 							<span class="rp_definition_header" id="def1">Definition 1 - Computational Indistinguishability</span>
 							<p class="rp_original rp_definition">
-								Two <span class="definable" data-define="poly-bounded family of random variables">poly-bounded families of RV's</span> are <span class="definable">computationally indistinguishable</span> if, for all <span class="definable" data-define="poly-size family of circuits">poly-size families of circuits</span> \(C\), for all constants \(f&gt;0\) and all sufficiently large \(k\in N\),
+								Two <span class="definable" data-define="poly-bounded family of random variables">poly-bounded families of RV's</span> are <span class="definable" data-define="indistinguishable">computationally indistinguishable</span> if, for all <span class="definable" data-define="poly-size family of circuits">poly-size families of circuits</span> \(C\), for all constants \(f&gt;0\) and all sufficiently large \(k\in N\),
 							</p>
 							<p class="rp_definition">
 								$$|P(U,c,k)-P(V,C,k)|&lt;k^{-f}$$
@@ -333,15 +379,16 @@
 						<h2>Tm-games with Passive Adversaries</h2>
 						<span class="rp_definition_header" id="def2">Definition 2 - Turing machine game</span>
 						<p class="rp_original rp_definition">
-							A <span class="definable" data-define="Turing machine game">Tm-game</span> problem consists of a pair \((\bar{M},1^k)\), that is, the description of a Turing machine \(M\) and an integer \(k\), the security parameter, presented in unary.
+							A <span class="definable" data-define="Turing machine game">Tm-game</span> problem consists of a pair \((\bar{M},1^k)\), that is, the description of a <span class="definable">Turing machine</span> \(M\) and an integer \(k\), the security parameter, presented in unary.
 						</p>
 						<p class="rp_original">
-							Let us now make some simplifications that will expedite our exposition. Without loss of generality in our scenario, we assume that, when \((\bar{M},1^k)\) is the common input in a game network, all private inputs have the same length \(l\) and that \(T(l)\), the running time of \(M\) on inputs of size \(l\), is less than \(k\).
+							Let us now make some simplifications that will expedite our exposition. Without loss of generality in our scenario, we assume that, when \((\bar{M},1^k)\) is the common input in a <span class="definable">game network</span>, all private inputs have the same length \(l\) and that \(T(l)\), the running time of \(M\) on inputs of size \(l\), is less than \(k\).
 						</p>
-						<p class="rp_original">
-							Let \(S\in PDA\). We say that \(S\) is a <i>Tm-game solver for passive adversaries</i> if, for all Tm-game problems \((\bar{M},1^k)\) given as common input and for all (respective) private inputs \(x_1,\dots,x_n\),
+						<span class="rp_definition_header" id="def3">Definition 3 - Turing machine Game Solver for Passive Adversaries</span>
+						<p class="rp_original rp_definition">
+							Let <span class="equation" data-equation="PDA">\(S\in PDA\)</span>. We say that \(S\) is a <span class="definable" data-define="Turing machine game">Tm-game solver</span> for <span class="definable" data-define="passive adversary">passive adversaries</span> if, for all Tm-game problems \((\bar{M},1^k)\) given as common input and for all (respective) private inputs \(x_1,\dots,x_n\),
 						</p>
-						<ol class="rp_original">
+						<ol class="rp_original rp_definition">
 							<li value="1">
 								<i>(Agreement constraint)</i>
 								<p>
@@ -382,13 +429,14 @@
 						</p>
 					</section>
 					<section id="sec4">
+						<h2>Hints on How to Play Tm-games with Passive Adversaries</h2>
 						<section>
 							<p class="rp_original">
-								At a first glance enforcing both correctness and privacy constraints of a <span class="definable">Tm-game</span> appears easy only for special cases of \(M\), say the ones computing a constant function. Nonetheless,
+								At a first glance enforcing both correctness and privacy constraints of a <span class="definable" data-define="Turing machine game">Tm-game</span> appears easy only for special cases of \(M\), say the ones computing a constant function. Nonetheless,
 							</p>
 							<span class="rp_theorem_header" id="theorem1">Theorem 1</span>
 							<p class="rp_original rp_theorem">
-								If <span class="definable" data-define="trapdoor function">trapdoor functions</span> exist, there exists a Tm-game solver for <span class="definable" data-define="passive adversary">passive adversaries</span>.
+								If <span class="definable" data-define="trapdoor function">trapdoor functions</span> exist, there exists a <span class="definable" data-define="Turing machine game">Tm-game</span> solver for <span class="definable" data-define="passive adversary">passive adversaries</span>.
 							</p>
 							<p class="rp_original">
 								In this extended abstract we limit ourselves to give a few indications, in an informal manner, about the proof of the above theorem. 
@@ -397,13 +445,13 @@
 						<section id="sec4.1">
 							<h3>A New and General Oblivious Transfer Protocol</h3>
 							<p class="rp_original">
-								In <a href="#citation4"><span class="reference" data-citation="4">[4]</span></a>, Rabin proposes the beautiful notion of an <span class="definable">oblivious transfer</span>. This is a probabilistic polynomial-time algorithm that allows A(lice), who knows the prime factorization of an integer \(n\), to send it to B(ob), who knows just \(n\), so that B will receive \(n\)'s factorization with probability &frac12; and A does not know whether or not B received it. Clearly, Rabin's notion of an OT supposes that factoring is computationally hard. Under this assumption, he proposed a protocol that, if A and B are allowed to be at most <span class="definable" data-define="passive adversary">passive adversaries</span>, correctly implements an OT. This protocol, however, may not work (i.e. no longer possesses a proof of correctness) if A and B are allowed to be malicious. Using the interactive proof-systems of <a href="#citation1"><span class="reference" data-citation="1">[1]</span></a>, Fischer, Micali, Rackoff, and Wittenberg found<a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a> a protocol that correctly implements OT under the simple (and in this context minimal) assumption that factoring is hard. Rabin's OT has proved to be a very fruitful notion, as exemplified by various applications proposed by Blum.<a href="#citation6"><sup class="reference" data-citation="6">[6]</sup></a>
+								In <a href="#citation4"><span class="reference" data-citation="4">[4]</span></a>, Rabin proposes the beautiful notion of an <span class="definable">oblivious transfer</span>. This is a probabilistic polynomial-time algorithm that allows A(lice), who knows the prime factorization of an integer \(n\), to send it to B(ob), who knows just \(n\), so that B will receive \(n\)'s factorization with probability &frac12; and A does not know whether or not B received it. Clearly, Rabin's notion of an OT supposes that factoring is computationally hard. Under this assumption, he proposed a protocol that, if A and B are allowed to be at most <span class="definable" data-define="passive adversary">passive adversaries</span>, correctly implements an OT. This protocol, however, may not work (i.e. no longer possesses a proof of correctness) if A and B are allowed to be <span class="definable" data-define="malicious adversary">malicious</span>. Using the interactive proof-systems of <a href="#citation1"><span class="reference" data-citation="1">[1]</span></a>, Fischer, Micali, Rackoff, and Wittenberg found<a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a> a protocol that correctly implements OT under the simple (and in this context minimal) assumption that factoring is hard. Rabin's OT has proved to be a very fruitful notion, as exemplified by various applications proposed by Blum.<a href="#citation6"><sup class="reference" data-citation="6">[6]</sup></a>
 							</p>
 							<p class="rp_original">
 								A more general and useful notion of OT has been proposed by Even, Goldreich, and Lempel<a href="#citation7"><sup class="reference" data-citation="7">[7]</sup></a>, the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span>. In their framework, A has two messages, \(m_0\) and \(m_1\). By using a cryptosystem \(E\) she computes \(\sigma_0=E(m_0)\) and \(\sigma_1=E(m_1)\) and sends \(\sigma_0, \sigma_1\) to B. B chooses one of these encryptions, \(\sigma_i\). A one-out-of-two OT allows B to read the corresponding message \(m_i\), while A will not know which message B has read (whenever \(m_0\neq m_1\)). This notion achieves the right level of generality and is crucial to what follows. Even, Goldreich, and Lempel also proposed the first implementation of a one-out-of-two OT using public-key cryptosystems. Their protocol has the merit of having freed the implementation of an oblivious transfer from the algebraic setting to which it appeared to be confined. Their protocol, though, requires a quite strong set of assumptions even when the adversaries are only passive.
 							</p>
 							<p class="rp_original">
-								Below, we contribute a new protocol that correctly implements a <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> in presence of <span class="definable" data-define="passive adversary">passive adversaries</span>. The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span> suffices to prove the correctness of our protocol.
+								Below, we contribute a new protocol that correctly implements a one-out-of-two OT in presence of passive adversaries. The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span> suffices to prove the correctness of our protocol.
 							</p>
 							<section>
 								<h4>Trapdoor and One-Way Functions</h4>
@@ -416,7 +464,7 @@
 									<li>It is hard to invert \(f\) without knowing \(f\)'s trapdoor on a random element in \(f\)'s domain.</li>
 								</ul>
 								<p class="rp_original">
-									We can interpret the above by saying that a party A can randomly select a pair of permutations, \((f,f^{-1})\), inverses of each other. This will enable A to easily evaluate and invert \(f\); if not A publicizes \(f\) and keeps secret \(f^{-1}\), then inverting \(f\) will be hard for any other party. We may write \(f_k\) to emphasize that \(k\) is the security parameter of our permutation.
+									We can interpret the above by saying that a party A can randomly select a pair of permutations, \((f,f^{-1})\), inverses of each other. This will enable A to easily evaluate and invert \(f\); if now A publicizes \(f\) and keeps secret \(f^{-1}\), then inverting \(f\) will be hard for any other party. We may write \(f_k\) to emphasize that \(k\) is the security parameter of our permutation.
 								</p>
 								<p class="rp_original">
 									Trapdoor permutations are a special case of <span class="definable" data-define="one-way permutation">one-way permutations</span>. These are permutations enjoying the three properties above, except that we do not insist that the trapdoor information exists.
@@ -425,10 +473,10 @@
 							<section>
 								<h4>Random Bits in One-Way Permutations</h4>
 								<p class="rp_original">
-									Our <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> protocol makes use of the trapdoor functions \(f\) hiding a random bit \(B_f\). Here \(B_f\) is a polynomial-time computable Boolean function; the word "bit" is appropriate as \(B_f\) evaluates to 1 for half of the values in \(f\)'s domain.
+									Our <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> protocol makes use of the <span class="definable" data-define="trapdoor function">trapdoor functions</span> \(f\) hiding a random bit \(B_f\). Here \(B_f\) is a polynomial-time computable Boolean function; the word "bit" is appropriate as \(B_f\) evaluates to 1 for half of the values in \(f\)'s domain.
 								</p>
 								<p class="rp_original">
-									We say that \(\{B_f\}\) is a <span class="definable" data-define="hardcore bit">random bit</span> in a family \(\{f\}\) of trapdoor permutations if \(\forall\) predicting algorithm \(Alg\) that, on inputs \(f=f_k\) and \(f(x)\), outputs, in \(T(k)\) steps, a guess for \(B_f((x))\) that is correct with probability \(\epsilon, \exists Alg'\) that, on inputs \(f\) and \(f(x)\), outputs \(x\) in <span class="equation" data-equation="polytk">\(poly(T(k),\epsilon^{-1})\)</span> expected time.
+									We say that \(\{B_f\}\) is a <span class="definable" data-define="hardcore bit">random bit</span> in a family \(\{f\}\) of trapdoor permutations if \(\forall\) predicting algorithm \(Alg\) that, on inputs \(f=f_k\) and \(f(x)\), outputs, in \(T(k)\) steps, a guess for \(B_f((x))\) that is correct with probability \(\epsilon, \exists Alg'\) that, on inputs \(f\) and \(f(x)\), outputs \(x\) in \(poly(T(k),\epsilon^{-1})\) expected time.
 								</p>
 								<p class="rp_original">
 									Thus, \(f\) being trapdoor, no probabilistic, polynomial-time algorithm given \(f_k(x)\), can correctly predict \(B_{f_k}(x)\) with probability \(&gt;\frac{1}{2}+\frac{1}{poly(k)}\). We might as well flip a coin. Thus, for a one-way permutation \(f\), given \(f(x)\) the value of \(B_f(x)\) cannot be guessed in polynomial time essentially better than at random.
@@ -443,7 +491,7 @@
 									Without loss of generality, we assume that the two messages in the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> both consist of a single bit.
 								</p>
 								<p class="rp_original">
-									In our protocol, both \(A,B\in PA\). \(A\)'s inputs are a pair of bits \((b_0,b_1)\) and their corresponding pair of encryptions \((E(b_0),E(b_1))\) where \(E\) is a probabilistic encryption algorithm<a href="#citation1"><sup class="reference" data-citation="1">[1]</sup></a>. The pair \((E(b_0),E(b_1))\) is also an input to \(B\) who has an additional private input bit \(\alpha\). It is desired that, even if some party is a passive adversary, the following two properties hold:
+									In our protocol, both <span class="equation" data-equation="PA">\(A,B\in PA\)</span>. \(A\)'s inputs are a pair of bits \((b_0,b_1)\) and their corresponding pair of encryptions \((E(b_0),E(b_1))\) where \(E\) is a probabilistic encryption algorithm<a href="#citation1"><sup class="reference" data-citation="1">[1]</sup></a>. The pair \((E(b_0),E(b_1))\) is also an input to \(B\) who has an additional private input bit \(\alpha\). It is desired that, even if some party is a <span class="definable">passive adversary</span>, the following two properties hold:
 								</p>
 								<ol type="i" class="rp_original">
 									<li>\(B\) will read the bit \(b_\alpha\), but will not be able to predict the other bit \(b_\bar{\alpha}\) essentially better than at random.</li>
@@ -454,7 +502,7 @@
 								</p>
 								<ol class="rp_original">
 									<li value="1">
-										\(A\) randomly selects \((f,f^{-1})\), a trapdoor function of size \(k\) (having a random bit \(B_f\)) together with its inverse. She keeps \(f^{-1}\) secret and sends \(f\) to \(B\).
+										\(A\) randomly selects \((f,f^{-1})\), a <span class="definable">trapdoor function</span> of size \(k\) (having a random bit \(B_f\)) together with its inverse. She keeps \(f^{-1}\) secret and sends \(f\) to \(B\).
 									</li>
 									<li value="2">
 										\(B\) randomly selects \(x_0\) and \(x_1\) in \(f\)'s domain and computes \(z=f(x_0)\) and sends \(A\) the pair
@@ -472,10 +520,10 @@
 									First notice that \(A,B\in PA\) and that \(B\) correctly reads \(b_\alpha\). Property i) is satisfied as \(B\) only sees \(b_\bar{\alpha}\) exclusive-ored with a bit essentially 50-50 unpredictable to him. Thus he cannot correctly guess \(b_\bar{\alpha}\) essentially better than at random. Let us now show that ii) holds. As \(f\) is a permutation, randomly selecting \(x\) in \(f\)'s domain and computing \(f(x)\) yields a randomly selected element in \(f\)'s domain. Thus \((u,v)\) is a pair of randomly selected elements in \(f\)'s domain both if \(\alpha=0\) or \(\alpha=1\). As \((u,v)\) is the only message \(B\) sends to \(A\), not even with infinite computing power will \(A\) find out whether \(B\) has read \(b_0\) or \(b_1\).
 								</p>
 								<p class="rp_original">
-									Notice that the protocol makes use of the fact that the adversaries are at most <span class="definable" data-define="passive adversary">passive</span> in a crucial way. Should, in fact, \(B\) send \((u,v)=(f(x_0),f(x_1))\) in step 2, he will easily read both bits. Thus, we will make use of additional ideas to handle <span class="definable" data-define="malicious adversary">malicious adversaries.</span>
+									Notice that the protocol makes use of the fact that the adversaries are at most passive in a crucial way. Should, in fact, \(B\) send \((u,v)=(f(x_0),f(x_1))\) in step 2, he will easily read both bits. Thus, we will make use of additional ideas to handle <span class="definable" data-define="malicious adversary">malicious adversaries.</span>
 								</p>
 								<p class="rp_original">
-									Notice also that we never made use of the encryptions \(E(b_0)\) and \(E(b_1)\). \(b_0\) and \(b_1\) could have been bits in "\(A\)'s mind." We have added these encryptions for uniformity with the next protocol in which the two messages must appear encrypted. Another reason is that, when we will handle <span class="definable" data-define="malicious adversary">malicious adversaries</span>, we will need these encryptions to define the problem.
+									Notice also that we never made use of the encryptions \(E(b_0)\) and \(E(b_1)\). \(b_0\) and \(b_1\) could have been bits in "\(A\)'s mind." We have added these encryptions for uniformity with the next protocol in which the two messages must appear encrypted. Another reason is that, when we will handle malicious adversaries, we will need these encryptions to define the problem.
 								</p>
 								<p class="rp_original">
 									It is easy to see that, having solved the single-bit messages case, we have also solved the case of arbitrary messages \(m_0\) and \(m_1\) of equal, known length \(l\). In fact, we can repeat the above protocol \(l\) times so that, if \(\alpha\) is 0 (1), \(B\) is required at the \(i\)-th time to learn the \(i\)th bit of \(m_0 (m_1)\).
@@ -487,17 +535,17 @@
 							<h3>Strengthening Yao's Combined Oblivious Transfer</h3>
 							<section>
 								<p class="rp_original">
-									In <a href="#citation12"><span class="reference" data-citation="12">[12]</span></a>, Yao presented a protocol that we call <span class="definable">combined oblivious transfer</span> (COT). The protocol involves two parties A and B, respectively owning private inputs \(a\) and \(b\) and any chosen function \(g\). It possesses the following property: upon termination, A computes \(g(a,b)\), while B has no idea of what A has computed. If we think of \(a\) and \(b\) as secrets, B appeats to be obliviously transferring a prescribed combination of his and A's secret to A. Yao implemented COT based on the assumption that factoring is hard, (which yields, as shown by <a href="#citation6"><span class="reference" data-citation="6">[6]</span></a>) a particular trapdoor permutation. We strengthen his result by showing that COT can be correctly implemented based on any trapdoor permutation. We do this by using the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> of section 4.1 in Yao's scheme. Let us consider first the case where \(a\) and \(b\) are bits and \(g\) is the Boolean \(AND\). Consider figure 1.
+									In <a href="#citation12"><span class="reference" data-citation="12">[12]</span></a>, Yao presented a protocol that we call <span class="definable">combined oblivious transfer</span> (COT). The protocol involves two parties A and B, respectively owning private inputs \(a\) and \(b\) and any chosen function \(g\). It possesses the following property: upon termination, A computes \(g(a,b)\), while B has no idea of what A has computed. If we think of \(a\) and \(b\) as secrets, B appears to be obliviously transferring a prescribed combination of his and A's secret to A. Yao implemented COT based on the assumption that factoring is hard, (which yields, as shown by <a href="#citation6"><span class="reference" data-citation="6">[6]</span></a>) a particular <span class="definable">trapdoor permutation</span>. We strengthen his result by showing that COT can be correctly implemented based on any trapdoor permutation. We do this by using the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> of section 4.1 in Yao's scheme. Let us consider first the case where \(a\) and \(b\) are bits and \(g\) is the Boolean \(AND\). Consider figure 1.
 								</p>
 								<img src="../../img/81.fig1.jpg" alt="A COT AND-gate" class="rp_original" />
 								<p class="rp_original">
 									Here \(E_1,\dots,E_6\) are independently selected encryption algorithms, respectively having decryption keys \(D_1,\dots,D_6\). \(E_1\) and \(E_2\) label the first input-wire, \(E_3\) and \(E_4\) the second input-wire, and \(E_5\) and \(E_6\) the output-wire. Each row in the gate is formed by the encryption of two strings. \(m\) and \(n\) are two randomly selected strings whose bit-by-bit exclusive-or equals \(D_5\). \(p\) and \(q\) are two randomly selected strings whose xor equals \(D_6\); so are \(s\) and \(t\); so are \(u\) and \(v\). The 4 rows have been put in the gate in random order. \(E_1E_2\) and \(E_5E_6\) are publicly labelled by complementary bits. \(E_3\) and \(E_4\) are each secretly labelled by a bit; more precisely, \(E_3\) is SECRETLY labelled 0 with probability &frac12; and \(E_4\) is labelled with the complement of \(E_3\)'s bit. (This secrecy is pictorially indicated by drawing \(E_3\) and \(E_4\)'s bits by a dotted line.) Define the value of a wire to be 0 (1) if one ONLY possesses the decoding algorithm of encryption algorithm labelled 0 (1). Then figure 1 is an or-gate. For instance, assume that both the input-wires have value 0. That is, one possesses only \(D_1\) and \(D_4\). Then one is able to decrypt both entries only in the third row. By taking the xor of \(u\) and \(v\), one easily obtains \(D_6\), but has no idea what \(D_5\) may be. Thus the output-wire has value \(0=AND(0,0)\).
 								</p>
 								<p class="rp_original">
-									To COTransfer \(AND(a,b)\), B generates a <span class="definable" data-define="combined oblivious transfer">COT</span> AND-gate like in figure 1, keeping for himself all decoding algorithms and all the strings in the rows. Then he gives A the decoding algorithm of the second input-wire that corresponds to the value of \(b\), his own input. Notice that as the association between \(E_3,E_4\) and 0,1 is scret (and \(E_1,E_2,E_3,E_4\) enter symmetrically in the gate rows), this will not betray \(b\) at all. Now A will get either \(D_1\) or \(D_2\) according to the value of \(a\) by means of our <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span>. Thus, B will not know which algorithm she got. At this point A can easily compute the value of the output wire. Thus, she will be the only one to know \(AND(a,b)\).
+									To COTransfer \(AND(a,b)\), B generates a COT AND-gate like in figure 1, keeping for himself all decoding algorithms and all the strings in the rows. Then he gives A the decoding algorithm of the second input-wire that corresponds to the value of \(b\), his own input. Notice that as the association between \(E_3,E_4\) and 0,1 is scret (and \(E_1,E_2,E_3,E_4\) enter symmetrically in the gate rows), this will not betray \(b\) at all. Now A will get either \(D_1\) or \(D_2\) according to the value of \(a\) by means of our one-out-of-two OT. Thus, B will not know which algorithm she got. At this point A can easily compute the value of the output wire. Thus, she will be the only one to know \(AND(a,b)\).
 								</p>
 								<p class="rp_original">
-									It is trivial to build a <span class="definable" data-define="combined oblivious transfer">COT</span> NOT gate. Notice that B may also keep secret the corresponding between 0,1 and \(E_5,E_6\). 
+									It is trivial to build a COT NOT gate. Notice that B may also keep secret the corresponding between 0,1 and \(E_5,E_6\). 
 								</p>
 								<img src="../../img/81.fig2.jpg" alt="A COT NOT-gate" class="rp_original" />
 								<p class="rp_original">
@@ -511,7 +559,7 @@
 								Recall that a <span class="definable" data-define="Turing machine game">Tm-game</span> solver wants to compute \(M(x_1,\dots,x_n)\) while respecting the privacy constraint. We want to use <span class="definable" data-define="combined oblivious transfer">COT</span> as a subroutine to construct a Tm-solver. This does not appear to be straightforward. For instance, if two parties \(i\) and \(j\) use COT so that \(i\) will compute \(g(x_i,x_j)\) for some function \(g\), this would already be a violation of the privacy constraint. Recall also that the Tm-game solver has to be polynomial not only in \(M\)'s running time, but also in \(n\), the number of players.
 							</p>
 							<p class="rp_original">
-								We find a way out by making special use of a lemma of Barrington's<a href="#citation13"><sup class="reference" data-citation="13">[13]</sup></a> that simulates computation by composing permutations in \(S_5\), the symmetric group on 5 elements. The general picture is the following. First, transform the <span class="definable">Turing machine</span> \(M\) of a <span class="definable" data-define="Turing machine game">Tm-game</span> to an equivalent circuit \(C\) in a standard way. The Boolean inputs of \(C\) will be \(b_1^1,\dots,b_l^1,\dots,b_1^n,\dots,b_l^n\), the bits of the \(n\), \(l\)-bit long inputs of our parties. This circuit \(C\) is then transformed to <span class="definable">straight-line program</span> as in <a href="#citation13"><span class="reference" data-citation="13">[13]</span></a>. This straight-line program is essentially as long as \(C\) is big. In it,
+								We find a way out by making special use of a lemma of Barrington's<a href="#citation13"><sup class="reference" data-citation="13">[13]</sup></a> that simulates computation by composing permutations in \(S_5\), the symmetric group on 5 elements. The general picture is the following. First, transform the <span class="definable">Turing machine</span> \(M\) of a Tm-game to an equivalent circuit \(C\) in a standard way. The Boolean inputs of \(C\) will be \(b_1^1,\dots,b_l^1,\dots,b_1^n,\dots,b_l^n\), the bits of the \(n\), \(l\)-bit long inputs of our parties. This circuit \(C\) is then transformed to <span class="definable">straight-line program</span> as in <a href="#citation13"><span class="reference" data-citation="13">[13]</span></a>. This straight-line program is essentially as long as \(C\) is big. In it,
 							</p>
 							<ul class="rp_original">
 								<li>0,1 are encoded by two (specially selected) 5-permutations</li>
@@ -522,33 +570,33 @@
 								At the start, each party takes each of his private bits and encodes it by a 5-permutation \(\sigma\) as in <a href="#citation13"><span class="reference" data-citation="13">[13]</span></a>. Then he divides \(\sigma\). That is, he selects at random \(n-1\) 5-permutations \(\sigma_1,\dots,\sigma_{n-1}\) and gives the pair \((i,\sigma_i)\) to party \(i\) (possibly himself). He then sets \(\sigma_n=(\sigma_1\cdots\sigma_{n-1})^{-1}\cdot\sigma\) and gives \((n,\sigma_n)\) to party \(n\). Now, inductively, assume that each variable is divided among the parties. That is, for each variable \(\sigma\), each player \(i\) possesses an index permutation pair \((x,\sigma_x)\) so that \(\prod\limits_{x=1}^n\sigma_x=\sigma\) and, given only \(n-1\) pieces, \(\sigma\) cannot be guessed better than at random. We now want to show that each instruction can be performed (i.e. that each party can compute his individual piece of the result) respecting the privacy constraint. There are essentially 3 cases.
 							</p>
 							<p class="rp_original">
-								<i>Case 1</i>: The instruction is of the form \(\sigma\cdot c\), where \(\sigma\) is a variable and \(c\) a constant. By induction, each party has a piece of the form \((x,\sigma_x)\). Then the party owning the piece \((n,\sigma_n)\) sets his new piece to be \((n,\sigma_n\cdot c)\) and all other parties leave their pieces untouched. It is immediately check that the ordered product of the new pieces is \(\sigma\cdot c\) and that privacy has been preserved against \(n-1\) <span class="definable" data-define="passive adversary">passive adversaries</span>.
+								<i>Case 1</i>: The instruction is of the form \(\sigma\cdot c\), where \(\sigma\) is a variable and \(c\) a constant. By induction, each party has a piece of the form \((x,\sigma_x)\). Then the party owning the piece \((n,\sigma_n)\) sets his new piece to be \((n,\sigma_n\cdot c)\) and all other parties leave their pieces untouched. It is immediately checked that the ordered product of the new pieces is \(\sigma\cdot c\) and that privacy has been preserved against \(n-1\) <span class="definable" data-define="passive adversary">passive adversaries</span>.
 							</p>
 							<p class="rp_original">
 								<i>Case 2</i>: The instruction is of the form \(\sigma^{-1}\cdot c\) where, again, \(\sigma\) is a variable and \(c\) a constant. It will be enough to show how to compute pieces for \(\sigma^{-1}\) respecting the privacy constraint. To do this, if a party has a piece \((x,\sigma_x)\), he sets his new piece to be \((n-x+1, \sigma_x^{-1})\).
 							</p>
 							<p class="rp_original">
-								<i>Case 3</i>: the instruction is of the form \(\sigma\cdot\tau\), where both \(\sigma\) and \(\tau\) are variables. Then \(\sigma\cdot\tau=\sigma_1\cdots\sigma_n\cdot\tau_1\cdots\tau_n\), and assume for simplicity that party \(i\) possesses piece \(\sigma_i\) and \(\tau_i\). Unfortunately, party 1 cannot compute his piece of \(\sigma\cdot\tau\) by multiplying his own two pieces. In fact, they are \(n\) positions apart in the product and \(S_5\) is not commutative (a fact crucial in Barrington's argument). The idea will then consist of making "partial progress". That is, moving party 1's pieces closer together by "swapping" \(\sigma_n\) and \(\tau_1\). This can be correctly accomplised by giving party 1 a piece \(\tau_1'\) and party \(n\) a piece \(\sigma_n'\) so that \(\tau_1'\cdot\sigma_n'=\sigma_n\cdot\tau_1\). This way the product of the new (and newly ordered pieces) would remain \(\sigma\cdot\tau\). One way of doing this would be of having party 1 and party \(n\) tell each other \(\sigma_n\) and \(\tau_1\). However, this would violate the privacy constraint with respect to a set of \(n-1\) passive adversaries. Instead, we use <span class="definable" data-define="combined oblivious transfer">COT</span> in the following way. Party \(n\) randomly selects a 5-permutation \(\rho\). Consider now the function \(g\) such that, for 5-permutations \(x\),\(y\), and \(z\), \(g(x,(y,z))=w\) where \(w\cdot z=y\cdot x\). Let now party 1 (with the role of A and input \(a=\tau_1\)) and party \(n\) (with the role of B and input \(b=(\sigma_n,\rho)\)) play COT with the function \(g\). Set \(\tau_1'=g(a,b)\) and \(\sigma_n=\rho\). Then we have made the desired partial progress. In fact, not only the product of the new pieces is unaltered, but we have also respected the privacy constraint. Informally, party \(n\)'s new piece is a random 5-permutation selected by party \(n\) himself and thus cannot give him and information neither about party 1's old piece nor the new one; moreover the transference of \(g(a,b)\) is oblivious and thus cannot give party \(n\) any knowledge either. On the other side, party 1 is dealt a new piece \(g(\tau_1,(\sigma_n,\rho))\) and he knows \(\tau_1\). However, as for all \(x\) and \(y\), \(g(x,(y,\cdot))\) is injective on \(S_5\), and \(\rho\) has been randomly and secretly selected by party \(n\), als o party 1 does not get any knowledge that he did not possess before! Notice also that during this "swap" we did not create any other pieces. Thus, after \(n\) "swaps" the only two pieces of party 1 will be in the first two positions in the product and he can thus multiply them together. This product will be party 1's piece for the variable \(\sigma\cdot\tau\). It should be verified that the entire walk of party 1 \(\tau\)-piece towards the left preserves correctness and does not violate the privacy constraint. Essentially because a new, random piece is created at each step. This way, after \(O(n^2)\) "swaps", and in polynomial time, all parties receive their piece of \(\sigma\cdot\tau\).
+								<i>Case 3</i>: the instruction is of the form \(\sigma\cdot\tau\), where both \(\sigma\) and \(\tau\) are variables. Then \(\sigma\cdot\tau=\sigma_1\cdots\sigma_n\cdot\tau_1\cdots\tau_n\), and assume for simplicity that party \(i\) possesses piece \(\sigma_i\) and \(\tau_i\). Unfortunately, party 1 cannot compute his piece of \(\sigma\cdot\tau\) by multiplying his own two pieces. In fact, they are \(n\) positions apart in the product and \(S_5\) is not commutative (a fact crucial in Barrington's argument). The idea will then consist of making "partial progress". That is, moving party 1's pieces closer together by "swapping" \(\sigma_n\) and \(\tau_1\). This can be correctly accomplised by giving party 1 a piece \(\tau_1'\) and party \(n\) a piece \(\sigma_n'\) so that \(\tau_1'\cdot\sigma_n'=\sigma_n\cdot\tau_1\). This way the product of the new (and newly ordered pieces) would remain \(\sigma\cdot\tau\). One way of doing this would be of having party 1 and party \(n\) tell each other \(\sigma_n\) and \(\tau_1\). However, this would violate the privacy constraint with respect to a set of \(n-1\) passive adversaries. Instead, we use COT in the following way. Party \(n\) randomly selects a 5-permutation \(\rho\). Consider now the function \(g\) such that, for 5-permutations \(x\),\(y\), and \(z\), \(g(x,(y,z))=w\) where \(w\cdot z=y\cdot x\). Let now party 1 (with the role of A and input \(a=\tau_1\)) and party \(n\) (with the role of B and input \(b=(\sigma_n,\rho)\)) play COT with the function \(g\). Set \(\tau_1'=g(a,b)\) and \(\sigma_n=\rho\). Then we have made the desired partial progress. In fact, not only the product of the new pieces is unaltered, but we have also respected the privacy constraint. Informally, party \(n\)'s new piece is a random 5-permutation selected by party \(n\) himself and thus cannot give him and information neither about party 1's old piece nor the new one; moreover the transference of \(g(a,b)\) is oblivious and thus cannot give party \(n\) any knowledge either. On the other side, party 1 is dealt a new piece \(g(\tau_1,(\sigma_n,\rho))\) and he knows \(\tau_1\). However, as for all \(x\) and \(y\), \(g(x,(y,\cdot))\) is injective on \(S_5\), and \(\rho\) has been randomly and secretly selected by party \(n\), als o party 1 does not get any knowledge that he did not possess before! Notice also that during this "swap" we did not create any other pieces. Thus, after \(n\) "swaps" the only two pieces of party 1 will be in the first two positions in the product and he can thus multiply them together. This product will be party 1's piece for the variable \(\sigma\cdot\tau\). It should be verified that the entire walk of party 1 \(\tau\)-piece towards the left preserves correctness and does not violate the privacy constraint. Essentially because a new, random piece is created at each step. This way, after \(O(n^2)\) "swaps", and in polynomial time, all parties receive their piece of \(\sigma\cdot\tau\).
 							</p>
 							<p class="rp_original">
-								At the end of the <span class="definable">straight-line program</span>, for each output variable \(\gamma\), each party publicizes his own piece \((x,\gamma_x)\), the ordered product of these pieces is computed, and the output bit recovered so as to satisfy both the correctness and the privacy constraint. (A more formal argument will be given in the final paper.)
+								At the end of the straight-line program, for each output variable \(\gamma\), each party publicizes his own piece \((x,\gamma_x)\), the ordered product of these pieces is computed, and the output bit recovered so as to satisfy both the correctness and the privacy constraint. (A more formal argument will be given in the final paper.)
 							</p>
 						</section>
 					</section>
 					<section id="sec5">
 						<h2>Malicious Adversaries</h2>
 						<p class="rp_original">
-							The complexity of our <span class="definable" data-define="Turing machine game">Tm-game</span> solver greatly increases when up to half of the players is allowed to be malicious and can more powerfully collaborate to try to disrupt the correctness and the privacy constraints. We used essentially all the cryptographic tools developed in the last ten years in the (correct) hope that they would make possible protocol design. Also, the proof of its correctness is rather delicate and unsuitable for an abstract. We will give it in the final paper. Here we only indicate what making playable at Tm-game with <span class="definable">malicious adversaries</span> may <i>mean</i> and which general ideas are involved in our solution.
+							The complexity of our <span class="definable" data-define="Turing machine game">Tm-game</span> solver greatly increases when up to half of the players is allowed to be <span class="definable" data-define="malicious adversary">malicious</span> and can more powerfully collaborate to try to disrupt the correctness and the privacy constraints. We used essentially all the cryptographic tools developed in the last ten years in the (correct) hope that they would make possible protocol design. Also, the proof of its correctness is rather delicate and unsuitable for an abstract. We will give it in the final paper. Here we only indicate what making <span class="definable" data-define="purely playable game">playable</span> at Tm-game with malicious adversaries may <i>mean</i> and which general ideas are involved in our solution.
 						</p>
 						<p class="rp_original">
-							As in this case some of the parties may not follow their prescribed programs at all, it is necessary to clarify what a private input is. After all, what stops someone from pretending that his private input is different from what it actually is? To avoid this, we assume that the parties have established their private inputs by <span class="definable" data-define="commitment">announcing correct encodings</span> of them. Their inputs are <i>by definition</i> the unique decryption of their respective encodings. Moreover, it should be clear that seeking a solution to a <span class="definable" data-define="Turing machine game">Tm-game</span> problem makes sense only if the parties are "willing to play". If, say, one of them "commits suicide", carrying with himself what his private input was, there is very little one can do besides investing exponential time and break his encryption. However we can, loosely speaking, prove that:
+							As in this case some of the parties may not follow their prescribed programs at all, it is necessary to clarify what a private input is. After all, what stops someone from pretending that his private input is different from what it actually is? To avoid this, we assume that the parties have established their private inputs by <span class="definable" data-define="commitment">announcing correct encodings</span> of them. Their inputs are <i>by definition</i> the unique decryption of their respective encodings. Moreover, it should be clear that seeking a solution to a Tm-game problem makes sense only if the parties are "willing to play". If, say, one of them "commits suicide", carrying with himself what his private input was, there is very little one can do besides investing exponential time and break his encryption. However we can, loosely speaking, prove that:
 						</p>
 						<span class="rp_theorem_header" id="theorem2">Theorem 2</span>
 						<p class="rp_original rp_theorem">
-							Given \(n\) players willing to play, less than half of which are <span class="definable" data-define="malicious adversary">malicious</span>, all <span class="definable" data-define="Turing machine game">Tm-games</span> are playable.
+							Given \(n\) players willing to play, less than half of which are <span class="definable" data-define="malicious adversary">malicious</span>, all <span class="definable" data-define="Turing machine game">Tm-games</span> are <span class="definable" data-define="purely playable game">playable</span>.
 						</p>
 						<p class="rp_original">
-							The above term "willing to play" indicates a technical condition rather than a psychological one. Namely, having successfully completed the <span class="definable">engagement protocol</span>. After completing this protocol, all players can be forced to play any desired game. The engagement protocol consists of two phases.
+							The above term "willing to play" indicates a technical condition rather than a psychological one. Namely, having successfully completed the engagement protocol. After completing this protocol, all players can be forced to play any desired game. The engagement protocol consists of two phases.
 						</p>
 						<ol class="rp_original">
 							<li value="1">
@@ -559,13 +607,13 @@
 							</li>
 						</ol>
 						<p class="rp_original">
-							We stress that, while no one can be forced to complete the <span class="definable">engagement protocol</span> (so to become "willing to play"), no one can decide not to complete it because he received a better idea of what the result of the subsequent game may be. Completing the engagement protocol will not give any player (or any small enough group of players) any knowledge about the others' private inputs.
+							We stress that, while no one can be forced to complete the engagement protocol (so to become "willing to play"), no one can decide not to complete it because he received a better idea of what the result of the subsequent game may be. Completing the engagement protocol will not give any player (or any small enough group of players) any knowledge about the others' private inputs.
 						</p>
 						<p class="rp_original">
-							Phase 1 of the <span class="definable">engagement protocol</span> consists of a verifiable secret sharing in the sense of Awerbuch, Chor, Goldwasser, and Micali<a href="#citation14"><sup class="reference" data-citation="14">[14]</sup></a>. However, we contribute a new protocol both tolerating up to \(\frac{n}{2}\) <span class="definable" data-define="malicious adversary">malicious adversaries</span> and using any <span class="definable">trapdoor function</span> whatsoever. Phase 2 of the engagement protocol is the multi-party version of Blum's <span class="definable" data-define="coin flip">coin flipping</span> by telephone<a href="#citation6"><sup class="reference" data-citation="6">[6]</sup></a>. Despite the (deceptive) similarity with the verifiable secret sharing of phase 1, to implement phase 2 we must make use of a yet unpublished theorem (and algorithm) of ACGM.
+							Phase 1 of the engagement protocol consists of a verifiable secret sharing in the sense of Awerbuch, Chor, Goldwasser, and Micali<a href="#citation14"><sup class="reference" data-citation="14">[14]</sup></a>. However, we contribute a new protocol both tolerating up to \(\frac{n}{2}\) malicious adversaries and using any <span class="definable">trapdoor function</span> whatsoever. Phase 2 of the engagement protocol is the multi-party version of Blum's <span class="definable" data-define="coin flip">coin flipping</span> by telephone<a href="#citation6"><sup class="reference" data-citation="6">[6]</sup></a>. Despite the (deceptive) similarity with the verifiable secret sharing of phase 1, to implement phase 2 we must make use of a yet unpublished theorem (and algorithm) of ACGM.
 						</p>
 						<p class="rp_original">
-							We now give a bird's eye view of how to make any <span class="definable" data-define="Turing machine game">Tm-game</span> \(g\) playable despite <span class="definable" data-define="malicious adversary">malicious adversaries</span>. On input \(M,1^k\), we first run the <span class="definable">engagement protocol</span>, then the <span class="definable" data-define="passive adversary">passive-adversary</span> playable version of the Tm-game. Here, we require all parties to use, as their private inputs, the strings they shared in phase 1 of the engagement protocol and, as a source of randomness, the encrypted random bits each was dealt in phase 2. The key point is that, now, no malicious adversary can deviate from his prescribed program, and thus he becomes a simple passive adversary. In fact, he is required to prove, in <span class="definable" data-define="zero knowledge proof">zero-knowledge</span> (in the sense of the Goldwasser, Micali, and Rackoff<a href="#citation8"><sup class="reference" data-citation="8">[8]</sup></a>), that each message he sends is what he should have sent being honest, given his private input, his random choices, and the messages he received so far. (Here, an essential tool is our recent result that all <span class="definable">NP</span> languages possess zero-knowledge proofs<a href="#citation15"><sup class="reference" data-citation="15">[15]</sup></a>.) If a malicious party, frustrated at not being able to send messages according to a different program, decides to stop, his input and random bits will be reconstructed by the community who will compute his messages when necessary, without skewing the probability distribution of the final outcome.
+							We now give a bird's eye view of how to make any Tm-game \(g\) playable despite malicious adversaries. On input \(M,1^k\), we first run the engagement protocol, then the <span class="definable" data-define="passive adversary">passive-adversary</span> playable version of the Tm-game. Here, we require all parties to use, as their private inputs, the strings they shared in phase 1 of the engagement protocol and, as a source of randomness, the encrypted random bits each was dealt in phase 2. The key point is that, now, no malicious adversary can deviate from his prescribed program, and thus he becomes a simple passive adversary. In fact, he is required to prove, in <span class="definable" data-define="zero knowledge proof">zero-knowledge</span> (in the sense of the Goldwasser, Micali, and Rackoff<a href="#citation8"><sup class="reference" data-citation="8">[8]</sup></a>), that each message he sends is what he should have sent being honest, given his private input, his random choices, and the messages he received so far. (Here, an essential tool is our recent result that all <span class="definable">NP</span> languages possess zero-knowledge proofs<a href="#citation15"><sup class="reference" data-citation="15">[15]</sup></a>.) If a malicious party, frustrated at not being able to send messages according to a different program, decides to stop, his input and random bits will be reconstructed by the community who will compute his messages when necessary, without skewing the probability distribution of the final outcome.
 						</p>
 						<p class="rp_original">
 							We would like to stress our new use of <span class="definable" data-define="NP-complete">NP-completeness</span>. From being our most effective way to prove lower-bounds, it now becomes our most effective tool to construct correct protocols.
@@ -609,16 +657,16 @@
 								The new state consists of the cards currently possessed by each player, the sequence of cards in the deck, and which cards were discarded by player 1. \(K_1(\sigma_2)\) consists of the new hand of player 1 and the cards he just discarded.
 							</p>
 							<p class="rp_original">
-								Now it is the turn of player 2. He also does not know the current state \(\sigma_2\), he only knows \(K_2(\sigma_2)\). Based solely on this information, he selects his move, which updates the current state, and so on. After the prescribed number of moves, the <span class="definable">pay-off function</span> \(p\) is evaluated at the final state to compute the result of the game.
+								Now it is the turn of player 2. He also does not know the current state \(\sigma_2\), he only knows \(K_2(\sigma_2)\). Based solely on this information, he selects his move, which updates the current state, and so on. After the prescribed number of moves, the pay-off function \(p\) is evaluated at the final state to compute the result of the game.
 							</p>
 							<p class="rp_annotation">
 								In poker the result consists of who has won, how much he has won, and how much everyone else has individually lost.
 							</p>
 							<p class="rp_original">
-								Note that a <span class="definable" data-define="Turing machine game">Tm-game</span> is indeed a game in which the initial state is empty and each player moves only once. State \(\sigma_i\) consists of the sequence of the first \(i\) moves. Each player has no knowledge about the current state and chooses his move to be the string \(x_i\), his own private input. The <span class="definable">pay-off function</span> \(M\) is then run on \(\sigma_n\). (Having probabilistic machines running on the final state, rather than deterministc ones, is a quite natural generalization.)
+								Note that a <span class="definable" data-define="Turing machine game">Tm-game</span> is indeed a game in which the initial state is empty and each player moves only once. State \(\sigma_i\) consists of the sequence of the first \(i\) moves. Each player has no knowledge about the current state and chooses his move to be the string \(x_i\), his own private input. The pay-off function \(M\) is then run on \(\sigma_n\). (Having probabilistic machines running on the final state, rather than deterministc ones, is a quite natural generalization.)
 							</p>
 							<p class="rp_original">
-								From this brief description it is immediately apparent that, by properly selecting the <span class="definable" data-define="knowledge function">knowledge functions</span>, one can enforce any desired  "privacy" constraints in a game.
+								From this brief description it is immediately apparent that, by properly selecting the knowledge functions, one can enforce any desired  "privacy" constraints in a game.
 							</p>
 						</section>
 						<section id="sec6.2">
@@ -630,10 +678,10 @@
 								Now, the fact that, in general, an \(n\)-person game requires \(n+1\) people to be played, not only is grotesque, but also diminishes the otherwise wide applicability of game theory! In fact, in real-life situations, we may simply not have any trusted parties, whether persons or public computers. Recently, complaints have been raised about financial transactions in the stock market. The complaints were about the fact that some parties were enjoying knowledge that was considered "extra" before choosing their move, i.e. before buying stocks. Just another game, the stock market, but one in which you may desire trusting no one!
 							</p>
 							<p class="rp_original">
-								We are thus led to consider the notion of a <span class="definable" data-define="purely playable game">(purely) playable</span> game. This is an \(n\)-person game that can be implemented by the \(n\) players without invoking any <span class="definable" data-define="trusted party">trusted parties</span>. In general, however, given the specification of a game with complicated <span class="definable" data-define="knowledge function">knowledge functions</span>, it is not at all easy to decide whether it is playable in some meaningful way. Here, among the "meaningful ways", we also include non-mathematical methods. Yet the decision may still not be easy.
+								We are thus led to consider the notion of a <span class="definable" data-define="purely playable game">(purely) playable</span> game. This is an \(n\)-person game that can be implemented by the \(n\) players without invoking any trusted parties. In general, however, given the specification of a game with complicated <span class="definable" data-define="knowledge function">knowledge functions</span>, it is not at all easy to decide whether it is playable in some meaningful way. Here, among the "meaningful ways", we also include non-mathematical methods. Yet the decision may still not be easy.
 							</p>
 							<p class="rp_original">
-								Poker, for instance, has simple enough <span class="definable" data-define="knowledge function">knowledge functions</span> (i.e. privacy constraints) that makes it playable in a "physical" way. In it, we use cards with cards with equal "back" and "opaque", tables whose top does not reflect light too much, we shuffle the deck "a lot", and we hand cards "facing down". All this is satisfactory as, in our physical model (the world), we only see along straight lines. However, assume we define NEWPOKER as follows. A player may select his move not only based on his own hand, but also on the knowledge of whether, combining the current hands of all players, one may form a <span class="definable" data-define="royal flush">royal flush</span>. NEWPOKER is certainly a game in the Von Neumann framework, but it is no longer apparent whether any physical realization of the game exists, particularly if some of the players may be cheaters.
+								Poker, for instance, has simple enough knowledge functions (i.e. privacy constraints) that makes it playable in a "physical" way. In it, we use cards with cards with equal "back" and "opaque", tables whose top does not reflect light too much, we shuffle the deck "a lot", and we hand cards "facing down". All this is satisfactory as, in our physical model (the world), we only see along straight lines. However, assume we define NEWPOKER as follows. A player may select his move not only based on his own hand, but also on the knowledge of whether, combining the current hands of all players, one may form a <span class="definable" data-define="royal flush">royal flush</span>. NEWPOKER is certainly a game in the Von Neumann framework, but it is no longer apparent whether any physical realization of the game exists, particularly if some of the players may be cheaters.
 							</p>
 							<p class="rp_original">
 								This is what we perceive lacking in game theory: the attention to the notion of playability. At this point, a variety of good questions naturally arises:
@@ -753,7 +801,7 @@
 						A. Yao, <i>How to Generate and Exchange Secrets</i>, Proc. 27th STOC, 1986, pp. 162-167
 					</li>
 					<li id="citation13">
-						D. Barrington, <i>Bounded-Width Branching Programs Recognize Exactly THose Languages in NC<sup>1</sup></i>, Proc. 18th STOC, 1986 pp 1-5
+						D. Barrington, <i>Bounded-Width Branching Programs Recognize Exactly Those Languages in NC<sup>1</sup></i>, Proc. 18th STOC, 1986 pp 1-5
 					</li>
 					<li id="citation14">
 						B. Chor, S. Goldwasser, S. Micali, and B. Awerbuch, <i>Verifiable Secret Sharing and Achieving Simultaneity in the Presence of Faults</i>, Proc. 26th FOCS, 1985, pp. 383-395.

@@ -27,7 +27,6 @@ var researchInfo = [
 	{authors:["Yehuda Lindell"], title:"General Composition and Universal Composability in Secure Multi-Party Computation", year:2003, id:21, length:30, tags:["Unsorted"]},
 	{authors:["Ronald Cramer","Ivan Damgård", "Ueli Maurer"], title:"General Secure Multi-Party Computation from and Linear Secret-Sharing Scheme", year:2000.5, id:22, length:19, tags:["Unsorted"]},
 	{authors:["Boaz Barak","Amit Sahai"], title:"How To Play Almost Any Mental Game Over The Net - Concurrent Composition via Super-Polynomial Simulation", year:2005, id:23, length:50, tags:["Unsorted"]},
-	{authors:["Oded Goldreich","Silvio Micali", "Avi Wigderson"], title:"How to Solve any Protocol Problem", year:1986, id:24, length:10, tags:["Unsorted"]},
 	
 	{authors:["Claudio Orlandi"], title:"Is Multiparty Computation Any Good In Practice?", year:2011, id:25, length:6, tags:["Unsorted"]},
 	{authors:["Yehuda Lindell"], title:"Lower Bounds and Impossibility Results for Concurrent Self Composition", year:2005, id:26, length:45, tags:["Unsorted"]},
@@ -98,4 +97,5 @@ var researchInfo = [
 	
 	{authors:["Ronald Cramer","Ivan Damgård", "Jesper Buus Nielsen"], title:"Multiparty Computation, an Introduction", year:2009, id:80, length:83, tags:["Unsorted"]},
 	{authors:["Oded Goldreich","Silvio Micali", "Avi Wigderson"], title:"How To Play Any Mental Game", year:1987, hasPage:true, id:81, length:12, tags:["Unsorted"]}
+	//24
 ];
