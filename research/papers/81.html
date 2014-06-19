@@ -49,11 +49,18 @@
 				}
 			}
 
-			self_def["computational indistinguishability"] = "<a href=\"#def1\">Definition 1</a></p><p class=\"gl_definition\">Informally, groups of random variables are indistinguishable from each other when large groups of them can't be differentiated consistently.</p>";
+			self_def["computational indistinguishability"] = "<a href=\"#def1\">Definition 1</a></p><p class=\"gl_definition\">Informally, groups of random variables are indistinguishable from each other when large groups of them can't be differentiated consistently.";
 			self_def["dynamic adversary"] = "A good machine can choose, during the run of the protocol, to become an adversary.";
+			self_def["engagement protocol"] = "A protocol to perform before playing a Tm-game that will 'lock in' players and force them to play the game. If they stop playing, the other players in the game can team up in order to perfectly simulate that player's interactions, assuming a majority of the original players is still playing.";
 			self_def["game network"] = "A network of \\(n\\) interacting polynomial-time Turing machines";
+			self_def["knowledge function"] = "A function \\(K_i\\) that takes a state in a game \\(\\sigma\\) and returns all information that player \\(i\\) knows during that state.";
+			self_def["one-out-of-two oblivious transfer"] = "Alice has two messages, \\(m_0\\) and \\(m_1\\). By using a cryptosystem \\(E\\) she computes \\(\\sigma_0=E(m_0)\\) and \\(\\sigma_1=E(m_1)\\) and sends \\(\\sigma_0, \\sigma_1\\) to Bob. Bob chooses one of these encryptions, \\(\\sigma_i\\). A one-out-of-two OT allows Bob to read the corresponding message \\(m_i\\), while Alice will not know which message Bob has read (whenever \\(m_0\\neq m_1\\)).";
+			self_def["pay-off function"] = "A function \\(p\\) that takes in the final state of a game and returns the outcome of the game based on that state. As an example, the pay-off function for poker takes in the state of everyone's hands after the last turn is played, and would return information like who won, how much they won, and how much everyone else lost.";
 			self_def["poly-bounded family of random variables"] = "A family \\(U=\\{U_k\\}\\) such that, for some constant \\(e&gt;0\\), all RVs \\(U_k\\in U\\) assign positive probability only to strings whose length is exactly \\(k^e\\).";
 			self_def["poly-size family of circuits"] = "A family \\(C=\\{C_k\\}\\) of Boolean circuits \\(C_k\\) with one Boolean output such that, for some constants \\(e,d&gt;0\\), all \\(C_k\\in C\\) have at most \\(k^e\\) gates and \\(k^d\\) Boolean inputs.";
+			self_def["purely playable game"] = "An \\(n\\)-person game that can be implemented by the \\(n\\) players without invoking any <span class=\"definable\" data-define=\"trusted party\">trusted parties</span>.";
+			self_def["royal flush"] = "For those of you who don't play poker, a royal flush is the highest hand in poker (with no jokers) and consists of an Ace, King, Queen, Jack, and 10, all of the same suit.";
+			self_def["Turing machine game"] = "<a href=\"#def2\">Definition 2</a></p><p class=\"gl_definition\">A Tm-game problem consists of a pair \\((\\bar{M},1^k)\\), that is, the description of a <span class=\"definable\">Turing machine</span> \\(M\\) and an integer \\(k\\), the security parameter, presented in unary. \\(n\\) parties, respectfully and individually owning secret inputs \\(x_1,\\dots,x_n\\) would like to correctly run \\(M(x_1,\\dots,x_n)\\) without revealing (to the other players) more about the \\(x_i\\)'s than is already contained in the output of the Turing machine itself.";
 			//-->
         </script>
     </head>
@@ -83,7 +90,7 @@
                     <span class="rp_title">How to Play Any Mental Game or A Completeness Theorem for Protocols with Honest Majority</span>
                     <span class="rp_info">1987
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="rp_author" href="../authors/odedgoldreich.html">Oded Goldreich</a> <a class="rp_author" href="../authors/authorpage.html">Silvio Micali</a> <a class="rp_author" href="../authors/authorpage.html">Avi Wigderson</a></span>
+                        <a class="rp_author" href="../authors/goldreich.html">Oded Goldreich</a> <a class="rp_author" href="../authors/micali.html">Silvio Micali</a> <a class="rp_author" href="../authors/wigderson.html">Avi Wigderson</a></span>
 						
                     <div class="main_toc">
                         <h4 style="color:#333333">Table of Contents</h4>
@@ -98,7 +105,7 @@
 									<li><a href="#a_ref">Referencing This Paper</a></li>
 								</ol>
 							</li>
-                            <li><a href="#_B">Annotated Paper</a></li>
+                            <li><a href="#_B">Annotated Extended Abstract</a></li>
                         </ol>
                     </div>
 					
@@ -130,10 +137,13 @@
 						<p class="rp_definition">
 							$$|P(U,c,k)-P(V,C,k)|&lt;k^{-f}$$
 						</p>
+						<a href="#def2"><span class="rp_definition_header">Definition 2 - Turing machine game</span></a>
+						<p class="rp_original rp_definition">
+							A <span class="definable" data-define="Turing machine game">Tm-game</span> problem consists of a pair \((\bar{M},1^k)\), that is, the description of a <span class="definable">Turing machine</span> \(M\) and an integer \(k\), the security parameter, presented in unary. \(n\) parties, respectfully and individually owning secret inputs \(x_1,\dots,x_n\) would like to correctly run \(M(x_1,\dots,x_n)\) without revealing (to the other players) more about the \(x_i\)'s than is already contained in the output of the Turing machine itself.
+						</p>
 					</section>
 					<section id="a_theorems">
 						<h2>Theorems</h2>
-						<p class="rp_original">Some general definitions used by several theorems</p>
 						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
 						<p class="rp_original rp_theorem">
 							If <span class="definable" data-define="trapdoor function">trapdoor functions</span> exist, there exists a Tm-game solver for <span class="definable" data-define="passive adversary">passive adversaries</span>.
@@ -321,8 +331,9 @@
 					</section>
 					<section id="sec3">
 						<h2>Tm-games with Passive Adversaries</h2>
-						<p class="rp_original">
-							A <span class="definable">Tm-game problem</span> consists of a pair \((\bar{M},1^k)\), that is, the description of a Turing machine \(M\) and an integer \(k\), the security parameter, presented in unary.
+						<span class="rp_definition_header" id="def2">Definition 2 - Turing machine game</span>
+						<p class="rp_original rp_definition">
+							A <span class="definable" data-define="Turing machine game">Tm-game</span> problem consists of a pair \((\bar{M},1^k)\), that is, the description of a Turing machine \(M\) and an integer \(k\), the security parameter, presented in unary.
 						</p>
 						<p class="rp_original">
 							Let us now make some simplifications that will expedite our exposition. Without loss of generality in our scenario, we assume that, when \((\bar{M},1^k)\) is the common input in a game network, all private inputs have the same length \(l\) and that \(T(l)\), the running time of \(M\) on inputs of size \(l\), is less than \(k\).
@@ -389,7 +400,7 @@
 								In <a href="#citation4"><span class="reference" data-citation="4">[4]</span></a>, Rabin proposes the beautiful notion of an <span class="definable">oblivious transfer</span>. This is a probabilistic polynomial-time algorithm that allows A(lice), who knows the prime factorization of an integer \(n\), to send it to B(ob), who knows just \(n\), so that B will receive \(n\)'s factorization with probability &frac12; and A does not know whether or not B received it. Clearly, Rabin's notion of an OT supposes that factoring is computationally hard. Under this assumption, he proposed a protocol that, if A and B are allowed to be at most <span class="definable" data-define="passive adversary">passive adversaries</span>, correctly implements an OT. This protocol, however, may not work (i.e. no longer possesses a proof of correctness) if A and B are allowed to be malicious. Using the interactive proof-systems of <a href="#citation1"><span class="reference" data-citation="1">[1]</span></a>, Fischer, Micali, Rackoff, and Wittenberg found<a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a> a protocol that correctly implements OT under the simple (and in this context minimal) assumption that factoring is hard. Rabin's OT has proved to be a very fruitful notion, as exemplified by various applications proposed by Blum.<a href="#citation6"><sup class="reference" data-citation="6">[6]</sup></a>
 							</p>
 							<p class="rp_original">
-								A more general and useful notion of OT has been proposed by Even, Goldreich, and Lempel<a href="#citation7"><sup class="reference" data-citation="7">[7]</sup></a>, the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span>. In their framwork, A has two messages, \(m_0\) and \(m_1\). By using a cryptosystem \(E\) she computes \(\sigma_0=E(m_0)\) and \(\sigma_1=E(m_1)\) and sends \(\sigma_0, \sigma_1\) to B. B chooses one of these encryptions, \(\sigma_i\). A one-out-of-two OT allows B to read the corresponding message \(m_i\), while A will not know which message B has read (whenever \(m_0\neq m_1\). This notion achieves the right level of generality and is crucial to what follows. Even, Goldreich, and Lempel also proposed the first implementation of a one-out-of-two OT using public-key cryptosystems. Their protocol has the merit of having freed the implementation of an oblivious transfer from the algebraic setting to which it appeared to be confined. Their protocol, though, requires a quite strong set of assumptions even when the adversaries are only passive.
+								A more general and useful notion of OT has been proposed by Even, Goldreich, and Lempel<a href="#citation7"><sup class="reference" data-citation="7">[7]</sup></a>, the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span>. In their framework, A has two messages, \(m_0\) and \(m_1\). By using a cryptosystem \(E\) she computes \(\sigma_0=E(m_0)\) and \(\sigma_1=E(m_1)\) and sends \(\sigma_0, \sigma_1\) to B. B chooses one of these encryptions, \(\sigma_i\). A one-out-of-two OT allows B to read the corresponding message \(m_i\), while A will not know which message B has read (whenever \(m_0\neq m_1\)). This notion achieves the right level of generality and is crucial to what follows. Even, Goldreich, and Lempel also proposed the first implementation of a one-out-of-two OT using public-key cryptosystems. Their protocol has the merit of having freed the implementation of an oblivious transfer from the algebraic setting to which it appeared to be confined. Their protocol, though, requires a quite strong set of assumptions even when the adversaries are only passive.
 							</p>
 							<p class="rp_original">
 								Below, we contribute a new protocol that correctly implements a <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> in presence of <span class="definable" data-define="passive adversary">passive adversaries</span>. The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span> suffices to prove the correctness of our protocol.
