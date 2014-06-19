@@ -75,4 +75,9 @@ ol.rp_theorem, ol.rp_definition {
     width:85%;
 }
 
+img.rp_original {
+	margin:10px auto;
+	display:block;
+}
+
 
