@@ -2,6 +2,7 @@ window.addEventListener("load", initResearchSection, true);
 
 function initResearchSection()
 {
+	var to = location.hash;
 	var authorSection = document.getElementById("researchByAuthor");
 	var titleSection = document.getElementById("researchByTitle");
 	var yearSection = document.getElementById("researchByYear");
@@ -19,6 +20,7 @@ function initResearchSection()
 	if(tagSection)
 		for(var child in tagSection.childNodes)
 			sortChildren(tagSection.childNodes.item(child));
+	location.hash = to;
 }
 
 function createSection(authorSection,titleSection,yearSection,tagSection)
@@ -37,6 +39,7 @@ function createSection(authorSection,titleSection,yearSection,tagSection)
                 else str += "</span>";
                 str += "<br /><span class=\"rl_year\">" + paper.year + "</span>" + authorsOf(paper, 0);
                 str += "<div class=\"rl_length\">" + paper.length + " pages</div>";
+				str += "<div class=\"rl_abstract\"><h5 style=\"margin:0px 0px;color:#222222;\">Abstract</h5>" + paper.abstractText + "</div>";
 		researchPiece.innerHTML = str;
                 
 		if(authorSection)
@@ -68,21 +71,28 @@ function authorsOf(paper, from)
 	}
 }
 
+function lastFirst(str)
+{
+	var pos = str.lastIndexOf(" ");
+	if(pos == -1) return str;
+	else return removeSpaces(str.substring(pos+1)+str.substring(0,pos));
+}
+
 function addToAuthors(paper, section, node)
 {
 	for(var i = 0; i < paper.authors.length; i++)
 	{
-		var authorSub = document.getElementById("research:author:" + paper.authors[i]);
+		var authorSub = document.getElementById("research:author:" + lastFirst(paper.authors[i]));
 		if(!authorSub)
 		{
 			var newAuthorDiv = document.createElement("div");
-			newAuthorDiv.id = "research:author:" + paper.authors[i];
+			newAuthorDiv.id = "research:author:" + lastFirst(paper.authors[i]);
 			newAuthorDiv.innerHTML = "<h2 class=\"rl_heading\">" + paper.authors[i] + "</h2>";
 			section.appendChild(newAuthorDiv);
 			authorSub = newAuthorDiv;
 		}
 		var addnode = node.cloneNode(true);
-		addnode.id = "papers:author:" + paper.authors[i] + ":" + paper.year + ":" + paper.id;
+		addnode.id = "papers:author:" + lastFirst(paper.authors[i]) + ":" + paper.year + ":" + paper.id;
 		authorSub.appendChild(addnode);
 	}
 }
@@ -91,7 +101,7 @@ function addToTags(paper, section, node)
 {
 	for(var i = 0; i < paper.tags.length; i++)
 	{
-		var tagSub = document.getElementById("research:tag:" + paper.tags[i]);
+		var tagSub = document.getElementById("research:tag:" + removeSpaces(paper.tags[i]));
 		if(!tagSub)
 		{
 			var newTagDiv = document.createElement("div");
