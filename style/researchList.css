@@ -16,7 +16,7 @@
 	margin-left:5px;
 	margin-right:20px;
 	color:#555555;
-        font-style:italic;
+    font-style:italic;
 }
 
 .rl_authors {
@@ -42,4 +42,26 @@
     margin:auto 5px auto 0px;
     font-size:8pt;
     color:#777777;
+}
+
+div.rl_abstract {
+	width:80%;
+	color:#444444;
+	font-size:10pt;
+	margin:0px 10% 10px auto;
+	max-height:1.5em;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	transition: all 1s ease;
+	overflow:hidden;
+	border-bottom:1px solid #444444;
+}
+
+div.rl_abstract:hover {
+	max-height:500px;
+	overflow:scroll-y;
+	border-bottom:0;
+	background-color:#EEECD5;
 }
