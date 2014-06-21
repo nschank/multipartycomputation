@@ -8,22 +8,28 @@ function addEquationListeners()
             var elem = elements.item(i);
             var num = elem.getAttribute("data-equation");
             if(num !== null)
-		addDOME(elem, num);
+				addDOME(elem, num);
     }
 }
 
 function addDOME(equation,id)
 {
-	var block = document.createElement("div");
-	block.className="equationBlock";
+	var block = document.getElementById("equationBlock" + id);
 	
-	block.innerHTML += "<h2>Equation Info</h2>";
-	block.innerHTML += "<span class=\"equationInfo\">" + fill(id) + "</span>";
-	block.innerHTML += "<p class=\"equationhelp\">For more help reading equations like these, visit our <a href=\"equations.html\">equations page</a></p>";
-	document.body.appendChild(block);
-	block.addEventListener('mouseover',keepOpen(block));
-	block.addEventListener('mouseout',maybeClose(block));
+	if(block === null)
+	{
+		block = document.createElement("div");
+		block.className="equationBlock";
+		block.id = "equationBlock"+id;
+		
+		block.innerHTML += "<h2>Equation Info</h2>";
+		block.innerHTML += "<span class=\"equationInfo\">" + fill(id) + "</span>";
+		block.innerHTML += "<p class=\"equationhelp\">For more help reading equations like these, visit our <a href=\"equations.html\">equations page</a></p>";
+		document.body.appendChild(block);
+		block.addEventListener('mouseover',keepOpen(block));
+		block.addEventListener('mouseout',maybeClose(block));
         window.addEventListener('scroll', definitelyClose(block));
+	}
         equation.addEventListener('mouseover',mouseOverListener(equation,block));
 	equation.addEventListener('mouseout',mouseOutListener(equation,block));
 }
