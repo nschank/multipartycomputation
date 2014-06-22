@@ -165,8 +165,33 @@
 						</p>
 					</section>
                     <section id="sec1">
+						<h2>Introduction</h2>
                         <p class="rp_original">
 							A <i>protocol</i> \(M=(M_A,M_B)\) is a pair of communicating probabilistic <span class="definable" data-define="Turing machine">Turing machines</span> each with a special "send-receive" tape. Given inputs of the form \((n,i_A)\) and \((n,i_B)\), the two machines will alternately send and receive message strings using the send-receive tapes; each machine will perform computation as a standard Turing machine after receiving a message string, including the computation of the next message to be sent. Eventually both machines half within a number of steps bounded by some polynomial in \(n\), leaving strings \(u_A\) and \(u_B\) on the output tapes. For a detailed description, see for example <a href="#citation1"><span class="reference" data-citation="1">[1]</span></a><a href="#citation2"><span class="reference" data-citation="2">[2]</span></a>; in our case we allow each machine to have their own private input tape. For any run \(\sigma\) of the protocol, let <span class="equation" data-equation="delta">\(\Delta_A(\sigma)\)</span> denote the <i>history</i> of the run from A's view, i.e. a sequence of the instantaneous descriptions of \(M_A\); similarly <span class="equation" data-equation="delta">\(\Delta_B(\sigma)\)</span> denote the history of this run from B's view.
+						</p>
+						<p class="rp_original">
+							The class of problems we are interested in are as follows. Given inputs \((n,i_A)\) and \((n,i_B)\), where \((i_A,i_B)\) is a random pair of strings distributed according to a probability distribution \(h_n\) over \(\{0,1\}^*\times\{0,1\}^*\), we wish to design a protocol \(\mathbb(M)=(M_A,M_B)\) such that the outputs \((u_A,u_B)\) are distributed according to a certain probability distribution \(w_{n,i_A,i_B}\) over \(\{0,1\}^*\times\{0,1\}^*\). The sequence of distributions \((h_1,h_2,\dots,h_n,\dots)\) is assumed to be a <i>polynomial ensemble</i> in the sense that there is a probabilistic Turing machine which, given input \(n\), will generate in time polynomial in \(n\) a random string \(x\) with a distribution indistinguishable computationally from \(h_n\); similarly we assume that \(w_{n,i_A,i_B}\) is a polynomial ensemble in that a random sample point can be generated in time polynomial in \(n\), when the parameters \(n,i_A,i_B\) have been given. Let us call this a <i>(two-party) interactive computational problem</i> \(\langle h_n,w_n\rangle\). OF special interest is the case when the probability distribution \(w_{n,i_A,i_B}\) is nonzero only at one point, call it \((f_n(i_A,i_B),g_n(i_A,i_B))\), in which case we can regard the problem as the evaluation of a pair of functions \(f_n(i_A,i_B),g_n(i_A,i_B)\); write it as \(\langle h_n,(f_n,g_n)\rangle\).
+						</p>
+						<p class="rp_original">
+							In addition to the <i>validity</i> requirement above, we would like the protocol to have certain <i>privacy</i> and <i>fairness</i> properties. Roughly, "privacy" means that if A behaves according to the protocol, then B will have no more information about the values of \(i_A,u_A\) than in the situation where an oracle does the computation for B and just hands B a value \(u_B\). Classical examples where privacy is the main concern include <span class="definable">oblivious transfer</span><a href="#citation3"><sup class="reference" data-citation="3">[3]</sup></a><a href="#citation4"><sup class="reference" data-citation="4">[4]</sup></a>, <span class="definable" data-define="coin flip">coin tossing</span><a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a><a href="#citation6"><sup class="reference" data-citation="6">[6]</sup></a>, mental poker<a href="#citation7"><sup class="reference" data-citation="7">[7]</sup></a><a href="#citation8"><sup class="reference" data-citation="8">[8]</sup></a>. A general study of this problem is given by Yao<a href="#citation9"><sup class="reference" data-citation="9">[9]</sup></a><a href="#citation10"><sup class="reference" data-citation="10">[10]</sup></a>. A related problem is the <i>interactive proof system</i><a href="#citation1"><sup class="reference" data-citation="1">[1]</sup></a> in which player A wishes to convince player B that a string \(\tau\) is in a certain language L. Recently, Goldreich, Micali, and Wigderson<a href="#citation11"><sup class="reference" data-citation="11">[11]</sup></a> proved that, for players, with polynomial-time computing power, an language in <span class="definable">NP</span> has a <i>minimum knowledge interactive proof</i>, assuming the existence of suitable <span class="definable" data-define="one-way function">one-way functions</span>. This latter problem is closely related to, in our formulation, the case of computing a pair of functions \(f_n(i_A,i_B),g_n(i_A,i_B)\), where \(i_A=(s,\tau), i_B=\tau, g_n(i_A,i_B)=1\) if and only if \(s\) is a short <i>proof</i> for \(t\in L\), and \(f_n(i_A,i_B)\equiv 1\).
+						</p>
+						<p class="rp_original">
+							The "fairness" requirement means that a cheater should not be able to obtain the desired output while denying the other party to find the proper output. The problem of exchanging secrets<a href="#citation12"><sup class="reference" data-citation="12">[12]</sup></a><a href="#citation13"><sup class="reference" data-citation="13">[13]</sup></a><a href="#citation14"><sup class="reference" data-citation="14">[14]</sup></a> has this requirement as its main concern.
+						</p>
+						<p class="rp_original">
+							In this paper, we will give a protocol for performing the computation \(\langle g_n,w_n\rangle\) which avieves validity, privacy, and fairness as stated in <a href="#theorem3">Theorem 3</a>, under the assumption that factoring large integers is computationally intractable. Many of the existing results mentioned are special cases of this theorem. A particular interesting special case (stated as <a href="#theorem2">Theorem 2</a>) is that it allows  two parties to exchange <i>secrets</i>, such as the factorization of a publicized integer or the Hamiltonian circuit of a publicized large graph, in a way that the probability of successful cheating can be made arbitrarily small. It is somewhat surprising that the two secrets being exchanged could be of very different apparent complexity, and one would have thought that it is difficult to find an equitable ratio of bits to be maintained during the process of swapping the secrets. Previously Blum<a href="#citation12"><sup class="reference" data-citation="12">[12]</sup></a> gave a protocol for exchanging prime factors based on several assumptions (see Hastad and Shamir<a href="#citation15"><sup class="reference" data-citation="15">[15]</sup></a> for discussions); Luby, Micali, and Rackoff<a href="#citation13"><sup class="reference" data-citation="13">[13]</sup></a>, and Vazirani and Vazirani<a href="#citation14"><sup class="reference" data-citation="14">[14]</sup></a> gave protocols for exchanging secrets which are one bit long.
+						</p>
+						<p class="rp_original">
+							The proof of <a href="#theorem3">Theorem 3</a> depends on the ability of two parties to generate a random integer \(N=p\cdot q\), with its <i>secret</i> \((p,q)\) hidden from each party, but recoverable at a later time by a joint effort. This result is of independent interest, and should serve as another useful tool for cryptographic protocol design. A general form of this result is given as <a href="#theorem1">Theorem 1</a>.
+						</p>
+						<p class="rp_original">
+							Compared with <a href="#citation9"><span class="reference" data-citation="9">[9]</span></a><a href="#citation10"><span class="reference" data-citation="10">[10]</span></a>, which deals with the same general problem, the addition of the fairness property is the new motive which leads to the present work. We should mention that all the protocols considered in this paper for solving the interactive computational problems \(\langle h_n,w_n\rangle\) will be independent of \(h_n\), as is traditional in considering cryptographic protocols. The main results (Theorems <a href="#theorem1">1</a>,<a href="#theorem2">2</a>, and <a href="#theorem3">3</a>) are all proved under the following assumption. Let \(W_n\) be the set of all integers \(N\) of the form \(p\cdot q\) where \(p\equiv q\equiv 3\bmod{4}\) are prime numbers. 
+						</p>
+						<span class="rp_theorem_header">
+							The Intractability Assumption of Factoring (IAF)
+						</span>
+						<p class="rp_original rp_theorem">
+							Let \(k&gt;0\) be any fixed number. For any polynomial time probabilistic algorithm for factoring integers, the probability of success for a random input integer from \(W_n\) is less than \(\frac{1}{n^k}\) for all large \(n\).
 						</p>
                     </section>
                 </div>
@@ -176,6 +201,19 @@
                 <ol id="referencelist">
                     <li id="citation1">GMR</li>
 					<li id="citation2">GHY</li>
+					<li id="citation3">R</li>
+					<li id="citation4">FRMW</li>
+					<li id="citation5">B1</li>
+					<li id="citation6">C</li>
+					<li id="citation7">SRA</li>
+					<li id="citation8">GM</li>
+					<li id="citation9">Y1</li>
+					<li id="citation10">Y2</li>
+					<li id="citation11">GMW</li>
+					<li id="citation12">B2</li>
+					<li id="citation13">LMR</li>
+					<li id="citation14">VV</li>
+					<li id="citation15">HS</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
