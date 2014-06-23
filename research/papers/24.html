@@ -25,6 +25,9 @@
 				{
 					case "delta":
 						return "The function \\(\\Delta_X(\\sigma)\\) takes in a run of a particular protocol \\(\\sigma\\) and outputs the history of that run from \\(X\\)'s point of view.";
+					case "rfunction":
+						return "We denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess for \(d_n(x_n)\) will be produced by \(Q\) when given \(y_n\), where \((x_n,y_n)\) is distributed according to \((X_n,Y_n)\).";
+					
 					default:
 						return "No info on this equation yet.";
 				}
@@ -39,7 +42,7 @@
 				}
 			}
 
-			self_def["non-general word"] = "definition";
+			self_def["polynomial ensemble"] = "A sequence of distributions \\((h_1,h_2,\\dots,h_n,\\dots)\\) is assumed to be a polynomial ensemble if there is a probabilistic <span class=\"definable\">Turing machine</span> which, on input \\(n\\), will generate in time polynomial in \\(n\\) a random string \\(x\\) with a distribution <span class=\"definable\">indistinguishable</span> computationally from \\(h_n\\).";
 			//-->
         </script>
     </head>
@@ -187,13 +190,72 @@
 						<p class="rp_original">
 							Compared with <a href="#citation9"><span class="reference" data-citation="9">[9]</span></a><a href="#citation10"><span class="reference" data-citation="10">[10]</span></a>, which deals with the same general problem, the addition of the fairness property is the new motive which leads to the present work. We should mention that all the protocols considered in this paper for solving the interactive computational problems \(\langle h_n,w_n\rangle\) will be independent of \(h_n\), as is traditional in considering cryptographic protocols. The main results (Theorems <a href="#theorem1">1</a>,<a href="#theorem2">2</a>, and <a href="#theorem3">3</a>) are all proved under the following assumption. Let \(W_n\) be the set of all integers \(N\) of the form \(p\cdot q\) where \(p\equiv q\equiv 3\bmod{4}\) are prime numbers. 
 						</p>
-						<span class="rp_theorem_header">
+						<span class="rp_theorem_header" id="IAF">
 							The Intractability Assumption of Factoring (IAF)
 						</span>
 						<p class="rp_original rp_theorem">
 							Let \(k&gt;0\) be any fixed number. For any polynomial time probabilistic algorithm for factoring integers, the probability of success for a random input integer from \(W_n\) is less than \(\frac{1}{n^k}\) for all large \(n\).
 						</p>
                     </section>
+					<section id="sec2">
+						<h2>Terminology</h2>
+						<p class="rp_original">
+							Let \(S=(S_1,S_2,\dots)\) and \(S'=(S_1',s_2',\dots)\) be <span class="definable" data-define="polynomial ensemble">polynomial ensembles</span>, where \(S_n=(X_n,Y_n)\) and \(S_n'=(X_n',Y_n')\) each is a probability distribution over \(\{0,1\}^*\times\{0,1\}^*\). Furthermore, assume that the two ensembles \((X_1,X_2,\dots)\) and \((X_1',X_2',\dots)\) are <span class="definable">indistinguishable</span> for polynomial-time computations.
+						</p>
+						<p class="rp_original">
+							Let \(D=(d_1,d_2,\dots)\) be a sequence of predicates \(d_n:\{0,1\}^*\rightarrow\{0,1\}\), where given \(d\) and \(n\), \(d_n(x)\) can be computed probabilistically in time polynomial in \(n\). Define a <i>guessing algorithm</i> \(Q_B\) to be a probabilistic algorithm which takes \((n,y)\) as input, where \(y\in\{0,1\}^*\), and outputs a 0 or 1 in time polynomial in \(n\).
+						</p>
+						<p class="rp_original">
+							Consider the experiment of taking a random \((x_n,y_n)\) distributed according to \((X_n,Y_n)\). Suppose that one observes the value \(y_N\) and tries to guess what the value of \(d_n(x_n)\) is by using a guessing algorithm \(Q\); let us denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess will be made. We use the notation \(o\)(poly-small) to denote any sequence \((b_1,b_2,\dots)\) that has the property \(b_n\in o(\frac{1}{n^k})\) for all fixed \(k\).
+						</p>
+						<p class="rp_original">
+							We write \(I_n(X_n | Y_n)\leq I_n(X_n' | Y_n')\) if \(\forall D,Q \exists Q'\) such that \(r(d_n,X_n',Y_n',Q')-r(d_n,X_n,Y_n,Q)\geq o\)(poly-small).
+						</p>
+						<p class="rp_original">
+							We write \(I_n(X_n | Y_n)\approx I_n(X_n'|Y_n')\) if \(I_n(X_n | Y_n)\leq I_n(X_n'|Y_n')\) and \(I_n(X_n'|Y_n')\leq I_n(X_n|Y_n)\).
+						</p>
+						<p class="rp_original">
+							A <i>puzzle ensemble</i> \(P=(L,F)\) consists of a language \(L\inBPP\) and a <span class="definable" data-define="polynomial ensemble">polynomial-time ensemble</span> \(F=(F_1,F_2,\dots)\) where each \(F_n\) is a distribution over \(\{0,1\}^*\times\{0,1\}^*\); we require further than a random \((s,\tau)\) distributed according to \(F_n\) will satisfy \((n,s,\tau)\in L\) with probability 1-\(o\)(poly-small); we will call \(s\) a <i>secret</i> of the <i>text</i> \(\tau\). Let \(T_{P,n}\) denote the distribution of a random \(\tau\) taken from the second component of a random \((s,\tau)\) distributed as \(F_n\). We will call \(P\) <i>intractable</i> if, for every probabilistic polynomial-time algorithm \(S\), when given as input a pair \((s,\tau)\), where \(\tau\) is distributed according to \(T_{P,n}\), will fail with probability 1-\(o\)(poly-small) to produce an \(s\) satisfying \((n,s,\tau)\in L\).
+						</p>
+						<p class="rp_original">
+							For example, let \(L=\{(n;p,q,N) | N=p\cdot q, p,q\) are \(n\)-bit primes\(\}\), and \(F_n\) be the uniform distribution over the set \(W_n\). Under the <a href="#IAF">Intractability of Factorization Assumption</a>, the <i>factorization puzzle ensemble</i> \(P=(L,F)\) is an intractable puzzle ensemble.
+						</p>
+					</section>
+					<section id="sec3">
+						<h2>Generating a Secret</h2>
+						<p class="rp_original">
+							Let \(P=(L,F)\), where \(F=(F_1,F_2,\dots,F_n,\dots)\), be an intractable puzzle ensemble. We wish to design a protocol \(M=(M_A,M_B)\) which has the following properties for any given \(n\):
+						</p>
+						<ol class="rp_original">
+							<li>\(M\) generates implicitly a pair \((s,\tau)\) distributed according to \(F_n\)</li>
+							<li>The text \(\tau\) will be found out by \(M_A\) and \(M_B\) as their outputs.</li>
+							<li>The secret \(s\), while computable by A and B jointly based on the information they have at the end of the execution of the protocol, is completely hidden from each party by itself, even if one of them cheats during the execution of the protocol</li>
+						</ol>
+						<p class="rp_original">
+							To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a puzzle ensemble \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization puzzle ensemble is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and \(D=(D_1,D_2,\dots)\) are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
+						</p>
+						<p class="rp_original">
+							Let \(P=(\alpha,D)\) be a uniquely decipherable, intractable puzzle ensemble, where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and \(D=(D_1,D_2,\dots)\). Formally, we define our requirements on a protocol \(M=(M_A,M_B)\) for generating a secret for \(P\) as follows. (A or B will sometimes output \(u_A\) or \(u_B=\)CHEATING; informally we say that A or B has detected that the other party is cheating.)
+						</p>
+						<section id="sec3.1">
+							<h3>Validity</h3>
+							<p class="rp_original">
+								If both A and B follow the protocol, then
+							</p>
+							<ul class="rp_original" type="i">
+								<li>
+									With probability 1-\(o\)(poly-small), \(u_A=u_B\), and their common value \(\tau\) is distributed according to a distribution indistinguishable (by polynomial-time computations) from \(D_n\);
+								</li>
+								<li>
+									\(I_n^{(J)}(a_n(\tau)|\tau,\Delta_j)\equiv I_N^{(L)}(a_n(\tau)|\tau) for \(j\in \{A,B\}\), where \(J\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(L\) is the stochastic process of fetching \(\tau\) according to \(D_n\).
+								</li>
+								<li>
+									\(\exists\) a protocol \(N=(N_A,N_B)\) which, given input \((\Delta_A,\Delta_B)\), computes outputs \(v_A,v_B\), with the property that \(v_A=v_B=a_n(\tau)\) with probability 1-\(o\)(poly-small).
+								</li>
+							</ul>
+						</section>
+						
+					</section>
                 </div>
             </div>
             <div class="main_toplevel main_section main_color8">
