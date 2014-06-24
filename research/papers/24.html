@@ -157,6 +157,47 @@
                                 <a href="#_B">Annotated Paper</a>
                                 <ol>
                                     <li><a href="#sec1">Introduction</a></li>
+									<li><a href="#sec2">Terminology</a></li>
+									<li>
+										<a href="#sec3">Generating a Secret</a>
+										<ol>
+											<li><a href="#sec3.1">Validity</a></li>
+											<li><a href="#sec3.2">Fairness</a></li>
+										</ol>
+									</li>
+									<li>
+										<a href="#sec4">Exchange of Secrets</a>
+										<ol>
+											<li><a href="#sec4.1">Validity</a></li>
+											<li><a href="#sec4.2">Fairness</a></li>
+										</ol>
+									</li>
+									<li>
+										<a href="#sec5">General Computation</a>
+										<ol>
+											<li>
+												<a href="#sec5.1">Model I</a>
+												<ol>
+													<li><a href="#sec5.1.1">Validity</a></li>
+													<li><a href="#sec5.1.2">Privacy</a></li>
+													<li><a href="#sec5.1.3">Validity</a></li>
+													<li><a href="#sec5.1.4">Privacy</a></li>
+													<li><a href="#sec5.1.5">Fairness</a></li>
+												</ol>
+											</li>
+											<li>
+												<a href="#sec5.2">Model II</a>
+												<ol>
+													<li><a href="#sec5.2.1">Validity</a></li>
+													<li><a href="#sec5.2.2">Privacy</a></li>
+													<li><a href="#sec5.2.3">Validity</a></li>
+													<li><a href="#sec5.2.4">Privacy</a></li>
+													<li><a href="#sec5.2.5">Fairness</a></li>
+												</ol>
+											</li>
+										</ol>
+									</li>
+									<li><a href="#sec6">Connections</a></li>
                                 </ol>
                             </li>
                         </ol>
@@ -168,7 +209,7 @@
 						</p>
 					</section>
                     <section id="sec1">
-						<h2>Introduction</h2>
+						<h2>1. Introduction</h2>
                         <p class="rp_original">
 							A <i>protocol</i> \(M=(M_A,M_B)\) is a pair of communicating probabilistic <span class="definable" data-define="Turing machine">Turing machines</span> each with a special "send-receive" tape. Given inputs of the form \((n,i_A)\) and \((n,i_B)\), the two machines will alternately send and receive message strings using the send-receive tapes; each machine will perform computation as a standard Turing machine after receiving a message string, including the computation of the next message to be sent. Eventually both machines half within a number of steps bounded by some polynomial in \(n\), leaving strings \(u_A\) and \(u_B\) on the output tapes. For a detailed description, see for example <a href="#citation1"><span class="reference" data-citation="1">[1]</span></a><a href="#citation2"><span class="reference" data-citation="2">[2]</span></a>; in our case we allow each machine to have their own private input tape. For any run \(\sigma\) of the protocol, let <span class="equation" data-equation="delta">\(\Delta_A(\sigma)\)</span> denote the <i>history</i> of the run from A's view, i.e. a sequence of the instantaneous descriptions of \(M_A\); similarly <span class="equation" data-equation="delta">\(\Delta_B(\sigma)\)</span> denote the history of this run from B's view.
 						</p>
@@ -198,7 +239,7 @@
 						</p>
                     </section>
 					<section id="sec2">
-						<h2>Terminology</h2>
+						<h2>2. Terminology</h2>
 						<p class="rp_original">
 							Let \(S=(S_1,S_2,\dots)\) and \(S'=(S_1',s_2',\dots)\) be <span class="definable" data-define="polynomial ensemble">polynomial ensembles</span>, where \(S_n=(X_n,Y_n)\) and \(S_n'=(X_n',Y_n')\) each is a probability distribution over \(\{0,1\}^*\times\{0,1\}^*\). Furthermore, assume that the two ensembles \((X_1,X_2,\dots)\) and \((X_1',X_2',\dots)\) are <span class="definable">indistinguishable</span> for polynomial-time computations.
 						</p>
@@ -222,7 +263,7 @@
 						</p>
 					</section>
 					<section id="sec3">
-						<h2>Generating a Secret</h2>
+						<h2>3. Generating a Secret</h2>
 						<p class="rp_original">
 							Let \(P=(L,F)\), where \(F=(F_1,F_2,\dots,F_n,\dots)\), be an intractable puzzle ensemble. We wish to design a protocol \(M=(M_A,M_B)\) which has the following properties for any given \(n\):
 						</p>
@@ -238,7 +279,7 @@
 							Let \(P=(\alpha,D)\) be a uniquely decipherable, intractable puzzle ensemble, where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and \(D=(D_1,D_2,\dots)\). Formally, we define our requirements on a protocol \(M=(M_A,M_B)\) for generating a secret for \(P\) as follows. (A or B will sometimes output \(u_A\) or \(u_B=\)CHEATING; informally we say that A or B has detected that the other party is cheating.)
 						</p>
 						<section id="sec3.1">
-							<h3>Validity</h3>
+							<h3>3.1. Validity</h3>
 							<p class="rp_original">
 								If both A and B follow the protocol, then
 							</p>
@@ -269,7 +310,7 @@
 							</p>
 						</section>
 						<section id="sec3.2">
-							<h3>Fairness</h3>
+							<h3>3.2. Fairness</h3>
 							<ol class="rp_original" type="i">
 								<li>
 									[B may cheat.] Suppose protocols \(M=(M_A,M_B)\) and \(N=(N_A,N_B)\) are run with machine pairs \((M_A,M_B'),(N_A,N_B')\). There exists a polynomial-time probabilistic algorithm \(Y\) (dependent on \(M_B'\) and \(N_B'\), which takes a history pair for \(M\) and \(N\) as input, and outputs a string \(w\). We require that if A follows the protocols \(M\) and \(N\) and then runs \(Y\), the probability that \(u_A=\tau\), \(v_B=a_n(\tau)\) while \(w\neq a_n(\tau)\) is \(o\)(poly-small).
@@ -483,23 +524,23 @@
             <div class="main_toplevel main_section main_color8">
                 <h1>References</h1>
                 <ol id="referencelist">
-                    <li id="citation1">GMR</li>
-					<li id="citation2">GHY</li>
-					<li id="citation3">R</li>
-					<li id="citation4">FRMW</li>
-					<li id="citation5">B1</li>
-					<li id="citation6">C</li>
-					<li id="citation7">SRA</li>
-					<li id="citation8">GM</li>
-					<li id="citation9">Y1</li>
-					<li id="citation10">Y2</li>
-					<li id="citation11">GMW</li>
-					<li id="citation12">B2</li>
-					<li id="citation13">LMR</li>
-					<li id="citation14">VV</li>
-					<li id="citation15">HS</li>
-					<li id="citation16">ACGS</li>
-					<li id="citation17">BS</li>
+                    <li id="citation1">S. Goldwasser, S. Micali, and C. Rackoff, "The knowledge complexity of interactive proof systems," <i>Proceedings of 17th Annual ACM Symposium on Theory of Computing</i>, 1985, 291-304.</li>
+					<li id="citation2">Z. Galil, S. Habe, and M. Yung, "A private interactive test of a Boolean predicate and minimum-knowledge public-key cryptosystems," <i>PRoceedings of 26th Annual IEEE Symposium on Foundations of Computer Science</i>, 1985, 360-371.</li>
+					<li id="citation3">M. Rabin, "How to exchange secrets," 1981, unpublished manuscript.</li>
+					<li id="citation4">M. Fischer, S. Micali, C. Rackoff, and D. Wittenberg, "An oblivious transfer protocol," 1985, to appear.</li>
+					<li id="citation5">M. Blum, "Coin flipping by phone," <i>COMPCON</i> (1982), 133-137.</li>
+					<li id="citation6">R. Cleve, "Limits on the security of coin flips when half of the processors are faulty," <i>Proceedings of 18th Annual ACM Symposium on Theory of Computing</i>, 1986, 364-369.</li>
+					<li id="citation7">A. Shamir, R. Rivest, and L. Adleman, "Mental Poker," MIT Technical Report, 1978.</li>
+					<li id="citation8">S. Goldwasser and S. Micali, "Probabilistic encryption and how to play mental poker keeping secret all partial information," <i>Proceedings of 14th Annual ACM Symposium on Theory of Computing</i>, 1982, 365-377.</li>
+					<li id="citation9"><a href="49.html">A. Yao, "Protocols for secure computations," (extended abstract) <i>Proceedings of 21st Annual IEEE Symposium on Foundations of Computer Science</i>, 1982.</a></li>
+					<li id="citation10">A. Yao, "Protocols for secure computations," in preparation.</li>
+					<li id="citation11">O. Goldreich, S. Micali, and A. Widgerson, "Proofs that yield nothing but their validity and a methodology of cryptographic protocol design," <i>Proceedings of 27th Annual IEEE Symposium on Foundations of Computer Science</i>, 1986.</li>
+					<li id="citation12">M. Blum, "How to exchange (secret) keys," <i>ACM Transactions on Computer Systems</i> (1983), 175-193.</li>
+					<li id="citation13">M. Luby, S. Micali, and C. Rackoff, "How to simultaneously exchange a secret bit by flipping a symmetrically-based coin," <i>Proceedings of 24th Annual IEEE Symposium on Foundations of Computer Science</i>, 1985, 11-22</li>
+					<li id="citation14">U. Vazirani and V. Vazirani, "Trapdoor pseudo-random number generators, with applications to protocol design," <i>Proceedings of 24th Annual IEEE Symposium on Foundations of Computer Science</i>, 1985, 23-30.</li>
+					<li id="citation15">J. Hastad and A. Shamir, "The cryptographic security of truncated linearly related variables," <i>PRoceedings of 17th Annual ACM Symposium on Theory of Computing</i>, 1985, 356-362.</li>
+					<li id="citation16">W. Alexi, B. Chor, O. Goldreich, and C.P. Schnorr, "RSA/Rabin bits are 1/2+1/2poly(log n) secure," <i>Proceedings of 25th Annual IEEE Symposium on Foundations of Computer Science</i>, 1984, 449-457.</li>
+					<li id="citation17">M. Blum and S. Goldwasser, "An efficient probabilistic PKCS as secure as factoring," <i>Proceedings of Crypto 84</i>, 1984.</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
