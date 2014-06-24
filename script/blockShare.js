@@ -3,8 +3,8 @@ function mouseOverListener(elem, block)
     return function()
     {
 		block.style.display="block";
-		block.style.left=Math.min(window.innerWidth-block.clientWidth, elem.getBoundingClientRect().right)+"px";
-		block.style.top=Math.min(window.innerHeight-block.clientHeight, elem.getBoundingClientRect().top)+"px";
+		block.style.left=Math.min(window.innerWidth-block.clientWidth, elem.getBoundingClientRect().left + 10)+"px";
+		block.style.top=Math.min(window.innerHeight-block.clientHeight, elem.getBoundingClientRect().bottom)+"px";
     };
 	
 }
