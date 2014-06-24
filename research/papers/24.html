@@ -383,7 +383,7 @@
 					<section id="sec4">
 						<h2>4. Exchange of Secrets</h2>
 						<p class="rp_original">
-							Let \(P_A=(L_A,F_A)\) and \(P_B=(L_B,F_B)\) be two intractable puzzle ensembles. Let \((s_A,\tau_A),(s_B,\tau_B)\) be random puzzles distributed according to \(F_{A,n}\) and \(F_{B,n}\); give \((n,s_A,\tau_A,\tau_B)\) as input to A and \((n,s_B,\tau_A,\tau_B)\) to B. We wish to design a protocol \(M=(M_A,M_B)\) that will enable A and B to exchange their secrets \(s_A\) and \(s_B\) so that neither will be swindled. We state the criteria for the protocol below.
+							Let \(P_A=(L_A,F_A)\) and \(P_B=(L_B,F_B)\) be two <span class="definable" data-define="intractable puzzle ensemble">intractable puzzle ensembles</span>. Let \((s_A,\tau_A),(s_B,\tau_B)\) be random puzzles distributed according to \(F_{A,n}\) and \(F_{B,n}\); give \((n,s_A,\tau_A,\tau_B)\) as input to A and \((n,s_B,\tau_A,\tau_B)\) to B. We wish to design a protocol \(M=(M_A,M_B)\) that will enable A and B to exchange their secrets \(s_A\) and \(s_B\) so that neither will be swindled. We state the criteria for the protocol below.
 						</p>
 						<section id="sec4.1">
 							<h3>4.1. Validity</h3>
@@ -397,9 +397,9 @@
 								<li>
 									[If B gets \(s_A\), then A can compute \(s_B\).]
 									<p>
-										If A follows the protocols and B does not (i.e., \(M_B'\neq M_B\), then for any fixed \(k\), there exists a probabilistic polynomial-time algorithm S which takes \((n,\Delta_A)\) as input and outputs a number \(v\) such that the following is true:
+										If A follows the protocols and B does not (i.e., \(M_B'\neq M_B\)), then for any fixed \(k\), there exists a probabilistic polynomial-time algorithm S which takes \((n,\)<span class="equation" data-equation="delta">\(\Delta_A\)</span>\()\) as input and outputs a number \(v\) such that the following is true:
 									</p>
-									$$Pr\{(u_B=s_A)\wedge(v\neq s_B)\}=O(\frac{1}{n^k}).$$
+									$$Pr\{(u_B=s_A)\wedge(v\neq s_B)\}\in O(\frac{1}{n^k}).$$
 								</li>
 								<li>
 									[If A gets \(s_B\), then B can compute \(s_A\).] (Interchange A and B in (i).)
@@ -408,7 +408,7 @@
 							<span class="rp_theorem_header" id="theorem2">
 								Theorem 2
 							</span>
-							<p class="rp_original">
+							<p class="rp_original rp_theorem">
 								Let \(P_A\) and \(P_B\) be any two intractable ensembles. There exists a protocol \(M=(M_A,M_B)\) for exchanging secrets between \(P_A\) and \(P_B\) that achieves validity and fairness.
 							</p>
 						</section>
