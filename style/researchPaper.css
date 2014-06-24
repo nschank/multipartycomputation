@@ -52,7 +52,7 @@ img.rp_link {
     width:80%;
 }
 
-.rp_theorem_header, .rp_definition_header {
+.rp_theorem_header, .rp_definition_header, .rp_sub_header {
     font-family:questrial;
     margin-top:8px;
     margin-bottom:2px;
@@ -68,16 +68,24 @@ img.rp_link {
 .rp_definition, .rp_theorem {
     font-size:110%;
     margin:0px auto auto auto;
-    width:90%;   
+    width:90%;
+}
+
+.rp_sub {
+	margin:0px auto auto auto;
+	width:95%;
 }
 
 ol.rp_theorem, ol.rp_definition {
     width:85%;
 }
 
+ol.rp_sub {
+	width:91%;
+}
+
 img.rp_original {
 	margin:10px auto;
 	display:block;
 }
-
 
