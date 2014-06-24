@@ -1,0 +1,30 @@
+Adversaries
+	Malicious vs. Passive
+	Static vs Dynamic/Adaptive
+		Adaptive Security->1996
+Proof Techniques
+	Simulator
+	Reduction
+Time?
+Environment?
+Primitives
+	Addition
+	Multiplication
+	AND
+	OR
+	Oblivious Transfer
+	ZKP
+Secret Sharing
+Leakage
+Black boxes
+Models (standard)
+Settings (stand alone)
+Composition
+
+Ch1
+Yao24 analysis
+annotation,analysis for 81
+Liability page
+Page on changes to text	
+	\in vs. = Big Oh
+	multi-party vs. multiparty

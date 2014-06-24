@@ -4,3 +4,4 @@ mpcorg.iml
 *.pdf
 *~
 *.txt
+!todo.txt
