@@ -23,14 +23,22 @@
 			{
 				switch (box)
 				{
+					case "approx":
+						return "Two probabilities of recovery are equivalent if neither is noticeably harder than the other in any situation.";
+					case "D=Tn":
+						return "\\(D_n\\) is the probability distribution of \\(\\tau\\) in a uniquely decipherable, <span class=\"definable\">intractable puzzle ensemble</span>.";
 					case "delta":
 						return "The function \\(\\Delta_X(\\sigma)\\) takes in a run of a particular protocol \\(\\sigma\\) and outputs the history of that run from \\(X\\)'s point of view.";
 					case "h_n":
 						return "The inputs \\((i_A,i_B)\\) to our protocol are distributed within the probability distribution \\(h_n\\) over \\(\\{0,1\\}^*\\times\\{0,1\\}^*\\)";
+					case "I_n":
+						return "The probability of recovering some piece of information \\(A\\) using only the information \\(B\\) (which may have been produced through some randomness \\(\\mathcal{R}\\)) is denoted by \\(I_n^{(\\mathcal{R})}(A\\;|\\;B)\\). This is read as <i>the probability of recovering \\(A\\) given \\(B\\).</i>";
 					case "rfunction":
 						return "We denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess for \(d_n(x_n)\) will be produced by \(Q\) when given \(y_n\), where \((x_n,y_n)\) is distributed according to \((X_n,Y_n)\).";
 					case "u_x":
 						return "We denote by \\(u_X\\) the output that party \\(X\\) receives after the run of the protocol.";
+					case "v_x":
+						return "We denote by \\(v_X\\) the output that party \\(X\\) receives after the run of the cooperative protocol \\(N\\), which produces the original secret for \\(u_X\\) using information received during the run of the original protocol: <span class=\"equation\" data-equation=\"delta\">\\(\\Delta_X\\)</span>.";
 					case "w":
 						return "The outputs \\((u_A,u_B)\\) of the protocol are distributed according to the probability distribution \\(w_{n,i_A,i_B}\\) over \\(\\{0,1\\}^*\\times\\{0,1\\}^*\\)";
 					default:
@@ -269,13 +277,13 @@
 							\(o\)(poly-small) may be recognizable as the class of all <span class="definable">negligible</span> functions. This experiment might be recognized as similar to how a <span class="definable">hardcore bit</span> is defined except, since it is not being applied to <span class="definable" data-define="one-way function">one-way functions</span>, there are no defined bounds on the outcome of the experiment.
 						</p>
 						<p class="rp_original">
-							We write \(I_n(X_n | Y_n)\leq I_n(X_n' | Y_n')\) if \(\forall D,Q \exists Q'\) such that \(r(d_n,X_n',Y_n',Q')-r(d_n,X_n,Y_n,Q)\geq o\)(poly-small).
+							We write <span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\leq\; \)<span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) if \(\forall D,Q \exists Q'\) such that \(r(d_n,X_n',Y_n',Q')-r(d_n,X_n,Y_n,Q)\geq o\)(poly-small).
 						</p>
 						<p class="rp_annotation">
 							Given a set of predicates, for all guessing algorithms \(Q\) to be applied on \((X_n,Y_n)\) under those predicates, we can produce a new guessing algorithm \(Q'\) that is strictly not worse on \((X_n',Y_n')\) for the same predicates. It might be said that \((X_n',Y_n')\) is strictly not harder to guess on than \((X_n,Y_n)\), regardless of the predicates.
 						</p>
 						<p class="rp_original">
-							We write \(I_n(X_n | Y_n)\approx I_n(X_n'|Y_n')\) if \(I_n(X_n | Y_n)\leq I_n(X_n'|Y_n')\) and \(I_n(X_n'|Y_n')\leq I_n(X_n|Y_n)\).
+							We write <span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="equation" data-equation="approx">\(\approx\)</span>\(\; \)<span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) if <span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\leq\; \)<span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) and <span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\;\leq\; \)<span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\).
 						</p>
 						<p class="rp_annotation">
 							We cannot produce a set of predicates for which it will be easier to guess on \((X_n,Y_n)\) than \((X_n',Y_n')\), and vice versa - so they are equally hard (or easy) to guess on.
@@ -296,18 +304,21 @@
 					<section id="sec3">
 						<h2>3. Generating a Secret</h2>
 						<p class="rp_original">
-							Let \(P=(L,F)\), where \(F=(F_1,F_2,\dots,F_n,\dots)\), be an intractable puzzle ensemble. We wish to design a protocol \(M=(M_A,M_B)\) which has the following properties for any given \(n\):
+							Let \(P=(L,F)\), where \(F=(F_1,F_2,\dots,F_n,\dots)\), be an <span class="definable">intractable puzzle ensemble</span>. We wish to design a protocol \(M=(M_A,M_B)\) which has the following properties for any given \(n\):
 						</p>
 						<ol class="rp_original">
-							<li>\(M\) generates implicitly a pair \((s,\tau)\) distributed according to \(F_n\)</li>
+							<li>\(M\) generates implicitly a pair \((s,\tau)\) distributed according to \(F_n\).</li>
 							<li>The text \(\tau\) will be found out by \(M_A\) and \(M_B\) as their outputs.</li>
-							<li>The secret \(s\), while computable by A and B jointly based on the information they have at the end of the execution of the protocol, is completely hidden from each party by itself, even if one of them cheats during the execution of the protocol</li>
+							<li>The secret \(s\), while computable by A and B jointly based on the information they have at the end of the execution of the protocol, is completely hidden from each party by itself, even if one of them cheats during the execution of the protocol.</li>
 						</ol>
 						<p class="rp_original">
-							To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a puzzle ensemble \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization puzzle ensemble is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and \(D=(D_1,D_2,\dots)\) are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
+							To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a puzzle ensemble \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization puzzle ensemble is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and <span class="equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span> are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
+						</p>
+						<p class="rp_annotation">
+							Though not explicitly stated, we can note here that \(\alpha_n\) is <span class="definable">injective</span>, which is what allows us to only explicitly define the probability distribution for \(\tau\) (as it must be identical for \(s\) by definition of injectivity).
 						</p>
 						<p class="rp_original">
-							Let \(P=(\alpha,D)\) be a uniquely decipherable, intractable puzzle ensemble, where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and \(D=(D_1,D_2,\dots)\). Formally, we define our requirements on a protocol \(M=(M_A,M_B)\) for generating a secret for \(P\) as follows. (A or B will sometimes output \(u_A\) or \(u_B=\)CHEATING; informally we say that A or B has detected that the other party is cheating.)
+							Let \(P=(\alpha,D)\) be a uniquely decipherable, intractable puzzle ensemble, where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and <span class="equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span>. Formally, we define our requirements on a protocol \(M=(M_A,M_B)\) for generating a secret for \(P\) as follows. (A or B will sometimes output <span class="equation" data-equation="u_x">\(u_A\)</span> or <span class="equation" data-equation="u_x">\(u_B\)</span>=CHEATING; informally we say that A or B has detected that the other party is cheating.)
 						</p>
 						<section id="sec3.1">
 							<h3>3.1. Validity</h3>
@@ -316,30 +327,41 @@
 							</p>
 							<ol class="rp_original" type="i">
 								<li>
-									With probability 1-\(o\)(poly-small), \(u_A=u_B\), and their common value \(\tau\) is distributed according to a distribution indistinguishable (by polynomial-time computations) from \(D_n\);
+									With probability 1-\(o\)(poly-small), <span class="equation" data-equation="u_x">\(u_A=u_B\)</span>, and their common value \(\tau\) is distributed according to a distribution indistinguishable (by polynomial-time computations) from <span class="equation" data-equation="D=Tn">\(D_n\)</span>.
 								</li>
 								<li>
-									\(I_n^{(J)}(a_n(\tau)|\tau,\Delta_j)\equiv I_N^{(L)}(a_n(\tau)|\tau)\) for \(j\in \{A,B\}\), where \(J\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(L\) is the stochastic process of fetching \(\tau\) according to \(D_n\).
-								</li>
-								<li>
-									\(\exists\) a protocol \(N=(N_A,N_B)\) which, given input \((\Delta_A,\Delta_B)\), computes outputs \(v_A,v_B\), with the property that \(v_A=v_B=a_n(\tau)\) with probability 1-\(o\)(poly-small).
+									<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\Delta_j)\;\)<span class="equation" data-equation="approx">\(\approx\)</span>\(\; \)<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\) for \(j\in \{A,B\}\), where \(\mathcal{J}\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(\mathcal{L}\) is the stochastic process of fetching \(\tau\) according to <span class="equation" data-equation="D=Tn">\(D_n\)</span>.
 								</li>
 							</ol>
+							<p class="rp_annotation">
+								The ability to guess \(a_n(\tau)\) is precisely as difficult whether done through the protocol (and therefore with extra information \(\Delta_j\), or done by simply taking \(\tau\) directly from <span class="equation" data-equation="D=Tn">\(D_n\)</span> (which, as discussed above by definition of an <span class="definable" data-define="intractable puzzle ensemble">intractable puzzle ensemble</span>, is extremely difficult).
+							</p>
+							<ol class="rp_original" type="i">
+								<li value="3">
+									\(\exists\) a protocol \(N=(N_A,N_B)\) which, given input \((\Delta_A,\Delta_B)\), computes outputs <span class="equation" data-equation="v_x">\(v_A,v_B\)</span>, with the property that \(v_A=v_B=a_n(\tau)\) with probability 1-\(o\)(poly-small).
+								</li>
+							</ol>
+							<p class="rp_annotation">
+								Given \(\Delta_A\) and \(\Delta_B\) together, a probabilistic polynomial-time algorithm can produce the secret \(s\) of \(\tau\) with only a <span class="definable">negligible</span> probability of failure.
+							</p>
 							<p class="rp_original">
-								To discuss the validity concept when one party, say B, may misbehave. Let \(d_n\) be the probability for runs in which \(v_A\neq\)CHEATING, and let \(D_n'\) be the probability distribution for \(\tau\) when restricted to such runs. If \(d_N\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n=\Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following two constraints to be true:
+								To discuss the validity concept when one party, say B, may misbehave. Let \(d_n\) be the probability for runs in which \(v_A\neq\)CHEATING, and let \(D_n'\) be the probability distribution for \(\tau\) when restricted to such runs. If \(d_n\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in \Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following two constraints to be true:
 							</p>
 							<ol class="rp_original" type="i">
 								<li value="4">
 									\(P'=(\alpha,D')\) is a uniquely decipherable intractable puzzle ensemble, where \(D'=(D_1',D_2',\dots)\).
 								</li>
 								<li>
-									\(I_n^{(J)}(a_n(\tau)|\tau,\Delta_B)\approx I_n^{(L)}(a_n(\tau)|\tau)\), where \(J\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(L\) is the stochastic process of fetching \(\tau\) according to \(D_n'\).
+									<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\Delta_B)\;\)<span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\), where \(\mathcal{J}\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the stochastic process of fetching \(\tau\) according to \(D_n'\).
 								</li>
 							</ol>
-							<p class="rp_original">
-								To develop the concept of fairness, consider the execution of protocol \(M\) and then \(N\). If A follows the protocols, we require that the probability for B to obtain \(s\) while A cannot recover \(s\) to be small.
+							<p class="rp_annotation">
+								Basically, the distribution of \(\tau\) when B cheats successfully is still intractable, and \(a_n(\tau)\) is still just as difficult to produce from \((\tau,\Delta_B)\) as it was from a normally chosen \(\tau\). Obviously, the above applies when switching the roles of A and B as well.
 							</p>
 						</section>
+						<p class="rp_original">
+							To develop the concept of fairness, consider the execution of protocol \(M\) and then \(N\). If A follows the protocols, we require that the probability for B to obtain \(s\) while A cannot recover \(s\) to be small.
+						</p>
 						<section id="sec3.2">
 							<h3>3.2. Fairness</h3>
 							<ol class="rp_original" type="i">
@@ -354,7 +376,7 @@
 								Theorem 1
 							</span>
 							<p class="rp_original rp_theorem">
-								Let \(P\) be an intractable puzzle ensemble that is uniquely decipherable. There exists a protocol \(M=(M_A,M_B)\) for generating a secret from \(P\) that achieves validity and fairness.
+								Let \(P\) be an <span class="definable">intractable puzzle ensemble</span> that is uniquely decipherable. There exists a protocol \(M=(M_A,M_B)\) for generating a secret from \(P\) that achieves <a href="#sec3.1">validity</a> and <a href="#sec3.2">fairness</a>.
 							</p>
 						</section>
 					</section>
@@ -414,7 +436,7 @@
 								<h4>5.1.2. Privacy</h4>
 								<ol class="rp_original">
 									<li>
-										\(I_n^{(J)}(i_A,i_B,u_A | \Delta_B,i_B,u_B)\approx I_n^{(L)}(i_A,i_B,u_A | i_B,u_B)\) where \(J\) is the <span class="definable">stochastic</span> process of running \(M\) with input from \(h\), and \(L\) is the stochastic process of having \((i_A,i_B)\) distributed according to \(h\) and \(u_A=f_n(i_A,i_B),u_B=g_n(i_A,i_B)\).
+										<span class="equation" data-equation="I_n">\(I_n^{(J)}\)</span>\((i_A,i_B,u_A | \Delta_B,i_B,u_B)\quad\approx\quad \)<span class="equation" data-equation="I_n">\(I_n^{(L)}\)</span>\((i_A,i_B,u_A | i_B,u_B)\) where \(J\) is the <span class="definable">stochastic</span> process of running \(M\) with input from \(h\), and \(L\) is the stochastic process of having \((i_A,i_B)\) distributed according to \(h\) and \(u_A=f_n(i_A,i_B),u_B=g_n(i_A,i_B)\).
 									</li>
 									<li>
 										(Interchange A and B in (i).)
@@ -439,7 +461,7 @@
 							<section id="sec5.1.4">
 								<h4>5.1.4. Privacy</h4>
 								<p class="rp_original">
-									For any \(M_B'\), there exists an \(S\in\mathbb{S}\) such that \(I_n^{(J)}(i_A,i_B,u_A|\Delta_B,i_B,u_B)\leq I_n^{(L(S))}(i_A,i_B,u_A|i_B,u_B)\).
+									For any \(M_B'\), there exists an \(S\in\mathbb{S}\) such that <span class="equation" data-equation="I_n">\(I_n^{(J)}\)</span>\((i_A,i_B,u_A|\Delta_B,i_B,u_B)\leq \)<span class="equation" data-equation="I_n">\(I_n\)</span>\(^{(L(S))}(i_A,i_B,u_A|i_B,u_B)\).
 								</p>
 								<p class="rp_original">
 									The fairness concept refers to obtaining the information that one is entitled to. Suppose B wishes to know the value of \(g_n(i_A,y)\) for some \(y\) other than \(i_B\). As we mentioned earlier, B can succeed by pretending \(i_B=y\) and otherwise follow the protocol; in the process A will obtain also the value of \(f_n(i_A,y)\). The privacy constraint stipulates that no information other than the value of \(g_n(i_A,y)\) is conveyed from A to B. The fairness constraint is concerned with whether it is possible for B to stop at some point, once B has the information about \(g_n(i_A,y)\), and deny the knowledge of \(f_n(i_A,y)\) to A. The following formulation is not the strongest possible version of this constraint, but it is sufficient for some applications such as exchanging secrets of sufficient length. Let \(L_n\) denote the set of all possible values of \(f_n(i_A,i_B)\) when \((i_A,i_B)\) is distributed according to \(h_n\).
@@ -497,7 +519,7 @@
 							<h4>5.2.2. Privacy</h4>
 							<ol class="rp_original" type="i">
 								<li>	
-									\(I_n^{(J)}(i_A,i_B,u_A|\Delta_B,i_B,u_B,v_B,w_B)\approx I_n^{(L)}(i_A,i_B,u_A|i_B,u_B)\) where \(J\) is the <span class="definable">stochastic</span> process of running \(M\) with input from \(h\), and \(L\) is the stochastic process of having \((i_A,i_B)\) distributed according to \(h\) and \(u_A=f_n(i_A,i_B),u_B=g_n(i_A,i_B)\).
+									<span class="equation" data-equation="I_n">\(I_n^{(J)}\)</span>\((i_A,i_B,u_A|\Delta_B,i_B,u_B,v_B,w_B)\quad\approx\quad \)<span class="equation" data-equation="I_n">\(I_n^{(L)}\)</span>\((i_A,i_B,u_A|i_B,u_B)\) where \(J\) is the <span class="definable">stochastic</span> process of running \(M\) with input from \(h\), and \(L\) is the stochastic process of having \((i_A,i_B)\) distributed according to \(h\) and \(u_A=f_n(i_A,i_B),u_B=g_n(i_A,i_B)\).
 								</li>
 								<li>(Interchange A and B in (i).)</li>
 							</ol>
@@ -514,7 +536,7 @@
 						<section id="sec5.2.4">
 							<h4>5.2.4. Privacy</h4>
 							<p class="rp_original">
-								\(I_n^{(J)}(i_A,i_B,u_A|\Delta_B,i_B,u_B,v_B,w_B) \approx I_n^{(L)}(i_A,i_B,u_A|i_B,u_B)\), where \(J\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(L\) is the stochastic process of being given the value of \(u_B\) distributed according to \(U_{n,i_B}\).
+								<span class="equation" data-equation="I_n">\(I_n^{(J)}\)</span>\((i_A,i_B,u_A|\Delta_B,i_B,u_B,v_B,w_B) \quad\approx\quad \)<span class="equation" data-equation="I_n">\(I_n^{(L)}\)</span>\((i_A,i_B,u_A|i_B,u_B)\), where \(J\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(L\) is the stochastic process of being given the value of \(u_B\) distributed according to \(U_{n,i_B}\).
 							</p>
 							<p class="rp_original">
 								As in Model I, let \(G\) denote a probabilistic polynomial-time <span class="definable">Turing machine</span> that takes \(i_B\) as input and outputs \(z\); let \(\beta_n(G)\) denote the probability that \(z=g_n(i_A,i_B)\).

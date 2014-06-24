@@ -33,6 +33,8 @@ var def_internal = {
 	
 	"indistinguishable":"Informally, two sets or distributions may be called indistinguishable if there doesn't exist an efficient (<span class=\"definable\">PPT</span>) algorithm for differentiating them that has more than <span class=\"definable\">negligible</span> advantage.",
 	
+	"injective":"An injective function (sometimes a one-to-one function or just an injection) is a function which preserves distinctness; that is, if two inputs are distinct, their outputs must also be distinct. More formally, a function \\(f\\) is injective iff \\(f(x)=f(y)\\Rightarrow x=y\\).",
+	
 	"isomorphic":"Being of identical shape and structure. In the case of graphs, two graphs are isomorphic if and only if there is a one-to-one mapping of vertices and edges between the two graphs. More informally, it could be said that one graph is a 'relabelling' of the other.",
     
 	"malicious adversary":"An adversary who deviates from the rules of a protocol.",
@@ -41,7 +43,7 @@ var def_internal = {
 	
 	"multiplicativity":"A function \\(f\\) is multiplicative if \\(\\forall a,b, f(ab)=f(a)f(b)\\).",
     
-	"negligible":"A function \\(\\mu(x\\) is negligible if \\(\\exists c,n\\) such that, \\(\\forall x>n |\\mu(x)| &lt; \\frac{1}{x^c}\\). More informally, a function is negligible if no inverse polynomial approaches 0 as quickly as it does.",
+	"negligible":"A function \\(\\mu(x)\\) is negligible if \\(\\forall c&gt;0\\;\\exists n\\) such that, \\(\\forall x>n,\\quad|\\mu(x)| &lt; \\frac{1}{x^c}\\). More informally, a function is negligible if no inverse polynomial approaches 0 as quickly as it does. As another, again more formal definition, \\(\\mu(x)\\) is negligible if \\(\\mu(x)\\in o(\\frac{1}{poly(x)})\\).",
 	
 	"NP":"The set of all decision problems which can be verified in time polynomial in the length of the input. More intuitively, it is the set of all questions such that, given a possible answer to the question, we can efficiently determine whether the answer is correct. As an example, the question \"What are the factors of x?\" is in NP because, given a set of factors, we just need to multiply them together to check if we get x. Notice that this is an example of a question that we cannot necessarily <i>solve</i> efficiently, but can still <i>verify</i> efficiently.",
 	
