@@ -7,6 +7,8 @@ var def_internal = {
 	
     "bias":"A systematic error which skews all values in a particular direction or towards a particular value.",
 	
+	"BPP":"Bounded Probabilistic Polynomial time is the class of problems that can be solved by a probabilistic <span class=\"definable\">Turing machine</span> in polynomial time with an error upper-bounded by &frac13; over 1 run of the algorithm.",
+	
 	"cartesian product":"The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\times\\){♠, ♥, ♦, ♣}. The Cartesian product is often extended into many dimensions, as in the expression \\(A\\times B\\times C\\times D\\), which would be the set of all ordered quadruples \\((a,b,c,d)\\) that can be formed from an \\(a\in A, b\\in B, c\\in C, d\\in D\\).",
     
 	"coin flip":"A common metaphor in cryptography research to refer to the creation of a truly random bit: 1 (heads) or 0 (tails). Note that, without external stimulus, it is impossible for a computer to create true randomness. There will be a tutorial on randomness.",
@@ -30,6 +32,8 @@ var def_internal = {
 	"hardcore bit":"The hardcore bit (or hardcore predicate) of a <span class=\"definable\">one-way function</span> \\(f\\) is a function \\(b : Domain_f\\mapsto\\{0,1\\}\\) such that \\(\\exists\\) PPT algorithm \\(B\\) where \\(B(x)=b(x)\\), but \\(\\nexists\\) PPT algorithm \\(F\\) where \\(F(f(x))=b(x)\\). In other words, its some way of producing a bit from \\(x\\) so that there's no way to guess what that bit will be from \\(f(x)\\) that's more reliable than flipping a coin.",
 	
 	"indistinguishable":"Informally, two sets or distributions may be called indistinguishable if there doesn't exist an efficient (<span class=\"definable\">PPT</span>) algorithm for differentiating them that has more than <span class=\"definable\">negligible</span> advantage.",
+	
+	"isomorphic":"Being of identical shape and structure. In the case of graphs, two graphs are isomorphic if and only if there is a one-to-one mapping of vertices and edges between the two graphs. More informally, it could be said that one graph is a 'relabelling' of the other.",
     
 	"malicious adversary":"An adversary who deviates from the rules of a protocol.",
 	
