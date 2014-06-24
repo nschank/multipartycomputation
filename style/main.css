@@ -34,6 +34,11 @@ h3 { margin-left:15px; color:#443; }
 h4 { margin-left:20px; color:#665; }
 h5 { margin-left:25px; color:#887; }
 
+h2 > a, li > a {
+	text-decoration:none;
+	color:#444400;
+}
+
 ol {
 	margin-right:5px;
 }
