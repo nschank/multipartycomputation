@@ -45,3 +45,15 @@ div.gl_block > a:hover {
     margin-top:3px;
 }
 
+.gl_term {
+	width:30%;
+	text-align:right;
+	margin:auto 5% auto 0px;
+	float:left;
+}
+
+.gl_def {
+	width:60%;
+	float:left;
+}
+

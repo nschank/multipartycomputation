@@ -9,7 +9,7 @@ var def_internal = {
 	
 	"BPP":"Bounded Probabilistic Polynomial time is the class of problems that can be solved by a probabilistic <span class=\"definable\">Turing machine</span> in polynomial time with an error upper-bounded by &frac13; over 1 run of the algorithm.",
 	
-	"cartesian product":"The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\times\\){♠, ♥, ♦, ♣}. The Cartesian product is often extended into many dimensions, as in the expression \\(A\\times B\\times C\\times D\\), which would be the set of all ordered quadruples \\((a,b,c,d)\\) that can be formed from an \\(a\in A, b\\in B, c\\in C, d\\in D\\).",
+	"cartesian product":"The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}. The Cartesian product is often extended into many dimensions, as in the expression \\(A\\times B\\times C\\times D\\), which would be the set of all ordered quadruples \\((a,b,c,d)\\) that can be formed from an \\(a\\in A, b\\in B, c\\in C, d\\in D\\).",
     
 	"coin flip":"A common metaphor in cryptography research to refer to the creation of a truly random bit: 1 (heads) or 0 (tails). Note that, without external stimulus, it is impossible for a computer to create true randomness. There will be a tutorial on randomness.",
     
@@ -65,7 +65,7 @@ var def_internal = {
     
 	"privacy constraint":"A constraint on what information (that you own) can be learned by other parties who are members of the computation.",
     
-	"probability density function":"A function (often called \\(p(i)\\)) used to calculate the probability of a particular instance \\(i\\) within the entire domain of possible inputs \\(I\\). Must satisfy the constraints that:<ol><li>Given any \\(i\\in I\\), \\(0\lte p(i)\lte 1\\)</li><li>\\(\\sum\\limits_{i\\in I} p(i) = 1\\)</li></ol>Basically, all possibilities must have a well-defined probability, and no possibilities may be missing.",
+	"probability density function":"A function (often called \\(p(i)\\)) used to calculate the probability of a particular instance \\(i\\) within the entire domain of possible inputs \\(I\\). Must satisfy the constraints that:<ol><li>Given any \\(i\\in I\\), \\(0\\leq p(i)\\leq 1\\)</li><li>\\(\\sum\\limits_{i\\in I} p(i) = 1\\)</li></ol>Basically, all possibilities must have a well-defined probability, and no possibilities may be missing.",
 	
 	"quadratic residue":"An integer \\(q\\) is a quadratic residue \\(\\bmod{n}\\) if there exists some \\(x\\) such that \\(q \\equiv x^2\\pmod{n}\\). Determining whether a number is a quadratic residue \\(\\bmod{n}\\) is a member of the complexity class <span class=\"definable\">NP</span>.",
 	
