@@ -215,7 +215,7 @@
 							We write \(I_n(X_n | Y_n)\approx I_n(X_n'|Y_n')\) if \(I_n(X_n | Y_n)\leq I_n(X_n'|Y_n')\) and \(I_n(X_n'|Y_n')\leq I_n(X_n|Y_n)\).
 						</p>
 						<p class="rp_original">
-							A <i>puzzle ensemble</i> \(P=(L,F)\) consists of a language \(L\inBPP\) and a <span class="definable" data-define="polynomial ensemble">polynomial-time ensemble</span> \(F=(F_1,F_2,\dots)\) where each \(F_n\) is a distribution over \(\{0,1\}^*\times\{0,1\}^*\); we require further than a random \((s,\tau)\) distributed according to \(F_n\) will satisfy \((n,s,\tau)\in L\) with probability 1-\(o\)(poly-small); we will call \(s\) a <i>secret</i> of the <i>text</i> \(\tau\). Let \(T_{P,n}\) denote the distribution of a random \(\tau\) taken from the second component of a random \((s,\tau)\) distributed as \(F_n\). We will call \(P\) <i>intractable</i> if, for every probabilistic polynomial-time algorithm \(S\), when given as input a pair \((s,\tau)\), where \(\tau\) is distributed according to \(T_{P,n}\), will fail with probability 1-\(o\)(poly-small) to produce an \(s\) satisfying \((n,s,\tau)\in L\).
+							A <i>puzzle ensemble</i> \(P=(L,F)\) consists of a language \(L\in BPP\) and a <span class="definable" data-define="polynomial ensemble">polynomial-time ensemble</span> \(F=(F_1,F_2,\dots)\) where each \(F_n\) is a distribution over \(\{0,1\}^*\times\{0,1\}^*\); we require further than a random \((s,\tau)\) distributed according to \(F_n\) will satisfy \((n,s,\tau)\in L\) with probability 1-\(o\)(poly-small); we will call \(s\) a <i>secret</i> of the <i>text</i> \(\tau\). Let \(T_{P,n}\) denote the distribution of a random \(\tau\) taken from the second component of a random \((s,\tau)\) distributed as \(F_n\). We will call \(P\) <i>intractable</i> if, for every probabilistic polynomial-time algorithm \(S\), when given as input a pair \((s,\tau)\), where \(\tau\) is distributed according to \(T_{P,n}\), will fail with probability 1-\(o\)(poly-small) to produce an \(s\) satisfying \((n,s,\tau)\in L\).
 						</p>
 						<p class="rp_original">
 							For example, let \(L=\{(n;p,q,N) | N=p\cdot q, p,q\) are \(n\)-bit primes\(\}\), and \(F_n\) be the uniform distribution over the set \(W_n\). Under the <a href="#IAF">Intractability of Factorization Assumption</a>, the <i>factorization puzzle ensemble</i> \(P=(L,F)\) is an intractable puzzle ensemble.
@@ -242,19 +242,241 @@
 							<p class="rp_original">
 								If both A and B follow the protocol, then
 							</p>
-							<ul class="rp_original" type="i">
+							<ol class="rp_original" type="i">
 								<li>
 									With probability 1-\(o\)(poly-small), \(u_A=u_B\), and their common value \(\tau\) is distributed according to a distribution indistinguishable (by polynomial-time computations) from \(D_n\);
 								</li>
 								<li>
-									\(I_n^{(J)}(a_n(\tau)|\tau,\Delta_j)\equiv I_N^{(L)}(a_n(\tau)|\tau) for \(j\in \{A,B\}\), where \(J\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(L\) is the stochastic process of fetching \(\tau\) according to \(D_n\).
+									\(I_n^{(J)}(a_n(\tau)|\tau,\Delta_j)\equiv I_N^{(L)}(a_n(\tau)|\tau)\) for \(j\in \{A,B\}\), where \(J\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(L\) is the stochastic process of fetching \(\tau\) according to \(D_n\).
 								</li>
 								<li>
 									\(\exists\) a protocol \(N=(N_A,N_B)\) which, given input \((\Delta_A,\Delta_B)\), computes outputs \(v_A,v_B\), with the property that \(v_A=v_B=a_n(\tau)\) with probability 1-\(o\)(poly-small).
 								</li>
-							</ul>
+							</ol>
+							<p class="rp_original">
+								To discuss the validity concept when one party, say B, may misbehave. Let \(d_n\) be the probability for runs in which \(v_A\neq\)CHEATING, and let \(D_n'\) be the probability distribution for \(\tau\) when restricted to such runs. If \(d_N\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n=\Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following two constraints to be true:
+							</p>
+							<ol class="rp_original" type="i">
+								<li value="4">
+									\(P'=(\alpha,D')\) is a uniquely decipherable intractable puzzle ensemble, where \(D'=(D_1',D_2',\dots)\).
+								</li>
+								<li>
+									\(I_n^{(J)}(a_n(\tau)|\tau,\Delta_B)\approx I_n^{(L)}(a_n(\tau)|\tau)\), where \(J\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(L\) is the stochastic process of fetching \(\tau\) according to \(D_n'\).
+								</li>
+							</ol>
+							<p class="rp_original">
+								To develop the concept of fairness, consider the execution of protocol \(M\) and then \(N\). If A follows the protocols, we require that the probability for B to obtain \(s\) while A cannot recover \(s\) to be small.
+							</p>
 						</section>
-						
+						<section id="sec3.2">
+							<h3>Fairness</h3>
+							<ol class="rp_original" type="i">
+								<li>
+									[B may cheat.] Suppose protocols \(M=(M_A,M_B)\) and \(N=(N_A,N_B)\) are run with machine pairs \((M_A,M_B'),(N_A,N_B')\). There exists a polynomial-time probabilistic algorithm \(Y\) (dependent on \(M_B'\) and \(N_B'\), which takes a history pair for \(M\) and \(N\) as input, and outputs a string \(w\). We require that if A follows the protocols \(M\) and \(N\) and then runs \(Y\), the probability that \(u_A=\tau\), \(v_B=a_n(\tau)\) while \(w\neq a_n(\tau)\) is \(o\)(poly-small).
+								</li>
+								<li>
+									[A may cheat.] (Interchange the roles of A and B in (i).)
+								</li>
+							</ol>
+							<span class="rp_theorem_header" id="theorem1">
+								Theorem 1
+							</span>
+							<p class="rp_original rp_theorem">
+								Let \(P\) be an intractable puzzle ensemble that is uniquely decipherable. There exists a protocol \(M=(M_A,M_B)\) for generating a secret from \(P\) that achieves validity and fairness.
+							</p>
+						</section>
+					</section>
+					<section id="sec4">
+						<h2>4. Exchange of Secrets</h2>
+						<p class="rp_original">
+							Let \(P_A=(L_A,F_A)\) and \(P_B=(L_B,F_B)\) be two intractable puzzle ensembles. Let \((s_A,\tau_A),(s_B,\tau_B)\) be random puzzles distributed according to \(F_{A,n}\) and \(F_{B,n}\); give \((n,s_A,\tau_A,\tau_B)\) as input to A and \((n,s_B,\tau_A,\tau_B)\) to B. We wish to design a protocol \(M=(M_A,M_B)\) that will enable A and B to exchange their secrets \(s_A\) and \(s_B\) so that neither will be swindled. We state the criteria for the protocol below.
+						</p>
+						<section id="sec4.1">
+							<h3>4.1. Validity</h3>
+							<p class="rp_original">
+								If both parties follow the protocol, then with probability \(1-o\)(poly-small), \(u_B=s_A\) and \(u_A=s_B\).
+							</p>
+						</section>
+						<section id="sec4.2">
+							<h3>4.2. Fairness</h3>
+							<ol class="rp_original" type="i">
+								<li>
+									[If B gets \(s_A\), then A can compute \(s_B\).]
+									<p>
+										If A follows the protocols and B does not (i.e., \(M_B'\neq M_B\), then for any fixed \(k\), there exists a probabilistic polynomial-time algorithm S which takes \((n,\Delta_A)\) as input and outputs a number \(v\) such that the following is true:
+									</p>
+									$$Pr\{(u_B=s_A)\wedge(v\neq s_B)\}=O(\frac{1}{n^k}).$$
+								</li>
+								<li>
+									[If A gets \(s_B\), then B can compute \(s_A\).] (Interchange A and B in (i).)
+								</li>
+							</ol>
+							<span class="rp_theorem_header" id="theorem2">
+								Theorem 2
+							</span>
+							<p class="rp_original">
+								Let \(P_A\) and \(P_B\) be any two intractable ensembles. There exists a protocol \(M=(M_A,M_B)\) for exchanging secrets between \(P_A\) and \(P_B\) that achieves validity and fairness.
+							</p>
+						</section>
+					</section>
+					<section id="sec5">
+						<h2>5. General Computation</h2>
+						<p class="rp_original">
+							Consider an interactive computational problem \(\langle h_n,w_n\rangle\) as defined in <a href="#sec1">Section 1</a>. We will show that there exists a protocol for it that satisfies some strong privacy and fairness constraints. In this extended abstract, we restrict ourselves to the case when \(w_n\) represents a pair of functions \((f_n,g_n)\) to be evaluated, i.e. given inputs \(i_A,i_B\), A and B wish to compute \(f_n(i_A,i_B)\) and \(g_n(i_A,i_B)\). The results can be extended to the general case.
+						</p>
+						<p class="rp_original">
+							We will consider two variants, which differ in their input-output format. Model I is the natural one, in which the inputs and outputs are as specified in the previous paragraph. However, since in general A does not have any control over the value of \(i_B\), a dishonest B can pretend that \(i_B\) is an arbitrary value \(y\). As a result, the fairness constraint can at most force B to compute the value of \(f_n(i_A,y)\) for <i>some</i> \(y\). In Model II, A will be given as input \((i_A,p_A,q_A,N_A,N_B,E_{N_B}(i_B))\) where \(N_A=p_A\cdot q_A\) is the product of two large primes, and \(N_B\) is another integer of two large prime factors used to encode B's parameter \(i_B\) as \(E_{N_B}(i_B)\); B has as input \((i_B,p_B,q_B,N_B,N_A,E_{N_A}(i_A))\). The integers \(N_A\) and \(N_B\) are generated from some distributions such that factoring these numbers are computationally intractable; \(E_N\) can be any probabilistic encryption scheme that is provably secure under the <a href="#IAF">Intractability Assumption of Factoring</a> (e.g. the ones in Alexi, Chor, Goldreich, and Schnorr<a href="#citation16"><sup class="reference" data-citation="16">[16]</sup></a> or Blum and Goldwasser<a href="#citation17"><sup class="reference" data-citation="17">[17]</sup></a>). In the output, A, B obtain \((u_A,v_A,w_A)\) and \((u_A,v_A,w_A)\). When both parties behave honestly, \(u_A=f_n(i_A,i_B), v_A=(p_A',q_A',N_A'),\) and \(w_A=(N_B', E_{N_D'}(g_n(i_A,i_B)))\), where \(N_A'\) and \(N_B'\) are integers which are the products of two large prime factors; similarly for the output of B. such formats arise quite naturally in concatenating protocols. The privacy and fairness constraints in this model are stronger than the first model.
+						</p>
+						<section id="sec5.1">
+							<h3>5.1. Model I</h3>
+							<p class="rp_original">
+								We first define the constraints when both parties follow the protocol.
+							</p>
+							<section id="sec5.1.1">
+								<h4>5.1.1. Validity</h4>
+								<p class="rp_original">
+									With probability 1-\(o\)(poly-small), \(u_A=f_n(i_A,i_B)\) and \(u_B=g_n(i_A,i_B)\).
+								</p>
+							</section>
+							<section id="sec5.1.2">
+								<h4>5.1.2. Privacy</h4>
+								<ol class="rp_original">
+									<li>
+										\(I_n^{(J)}(i_A,i_B,u_A | \Delta_B,i_B,u_B)\approx I_n^{(L)}(i_A,i_B,u_A | i_B,u_B)\) where \(J\) is the <span class="definable">stochastic</span> process of running \(M\) with input from \(h\), and \(L\) is the stochastic process of having \((i_A,i_B)\) distributed according to \(h\) and \(u_A=f_n(i_A,i_B),u_B=g_n(i_A,i_B)\).
+									</li>
+									<li>
+										(Interchange A and B in (i).)
+									</li>
+								</ol>
+							</section>
+							<p class="rp_original">
+								We now define the constraints when A follows the protocol while B may cheat, that is, B executes the protocol with any \(M_B'\). Since \(M_B'\) is arbitrary, B can always generate an \(i_B'\) and acts as if this is the input value \(i_B\). As A can never detect this method of cheating, A has to cooperate and let B know the value of \(g_n(i_A,i_B')\). This enables B to control A's output \(u_A\), and to probe somewhat into the value of \(i_A\); this cannot be prevented if we want to preserve the validity condition for honest parties described above. We shall require that B cannot do more than that. Let us denote by Z the set \(\{0,1\}^*\cup\{\)CHEATING\(\}\), and extend the function \(f_n\) by \(f_n(i_A,y)=\)CHEATING if \(y=\)CHEATING.
+							</p>
+							<p class="rp_original">
+								Let \(M_B'\) be any communicating <span class="definable">Turing machine</span>, and let \(U_n\) be the distribution corresponding to \(u_A\) when \((M_A,M_B')\) are used to carry out the protocol.
+							</p>
+							<section id="sec5.1.3">
+								<h4>5.1.3. Validity</h4>
+								<p class="rp_original">
+									There exists a probabilistic polynomial-time algorithm S that takes input \((n,i_B)\) and produces a random \(y\in Z\) such that \(U_n\) is indistinguishable from the distribution corresponding to \(f_n(i_A,y)\).
+								</p>
+								<p class="rp_original">
+									Let \(J\) be the <span class="definable">stochastic</span> process of running \((M_A,M_B')\) with input \((i_A,i_B)\) distributed according to \(h_n\). Let \(\mathbb{S}\) be the set of all probabilistic polynomial-time algorithms \(S\) that take input \((n,i_B)\) and produce random \(y\in Z\). For any \(S\in\mathbb{S}\), let \(L(S)\) be the stochastic process of generating \((i_A,i_B)\) according to \(h_n\), run \(S\) on input \((n,i_B)\) to produce a random \(y\), and define \(u_A=f_n(i_A,y),u_B=g_n(i_A,y)\). Intuitively, B may use \(S\) to generate a random \(y\), and after that, acts as if \(y\) were the value of \(i_B\), and otherwise follows the protocol; \(L(S)\) is clearly a less informative process for B in which A simply tells B the value of \(u_B=g_n(i_A,y)\) without other communications taking place.
+								</p>
+							</section>
+							<section id="sec5.1.4">
+								<h4>5.1.4. Privacy</h4>
+								<p class="rp_original">
+									For any \(M_B'\), there exists an \(S\in\mathbb{S}\) such that \(I_n^{(J)}(i_A,i_B,u_A|\Delta_B,i_B,u_B)\leq I_n^{(L(S))}(i_A,i_B,u_A|i_B,u_B)\).
+								</p>
+								<p class="rp_original">
+									The fairness concept refers to obtaining the information that one is entitled to. Suppose B wishes to know the value of \(g_n(i_A,y)\) for some \(y\) other than \(i_B\). As we mentioned earlier, B can succeed by pretending \(i_B=y\) and otherwise follow the protocol; in the process A will obtain also the value of \(f_n(i_A,y)\). The privacy constraint stipulates that no information other than the value of \(g_n(i_A,y)\) is conveyed from A to B. The fairness constraint is concerned with whether it is possible for B to stop at some point, once B has the information about \(g_n(i_A,y)\), and deny the knowledge of \(f_n(i_A,y)\) to A. The following formulation is not the strongest possible version of this constraint, but it is sufficient for some applications such as exchanging secrets of sufficient length. Let \(L_n\) denote the set of all possible values of \(f_n(i_A,i_B)\) when \((i_A,i_B)\) is distributed according to \(h_n\).
+								</p>
+							</section>
+							<span class="rp_definition_header">
+								Definition X - Recovery Algorithm
+							</span>
+							<p class="rp_definition">
+								A <i>recovery algorithm</i> \(R\) for A is a probabilistic polynomial-time algorithm which takes \((n,\Delta_A)\) as input, and outputs a string \(v\).
+							</p>
+							<p class="rp_original">
+								Consider a pair \((i_A,i_B)\) distributed according to \(h_n\). Let \(G\) denote a probabilistic polynomial-time <span class="definable">Turing machine</span> that takes \(i_B\) as input and outputs \(z\); let \(\beta_n(G)\) denote the probability that \(z=g_n(i_A,i_B)\).
+							</p>
+							<section id="sec5.1.5">
+								<h4>5.1.5. Fairness</h4>
+								<p class="rp_original">
+									For any fixed \(k\), there exists a recovery algorithm \(R\) (dependent on \(M_B'\)) whose output \(v\) satisfies the following condition:
+									$$Pr\{(u_B=g_n(i_A,i_B))\wedge (v\notin L_n)\}\leq \beta_n(G)+O(\frac{1}{n^k})$$
+									for some \(G\).
+								</p>
+								<p class="rp_original">
+									To complete the definitions, we interchange the roles of A and B in the above discussions, which gives the constraints of validity, privacy, and fairness when B follows the protocol and A is cheating.
+								</p>
+							</section>
+							<span class="rp_definition_header">
+								Definition X
+							</span>
+							<p class="rp_definition">
+								A protocol is said to achieve validity, privacy, and fairness, if all the above constraints are satisfied.
+							</p>
+							<span class="rp_theorem_header" id="theorem3">
+								Theorem 3
+							</span>
+							<p class="rp_original rp_theorem">
+								For any interactive computational problem \(\langle h_n,(f_n,g_n)\rangle\), there exists a protocol \(M\) that achieves validity, privacy, and fairness.
+							</p>
+						</section>
+						<p class="rp_original">
+							In Model II, the constraints are simpler. The input-output formats are as explained at the beginning of this section.
+						</p>
+					</section>
+					<section id="sec5.2">
+						<h3>5.2. Model II</h3>
+						<p class="rp_original">
+							When both A and B follow the protocol, the following is required.
+						</p>
+						<section id="sec5.2.1">
+							<h4>5.2.1. Validity</h4>
+							<p class="rp_original">
+								With probability 1-\(o\)(poly-small), \(u_A=f_n(i_A,i_B),v_A=(p_A',q_A',N_A')\) and \(w_A=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor. A dual constraint on B is also required.
+							</p>
+						</section>
+						<section id="sec5.2.2">
+							<h4>5.2.2. Privacy</h4>
+							<ol class="rp_original" type="i">
+								<li>	
+									\(I_n^{(J)}(i_A,i_B,u_A|\Delta_B,i_B,u_B,v_B,w_B)\approx I_n^{(L)}(i_A,i_B,u_A|i_B,u_B)\) where \(J\) is the <span class="definable">stochastic</span> process of running \(M\) with input from \(h\), and \(L\) is the stochastic process of having \((i_A,i_B)\) distributed according to \(h\) and \(u_A=f_n(i_A,i_B),u_B=g_n(i_A,i_B)\).
+								</li>
+								<li>(Interchange A and B in (i).)</li>
+							</ol>
+						</section>
+						<p class="rp_original">
+							If A follows the protocol, but B may cheat and executes some \(M_B'\). Let \(d_n\) be the probability for runs in which \(v_A\neq\)CHEATING, and let \(U_{n,i_B}\) be the probability distribution for \(u_B\) when restricted to such runs and with \(i_B\) being an input for B. If \(d_n\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in\Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following constraints of Validity and Privacy.
+						</p>
+						<section id="sec5.2.3">
+							<h4>5.2.3. Validity</h4>
+							<p class="rp_original">
+								With probability \(d_n-o\)(poly-small), \(u_A=f_n(i_A,i_B), v_A=(p_A',q_A',N_A')\) and \(w_A'=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor.
+							</p>
+						</section>
+						<section id="sec5.2.4">
+							<h4>5.2.4. Privacy</h4>
+							<p class="rp_original">
+								\(I_n^{(J)}(i_A,i_B,u_A|\Delta_B,i_B,u_B,v_B,w_B) \approx I_n^{(L)}(i_A,i_B,u_A|i_B,u_B)\), where \(J\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(L\) is the stochastic process of being given the value of \(u_B\) distributed according to \(U_{n,i_B}\).
+							</p>
+							<p class="rp_original">
+								As in Model I, let \(G\) denote a probabilistic polynomial-time <span class="definable">Turing machine</span> that takes \(i_B\) as input and outputs \(z\); let \(\beta_n(G)\) denote the probability that \(z=g_n(i_A,i_B)\).
+							</p>
+						</section>
+						<section id="sec5.2.5">
+							<h4>5.2.5. Fairness</h4>
+							<p class="rp_original">
+								For any fixed \(k\), there exists a recovery algorithm \(R\) (dependent on \(M_B'\)) whose output \(s\) satisfies the following condition:
+								$$Pr\{(u_B=g_n(i_A,i_B))\wedge(s\neq f_n(i_A,i_B))\} \leq\beta_n(G)+O(\frac{1}{n^k})$$
+								for some G.
+							</p>
+						</section>
+						<p class="rp_original">
+							When B follows the protocol and A may cheat, we have a set of requirements obtained from the above ones by switching the roles of A and B.
+						</p>
+						<p class="rp_original">
+							<a href="#theorem3">Theorem 3</a> is also true for Model II.
+						</p>
+					</section>
+					<section id="sec6">
+						<h2>6. Connections</h2>
+						<p class="rp_original">
+							We have chosen a semantic definition of privacy, namely, the communications will not enable one to compute more accurately any polynomial-time predicates. In recent literature, an elegant concept of <i>minimum-knowledge transfer</i> protocol was introduced in <a href="#citation1"><span class="reference" data-citation="1">[1]</span></a> (and generalized in <a href="#citation2"><span class="reference" data-citation="2">[2]</span></a>) to capture the notion of no unintended information disclosure. It is easy to define privacy constraints for our problems in terms of this concept. We can show that the protocols used to prove the theorems also satisfy the minimum knowledge transfer requirements.
+						</p>
+						<span class="rp_theorem_header" id="theorem4">
+							Theorem 4
+						</span>
+						<p class="rp_original rp_theorem">
+							For any interactive computational problem \(\langle h_n,(f_n,g_n)\rangle\), there exists a minimum knowledge transfer protocol \(M\) that achieves validity and fairness.
+						</p>
+						<p class="rp_original">
+							The proofs of the theorems are length, and will be given in the complete paper.
+						</p>
 					</section>
                 </div>
             </div>
@@ -276,6 +498,8 @@
 					<li id="citation13">LMR</li>
 					<li id="citation14">VV</li>
 					<li id="citation15">HS</li>
+					<li id="citation16">ACGS</li>
+					<li id="citation17">BS</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
