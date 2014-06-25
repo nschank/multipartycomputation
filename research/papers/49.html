@@ -55,6 +55,7 @@
 				}
 			}
 
+			self_def["(e,d)-privacy constraint"] = "<a href=\"#def1\">Definition 1</a></p><p>A protocol is said to satisfy the \\((\\epsilon,\\delta)\\)-privacy constraint for some fixed \\(\\epsilon,\\delta&gt;0\\) if:</p><ol><li>Alice's calculated probability distribution on \\(j\\quad p_i(j)=\\frac{1}{|G_i|}(1+O(\\epsilon))\\) for \\(j \\in G_i\\), and 0 otherwise, where \\(G_i\\) is the set of \\(j\\) for which \\(f(i,j)=v\\),</li><li>if Alice tries afterwards to perform more calculations with no more than \\(O(N^k)\\) encryptions and decryptions, with probability at least \\(1-\\delta\\) she will still get the above distribution on \\(j\\), and</li><li>the above requirement is also true for Bob.</li></ol><p>";
 			self_def["successful cheating"] = "<a href=\"#def2\">Definition 2</a></p><p>An instance of an execution of a protocol in which a party does not behave consistently with any possible input, yet any other party is unable to detect it.";
 			self_def["robust"] = "A robust bit-producing protocol is one in which the bit produced has the correct <span class=\"definable\">bias</span> even if someone has cheated.";
 			//-->
@@ -91,12 +92,14 @@
                         <ol type="A">
                             <li><a href="#_A">Overview</a>
 								<ol>
-									<li><a href="#a_intro">Introduction</a></li>
-									<li><a href="#a_goals">Goals and Results</a></li>
-									<li><a href="#a_defs">Definitions</a></li>
-									<li><a href="#a_theorems">Theorems</a></li>
-									<li><a href="#a_protocols">Protocols</a></li>
-									<li><a href="#a_ref">Referencing This Paper</a></li>
+									<li><a href="#intro">Introduction</a></li>
+									<li><a href="#goals">Goals and Results</a></li>
+									<li><a href="#assumptions">Assumptions</a></li>
+									<li><a href="#defs">Definitions</a></li>
+									<li><a href="#theorems">Theorems</a></li>
+									<li><a href="#protocols">Protocols</a></li>
+									<li><a href="#further">Further Reading</a></li>
+									<li><a href="#ref">Referencing This Paper</a></li>
 								</ol>
 							</li>
                             <li><a href="#_B">Annotated Extended Abstract</a></li>
@@ -106,20 +109,21 @@
                         <span class="equation" data-equation="fx1xm">\(f(x_1, x_2, x_3,&hellip;, x_m)\)</span>,
                         which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range. 
                         Assume initially person \(P_i\) knows the value of \(x_i\) and no other 
-                        \(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?</div>
-                    <section id="a_intro">
+                        \(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?
+					</div>
+                    <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaire Problem, and for being the first paper to look into Multiparty Computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) Multiparty Computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
 						</p>
 						<p class="rp_analysis">
-							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaire Problem, or Yao's Millionaire Problem. Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it an excellent case study into secure two-party computation (as can be seen in the <a href="../../learn/ch1.html#sec1">tutorial page</a> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaire Problem nonetheless remains the most common example of multiparty computation to date.
+							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaire Problem. Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it an excellent case study into secure two-party computation (as can be seen in the <a href="../../learn/ch1.html#sec1">tutorial page</a> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaire Problem nonetheless remains the most common example of multiparty computation to date.
 						</p>
 						<p class="rp_analysis">
-							The significance of this particular paper to this field is difficult to overstate. Despite its shortcomings (namely, its lack of proof and its limited direct application), its focus on defining a general problem as opposed to being limited to a specific one ultimately vaulted it into the realm of influence, and most research into multiparty computation which followed it can be framed within the definitions he specified.
+							The significance of this particular paper to this field is difficult to overstate. Despite its shortcomings (namely, its lack of proof and its limited direct application), its focus on defining a general problem as opposed to being limited to a specific one ultimately vaulted it into the realm of influence, and most research into multiparty computation which followed it can be framed within the definitions Yao presented here.
 						</p>
 					</section>
-					<section id="a_goals">
+					<section id="goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							Yao's main goal was to lay the groundwork for later research by outlining the framework of a few different basic types of problems, as well as citing a few basic applications. He defined the problem of multiparty computation in terms of:
@@ -135,7 +139,13 @@
 							Yao specifically mentions, as an aside, that his theorems prove that <span class="definable">mental poker</span> can be played with any public-key system, a generalization of previous research.
 						</p>
 					</section>
-					<section id="a_defs">
+					<section id="assumptions">
+						<h2>Assumptions</h2>
+						<p class="rp_analysis">
+							Yao's theorems are dependent on the existence of <a href="../../learn/assumptions.html"><span class="definable" data-define="one-way function">one-way functions</span></a>.
+						</p>
+					</section>
+					<section id="defs">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - \((\epsilon,\delta)\)-Privacy Constraint</span></a>
 						<p class="rp_original rp_definition">
@@ -175,14 +185,14 @@
 							cheating by Bob is defined similarly.
 						</p>
 					</section>
-					<section id="a_theorems">
+					<section id="theorems">
 						<h2>Theorems</h2>
 						<p class="rp_original">Let \(A\) be a protocol, let \(T(A)\) denote the maximum number of bits exchanged
 							 between Alice and Bob when \(A\) is used.</p>
 						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
 						<p class="rp_original rp_theorem">
 							For any \(\epsilon,\delta > 0\) and any function \(f\), there exists a protocol for computing \(f\)
-							that satisfies the \((\epsilon,\delta)\)-privacy constraint.
+							that satisfies the <span class="definable" data-define="(e,d)-privacy constraint">\((\epsilon,\delta)\)-privacy constraint</span>.
 						</p>
 						<a href="#theorem2"><span class="rp_theorem_header">Theorem 2</span></a>
 						<p class="rp_original rp_theorem">
@@ -190,14 +200,14 @@
 							be a \(0-1\) function. If \(f\) can be
 							computed by a boolean circuit of size \(C(f)\), then there is a protocol
 							\(A\) computing \(f\) satisfying the
-							\((\epsilon,\delta)\)-privacy constraint such that
+							<span class="definable" data-define="(e,d)-privacy constraint">\((\epsilon,\delta)\)-privacy constraint</span> such that
 							<span class="equation" data-equation="th2">\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta}})\)</span>.
 						</p>
 						<a href="#theorem3"><span class="rp_theorem_header">Theorem 3</span></a>
 						<p class="rp_original rp_theorem">
 							Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(F_n\) be the family of \(0-1\) valued function
                                 \(f(i,j)\) with \(i\) and \(j\) being \(n\)-bit integers. Let \(f\) be a random element of \(F_n\),
-							then any protocol \(A\) that computes \(f\) with \((\epsilon,\delta)\)-privacy constraint
+							then any protocol \(A\) that computes \(f\) with <span class="definable" data-define="(e,d)-privacy constraint">\((\epsilon,\delta)\)-privacy constraint</span>
 							must have \(T(A)>2^\frac{n}{2}\) for all large \(n\).
 						</p>
 						<a href="#theorem4"><span class="rp_theorem_header">Theorem 4</span></a>
@@ -207,25 +217,25 @@
 						</p>
 						<ol class="rp_original rp_theorem">
 							<li>\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta\cdot\gamma}}\log{\frac{1}{\gamma}})\), and</li>
-							<li>if one participant behaves according to \(A\), the probability of a successful cheating by the other
+							<li>if one participant behaves according to \(A\), the probability of a <span class="definable">successful cheating</span> by the other
 								participant is at most \(\gamma\)</li>
 						</ol>
 						<a href="#theorem5"><span class="rp_theorem_header">Theorem 5</span></a>
 						<p class="rp_theorem rp_annotation">
-							Let \(K'\) be defined such that the set \(\{P_i | i \in K'\}\) is the set of people who are attempting to collude with each
+							Let \(K'\) be defined such that the set \(\{P_i\;|\;i \in K'\}\) is the set of people who are attempting to collude with each
 							other in order to cheat. 
 						</p>
                         <p class="rp_original rp_theorem">
                             For any \(\epsilon,\delta,\gamma > 0\), there exists a protocol
-                            \(A\) for computing \(f\) which satisfies the \((\epsilon,\delta)\)-private constraint
+                            \(A\) for computing \(f\) which satisfies the <span class="definable" data-define="(e,d)-privacy constraint">\((\epsilon,\delta)\)-private constraint</span>
                             and which has the property that, for any \(K' \neq \{1,&hellip;,m\}\), the probability for
                             \(K'\) to have a successful cheating can not be more than \(\gamma\).
                         </p>
 						<a href="#theorem6"><span class="rp_theorem_header">Theorem 6</span></a>
                         <p class="rp_original rp_theorem">
                             There exist functions \(f\) for which any protocol
-                            \(A\) satisfying the conditions in Theorem 5 must have
-                            \(T(A) = \Omega((|X_1|\cdot |X_2|\cdot\cdots\cdot|X_m|)^\frac{1}{4})\)
+                            \(A\) satisfying the conditions in <a href="#theorem5">Theorem 5</a> must have
+                            \(T(A) \in \Omega((|X_1|\cdot |X_2|\cdot\cdots\cdot|X_m|)^\frac{1}{4})\)
                         </p>
 						<a href="#theorem7"><span class="rp_theorem_header">Theorem 7</span></a>
 						<p class="rp_original rp_theorem">
@@ -233,10 +243,14 @@
                             a bit with a <span class="definable">transcendental</span> bias \(\alpha\) can be <span class="definable">robust</span>.
                         </p>
 						<a href="#theorem8"><span class="rp_theorem_header">Theorem 8</span></a>
+						<p class="rp_annotation rp_theorem">
+							Suppose Alice and Bob wish to exchange a pair
+                            of solutions \(x, y\) with \(E_a(x) = 1\) and \(E_b(y) = 1\).
+						</p>
 						<p class="rp_original rp_theorem">
-                            Let \(A\) be any protocol for exchanging secrets.
+                            Let \(A\) be any protocol for exchanging [such] secrets.
                             Then either Alice or Bob will be able to doublecross
-                            successfully with probability at least \(\frac{1}{2}\).
+                            successfully with probability at least &frac12;.
                         </p>
 						<a href="#theorem9"><span class="rp_theorem_header">Theorem 9</span></a>
 						<p class="rp_original rp_theorem">
@@ -246,24 +260,33 @@
                             of anyone double-crossing successfully is bounded by \(\epsilon\).
                         </p>
 					</section>
-					<section id="a_protocol">
+					<section id="protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#sec3.1">Millionaire Protocol</a></h3>
 						<ul class="rp_analysis">
 							<li><b>Number of parties: </b>2</li>
 							<li><b>Function(s): </b>Comparisons between \(x_0\) and \(x_1\) (i.e. \(&lt;, &gt;, \leq ,\geq\)). Two honest parties will find the same return value.</li>
-							<li><b>Privacy constraints: </b><span class="definable" data-define="negligible">Negligible probability</span> that \(P_i\) learns \(x_{(1-i)}\)</li>
+							<li><b>Privacy constraints: </b><span class="definable" data-define="negligible">Negligible probability</span> that \(P_i\) learns more about \(x_{(1-i)}\) than offered by the computed function.</li>
 							<li><b>Cheating: </b><span class="definable" data-define="malicious adversary">Malicious adversaries</span> can change the outcome of the protocol to a value of their choosing.</li>
 							<li><b>Security constraints: </b>None</li>
-							<li><b>Bits exchanged: </b>\(O(Nn)\) where \(N\) is the bit-length of \(i\) and \(j\), and \(n\) is the size of their range.</li>
-							<li><b>Runtime:</b> \(O(n)\), where \(n\) is the size of the range of \(i\) and \(j\)</li>
+							<li><b>Bits exchanged: </b>\(O(Nn)\) where \(N\) is the bit-length of \(i\) and \(j\), and \(n\) is their range.</li>
+							<li><b>Runtime:</b> \(O(n)\), where \(n\) is the range of \(i\) and \(j\)</li>
 						</ul>
 					</section>
-					<section id="a_ref">
+					<section id="further">
+						<h2>Further Reading</h2>
+						<p class="rp_analysis">
+							For more about the Millionaire Problem, see the related <a href="../../learn/ch1.html#sec1">tutorial section</a>.
+						</p>
+						<p class="rp_analysis">
+							For more about exchanging secrets as in Theorems <a href="#theorem8">8</a> and <a href="#theorem9">9</a>, see Yao's follow-up paper <a href="21.html">How to Generate and Exchange Secrets</a>.
+						</p>
+					</section>
+					<section id="ref">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
-							A.C. Yao. Protocols for secure computations. In <i>Proc. of the 23rd Annu. IEEE Symp. on Foundations of Computer Science.</i> pages 160-164. 1982.
+							A.C. Yao. Protocols for secure computations (extended abstract). In <i>Proc. of the 23rd Annu. IEEE Symp. on Foundations of Computer Science.</i> pages 160-164. 1982.
 						</p>
 					</section>
                 </div>
@@ -332,6 +355,9 @@
                             For example, without a precise model it would be hard to answer a question such as “Is it possible for three mutually suspecting parties to interactively generate a bit with <span class="definable">bias</span>
                             \(\frac{1}{e}\)?”
                         </p>
+						<p class="rp_annotation">
+							Yao answers this question in <a href="#theorem7">Theorem 7</a>, which states that <span class="definable">transcendental</span> biases are not achievable <span class="definable" data-define="robust">robustly</span>.
+						</p>
                         <p class="rp_original">
                             In response to this need, we propose to adopt the following view.
 
@@ -364,7 +390,7 @@
                             Results on the other case will be reported elsewhere.
                         </p>
 						<p class="rp_annotation">
-							There is soon to be a <span data-broken-link=true>tutorial section</span> dealing with adversaries, as it is one of the most varied and well-studied aspects of cryptography.
+							There is soon to be a <span data-broken-link=true>tutorial section</span> dealing with adversaries and saboteurs, as it is one of the most varied and well-studied aspects of cryptography.
 						</p>
                     </section>
                     <section id="sec3">
@@ -392,7 +418,7 @@
                                 Let \(E_a\) be the public key of Alice, generated by choosing a random element from \(Q_N\).
                             </p>
 							<p class="rp_annotation">
-								Firstly, it should be noted that in the original paper, Yao put that \(1 &lt; i,j &lt; 10\); however, the protocol is not at any way affected by allowing \(i\) or \(j\) to be \(1\) or \(10\).
+								Firstly, it should be noted that in the original paper, Yao put that \(1 &lt; i,j &lt; 10\); however, the protocol is not at any way affected by allowing \(i\) or \(j\) to be \(1\) or \(10\), and it doing so cuts down on unnecessary bits sent.
 								Secondly, beginning readers should note that, while Bob can calculate \(E_a(x)\), he is unable to calculate \(D_a(x)\)&mdash;the decryption of \(E_a(x)\)&mdash; in a reasonable (polynomial) amount of time.
 							</p>
                             <p class="rp_original">
@@ -417,17 +443,17 @@
                                 <li value="4">
                                     Alice generates a random prime \(p\) of \(N/2\) bits,
                                     and computes the values \(z_u = y_u\pmod{p}\) for all \(u\);
-                                    if all \(z_u\) differ by at least \(2\) in the \(\bmod{p}\) sense, stop;
+                                    <del>if all \(z_u\) differ by at least 2 in the \(\bmod{p}\) sense, stop;
                                     otherwise generates another random prime and repeat the process until all \(z_u\)
-                                    differ by at least \(2\);
-                                    let \(p, z_u\) denote this final set of numbers.
+                                    differ by at least 2;
+                                    let \(p, z_u\) denote this final set of numbers.</del>
                                 </li>
 							</ol>
 							<p class="rp_annotation">
-								In this step, it's possible Yao made a mistake. The restriction that no two \(z_u\) have a difference less than \(2\) allows Bob to learn something about \(i\) in some cases.
+								In this step, Yao made a mistake. The restriction that no two \(z_u\) have a difference less than \(2\) allows Bob to learn something about \(i\) in some cases.
 								Let's, for the sake of an example, say that \(i=5\). Alice chooses a \(p\) such that \(z_4 = z_6 + 2\), but their difference is at least \(2\), so this should be okay.
-								However, in the next step, she adds \(1\) to all \(z_u\) for \(u \geq 5\); now \(z_4 = z_6 + 1\), which according to the rule is not allowed. Bob now knows that \(i\in\{5,6\}\):
-								those are the only two cases in which \(z_4 = z_6 + 1\) could be possible with the restriction on step 4. Without the restriction, he learns nothing.
+								However, in the next step, she adds \(1\) to all \(z_u\) for \(u \geq 5\); now \(z_4 = z_6 + 1\), which according to this rule is not allowed when initially choosing \(p\). Bob now knows that \(i\in\{5,6\}\):
+								those are the only two cases in which \(z_4 = z_6 + 1\) could be possible with the restriction on step 4. Without the restriction, he learns nothing, since all of the numbers are, from his perspective, randomly produced (since the results of \(D_a\) look random to him).
 							</p>
 							<p class="rp_annotation">
 								The above reasoning works for <u>any</u> value that two \(z_u\)'s 'should' be apart, since the addition of \(1\) can always move a \(z_u\) too close to another in the next step.
@@ -441,9 +467,11 @@
                                 </li>
 							</ol>
 							<p class="rp_annotation">
-								There was an error in the original document that had an extra term (\(z_i+1\)) after \(z_i\).
+								There was an error in the original document that had an extra term (\(z_i+1\)) after \(z_i\), but this clearly isn't 10 numbers, and clearly doesn't fit with the remainder of the protocol.
+							</p>
+							<p class="rp_annotation">
 								This protocol can be simply altered to calculate \(i\leq j\) instead of \(i&lt;j\) by changing \(z_i\) to \(z_i+1\) (and accordingly changing
-								\(\geq\) and \(&lt;\) in the next step to \(&gt;\) and \(\leq\) respectively).
+								\(\geq\) and \(&lt;\) in the next step to \(&gt;\) and \(\leq\) respectively). The statements \(i&gt;j\) and \(i\geq j\) are the negations of \(i\leq j\) and \(i&lt;j\), so can obviously be calculated the same way but negating the answer.
 							</p>
 							<ol class="rp_original">
                                 <li value="6">
@@ -492,7 +520,7 @@
                                 In the formal definition to be given in <a href="#sec3.2">Section 3.2</a>, we will define this precisely.
                             </p>
 							<p class="rp_annotation">
-								This precise example will be addressed in the annotations, because Yao does not return to it.
+								This precise example will be addressed in the annotations, because Yao does not return to it. However (spoiler alert), neither party could perform enough calculations to learn something extra in polynomial time. Alice, in particular, cannot possibly learn anything, whereas Bob only has an \(\frac{n}{N}\) probability of learning something, where \(n\) is the range of \(i,j\).
 							</p>
                             <p class="rp_original">
                                 One may have noticed the possibility that some party may cheat in the process, by deviating from the agreed protocol.
@@ -510,8 +538,8 @@
                                 \(E_aE_b(x) = E_bE_a(x)\).
                                 The other solution makes use of a probabilistic encryption method invented by Goldwasser and Micali <a href="#citation2"><sup class="reference" data-citation="2">[2]</sup></a>.
                             </p>
-							<p class="rp_annotation">
-								Neither is mentioned. <span data-broken-link=true>Yet.</span>
+							<p class="rp_annotation" data-broken-link=true>
+								To our knowledge, neither has been released by Yao.
 							</p>
                         </section>
                         <section id="Model">
@@ -599,27 +627,29 @@
                                 </li>
                             </ol>
 							<p class="rp_annotation">
-								Let's quickly see what \(\epsilon\) and \(\delta\) we can apply to the millionaire protocol.
-								Without loss of generality, assume that Bob has more money (e.g. \(i&lt;j\) and therefore \(f(i,j)=1\)).
+								Let's quickly see what \(\epsilon\) and \(\delta\) we can apply to the millionaire protocol. For added generality, we will generalize from \(i,j\in\{1,10\}\) to any range of size \(n\) starting at 1. Without loss of generality, assume that Bob has more money (e.g. \(i&lt;j\) and therefore \(f(i,j)=1\)).
 								Fixing \(i,j\), we'll first look at what Alice can learn. 
 							</p>
 							<p class="rp_annotation">
-								Obviously, she knows that \(p_i(x)=0\) for \(x\leq i\). For the remainder of possible \(j\)'s, however, she can decrypt them using her private key,
-								producing \(10-i\) possible \(x\) values. Since \(x\) was chosen randomly, she cannot possibly figure out which one Bob chose. \(G_i=\{i+1,i+2,&hellip;,10\}\)
-								and, with no way of choosing between them, \(p_i(j)=\frac{1}{|G_i|}\) for \(j\in G_i\).
+								Obviously, she knows that \(p_i(x)=0\) for \(x\leq i\). For the remainder of possible \(u=j\)'s, however, she can decrypt \(k-j+u\)'s using her private key, producing \(n-i\) possible \(x\) values. Since \(x\) was chosen randomly, she cannot possibly figure out which one Bob chose. \(G_i=\{i+1,i+2,&hellip;,n\}\) and, with no way of choosing between them, \(p_i(j)=\frac{1}{|G_i|}=\frac{1}{n-i}\) for \(j\in G_i\).
 							</p>
 							<p class="rp_annotation">
 								Bob, conversely, knows that \(i\) must be within \(G_j=\{1,2,&hellip;,j-1\}\). He has slightly more information from Alice, and can try to guess another value of \(y_u\) in order to further restrict \(i\)&mdash;information that would drastically alter his probability distribution. He knows \(p\), the
-								random prime Alice has used to \(\bmod{} y_u\), and he knows either \(y_i\pmod{p}\) or \(y_i+1\pmod{p}\) for all of \(i\in G_j\). He must correctly guess a value \(g\) such that \(E_a(g)\) or \(E_a(g+1)\) is \(k+j-u\) for some \(u&lt;j\); knowing only their value \(\bmod{p}\) and their upper bound \(2^N-1\), he can narrow the search field to \(j-1\) different searches of <span class="equation" data-equation="search">\(\frac{2^N-1)}{p}\times2\)</span> different values. Since \(p\) is of length \(\frac{N}{2}\), this is a total search space lower bounded by \(O(j\cdot 2^{N/2})\), with \(j-1\) values to be found, for a total average time of finding more information of \(O(2^{N/2})\).
+								random prime Alice has used to \(\bmod{} y_u\), and he knows either \(y_i\pmod{p}\) or \(y_i+1\pmod{p}\) for all of \(i\in G_j\). He must correctly guess a value \(g\) such that \(E_a(g)\) or \(E_a(g+1)\) is \(k+j-u\) for some \(u&lt;j\).
 							</p>
 							<p class="rp_annotation">
-								This means that we can set both \(\epsilon\) and \(\delta\) very low: even with additional calculations, the probability that either learns anything at all
-								is <span class="definable">negligible</span>.
+								This is likely why Yao attempted to specify that no two \(y_u\)'s be within 2 of each other, to force Bob's search space \(\bmod{p}\) to be of size \(2(j-1)\). This restriction is not necessary, however: assume the very worst case, which is that \(z_u\) is a sequence of only one number repeated (and noting that that would tell Bob nothing about \(i\) by itself), so Bob has a search space of \(2\bmod{p}\). Since each \(y_u\) could be between 0 and \(2^N-1\), and \(p\) is of maximum size \(2^{\frac{N}{2}}\), this leaves a minimal search space of \(2*\frac{2^N}{2^{N/2}}=2^{\frac{N}{2}+1}\). Since Bob has no extra information which would allow him to choose from the search space better than randomly, finding a single value which would give him any information has runtime \(O(2^N)\). Since this is the minimal search space, it is the best case for Bob, and therefore the probability of him finding any information through extra calculation is <span class="definable">negligible</span>.
+							</p>
+							<p class="rp_annotation">
+								We can set \(\epsilon\) arbitrarily low, since neither party can calculate a probability distribution better than \(\frac{1}{|G|}\).
+							</p>
+							<p class="rp_annotation">
+								We can calculate \(\delta\) a bit more precisely. The probability of Bob changing his probability distribution is \(\frac{O(N^k)}{2^{N/2+1}}\) best case, so for fixed \(k\) we can set \(\delta\leq \frac{N^k}{2^{N/2+1}}\), which <a href="http://www.wolframalpha.com/input/?i=plot+%28N%5Ek%29%2F%282%5E%28N%2F2%2B1%29%29+on+k%3D0..8%2C+N%3D128..256">rapidly</a> approaches \(0\) as \(N\) increases.
 							</p>
                             <span class="rp_theorem_header" id="theorem1">Theorem 1</span>
                             <p class="rp_original rp_theorem">
                                 For any \(\epsilon,\delta > 0\) and any function \(f\), there exists a protocol for computing \(f\)
-                                that satisfies the \((\epsilon,\delta)\)-privacy constraint.
+                                that satisfies the <span class="definable" data-define="(e,d)-privacy constraint">\((\epsilon,\delta)\)-privacy constraint</span>.
                             </p>
 							<p class="rp_annotation">
 								Yao did not present a proof for this theorem in this paper, but we are <span data-broken-link=true>still looking</span>.
