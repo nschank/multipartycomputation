@@ -164,7 +164,14 @@
                             <li>
                                 <a href="#_B">Annotated Extended Abstract</a>
                                 <ol>
-                                    <li><a href="#sec1">Introduction</a></li>
+                                    <li>
+										<a href="#sec1">Introduction</a>
+										<ol>
+											<li><a href="#sec1.1">Results</a></li>
+											<li><a href="#sec1.2">Algorithm</a></li>
+											<li><a href="#sec1.3">Related Works</a></li>
+										</ol>
+									</li>
                                 </ol>
                             </li>
                         </ol>
@@ -185,8 +192,49 @@
 							Inspired by their work, Chaum, Damgård, and Van de Graaf presented a more direct and practical solution<a href="#citation3"><sup class="reference" data-citation="3">[3]</sup></a> based on a specific trapdoor function. Their protocol had the advantage that one \(x_i\) was unconditionally secure, i.e. no information at all is available about it, other than the amount released by \(z\). All these constructions rely on trapdoor one-way functions, and therefore must assume essentially that public key cryptography is possible.
 						</p>
 						<p class="rp_original">
-							
+							A much weaker assumption is to assert the existence of authenticated secrecy channels, i.e. a way of communicating in which the identity of the sender is known (authentication) and the data transferred is revealed only to the single person it is designed for (secrecy). Such channels are very practical and can be implemented very easily: for example, this channel can be obtained by writing down messages on pieces of paper and physically handing them out to the other parties. They can also be implemented using conventional cryptography (secret key systems). Two fundamental questions remain: Which protocol problems can be solved assuming only the existence of these authenticated secrecy channels between pairs of participants, and can al parties have their secrets unconditionally secure?
 						</p>
+						<section id="sec1.1">
+							<h3>1.1. Results</h3>
+							<p class="rp_original">
+								In this paper, we show that essentially any multiparty protocol problem can be solved under the assumption of the existence of authenticated secrecy channels between pairs of participants and that each party;s secrets can be unconditionally secure. As explained below, under such a model it is required that less than one third of the participants deviate from the protocol. The number of cheaters tolerated by our solution is therefore optimal.
+							</p>
+							<p class="rp_original">
+								The techniques presented do not rely on any cryptographic assumptions; they provide secrecy and correctness by means of a new non-cryptographi verifiable secret sharing (VSS) scheme. These schemes were introduced in the cryptographic setting in <a href="#citation4"><span class="reference" data-citation="4">[4]</span></a>. To this day, all previous solutions relied on public key cryptography. We introduce the first VSS scheme that does not rely on such assumptions. Sections <a href="#sec3">3</a> and <a href="#sec4">4</a> are devoted to the construction of this new scheme and to its application toward achieving our goal.
+							</p>
+						</section>
+						<section id="sec1.2">
+							<h3>1.2. Algorithm</h3>
+							<p class="rp_original">
+								The general structure of the algorithms is similar to the ones of <a href="#citation1"><span class="reference" data-citation="1">[1]</span></a> and <a href="#citation3"><span class="reference" data-citation="3">[3]</span></a> in the sense that it takes place in two steps: Commitment and Computation. First the participants enter a stage in which they commit to their inputs. This commitment is performed using the VSS, so that every participant gets a share of everybody else's secret. If some participants are trying to commit to something improper or are simply not collaborating, this first phase will identify them and the remaining participants will take the actions relevant to this situation. This is the very best we can hope for. What else could you do with someone who does not want to participate? Once everyone has committed to their inputs, the second phase is the actual evaluation of the function. The computation is performed locally by each participant on the shares he or she got from the others.
+							</p>
+							<p class="rp_original">
+								Our construction achieves the following properties:
+							</p>
+							<ul class="rp_original">
+								<li>
+									Unconditional Secrecy: In both stages, it is not possible for any subset of less than \(\frac{n}{3}\) participants to gain any information about the remaining people's inputs.
+								</li>
+								<li>
+									Built-In Fault Tolerance: In the second phase, no such subset will be able to prevent the honest participants from completing correctly the secret evaluation of the function (see <a href="#sec5">Section 5</a>).
+								</li>
+							</ul>
+							<p class="rp_original">
+								Again, we mean that our solution does not depend on some restrictions of the computing power of the participants. Earlier solutions relied on cryptographic assumptions both for secrecy of the inputs and correctness of the computation. If in the best case these assumptions turned out to be true, the secrecy and correctness would still be dependent on the limitations in computing power of the participants.
+							</p>
+						</section>
+						<section id="sec1.3">
+							<h3>1.3. Related Works</h3>
+							<p class="rp_original">
+								Our work has drawn inspiration from and relies on a number of earlier contributions. The Byzantine Generals problem proposed and solved by <a href="#citation5"><span class="reference" data-citation="5">[5]</span></a> can be thought of as underlying our work. Also, the type of so called secret sharing schemes proposed by <a href="#citation6"><span class="reference" data-citation="6">[6]</span></a> and <a href="#citation7"><span class="reference" data-citation="7">[7]</span></a> are basic building blocks. The usefulness of their homomorphic structue was observed by <a href="#citation8"><span class="reference" data-citation="8">[8]</span></a>, who proposed techniques very similar to ours.
+							</p>
+							<p class="rp_original">
+								Other work has been able to provide unconditional privacy in multiparty protocols. A poker protocol<a href="#citation9"><sup class="reference" data-citation="9">[9]</sup></a> used a model similar to ours, but was unable to tolerate active cheaters. The dining cryptographers problem<a href="#citation10"><sup class="reference" data-citation="10">[10]</sup></a>, also based on a similar model, provided unconditional untraceability of messages and was able to tolerate active disruption. The present work stems from that of <a href="#citation3"><span class="reference" data-citation="3">[3]</span></a>, where general multiparty protocols were provided based on <span class="definable" data-define="trapdoor one-way function">trapdoor one-way functions</span> that can offer unconditional privacy to one participant. It was also shown there that unconditional protection of a single designated participant is all that can be achieved under that model.
+							</p>
+							<p class="rp_original">
+								Some concurrent and independent work<a href="#citation11"><sup class="reference" data-citation="11">[11]</sup></a> has also been performed on this topic: during discussions with Shafi Goldwasser and Avi Wigderson, we learned that, together with Michael Ben-Or, they were working on results similar to ours. At that time, all of us had results in a very early stage. Finally, by the time of submission to this conference, both groups have ended up getting almost identical results by quite different means.
+							</p>
+						</section>
                     </section>
                 </div>
             </div>
@@ -196,6 +244,14 @@
                     <li id="citation1">GMW</li>
 					<li id="citation2">Ya</li>
 					<li id="citation3">CDG</li>
+					<li id="citation4">CGMA</li>
+					<li id="citation5">LPS</li>
+					<li id="citation6">Bl</li>
+					<li id="citation7">Sh</li>
+					<li id="citation8">Be</li>
+					<li id="citation9">BF</li>
+					<li id="citation10">Ch2</li>
+					<li id="citation11">BGW</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
