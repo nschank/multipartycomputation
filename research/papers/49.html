@@ -342,11 +342,11 @@
                     <section id="sec2">
                         <h2>A Unified View of Secure Computation</h2>
                         <p class="rp_original">
-                            Since <span class="definable" data-define="one-way function">one-way functions</span> were first proposed in 1976 <a href="#citation1"><sup class="reference" data-citation="1">[1]</sup></a>, they have been used in two kinds of applications.
+                            Since <span class="definable" data-define="one-way function">one-way functions</span> were first proposed in 1976 <sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup>, they have been used in two kinds of applications.
 
-                            The first kind is concerned with the <span class="definable">encryption</span> and transmission of messages to make them unreadable and unalterable for eavesdroppers and saboteurs <a href="#citation1"><sup class="reference" data-citation="1">[1]</sup></a><a href="#citation2"><sup class="reference" data-citation="2">[2]</sup></a><a href="#citation3"><sup class="reference" data-citation="3">[3]</sup></a><a href="#citation4"><sup class="reference" data-citation="4">[4]</sup></a>.
+                            The first kind is concerned with the <span class="definable">encryption</span> and transmission of messages to make them unreadable and unalterable for eavesdroppers and saboteurs <sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup><sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup><sup class="reference" data-citation="3"><a href="#citation3">[3]</a></sup><sup class="reference" data-citation="4"><a href="#citation4">[4]</a></sup>.
 
-                            The second kind of applications includes “<span class="definable">mental poker</span>”<a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a>, in which two players deal cards by communicating over a telephone line, and “<span class="definable" data-define="coin flip">coin flipping</span>” <a href="#citation6"><sup class="reference" data-citation="6">[6]</sup></a>, in which two mutually suspecting parties are to generate an unbiased bit.
+                            The second kind of applications includes “<span class="definable">mental poker</span>”<sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup>, in which two players deal cards by communicating over a telephone line, and “<span class="definable" data-define="coin flip">coin flipping</span>” <sup class="reference" data-citation="6"><a href="#citation6">[6]</a></sup>, in which two mutually suspecting parties are to generate an unbiased bit.
 
                             It would be desirable to have a unified framework where all these applications can be related, and where common proof techniques can be developed for proving the security of protocols.
 
@@ -529,14 +529,14 @@
                                 without revealing the values of \(i\) and \(j\)?
                                 We will show that this is possible in <a href="#sec3.3">Section 3.3</a>.
                                 (Note that this is a stronger requirement than the verifiability requirement used in the mental poker protocol in Shamir et. al.
-                                <a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a>).
+                                <sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup>).
                             </p>
                             <p class="rp_original">
                                 We have two other solutions to the millionaire’s problem based on different principles.
                                 The first of them assumes that Alice and Bob each owns a private one-way function,
                                 where these functions satisfy the <span class="definable">commutativity</span> property, i.e.
                                 \(E_aE_b(x) = E_bE_a(x)\).
-                                The other solution makes use of a probabilistic encryption method invented by Goldwasser and Micali <a href="#citation2"><sup class="reference" data-citation="2">[2]</sup></a>.
+                                The other solution makes use of a probabilistic encryption method invented by Goldwasser and Micali <sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup>.
                             </p>
 							<p class="rp_annotation" data-broken-link=true>
 								To our knowledge, neither has been released by Yao.
@@ -700,7 +700,7 @@
                                 and Alice with the privacy constraint. Let \(F_n\) be the family of \(0-1\) valued function
                                 \(f(i,j)\) with \(i\) and \(j\) being \(n\)-bit integers. Clearly, at most \(n\) bits of
                                 transmitted information can compute \(f\), in the absence of the privacy constraint. (See
-                                <a href="#citation7"><span class="reference" data-citation="7">[7]</span></a> for further discussion).
+                                <span class="reference" data-citation="7"><a href="#citation7">[7]</a></span> for further discussion).
                             </p>
 							<p class="rp_annotation">
 								Yao is referring to the lower bound mentioned above, though does not include in the calculation the final bit exchanged which would exchange the answer.
@@ -873,13 +873,13 @@
                         <p class="rp_original">
                             One interesting corollary of our results is that mental
                             poker can be played with any general public-key system.
-                            It differs from Shamir et. al’s solution <a href="#citation5"><sup class="reference" data-citation="5">[5]</sup></a>
+                            It differs from Shamir et. al’s solution <sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup>
                             in that we do
                             not require the one-way functions used to be <span class="definable" data-define="commutativity">commutative</span>,
                             and that we can play it with a public-key system
                             (instead of using private keys). (A solution with a special
                             one-way function with publicized keys for playing mental
-                            poker was known in <a href="#citation2"><span class="reference" data-citation="2">[2]</span></a>, but that solution depends on
+                            poker was known in <span class="reference" data-citation="2"><a href="#citation2">[2]</a></span>, but that solution depends on
                             the special properties of the one-way function involved.)
                             Moreover, the present solution uses much fewer bits as
                             the number of cards becomes greater. Suppose we
@@ -1058,7 +1058,7 @@
 
                         <p class="rp_original">
                             Different kinds of exchanging secrets have been considered
-                            previously. Blum <a href="#citation6"><span class="reference" data-citation="6">[6]</span></a> showed that it is possible to
+                            previously. Blum <span class="reference" data-citation="6"><a href="#citation6">[6]</a></span> showed that it is possible to
                             exchange factors of large composite numbers (a special
                             type of secrets) with vanishing chance for cheating.
                             Even (private communication, 1981) also devised some
