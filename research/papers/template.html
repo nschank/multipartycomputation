@@ -23,8 +23,6 @@
 			{
 				switch (box)
 				{
-					case "equationname":
-						return "equationexplanation";
 					default:
 						return "No info on this equation yet.";
 				}
@@ -76,12 +74,14 @@
                         <ol type="A">
                             <li><a href="#_A">Overview</a>
 								<ol>
-									<li><a href="#a_intro">Introduction</a></li>
-									<li><a href="#a_goals">Goals and Results</a></li>
-									<li><a href="#a_defs">Definitions</a></li>
-									<li><a href="#a_theorems">Theorems</a></li>
-									<li><a href="#a_protocols">Protocols</a></li>
-									<li><a href="#a_ref">Referencing This Paper</a></li>
+									<li><a href="#intro">Introduction</a></li>
+									<li><a href="#goals">Goals and Results</a></li>
+									<li><a href="#assumptions">Assumptions</a></li>
+									<li><a href="#defs">Definitions</a></li>
+									<li><a href="#theorems">Theorems</a></li>
+									<li><a href="#protocols">Protocols</a></li>
+									<li><a href="#further">Further Reading</a></li>
+									<li><a href="#ref">Referencing This Paper</a></li>
 								</ol>
 							</li>
                             <li><a href="#_B">Annotated Paper</a></li>
@@ -92,13 +92,13 @@
 						An important snippet of the paper
 					</div>
 						
-                    <section id="a_intro">
+                    <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Paper Title</b> is...
 						</p>
 					</section>
-					<section id="a_goals">
+					<section id="goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							Some goals that they had.
@@ -107,14 +107,17 @@
 							Don't forget some results, too!
 						</p>
 					</section>
-					<section id="a_defs">
+					<section id="assumptions">
+						<h2>Assumptions</h2>
+					</section>
+					<section id="defs">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - </span></a>
 						<p class="rp_original rp_definition">
 							A definition 
 						</p>
 					</section>
-					<section id="a_theorems">
+					<section id="theorems">
 						<h2>Theorems</h2>
 						<p class="rp_original">Some general definitions used by several theorems</p>
 						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
@@ -122,7 +125,7 @@
 							A theorem
 						</p>
 					</section>
-					<section id="a_protocol">
+					<section id="protocol">
 						<h2>Protocols</h2>
 						<h3><a href="#secxx">Some Protocol Defined</a></h3>
 						<ul class="rp_analysis">
@@ -135,7 +138,10 @@
 							<li><b>Runtime:</b></li>
 						</ul>
 					</section>
-					<section id="a_ref">
+					<section id="further">
+						<h2>Further Reading</h2>
+					</section>
+					<section id="ref">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -144,7 +150,7 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5"><a id="_B"></a>
+            <div class="main_toplevel main_section main_color5" id="_B">
                 <div class="main_window main_fullwidth">
                     <div class="main_toc">
                         <h4 style="color:#333333">Table of Contents</h4>
@@ -160,16 +166,6 @@
                     </div>
                     <section id="sec1">
                         <h2>Introduction</h2>
-                        <p class="rp_original">
-                            An original paragraph of the paper
-							<a href="#citation1"><span class="reference" data-citation="1">[A citation]</span></a>
-							<span class="definable" data-define="collusion">definable</span> 
-							<a href="../tag.html#research:tag:Voting">Related tag</a>
-							<span class="equation" data-equation="equationname">An equation</span>
-                        </p>
-						<p class="rp_annotation">
-							An annotation of the above paragraph
-						</p>
                     
 						<span class="rp_definition_header" id="def1">Definition 1</span>
 						<p class="rp_definition">
