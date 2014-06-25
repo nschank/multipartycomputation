@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MPC - Chapter X</title>
+        <title>MPC - Cryptography Cheat Sheet</title>
         <link rel="stylesheet" type="text/css" href="../style/main.css">
         <link rel="stylesheet" type="text/css" href="../style/equation.css">
         <link rel="stylesheet" type="text/css" href="../style/ref.css">
@@ -59,40 +59,65 @@
             <div class="main_toplevel main_section main_color1">
                 <div class="main_section_nav_container">
 					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
-                    <div class="main_section_nav_box"><a href="prev.html">&#8606; Previous Chapter</a></div>
-                    <div class="main_section_nav_box"><a href="prev.html#last">&#8592; Previous Section</a></div>
-                    <div class="main_section_nav_box"><a href="#sec1">Next Section &#8594;</a></div>
-                    <div class="main_section_nav_box"><a href="next.html">Next Chapter &#8608;</a></div>
                 </div>
                 <div class="main_window main_fullwidth" id="intro">
-                    <span class="l_chapter">Chapter X: </span>
+                    <span class="l_chapter">Cryptography Cheat Sheet</span>
 						
                     <div class="main_toc">
-                        <h4 style="color:#333333">Sections</h4>
-                        <ol type="A">
-                            
-                        </ol>
+                        <h4 style="color:#333333">Categories</h4>
+                        <ul type="A">
+							<li><a href="#mod">Modular Arithmetic</a></li>
+							<li><a href="#O">Big-Oh Notation and Runtime</a></li>
+							<li><a href="#prob">Probability</a></li>
+							<li><a href="#exp">Experiments</a></li>
+                        </ul>
                     </div>
 					
-                    <a href="#citation1"><span class="reference" data-citation="1">[A citation]</span></a>
-					<span class="definable" data-define="collusion">definable</span>
-					<span class="equation" data-equation="equationname">An equation</span>
+                    
                 </div>
             </div>
-			<div class="main_toplevel main_section main_color2" id="sec1">
+			<div class="main_toplevel main_section main_color2" id="mod">
                 <div class="main_section_nav_container">
 					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
-                    <div class="main_section_nav_box"><a href="prev.html">&#8606; Previous Chapter</a></div>
-                    <div class="main_section_nav_box"><a href="#intro">&#8592; Previous Section</a></div>
-                    <div class="main_section_nav_box"><a href="#sec2">Next Section &#8594;</a></div>
-                    <div class="main_section_nav_box"><a href="next.html">Next Chapter &#8608;</a></div>
                 </div>
                 <div class="main_window main_fullwidth">
-					<span class="l_section">Section 1: </span>
-					
-                    <a href="#citation1"><span class="reference" data-citation="1">[A citation]</span></a>
-					<span class="definable" data-define="collusion">definable</span>
-					<span class="equation" data-equation="equationname">An equation</span>
+					<span class="l_section">Modular Arithmetic</span>
+                </div>
+            </div>
+			<div class="main_toplevel main_section main_color3" id="O">
+                <div class="main_section_nav_container">
+					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
+                </div>
+                <div class="main_window main_fullwidth">
+					<span class="l_section">Big-Oh Notation and Runtime</span>
+					<p class="l_content">
+						We theoretical computer scientists generally don't much care about how fast a program actually runs in seconds or minutes (or months...). When we talk about <i>runtime</i>, we're actually referring to the amount of time it takes <u>relative to something</u>. 
+					</p>
+					<p class="l_content">
+						As an example, let's pretend we had a list of \(n\) items and wanted to check whether the first element was some particular value \(x\). If we triple the size of the list, then change the value of \(x\), the amount of time it would take to check this would not change: the runtime is <i>constant</i> relative to both \(n\) and \(x\). 
+					</p>
+					<p class="l_content">
+						But what if we wanted to check if <u>any</u> value in the list were \(x\)? The simplest way to check would obviously be to check every value one by one. If we triple the length of the list, we can expect that it would take three times as long. This algorithm is <i>linear</i> in \(n\); if we increase \(n\) by some factor, the runtime should increase by about the same factor.
+					</p>
+					<p class="l_content">
+						It was for this purpose that computer scientists started using <b>Big-Oh Notation</b>, which is a way of concisely describing the runtime of an algorithm. There are five main functions used within Big-Oh Notation: \(o,O,\Theta,\Omega,\omega\) (read little-oh, big-oh, big-theta, big-omega, little-omega).
+					</p>
+                </div>
+            </div>
+			<div class="main_toplevel main_section main_color4" id="prob">
+                <div class="main_section_nav_container">
+					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
+                </div>
+                <div class="main_window main_fullwidth">
+					<span class="l_section">Probability</span>
+                </div>
+            </div>
+			<div class="main_toplevel main_section main_color5" id="exp">
+                <div class="main_section_nav_container">
+					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
+                </div>
+                <div class="main_window main_fullwidth">
+					<span class="l_section">Experiments</span>
                 </div>
             </div>
             <div class="main_toplevel main_section main_color8">
@@ -103,7 +128,7 @@
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+ch##@gmail.com">Problem with this page?</a></p>
+                    <p><a href="mailto:multipartycomputationorg+chsh##@gmail.com">Problem with this page?</a></p>
                 </div>
                 <p>Copyright &copy; Nicolas Schank 2014, Brown University</p>
             </div>
