@@ -207,3 +207,7 @@ div.main_toc ol {
 div.main_toc > ol {
     padding-left:2em;
 }
+
+.main_hidden {
+	display:none;
+}

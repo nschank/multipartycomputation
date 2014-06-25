@@ -41,8 +41,9 @@ ol#referencelist a, ol.referenceList a {
 	margin-left:30px;
 }
 
-.reference {
+.reference > a {
 	font-family:monospace;
 	color:#6A6174;
-        text-decoration:none;
+	text-decoration:none;
 }
+
