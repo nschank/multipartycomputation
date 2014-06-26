@@ -114,10 +114,10 @@
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaire Problem, and for being the first paper to look into Multiparty Computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) Multiparty Computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
+							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaires' Problem, and for being the first paper to look into Multiparty Computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) Multiparty Computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
 						</p>
 						<p class="rp_analysis">
-							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaire Problem. Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it an excellent case study into secure two-party computation (as can be seen in the <a href="../../learn/ch1.html#sec1">tutorial page</a> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaire Problem nonetheless remains the most common example of multiparty computation to date.
+							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaires' Problem. Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it an excellent case study into secure two-party computation (as can be seen in the <a href="../../learn/ch1.html#sec1">tutorial page</a> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaires' Problem nonetheless remains the most common example of multiparty computation to date.
 						</p>
 						<p class="rp_analysis">
 							The significance of this particular paper to this field is difficult to overstate. Despite its shortcomings (namely, its lack of proof and its limited direct application), its focus on defining a general problem as opposed to being limited to a specific one ultimately vaulted it into the realm of influence, and most research into multiparty computation which followed it can be framed within the definitions Yao presented here.
@@ -129,7 +129,7 @@
 							Yao's main goal was to lay the groundwork for later research by outlining the framework of a few different basic types of problems, as well as citing a few basic applications. He defined the problem of multiparty computation in terms of:
 						</p>
 						<ul class="rp_analysis">
-							<li><b>The limitations of privacy and security constraints.</b> Yao cited two extreme examples to display the difference. On the extreme privacy side, he gave the Millionaire Problem as an example, in which it is assumed that no saboteurs are on the line, but in which both parties want the other to learn nothing about their own input. On the extreme security side, he cited any basic encryption/decryption scheme in which a message needs to be sent over an unsecure line from one party to the other. Multiparty Computation protocols can be private, secure, or both, and all in varying degrees.</li>
+							<li><b>The limitations of privacy and security constraints.</b> Yao cited two extreme examples to display the difference. On the extreme privacy side, he gave the Millionaires' Problem as an example, in which it is assumed that no saboteurs are on the line, but in which both parties want the other to learn nothing about their own input. On the extreme security side, he cited any basic encryption/decryption scheme in which a message needs to be sent over an unsecure line from one party to the other. Multiparty Computation protocols can be private, secure, or both, and all in varying degrees.</li>
 							<li><b>Deterministic vs. probabilistic computation.</b> Yao mentions that both are possible, though the latter is rather obviously more difficult to prove secure, especially if the probability density of the inputs is not constant.</li>
 							<li><b>Number of parties.</b> Yao assumes the two-party case for the majority of the paper, but expands the ideas to any \(m\) parties near his conclusions. The \(m\) party case is generally more difficult to deal with due to <span class="definable" data-define="collusion">collusions</span> that are impossible in the two-party case; however, Yao states that it is possible to create a protocol for any \(m\) parties with any function.</li>
 							<li><b>Trust, cheating, and collusion.</b> Parties may not trust that the other parties are following the protocol correctly, and that must be built into some protocols in order to ensure that the results are still viable. Cheating (as opposed to sabotage, below) may affect correctness, privacy, or both. Collusion is a particular subset of cheating under which multiple cheaters work together. Yao states that any computable function \(f\) can be turned into a protocol with an upper-bounded probability of successful cheating.</li>
@@ -142,7 +142,7 @@
 					<section id="assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
-							Yao's theorems are dependent on the existence of <a href="../../learn/assumptions.html"><span class="definable" data-define="one-way function">one-way functions</span></a>.
+							Some of Yao's results are dependent on the existence of <a href="../../learn/assumptions.html"><span class="definable" data-define="one-way function">one-way functions</span></a>. His Millionaires' Problem protocol, for one. Since this extended abstract only briefly explains most of his theorems, we must assume that Theorems 1-5 and 9 depend on the existence of such functions. Theorem 6 determines a lower bound, and 7 and 8 are impossibility results, so we can safely assume that they do not.
 						</p>
 					</section>
 					<section id="defs">
@@ -262,21 +262,24 @@
 					</section>
 					<section id="protocols">
 						<h2>Protocols</h2>
-						<h3><a href="#sec3.1">Millionaire Protocol</a></h3>
+						<h3><a href="#sec3.1">Millionaires' Protocol</a></h3>
 						<ul class="rp_analysis">
 							<li><b>Number of parties: </b>2</li>
 							<li><b>Function(s): </b>Comparisons between \(x_0\) and \(x_1\) (i.e. \(&lt;, &gt;, \leq ,\geq\)). Two honest parties will find the same return value.</li>
 							<li><b>Privacy constraints: </b><span class="definable" data-define="negligible">Negligible probability</span> that \(P_i\) learns more about \(x_{(1-i)}\) than offered by the computed function.</li>
 							<li><b>Cheating: </b><span class="definable" data-define="malicious adversary">Malicious adversaries</span> can change the outcome of the protocol to a value of their choosing.</li>
-							<li><b>Security constraints: </b>None</li>
+							<li><b>Security constraints: </b>None: an outside attacker could easily affect or learn the outcome of the protocol.</li>
 							<li><b>Bits exchanged: </b>\(O(Nn)\) where \(N\) is the bit-length of \(i\) and \(j\), and \(n\) is their range.</li>
 							<li><b>Runtime:</b> \(O(n)\), where \(n\) is the range of \(i\) and \(j\)</li>
+							<li>
+								<b>Assumptions:</b> Existence of <span class="definable" data-define="one-way function">one-way functions</span>.
+							</li>
 						</ul>
 					</section>
 					<section id="further">
 						<h2>Further Reading</h2>
 						<p class="rp_analysis">
-							For more about the Millionaire Problem, see the related <a href="../../learn/ch1.html#sec1">tutorial section</a>.
+							For more about the Millionaires' Problem, see the related <a href="../../learn/ch1.html#sec1">tutorial section</a>.
 						</p>
 						<p class="rp_analysis">
 							For more about exchanging secrets as in Theorems <a href="#theorem8">8</a> and <a href="#theorem9">9</a>, or for a deep explanation of <a href="#theorem2">Theorem 2</a>, see Yao's follow-up paper <a href="21.html">How to Generate and Exchange Secrets</a>.
@@ -305,7 +308,7 @@
                                     <li>
                                         <a href="#sec3">Deterministic Computations</a>
                                         <ol>
-                                            <li><a href="#sec3.1">Solution to the Millionaire's Problem</a></li>
+                                            <li><a href="#sec3.1">Solution to the Millionaires' Problem</a></li>
                                             <li><a href="#sec3.2">Model for the General Problem</a></li>
                                             <li><a href="#sec3.3">Additional Requirements</a></li>
                                             <li><a href="#sec3.4">Applications</a></li>
@@ -396,7 +399,7 @@
                     <section id="sec3">
                         <h2>3. Deterministic Computations</h2>
                         <section id="sec3.1">
-                            <h3>3.1. Solutions to the Millionaire's Problem</h3>
+                            <h3>3.1. Solutions to the Millionaires' Problem</h3>
 
                             <p class="rp_original">
                                 In this abstract, we will describe in detail only one of the three solutions we have.
@@ -532,7 +535,7 @@
                                 <sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup>).
                             </p>
                             <p class="rp_original">
-                                We have two other solutions to the millionaire’s problem based on different principles.
+                                We have two other solutions to the millionaires' problem based on different principles.
                                 The first of them assumes that Alice and Bob each owns a private one-way function,
                                 where these functions satisfy the <span class="definable">commutativity</span> property, i.e.
                                 \(E_aE_b(x) = E_bE_a(x)\).
@@ -568,7 +571,7 @@
                                 Alice and Bob send strings to each other alternately.
                                 Each time after Bob has finished transmission, Alice examines the information so far in her possession,
                                 which consists of some sequence of strings \(\alpha_1,\alpha_2,&hellip;,\alpha_t\), and some relations among the strings (e.g. \(E_b(\alpha_3)=\alpha_9\), \(\alpha_8\) has an odd number of
-                                1’s);
+                                1's);
                                 based on the bits that have so far been transmitted between her and Bob,
                                 the protocol specifies how she should compute in private strings \(\alpha_{t+1},\alpha_{t+2},&hellip;,\alpha_s\)
                                 where each new string \(\alpha_u\) is a function of the earlier strings,
@@ -579,16 +582,16 @@
                                 probabilistic, i.e. she will decide to evaluate \(E(\alpha_4)\),
                                 or to compute \(\alpha_2 + 3\alpha_8\) based on the outcomes of some <span class="definable" data-define="coin flip">coin tosses</span>.
                                 After she has finished this computation, she will send a string to Bob, and again the string is chosen probabilistically.
-                                Now it is Bob’s turn to compute strings and send a string according to the protocol.
+                                Now it is Bob's turn to compute strings and send a string according to the protocol.
                                 We agree that there is a special symbol whose appearance means the end of the execution of the protocol.
                                 By that time, the protocol has an instruction for each participant to compute
                                 the function value \(f\) in private.
-                                Finally, we require that, in a protocol, the total number of evaluations of \(E\)’s
-                                and \(D\)’s by Bob and Alice be bounded by <span class="equation" data-equation="O(n^k)">\(O(N^k)\)</span>, where
+                                Finally, we require that, in a protocol, the total number of evaluations of \(E\)'s
+                                and \(D\)'s by Bob and Alice be bounded by <span class="equation" data-equation="O(n^k)">\(O(N^k)\)</span>, where
                                 \(k\) is an integer chosen in advance.
                             </p>
 							<p class="rp_annotation">
-								While not mentioned, it is important to note that random (or pseudorandom) number generation must also be allowed, even just for the above millionaire protocol.
+								While not mentioned, it is important to note that random (or pseudorandom) number generation must also be allowed, even just for the above millionaires' protocol.
 							</p>
                             <h4>Privacy Constraint</h4>
 							<span class="rp_definition_header" id="def1">Definition 1</span>
@@ -627,7 +630,7 @@
                                 </li>
                             </ol>
 							<p class="rp_annotation">
-								Let's quickly see what \(\epsilon\) and \(\delta\) we can apply to the millionaire protocol. For added generality, we will generalize from \(i,j\in\{1,10\}\) to any range of size \(n\) starting at 1. Without loss of generality, assume that Bob has more money (e.g. \(i&lt;j\) and therefore \(f(i,j)=1\)).
+								Let's quickly see what \(\epsilon\) and \(\delta\) we can apply to the millionaires' protocol. For added generality, we will generalize from \(i,j\in\{1,10\}\) to any range of size \(n\) starting at 1. Without loss of generality, assume that Bob has more money (e.g. \(i&lt;j\) and therefore \(f(i,j)=1\)).
 								Fixing \(i,j\), we'll first look at what Alice can learn. 
 							</p>
 							<p class="rp_annotation">
@@ -663,7 +666,7 @@
                             <h3>3.3. Additional Requirements</h3>
                             <h4>Complexity</h4>
                             <p class="rp_original">
-                                The solution given earlier for the millionaire's problem will become impractical if the range
+                                The solution given earlier for the millionaires' problem will become impractical if the range
                                 \(n\) of \(i,j\) become large,
                                 since the number of bits transmitted is proportional to \(n\).
                                 An interesting question is then to determine the minimum number of bits needed by any
@@ -741,7 +744,7 @@
 							</p>
 							<ol class="rp_annotation">
 								<li>Start with one \(i\), then change to another \(i'\) at a different time during the computation.</li>
-								<li>Start with an invalid \(i\), although this is sometimes impossible to do at all (as with Alice in the millionaire protocol)</li>
+								<li>Start with an invalid \(i\), although this is sometimes impossible to do at all (as with Alice in the millionaires' protocol)</li>
 							</ol>
                             <span class="rp_definition_header" id="def2">Definition 2</span>
                             <p class="rp_original rp_definition">
@@ -777,7 +780,7 @@
                                 as a function <span class="equation" data-equation="fx1xm">\(f(x_1, x_2, x_3,&hellip;, x_m)\)</span>. The results obtained
                                 in this paper means that it is possible to agree on the
                                 final action \(f\), without anyone knowing the opinion of any
-                                other member’s. Furthermore, the protocol makes the probability of anyone having a
+                                other member's. Furthermore, the protocol makes the probability of anyone having a
                                 <span class="definable">successful cheating</span> very remote.
                             </p>
 							
@@ -791,13 +794,13 @@
                                 Suppose that Alice is trying to
                                 sell Bob a house. In principle, each one has a strategy
                                 of negotiation in mind. If we number all the possible
-                                strategies of Alice as \(A_1,A_2,&hellip;,A_t\), and those of Bob’
+                                strategies of Alice as \(A_1,A_2,&hellip;,A_t\), and those of Bob'
                                 as \(B_1,B_2,&hellip;,B_u\), then the outcome (no deal, or sell at
                                 \(x\) dollars, . . . ) will be decided once the actual strategies
                                 \(A_i, B_j\) used have been determined. Write the outcome
                                 as \(f(i, j)\), then it is possible to carry out the negotiation
                                 obliviously, in the sense that Alice will not gain any
-                                information on Bob’s negotiation tactics except that it is
+                                information on Bob's negotiation tactics except that it is
                                 consistent with the outcome, and vice versa.
                             </p>
 
@@ -876,7 +879,7 @@
                         <p class="rp_original">
                             One interesting corollary of our results is that mental
                             poker can be played with any general public-key system.
-                            It differs from Shamir et. al’s solution<sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup>
+                            It differs from Shamir et. al's solution<sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup>
                             in that we do
                             not require the <span class="definable" data-define="one-way function">one-way functions</span> used to be <span class="definable" data-define="commutativity">commutative</span>,
                             and that we can play it with a public-key system
@@ -974,7 +977,7 @@
                             running time than the bound given in Theorem 5. For
                             example, the parity function \(f(x_1, x_2, &hellip;, x_m) = x_1 \bigoplus x_2 \bigoplus
                             \cdots \bigoplus x_m\) and the tally function \(f(x_1, x_2,&hellip;, x_m) =\)
-                            # of \(1\)’s in the \(x\)’s (the \(x\)’s are boolean variables) both
+                            # of \(1\)'s in the \(x\)'s (the \(x\)'s are boolean variables) both
                             have protocols satisfying Theorem 5 with running time
                             polynomial in \(m\).
                         </p>
@@ -1080,7 +1083,7 @@
                     <li id="citation2">S. Goldwasser and S. Micali. Probabilistic encryption
                         and how to play mental poker keeping secret all
                         partial information. In <i>Proceedings of the 14th ACM
-                            Symposium on Theory of Computing (STOC’82)</i>,
+                            Symposium on Theory of Computing (STOC'82)</i>,
                         pages 365–377, San Francisco, CA, USA, May
                         1982.</li>
                     <li id="citation3">M. O. Rabin. Digitalized signatures and public-key
@@ -1102,7 +1105,7 @@
                     <li id="citation7">Andrew C. Yao. Some complexity questions related
                         to distributive computing. In <i>Conference Record of
                             the 11th ACM Symposium on Theory of Computing
-                            (STOC’79)</i>, pages 209–213, Atlanta, GA, USA, April
+                            (STOC'79)</i>, pages 209–213, Atlanta, GA, USA, April
                         1979.</li>
                 </ol>
 				<p class="rp_annotation">
