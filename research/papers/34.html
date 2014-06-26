@@ -238,6 +238,103 @@
 							</p>
 						</section>
                     </section>
+					<section id="sec2">
+						<h2>2. The Model</h2>
+						<p class="rp_original">
+							For convenience, the number of participants will be called \(n\), which can always be written as \(n=3d+a\), where \(a=\)1, 2, or 3. Let \(P_1,P_2,\cdots,P_n\) be the participants.
+						</p>
+						<p class="rp_original">
+							Our assumptions about at least \(2d+a\) of the participants are that:
+						</p>
+						<ul class="rp_original">
+							<li>They do not leak secret information to other participants; and</li>
+							<li>They send the correct messages defined by the protocol</li>
+						</ul>
+						<p class="rp_original">
+							We call a participant satisfying the above properties <i>reliable</i>. At the start of the protocol, it is of course not generally agreed which participants are reliable. Our basic assumptions about the communication between reliable participants \(P_A\) and \(P_B\) are that:
+						</p>
+						<ul class="rp_original">
+							<li>When \(P_A\) sends a message to \(P_B\), nobody else can learn anything about its content;</li>
+							<li>When \(P_B\) receives a message from \(P_A\), \(P_B\) can be certain that nobody but \(P_A\) could have sent the message; and</li>
+							<li>Messages sent will be received in a timely manner.</li>
+						</ul>
+						<p class="rp_original">
+							Finally, we complete our model by assuming the following:
+						</p>
+						<ul class="rp_original">
+							<li>All participants agree on the protocols to be followed; and</li>
+							<li>Participants can determine whether messages sent to them were sent before deadlines set in the protocol.</li>
+						</ul>
+						<p class="rp_original">
+							Our protocols ensure that all reliable participants obtain the correct result. IT is proved constructively in <span class="reference" data-citation="5"><a href="#citation5">[5]</a></span>, under a model like ours, that a necessary and sufficient condition for all reliable participants to agree on a message&mdash;such as the result of a protocol&mdash;is that at least \(2d+a\) of the participants are reliable. Hence, our two-thirds assumption is optimal. A polynomial algorithm solving this problem is presented in <span class="reference" data-citation="12"><a href="#citation12">[12]</a></span>. Their construction allows us to obtain an efficient "broadcast" channel: a means allowing any participant to make a message known to all participants, in such a way that all reliable participants will obtain the same value of the message. (Assuming a broadcast channel, moreover, would not enable us to weaken our other requirements, but remains interesting in some other context, as explained in <a href="#sec6">Section 6</a>.)
+						</p>
+						<p class="rp_original">
+							For simplicity in the following descriptions, we use the terminology of information theory because we make the assumption that the channels are unconditionally secure. Notice however that in fact we get protocols as strong as the secrecy and authentication of the channels used. If the channels were not unconditionally secure, for example, the protocol would not be unconditionally secure for all participants but its correctness would still be guaranteed.
+						</p>
+					</section>
+					<section id="sec3">
+						<h2>3. Implementing Blobs using Secret Sharing</h2>
+						<p class="rp_original">
+							In <span class="reference" data-citation="13"><a href="#citation13">[13]</a></span>, a fundamental protocol primitive is described: <i>the blob</i>. The purpose of blobs is to allow a participant \(P_A\) to <i><span class="definable" data-define="commitment">commit</span></i> to a bit in such a way that he or she cannot later change his or her mind about the bit, but nobody else can discover it without the participant's help. The defining properties of blocks are as follows:
+						</p>
+						<ol type="i">
+							<li>\(P_A\) can obtain blobs representing 1 and blocks representing 0.</li>
+							<li>When presented with a blob, nobody can tell which bit it represents.</li>
+							<li>\(P_A\) can open blobs by showing the other participants the single bit each represents; there is no blob \(P_A\) is able to "open" both as \(0\) and as \(1\).</li>
+							<li>Any other participant can at will obtain blobs representing 0 and 1. Moreover, these blobs must look exactly like the blobs obtained by \(P_A\).</li>
+						</ol>
+						<p class="rp_original">
+							To implement blobs in our model, we use a variation on Shamir's secret sharing scheme<sup class="reference" data-citation="7"><a href="#citation7">[7]</a></sup>. This variation was proposed by Blakley<sup class="reference" data-citation="6"><a href="#citation6">[6]</a></sup>, who independently discovered secret sharing schemes, and it is more efficient than Shamir's original construction.
+						</p>
+						<p class="rp_original">
+							For our purposes, the scheme may be described as follows: a polynomial \(f\) of degree at most \(d\) over \(GF(2^k)\) is chosen uniformly, where \(k\) is an integer such that \(2^k&gt;n\). The secret to be shared is defined for convenience as the value of \(f\) at 0. The protocol also assigns a distinct non-zero point \(i_B\) in the field to each participant \(P_B\). The secret can now be divided among the \(n\) participants by providing each \(P_B\) with the value of \(f(i_B)\). It is not hard to see that more than \(d\) shares completely determine \(f\), and therefore the secret, while no Shannon information about the secret is revealed by any number of shares not exceeding \(d\).
+						</p>
+						<p class="rp_original">
+							We generalize slightly by allowing blobs to represent any value in \(GF(2^k)\). Blobs are now readily achieved:
+						</p>
+						<ol type="i">
+							<li>
+								To obtain a blob representing the value \(v\), participant \(P_A\) chooses uniformly a polynomial \(f\) with \(def(f)\leq d\), such that \(f(0)=v\). She then calculates \(n\) shares as above and distributes one to each participant. Using the subprotocol described below, she convinces the other participants that she has distributed a consistent set of shares.
+							</li>
+							<li>
+								Since the number of unreliable participants is smaller than \(d\), no <span class="definable">collusion</span> will gain any information in the Shannon sense about the value represented by a blob.
+							</li>
+							<li>
+								To open a blob, \(P_A\) first broadcasts what its shares should be \((\{i_B\;|\;1\leq B\leq n\})\). Then each participant broadcasts a message stating whether they agree with their share that was broadcast by \(P_A\). If a participant does not agree, he is said to be <i>complaining</i> about \(P_A\). It is required that at least \(2d+a\) of the participants do not complain. By the remarks below, this condition ensures that \(P_A\) can only open a blob to reveal the single value it represents.
+							</li>
+							<li>
+								Any participant can choose a polynomial and distribute shares of it, whence it is impossible to tell from a blob who generated it.
+							</li>
+						</ol>
+						<p class="rp_original">
+							By distributing inconsistent shares to reliable participants, a coalition of unreliable participants could allow \(P_A\) to open a block in two or more different ways. The following proof, which we informally call a "cut-and-choose procedure" (and is similar to the construction of <span class="reference" data-citation="8"><a href="#citation8">[8]</a></span>) enables us to remove this inconsistency. Let the original blob chosen by \(P_A\) be \(\beta\). Then the cut-and-choose works as follows:
+						</p>
+						<ol class="rp_original" type="a">
+							<li>\(P_A\) establishes a new independently chosen blob \(\delta\).</li>
+							<li>One of the other participants flips a coin and asks \(P_A\) to open \(\delta\), or to open \(\delta+\beta\), where \(\delta+\beta\) denotes the blob defined by the sum of corresponding shares of \(\delta\) and \(\beta\).</li>
+							<li>
+								Steps (a) and (b) are repeated until no complaints have occurred in \(m\) consecutive rounds, or until more than \(d\) participants have complained about \(P_A\). In the first case the proof is accepted, otherwise it is rejected.
+							</li>
+						</ol>
+						<p class="rp_original">
+							The participants take turns in executing step (b). By assumption, this means that \(P_A\) will be unable to predict the coinflips at least \(\frac{2d+a}{n}\) of the time.
+						</p>
+						<p class="rp_original">
+							Note that the proof will always terminate: even if all unreliable participants work against an honest \(P_A\), they cannot enlarge the number of rounds by more than \(md\).
+						</p>
+						<p class="rp_original">
+							When \(\beta\) is later opened, the shares held by complaining participants are of course ignored.
+						</p>
+						<p class="rp_original">
+							If the proof is accepted, then the following holds with probability exponentially close to 1 in \(m\): all reliable participants who did not complain (of which there are at least \(d+a\)) have shares consistent with one polynomial of degree at most \(d\).
+						</p>
+						<p class="rp_original">
+							Thus, with very high probability, \(P_A\) cannot convincingly claim that her blob contains anything but the secret determined by the \(d+a\) valid shares guaranteed by the fact above, since otherwise the condition in step (iii) would be violated.
+						</p>
+						<p class="rp_original">
+							To see why this is satisfied, it suffices to consider the behavior of reliable participants, corresponding to the worst case assumption that all unreliable participants will try to help \(P_A\) by always agreeing with her. For any blob \(\gamma\), consider a polynomial consistent with a maximal number of shares of \(\gamma\), and let \(C(\gamma)\) be the number of remaining shares held by reliable and non-complaining participants. Thus \(C(\gamma)\) may vary over time. In other words, no matter how \(P_A\) tries to open \(\gamma\), at least \(C(\gamma)\) participants will complain. The case where \(P_A\) created \(\gamma\) correctly corresponds of course to \(C(y)=0\).
+						</p>
+					</section>
                 </div>
             </div>
             <div class="main_toplevel main_section main_color8">
@@ -254,6 +351,8 @@
 					<li id="citation9">BF</li>
 					<li id="citation10">Ch2</li>
 					<li id="citation11">BGW</li>
+					<li id="citation12">DS</li>
+					<li id="citation13">BCC</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
