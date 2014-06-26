@@ -24,7 +24,7 @@
 				switch (box)
 				{
 					case "cartesianproduct":
-						return "<p>Read: <i>the Cartesian product of V and W.</i></p><p>The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\times\\){♠, ♥, ♦, ♣}</p><p>A function with domain \\(V\\timesW\\) can be rephrased as a function \\(f(v,w\\) where the domain of \\(v\\) is \\(V\\) and the domain of \\(w\\) is \\(W\\).</p></p>";
+						return "<p>Read: <i>the Cartesian product of V and W.</i></p><p>The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}</p><p>A function with domain \\(V\\times W\\) can be rephrased as a function \\(f(v,w\\) where the domain of \\(v\\) is \\(V\\) and the domain of \\(w\\) is \\(W\\).</p></p>";
 					case "Eax":
 						return "<p>The encryption of the \\(N\\)-bit integer \\(x\\) under Alice's public key.</p>";
 					case "fx1xm":
@@ -279,7 +279,7 @@
 							For more about the Millionaire Problem, see the related <a href="../../learn/ch1.html#sec1">tutorial section</a>.
 						</p>
 						<p class="rp_analysis">
-							For more about exchanging secrets as in Theorems <a href="#theorem8">8</a> and <a href="#theorem9">9</a>, see Yao's follow-up paper <a href="21.html">How to Generate and Exchange Secrets</a>.
+							For more about exchanging secrets as in Theorems <a href="#theorem8">8</a> and <a href="#theorem9">9</a>, or for a deep explanation of <a href="#theorem2">Theorem 2</a>, see Yao's follow-up paper <a href="21.html">How to Generate and Exchange Secrets</a>.
 						</p>
 					</section>
 					<section id="ref">
@@ -319,7 +319,7 @@
                         </ol>
                     </div>
                     <section id="sec1">
-                        <h2>Introduction</h2>
+                        <h2>1. Introduction</h2>
                         <p class="rp_original">
                             Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other’s wealth. 
                             How can they carry out such a conversation?
@@ -340,7 +340,7 @@
                         </p>
                     </section>
                     <section id="sec2">
-                        <h2>A Unified View of Secure Computation</h2>
+                        <h2>2. A Unified View of Secure Computation</h2>
                         <p class="rp_original">
                             Since <span class="definable" data-define="one-way function">one-way functions</span> were first proposed in 1976 <sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup>, they have been used in two kinds of applications.
 
@@ -394,9 +394,9 @@
 						</p>
                     </section>
                     <section id="sec3">
-                        <h2>Deterministic Computations</h2>
+                        <h2>3. Deterministic Computations</h2>
                         <section id="sec3.1">
-                            <h3>Solutions to the Millionaire's Problem</h3>
+                            <h3>3.1. Solutions to the Millionaire's Problem</h3>
 
                             <p class="rp_original">
                                 In this abstract, we will describe in detail only one of the three solutions we have.
@@ -542,8 +542,8 @@
 								To our knowledge, neither has been released by Yao.
 							</p>
                         </section>
-                        <section id="Model">
-                            <a id="sec3.2"><h3>Model for the General Problem</h3></a>
+                        <section id="sec3.2">
+                            <h3>3.2. Model for the General Problem</h3>
                             <p class="rp_original">
                                 As these three solutions base their security on different assumptions,
                                 a precise model has to be specified in detail for each solution. In this abstract, we will only give the model that corresponds to the first solution.
@@ -660,14 +660,14 @@
                             </p>
                         </section>
                         <section id="sec3.3">
-                            <h3>Additional Requirements</h3>
+                            <h3>3.3. Additional Requirements</h3>
                             <h4>Complexity</h4>
                             <p class="rp_original">
                                 The solution given earlier for the millionaire's problem will become impractical if the range
                                 \(n\) of \(i,j\) become large,
                                 since the number of bits transmitted is proportional to \(n\).
                                 An interesting question is then to determine the minimum number of bits needed by any
-                                protocol to compute \(f\) that satisfies the \((\epsilon,\delta)\)-privacy constraint.
+                                protocol to compute \(f\) that satisfies the <span class="definable" data-define="(e,d)-privacy constraint">\((\epsilon,\delta)\)-privacy constraint</span>.
                                 Conceivably, there are functions that are easily computable without the privacy requirement,
                                 but become infeasible with the extra privacy constraint.
                                 Fortunately, we can prove that this is not the case.
@@ -675,7 +675,7 @@
                                 between Alice and Bob when \(A\) is used.
                             </p>
 							<p class="rp_annotation">
-								If we set \((\epsilon,\delta)=(1,1)\)&mdash;that is, if we don't require privacy at all&mdash;then the only information that needs to be sent is \(i\) to Bob, followed by \(f(i,j)\) back to Alice, meaning \(T(A)=\log_2{i}+1\); this is the lowest bound possible. This would be increased further by the need for
+								If we set \((\epsilon,\delta)=(1,1)\)&mdash;that is, if we don't require privacy at all&mdash;then the only information that needs to be sent is \(i\) to Bob, followed by \(f(i,j)\) back to Alice, meaning \(T(A)=\log_2{i}+1\leq N+1\); this is the lowest bound possible (\(T(A)\in\Omega(N)\)). This would be increased further by the need for
 								security, of course.
 							</p>
                             <span class="rp_theorem_header" id="theorem2">Theorem 2</span>
@@ -684,11 +684,11 @@
                                 be a \(0-1\) function. If \(f\) can be
                                 computed by a boolean circuit of size \(C(f)\), then there is a protocol
                                 \(A\) computing \(f\) satisfying the
-                                \((\epsilon,\delta)\)-privacy constraint such that
+                                <span class="definable" data-define="(e,d)-privacy constraint">\((\epsilon,\delta)\)-privacy constraint</span> such that
                                 <span class="equation" data-equation="th2">\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta}})\)</span>.
                             </p>
 							<p class="rp_annotation">
-								Some clarification <span data-broken-link=true>here</span> may be necessary for \(C(f)\).
+								When Yao is referring to the 'size' of a boolean circuit, he is referring to the number of wires. He would later go on to develop this theorem into another pivotal work in multiparty computation, <a href="24.html">How to Generate and Exchange Secrets</a>. The basic idea is that one can use a construction called a "garbled circuit" in order to securely transfer the outcome of an entire circuit, one gate at a time. Note that this is only secure against <span class="definable" data-define="passive adversary">passive adversaries</span>.
 							</p>
                             <p class="rp_original">
                                 In fact, if \(f\) can be computed by a <span class="definable">Turing machine</span> in time \(S\), then the protocol can
@@ -709,8 +709,11 @@
                             <p class="rp_original rp_theorem">
                                 Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(f\) be a random element of \(F_n\),
                                 then any protocol \(A\) that computes \(f\) with \((\epsilon,\delta)\)-privacy constraint
-                                must have \(T(A)>2^\frac{n}{2}\) for all large \(n\).
+                                must have \(T(A)&gt;2^\frac{n}{2}\) for all large \(n\).
                             </p>
+							<p class="rp_annotation">
+								We are yet uncertain what to make of this theorem: in particular, whether Yao means to indicate something significant about the value \(\frac{1}{5}\), or to specify a particular property of members of \(F_n\).
+							</p>
                             <h4>Mutually-Suspecting Participants</h4>
                             <p class="rp_original">
                                 So far the discussions
@@ -764,7 +767,7 @@
 							</p>
                         </section>
                         <section id="sec3.4">
-                            <h3>Applications</h3>
+                            <h3>3.4. Applications</h3>
 
                             <h4>Secret Voting</h4>
                             <p class="rp_original">
@@ -779,8 +782,8 @@
                             </p>
 							
 							<p class="rp_annotation">
-								Definitely the most relatable and understandable use of multiparty computation mentioned! <span data-broken-link=true>Voting</span>
-								is dealt with elsewhere, and further research can be found under the <a href="../tag.html#research:tag:Voting">Voting</a> tag.
+								Definitely the most relatable and understandable use of multiparty computation mentioned! Voting
+								is dealt with in the <a href="../../learn/ch1.html#sec2">first tutorial</a>, and further research can be found under the <a href="../tag.html#research:tag:Voting">Voting</a> tag.
 							</p>
 
                             <h4>Oblivious Negotiation</h4>
@@ -819,7 +822,7 @@
                         </section>
                     </section>
                     <section id="Probabilistic">
-                        <h2 id="sec4">Probabilistic Computations</h2>
+                        <h2 id="sec4">4. Probabilistic Computations</h2>
                         <p class="rp_original">
                             Let us consider the case with two parties Bob and Alice
                             \((m = 2)\). Let \(V\) and \(W\) be finite sets. A function \(p\) from
@@ -847,13 +850,13 @@
                             done, according to the privacy constraint, is equal
                             to
                         </p>
-
+						
                         <p style="font-size:150%">
                             $$\frac{1}{|J|}\sum\limits_{j\in J}\frac{f_{ij}(v,w)}{\sum\nolimits_{x\in W} f_{ij}(v,x)}$$
                         </p>
 						
 						<p class="rp_annotation">
-							Keep in mind that this is the probability of \(w\) given a particular \(i\); Bob's equation would be the same, but with \(j\) and \(v\) instead.
+							Keep in mind that this is the probability of \(w\) given a particular \(i\) and \(v\); Bob's equation would be the same, but with \(j\) and \(v\) instead. Since \(q\) is constant, the probability of each \(j\) is equally likely to any other, so we can simply add all \(|J|\) probabilities together and divide by \(|J|\) at the end.
 						</p>
                         <p class="rp_original">
                             For example, <span class="definable">mental poker</span> would correspond to the
@@ -873,9 +876,9 @@
                         <p class="rp_original">
                             One interesting corollary of our results is that mental
                             poker can be played with any general public-key system.
-                            It differs from Shamir et. al’s solution <sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup>
+                            It differs from Shamir et. al’s solution<sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup>
                             in that we do
-                            not require the one-way functions used to be <span class="definable" data-define="commutativity">commutative</span>,
+                            not require the <span class="definable" data-define="one-way function">one-way functions</span> used to be <span class="definable" data-define="commutativity">commutative</span>,
                             and that we can play it with a public-key system
                             (instead of using private keys). (A solution with a special
                             one-way function with publicized keys for playing mental
@@ -891,7 +894,7 @@
                         </p>
                     </section>
                     <section id="sec5">
-                        <h2>Generalization to \(m\)-Party Case</h2>
+                        <h2>5. Generalization to \(m\)-Party Case</h2>
                         <p class="rp_original">
                             When \(m\) parties \(A_1,A_2,&hellip;,A_m\) collaborate to compute
                             a function \(f(x_1, x_2,&hellip;,x_m)\), more than one parties may
@@ -928,11 +931,11 @@
                             in addition to their only variable values \(i\), is that the function
                             \(f\) has value \(v\), then \(q_{i,v}(j)\) is the distribution they
                             can infer.) Let \(\epsilon,\delta > 0\). A protocol \(A\) is said to <i>satisfy the
-                                \((\epsilon,\delta)\)-private constraint</i> if for every nonempty \(K\), even if
+                                <span class="definable" data-define="(e,d)-private constraint">\((\epsilon,\delta)\)-private constraint</span></i> if for every nonempty \(K\), even if
                             the participants in \(K\) are allowed to perform in private an
                             amount of calculation polynomial in \(T(A)\), they will still
                             infer, with probability at least \(1 − \delta\), that the distribution
-                            on \(j\) is equal to \(q_{i,v}(j)(1 + O(\epsilon))\). A <i>successful cheating</i>
+                            on \(j\) is equal to \(q_{i,v}(j)(1 + O(\epsilon))\). A <span class="definable">successful cheating</span>
                             by \(K'\) (with respect to a protocol \(A\)) is an instance of the
                             execution of \(A\), in which at least one participant \(A_r\) with
                             \(r \in K'\) behaves inconsistently with any \(x_r \in X_r\) without
@@ -945,7 +948,7 @@
                         <span class="rp_theorem_header" id="theorem5">Theorem 5</span>
                         <p class="rp_original rp_theorem">
                             For any \(\epsilon,\delta,\gamma > 0\), there exists a protocol
-                            \(A\) for computing \(f\) which satisfies the \((\epsilon,\delta)\)-private constraint
+                            \(A\) for computing \(f\) which satisfies the <span class="definable" data-define="(e,d)-private constraint">\((\epsilon,\delta)\)-private constraint</span>
                             and which has the property that, for any \(K' \neq \{1,&hellip;,m\}\), the probability for
                             \(K'\) to have a successful cheating can not be more than \(\gamma\).
                         </p>
@@ -1110,7 +1113,9 @@
                 <div class="rp_problems">
                     <p><a href="mailto:multipartycomputationorg+49@gmail.com">Problem with this page?</a></p>
                 </div>
-                <p>Copyright &copy; Nicolas Schank 2014, Brown University</p>
+                <p>Created by Nicolas Schank 2014, Brown University</p>
+				<p>All original work is free for any use by anyone whatsoever.</p>
+				<p>For more information about liability and licensing Yao's original paper, see <a href="../liability.html">Liability</a>.</p>
             </div>
         </div>
     </body>
