@@ -92,7 +92,9 @@ public final class NIterators
 			{
 				if(!next.isPresent()) step();
 				if(empty) throw new NoSuchElementException();
-				return next.get();
+				T ret = next.get();
+				next = Optional.empty();
+				return ret;
 			}
 
 			/**

@@ -103,13 +103,13 @@ public class HistoryImpl implements History
 		return NIterators.map(this.events.iterator(), EventDescription::toString);
 	}
 
-	/**
-	 * @return A String representation of this HistoryImpl
-	 */
 	@Override
 	public String toString()
 	{
-		throw new UnsupportedOperationException("toString not yet implemented");
+		StringBuilder b = new StringBuilder();
+		for(String s : this)
+			b.append(s).append("\n");
+		return b.toString();
 	}
 
 	@Immutable

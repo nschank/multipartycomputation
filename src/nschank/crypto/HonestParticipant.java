@@ -49,8 +49,13 @@ public class HonestParticipant implements Participant
 	@Override
 	public boolean forget(final String... informationKey)
 	{
+		StringBuilder old = new StringBuilder();
 		for(String s : informationKey)
-			this.forget(s);
+		{
+			this.known.remove(s);
+			old.append(s).append(", ");
+		}
+		this.getHistory().add("Crossing out the values " + old.toString());
 		return true;
 	}
 
@@ -71,14 +76,14 @@ public class HonestParticipant implements Participant
 	{
 		String ret = key;
 		key = increment(key);
-		return ret;
+		return name + "_" + ret;
 	}
 
 	@Override
 	public String give(final Object information, final String description)
 	{
-		this.getHistory().add(name + " now knows " + description, this);
 		String thisKey = this.getKey();
+		this.getHistory().add(name + " now knows " + thisKey + "," + description + ": " + information.toString(), this);
 		this.known.put(thisKey, information);
 		return thisKey;
 	}

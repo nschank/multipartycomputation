@@ -24,7 +24,7 @@ public interface Participant
 	}
 	default public String give(Object information)
 	{
-		return this.give(information, information.toString());
+		return this.give(information, " the value " + information.toString());
 	}
 	public String give(Object information, String description);
 }
