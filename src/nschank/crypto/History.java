@@ -1,5 +1,6 @@
 package nschank.crypto;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -13,7 +14,7 @@ import java.util.Collection;
  * of Participants' private history.
  *
  * @author nschank, Brown University
- * @version 1.2
+ * @version 1.3
  */
 public interface History extends Iterable<String>
 {
@@ -48,6 +49,21 @@ public interface History extends Iterable<String>
 	 * @return An Iterable of event descriptions, in correct order.
 	 */
 	public Iterable<String> eventsFullyVisibleTo(Collection<Participant> participants);
+
+	/**
+	 * An Iterable of events which are all visible to the given participant
+	 *
+	 * @param witness
+	 * 		Any participant in this protocol
+	 *
+	 * @return An Iterable of event descriptions, in correct order.
+	 */
+	default public Iterable<String> eventsVisibleTo(Participant witness)
+	{
+		Collection<Participant> singleton = new ArrayList<>(1);
+		singleton.add(witness);
+		return eventsVisibleTo(singleton);
+	}
 
 	/**
 	 * An Iterable of events which are all visible to at least one of the given participants
