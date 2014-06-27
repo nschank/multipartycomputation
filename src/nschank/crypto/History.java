@@ -14,7 +14,7 @@ import java.util.Collection;
  * of Participants' private history.
  *
  * @author nschank, Brown University
- * @version 1.3
+ * @version 1.4
  */
 public interface History extends Iterable<String>
 {
@@ -39,6 +39,23 @@ public interface History extends Iterable<String>
 	 * @return true
 	 */
 	public boolean add(String event, Collection<Participant> visibleTo);
+
+	/**
+	 * Adds an event to the History of a Protocol
+	 *
+	 * @param event
+	 * 		A String description of an event that has occurred in the Protocol
+	 * @param witness
+	 * 		What Participant in the Protocol witnessed this event
+	 *
+	 * @return true
+	 */
+	default public boolean add(String event, Participant witness)
+	{
+		Collection<Participant> singleton = new ArrayList<>(1);
+		singleton.add(witness);
+		return this.add(event, singleton);
+	}
 
 	/**
 	 * An Iterable of events which are all visible to all of the given participants
