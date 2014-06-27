@@ -3,6 +3,7 @@ package nschank.util;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 
@@ -14,7 +15,7 @@ import java.util.function.Predicate;
  * Utility class for Iterators
  *
  * @author nschank, Brown University
- * @version 1.2
+ * @version 1.3
  */
 public final class NIterators
 {
@@ -27,14 +28,48 @@ public final class NIterators
 	}
 
 	/**
+	 * Creates an Iterator of a new type from an Iterator and a Function from the old type to the new type
+	 *
+	 * @param from
+	 * 		An Iterator of any type
+	 * @param to
+	 * 		A function to apply piecewise to each element of {@code from}
+	 * @param <T>
+	 * 		Any type
+	 * @param <S>
+	 * 		Any type
+	 *
+	 * @return An Iterator of type S created from an Iterator of type T and a function that goes element by element
+	 */
+	public static <T, S> Iterator<S> map(final Iterator<T> from, final Function<T, S> to)
+	{
+		return new Iterator<S>()
+		{
+			@Override
+			public boolean hasNext()
+			{
+				return from.hasNext();
+			}
+
+			@Override
+			public S next()
+			{
+				return to.apply(from.next());
+			}
+		};
+	}
+
+	/**
 	 * Given an Iterator and a Predicate of the same type, returns an iterator which goes through the given iterator but
-	 *  only returns those elements which satisfy the predicate.
+	 * only returns those elements which satisfy the predicate.
+	 *
 	 * @param universe
 	 * 		Any iterator
 	 * @param includeIf
 	 * 		A predicate which may return true for some elements of {@code universe}
 	 * @param <T>
-	 *     Any type
+	 * 		Any type
+	 *
 	 * @return An iterator which goes through all elements of {@code universe} which satisfy {@code includeIf}, in same order
 	 */
 	public static <T> Iterator<T> subiterator(final Iterator<T> universe, final Predicate<T> includeIf)
