@@ -1,5 +1,8 @@
 package nschank.crypto;
 
+import java.util.Collection;
+
+
 /**
  * Created by Nicolas Schank for package nschank.crypto
  * Created on 26 Jun 2014
@@ -10,7 +13,7 @@ package nschank.crypto;
  * of Participants' private history.
  *
  * @author nschank, Brown University
- * @version 1.1
+ * @version 1.2
  */
 public interface History extends Iterable<String>
 {
@@ -34,7 +37,7 @@ public interface History extends Iterable<String>
 	 *
 	 * @return true
 	 */
-	public boolean add(String event, Iterable<Participant> visibleTo);
+	public boolean add(String event, Collection<Participant> visibleTo);
 
 	/**
 	 * An Iterable of events which are all visible to all of the given participants
@@ -44,7 +47,7 @@ public interface History extends Iterable<String>
 	 *
 	 * @return An Iterable of event descriptions, in correct order.
 	 */
-	public Iterable<String> eventsFullyVisibleTo(Iterable<Participant> participants);
+	public Iterable<String> eventsFullyVisibleTo(Collection<Participant> participants);
 
 	/**
 	 * An Iterable of events which are all visible to at least one of the given participants
@@ -54,5 +57,5 @@ public interface History extends Iterable<String>
 	 *
 	 * @return An Iterable of event descriptions, in correct order.
 	 */
-	public Iterable<String> eventsVisibleTo(Iterable<Participant> participants);
+	public Iterable<String> eventsVisibleTo(Collection<Participant> participants);
 }
