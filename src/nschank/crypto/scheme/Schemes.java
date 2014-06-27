@@ -14,7 +14,7 @@ import java.util.function.Function;
  * A Utility class for creating encryption/decryption schemes
  *
  * @author nschank, Brown University
- * @version 1.3
+ * @version 1.3.1
  */
 public final class Schemes
 {
@@ -45,7 +45,7 @@ public final class Schemes
 
 		return schemeBuilder((BigInteger b) -> b.modPow(e, n), (BigInteger b) -> b.modPow(d, n),
 				"(n=" + n.toString() + ",e=" + e.toString() + ")", "(d=" + d.toString() + ")",
-				(BigInteger b) -> b.mod(TWO).equals(BigInteger.ONE));
+				(BigInteger b) -> b.testBit(1));
 	}
 
 	/**
