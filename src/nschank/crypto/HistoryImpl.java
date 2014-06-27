@@ -14,11 +14,12 @@ import java.util.*;
  * An implementation of the History interface.
  *
  * @author nschank, Brown University
- * @version 1.1
+ * @version 1.3
  */
 public class HistoryImpl implements History
 {
-	private List<EventDescription> events;
+	private final List<EventDescription> events;
+	private String tabs = "";
 
 	/**
 	 * Creates a History for a Protocol to add to.
@@ -39,7 +40,7 @@ public class HistoryImpl implements History
 	@Override
 	public boolean add(final String event)
 	{
-		this.events.add(new EventDescription(event));
+		this.events.add(new EventDescription(tabs + event));
 		return true;
 	}
 
@@ -56,7 +57,7 @@ public class HistoryImpl implements History
 	@Override
 	public boolean add(final String event, final Collection<Participant> visibleTo)
 	{
-		this.events.add(new EventDescription(event, visibleTo));
+		this.events.add(new EventDescription(tabs + event, visibleTo));
 		return true;
 	}
 
@@ -71,9 +72,8 @@ public class HistoryImpl implements History
 	@Override
 	public Iterable<String> eventsFullyVisibleTo(final Collection<Participant> participants)
 	{
-		return () -> NIterators
-				.map(NIterators.subiterator(this.events.iterator(), (EventDescription e) -> e.visibleTo(participants)),
-						EventDescription::toString);
+		return () -> NIterators.map(NIterators.subiterator(this.events.iterator(), (EventDescription e) -> e.visibleTo(
+				participants)), EventDescription::toString);
 	}
 
 	/**
@@ -87,9 +87,9 @@ public class HistoryImpl implements History
 	@Override
 	public Iterable<String> eventsVisibleTo(final Collection<Participant> participants)
 	{
-		return () -> NIterators.map(NIterators
-				.subiterator(this.events.iterator(), (EventDescription f) -> f.visibleToAny(participants)),
-				EventDescription::toString);
+		return () -> NIterators.map(NIterators.subiterator(this.events.iterator(),
+														   (EventDescription f) -> f.visibleToAny(participants)),
+									EventDescription::toString);
 	}
 
 	/**
@@ -101,6 +101,18 @@ public class HistoryImpl implements History
 	public Iterator<String> iterator()
 	{
 		return NIterators.map(this.events.iterator(), EventDescription::toString);
+	}
+
+	@Override
+	public void tabDown()
+	{
+		tabs = tabs.substring(0, Math.max(0, tabs.length() - 1));
+	}
+
+	@Override
+	public void tabUp()
+	{
+		tabs = tabs + "\t";
 	}
 
 	@Override

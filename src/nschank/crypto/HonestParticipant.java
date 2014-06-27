@@ -1,7 +1,7 @@
 package nschank.crypto;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -12,12 +12,12 @@ import java.util.Map;
  * A Participant who doesn't attempt to lie.
  *
  * @author nschank, Brown University
- * @version 1.2
+ * @version 2.1
  */
 public class HonestParticipant implements Participant
 {
 	private String key = "A";
-	private final Map<String, Object> known;
+	private final Set<Information> known;
 	private final String name;
 	private final History view;
 
@@ -27,7 +27,7 @@ public class HonestParticipant implements Participant
 	public HonestParticipant(History view, String name)
 	{
 		this.name = name;
-		this.known = new HashMap<>();
+		this.known = new HashSet<>();
 		this.view = view;
 	}
 
@@ -41,28 +41,12 @@ public class HonestParticipant implements Participant
 	}
 
 	@Override
-	public boolean containsKey(final String informationKey)
+	public boolean forget(final Information... infs)
 	{
-		return this.known.containsKey(informationKey);
-	}
-
-	@Override
-	public boolean forget(final String... informationKey)
-	{
-		StringBuilder old = new StringBuilder();
-		for(String s : informationKey)
-		{
-			this.known.remove(s);
-			old.append(s).append(", ");
-		}
-		this.getHistory().add("Crossing out the values " + old.toString(), this);
+		for(Information s : infs)
+			if(this.known.remove(s))
+				;//this.getHistory().add(this.toString() + " no longer needs " + s.getName(), this);
 		return true;
-	}
-
-	@Override
-	public Object get(final String informationKey)
-	{
-		return this.known.get(informationKey);
 	}
 
 	@Override
@@ -71,8 +55,7 @@ public class HonestParticipant implements Participant
 		return this.view;
 	}
 
-	@Override
-	public String getKey()
+	private String getKey()
 	{
 		String ret = key;
 		key = increment(key);
@@ -80,12 +63,25 @@ public class HonestParticipant implements Participant
 	}
 
 	@Override
-	public String give(final Object information, final String description)
+	public <T> Information<T> give(final Information<T> information, final LearningType learnedBy)
 	{
-		String thisKey = this.getKey();
-		this.getHistory().add(name + " now knows " + thisKey + "," + description + ": " + information.toString(), this);
-		this.known.put(thisKey, information);
-		return thisKey;
+		this.known.add(information);
+		this.getHistory().add(
+				this.toString() + learnedBy.verb() + information.getName() + "=" + information.getValue() + "; "
+						+ information.getContext(this), this);
+		return information;
+	}
+
+	@Override
+	public <T> Information<T> give(final T object, final String context, final LearningType learnedBy)
+	{
+		return this.give(object, context, learnedBy, this.getKey());
+	}
+
+	@Override
+	public <T> Information<T> give(final T object, final String context, final LearningType learnedBy, String name)
+	{
+		return this.give(new InformationImpl<>(object, this, context, name), learnedBy);
 	}
 
 	/**

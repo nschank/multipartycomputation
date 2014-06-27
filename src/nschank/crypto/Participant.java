@@ -9,22 +9,38 @@ package nschank.crypto;
  * that it is running, the history
  *
  * @author nschank, Brown University
- * @version 1.3
+ * @version 2.1
  */
 public interface Participant
 {
-	public boolean containsKey(String informationKey);
-	public boolean forget(String... informationKey);
-	public Object get(String informationKey);
+	public boolean forget(Information... infs);
 	public History getHistory();
-	public String getKey();
 	default public Iterable<String> getPersonalHistory()
 	{
 		return this.getHistory().eventsVisibleTo(this);
 	}
-	default public String give(Object information)
+	public <T> Information<T> give(Information<T> information, LearningType learnedBy);
+	public <T> Information<T> give(T object, String context, LearningType learnedBy);
+	public <T> Information<T> give(T object, String context, LearningType learnedBy, String name);
+	default public <T> Information<T> send(Information<T> information, Participant... to)
 	{
-		return this.give(information, " the value " + information.toString());
+		for(Participant p : to)
+		{
+			this.getHistory().add(this.toString() + " sent " + p.toString() + " " + information.getContext(this) + ", "
+										  + information.getName(), this);
+			p.give(information, LearningType.GIVEN);
+		}
+		return information;
 	}
-	public String give(Object information, String description);
+	default public <T> Information<T> send(Information<T> information, String context, Participant... to)
+	{
+		information.giveContext(context, to);
+		for(Participant p : to)
+		{
+			this.getHistory().add(this.toString() + " sent " + p.toString() + " " + information.getContext(this) + ", "
+										  + information.getName(), this);
+			p.give(information, LearningType.GIVEN);
+		}
+		return information;
+	}
 }

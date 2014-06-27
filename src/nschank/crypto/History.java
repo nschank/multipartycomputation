@@ -14,7 +14,7 @@ import java.util.Collection;
  * of Participants' private history.
  *
  * @author nschank, Brown University
- * @version 1.4
+ * @version 1.5
  */
 public interface History extends Iterable<String>
 {
@@ -91,4 +91,6 @@ public interface History extends Iterable<String>
 	 * @return An Iterable of event descriptions, in correct order.
 	 */
 	public Iterable<String> eventsVisibleTo(Collection<Participant> participants);
+	public void tabDown();
+	public void tabUp();
 }
