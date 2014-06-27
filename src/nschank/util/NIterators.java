@@ -15,7 +15,7 @@ import java.util.function.Predicate;
  * Utility class for Iterators
  *
  * @author nschank, Brown University
- * @version 1.3
+ * @version 1.3.1
  */
 public final class NIterators
 {
@@ -41,7 +41,7 @@ public final class NIterators
 	 *
 	 * @return An Iterator of type S created from an Iterator of type T and a function that goes element by element
 	 */
-	public static <T, S> Iterator<S> map(final Iterator<T> from, final Function<T, S> to)
+	public static <T, S> Iterator<? super S> map(final Iterator<? extends T> from, final Function<T, S> to)
 	{
 		return new Iterator<S>()
 		{
@@ -72,7 +72,8 @@ public final class NIterators
 	 *
 	 * @return An iterator which goes through all elements of {@code universe} which satisfy {@code includeIf}, in same order
 	 */
-	public static <T> Iterator<T> subiterator(final Iterator<T> universe, final Predicate<T> includeIf)
+	public static <T> Iterator<? super T> subiterator(final Iterator<? extends T> universe,
+													  final Predicate<T> includeIf)
 	{
 		return new Iterator<T>()
 		{
