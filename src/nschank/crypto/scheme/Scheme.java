@@ -8,12 +8,13 @@ package nschank.crypto.scheme;
  * A Scheme represents a way of encrypting and decrypting data
  *
  * @author nschank, Brown University
- * @version 1.1
+ * @version 1.2
  */
 public interface Scheme<MessageSpace, CipherSpace>
 {
 	public MessageSpace decrypt(CipherSpace c);
 	public CipherSpace encrypt(MessageSpace m);
+	public boolean hardcoreBit(MessageSpace m);
 	public String privateKey();
 	default public String publicKey()
 	{

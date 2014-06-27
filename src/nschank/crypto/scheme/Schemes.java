@@ -14,10 +14,11 @@ import java.util.function.Function;
  * A Utility class for creating encryption/decryption schemes
  *
  * @author nschank, Brown University
- * @version 1.2
+ * @version 1.3
  */
 public final class Schemes
 {
+	private static BigInteger TWO = new BigInteger("2");
 	private static Random randomness = new SecureRandom();
 
 	/**
@@ -43,7 +44,8 @@ public final class Schemes
 		final BigInteger d = e.modInverse(phi);
 
 		return schemeBuilder((BigInteger b) -> b.modPow(e, n), (BigInteger b) -> b.modPow(d, n),
-				"(n=" + n.toString() + ",e=" + e.toString() + ")", "(d=" + d.toString() + ")");
+				"(n=" + n.toString() + ",e=" + e.toString() + ")", "(d=" + d.toString() + ")",
+				(BigInteger b) -> b.mod(TWO).equals(BigInteger.ONE));
 	}
 
 	/**
@@ -55,7 +57,7 @@ public final class Schemes
 	}
 
 	public static <M, C> Scheme<M, C> schemeBuilder(final Function<M, C> E, final Function<C, M> D, final String pk,
-													final String sk)
+													final String sk, final Function<M, Boolean> hardcore)
 	{
 		return new Scheme<M, C>()
 		{
@@ -81,6 +83,12 @@ public final class Schemes
 			public String publicKey()
 			{
 				return pk;
+			}
+
+			@Override
+			public boolean hardcoreBit(final M m)
+			{
+				return hardcore.apply(m);
 			}
 		};
 	}
