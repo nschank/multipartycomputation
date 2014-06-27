@@ -55,7 +55,7 @@ public class HonestParticipant implements Participant
 			this.known.remove(s);
 			old.append(s).append(", ");
 		}
-		this.getHistory().add("Crossing out the values " + old.toString());
+		this.getHistory().add("Crossing out the values " + old.toString(), this);
 		return true;
 	}
 
