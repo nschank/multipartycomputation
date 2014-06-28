@@ -197,6 +197,7 @@ div.main_toc {
     border:1px solid #8A8194;
     min-height:100px;
     float:left;
+	clear:left;
     font-size:10pt;
 }
 
