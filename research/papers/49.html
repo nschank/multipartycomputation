@@ -269,10 +269,11 @@
 							<li><b>Privacy constraints: </b><span class="definable" data-define="negligible">Negligible probability</span> that \(P_i\) learns more about \(x_{(1-i)}\) than offered by the computed function.</li>
 							<li><b>Cheating: </b><span class="definable" data-define="malicious adversary">Malicious adversaries</span> can change the outcome of the protocol to a value of their choosing.</li>
 							<li><b>Security constraints: </b>None: an outside attacker could easily affect or learn the outcome of the protocol.</li>
+							<li><b>Subprotocols: </b>A <span class="definable">trapdoor permutation</span> for encryption/decryption. Assumed to run in \(T(N)\) time.</li>
 							<li><b>Bits exchanged: </b>\(O(Nn)\) where \(N\) is the bit-length of \(i\) and \(j\), and \(n\) is their range.</li>
-							<li><b>Runtime:</b> \(O(n)\), where \(n\) is the range of \(i\) and \(j\)</li>
+							<li><b>Runtime:</b> \(O(n+T(N))\), where \(n\) is the range of \(i\) and \(j\)</li>
 							<li>
-								<b>Assumptions:</b> Existence of <span class="definable" data-define="one-way function">one-way functions</span>.
+								<b>Assumptions:</b> Existence of <span class="definable" data-define="trapdoor function">trapdoor functions</span>.
 							</li>
 						</ul>
 					</section>
@@ -453,13 +454,16 @@
                                 </li>
 							</ol>
 							<p class="rp_annotation">
-								In this step, Yao made a mistake. The restriction that no two \(z_u\) have a difference less than \(2\) allows Bob to learn something about \(i\) in some cases.
-								Let's, for the sake of an example, say that \(i=5\). Alice chooses a \(p\) such that \(z_4 = z_6 + 2\), but their difference is at least \(2\), so this should be okay.
-								However, in the next step, she adds \(1\) to all \(z_u\) for \(u \geq 5\); now \(z_4 = z_6 + 1\), which according to this rule is not allowed when initially choosing \(p\). Bob now knows that \(i\in\{5,6\}\):
-								those are the only two cases in which \(z_4 = z_6 + 1\) could be possible with the restriction on step 4. Without the restriction, he learns nothing, since all of the numbers are, from his perspective, randomly produced (since the results of \(D_a\) look random to him).
+								In this step, Yao originally made a mistake. The restriction that no two \(z_u\) have a difference less than \(2\) allows Bob to learn something about \(i\) in some cases.
+								Let's say we require a minimal difference of \(\delta&gt;0\) between all \(z_u\) in the \(\bmod{p}\) sense. Since \(\delta\) is the minimum distance, it is valid to select a \(p\) such that \(\exists\;u_1,u_2\) where \(u_1\leq i\lt u_2\) and \(z_{u_1}=z_{u_2}+\delta\). According to the next step of the protocol, Alice will send Bob \(z_{u_1}\) and \(z_{u_2}+1\) (along with a number of other values). From Bob's perspective, there are three possibilities:
 							</p>
+							<ol class="rp_annotation" type="i">
+								<li>Alice sent him \(z_{u_1}\) and \(z_{u_2}\): however, this is not possible, because the difference between the numbers is \(\delta-1\), while violates the rule.</li>
+								<li>Alice sent him \(z_{u_1}+1\) and \(z_{u_2}+1\): we reach an identical problem here.</li>
+								<li>Alice sent him \(z_{u_1}\) and \(z_{u_2}+1\): this is the only possible option, as (by our assumptions) it did not originally break the rule.</li>
+							</ol>
 							<p class="rp_annotation">
-								The above reasoning works for <u>any</u> value that two \(z_u\)'s 'should' be apart, since the addition of \(1\) can always move a \(z_u\) too close to another in the next step.
+								Since Alice only adds 1 to a \(z_u\) if \(u&gt;i\), Bob can infer that \(u_1\leq i&lt;u_2\). This breaks our privacy constraints on the protocol, so our requiring a minimal distance must have been in error. We have shown the minimum difference requirement breaks the protocol, but we must also demonstrate that <i>not</i> having a minimum difference requirement <i>doesn't</i> do so. We analyze that very question <a href="#def1">below</a>.
 							</p>
 							<ol class="rp_original">
                                 <li value="5">
@@ -523,7 +527,7 @@
                                 In the formal definition to be given in <a href="#sec3.2">Section 3.2</a>, we will define this precisely.
                             </p>
 							<p class="rp_annotation">
-								This precise example will be addressed in the annotations, because Yao does not return to it. However (spoiler alert), neither party could perform enough calculations to learn something extra in polynomial time. Alice, in particular, cannot possibly learn anything, whereas Bob only has an \(\frac{n}{N}\) probability of learning something, where \(n\) is the range of \(i,j\).
+								This precise example will be addressed in the annotations, because Yao does not return to it. However (spoiler alert), neither party could perform enough calculations to learn something extra in polynomial time. Alice, in particular, cannot possibly learn anything, whereas Bob only has an \(\frac{n}{2^N}\) probability of learning something, where \(n\) is the range of \(i,j\).
 							</p>
                             <p class="rp_original">
                                 One may have noticed the possibility that some party may cheat in the process, by deviating from the agreed protocol.
@@ -634,14 +638,14 @@
 								Fixing \(i,j\), we'll first look at what Alice can learn. 
 							</p>
 							<p class="rp_annotation">
-								Obviously, she knows that \(p_i(x)=0\) for \(x\leq i\). For the remainder of possible \(u=j\)'s, however, she can decrypt \(k-j+u\)'s using her private key, producing \(n-i\) possible \(x\) values. Since \(x\) was chosen randomly, she cannot possibly figure out which one Bob chose. \(G_i=\{i+1,i+2,&hellip;,n\}\) and, with no way of choosing between them, \(p_i(j)=\frac{1}{|G_i|}=\frac{1}{n-i}\) for \(j\in G_i\).
+								Obviously, she knows that \(p_i(x)=0\) for \(x\leq i\). For the remainder of possible \(u=j\)'s, however, she can decrypt \(k-j+u\)'s using her private key, producing \(n-i\) possible \(x\) values. Since \(x\) was chosen randomly, she cannot possibly figure out which one Bob chose. \(G_i=\{i+1,i+2,&hellip;,n\}\) and, with no way of choosing between them, \(p_i(j)=\frac{1}{|G_i|}=\frac{1}{n-i}\) for \(j\in G_i\). Bob's information is information theoretically secure.
 							</p>
 							<p class="rp_annotation">
-								Bob, conversely, knows that \(i\) must be within \(G_j=\{1,2,&hellip;,j-1\}\). He has slightly more information from Alice, and can try to guess another value of \(y_u\) in order to further restrict \(i\)&mdash;information that would drastically alter his probability distribution. He knows \(p\), the
+								Bob, conversely, knows that \(i\) must be within \(G_j=\{1,2,&hellip;,j-1\}\). He has slightly more information from Alice, and can try to guess what another value of \(y_u\) was in order to further restrict \(i\)&mdash;information that would drastically alter his probability distribution. He knows \(p\), the
 								random prime Alice has used to \(\bmod{} y_u\), and he knows either \(y_i\pmod{p}\) or \(y_i+1\pmod{p}\) for all of \(i\in G_j\). He must correctly guess a value \(g\) such that \(E_a(g)\) or \(E_a(g+1)\) is \(k+j-u\) for some \(u&lt;j\).
 							</p>
 							<p class="rp_annotation">
-								This is likely why Yao attempted to specify that no two \(y_u\)'s be within 2 of each other, to force Bob's search space \(\bmod{p}\) to be of size \(2(j-1)\). This restriction is not necessary, however: assume the very worst case, which is that \(z_u\) is a sequence of only one number repeated (and noting that that would tell Bob nothing about \(i\) by itself), so Bob has a search space of \(2\bmod{p}\). Since each \(y_u\) could be between 0 and \(2^N-1\), and \(p\) is of maximum size \(2^{\frac{N}{2}}\), this leaves a minimal search space of \(2*\frac{2^N}{2^{N/2}}=2^{\frac{N}{2}+1}\). Since Bob has no extra information which would allow him to choose from the search space better than randomly, finding a single value which would give him any information has runtime \(O(2^N)\). Since this is the minimal search space, it is the best case for Bob, and therefore the probability of him finding any information through extra calculation is <span class="definable">negligible</span>.
+								This is likely why Yao attempted to specify that no two \(y_u\)'s be within 2 of each other, to force Bob's search space within \((\mathbb{Z}/p\mathbb{Z})^*\) to be of size \(2(j-1)\). This restriction is not necessary, however: assume the very worst case, which is that \(z_u\) is a sequence of only one number repeated (and noting that that would tell Bob nothing about \(i\) by itself), so Bob has a search space of only 2 within \((\mathbb{Z}/p\mathbb{Z})^*\). Since each \(y_u\) could be between 0 and \(2^N-1\), and \(p\) is of maximum size \(2^{\frac{N}{2}}\), this leaves a minimal total search space of \(2*\frac{2^N}{2^{N/2}}=2^{\frac{N}{2}+1}\). Since Bob has no extra information which would allow him to choose from the search space better than randomly, finding a single value which would give him any information has runtime \(O(2^N)\). Since this is the minimal search space, it is the best case for Bob, and therefore the probability of him finding any information through extra calculation is <span class="definable">negligible</span>.
 							</p>
 							<p class="rp_annotation">
 								We can set \(\epsilon\) arbitrarily low, since neither party can calculate a probability distribution better than \(\frac{1}{|G|}\).
