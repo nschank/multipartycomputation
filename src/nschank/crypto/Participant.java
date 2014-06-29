@@ -15,6 +15,7 @@ public interface Participant
 {
 	public boolean forget(Information... infs);
 	public History getHistory();
+	String getName();
 	default public Iterable<String> getPersonalHistory()
 	{
 		return this.getHistory().eventsVisibleTo(this);

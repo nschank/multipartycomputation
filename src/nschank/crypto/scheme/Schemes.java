@@ -18,7 +18,6 @@ import java.util.function.Function;
  */
 public final class Schemes
 {
-	private static BigInteger TWO = new BigInteger("2");
 	private static Random randomness = new SecureRandom();
 
 	/**
@@ -31,29 +30,48 @@ public final class Schemes
 
 	public static Scheme<BigInteger, BigInteger> RSA(final int k)
 	{
-		BigInteger p = BigInteger.probablePrime(k / 2 + 1, randomness);
-		BigInteger q;
-		do q = BigInteger.probablePrime(k / 2 + k % 2, randomness); while(p.equals(q));
+		BigInteger p, q, nt;
 
-		final BigInteger n = p.multiply(q);
+		do
+		{
+			p = BigInteger.probablePrime(k / 2, randomness);
+			do q = BigInteger.probablePrime(k / 2 + k % 2, randomness); while(p.equals(q));
+		} while((nt = p.multiply(q)).bitLength() != k);
+
+
+		final BigInteger n = nt;
 		BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
 		BigInteger et;
-		do et = BigInteger.probablePrime(phi.bitLength() - 1, randomness); while(!phi.gcd(et).equals(BigInteger.ONE));
+		do et = BigInteger.probablePrime(phi.toString(2).length() - 1, randomness); while(!phi.gcd(et).equals(
+				BigInteger.ONE));
 		final BigInteger e = et;
 
 		final BigInteger d = e.modInverse(phi);
 
-		return schemeBuilder((BigInteger b) -> b.modPow(e, n), (BigInteger b) -> b.modPow(d, n),
-				"(n=" + n.toString() + ",e=" + e.toString() + ")", "(d=" + d.toString() + ")",
-				(BigInteger b) -> b.testBit(1));
+		return schemeBuilder((BigInteger b) -> b.modPow(e, n), (BigInteger b) -> b.modPow(d, n), padForward(n.toString(
+				2), k) + e.toString(2), padForward(n.toString(2), k) + d.toString(2), (BigInteger b) -> b.testBit(1));
 	}
 
-	/**
-	 *
-	 */
-	public static void main(String[] args)
+	public static Function<BigInteger, BigInteger> decryptRSA(String sk, int k)
 	{
+		final BigInteger n = new BigInteger(sk.substring(0, k), 2);
+		final BigInteger d = new BigInteger(sk.substring(k), 2);
 
+		return (BigInteger b) -> b.modPow(d, n);
+	}
+
+	public static Function<BigInteger, BigInteger> encryptRSA(String pk, int k)
+	{
+		final BigInteger n = new BigInteger(pk.substring(0, k), 2);
+		final BigInteger e = new BigInteger(pk.substring(k), 2);
+
+		return (BigInteger b) -> b.modPow(e, n);
+	}
+
+	public static String padForward(String s, int k)
+	{
+		if(s.length() < k) return padForward("0" + s, k);
+		return s;
 	}
 
 	public static <M, C> Scheme<M, C> schemeBuilder(final Function<M, C> E, final Function<C, M> D, final String pk,
@@ -89,6 +107,12 @@ public final class Schemes
 			public boolean hardcoreBit(final M m)
 			{
 				return hardcore.apply(m);
+			}
+
+			@Override
+			public String toString()
+			{
+				return "(pk=" + this.publicKey() + ",sk=" + this.privateKey() + ")";
 			}
 		};
 	}

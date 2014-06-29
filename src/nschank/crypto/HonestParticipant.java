@@ -63,6 +63,12 @@ public class HonestParticipant implements Participant
 	}
 
 	@Override
+	public String getName()
+	{
+		return this.name;
+	}
+
+	@Override
 	public <T> Information<T> give(final Information<T> information, final LearningType learnedBy)
 	{
 		this.known.add(information);
