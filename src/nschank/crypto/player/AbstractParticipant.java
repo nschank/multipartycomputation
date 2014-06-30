@@ -123,7 +123,6 @@ public abstract class AbstractParticipant implements Participant
 				{
 					try
 					{
-
 						i.supply(s.toString(), this.values.get(s.toString()).get(30, TimeUnit.SECONDS));
 					} catch(TimeoutException t)
 					{

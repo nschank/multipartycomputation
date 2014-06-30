@@ -39,7 +39,7 @@ public class HistoryImpl implements History
 	 * @return true
 	 */
 	@Override
-	public boolean add(final String event)
+	public synchronized boolean add(final String event)
 	{
 		this.events.add(new EventDescription(tabs + event));
 		return true;
@@ -56,7 +56,7 @@ public class HistoryImpl implements History
 	 * @return true
 	 */
 	@Override
-	public boolean add(final String event, final Collection<Participant> visibleTo)
+	public synchronized boolean add(final String event, final Collection<Participant> visibleTo)
 	{
 		this.events.add(new EventDescription(tabs + event, visibleTo));
 		return true;
@@ -71,7 +71,7 @@ public class HistoryImpl implements History
 	 * @return An Iterable of event descriptions, in correct order.
 	 */
 	@Override
-	public Iterable<String> eventsFullyVisibleTo(final Collection<Participant> participants)
+	public synchronized Iterable<String> eventsFullyVisibleTo(final Collection<Participant> participants)
 	{
 		return () -> NIterators.map(NIterators.subiterator(this.events.iterator(), (EventDescription e) -> e.visibleTo(
 				participants)), EventDescription::toString);
@@ -86,7 +86,7 @@ public class HistoryImpl implements History
 	 * @return An Iterable of event descriptions, in correct order.
 	 */
 	@Override
-	public Iterable<String> eventsVisibleTo(final Collection<Participant> participants)
+	public synchronized Iterable<String> eventsVisibleTo(final Collection<Participant> participants)
 	{
 		return () -> NIterators.map(NIterators.subiterator(this.events.iterator(),
 														   (EventDescription f) -> f.visibleToAny(participants)),
@@ -99,19 +99,19 @@ public class HistoryImpl implements History
 	 * @return an Iterator.
 	 */
 	@Override
-	public Iterator<String> iterator()
+	public synchronized Iterator<String> iterator()
 	{
 		return NIterators.map(this.events.iterator(), EventDescription::toString);
 	}
 
 	@Override
-	public void tabDown()
+	public synchronized void tabDown()
 	{
 		tabs = tabs.substring(0, Math.max(0, tabs.length() - 1));
 	}
 
 	@Override
-	public void tabUp()
+	public synchronized void tabUp()
 	{
 		tabs = tabs + "\t";
 	}
