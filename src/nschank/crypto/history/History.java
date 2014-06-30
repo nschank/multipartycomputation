@@ -1,4 +1,6 @@
-package nschank.crypto;
+package nschank.crypto.history;
+
+import nschank.crypto.player.Participant;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -91,6 +93,12 @@ public interface History extends Iterable<String>
 	 * @return An Iterable of event descriptions, in correct order.
 	 */
 	public Iterable<String> eventsVisibleTo(Collection<Participant> participants);
+	/**
+	 * For use in complex Histories: goes back one indentation
+	 */
 	public void tabDown();
+	/**
+	 * For use in complex Histories: goes forward one indentation
+	 */
 	public void tabUp();
 }

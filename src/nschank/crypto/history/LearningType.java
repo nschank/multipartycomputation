@@ -1,4 +1,4 @@
-package nschank.crypto;
+package nschank.crypto.history;
 
 /**
  * Created by Nicolas Schank for package nschank.crypto

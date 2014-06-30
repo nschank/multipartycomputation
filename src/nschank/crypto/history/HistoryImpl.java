@@ -1,5 +1,6 @@
-package nschank.crypto;
+package nschank.crypto.history;
 
+import nschank.crypto.player.Participant;
 import nschank.note.Immutable;
 import nschank.util.NIterators;
 

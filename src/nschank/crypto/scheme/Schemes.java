@@ -14,7 +14,7 @@ import java.util.function.Function;
  * A Utility class for creating encryption/decryption schemes
  *
  * @author nschank, Brown University
- * @version 1.3.1
+ * @version 1.3.2
  */
 public final class Schemes
 {
@@ -29,6 +29,11 @@ public final class Schemes
 	}
 
 	public static Scheme<BigInteger, BigInteger> RSA(final int k)
+	{
+		return RSA(randomness, k);
+	}
+
+	public static Scheme<BigInteger, BigInteger> RSA(final Random randomness, final int k)
 	{
 		BigInteger p, q, nt;
 
