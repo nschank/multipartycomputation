@@ -91,6 +91,10 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="rp_author" href="../authors/Oded Goldreich.html">Oded Goldreich</a> <a class="rp_author" href="../authors/Silvio Micali.html">Silvio Micali</a> <a class="rp_author" href="../authors/Avi Wigderson.html">Avi Wigderson</a></span>
 						
+					<div class="rp_snippet">
+						&ldquo;As long as the majority of the players is honest, all protocols may be correctly played.&rdquo;
+					</div>
+						
                     <div class="main_toc">
                         <h4 style="color:#333333">Table of Contents</h4>
                         <ol type="A">
@@ -108,14 +112,12 @@
                         </ol>
                     </div>
 					
-                    <div class="rp_snippet">
-						As long as the majority of the players is honest, all protocols may be correctly played.
-					</div>
+					<h1>Overview</h1>
 						
                     <section id="a_intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>How to Play Any Mental Game</b> is a 1987 work by Goldreich, Micali, and Widgerson that offers a completeness theorem for any protocol with honest majority. Based on their 1986 work <i>How to Solve Any Protocol Problem</i><a href="pdf/81.1.pdf"><sup>(PDF)</sup></a>, it brings together essentially every major piece of cryptography into one central paper, providing a key piece in the development of multiparty computation protocols. By providing the building blocks necessary to build any general problem into a private and robust protocol, this paper provides the benchmark by which every new protocol is measured. 
+							<b>How to Play Any Mental Game</b> is a 1987 work by Goldreich, Micali, and Widgerson that offers a completeness theorem for any protocol with honest majority. Based on their 1986 work <i>How to Solve Any Protocol Problem</i><a href="pdf/81.1.pdf"><sup>(PDF)</sup></a>, it brings together essentially every major piece of cryptography into one central paper, providing a key piece in the development of multiparty computation protocols. By presenting the building blocks necessary to build any general problem into a private and robust protocol, this paper provides the benchmark by which every new protocol is measured. 
 						</p>
 						<p class="rp_analysis">
 							Goldreich et al.'s methods here are often compared with the garbled circuits presented by Yao <a href="24.html">a year earlier</a>. 
@@ -164,7 +166,7 @@
 						</p>
 						<a href="#def3"><span class="rp_definition_header">Definition 3 - Turing Machine game solver for Passive Adversaries</span></a>
 						<p class="rp_original rp_definition">
-							Let <span class="equation" data-equation="PDA">\(S\in PDA\)</span>. We say that \(S\) is a <span class="definable" data-define="Turing machine game">Tm-game solver</span> for <span class="definable" data-define="passive adversary">passive adversaries</span> if, for all Tm-game problems \((\bar{M},1^k)\) given as common input and for all (respective) private inputs \(x_1,\dots,x_n\),
+							Let \(S\in\)<span class="equation" data-equation="PDA">\(PDA\)</span>. We say that \(S\) is a <span class="definable" data-define="Turing machine game">Tm-game</span> solver for <span class="definable" data-define="passive adversary">passive adversaries</span> if, for all Tm-game problems \((\bar{M},1^k)\) given as common input and for all (respective) private inputs \(x_1,\dots,x_n\),
 						</p>
 						<ol class="rp_original rp_definition">
 							<li value="1">
@@ -257,6 +259,7 @@
             </div>
             <div class="main_toplevel main_section main_color5"><a id="_B"></a>
                 <div class="main_window main_fullwidth">
+					<h1>Annotated Paper</h1>
                     <div class="main_toc">
                         <h4 style="color:#333333">Table of Contents</h4>
                         <ol type="A">
@@ -320,7 +323,7 @@
 					<section id="sec1">
 						<h2>1. Introduction</h2>
 						<p class="rp_original">
-							Before discussing how to "make <span class="definable" data-define="purely playable game">playable</span>" a general game with incomplete information (which we do in section 6) let us address the problem of making playable a special class of games, the <span class="definable" data-define="Turing machine game">Turing machine games</span> (<i>Tm-games</i> for short).
+							Before discussing how to "make <span class="definable" data-define="purely playable game">playable</span>" a general game with incomplete information (which we do in <a href="#sec6">section 6</a>) let us address the problem of making playable a special class of games, the <span class="definable" data-define="Turing machine game">Turing machine games</span> (<i>Tm-games</i> for short).
 						</p>
 						<p class="rp_original">
 							Informally, \(n\) parties, respectively and individually owning secret inputs \(x_1,\dots,x_n\) would like to <i>correctly</i> run a given <span class="definable">Turing machine</span> \(M\) on these \(x_i\)‘s while keeping the maximum possible privacy about them. That is, they want to compute \(y=M(x_1,\dots,x_n)\) without revealing more about the \(x_i\)’s than it is already contained in the value \(y\) itself. For instance, if \(M\) computes the sum of the \(x_i\)’s, every single player should not be able to learn more than the sum of the inputs of the other parties. Here \(M\) may very well be a probabilistic Turing machine. In this case, all player want to agree on a single string \(y\), selected with the right probability distribution, as \(M\)’s output.
@@ -394,7 +397,7 @@
 								Jumping ahead, we will show that all Tm-games are <span class="definable" data-define="purely playable game">playable</span> with any number of passive adversaries or with \(&lt;\frac{n}{2}\) malicious adversaries. 
 							</p>
 							<p class="rp_annotation">
-								Keep in mind that this is operating under the assumption that adversaries run in PPT, and therefore only offers protection in the <span class="definable" data-define="cryptographic security">cryptographic</span> sense.
+								Keep in mind that this is operating under the assumption that adversaries run in PPT, and therefore only offers protection in the <span class="definable" data-define="cryptographic security">cryptographic</span> sense. In an information theoretic setting, only up to \(\frac{n}{3}\) parties can be malicious, as shown by <a href="34.html">Chaum, Crépeau, and Damgård</a> the next year. 
 							</p>
 						</section>
 						<section id="sec2.4">
@@ -407,7 +410,7 @@
 							</p>
 							<span class="rp_definition_header" id="def1">Definition 1 - Computational Indistinguishability</span>
 							<p class="rp_original rp_definition">
-								Two <span class="definable" data-define="poly-bounded family of random variables">poly-bounded families of RV's</span> are <span class="definable" data-define="indistinguishable">computationally indistinguishable</span> if, for all <span class="definable" data-define="poly-size family of circuits">poly-size families of circuits</span> \(C\), for all constants \(f&gt;0\) and all sufficiently large \(k\in N\),
+								Two <span class="definable" data-define="poly-bounded family of random variables">poly-bounded families of RV's</span> are <span class="definable" data-define="computational indistinguishability">computationally indistinguishable</span> if, for all <span class="definable" data-define="poly-size family of circuits">poly-size families of circuits</span> \(C\), for all constants \(f&gt;0\) and all sufficiently large \(k\in N\),
 							</p>
 							<p class="rp_original rp_definition">
 								$$|P(U,C,k)-P(V,C,k)|&lt;k^{-f}$$
@@ -453,7 +456,7 @@
 							<li value="3">
 								<i>(Privacy constraint)</i>
 								<p>
-									\(\forall\; T\subset\{1,\dots,n\}\) and \(\forall\;A\in PPT,\;\exists\;B\in PPT\) such that \(\{A_k\}\) and \(\{B_k\}\) are computationally <span class="definable">indistinguishable</span> RVs. Here</p>
+									\(\forall\; T\subset\{1,\dots,n\}\) and \(\forall\;A\in PPT,\;\exists\;B\in PPT\) such that \(\{A_k\}\) and \(\{B_k\}\) are <span class="definable" data-define="computational indistinguishability">computationally indistinguishable</span> RVs. Here</p>
 								<p>
 									\(A_k=A((\bar{M},1^k),\)<span class="equation" data-equation="HS">\(HS((\bar{M},1^k))\)</span>,<span class="equation" data-equation="HST">\(HS_T((\bar{M},1^k))\)</span>\()\)
 								</p>
@@ -477,6 +480,9 @@
 							Notice that passive adversaries appear in the above definition in an implicit way. Algorithm \(A\) can be thought as all the members of \(T\) being passive adversaries computing after an execution of \(S\). In fact, passive adversaries are obliged to send messages according to \(S\) and their private history, in an execution of \(S\), as an explicit input to \(A\). Let us stress that the private history of a machine \(i\) contains the name \(i\), the private input \(x_i\), and \(M\)'s output as well. Thus the privacy constraint essentially says that whatever the passive adversaries may compute after computing \(S\), they could also easily deduce from the desired \(M\)'s output \(y\) and their own private inputs (which they are entitled to have!). In fact, if they are given \(y\) by running \(S\), the passive adversaries will see, in addition to \(y\), only the public history and their own private history. However, whatever they could efficiently compute with this additional input, they could also have computed without it. In other words, \(S\) keeps whatever privacy of the inputs of the good parties is not "betrayed" by the value of \(y\) itself. For instance, if \(M\) computes the sum of the \(x_i\)'s, then the privacy constraint will allow the adversarial players to compute (at the end of \(S\)) essentially only the sum of the inputs of the good parties. As for another example, if \(M\) is the identity function, then the privacy constraint holds vacuously. Same if the set \(T\) is the set of all players.
 						</p>
 						<p class="rp_annotation">
+							Let us emphasize that \(T\) should be interpreted as the set of all passive adversaries, who can be interpreted as colluding together in order to determine more about the honest parties.
+						</p>
+						<p class="rp_annotation">
 							This is sometimes known as the ideal vs. real-world argument. From the point of view of the adversary, there is no difference between the 'ideal world' (where the protocol was performed by a <span class="definable">trusted party</span> instead) and the real world, where the protocol is being performed.
 						</p>
 					</section>
@@ -492,6 +498,9 @@
 							</p>
 							<p class="rp_original">
 								In this extended abstract we limit ourselves to give a few indications, in an informal manner, about the proof of the above theorem. 
+							</p>
+							<p class="rp_annotation">
+								Nonetheless, they give an excellent summary of how to build up to their main theorem, by presenting their building blocks one by one.
 							</p>
 						</section>
 						<section id="sec4.1">
@@ -537,7 +546,7 @@
 									Thus, \(f\) being trapdoor, no probabilistic, polynomial-time algorithm given \(f_k(x)\), can correctly predict \(B_{f_k}(x)\) with probability \(\geq\frac{1}{2}+\frac{1}{poly(k)}\). We might as well flip a coin. Thus, for a one-way permutation \(f\), given \(f(x)\) the value of \(B_f(x)\) cannot be guessed in polynomial time essentially better than at random.
 								</p>
 								<p class="rp_annotation">
-									Again note that probability of \frac{1}{2}+\frac{1}{poly(k)} is <span class="definable" data-define="negligible">non-negligible</span>, so it should be \(\geq\), not &gt; as it was originally. Since by definition of a trapdoor permutation we cannot determine determine \(x\) given \(f(x)\) in polynomial time, \(\epsilon^{-1}\) must be greater than polynomial in \(k\), so \(\epsilon &lt; \frac{1}{poly(k)}\), and therefore is negligible.
+									Again note that probability of \(\frac{1}{2}+\frac{1}{poly(k)}\) is <span class="definable" data-define="negligible">non-negligible</span>, so it should be \(\geq\), not &gt; as it was originally. Since by definition of a trapdoor permutation we cannot determine determine \(x\) given \(f(x)\) in polynomial time, \(\epsilon^{-1}\) must be greater than polynomial in \(k\), so \(\epsilon &lt; \frac{1}{poly(k)}\), and therefore is negligible.
 								</p>
 								<p class="rp_original">
 									Then notion of a random bit in a one-way permutation was introduced by Blum and Micali<sup class="reference" data-citation="9"><a href="#citation9">[9]</a></sup> who showed a random bit in the <span class="definable" data-define="discrete logarithm problem">Discrete Logarithm Problem</span>, a well known candidate for one-way permutation. Chor and Goldreich show random bits in the RSA function. Do all one-way functions have a random bit? We do not know the answer to this question, but Yao<sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup> has shown the next best thing. Namely, that given a one-way (trapdoor) permutation \(f\), one can construct a one-way (trapdoor) permutation \(F\) with random bit \(B_F\) (For a detailed proof of this theorem see <span class="reference" data-citation="10"><a href="#citation10">[10]</a></span>). Levin<sup class="reference" data-citation="11"><a href="#citation11">[11]</a></sup> has actually proved a more general version of this theorem.
@@ -566,7 +575,7 @@
 								<p class="rp_annotation">
 									Changed from trapdoor function to permutation, as is required for step 2 to make sense.
 								</p>
-								<ol>
+								<ol class="rp_original">
 									<li value="2">
 										\(B\) randomly selects \(x_0\) and \(x_1\) in \(f\)'s domain and computes \(z=f(x_0)\) and sends \(A\) the pair
 										$$(u,v)=\begin{cases}(f(x_0),x_1)&\mbox{if } \alpha =0\\(x_0,f(x_1))&\mbox{if }\alpha =1\end{cases}$$
@@ -860,7 +869,7 @@
 						R. Boppana and R. Hirschfeld, <i>Pseudo-Random Generators and Complexity Classes</i>, To appear in Randomness and Computation, 5th volume of Advances in Computing Research, ed. S. Micali
 					</li>
 					<li id="citation11">
-						L. Leonid, <i>One-Way Functions and Pseudo-Random Generators</i>, Proc. 17th STOC, 1985, pp. 363-365.
+						L. Levin, <i>One-Way Functions and Pseudo-Random Generators</i>, Proc. 17th STOC, 1985, pp. 363-365.
 					</li>
 					<li id="citation12">
 						A. Yao, <i>How to Generate and Exchange Secrets</i>, Proc. 27th STOC, 1986, pp. 162-167

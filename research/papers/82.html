@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Title - Author, Year</title>
+        <title>Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result - David Chaum, Ivan B. Damgård, Jeroen van de Graaf, 1988</title>
         <link rel="stylesheet" type="text/css" href="../../style/main.css">
         <link rel="stylesheet" type="text/css" href="../../style/equation.css">
         <link rel="stylesheet" type="text/css" href="../../style/ref.css">
@@ -62,12 +62,16 @@
                     <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
                 </div>
                 <div class="main_window main_fullwidth" id="_A">
-                    <div class="rp_linkbox"><a href="pdf/###.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
+                    <div class="rp_linkbox"><a href="pdf/82.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
-                    <span class="rp_title">Paper Title</span>
-                    <span class="rp_info">Year
+                    <span class="rp_title">Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result</span>
+                    <span class="rp_info">1988
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="rp_author" href="../authors/authorpage.html">Author</a>
+						<a class="rp_author" href="../authors/David Chaum.html">David Chaum</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="rp_author" href="../authors/Ivan Damgård.html">Ivan Damgård</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="rp_author" href="../authors/Jeroen van de Graaf.html">Jeroen van de Graaf</a>
 					</span>
 					
 					<div class="rp_snippet">
@@ -168,6 +172,28 @@
                             </li>
                         </ol>
                     </div>
+					<section id="summary">
+						<h2>Summary</h2>
+						<p class="rp_original">
+							A protocol is presented that allows a set of parties to collectively perform any agreed computation, where every party is able to choose secret inputs and verify that the resulting output is correct, and where all secret inputs are optimally protected.
+						</p>
+						<p class="rp_original">
+							The protocol has the following properties:
+						</p>
+						<ul class="rp_original">
+							<li>One participant is allowed to hide his secrets <i>unconditionally</i>, i.e. the protocol releases no Shannon information about these secrets. This means that a participant with bounded resources can perform computations securely with a participant who may have unlimited computing power. To the best of our knowledge, our protocol is the first of its kind to provide this possibility.</li>
+							<li>The cost of our protocol is linear in the number of gates in a circuit performing the computation, and in the number of participants. We believe it is conceptually simpler and more efficient than other protocols solving related problems<sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup><sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup><sup class="reference" data-citation="3"><a href="#citation3">[3]</a></sup>. It therefore leads to practical solutions on problems involving small circuits.</li>
+							<li>The protocol is <i>openly verifiable</i>, i.e. any number of people can later come in and rechallenge any participant to verify that no cheating has occurred.</li>
+							<li>The protocol is optimally secure against conspiracies: even if \(n-1\) out of the \(n\) participants collude, they will not find out more about the remaining participants' secrets than what they could already infer from their own input and the public output.</li>
+							<li>Each participant has a chance of undetected cheating that is only exponentially small in the amount of time and space needed for the protocol.</li>
+							<li>The protocol adapts easily, and with negligible extra cost, to various additional requirements, e.g. making part of the output private to some participant, ensuring that the participants learn the output simultaneously, etc.</li>
+							<li>Participants can prove relations between data used in different instances of the protocol, even if those instances involve different groups of participants. For example, it can be proved that the output of one computation was used as input to another, without revealing more about this data.</li>
+							<li>The protocol can be used as an essential tool in proving that all languages in IP have zero knowledge proof systems, i.e. any statement which can be proved interactively can also be proved in zero knowledge.</li>
+						</ul>
+						<p class="rp_original">
+							The rest of this paper is organized as follows: First we survey some related results. Then <a href="#sec2">Section 2</a> gives an intuitive introduction to the protocol. In <a href="#sec3">Section 3</a>, we present one of the main tools used in this paper: bit commitment schemes. Sections <a href="#sec4">4</a> and <a href="#sec5">5</a> contain the notation, terminology, etc. used in the paper. In <a href="#sec6">Section 6</a>, the protocol is presented, along with proofs of its security and correctness. In <a href="#sec7">Section 7</a>, we show how to adapt the protocol to various extra requirements and discuss some generalizations and optimizations. Finally, <a href="#sec8">Section 8</a> contains some remarks on how to construct zero knowledge proof systems for any language in IP.
+						</p>
+					</section>
                     <section id="sec1">
                         <h2>1. Introduction</h2>
                     </section>
@@ -176,12 +202,14 @@
             <div class="main_toplevel main_section main_color8">
                 <h1>References</h1>
                 <ol id="referencelist">
-                    <li id="citation1">A citation</li>
+                    <li id="citation1">Y1</li>
+					<li id="citation2">GoMiWi</li>
+					<li id="citation3">GaHaYu</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+###@gmail.com">Problem with this page?</a></p>
+                    <p><a href="mailto:multipartycomputationorg+82@gmail.com">Problem with this page?</a></p>
                 </div>
                 <p>Created by Nicolas Schank 2014, Brown University</p>
 				<p>All original work is free for any use by anyone whatsoever.</p>

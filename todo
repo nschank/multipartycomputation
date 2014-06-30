@@ -26,10 +26,10 @@ Ch1
 34
 Assumptions page
 submit
-fix 404
 cheat sheet additions
 	boolean gates
 	RSA
+	indistinguishability
 words
 	information theoretic security
 	synchronous network
@@ -39,3 +39,5 @@ words
 	adaptive adversary
 	cryptographic security
 	oblivious transfer (basic, factoring, one-out-of-two)
+	fault-tolerance
+	computational indistinguishability (from indistinguishable)

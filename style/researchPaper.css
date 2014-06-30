@@ -34,10 +34,11 @@ img.rp_link {
 
 .rp_snippet {
     font-style:italic;
-    margin:10px 5%;
+    margin:10px auto;
     color:#666666;
     float:left;
     width:90%;
+	text-align:center;
 }
 
 .rp_original, .rp_analysis {
