@@ -18,6 +18,9 @@ import java.util.function.Function;
  * Created on 27 Jun 2014
  * Last updated on 27 Jun 2014
  *
+ * Performs Yao's protocol on two bytes (1-255) to determine if Alice has an i value which is strictly less than Bob's j
+ * value.
+ *
  * @author nschank, Brown University
  * @version 1.1
  */
@@ -43,7 +46,7 @@ public class LessThan82 implements Protocol<Information<Boolean>>
 	}
 
 	/**
-	 *
+	 * Example protocol
 	 */
 	public static void main(String[] args) throws Exception
 	{

@@ -14,17 +14,32 @@ import java.util.*;
  * Created on 29 Jun 2014
  * Last updated on 29 Jun 2014
  *
+ * A Protocol (intended more for didactic use than practical use) which allows any group of people, each of whom has a
+ * particular "crush", to each individually determine whether their crush is requited.
+ *
  * @author nschank, Brown University
  * @version 1.1
  */
 public class FourthGradeProtocol implements Protocol<Map<Participant, Information<Boolean>>>
 {
-	private static final Random randomness = new SecureRandom();
+	private static final Random RANDOMNESS = new SecureRandom();
+
+	/*
+		Maps from a person to their crush
+	 */
 	private final Map<Participant, Information<Participant>> crushes;
+
+	/*
+		Security constraint
+	 */
 	private final int k;
 
 	/**
-	 *
+	 * Creates a FourthGrade Protocol which has:
+	 * @param crushes
+	 * 		A map from participants to their own crushes
+	 * @param k
+	 * 		A security parameter
 	 */
 	public FourthGradeProtocol(final Map<Participant, Information<Participant>> crushes, final int k)
 	{
@@ -34,7 +49,7 @@ public class FourthGradeProtocol implements Protocol<Map<Participant, Informatio
 
 
 	/**
-	 *
+	 * Performs an example of the fourth grade protocol
 	 */
 	public static void main(String[] args) throws Exception
 	{
@@ -55,11 +70,21 @@ public class FourthGradeProtocol implements Protocol<Map<Participant, Informatio
 
 		for(Participant p : parts)
 		{
-			System.out.println(p + "\t" + ret.get(p) + "\t" + crush.get(p));
+			System.out.println(p + "\tRequited: " + ret.get(p) + "\tCrush: " + crush.get(p));
 		}
 
 	}
 
+	/**
+	 * Broadcasts a piece of information to all parties.
+	 *
+	 * @param from
+	 * 		Who is broadcasting the info
+	 * @param info
+	 * 		The piece of information to broadcast
+	 * @param <T>
+	 * 		The type of information being sent
+	 */
 	private <T> void broadcast(Participant from, Information<T> info)
 	{
 		for(Participant p : this.getParticipants())
@@ -92,7 +117,7 @@ public class FourthGradeProtocol implements Protocol<Map<Participant, Informatio
 			sk.put(p, p.give(pub.privateKey(), "a private key", LearningType.CALC, "sk" + p.getName()));
 			pik.put(p, p.give(sec.publicKey(), "another public key", LearningType.CALC, "pik" + p.getName()));
 			sigmak.put(p, p.give(sec.privateKey(), "another private key", LearningType.CALC, "sigmak" + p.getName()));
-			r.put(p, p.give(BigInteger.probablePrime(this.k / 2, randomness), "a random value", LearningType.CHOSEN,
+			r.put(p, p.give(BigInteger.probablePrime(this.k / 2, RANDOMNESS), "a random value", LearningType.CHOSEN,
 							"r" + p.getName()));
 
 			broadcast(p, pk.get(p));
