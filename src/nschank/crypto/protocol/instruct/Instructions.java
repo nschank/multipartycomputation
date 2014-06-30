@@ -29,20 +29,6 @@ public final class Instructions
 		//Utility class
 	}
 
-	public static Instruction choose(final String newname, final String description, final String fromname)
-	{
-		final Set<String> required = new HashSet<>();
-		required.add(fromname);
-		return new AbstractInstruction(required, newname, description)
-		{
-			@Override
-			public Object call() throws Exception
-			{
-				return this.arguments.get(fromname);
-			}
-		};
-	}
-
 	public static Instruction createFrom(final String name, final String description,
 										 final BiFunction<Instruction, Random, Object> creator,
 										 final String... arguments)
@@ -56,6 +42,20 @@ public final class Instructions
 			public Object call() throws Exception
 			{
 				return creator.apply(this, this.randomness);
+			}
+		};
+	}
+
+	public static Instruction rename(final String newname, final String description, final String fromname)
+	{
+		final Set<String> required = new HashSet<>();
+		required.add(fromname);
+		return new AbstractInstruction(required, newname, description)
+		{
+			@Override
+			public Object call() throws Exception
+			{
+				return this.arguments.get(fromname);
 			}
 		};
 	}

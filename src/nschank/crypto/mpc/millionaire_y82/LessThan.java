@@ -141,7 +141,7 @@ public class LessThan implements Protocol
 		final List<Instruction> protocol = new ArrayList<>();
 
 		protocol.add(Instructions.createFrom("security parameter", "choose a security parameter", (i, r) -> this.k));
-		protocol.add(Instructions.choose("i", "choose a number between 1 and 127 (type byte)", "input"));
+		protocol.add(Instructions.rename("i", "choose a number between 1 and 127 (type byte)", "input"));
 		protocol.add(Instructions.createFrom("scheme", "create an encryption and decryption scheme (type Scheme)",
 											 (a, b) -> Schemes.RSA(b, (int) a.get("security parameter")),
 											 "security parameter"));
@@ -150,7 +150,7 @@ public class LessThan implements Protocol
 				.get("scheme"))::encrypt), "scheme"));
 		protocol.add(Instructions.createFrom("Da", "specify the decryption function", (i,
 																					   r) -> (Function<BigInteger, BigInteger>) (((Scheme<BigInteger, BigInteger>) i
-													 .get("scheme"))::decrypt), "scheme"));
+				.get("scheme"))::decrypt), "scheme"));
 		protocol.add(Instructions.send("Ea", "send the encryption function to the other participant", alice, bob));
 		protocol.add(Instructions.createFrom("yu",
 											 "calculate the values Da(k-j+u) for u=1...127 (type List<BigInteger>)",
@@ -200,9 +200,10 @@ public class LessThan implements Protocol
 		final List<Instruction> protocol = new ArrayList<>();
 
 		protocol.add(Instructions.createFrom("security parameter", "choose a security parameter", (i, r) -> this.k));
-		protocol.add(Instructions.choose("j", "choose a number between 1 and 255", "input"));
-		protocol.add(Instructions.createFrom("x", "choose a random N-bit prime", (i, r) -> BigInteger.probablePrime(
-				(int) i.get("security parameter") - 1, r), "security parameter"));
+		protocol.add(Instructions.rename("j", "choose a number between 1 and 127 (type byte)", "input"));
+		protocol.add(Instructions.createFrom("x", "choose a random N-bit prime (type BigInteger)",
+											 (i, r) -> BigInteger.probablePrime((int) i.get("security parameter") - 1,
+																				r), "security parameter"));
 		protocol.add(Instructions.createFrom("k", "calculate the encryption of x under Ea", (i, r) -> {
 			final Function<BigInteger, BigInteger> Ea = (Function<BigInteger, BigInteger>) i.get("Ea");
 			return Ea.apply((BigInteger) i.get("x"));
@@ -227,6 +228,9 @@ public class LessThan implements Protocol
 		return Collections.unmodifiableSet(this.participants);
 	}
 
+	/**
+	 * A Participant for the LessThan protocol. The byte i is set to the valueName "input"
+	 */
 	public static class LessThanParticipant extends AbstractParticipant
 	{
 		private final String name;

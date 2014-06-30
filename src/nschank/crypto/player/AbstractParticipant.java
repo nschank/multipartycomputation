@@ -121,16 +121,18 @@ public abstract class AbstractParticipant implements Participant
 			{
 				for(Object s : i.inputs())
 				{
-					if(!this.values.containsKey(s.toString())) throw new Exception(
-							"The required argument " + s.toString() + " in instruction " + i.plaintext()
-									+ " could not be found.");
 					try
 					{
+
 						i.supply(s.toString(), this.values.get(s.toString()).get(30, TimeUnit.SECONDS));
 					} catch(TimeoutException t)
 					{
 						throw new Exception("Instruction " + i.plaintext() + " timed out when waiting for argument " + s
 								.toString());
+					} catch(NullPointerException n)
+					{
+						throw new Exception("Required argument " + s.toString() + " in instruction " + i.plaintext()
+													+ " could not be found.");
 					}
 				}
 				Object value;
