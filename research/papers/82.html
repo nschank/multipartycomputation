@@ -169,7 +169,12 @@
                                 <ol>
                                     <li><a href="#sec1">Introduction</a></li>
 									<li><a href="#sec2">Overview of the Protocol</a></li>
-									<li><a href="#sec3">Bit Commitment Schemes</a></li>
+									<li><a href="#sec3">Bit Commitment Schemes</a>
+										<ol>
+											<li><a href="#sec3.1">Examples</a></li>
+										</ol>
+									</li>
+									<li><a href="#sec4">Protocols: notation and definitions</a></li>
                                 </ol>
                             </li>
                         </ol>
@@ -304,6 +309,120 @@
 					</section>
 					<section id="sec3">
 						<h2>3. Bit Commitment Schemes</h2>
+						<p class="rp_original">
+							A bit commitment scheme is a tool allowing protocol participant \(A\) to "commit" to a bit \(b\in\{0,1\}\) by releasing some information related to \(b\) such that:
+						</p>
+						<ul class="rp_original">
+							<li>She cannot later convincingly claim that \(b\) had the opposite value.</li>
+							<li>No other participant can find the value of \(b\) unless \(A\) allows this (opens the commitment)</li>
+						</ul>
+						<p class="rp_original">
+							More formally, a bit commitment scheme is a family of finite sets $$\{I_m\}_{m=1}^\infty$$ such that a member of \(I_m\) is a pair of functions $$(f_m^{(0)},f_m^{(1)}),$$ where $$f_m^{(0)}:\;R_m^{(0)}\;\;\rightarrow\;\;S_m\quad and\quad f_m^{(0)}:\;R_m^{(1)}\;\;\rightarrow\;\;S_m$$ where \(R_m^{(i)}\) and \(S_m\) are finite sets, and the function are polynomial (in \(m\)) time computable.
+						</p>
+						<p class="rp_original">
+							Further, there exists a probabilistic polynomial time algorithm \(\Omega\), which on input a value of the security parameter \(m\) outputs a member chosen randomly and uniformly from \(I_m\).
+						</p>
+						<p class="rp_original">
+							To use the commitment scheme, \(A\) will choose an instance, i.e. she will choose a value of \(m\), run \(\Omega\) and make \(m,\,f_m^{(0)}\) and \(f_m^{(1)}\) public.
+						</p>
+						<p class="rp_original">
+							To commit to a bit \(b,\,A\) chooses an element \(r\) uniformly in \(R_m^{(b)}\) and makes public $$BCS_{A,m}(b,r)=f_m^{(b)}(r).$$
+						</p>
+						<p class="rp_original">
+							Below, we list the properties of bit commitment schemes that are of interest in our protocol:
+						</p>
+						<span class="rp_sub_header">Hiding the bit:</span>
+						<p class="rp_original rp_sub">
+							Let \(\Delta\) be any probabilistic polynomial time algorithm which takes as input a commitment \(BCS_{A,m}(b,r)\) and gives a one bit output \(\Delta(BCS_{A,m}(b,r))\). Then for all constants \(c\),$$|Prob(\Delta(BCS_{A,m}(b,r))=b-\frac 1 2|\lt m^{-c}$$ for all sufficiently large \(m\). This holds for all but a fraction \(\epsilon(m)\) of the instances in \(I_m\), and as a function of \(m,\,\epsilon(m)\) vanishes faster than any polynomial fraction.
+						</p>
+						<p class="rp_original rp_sub">
+							Thus, guessing from a commitment which bit it contains is a hard problem. Note that \(b\) must be uniquely determined from \(BCS_{A,m}(b,r)\) and \(r\), but not necessarily from \(BCS_{A,m}(b,r)\) alone. This also means that \(b\) may be impossible to find from a commitment to \(b\), even wit infinite computing power.
+						</p>
+						<span class="rp_sub_header">Unforgeability:</span>
+						<p class="rp_original rp_sub">
+							Let \(\Delta\) be a probabilistic polynomial time algorithm which takes as input a commitment \(BCS_{A,m}(b,r),\,b\) and \(r\), and gives as output an element \(r_\Delta\) in \(R_m^{(b\oplus 1)}\). Then, for any constant \(c\), $$Prob(BCS_{A,m}(b,r)=BCS_{A,m}(b\oplus 1,r_\Delta))\lt m^{-c}$$ for all sufficiently large \(m\). Again this holds for all but a fraction \(\epsilon(m)\) of the instances in \(I_m\), and as a function of \(m,\,\epsilon(m)\) vanishes faster than any polynomial fraction.
+						</p>
+						<p class="rp_original rp_sub">
+							Thus it is not possible for a polynomially bounded \(A\) to lie about the contents of her commitments. But note that an \(r_\Delta\) satisfying the condition above may not exist at all, in which case it is impossible to lie, even with infinite computing power.
+						</p>
+						<span class="rp_sub_header">Opening a commitment:</span>
+						<p class="rp_original rp_sub">
+							Given \(BCS_{A,m}(b,r),\,A\) can convince anyone that, for a given value of \(n\), she knows an \(r\) which will produce the given commitment. Typically, she will just reveal \(r\).
+						</p>
+						<span class="rp_sub_header">Comparability:</span>
+						<p class="rp_original rp_sub">
+							Given two commitments, \(BCS_{A,m}(b,r)\) and \(BCS_{A,m}(b',r')\), there exists a Minimum Knowledge Interactive Proof (MKIP) by which \(A\) can convince anyone about the value of \(b\oplus b'\).
+						</p>
+						<span class="rp_sub_header">Blinding:</span>
+						<p class="rp_original rp_sub">
+							Given a commitment \(BCS_{A,m}(b,r)\), <i>another</i> participant, \(B\), can choose \(b'\in\{0,1\}\) and compute from this a blinded commitment \(BCS_{A,m}(b\oplus b',r')\), where \(r'\) is uniformly distributed in \(R_m^{(b\oplus b')}\). There exists a MKIP such that, given these two commitments, \(B\) can convince anyone about the value of \(b'\).
+						</p>
+						<p class="rp_original rp_sub">
+							Moreover, we require that given two commitments \(BCS_{A,m}(b\oplus b',r')\) and \(BCS_{A,m}(b\oplus b",r")\), which have been computed by \(B\) as above, there exists a MKIP by which B can convince anyone about the value of \((b\oplus b')\oplus(b\oplus b")=b'\oplus b"\).
+						</p>
+						<p class="rp_original rp_sub">
+							Finally, it must be possible for \(A\) to open commitments which have been blinded as above, just as if she had computed them herself.
+						</p>
+						<p class="rp_original">
+							From a theoretical point of view, the opening and comparability properties do not represent demanding assumptions, since the required proofs can always be produced by using standard reductions to 3COL or SAT<sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup><sup class="reference" data-citation="8"><a href="#citation8">[8]</a></sup><sup class="reference" data-citation="7"><a href="#citation7">[7]</a></sup>. We will only be concerned, however, with bit commitment schemes allowing the proofs to be produced directly and efficiently. As a consequence, the main protocol will be much more efficient. 
+						</p>
+						<section id="sec3.1">
+							<h3>3.1. Examples</h3>
+							<p class="rp_original">
+								The protocol presented in this paper relies on the existence of bit commitment schemes satisfying the properties defined above. In this subsection, we give three examples of commitment schemes which could be used in the protocol, namely the <i>Quadratic Residuosity Scheme</i> (QRS), <i>the Jacobi Symbol Scheme</i> (JSS), and <i>the Discrete Log Scheme</i> (DLS), of which DLS has not been used in published protocols before.
+							</p>
+							<p class="rp_original">
+								In QRS, \(A\) uses the algorithm \(\Omega\) to select at random two \(m\)-bit primes, \(p\) and \(q\) with \(p\equiv q\equiv -1\pmod 4\). She then puts \(N=pq,\,R_m^{(0)}=R_m^{(1)}=Z_N^*\) and \(S_m=\left\{x\in Z_N^*\,\middle|\,\left(\frac x N\right)=1\right\}\). She makes public \(N\) and uses for example the zero knowledge protocol from <span class="reference" data-citation="10"><a href="#citation10">[10]</a></span> to convince everyone that \(N\) is of the right form. In particular, this implies that -1 is a <span class="definable" data-define="quadratic residue">quadratic nonresidue</span> modulo \(N\) of <span class="definable">Jacobi symbol</span> 1. If we define $$f_m^{(b)}(r)=(-1)^br^2\bmod N$$ it is easy to see that a commitment will contain a 1 if and only if the commitment is a quadratic nonresidue modulo \(N\).
+							</p>
+							<p class="rp_original">
+								The "hiding" condition above now translates into the well known <i>quadratic residuosity assumption</i>: it is hard, even probabilistically, to distinguish quadratic residues from quadratic nonresidues modulo \(N\) (a formal statement can be found in <span class="reference" data-citation="2"><a href="#citation2">[2]</a></span>). Moreover, even with infinite computing power, clearly \(A\) cannot lie about the contents of a commitment.
+							</p>
+							<p class="rp_original">
+								The opening and comparability properties are easily verified for QRS: \(A\) simply makes public a square root modulo \(N\) of $$(-1)^bBCS_{A,m}(b,r)\quad resp.\quad(-1)^{b\oplus b'}BCS_{A,m}(b,r)BCS_{A,m}(b',r')^{-1}.$$ These proofs will be MKIPs because the commitments were chosen by \(A\) herself at random.
+							</p>
+							<p class="rp_original">
+								Blinding is also a simple process: having chosen \(b',\,B\) computes the new commitment as $$(-1)^{b'}s^2BCS_{A,m}(b,r)=BCS_{A,m}(b\oplus b',rs),$$ where \(s\) is randomly chosen from \(Z_n^*.\,B\) can show the value of \(b'\) by showing a square root of $$(-1)^(b')BCS_{A,m}(b\oplus b',rs)(BCS_{A,m}(b,r))^{-1},$$ which equals \(s.\,s\) is called <i>the blinding factor</i>.
+							</p>
+							<p class="rp_original">
+								Also, given two blinded commitments as above, \(B\) can show a square root of $$(-1)^{b'\oplus b"}BCS_{A,m}(b\oplus b',r')(BCS_{A,m}(b\oplus b",r"))^{-1}$$ to convince everyone about the value of \(b'\oplus b"\).
+							</p>
+							<p class="rp_original">
+								Clearly, \(A\) can compute any commitment by using her knowledge of the factors of \(N\) to compute square roots. But it is important to note that it will only be safe for her to do so, if she is convinced that she will always be opening blinded forms of commitments chosen by <i>herself</i>. This will be ensured by the construction of our main protocol.
+							</p>
+							<p class="rp_original">
+								In the JSS (first introduced by Blum<sup class="reference" data-citation="11"><a href="#citation11">[11]</a></sup>), some participant \(B\) chooses a modulus \(N\) of the same form as above, such that the factorization is unknown to \(A\), and convinces her as above that \(N\) was correctly chosen. We then put $$R_m^{(0)}\;=\;\left\{x\in Z_N^*\,\middle|\,\left(\frac x N\right)=1\right\},$$ $$R_m^{(1)}\;=\;\left\{x\in Z_N^*\,\middle|\,\left(\frac x N\right)=-1\right\},$$ $$and\quad S_m\;=\;QR(N),$$ where \(QR(N)\) denotes the set of wuadratic residues modulo \(N\). Finally, we set $$f_m^{(b)}(r)\;=\;r^2\bmod N,$$ where \(r\in R_m^{(b)}\).
+							</p>
+							<p class="rp_original">
+								This scheme hides the bits unconditionally: since each square modulo \(N\) has two square roots of Jacobi symbol +1 and two of Jacobi symbol -1, release by \(A\) of \(BCS_{A,m}(b,r)\) gives away no Shannon information about \(b\). On the other hand, the unforgeability property only holds conditionally here: if \(A\) could factor \(N\), she could lie about the value of \(b\).
+							</p>
+							<p class="rp_original">
+								JSS also satisfies the comparability property: Given two commitments \(s_1\,=\,BCS_{A,m}(b,r)\) and \(s_2\,=\,BCS_{A,m}(b',r'),\,A\) can make public a square root of \(s_1(s_2)^{-1}\) of Jacobi symbol \((-1)^{b\oplus b'}\) to convince everybody about the value of \(b\oplus b'\). Note that this is still information theoretically secure: after having seen a proof that \(b\oplus b'\,=\,1\), say, the two possibilities \((b,b')\,=\,(1,0)\) and \((b,b')\,=\,(0,1)\) remain equally likely, even to someone who knows the factorization of \(N\).
+							</p>
+							<p class="rp_original">
+								Note that if \(A\) is going to commit to bits using JSS in a multiparty protocol, every participant except \(A\) must supply a different modulus, and when committing to a bit, \(A\) must make public a set of commitments to this bit, one for each modulus supplied. This is to prevent the possibility that \(A\) breaks the unforgeability property by conspiring with somebody who knows the factorizations. This of course means that the other participants must be convinced that the same bit is contained in all commitments in a given set. Fortunately, the construction of our main protocol is such that this automatically ensured whenever JSS is used.
+							</p>
+							<p class="rp_original">
+								Note also that if absolute certainty is needed about the correctness of the choice of \(N,\,B\) could be required to simply reveal the factorization of \(N\) after the protocol has been executed. IT would be too late for \(A\) by them to use this knowledge in the protocol. Another possibility is for \(B\) to prove to \(A\) in zero knowledge that the modulus has the right form. However, all the known proofs of this leave an exponentially small probability that \(B\)'s claim is false, in which case \(A\) <i>would</i> be giving away information about her secrets. Thus it seems that with this scheme, \(A\) will never be quite sure that her secrets have not been betrayed until after it happened!
+							</p>
+							<p class="rp_original">
+								The next example, the <span class="definable" data-define="Discrete Log Problem">Discrete Log Scheme</span>, solves this problem. Here, \(B\) chooses an \(m\)-bit prime \(p\), a generator \(g\) of \(Z_p^*\), and an element \(a\in Z_p^*\) at random and reveals them to \(A\). We now put \(R_m^{(1)}\,=\,R_m^{(0)}\,=\,S_m\,=\,Z_p^*\), and $$f_m^{(b)}(r)\,=\,a^bg^r.$$
+							</p>
+							<p class="rp_original">
+								This scheme also hides the bits unconditionally, since the bit contained in a commitment is not uniquely determined, if the random choice made by \(A\) is unknown. Note that if \(p\) is determined such that the factorization of \(p-1\) is known, \(A\) can easily check for herself that \(p\) is a prime and that \(g\) is a generator.
+							</p>
+							<p class="rp_original">
+								To open a commitment, \(A\) must show the discrete log base \(g\) of $$a^{-b}BCS_{A,m}(b,r),$$ namely \(r\). IT is also easy to see that the unforgeability property holds, assuming that \(A\) cannot find the discrete log of \(a\).
+							</p>
+							<p class="rp_original">
+								Given two commitments \(BCS_{A,m}(b,r)\) and \(BCS_{A,m}(b',r'),\,A\) can prove that \(b\oplus b'=0\) by showing the discrete log of $$BCS_{A,m}(b,r)(BCS_{A,m}(b',r'))^{-1}$$ and to show that \(b\oplus b'=1\), she shows the discrete log of $$a^{-1}BCS_{A,m}(b,r)BCS_{A,m}(b',r').$$ Once again, it is easy to see that \(A\) cannot make a false claim about \(b\oplus b'\) unless she can find the discrete log of \(a\).
+							</p>
+							<p class="rp_original">
+								An additional advantage of DLS compared to JSS is that it is not necessary in a multiparty application that all participants different from \(A\) choose their own instances, and that \(A\) then must commit to a bit "in parallel" using all the published instances. Since there is no trapdoor present in DLS, all participants can collaborate in choosing \(p,\,g\) and \(a\) using some multiparty coinflipping protocol.
+							</p>
+						</section>
+					</section>
+					<section id="sec4">
+						<h2>4. Protocols: notation and definitions</h2>
 					</section>
                 </div>
             </div>
@@ -319,6 +438,8 @@
 					<li id="citation7">BrCr</li>
 					<li id="citation8">Ch</li>
 					<li id="citation9">GoMi</li>
+					<li id="citation10">PeGr</li>
+					<li id="citation11">Bl</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">

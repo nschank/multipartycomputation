@@ -45,5 +45,6 @@ words
 	GF(2)
 	commutativity
 	injective
+	Jacobi symbol
 changes
 	xor, x-or to XOR
