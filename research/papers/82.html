@@ -174,7 +174,12 @@
 											<li><a href="#sec3.1">Examples</a></li>
 										</ol>
 									</li>
-									<li><a href="#sec4">Protocols: notation and definitions</a></li>
+									<li><a href="#sec4">Protocols: notation and definitions</a>
+										<ol>
+											<li><a href="#sec4.1">Correctness and Security</a></li>
+										</ol>
+									</li>
+									<li><a href="#sec5">Circuits, terminology, and notation</a></li>
                                 </ol>
                             </li>
                         </ol>
@@ -423,6 +428,90 @@
 					</section>
 					<section id="sec4">
 						<h2>4. Protocols: notation and definitions</h2>
+						<p class="rp_original">
+							We think of a protocol as occurring among a set of communicating probabilistic <span class="definable" data-define="Turing machine">Turing machines</span> \(\{P_1,\dots,P_n\}\) called the participants. The protocol is described as a specification of the program each participant should follow.
+						</p>
+						<p class="rp_original">
+							Each machine has private input, output, and random tapes, and one communication tape. The contents of the input tape of \(P_i\) is called \(ip_i\), the contents of the output tape after execution of the protocol is called \(op_i\). All machines are clocked by a common clock, and the protocol proceeds in rounds. In each round, exactly one machine can do some computation and perhaps write a message on the other machines' communication tapes. By definition, all messages sent in the protocol are written simultaneously on all communication tapes. IF a machine receives a message which does not obey the constraints specified in the protocol, it stops immediately, and we say that <i>cheating has been detected</i>.
+						</p>
+						<p class="rp_original">
+							We assume the existence of a mutually trusted source of random bits. Such a source could easily be implemented using e.g. Blum's coin flipping problem<sup class="reference" data-citation="11"><a href="#citation11">[11]</a></sup>. But since the construction of such a subprotocol is independent of our main protocol, we have chosen to abstract away the fact that a subprotocol is used.
+						</p>
+						<p class="rp_original">
+							The protocol takes some global input, known to all machines:
+						</p>
+						<ul class="rp_original">
+							<li>A specification of the computation to be performed, in the form of a boolean circuit \(C\).</li>
+							<li>The cryptographic security parameter \(m\).</li>
+						</ul>
+						<p class="rp_original">
+							Note that the security and the certainty of correctness may be varies <i>independently</i> of the complexity of the computation modelled by \(C\). Moreover, the protocol never uses any special properties of \(C\), such as membership of a polynomial size family. For these reasons, we look at \(C\) just as a single fixed circuit.
+						</p>
+						<p class="rp_original">
+							Of course, this does not mean that the behavior of e.g. the running time of the protocol as a function of \(C\) is not interesting, only that such dependencies should be considered independently of the security level.
+						</p>
+						<section id="sec4.1">
+							<h3>4.1. Correctness and Security</h3>
+							<p class="rp_original">
+								The definitions in this section are straightforward generalizations of the definition of "zero knowledge proof systems" found in <span class="reference" data-citation="12"><a href="#citation12">[12]</a></span>. This becomes clear if one takes a slightly different point of view of the situation where a prover convinces a verifier about the membership of a string \(x\) in an <span class="definable">NP</span>-language \(L\).
+							</p>
+							<p class="rp_original">
+								In fact the prover and the verifier are doing an interactive computation, where only the prover supplies input, namely a certificate of membership for \(x\). The notion of correctness of the protocol they execute corresponds to the fact that we have a proof system: we want the protocol to produce the correct output of the computation, namely "accept" if indeed the prover put in a valid certificate of membership for \(x\). The notion of security corresponds to the fact that the proof system is zero knowledge: we want the verifier to gain nothing useful about the secrets of the prover, other than the fact that \(x\) is in \(L\).
+							</p>
+							<p class="rp_original">
+								If we model the computation needed to verify membership for \(x\) by a boolean circuit \(C\), it is clear that this is just a special case of the general problem addressed in this paper.
+							</p>
+							<p class="rp_original">
+								We allow \(C\) to be a probabilistic circuit, i.e. take as input a number of bits chosen uniformly from \(\{0,1\}\). Thus, given as inputs \(I=(ip_1,\dots,ip_n),\,C\) determines a probability distribution \(OP_I^C\) on the output. We assume for simplicity that the output is public, i.e. the same output string will appear on the output tape of any participant following the protocol (the generalization to different (private) outputs is easy and will be discussed later). Given a choice of inputs as above, we let \(OP_{I,m}^{prot}\) denote the probability distribution according to which the output string of a participant following the protocol is distributed, when the protocol is executed with security parameter value \(m\) and no cheating is detected. We would like this distribution to be essentially equal to \(OP_I^C\). In other words, the only way for (a set of) dishonest participant(s) to prevent the correct result from being computed is to stop the protocol, e.g. by deliberately sending an incorrect message.
+							</p>
+							<p class="rp_original">
+								We let \(OP_I^C(op)\) (resp. \(OP_{I,m}^{prot}(op)\)) denote the probability that the binary string \(op\) is produced as output.
+							</p>
+							<span class="rp_definition_header">Definition 4.1</span>
+							<p class="rp_original rp_definition">
+								A protocol is said to be <i>correct</i> if for any choice of inputs \(I=(ip_1,\dots,ip_n)\), and any binary string \(op\) and constant \(c,\) $$|OP_I^C(op)-OP_{I,m}^{prot}(op)|\lt m^{-c}$$ for all sufficiently large \(m\).
+							</p>
+							<p class="rp_original">
+								A <i> conspiracy</i> is a subset \(X\) of \(\{P_1,\dots,P_n\}\) with \(|X|\lt n\). The machines in a conspiracy may follow any (polynomial time) program, and they may establish private communication channels to share all the information available to them.
+							</p>
+							<p class="rp_original">
+								Intuitively, we will consider the protocol secure if no conspiracy will learn more from the protocol than what could already have been inferred from the output of the computation and the part of the input known to the conspiracy.
+							</p>
+							<p class="rp_original">
+								To state this more formally, we need some definitions:
+							</p>
+							<p class="rp_original">
+								The binary string which is that concatenation of all messages sent during an execution of the protocol is called a <i>protocol conversation</i>.
+							</p>
+							<p class="rp_original">
+								Let \(ra\) be a binary string containing as many bits as there are random input bits to \(C\). Then by \(f_C(ip_1,\dots,ip_n,ra)\) we denote the output of \(C\) resulting from inputs \((ip_1,\dots,ip_n)\) and random choice \(ra\).
+							</p>
+							<p class="rp_original">
+								We let \(P_{prot}^{(m)}(ip_1,\dots,ip_n,ra)\) denote the probability distribution according to which a protocol conversation with security parameter \(m\) and inputs \((ip_1,\dots,ip_n,ra)\) is distributed.
+							</p>
+							<p class="rp_original">
+								Note that this distribution is conditional on the program followed by the machines in \(X\), i.e. the conspiracy's strategy. Note also that the definition talks about the inputs of machines in \(X\). This is not necessarily a meaningful concept: nothing prevents a dishonest participant from pretending that the contents of its input tape are different from what they are in fact. This "problem" is easily solved, however, if we jump ahead in the protocol description a little: each participant must publish bit commitments which determine a particular choice of input. We therefore <i>define</i> the input of a participant to be the bit string committed to during the execution of the protocol.
+							</p>
+							<p class="rp_original">
+								A <i>simulator for \(X\)</i> is a polynomial time Turing machine \(M_X\) which, on input \(\left(m, f_C(ip_1,\dots,ip_n,ra), \left\{ip_i,\,\middle|\,P_i\in X\right\}\right)\) will generate a protocol conversation distributed according to the distribution \(P_{M_X}^{(m)}\left(f_C(ip_1,\dots,ip_n,ra), \left\{ip_i,\,\middle|\,P_i\in X\right\}\right)\).
+							</p>
+							<span class="rp_definition_header" id="#def4.2">Definition 4.2</span>
+							<p class="rp_original rp_definition">
+								The protocol is said to be <i>secure against the conspiracy \(X\)</i> if there exists a simulator for \(X,\,M_X\), such that for any \((ip_1,\dots,ip_n)\) and \(ra\), the two ensembles of probability distributions $$\left\{P_{M_X}^{(m)}\left(f_C(ip_1,\dots,ip_n,ra), \left\{ip_i,\,\middle|\,P_i\in X\right\}\right)\right\}_{m=1}^\infty$$ and $$\left\{P_{prot}^{(m)}(ip_1,\dots,ip_n,ra)\right\}_{m=1}^\infty $$ are polynomially (in \(m\)) indistinguishable.
+							</p>
+							<p class="rp_original">
+								We assume that the reader is familiar with this notion. For details, refer to <span class="reference" data-citation="12"><a href="#citation12">[12]</a></span>.
+							</p>
+							<p class="rp_original">
+								The protocol is said to be <i>secure</i> if it is secure against any conspiracy.
+							</p>
+							<p class="rp_original">
+								This definition means that no matter which type of hostile behavior is exhibited by \(X\), the private inputs of all honest participants <i>and</i> the random inputs are optimally protected. But note that providing the protocol secure under this definition does not exclude the possibility that a conspiracy, by stopping the protocol in some clever way, could find out about the output, while preventing honest participants from getting at it. The basic protocol as described in <a href="#sec5">Section 5</a> already offers protection against this, but a lot of variations on the theme are possible. More details will be given in <a href="#sec6">Section 6</a>.
+							</p>
+						</section>
+					</section>
+					<section id="sec5">
+						<h2>5. Circuits, terminology, and notation</h2>
 					</section>
                 </div>
             </div>
@@ -440,6 +529,7 @@
 					<li id="citation9">GoMi</li>
 					<li id="citation10">PeGr</li>
 					<li id="citation11">Bl</li>
+					<li id="citation12">GoMiRa</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
