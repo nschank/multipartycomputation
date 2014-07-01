@@ -41,3 +41,9 @@ words
 	oblivious transfer (basic, factoring, one-out-of-two)
 	fault-tolerance
 	computational indistinguishability (from indistinguishable)
+	fix combined oblivious transfer: Bob can learn g
+	GF(2)
+	commutativity
+	injective
+changes
+	xor, x-or to XOR
