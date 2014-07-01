@@ -168,6 +168,8 @@
                                 <a href="#_B">Annotated Paper</a>
                                 <ol>
                                     <li><a href="#sec1">Introduction</a></li>
+									<li><a href="#sec2">Overview of the Protocol</a></li>
+									<li><a href="#sec3">Bit Commitment Schemes</a></li>
                                 </ol>
                             </li>
                         </ol>
@@ -195,8 +197,114 @@
 						</p>
 					</section>
                     <section id="sec1">
-                        <h2>1. Introduction</h2>
+                        <h2>1. Related Work</h2>
+						<p class="rp_original">
+							The problem of multiparty secure computations is an important one. When stated in its most general form, its solution implies a solution&mdash;at least a theoretical one&mdash;to almost any protocol construction problem. The first to consider this problem was Yao<sup class="reference" data-citation="4"><a href="#citation4">[4]</a></sup>. He devised protocols that, under various cryptographic assumptions, could keep the inputs secret while allowing each participant only a negligible chance of cheating. He did not, however, address the problem of "fairness", i.e. ensuring that the participants learn the output simultaneously. Layer, Yao<span class="reference" data-citation="1"><a href="#citation1">[1]</a></span> solved also this problem for the two-party case. Recently, in work done independently from (but earlier than) ours, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup> used Yao's two-party construction to devise a multiparty solution, based on the existence of a trapdoor one-way function. This protocol implements a multiparty simulation of the computation in a circuit. Each participant holds a share of each bit in the real computation, and these shares are manipulated by using Yao's two-party construction \(O(n^2)\) times, where \(n\) is the number of participants. In other work done independently from and almost simultaneously with ours, Galil, Haber, and Yung generalize all the properties of Yao's construction to the multiparty case, and simplify the use of Yao's protocol in the multiparty simulation. Also, they give a concrete construction based on Diffie-Hellman key exchange rather than the existence of a trapdoor one way function. Very recently, Goldreich and Vainish<sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup> found another simplification by designing a special purpose two-party protocol which could replace Yao's protocol in the multiparty construction.
+						</p>
+						<p class="rp_original">
+							In comparison, our protocol solves the multiparty case using a totally different concept. It attacks the problem "directly", without using Yao's two-party protocol, and without using reductions to 3-colorability<sup class="reference" data-citation="6"><a href="#citation6">[6]</a></sup> or to SAT<sup class="reference" data-citation="7"><a href="#citation7">[7]</a></sup><sup class="reference" data-citation="8"><a href="#citation8">[8]</a></sup> to prove the validity of messages. We rely on a stronger cryptographic assumption than <span class="reference" data-citation="2"><a href="#citation2">[2]</a></span>, namely the <i>Quadratic Residuosity Assumption</i><sup class="reference" data-citation="9"><a href="#citation9">[9]</a></sup>. This, however, allows a simpler and more efficient construction, capable of implementing all the "primitives for cryptographic computations", defined in <span class="reference" data-citation="3"><a href="#citation3">[3]</a></span>. Although our protocol could also be based only on the existence of a trapdoor one-way function, this would reduce the efficiency considerably. Some of the techniques upon which our protocol is based were previously developed and used in the work of Chaum<sup class="reference" data-citation="8"><a href="#citation8">[8]</a></sup> and Brassard and Crépeau<sup class="reference" data-citation="7"><a href="#citation7">[7]</a></sup>. By specializing to the case where only one participant supplies the inputs, our protocol can provide slightly more efficient solutions to the problems solved there.
+						</p>
+						<p class="rp_original">
+							An interesting consequence of our work is that any statement which can be proved interactively, can also be proved in zero knowledge, provided that our cryptographic assumption holds (one assumption which will do in this case is the existence of clawfree trapdoor functions). More formally: any language in IP has a zero knowledge proof system. This result was already proved for protocols with a constant number of rounds in <span class="reference" data-citation="6"><a href="#citation6">[6]</a></span>, where a proof of the result in full generality is attributed to Ben-Or. As far as we know, this last proof is still unpublished, so we cannot comment on possible differences between this proof and ours.
+						</p>
                     </section>
+					<section id="sec2">
+						<h2>2. Overview of the Constructions</h2>
+						<p class="rp_original">
+							For the intuitive sketch given in this section, we wdl make some simplifications. We will consider only two parties, \(A\) and \(B\) and we will do a computation on one AND-gate only. At the end of the section we will see how this method can be generalised to more parties, and to a computation consisting of many gates.
+						</p>
+						<p class="rp_original">
+							Note that this AND-gate computation, where both parties want to hide their input from each other, has a meaningful application: consider the situation where Alice and Bob have just met, and each considers dating the other. Neither wishes to lose face in the following sense: if Alice wants a date but Bob doesn't, Alice does not want to let Bob know that she wanted the date. And the same holds for Bob. In other words: if a party does not want the date, they do not find out the other party's decision.
+						</p>
+						<p class="rp_original">
+							Note that sometimes a party can derive the other's input just by combining his own input and the output of the joint computation. This can never be avoided, however.
+						</p>
+						<p class="rp_original">
+							The AND-gate is represented by a truth-table \(T\). We will show what transformations \(A\) and \(B\) have to apply to \(T\) in order to compute the logical AND, such that
+						</p>
+						<ul class="rp_original">
+							<li>both parties can be sure (with very high probability) that the transformations are done correctly;</li>
+							<li>both parties can keep their input hidden from the other party; and</li>
+							<li>both parties can be sure the result of the computation is correct.</li>
+						</ul>
+						<h3>The Protocol</h3>
+						<ol class="rp_original">
+							<li>
+								<ol class="rp_original">
+									<li>\(A\)(lice) applies a randomly chosen permutation, \(\sigma_j\), to the rows of \(T\).</li>
+									<li>\(A\) chooses two bits \(b_1\) and \(b_3\), and uses these to compute the XOR of the \(k\)th column and \(b_k\). This procedure is known as <i>inversion of columns</i>.</li>
+									<li>\(A\) chooses four bits \(d_1\cdots d_4\), and computes the XOR of the \(l\)th entry in the last column and \(d_l\). This procedure is known as <i>encryption the output column</i>.</li>
+									<li>\(A\) encrypts \(b_1,b_3,d_1\cdots d_4\) in such a way that she cannot disavow these values later, while \(B\)(ob) cannot see what the values are without \(A\)'s help. This is known as <i>committing to the bits</i>.</li>
+								</ol>
+							</li>
+						</ol>
+						<p class="rp_original">
+							We will indicate the final result of these steps with \(\hat{T}\). \(B\) will verify whether \(\hat{T}\) was constructed correctly in the next steps:
+						</p>
+						<ol class="rp_original">
+							<li value="2">\(A\) creates a transformed truthtable \(T'\) in exactly the same way as she created \(\hat{T}\).</li>
+						</ol>
+						<img class="rp_original" src="../../img/82.fig1.jpg" alt="Steps 1.1 through 1.4" />
+						<ol class="rp_original">
+							<li value="3">
+								\(B\) flips a coin.
+								<ul class="rp_original">
+									<li>If the coin came out heads, \(A\) must reveal exactly how she constructed \(T'\), so that \(B\) can verify that this was done correctly.</li>
+									<li>If the coin came out tails, \(A\) must show a special relation between \(\hat{T}\) and \(T'\). Details on this can be found in <a href="#sec6.1">Section 6.1</a>. Here, it suffices to know that if the relation holds, it implies that \(\hat{T}\) was correctly constructed if and only if \(T'\) was.</li>
+								</ul>
+							</li>
+						</ol>
+						<p class="rp_original">
+							After \(m\) repetitions of steps 2 and 3, \(B\) is convinced with very high probability that \(A\) constructed \(\hat{T}\) correctly. Now \(B\) will do to \(\hat{T}\) what \(A\) did to \(T\), and even more:
+						</p>
+						<ol class="rp_original">
+							<li value="4">
+								<ol class="rp_original">
+									<li>
+										\(B\) permutes the rows of \(\hat{T}\), together with the commitments of the output column entries.
+										<img alt="The row-permutation performed by \(B\)" class="rp_original" src="../../img/82.fig2.jpg" />
+									</li>
+									<li>\(B\) flips a coin for each output column entry and applies the XOR.</li>
+									<li>
+										\(B\) computes, <i>using \(A\)'s bit commitment scheme</i>, a commitment containing the XOR of his own bit and the one chosen and committed to by \(A\) for this output column entry. Although \(A\) can later open the resulting commitment, he will have no idea which of his original commitments it was computed from. This requires special properties of the commitment scheme used.
+										<img alt="The blinding" class="rp_original" src="../../img/82.fig3.jpg" />
+									</li>
+								</ol>
+							</li>
+						</ol>
+						<p class="rp_original">
+							This <i>blinding</i> is necessary to hide \(B\)'s permutation. \(B\) also has to do a transformation corresponding exactly to the one of \(A\):
+						</p>
+						<ol class="rp_original">
+							<li value="4">
+								<ol class="rp_original">
+									<li value="4">\(B\) chooses bits for inversion of his own input column, and for the output column.</li>
+									<li>\(B\) chooses bits for inversion of each output column entry</li>
+									<li>\(B\) commits to the bits chosen in steps 4.4 and 4.5. He then sends his final result, \(T^*\), to \(A\).
+									<img alt="The final part of \(B\)'s transformation." class="rp_original" src="../../img/82.fig4.jpg" /></li>
+								</ol>
+							</li>
+							<li>In the same way as in steps 2 and 3, \(B\) convinces \(A\) that \(T^*\) was constructed correctly.</li>
+						</ol>
+						<p class="rp_original">
+							Now \(A\) and \(B\) have together constructed a double-blinded version \(T^*\) of the gate that satisfies the conditions listed before step 1. They will use \(T^*\) in performing the computation as follows:
+						</p>
+						<ol class="rp_original">
+							<li value="6">Together they select the correct row of \(T^*\) by announcing their choice of input bits for \(T^*\). These input bits are the XOR sum of the "real" input bits, and the inversion bits for the corresponding columns.</li>
+							<li>\(A\) and \(B\) both reveal the inversion bit for the output column, and the inversion bit for the entry in the output column which is in the selected row. By XORing this output column entry with the revealed inversion bits, they can both compute the bit that is the result of the computation.</li>
+						</ol>
+						<p class="rp_original">
+							This basic protocol can be generalized in several ways:
+						</p>
+						<ul class="rp_original">
+							<li>Instead of using an AND-gate, any type of gate can be used.</li>
+							<li>Instead of two parties, any number of parties can participate in the protocol. Each new party just has to follow \(B\)'s part of the protocol, and will thus have to blind the commitments of each participant who went before.</li>
+							<li>Instead of using only one gate, a computation involving arbitrarily many gates can be done with the protocol. The only condition is that when gate \(T_1\) is connected to \(T_2\), then their corresponding output column and input column were inverted using the <i>same</i> bits. When later a row is selected in the encrypted version of \(T_1\), the inversion bits that apply to the single output column entry will be revealed, while the column inversion bits will remain secret. The revealed inversion bits are now XORed with the output column entry selected, and the result can be used directly as an input bit to the encryption version of \(T_2\).</li>
+						</ul>
+					</section>
+					<section id="sec3">
+						<h2>3. Bit Commitment Schemes</h2>
+					</section>
                 </div>
             </div>
             <div class="main_toplevel main_section main_color8">
@@ -205,6 +313,12 @@
                     <li id="citation1">Y1</li>
 					<li id="citation2">GoMiWi</li>
 					<li id="citation3">GaHaYu</li>
+					<li id="citation4">Y2</li>
+					<li id="citation5">GoVa</li>
+					<li id="citation6">GoMiWi2</li>
+					<li id="citation7">BrCr</li>
+					<li id="citation8">Ch</li>
+					<li id="citation9">GoMi</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
