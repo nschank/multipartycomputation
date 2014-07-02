@@ -23,6 +23,8 @@
 			{
 				switch (box)
 				{
+					case "alpha":
+						return "The function \\(\\alpha\\) maps \\(\\tau\\) to its secret \\(s\\) in any uniquely decipherable puzzle ensemble.";
 					case "approx":
 						return "Two probabilities of recovery are equivalent if neither is noticeably harder than the other in any situation.";
 					case "D=Tn":
@@ -68,9 +70,11 @@
         </script>
     </head>
     <body>
-		\(
-			\require{cancel}
-		\)
+		<div class="main_hidden">
+			\(
+				\require{cancel}
+			\)
+		</div>
         <div class="main_foreground">
             <div class="main_toplevel main_header">
                 <h1>Multiparty Computation</h1>
@@ -98,6 +102,10 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="rp_author" href="../authors/Andrew C. Yao.html">Andrew C. Yao</a></span>
 						
+					<div class="rp_snippet">
+						&ldquo;An important snippet of the paper&rdquo;
+					</div>	
+					
                     <div class="main_toc">
                         <h4 style="color:#333333">Table of Contents</h4>
                         <ol type="A">
@@ -105,6 +113,7 @@
 								<ol>
 									<li><a href="#a_intro">Introduction</a></li>
 									<li><a href="#a_goals">Goals and Results</a></li>
+									<li><a href="#a_assumptions">Assumptions</a></li>
 									<li><a href="#a_defs">Definitions</a></li>
 									<li><a href="#a_theorems">Theorems</a></li>
 									<li><a href="#a_ref">Referencing This Paper</a></li>
@@ -113,10 +122,8 @@
                             <li><a href="#_B">Annotated Paper</a></li>
                         </ol>
                     </div>
-					
-                    <div class="rp_snippet">
-						An important snippet of the paper
-					</div>
+					<h1>Overview</h1>
+                    
 						
                     <section id="a_intro">
 						<h2>Introduction</h2>
@@ -131,6 +138,18 @@
 						</p>
 						<p class="rp_analysis">
 							Don't forget some results, too!
+						</p>
+					</section>
+					<section id="a_assumptions">
+						<h2>Assumptions</h2>
+						<p class="rp_original">
+							Let \(W_n\) be the set of all integers \(N\) of the form \(p\cdot q\) where \(p\equiv q\equiv 3\bmod{4}\) are prime numbers. 
+						</p>
+						<span class="rp_theorem_header">
+							<a href="#IAF">The Intractability Assumption of Factoring (IAF)</a>
+						</span>
+						<p class="rp_original rp_theorem">
+							Let \(k&gt;0\) be any fixed number. For any polynomial time probabilistic algorithm for factoring integers, the probability of success for a random input integer from \(W_n\) is less than \(\frac{1}{n^k}\) for all large \(n\).
 						</p>
 					</section>
 					<section id="a_defs">
@@ -169,7 +188,7 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5"><a id="_B"></a>
+            <div class="main_toplevel main_section main_color5" id="_B">
                 <div class="main_window main_fullwidth">
                     <div class="main_toc">
                         <h4 style="color:#333333">Table of Contents</h4>
@@ -209,7 +228,7 @@
 					<section id="abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
-							In this paper we introduce a new tool for controlling the knowledge transfer process in cryptographic protocol design. It is applied to solve a general class of problems which include most of the two-party cryptographic problems in the literature. Specifically, we show how two parties A and B can interactively generate a random integer \(N = pq\) such that its secret, i.e., the prime factors \((p, q)\), is hidden from either party individually but is recoverable jointly if desired. This can be utilized to give a protocol for two parties with private values \(i\) and \(j\) to compute any polynomially computable functions \(f(i,j)\) and \(g(i,j)\) with minimal knowledge transfer and a strong fairness property. As a special case, A and B can exchange a pair of secrets \(s_A\), \(s_B\), e.g. the factorization of an integer and a Hamiltonian circuit in a graph, in such a way that \(s_A\) becomes computable by B when and only when \(s_B\) becomes computable by A. All these results are proved assuming only that the problem of factoring large integers is computationally intractable.
+							In this paper we introduce a new tool for controlling the knowledge transfer process in cryptographic protocol design. It is applied to solve a general class of problems which include most of the two-party cryptographic problems in the literature. Specifically, we show how two parties A and B can interactively generate a random integer \(N = pq\) such that its secret, i.e. the prime factors \((p, q)\), is hidden from either party individually but is recoverable jointly if desired. This can be utilized to give a protocol for two parties with private values \(i\) and \(j\) to compute any polynomially computable functions \(f(i,j)\) and \(g(i,j)\) with minimal knowledge transfer and a strong fairness property. As a special case, A and B can exchange a pair of secrets \(s_A\), \(s_B\), e.g. the factorization of an integer and a Hamiltonian circuit in a graph, in such a way that \(s_A\) becomes computable by B when and only when \(s_B\) becomes computable by A. All these results are proved assuming only that the problem of factoring large integers is computationally intractable.
 						</p>
 					</section>
                     <section id="sec1">
@@ -224,7 +243,7 @@
 							Instead of defining the sequence of <span class="equation" data-equation="h_n">\(h_n\)</span>'s as a polynomial ensemble, it may be simpler to simply state that, for any \(n\), a string \(x\) in the distribution \(h_n\) can be produced by a probabilistic polynomial-time Turing machine.
 						</p>
 						<p class="rp_original">
-							In addition to the <i>validity</i> requirement above, we would like the protocol to have certain <i>privacy</i> and <i>fairness</i> properties. Roughly, "privacy" means that if A behaves according to the protocol, then B will have no more information about the values of \(i_A\),<span class="equation" data-equation="u_x">\(u_A\)</span> than in the situation where an oracle does the computation for B and just hands B a value <span class="equation" data-equation="u_x">\(u_B\)</span>. Classical examples where privacy is the main concern include <span class="definable">oblivious transfer</span><sup class="reference" data-citation="3"><a href="#citation3">[3]</a></sup><sup class="reference" data-citation="4"><a href="#citation4">[4]</a></sup>, <span class="definable" data-define="coin flip">coin tossing</span><sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup><sup class="reference" data-citation="6"><a href="#citation6">[6]</a></sup>, mental poker<sup class="reference" data-citation="7"><a href="#citation7">[7]</a></sup><sup class="reference" data-citation="8"><a href="#citation8">[8]</a></sup>. A general study of this problem is given by Yao<sup class="reference" data-citation="9"><a href="#citation9">[9]</a></sup><sup class="reference" data-citation="10"><a href="#citation10">[10]</a></sup>. A related problem is the <i>interactive proof system</i><sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup> in which player A wishes to convince player B that a string \(\tau\) is in a certain language L. Recently, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="11"><a href="#citation11">[11]</a></sup> proved that, for players with polynomial-time computing power, an language in <span class="definable">NP</span> has a <i>minimum knowledge interactive proof</i>, assuming the existence of suitable <span class="definable" data-define="one-way function">one-way functions</span>. This latter problem is closely related to, in our formulation, the case of computing a pair of functions \(f_n(i_A,i_B),g_n(i_A,i_B)\), where \(i_A=(s,\tau), i_B=\tau, g_n(i_A,i_B)=1\) if and only if \(s\) is a short <i>proof</i> for \(t\in L\), and \(f_n(i_A,i_B)\equiv 1\).
+							In addition to the <i>validity</i> requirement above, we would like the protocol to have certain <i>privacy</i> and <i>fairness</i> properties. Roughly, "privacy" means that if A behaves according to the protocol, then B will have no more information about the values of \(i_A\),<span class="equation" data-equation="u_x">\(u_A\)</span> than in the situation where an oracle does the computation for B and just hands B a value <span class="equation" data-equation="u_x">\(u_B\)</span>. Classical examples where privacy is the main concern include <span class="definable">oblivious transfer</span><sup class="reference" data-citation="3"><a href="#citation3">[3]</a></sup><sup class="reference" data-citation="4"><a href="#citation4">[4]</a></sup>, <span class="definable" data-define="coin flip">coin tossing</span><sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup><sup class="reference" data-citation="6"><a href="#citation6">[6]</a></sup>, mental poker<sup class="reference" data-citation="7"><a href="#citation7">[7]</a></sup><sup class="reference" data-citation="8"><a href="#citation8">[8]</a></sup>. A general study of this problem is given by Yao<sup class="reference" data-citation="9"><a href="#citation9">[9]</a></sup><sup class="reference" data-citation="10"><a href="#citation10">[10]</a></sup>. A related problem is the <i>interactive proof system</i><sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup> in which player A wishes to convince player B that a string \(\tau\) is in a certain language L. Recently, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="11"><a href="#citation11">[11]</a></sup> proved that, for players with polynomial-time computing power, an language in <span class="definable">NP</span> has a <i>minimum knowledge interactive proof</i>, assuming the existence of suitable <span class="definable" data-define="one-way function">one-way functions</span>. This latter problem is closely related to, in our formulation, the case of computing a pair of functions \(f_n(i_A,i_B),g_n(i_A,i_B)\), where \(i_A=(s,\tau),\;i_B=\tau,\;g_n(i_A,i_B)=1\) if and only if \(s\) is a short <i>proof</i> for \(t\in L\), and \(f_n(i_A,i_B)\equiv 1\).
 						</p>
 						<p class="rp_annotation">
 							Let's give a more specific example for this final sentence. Let's say our language \(L\) is the language \(Isomorphic\), where, given two graphs \(G_1,G_2\), \((G_1,G_2)\in L\) if and only if \(G_1\) is <span class=("definable">isomorphic</span> to \(G_2\). \(\tau\) would be \((G_1,G_2)\) since it's what we hope to prove is in \(L\). \(s\) would be a proof for their isomorphism, which would be the one-to-one mapping from vertices in \(G_1\) to vertices in \(G_2\). \(g_n\) should be 1 if and only if A is able to produce such a mapping, which could only be so if \(s\in L\). \(f_n\) does not matter, since \(A\) does not mean to learn anything, so it can simply be any value, such as 1.
@@ -257,7 +276,7 @@
 							Let \(D=(d_1,d_2,\dots)\) be a sequence of predicates \(d_n:\{0,1\}^*\rightarrow\{0,1\}\), where given \(d\) and \(n\), \(d_n(x)\) can be computed probabilistically in time polynomial in \(n\). Define a <i>guessing algorithm</i> \(Q_B\) to be a probabilistic algorithm which takes \((n,y)\) as input, where \(y\in\{0,1\}^*\), and outputs a 0 or 1 in time polynomial in \(n\).
 						</p>
 						<p class="rp_original">
-							Consider the experiment of taking a random \((x_n,y_n)\) distributed according to \((X_n,Y_n)\). Suppose that one observes the value \(y_n\) and tries to guess what the value of \(d_n(x_n)\) is by using a guessing algorithm \(Q\); let us denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess will be made. We use the notation \(o\)(poly-small) to denote any sequence \((b_1,b_2,\dots)\) that has the property \(b_n\in o(\frac{1}{n^k})\) for all fixed \(k\).
+							Consider the experiment of taking a random \((x_n,y_n)\) distributed according to \((X_n,Y_n)\). Suppose that one observes the value \(y_n\) and tries to guess what the value of \(d_n(x_n)\) is by using a guessing algorithm \(Q\); let us denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess will be made. We use the notation \(o\)(poly-small) to denote any sequence \((b_1,b_2,\dots)\) that has the property \(b_n\in o\left(\frac{1}{n^k}\right)\) for all fixed \(k\).
 						</p>
 						<p class="rp_annotation">
 							\(o\)(poly-small) may be recognizable as the class of all <span class="definable">negligible</span> functions. This experiment might be recognized as similar to how a <span class="definable">hardcore bit</span> is defined except, since it is not being applied to <span class="definable" data-define="one-way function">one-way functions</span>, there are no defined bounds on the outcome of the experiment.
@@ -275,13 +294,13 @@
 							We cannot produce a set of predicates for which it will be easier to guess on \((X_n,Y_n)\) than \((X_n',Y_n')\), and vice versa - so they are equally hard (or easy) to guess on.
 						</p>
 						<p class="rp_original">
-							A <span class="definable">puzzle ensemble</span> \(P=(L,F)\) consists of a language \(L\in\) <span class="definable">BPP</span> and a <span class="definable" data-define="polynomial ensemble">polynomial-time ensemble</span> \(F=(F_1,F_2,\dots)\) where each \(f_n\) is a distribution over \(\{0,1\}^*\times\{0,1\}^*\); we require further than a random \((s,\tau)\) distributed according to \(f_n\) will satisfy \((n,s,\tau)\in L\) with probability 1-\(o\)(poly-small); we will call \(s\) a <i>secret</i> of the <i>text</i> \(\tau\). Let \(T_{P,n}\) denote the distribution of a random \(\tau\) taken from the second component of a random \((s,\tau)\) distributed as \(f_n\). We will call \(P\) <span class="definable" data-define="intractable puzzle ensemble">intractable</span> if, for every probabilistic polynomial-time algorithm \(S\), when given as input a pair \(\cancel{(s,\tau)} (n,\tau)\), where \(\tau\) is distributed according to \(T_{P,n}\), will fail with probability 1-\(o\)(poly-small) to produce an \(s\) satisfying \((n,s,\tau)\in L\).
+							A <span class="definable">puzzle ensemble</span> \(P=(L,F)\) consists of a language \(L\in\) <span class="definable">BPP</span> and a <span class="definable" data-define="polynomial ensemble">polynomial-time ensemble</span> \(F=(F_1,F_2,\dots)\) where each \(f_n\) is a distribution over \(\{0,1\}^*\times\{0,1\}^*\); we require further than a random \((s,\tau)\) distributed according to \(f_n\) will satisfy \((n,s,\tau)\in L\) with probability 1-\(o\)(poly-small); we will call \(s\) a <i>secret</i> of the <i>text</i> \(\tau\). Let \(T_{P,n}\) denote the distribution of a random \(\tau\) taken from the second component of a random \((s,\tau)\) distributed as \(f_n\). We will call \(P\) <span class="definable" data-define="intractable puzzle ensemble">intractable</span> if every probabilistic polynomial-time algorithm \(S\), when given as input a pair \(\cancel{(s,\tau)} (n,\tau)\) where \(\tau\) is distributed according to \(T_{P,n}\), will fail with probability 1-\(o\)(poly-small) to produce an \(s\) satisfying \((n,s,\tau)\in L\).
 						</p>
 						<p class="rp_annotation">
-							A puzzle ensemble is a language and a probability distribution over secrets and texts that promises to fail to produce a valid secret and text within the language only negligibly often. That puzzle ensemble is intractable if we cannot make an algorithm that can produce a secret given its text with more than negligible probability. Note the likely error in the original form above that would give \(S\) the answer to the question it is being asked, as opposed to the security parameter.
+							A puzzle ensemble is a language and a probability distribution over secrets and texts where randomly sampling from the distribution produces an invalid secret/text pair only negligibly often. That puzzle ensemble is intractable if we cannot make an algorithm that can produce a secret given its text with more than negligible probability. Note the likely error in the original form above that would give \(S\) the answer to the question it is being asked, as opposed to the security parameter.
 						</p>
 						<p class="rp_original">
-							For example, let \(L=\{(n;p,q,N) | N=p\cdot q; p,q\) are \(n\)-bit primes\(\}\), and \(f_n\) be the uniform distribution over the set \(W_n\). Under the <a href="#IAF">Intractability of Factorization Assumption</a>, the <i>factorization puzzle ensemble</i> \(P=(L,F)\) is an intractable puzzle ensemble.
+							For example, let \(L=\{(n;\,p,q,N)\;|\;N=p\cdot q;\;p,q\) are \(n\)-bit primes\(\}\), and \(f_n\) be the uniform distribution over the set \(W_n\). Under the <a href="#IAF">Intractability of Factorization Assumption</a>, the <i>factorization puzzle ensemble</i> \(P=(L,F)\) is an intractable puzzle ensemble.
 						</p>
 						<p class="rp_annotation">
 							This is because, according to the assumption, given our text \(\tau=N\), we will only negligibly often be able to produce the secret \(s=(p,q)\) for sufficiently large \(n\).
@@ -297,14 +316,17 @@
 							<li>The text \(\tau\) will be found out by \(M_A\) and \(M_B\) as their outputs.</li>
 							<li>The secret \(s\), while computable by A and B jointly based on the information they have at the end of the execution of the protocol, is completely hidden from each party by itself, even if one of them cheats during the execution of the protocol.</li>
 						</ol>
+						<p class="rp_annotation">
+							We should note that we want \(s\) to still be the correct secret for \(\tau\) if a party cheats as well.
+						</p>
 						<p class="rp_original">
-							To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a puzzle ensemble \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization puzzle ensemble is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and <span class="equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span> are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
+							To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a puzzle ensemble \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization puzzle ensemble is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where <span class="equation" data-equation="alpha">\(\alpha=(\alpha_1,\alpha_2,\dots</span> and <span class="equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span> are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
 						</p>
 						<p class="rp_annotation">
-							Though not explicitly stated, we can note here that \(\alpha_n\) is <span class="definable">injective</span>, which is what allows us to only explicitly define the probability distribution for \(\tau\) (as it must be identical for \(s\) by definition of injectivity).
+							Though not explicitly stated, we can note here that \(\alpha_n\) is <span class="definable">injective</span>, which is what allows us to explicitly define the probability distribution for only \(\tau\) (as it must be identical for \(s\) by definition of injectivity).
 						</p>
 						<p class="rp_original">
-							Let \(P=(\alpha,D)\) be a uniquely decipherable, intractable puzzle ensemble, where \(\alpha=(\alpha_1,\alpha_2,\dots)\) and <span class="equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span>. Formally, we define our requirements on a protocol \(M=(M_A,M_B)\) for generating a secret for \(P\) as follows. (A or B will sometimes output <span class="equation" data-equation="u_x">\(u_A\)</span> or <span class="equation" data-equation="u_x">\(u_B\)</span>=CHEATING; informally we say that A or B has detected that the other party is cheating.)
+							Let \(P=(\alpha,D)\) be a uniquely decipherable, intractable puzzle ensemble, where <span class="equation" data-equation="alpha">\(\alpha=(\alpha_1,\alpha_2,\dots)\)</span> and <span class="equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span>. Formally, we define our requirements on a protocol \(M=(M_A,M_B)\) for generating a secret for \(P\) as follows. (A or B will sometimes output <span class="equation" data-equation="u_x">\(u_A\)</span> or <span class="equation" data-equation="u_x">\(u_B\)</span>=CHEATING; informally we say that A or B has detected that the other party is cheating.)
 						</p>
 						<section id="sec3.1">
 							<h3>3.1. Validity</h3>
@@ -316,29 +338,29 @@
 									With probability 1-\(o\)(poly-small), <span class="equation" data-equation="u_x">\(u_A\)</span>\(=\)<span class="equation" data-equation="u_x">\(u_B\)</span>, and their common value \(\tau\) is distributed according to a distribution indistinguishable (by polynomial-time computations) from <span class="equation" data-equation="D=Tn">\(D_n\)</span>.
 								</li>
 								<li>
-									<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\Delta_j)\;\)<span class="equation" data-equation="approx">\(\approx\)</span>\(\; \)<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\) for \(j\in \{A,B\}\), where \(\mathcal{J}\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(\mathcal{L}\) is the stochastic process of fetching \(\tau\) according to <span class="equation" data-equation="D=Tn">\(D_n\)</span>.
+									<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\)<span class="equation" data-equation="delta">\(\Delta_j\)</span>\()\) <span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\) for \(j\in \{A,B\}\), where \(\mathcal{J}\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(\mathcal{L}\) is the stochastic process of fetching \(\tau\) according to <span class="equation" data-equation="D=Tn">\(D_n\)</span>.
 								</li>
 							</ol>
 							<p class="rp_annotation">
-								The ability to guess \(a_n(\tau)\) is precisely as difficult whether done through the protocol (and therefore with extra information \(\Delta_j\), or done by simply taking \(\tau\) directly from <span class="equation" data-equation="D=Tn">\(D_n\)</span> (which, as discussed above by definition of an <span class="definable" data-define="intractable puzzle ensemble">intractable puzzle ensemble</span>, is extremely difficult).
+								The ability to guess \(a_n(\tau)\) is precisely as difficult whether done through the protocol (and therefore with extra information  from the run of the protocol \(\Delta_j\)), or done by simply taking \(\tau\) directly from <span class="equation" data-equation="D=Tn">\(D_n\)</span> (which, as discussed above by definition of an <span class="definable" data-define="intractable puzzle ensemble">intractable puzzle ensemble</span>, is extremely difficult).
 							</p>
 							<ol class="rp_original" type="i">
 								<li value="3">
-									\(\exists\) a protocol \(N=(N_A,N_B)\) which, given input \((\Delta_A,\Delta_B)\), computes outputs <span class="equation" data-equation="v_x">\(v_A,v_B\)</span>, with the property that \(v_A=v_B=a_n(\tau)\) with probability 1-\(o\)(poly-small).
+									\(\exists\) a protocol \(N=(N_A,N_B)\) which, given input (<span class="equation" data-equation="delta">\(\Delta_A,\Delta_B\)</span>), computes outputs <span class="equation" data-equation="v_x">\(v_A,v_B\)</span>, with the property that \(v_A=v_B=a_n(\tau)\) with probability 1-\(o\)(poly-small).
 								</li>
 							</ol>
 							<p class="rp_annotation">
 								Given \(\Delta_A\) and \(\Delta_B\) together, a probabilistic polynomial-time algorithm can produce the secret \(s\) of \(\tau\) with only a <span class="definable">negligible</span> probability of failure.
 							</p>
 							<p class="rp_original">
-								To discuss the validity concept when one party, say B, may misbehave. Let \(d_n\) be the probability for runs in which \(v_A\neq\)CHEATING, and let \(D_n'\) be the probability distribution for \(\tau\) when restricted to such runs. If \(d_n\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in \Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following two constraints to be true:
+								Now to discuss the validity concept when one party, say B, may misbehave. Let \(d_n\) be the probability for runs in which \(u_A\neq\)CHEATING, and let \(D_n'\) be the probability distribution for \(\tau\) when restricted to such runs. If \(d_n\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in \Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following two constraints to be true:
 							</p>
 							<ol class="rp_original" type="i">
 								<li value="4">
 									\(P'=(\alpha,D')\) is a uniquely decipherable intractable puzzle ensemble, where \(D'=(D_1',D_2',\dots)\).
 								</li>
 								<li>
-									<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\Delta_B)\;\)<span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\), where \(\mathcal{J}\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the stochastic process of fetching \(\tau\) according to \(D_n'\).
+									<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\)<span class="equation" data-equation="delta">\(\Delta_B)\)</span> <span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\), where \(\mathcal{J}\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the stochastic process of fetching \(\tau\) according to \(D_n'\).
 								</li>
 							</ol>
 							<p class="rp_annotation">
@@ -352,7 +374,7 @@
 							<h3>3.2. Fairness</h3>
 							<ol class="rp_original" type="i">
 								<li>
-									[B may cheat.] Suppose protocols \(M=(M_A,M_B)\) and \(N=(N_A,N_B)\) are run with machine pairs \((M_A,M_B'),(N_A,N_B')\). There exists a polynomial-time probabilistic algorithm \(Y\) (dependent on \(M_B'\) and \(N_B'\), which takes a history pair for \(M\) and \(N\) as input, and outputs a string \(w\). We require that if A follows the protocols \(M\) and \(N\) and then runs \(Y\), the probability that <span class="equation" data-equation="u_x">\(u_A\)</span>\(=\tau\), \(v_B=a_n(\tau)\) while \(w\neq a_n(\tau)\) is \(o\)(poly-small).
+									[B may cheat.] Suppose protocols \(M=(M_A,M_B)\) and \(N=(N_A,N_B)\) are run with machine pairs \((M_A,M_B'),(N_A,N_B')\). There exists a polynomial-time probabilistic algorithm \(Y\) (dependent on \(M_B'\) and \(N_B'\)), which takes a history pair for \(M\) and \(N\) as input, and outputs a string \(w\). We require that if A follows the protocols \(M\) and \(N\) and then runs \(Y\), the probability that <span class="equation" data-equation="u_x">\(u_A\)</span>\(=\tau\), \(v_B=a_n(\tau)\) while \(w\neq a_n(\tau)\) is \(o\)(poly-small).
 								</li>
 								<li>
 									[A may cheat.] (Interchange the roles of A and B in (i).)
@@ -382,7 +404,7 @@
 								<p>
 									If A follows the protocols and B does not (i.e., \(M_B'\neq M_B\)), then for any fixed \(k\), there exists a probabilistic polynomial-time algorithm S which takes \((n,\)<span class="equation" data-equation="delta">\(\Delta_A\)</span>\()\) as input and outputs a number \(v\) such that the following is true:
 								</p>
-								$$Pr\{(u_B=s_A)\wedge(v\neq s_B)\}\in O(\frac{1}{n^k}).$$
+								$$Pr\{(u_B=s_A)\wedge(v\neq s_B)\}\in O\left(\frac{1}{n^k}\right).$$
 							</li>
 							<li>
 								[If A gets \(s_B\), then B can compute \(s_A\).] (Interchange A and B in (i).)
@@ -401,7 +423,7 @@
 							Consider an interactive computational problem \(\langle h_n,w_n\rangle\) as defined in <a href="#sec1">Section 1</a>. We will show that there exists a protocol for it that satisfies some strong privacy and fairness constraints. In this extended abstract, we restrict ourselves to the case when \(w_n\) represents a pair of functions \((f_n,g_n)\) to be evaluated, i.e. given inputs \(i_A,i_B\), A and B wish to compute \(f_n(i_A,i_B)\) and \(g_n(i_A,i_B)\). The results can be extended to the general case.
 						</p>
 						<p class="rp_original">
-							We will consider two variants, which differ in their input-output format. Model I is the natural one, in which the inputs and outputs are as specified in the previous paragraph. However, since in general A does not have any control over the value of \(i_B\), a dishonest B can pretend that \(i_B\) is an arbitrary value \(y\). As a result, the fairness constraint can at most force B to compute the value of \(f_n(i_A,y)\) for <i>some</i> \(y\). In Model II, A will be given as input \((i_A,p_A,q_A,N_A,N_B,E_{N_B}(i_B))\) where \(N_A=p_A\cdot q_A\) is the product of two large primes, and \(N_B\) is another integer of two large prime factors used to encode B's parameter \(i_B\) as \(E_{N_B}(i_B)\); B has as input \((i_B,p_B,q_B,N_B,N_A,E_{N_A}(i_A))\). The integers \(N_A\) and \(N_B\) are generated from some distributions such that factoring these numbers are computationally intractable; \(E_N\) can be any probabilistic encryption scheme that is provably secure under the <a href="#IAF">Intractability Assumption of Factoring</a> (e.g. the ones in Alexi, Chor, Goldreich, and Schnorr<sup class="reference" data-citation="16"><a href="#citation16">[16]</a></sup> or Blum and Goldwasser<sup class="reference" data-citation="17"><a href="#citation17">[17]</a></sup>). In the output, A, B obtain \((\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(,v_A,w_A)\) and \(\cancel{(u_A,v_A,w_A)}\;(u_B,v_B,w_B)\). When both parties behave honestly, <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A'),\) and \(w_A=(N_B', E_{N_B'}(g_n(i_A,i_B)))\), where \(N_A'\) and \(N_B'\) are integers which are the products of two large prime factors; similarly for the output of B. Such formats arise quite naturally in concatenating protocols. The privacy and fairness constraints in this model are stronger than the first model.
+							We will consider two variants, which differ in their input-output format. Model I is the natural one, in which the inputs and outputs are as specified in the previous paragraph. However, since in general A does not have any control over the value of \(i_B\), a dishonest B can pretend that \(i_B\) is an arbitrary value \(y\). As a result, the fairness constraint can at most force B to compute the value of \(f_n(i_A,y)\) for <i>some</i> \(y\). In Model II, A will be given as input \((i_A,p_A,q_A,N_A,N_B,E_{N_B}(i_B))\) where \(N_A=p_A\cdot q_A\) is the product of two large primes, and \(N_B\) is another integer of two large prime factors used to encode B's parameter \(i_B\) as \(E_{N_B}(i_B)\); B has as input \((i_B,p_B,q_B,N_B,N_A,E_{N_A}(i_A))\). The integers \(N_A\) and \(N_B\) are generated from some distributions such that factoring these numbers are computationally intractable; \(E_N\) can be any probabilistic encryption scheme that is provably secure under the <a href="#IAF">Intractability Assumption of Factoring</a> (e.g. the ones in Alexi, Chor, Goldreich, and Schnorr<sup class="reference" data-citation="16"><a href="#citation16">[16]</a></sup> or Blum and Goldwasser<sup class="reference" data-citation="17"><a href="#citation17">[17]</a></sup>). In the output, A, B obtain \((\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(,v_A,w_A)\) and \(\cancel{(u_A,v_A,w_A)}\;(\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\). When both parties behave honestly, <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A'),\) and \(w_A=\left(N_B', E_{N_B'}\left(g_n(i_A,i_B)\right)\right)\), where \(N_A'\) and \(N_B'\) are integers which are the products of two large prime factors; similarly for the output of B. Such formats arise quite naturally in concatenating protocols. The privacy and fairness constraints in this model are stronger than the first model.
 						</p>
 						<p class="rp_annotation">
 							Notice the error corrected above.
@@ -558,7 +580,7 @@
                 <h1>References</h1>
                 <ol id="referencelist">
                     <li id="citation1">S. Goldwasser, S. Micali, and C. Rackoff, "The knowledge complexity of interactive proof systems," <i>Proceedings of 17th Annual ACM Symposium on Theory of Computing</i>, 1985, 291-304.</li>
-					<li id="citation2">Z. Galil, S. Habe, and M. Yung, "A private interactive test of a Boolean predicate and minimum-knowledge public-key cryptosystems," <i>PRoceedings of 26th Annual IEEE Symposium on Foundations of Computer Science</i>, 1985, 360-371.</li>
+					<li id="citation2">Z. Galil, S. Habe, and M. Yung, "A private interactive test of a Boolean predicate and minimum-knowledge public-key cryptosystems," <i>Proceedings of 26th Annual IEEE Symposium on Foundations of Computer Science</i>, 1985, 360-371.</li>
 					<li id="citation3">M. Rabin, "How to exchange secrets," 1981, unpublished manuscript.</li>
 					<li id="citation4">M. Fischer, S. Micali, C. Rackoff, and D. Wittenberg, "An oblivious transfer protocol," 1985, to appear.</li>
 					<li id="citation5">M. Blum, "Coin flipping by phone," <i>COMPCON</i> (1982), 133-137.</li>
@@ -571,7 +593,7 @@
 					<li id="citation12">M. Blum, "How to exchange (secret) keys," <i>ACM Transactions on Computer Systems</i> (1983), 175-193.</li>
 					<li id="citation13">M. Luby, S. Micali, and C. Rackoff, "How to simultaneously exchange a secret bit by flipping a symmetrically-based coin," <i>Proceedings of 24th Annual IEEE Symposium on Foundations of Computer Science</i>, 1985, 11-22</li>
 					<li id="citation14">U. Vazirani and V. Vazirani, "Trapdoor pseudo-random number generators, with applications to protocol design," <i>Proceedings of 24th Annual IEEE Symposium on Foundations of Computer Science</i>, 1985, 23-30.</li>
-					<li id="citation15">J. Hastad and A. Shamir, "The cryptographic security of truncated linearly related variables," <i>PRoceedings of 17th Annual ACM Symposium on Theory of Computing</i>, 1985, 356-362.</li>
+					<li id="citation15">J. Hastad and A. Shamir, "The cryptographic security of truncated linearly related variables," <i>Proceedings of 17th Annual ACM Symposium on Theory of Computing</i>, 1985, 356-362.</li>
 					<li id="citation16">W. Alexi, B. Chor, O. Goldreich, and C.P. Schnorr, "RSA/Rabin bits are 1/2+1/2poly(log n) secure," <i>Proceedings of 25th Annual IEEE Symposium on Foundations of Computer Science</i>, 1984, 449-457.</li>
 					<li id="citation17">M. Blum and S. Goldwasser, "An efficient probabilistic PKCS as secure as factoring," <i>Proceedings of Crypto 84</i>, 1984.</li>
                 </ol>
