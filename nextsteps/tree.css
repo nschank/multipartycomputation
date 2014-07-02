@@ -1,0 +1,74 @@
+.tree, .tree * {
+    padding: 0;
+    margin: 0 0 0 10px;
+    list-style: none;
+}
+ 
+.tree label[for]::before
+{
+    content: "\25b6";
+    display: inline-block;
+    margin: 2px 0 0;
+    width: 13px;
+    height: 20px;
+    vertical-align: top;
+    text-align: center;
+    color: #e74c3c;
+    font-size: 8px;
+    line-height: 13px;
+}
+ 
+.tree li ul
+{
+    margin: 0 0 0 9px;
+}
+ 
+.tree *
+{
+    vertical-align: middle;
+}
+ 
+.tree
+{
+    font: normal 18px/16px Arial, Sans-serif;
+}
+ 
+.tree li
+{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+ 
+.tree input[type="checkbox"]
+{
+    display: none;
+}
+ 
+.tree label
+{
+    cursor: pointer;
+}
+ 
+.tree label[for]::before
+{
+    -webkit-transform: translatex(-6px);
+    -moz-transform: translatex(-6px);
+    -ms-transform: translatex(-6px);
+    -o-transform: translatex(-6px);
+    transform: translatex(-6px);
+}
+ 
+.tree input[type="checkbox"][id]:checked ~ label[for]::before
+{
+    content: "\25bc";
+}
+ 
+.tree input[type="checkbox"][id]:not(:checked) ~ ul
+{
+    display: none;
+}
+
+.tree_file {
+	font-size:14pt;
+}
