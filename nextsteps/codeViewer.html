@@ -6,10 +6,36 @@
         <link rel="stylesheet" type="text/css" href="../style/main.css">
         <link rel="stylesheet" type="text/css" href="../style/learn.css">
         <link rel="stylesheet" type="text/css" href="../style/prism.css">
+		<link rel="stylesheet" type="text/css" href="../style/codeView.css">
         <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-		<link rel="stylesheet" type="text/css" href="tree.css">
-		<script type="text/javascript" src="codetree.js"></script>
-		<script type="text/javascript" src="buildTree.js"></script>
+		<script type="text/javascript" src="codeDirTree.js"></script>
+		<script type="text/javascript" src="../script/buildCodeTree.js"></script>
+		<script type="text/javascript">
+			<!--
+				window.addEventListener("load", skipTo, true);
+			
+				function skipTo(event)
+				{
+					if(window.location.hash)
+					{
+						var open = window.location.hash.substring(1);
+						window.location.hash = "";
+						
+						var index = open.indexOf('/');
+						while(index != -1)
+						{
+							var check = document.getElementById("node" + pathToStr(open.substring(0,index)));
+							console.log(open.substring(0,index));
+							if(check)
+								check.setAttribute("checked", true);
+							index = open.indexOf('/', index+1);
+						}
+						
+						setCodeTo(open);
+					}
+				}
+			-->
+		</script>
     </head>
     <body>
         <div class="main_foreground">
@@ -26,7 +52,10 @@
             </div>
             <div class="main_toplevel main_section main_color1">
 				<h1>Treeview</h1>
-				<div class="main_window main_fullwidth" style="height:300px; overflow-y:auto">
+				<p class="l_content">
+					Visit the our <a href="https://github.com/nschank/multipartycomputation/tree/impl_publish">Implementation GitHub</a> to see older versions, fork, or clone.
+				</p>
+				<div class="main_window main_fullwidth treeview">
 					<div class="tree" id="codeviewtree">
 						
 					</div>
@@ -34,7 +63,7 @@
             </div>
 			<div class="main_toplevel main_section main_color4">
 				<h1>Code View</h1>
-				<div class="main_window main_fullwidth" id="codeholder" style="min-height:200px; max-height:1500px; overflow-y:auto">
+				<div class="main_window main_fullwidth" id="codeholder">
 					<pre id="currentcode" data-src="code/README.md"></pre>
 				</div>
             </div>

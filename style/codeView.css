@@ -69,6 +69,13 @@
     display: none;
 }
 
-.tree_file {
-	font-size:14pt;
+.treeview {
+	height:300px; 
+	overflow-y:auto
+}
+
+#codeholder {
+	min-height:200px; 
+	max-height:1500px; 
+	overflow-y:auto
 }

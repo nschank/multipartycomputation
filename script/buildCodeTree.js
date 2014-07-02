@@ -11,6 +11,13 @@ function createTreeView(event)
 	treediv.appendChild(ul);
 }
 
+function pathToStr(path)
+{
+	if(path.length == 0) return "";
+	else if(path.charAt(0) == '/') return pathToStr(path.substring(1));
+	else return path.charAt(0) + pathToStr(path.substring(1));
+}
+
 function addLi(addTo, path)
 {
 	return function(elem)
@@ -19,7 +26,7 @@ function addLi(addTo, path)
 		
 		if(elem.type === "dir")
 		{
-			var n = "node" + (nodeNum++);
+			var n = "node" + pathToStr(path + "/" + elem.name);
 			var input = document.createElement("input");
 			input.setAttribute("type", "checkbox");
 			input.id = n;
@@ -52,6 +59,7 @@ function addLi(addTo, path)
 
 function setCodeTo(path)
 {
+	nodeNum = 0;
 	var holder = document.getElementById("codeholder");
 	holder.removeChild(document.getElementById("currentcode"));
 	var newcode = document.createElement("pre");
