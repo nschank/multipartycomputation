@@ -21,9 +21,10 @@ Models (standard)
 Settings (stand alone)
 Composition
 
-Complete 24/81 completely
+Complete 24 completely
 Ch1
 34
+animation
 Assumptions page
 submit
 cheat sheet additions
@@ -31,20 +32,4 @@ cheat sheet additions
 	RSA
 	indistinguishability
 words
-	information theoretic security
-	synchronous network
-	authenticated network
-	secrecy network
-	broadcast channel
-	adaptive adversary
-	cryptographic security
-	oblivious transfer (basic, factoring, one-out-of-two)
-	fault-tolerance
 	computational indistinguishability (from indistinguishable)
-	fix combined oblivious transfer: Bob can learn g
-	GF(2)
-	commutativity
-	injective
-	Jacobi symbol
-changes
-	xor, x-or to XOR
