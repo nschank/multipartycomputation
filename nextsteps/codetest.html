@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="../style/prism.css">
         <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" type="text/css" href="tree.css">
+		<script type="text/javascript" src="codetree.js"></script>
 		<script type="text/javascript" src="buildTree.js"></script>
     </head>
     <body>
@@ -24,69 +25,25 @@
                 <a href="../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
             <div class="main_toplevel main_section main_color1">
-				<div class="main_window main_fullwidth">
-					<h1>Open Problems</h1>
-					<div style="height:200px; overflow-y:scroll">
-						<div class="tree" id="codeviewtree">
-							
-						</div>
+				<h1>Treeview</h1>
+				<div class="main_window main_fullwidth" style="height:300px; overflow-y:auto">
+					<div class="tree" id="codeviewtree">
+						
 					</div>
-					<p class="l_content">
-						<pre data-src="NIterators.java">Fucking why</pre>
-					</p>
 				</div>
             </div>
-            <div class="main_toplevel main_section main_color8">
-                <h1>References</h1>
-                <ol id="referencelist">
-                    <li id="citation1">A citation</li>
-                </ol>
+			<div class="main_toplevel main_section main_color4">
+				<h1>Code View</h1>
+				<div class="main_window main_fullwidth" id="codeholder" style="min-height:200px; max-height:1500px; overflow-y:auto">
+					<pre id="currentcode" data-src="code/README.md"></pre>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color9">
-                <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+ch##@gmail.com">Problem with this page?</a></p>
-                </div>
-                <p>Copyright &copy; Nicolas Schank 2014, Brown University</p>
+                <p>Created by Nicolas Schank 2014, Brown University</p>
+				<p>All original work is free for any use by anyone whatsoever. We would like to thank <a href="http://www.prismjs.com/">PrismJS</a> for the use of their beautiful syntax highlighter. Visit their website or <a href="https://github.com/LeaVerou/prism/">their GitHub</a> for more information. Our code tree is based on the one made by the <a href="http://acidjs.wemakesites.net/">AcidJS</a> library.</p>
             </div>
         </div>
 		
 		<script type="text/javascript" src="../script/prism.js"></script>
     </body>
 </html>
-
-<!--
-<ul>
-								<li>
-									<input type="checkbox" id="node-0" checked="checked" /><label for="node-0">Libraries</label>
-									<ul>
-										<li>
-											<input type="checkbox" id="node-0-0" checked="checked" /><label for="node-0-0">Documents</label>
-											<ul>
-												<li>
-													<input type="checkbox" id="node-0-0-0" checked="checked" /><label for="node-0-0-0">My Documents</label>
-													<ul>
-														<li>
-															<input type="checkbox" id="node-0-0-0-0" /><label for="node-0-0-0-0">Downloads</label>
-														</li>
-														<li>
-															<input type="checkbox" id="node-0-0-0-1" /><label for="node-0-0-0-1">Projects</label>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<input type="checkbox" id="node-0-1" /><label for="node-0-1">Music</label>
-											<ul>
-												<li>
-													<input type="checkbox" id="node-0-1-0" /><label for="node-0-1-0">My Music</label>
-												</li>
-												<li>
-													<input type="checkbox" id="node-0-1-1" /><label for="node-0-1-1">Public Music</label>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							-->

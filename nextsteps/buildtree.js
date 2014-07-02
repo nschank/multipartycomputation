@@ -2,35 +2,16 @@ window.addEventListener("load", createTreeView, true);
 
 var nodeNum = 0;
 
-var tree = [{type:"dir", name:"src", 
-	children:[
-		{type:"dir", name:"nschank",
-		children:[
-			{type:"dir", name:"crypto",
-			children:[
-			
-			]},
-			{type:"dir", name:"util",
-			children:[
-				{type:"file", name:"NIterators.java"}
-			]},
-			{type:"dir", name:"note",
-			children:[
-				{type:"file", name:"Immutable.java"}
-			]}
-		]}
-	]}];
-
 function createTreeView(event)
 {
 	var treediv = document.getElementById("codeviewtree");
 	var ul = document.createElement("ul");
 	
-	tree.forEach(addLi(ul));
+	tree.forEach(addLi(ul, "code"));
 	treediv.appendChild(ul);
 }
 
-function addLi(addTo)
+function addLi(addTo, path)
 {
 	return function(elem)
 	{
@@ -50,7 +31,7 @@ function addLi(addTo)
 			li.appendChild(input);
 			li.appendChild(label);
 			var ul = document.createElement("ul");
-			elem.children.forEach(addLi(ul));
+			elem.children.forEach(addLi(ul, path + "/" + elem.name));
 			li.appendChild(ul);
 			addTo.appendChild(li);
 		}
@@ -58,15 +39,25 @@ function addLi(addTo)
 		{
 			var ul = document.createElement("ul");
 			var link = document.createElement("a");
-			link.setAttribute("href", "#");
+			link.setAttribute("href", "javascript:setCodeTo(\"" + path + "/" + elem.name+"\");");
 			link.setAttribute("class", "tree_file");
+			link.setAttribute("style", "font-size:12pt");
 			link.innerHTML = elem.name;
 			li.appendChild(link);
 			ul.appendChild(li);
 			addTo.appendChild(ul);
 		}
-		
-		
 	};
+}
+
+function setCodeTo(path)
+{
+	var holder = document.getElementById("codeholder");
+	holder.removeChild(document.getElementById("currentcode"));
+	var newcode = document.createElement("pre");
+	newcode.setAttribute("data-src", path);
+	newcode.id = "currentcode";
+	holder.appendChild(newcode);
+	doLoadSrc();
 }
 
