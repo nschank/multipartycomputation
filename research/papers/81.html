@@ -233,6 +233,7 @@
 							<li><b>Bits exchanged: </b>\(O(k)\) where \(k\) is the security parameter of their trapdoor permutation.</li>
 							<li><b>Runtime: </b>\(O\left(T(k)\right)=O(poly(k))\) for T(k) being the highest runtime between the trapdoor permutation, its decryption, or the calculation of its <span class="definable">hardcore bit</span> (all of which are polynomial).</li>
 							<li><b>Assumptions: </b>The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span>.</li>
+							<li><b>Implementations: </b>We have our own version in Java <a href="../../nextsteps/codeViewer.html#code/src/nschank/crypto/ot/oneoftwo_gmw87/ObliviousBitTransfer.java">here</a>.</li>
 						</ul>
 						<h3><a href="#sec4.2">Combined Oblivious Transfer</a></h3>
 						<ul class="rp_analysis">
@@ -646,8 +647,8 @@
 								<p class="rp_original">
 									It is easy to see that, having solved the single-bit messages case, we have also solved the case of arbitrary messages \(m_0\) and \(m_1\) of equal, known length \(l\). In fact, we can repeat the above protocol \(l\) times so that, if \(\alpha\) is 0 (1), \(B\) is required at the \(i\)-th time to learn the \(i\)th bit of \(m_0 (m_1)\).
 								</p>
-								<p class="rp_annotation" data-broken-link=true>
-									We have a working implementation of this protocol in the implementation section. While we do not have that section of the site yet, you can visit it on <a href="https://github.com/nschank/multipartycomputation/blob/impl_publish/src/nschank/crypto/ot/oneoftwo_gmw87/ObliviousBitTransfer.java">GitHub</a>.
+								<p class="rp_annotation">
+									We have a working implementation of this protocol in the implementation section. You can find it <a href="../../nextsteps/codeViewer.html#code/src/nschank/crypto/ot/oneoftwo_gmw87/ObliviousBitTransfer.java">here</a>.
 								</p>
 							</section>
 						</section>
