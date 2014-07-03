@@ -92,6 +92,8 @@ img.rp_original {
 
 .rp_truthtable {
 	width:25%;
+	display:block;
+	margin:5px auto;
 	border-collapse:collapse;
 }
 

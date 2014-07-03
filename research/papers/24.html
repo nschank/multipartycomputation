@@ -103,7 +103,7 @@
                         <a class="rp_author" href="../authors/Andrew C. Yao.html">Andrew C. Yao</a></span>
 						
 					<div class="rp_snippet">
-						&ldquo;An important snippet of the paper&rdquo;
+						&ldquo;The "fairness" requirement means that a cheater should not be able to obtain the desired output while denying the other party to find the proper output. The problem of exchanging secrets has this requirement as its main concern.&rdquo;
 					</div>	
 					
                     <div class="main_toc">
@@ -113,6 +113,7 @@
 								<ol>
 									<li><a href="#a_intro">Introduction</a></li>
 									<li><a href="#a_goals">Goals and Results</a></li>
+									<li><a href="#a_garbled">Garbled Circuit Construction</a></li>
 									<li><a href="#a_assumptions">Assumptions</a></li>
 									<li><a href="#a_defs">Definitions</a></li>
 									<li><a href="#a_theorems">Theorems</a></li>
@@ -128,16 +129,74 @@
                     <section id="a_intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Paper Title</b> is...
+							<b>How To Generate and Exchange Secrets</b> is a 1986 extended abstract by Yao that is, strangely, well-known for something not written in it. Yao's garbled circuit, one of the two most basic general constructions for creating multiparty computation protocols, was actually first mentioned in an oral presentation given about the paper as an example of how to satisfy the specifications Yao laid out. Ironically, it is in the description of the other construction, the <a href="81.html">GMW method</a>, that we can actually find the first major publication of Yao's garbled circuit method.
+						</p>
+						<p class="rp_analysis">
+							We give a formal construction of the protocol after the Goals and Results section.
 						</p>
 					</section>
 					<section id="a_goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
-							Some goals that they had.
+							Because Yao never completed released a completed version of this paper, there is actually very little that was <i>accomplished</i> per se in this paper. The released abstract deals entirely with definitions for what a protocol must satisfy in order to be valid, private, and 'fair.'
 						</p>
 						<p class="rp_analysis">
-							Don't forget some results, too!
+							The main results from this paper were due to the word of mouth spread of the garbled circuit construction. The garbled circuit&mdash;sometimes also known as the "combined oblivious transfer," thanks to GMW&mdash;is an extremely useful primitive for use in building protocols for several reasons:
+						</p>
+						<ul class="rp_analysis">
+							<li>It's <i>generalizable</i>: since Boolean gates are complete over computations, a garbled circuit is able to perform any computation.</li>
+							<li>It operates in <i>constant round complexity</i>; that is, the number of interactions between parties is only relative to the size of the inputs, not to the size of the operation. This is starkly in contrast with the GMW construction, in which the number of interactions is relative to the number of gates.</li>
+						</ul>
+					</section>
+					<section id="a_garbled">
+						<h2>Garbled Circuit Construction</h2>
+						<p class="rp_analysis">
+							Two parties, \(P_1\) and \(P_2\) wish to jointly compute the value of some function. Without loss of generality, assume they are performing a binary function on their respective bits \(b_1\) and \(b_2\).
+						</p>
+						<p class="rp_analysis">
+							The two parties first agree on a function, \(f(\cdot,\cdot)\). Party 1 creates the truth table for the function. For concreteness, let's assume they are computing AND; the concepts are identical for any gate.
+						</p>
+						<table class="rp_analysis rp_truthtable">
+							<tr><th>\(b_1\)</th><th>\(b_2\)</th><th>\(b_1\wedge b_2\)</th></tr>
+							<tr><td>0</td><td>0</td><td>0</td></tr>
+							<tr><td>1</td><td>0</td><td>0</td></tr>
+							<tr><td>0</td><td>1</td><td>0</td></tr>
+							<tr><td>1</td><td>1</td><td>1</td></tr>
+						</table>
+						<p class="rp_analysis">
+							Both parties then agree on some symmetric encryption and decryption scheme, \(E,\,D,\) along with some sampling algorithm \(G\) which produces keys within the scheme. Party 1 samples 6 random keys \(s_i\) using \(G\), \(s_1\dots s_6\). Party 1 recreates the table, except now, within each column, \(P_1\) replaces 0 and 1 with two of the keys. 
+						</p>
+						<table class="rp_analysis rp_truthtable">
+							<tr><th>\(b_1\)</th><th>\(b_2\)</th><th>\(b_1\wedge b_2\)</th></tr>
+							<tr><td>\(s_1\)</td><td>\(s_3\)</td><td>\(s_5\)</td></tr>
+							<tr><td>\(s_2\)</td><td>\(s_3\)</td><td>\(s_5\)</td></tr>
+							<tr><td>\(s_1\)</td><td>\(s_4\)</td><td>\(s_5\)</td></tr>
+							<tr><td>\(s_2\)</td><td>\(s_4\)</td><td>\(s_6\)</td></tr>
+						</table>
+						<p class="rp_analysis">
+							Party 1 then encrypts the output column using <i>both</i> of the keys within its row, like so:
+						</p>
+						<table class="rp_analysis rp_truthtable">
+							<tr><th>\(b_1\)</th><th>\(b_2\)</th><th>\(b_1\wedge b_2\)</th></tr>
+							<tr><td>\(s_1\)</td><td>\(s_3\)</td><td>\(E_{s_1}(E_{s_3}(s_5))\)</td></tr>
+							<tr><td>\(s_2\)</td><td>\(s_3\)</td><td>\(E_{s_2}(E_{s_3}(s_5))\)</td></tr>
+							<tr><td>\(s_1\)</td><td>\(s_4\)</td><td>\(E_{s_1}(E_{s_4}(s_5))\)</td></tr>
+							<tr><td>\(s_2\)</td><td>\(s_4\)</td><td>\(E_{s_2}(E_{s_4}(s_6))\)</td></tr>
+						</table>
+						<p class="rp_analysis">
+							\(P_1\) shows \(P_2\) some permutation of the rows, but doesn't show \(P_2\) the keys themselves; that is, \(P_2\) knows the evaluation of (for instance) \(E_{s_1}(E_{s_3}(s_5))\), and knows that it <i>uses</i> \(s_1\) and \(s_3\), but does not know the <i>values</i> of \(s_1\) or \(s_3\). 
+						</p>
+						<p class="rp_analysis">
+							\(P_1\) also tells \(P_2\) the association between \(P_2\)'s bit's value and \(s_3,\,s_4\); so \(P_2\) knows that \(s_3\) corresponds to 0 and \(s_4\) corresponds to 1.
+						</p>
+						<p class="rp_analysis">
+							\(P_1\) sends to \(P_2\) the specific key associated with the value of \(b_1\): \(P_2\) now has one of the two keys necessary to decrypt an output value. In order to get the other key, \(P_2\) performs a one-out-of-two oblivious transfer with \(P_1\), retrieving only the key associated with \(b_2\)'s value.
+						</p>
+						<p class="rp_analysis">
+							\(P_2\) now possesses two keys, and can therefore decrypt the output of one row of the encrypted truth table&mdash;that is, the output of the circuit. \(P_2\) now possesses a key which is directly associated with the output of the gate; depending on how the parties which to continue, one of two things occurs.
+						</p>
+						<p class="rp_analysis">
+							If this output is not going to be used in another gate, \(P_1\) simply tells \(P_2\) the associations between (0,1) and (\(s_5,s_6\)), so \(P_2\) knows how to interpret the output. Otherwise, \(P_1\) can use the two possible output keys as new <i>input</i> keys for another garbled gate, ad infinitum.
 						</p>
 					</section>
 					<section id="a_assumptions">
@@ -183,7 +242,7 @@
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
-							A reference for this paper
+							Andrew Chi-Chih Yao. How to generate and exchange secrets (extended abstract). In <i>27th Annual Symposium on Foundations of Computer Science</i>, pages 162–167, Toronto, Ontario, Canada, 27–29 October 1986. IEEE.
 						</p>
 					</section>
                 </div>
@@ -320,7 +379,7 @@
 							We should note that we want \(s\) to still be the correct secret for \(\tau\) if a party cheats as well.
 						</p>
 						<p class="rp_original">
-							To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a puzzle ensemble \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization puzzle ensemble is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where <span class="equation" data-equation="alpha">\(\alpha=(\alpha_1,\alpha_2,\dots</span> and <span class="equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span> are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
+							To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a puzzle ensemble \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization puzzle ensemble is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where <span class="equation" data-equation="alpha">\(\alpha=(\alpha_1,\alpha_2,\dots\)</span> and <span class="equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span> are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
 						</p>
 						<p class="rp_annotation">
 							Though not explicitly stated, we can note here that \(\alpha_n\) is <span class="definable">injective</span>, which is what allows us to explicitly define the probability distribution for only \(\tau\) (as it must be identical for \(s\) by definition of injectivity).
