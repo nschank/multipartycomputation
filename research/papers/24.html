@@ -282,7 +282,7 @@
 							\(o\)(poly-small) may be recognizable as the class of all <span class="definable">negligible</span> functions. This experiment might be recognized as similar to how a <span class="definable">hardcore bit</span> is defined except, since it is not being applied to <span class="definable" data-define="one-way function">one-way functions</span>, there are no defined bounds on the outcome of the experiment.
 						</p>
 						<p class="rp_original">
-							We write <span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="equation" data-equation="leq">\(\leq\)</span>\(\; \)<span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) if \(\forall D,Q \exists Q'\) such that \(r(d_n,X_n',Y_n',Q')-r(d_n,X_n,Y_n,Q)\geq o\)(poly-small).
+							We write <span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="equation" data-equation="leq">\(\leq\)</span>\(\; \)<span class="equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) if \(\forall\,D,Q\;\exists\,Q'\) such that \(r(d_n,X_n',Y_n',Q')-r(d_n,X_n,Y_n,Q)\geq o\)(poly-small).
 						</p>
 						<p class="rp_annotation">
 							Given a set of predicates, for all guessing algorithms \(Q\) to be applied on \((X_n,Y_n)\) under those predicates, we can produce a new guessing algorithm \(Q'\) that is strictly not worse on \((X_n',Y_n')\) for the same predicates. It might be said that \((X_n',Y_n')\) is strictly not harder to guess on than \((X_n,Y_n)\), regardless of the predicates.
@@ -447,7 +447,7 @@
 								</li>
 							</ol>
 							<p class="rp_annotation">
-								That is to say, running our protocol will not make it any easier to find the other person's input than it would have been if an oracle had given us the answer. This is our main connection to multiparty computation.
+								That is to say, running our protocol will not make it any easier to find the other person's input than it would have been if an oracle had given us the answer.
 							</p>
 							<p class="rp_original">
 								We now define the constraints when A follows the protocol while B may cheat; that is, B executes the protocol with any \(M_B'\). Since \(M_B'\) is arbitrary, B can always generate an \(i_B'\) and acts as if this is the input value \(i_B\). As A can never detect this method of cheating, A has to cooperate and let B know the value of \(g_n(i_A,i_B')\). This enables B to control A's output <span class="equation" data-equation="u_x">\(u_A\)</span>, and to probe somewhat into the value of \(i_A\); this cannot be prevented if we want to preserve the validity condition for honest parties described above. We shall require that B cannot do more than that. Let us denote by \(\mathcal{Z}\) the set \(\{0,1\}^*\cup\{\)CHEATING\(\}\), and extend the function \(f_n\) by \(f_n(i_A,y)=\)CHEATING if \(y=\)CHEATING.
@@ -462,9 +462,15 @@
 							<p class="rp_original">
 								Let \(\mathcal{J}\) be the <span class="definable">stochastic</span> process of running \((M_A,M_B')\) with input \((i_A,i_B)\) distributed according to <span class="equation" data-equation="h_n">\(h_n\)</span>. Let \(\mathcal{S}\) be the set of all probabilistic polynomial-time algorithms \(S\) that take input \((n,i_B)\) and produce random \(y\in \mathcal{Z}\). For any \(S\in\mathcal{S}\), let \(\mathcal{L}(S)\) be the stochastic process of generating \((i_A,i_B)\) according to \(h_n\), running \(S\) on input \((n,i_B)\) to produce a random \(y\), and defining <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,y),\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,y)\). Intuitively, B may use \(S\) to generate a random \(y\), and after that, acts as if \(y\) were the value of \(i_B\), and otherwise follows the protocol; \(\mathcal{L}(S)\) is clearly a less informative process for B in which A simply tells B the value of <span class="equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,y)\) without other communications taking place.
 							</p>
+							<p class="rp_annotation">
+								Yao wasn't extremely clear here: \(\mathcal{J}\) is the first of those two options, in which they run the protocol after B chooses some \(y\), whereas \(\mathcal{L}\) is the oracle model in which B is simply handed the value \(g_n(i_A,y)\).
+							</p>
 							<span class="rp_sub_header">Privacy</span>
 							<p class="rp_original rp_sub">
-								For any \(M_B'\), there exists an \(S\in\mathcal{S}\) such that <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\;\)<span class="equation" data-equation="leq">\(\leq\)</span>\(\;\)<span class="equation" data-equation="I_n">\(I_n\)</span>\(^{(\mathcal{L}(S))}(i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(|i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\).
+								For any \(M_B'\), there exists an \(S\in\mathcal{S}\) such that <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\;\)<span class="equation" data-equation="leq">\(\leq\)</span>\(\;\)<span class="equation" data-equation="I_n">\(I_n\)</span>\(^{(\mathcal{L}(S))}(i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\,|\,i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\).
+							</p>
+							<p class="rp_annotation">
+								In words, the probability of recovering extra information during a real run of the protocol is not more likely than the probability of recovering extra information in the oracle model. The key intuition here is that we only need to prove the existence of <i>some</i> \(S\) because this is <u>any</u> \(M_B'\). In other words, no matter what \(M_B'\) does, there is some oracle model (for some input) that would give B at least as much information, if not more. 
 							</p>
 							<p class="rp_original">
 								The fairness concept refers to obtaining the information that one is entitled to. Suppose B wishes to know the value of \(g_n(i_A,y)\) for some \(y\) other than \(i_B\). As we mentioned earlier, B can succeed by pretending \(i_B=y\) and otherwise follow the protocol; in the process A will obtain also the value of \(f_n(i_A,y)\). The privacy constraint stipulates that no information other than the value of \(g_n(i_A,y)\) is conveyed from A to B. The fairness constraint is concerned with whether it is possible for B to stop at some point, once B has the information about \(g_n(i_A,y)\), and deny the knowledge of \(f_n(i_A,y)\) to A. The following formulation is not the strongest possible version of this constraint, but it is sufficient for some applications such as exchanging secrets of sufficient length. Let \(L_n\) denote the set of all possible values of \(f_n(i_A,i_B)\) when \((i_A,i_B)\) is distributed according to <span class="equation" data-equation="h_n">\(h_n\)</span>.
@@ -482,7 +488,7 @@
 								Consider a pair \((i_A,i_B)\) distributed according to <span class="equation" data-equation="h_n">\(h_n\)</span>. Let \(G\) denote a probabilistic polynomial-time <span class="definable">Turing machine</span> that takes \(i_B\) as input and outputs \(z\); let \(\beta_n(G)\) denote the probability that \(z=g_n(i_A,i_B)\).
 							</p>
 							<p class="rp_annotation">
-								So \(G\) tries to come up with \(g_n(i_A,i_B)\) given <u>only</u> \(i_B\).
+								So \(G\) tries to come up with \(g_n(i_A,i_B)\) given <u>only</u> \(i_B\), with success rate \(\beta_n(G)\).
 							</p>
 							<span class="rp_sub_header">Fairness</span>
 							<p class="rp_original rp_sub">
@@ -491,10 +497,7 @@
 								for some \(G\).
 							</p>
 							<p class="rp_annotation">
-								Saying it in words is helpful. For any fixed \(k\), we can find a recovery algorithm \(R\) and a \(G\) so that the probability that B correctly determined \(g_n(i_A,i_B)\) by the end, but that A could not find any possible value for \(f_n(i_A,i_B)\) by the end, is only <span class="definable" data-define="negligible">negligibly</span> higher than the probability that B could have just guessed \(g_n(i_A,i_B)\) in the first place.
-							</p>
-							<p class="rp_annotation">
-								<span data-broken-link=true>However, why can't R just always pick a value within the range of \(f_n\)?</span>
+								Saying it in words is helpful. For any fixed \(k\), we can find a recovery algorithm \(R\) and a guessing algorithm \(G\) so that the probability that B correctly determined \(g_n(i_A,i_B)\) by the end, but that A could not find any possible value for \(f_n(i_A,i_B)\) by the end, is only <span class="definable" data-define="negligible">negligibly</span> higher than the probability that B could have just guessed \(g_n(i_A,i_B)\) in the first place.
 							</p>
 							<p class="rp_original">
 								To complete the definitions, we interchange the roles of A and B in the above discussions, which gives the constraints of validity, privacy, and fairness when B follows the protocol and A is cheating.
@@ -529,16 +532,25 @@
 							</li>
 							<li>(Interchange A and B in (i).)</li>
 						</ol>
+						<p class="rp_annotation">
+							So one can not learn anything extra by having \(\Delta, v, w\) that they wouldn't know from the oracle.
+						</p>
 						<p class="rp_original">
-							If A follows the protocol, but B may cheat and executes some \(M_B'\). Let \(d_n\) be the probability of runs in which \(v_A\neq\)CHEATING, and let \(U_{n,i_B}\) be the probability distribution for <span class="equation" data-equation="u_x">\(u_B\)</span> when restricted to such runs and with \(i_B\) being an input for B. If \(d_n\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in\Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following constraints of Validity and Privacy.
+							If A follows the protocol, but B may cheat and execute some \(M_B'\), then let \(d_n\) be the probability of runs in which \(v_A\neq\)CHEATING, and let \(U_{n,i_B}\) be the probability distribution for <span class="equation" data-equation="u_x">\(u_B\)</span> when restricted to such runs and with \(i_B\) being an input for B. If \(d_n\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in\Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following constraints of Validity and Privacy.
 						</p>
 						<span class="rp_sub_header">Validity</span>
 						<p class="rp_original rp_sub">
 							With probability \(d_n-o\)(poly-small), <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A')\) and \(w_A'=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor.
 						</p>
+						<p class="rp_annotation">
+							Only negligibly often can B both cheat undetectedly and change Alice's output.
+						</p>
 						<span class="rp_sub_header">Privacy</span>
 						<p class="rp_original rp_sub">
 							<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\;\)<span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the stochastic process of being given the value of <span class="equation" data-equation="u_x">\(u_B\)</span> distributed according to \(U_{n,i_B}\).
+						</p>
+						<p class="rp_annotation">
+							In other words, cheating undetectedly does not allow B to learn anything more than he would have by using a trusted party.
 						</p>
 						<p class="rp_original">
 							As in Model I, let \(G\) denote a probabilistic polynomial-time <span class="definable">Turing machine</span> that takes \(i_B\) as input and outputs \(z\); let \(\beta_n(G)\) denote the probability that \(z=g_n(i_A,i_B)\).
@@ -550,7 +562,7 @@
 							for some G.
 						</p>
 						<p class="rp_annotation">
-							We can make a recovery algorithm good enough that the probability of B getting \(g_n\) but our recovery algorithm not working is negligible, unless B just guessed by using \(G\).
+							We can make a recovery algorithm good enough that the probability of B getting \(g_n\), but our recovery algorithm not working, is negligible, unless B just guessed by using \(G\).
 						</p>
 						<p class="rp_original">
 							When B follows the protocol and A may cheat, we have a set of requirements obtained from the above ones by switching the roles of A and B.
