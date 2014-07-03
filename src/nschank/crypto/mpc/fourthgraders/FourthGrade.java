@@ -7,8 +7,8 @@ import nschank.crypto.player.Participant;
 import nschank.crypto.protocol.Protocol;
 import nschank.crypto.protocol.instruct.Instruction;
 import nschank.crypto.protocol.instruct.Instructions;
-import nschank.crypto.scheme.Scheme;
-import nschank.crypto.scheme.Schemes;
+import nschank.crypto.scheme.EncryptionScheme;
+import nschank.crypto.scheme.RSAScheme;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -19,6 +19,9 @@ import java.util.*;
  * Created on 30 Jun 2014
  * Last updated on 30 Jun 2014
  *
+ * A Protocol which allows any set of Participants to determine whether or not their crush is "requited." Two participants
+ * have requited crushes only if they both have the other's name as the value of their "crush" variable.
+ *
  * @author nschank, Brown University
  * @version 1.1
  */
@@ -27,6 +30,14 @@ public class FourthGrade implements Protocol
 	private final int k;
 	private final Set<Participant> participants;
 
+	/**
+	 * Teaches the participants given how to play the fourth grade protocol.
+	 *
+	 * @param k
+	 * 		The security parameter
+	 * @param participants
+	 * 		Any group of participants, each of whom has a "crush" value which is another participant's name (not their own)
+	 */
 	public FourthGrade(final int k, Participant... participants)
 	{
 		this.k = k;
@@ -41,6 +52,14 @@ public class FourthGrade implements Protocol
 		}
 	}
 
+	/**
+	 * Runs the fourth grade protocol with 40 participants, each with a random crush.
+	 *
+	 * @param args
+	 * 		Unused
+	 *
+	 * @throws InterruptedException
+	 */
 	public static void main(String[] args) throws InterruptedException
 	{
 		int index = 40;
@@ -56,7 +75,7 @@ public class FourthGrade implements Protocol
 			t[i] = new Thread(p[i]);
 		}
 
-		Protocol pr = new FourthGrade(10, p);
+		Protocol pr = new FourthGrade(128, p);
 		for(Thread a : t)
 			a.start();
 		for(Thread a : t)
@@ -71,6 +90,15 @@ public class FourthGrade implements Protocol
 		}
 	}
 
+	/**
+	 * Creates an array which contains the value "crush", and the names of every participant followed by a colon and the
+	 * value arg. (e.g. "annie:arg")
+	 *
+	 * @param except
+	 * 		The Participant who is expecting the values
+	 * @param arg
+	 * 		Any variable name
+	 */
 	private String[] allValues(final Participant except, final String arg)
 	{
 		String[] all = new String[this.participants.size()];
@@ -81,6 +109,18 @@ public class FourthGrade implements Protocol
 		return all;
 	}
 
+	/**
+	 * Broadcasts the variable of name {@literal name:broadcastName} to everyone in the protocol except {@code except}
+	 *
+	 * @param except
+	 * 		The Participant broadcasting
+	 * @param protocol
+	 * 		The broadcasting Participant's protocol
+	 * @param broadcastName
+	 * 		The name of the variable being broadcast
+	 * @param description
+	 * 		A description of broadcasting this value by this Participant
+	 */
 	private void broadcast(final Participant except, final List<Instruction> protocol, final String broadcastName,
 						   final String description)
 	{
@@ -121,83 +161,95 @@ public class FourthGrade implements Protocol
 		return this.participants;
 	}
 
+	/**
+	 * Creates a protocol for a given Participant
+	 *
+	 * @param p
+	 * 		Any "fourth grader"
+	 *
+	 * @return The List of Instructions for this {@code p} to follow
+	 */
 	private Iterable<Instruction> protocol(final Participant p)
 	{
 		List<Instruction> protocol = new ArrayList<>();
 
 		protocol.add(Instructions.createFrom("security parameter", "choose a security parameter", (i, r) -> this.k));
-		protocol.add(Instructions.createFrom("public scheme",
-											 "create an encryption and decryption scheme (type Scheme)",
-											 (a, b) -> Schemes.RSA(b, 3 * (int) a.get("security parameter")),
-											 "security parameter"));
+		protocol.add(Instructions
+				.createFrom("public scheme", "create an encryption and decryption scheme (type Scheme)",
+						(a, b) -> new RSAScheme(3 * (int) a.get("security parameter"), b), "security parameter"));
 		protocol.add(Instructions.createFrom(p.getName() + ":pk", "specify the encryption function of scheme",
-											 (i, r) -> (((Scheme<BigInteger, BigInteger>) i.get("public scheme"))
-													 .publicKey()), "public scheme"));
+				(i, r) -> (((EncryptionScheme<BigInteger, BigInteger>) i.get("public scheme")).publicKey()),
+				"public scheme"));
 		protocol.add(Instructions.createFrom("sk", "specify the decryption function",
-											 (i, r) -> ((Scheme<BigInteger, BigInteger>) i.get("public scheme"))
-													 .privateKey(), "public scheme"));
+				(i, r) -> ((EncryptionScheme<BigInteger, BigInteger>) i.get("public scheme")).privateKey(),
+				"public scheme"));
 
 		broadcast(p, protocol, "pk", p.getName() + " broadcasts a public key");
 
-		protocol.add(Instructions.createFrom("private scheme",
-											 "create an encryption and decryption scheme (type Scheme)",
-											 (a, b) -> Schemes.RSA(b, (int) a.get("security parameter")),
-											 "security parameter"));
+		protocol.add(Instructions
+				.createFrom("private scheme", "create an encryption and decryption scheme (type Scheme)",
+						(a, b) -> new RSAScheme((int) a.get("security parameter"), b), "security parameter"));
 		protocol.add(Instructions.createFrom("pik", "specify the encryption function of scheme",
-											 (i, r) -> (((Scheme<BigInteger, BigInteger>) i.get("private scheme"))
-													 .publicKey()), "private scheme"));
+				(i, r) -> (((EncryptionScheme<BigInteger, BigInteger>) i.get("private scheme")).publicKey()),
+				"private scheme"));
 		protocol.add(Instructions.createFrom("sigmak", "specify the decryption function",
-											 (i, r) -> ((Scheme<BigInteger, BigInteger>) i.get("private scheme"))
-													 .privateKey(), "private scheme"));
+				(i, r) -> ((EncryptionScheme<BigInteger, BigInteger>) i.get("private scheme")).privateKey(),
+				"private scheme"));
 
-		protocol.add(Instructions.createFrom("crushpk", "looks at crushes public key", (i, r) -> i.get(i.get("crush")
-																											   .toString()
-																											   + ":pk"),
-											 allValues(p, "pk")));
-		protocol.add(Instructions.createFrom(p.getName() + ":c",
-											 "calculates the encryption of pik under crushes public key",
-											 (i, r) -> Schemes.encryptRSA(i.get("crushpk").toString(), 3 * (int) i.get(
-													 "security parameter")).apply(new BigInteger(i.get("pik")
-																										 .toString(),
-																								 2)), "crushpk",
-											 "security parameter", "pik"));
+		protocol.add(Instructions.createFrom("crushpk", "looks at crushes public key",
+				(i, r) -> i.get(i.get("crush").toString() + ":pk"), allValues(p, "pk")));
+		protocol.add(Instructions
+				.createFrom(p.getName() + ":c", "calculates the encryption of pik under crushes public key",
+						(i, r) -> RSAScheme.encrypt(3 * (int) i.get("security parameter"), i.get("crushpk").toString(),
+								new BigInteger(i.get("pik").toString(), 2)), "crushpk", "security parameter", "pik"));
 		broadcast(p, protocol, "c", p.getName() + " broadcasts c");
-		protocol.add(Instructions.createFrom("crushc", "looks at crushes c", (i, r) -> i.get(i.get("crush").toString()
-																									 + ":c"), allValues(
-													 p, "c")));
+		protocol.add(Instructions
+				.createFrom("crushc", "looks at crushes c", (i, r) -> i.get(i.get("crush").toString() + ":c"),
+						allValues(p, "c")));
 		protocol.add(Instructions.createFrom(p.getName() + ":r", "creates a random confirmation value",
-											 (i, r) -> BigInteger.probablePrime((int) i.get("security parameter") / 2,
-																				r), "security parameter"));
+				(i, r) -> BigInteger.probablePrime((int) i.get("security parameter") / 2, r), "security parameter"));
 		broadcast(p, protocol, "r", p.getName() + " broadcasts r");
-		protocol.add(Instructions.createFrom("crushr", "looks at crushes r", (i, r) -> i.get(i.get("crush").toString()
-																									 + ":r"), allValues(
-				p, "r")));
-		protocol.add(Instructions.createFrom("delta", "decryption of crushc under sk", (i, r) -> Schemes.decryptRSA(
-													 i.get("sk").toString(), 3 * (int) i.get("security parameter"))
-													 .apply((BigInteger) i.get("crushc")).toString(2),
-											 "security parameter", "sk", "crushc"));
-		protocol.add(Instructions.createFrom(p.getName() + ":x", "encryption of crushr under delta",
-											 (i, r) -> Schemes.encryptRSA(i.get("delta").toString(), (int) i.get(
-													 "security parameter")).apply((BigInteger) i.get("crushr"))
-													 .toString(2), "security parameter", "delta", "crushr"));
+		protocol.add(Instructions
+				.createFrom("crushr", "looks at crushes r", (i, r) -> i.get(i.get("crush").toString() + ":r"),
+						allValues(p, "r")));
+		protocol.add(Instructions.createFrom("delta", "decryption of crushc under sk", (i, r) -> RSAScheme
+				.decrypt(3 * (int) i.get("security parameter"), i.get("sk").toString(), (BigInteger) i.get("crushc"))
+				.toString(2), "security parameter", "sk", "crushc"));
+		protocol.add(Instructions.createFrom(p.getName() + ":x", "encryption of crushr under delta", (i, r) -> RSAScheme
+				.encrypt((int) i.get("security parameter"), i.get("delta").toString(), (BigInteger) i.get("crushr"))
+				.toString(2), "security parameter", "delta", "crushr"));
 		broadcast(p, protocol, "x", p.getName() + " broadcasts x");
-		protocol.add(Instructions.createFrom("crushx", "looks at crushes x", (i, r) -> i.get(i.get("crush").toString()
-																									 + ":x"), allValues(
-				p, "x")));
-		protocol.add(Instructions.createFrom("s", "decryption of crushx under sigmak", (i, r) -> Schemes.decryptRSA(
-													 i.get("sigmak").toString(), (int) i.get("security parameter"))
-													 .apply(new BigInteger(i.get("crushx").toString(), 2)), "crushx",
-											 "sigmak", "security parameter"));
-		protocol.add(Instructions.createFrom("output", "s = r", (i, r) -> i.get(p.getName() + ":r").equals(i.get("s")),
-											 "s", p.getName() + ":r"));
+		protocol.add(Instructions
+				.createFrom("crushx", "looks at crushes x", (i, r) -> i.get(i.get("crush").toString() + ":x"),
+						allValues(p, "x")));
+		protocol.add(Instructions.createFrom("s", "decryption of crushx under sigmak", (i, r) -> RSAScheme
+				.decrypt((int) i.get("security parameter"), i.get("sigmak").toString(),
+						new BigInteger(i.get("crushx").toString(), 2)), "crushx", "sigmak", "security parameter"));
+		protocol.add(Instructions
+				.createFrom("output", "s = r", (i, r) -> i.get(p.getName() + ":r").equals(i.get("s")), "s",
+						p.getName() + ":r"));
 
 		return protocol;
 	}
 
+	/**
+	 * A "Fourth Grader" - that is, someone who participates in this Protocol
+	 */
 	public static class FourthGrader extends AbstractParticipant
 	{
 		private String name;
 
+		/**
+		 * Creates a Participant with the value of {@code crushname} as their crush. The name of this participant is
+		 * {@code name} (and therefore anyone with a crush on this Participant must have {@code name} as their {@code crushname}.
+		 *
+		 * @param h
+		 * 		The History for this Participant to contribute to
+		 * @param crushname
+		 * 		The name of this Participant's crush
+		 * @param name
+		 * 		This Participant's name
+		 */
 		public FourthGrader(History h, String crushname, String name)
 		{
 			super(h);

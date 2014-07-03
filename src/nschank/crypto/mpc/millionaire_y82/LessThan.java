@@ -7,8 +7,8 @@ import nschank.crypto.player.Participant;
 import nschank.crypto.protocol.Protocol;
 import nschank.crypto.protocol.instruct.Instruction;
 import nschank.crypto.protocol.instruct.Instructions;
-import nschank.crypto.scheme.Scheme;
-import nschank.crypto.scheme.Schemes;
+import nschank.crypto.scheme.EncryptionScheme;
+import nschank.crypto.scheme.RSAScheme;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -34,7 +34,8 @@ public class LessThan implements Protocol
 	private final Set<Participant> participants;
 
 	/**
-	 * Tells Alice and Bob how to participate in this {@code Protocol}
+	 * Tells Alice and Bob how to participate in this {@code Protocol}. After running the Protocol, Alice and Bob
+	 * will both have their {@literal output}s set to the boolean value of i<j.
 	 *
 	 * @param alice
 	 * 		A party with value {@literal i} between 1 and 255
@@ -143,28 +144,25 @@ public class LessThan implements Protocol
 		protocol.add(Instructions.createFrom("security parameter", "choose a security parameter", (i, r) -> this.k));
 		protocol.add(Instructions.rename("i", "choose a number between 1 and 127 (type byte)", "input"));
 		protocol.add(Instructions.createFrom("scheme", "create an encryption and decryption scheme (type Scheme)",
-											 (a, b) -> Schemes.RSA(b, (int) a.get("security parameter")),
-											 "security parameter"));
-		protocol.add(Instructions.createFrom("Ea", "specify the encryption function of scheme", (i,
-																								 r) -> (Function<BigInteger, BigInteger>) (((Scheme<BigInteger, BigInteger>) i
-				.get("scheme"))::encrypt), "scheme"));
-		protocol.add(Instructions.createFrom("Da", "specify the decryption function", (i,
-																					   r) -> (Function<BigInteger, BigInteger>) (((Scheme<BigInteger, BigInteger>) i
-				.get("scheme"))::decrypt), "scheme"));
+				(a, b) -> new RSAScheme((int) a.get("security parameter"), b), "security parameter"));
+		protocol.add(Instructions.createFrom("Ea", "specify the encryption function of scheme",
+				(i, r) -> (Function<BigInteger, BigInteger>) (((EncryptionScheme<BigInteger, BigInteger>) i
+						.get("scheme"))::encrypt), "scheme"));
+		protocol.add(Instructions.createFrom("Da", "specify the decryption function",
+				(i, r) -> (Function<BigInteger, BigInteger>) (((EncryptionScheme<BigInteger, BigInteger>) i
+						.get("scheme"))::decrypt), "scheme"));
 		protocol.add(Instructions.send("Ea", "send the encryption function to the other participant", alice, bob));
-		protocol.add(Instructions.createFrom("yu",
-											 "calculate the values Da(k-j+u) for u=1...127 (type List<BigInteger>)",
-											 (i, r) -> {
-												 final List<BigInteger> b = new ArrayList<>();
-												 final BigInteger kj1 = (BigInteger) i.get("k-j+1");
-												 final Function<BigInteger, BigInteger> Da
-														 = (Function<BigInteger, BigInteger>) i.get("Da");
-												 for(int u = 1; u <= 127; u++)
-													 b.add(Da.apply(kj1.add(BigInteger.valueOf(u - 1))));
-												 return b;
-											 }, "k-j+1", "Da"));
-		protocol.add(Instructions.createFrom("p", "create a prime of length N/2", (i, r) -> BigInteger.probablePrime(
-				((int) i.get("security parameter")) / 2, r), "security parameter"));
+		protocol.add(Instructions
+				.createFrom("yu", "calculate the values Da(k-j+u) for u=1...127 (type List<BigInteger>)", (i, r) -> {
+							final List<BigInteger> b = new ArrayList<>();
+							final BigInteger kj1 = (BigInteger) i.get("k-j+1");
+							final Function<BigInteger, BigInteger> Da = (Function<BigInteger, BigInteger>) i.get("Da");
+							for(int u = 1; u <= 127; u++)
+								b.add(Da.apply(kj1.add(BigInteger.valueOf(u - 1))));
+							return b;
+						}, "k-j+1", "Da"));
+		protocol.add(Instructions.createFrom("p", "create a prime of length N/2",
+				(i, r) -> BigInteger.probablePrime(((int) i.get("security parameter")) / 2, r), "security parameter"));
 		protocol.add(Instructions.createFrom("zu", "calculate zu = yu mod p, plus 1 if u > i", (i, r) -> {
 			final List<BigInteger> yu = (List<BigInteger>) i.get("yu");
 			final BigInteger p = (BigInteger) i.get("p");
@@ -181,8 +179,8 @@ public class LessThan implements Protocol
 
 		protocol.add(Instructions.send("p", "send p to Bob", alice, bob));
 		protocol.add(Instructions.send("zu", "send zu to Bob", alice, bob));
-		protocol.add(Instructions.createFrom("output", "receive output from Bob", (i, r) -> (boolean) i.get("i<j"),
-											 "i<j"));
+		protocol.add(
+				Instructions.createFrom("output", "receive output from Bob", (i, r) -> (boolean) i.get("i<j"), "i<j"));
 
 		return protocol;
 	}
@@ -202,21 +200,20 @@ public class LessThan implements Protocol
 		protocol.add(Instructions.createFrom("security parameter", "choose a security parameter", (i, r) -> this.k));
 		protocol.add(Instructions.rename("j", "choose a number between 1 and 127 (type byte)", "input"));
 		protocol.add(Instructions.createFrom("x", "choose a random N-bit prime (type BigInteger)",
-											 (i, r) -> BigInteger.probablePrime((int) i.get("security parameter") - 1,
-																				r), "security parameter"));
+				(i, r) -> BigInteger.probablePrime((int) i.get("security parameter") - 1, r), "security parameter"));
 		protocol.add(Instructions.createFrom("k", "calculate the encryption of x under Ea", (i, r) -> {
 			final Function<BigInteger, BigInteger> Ea = (Function<BigInteger, BigInteger>) i.get("Ea");
 			return Ea.apply((BigInteger) i.get("x"));
 		}, "Ea", "x"));
-		protocol.add(Instructions.createFrom("k-j+1", "calculate k-j+1", (i, r) -> ((BigInteger) i.get("k")).add(
-													 BigInteger.ONE).subtract(BigInteger.valueOf((byte) i.get("j"))),
-											 "k", "j"));
+		protocol.add(Instructions.createFrom("k-j+1", "calculate k-j+1",
+				(i, r) -> ((BigInteger) i.get("k")).add(BigInteger.ONE).subtract(BigInteger.valueOf((byte) i.get("j"))),
+				"k", "j"));
 		protocol.add(Instructions.send("k-j+1", "sending Alice k-j+1", bob, alice));
-		protocol.add(Instructions.createFrom("xmodp", "calculate x mod p", (i, r) -> ((BigInteger) i.get("x")).mod(
-				(BigInteger) i.get("p")), "x", "p"));
-		protocol.add(Instructions.createFrom("i<j", "check x mod p = z_j", (i, r) -> ((List<BigInteger>) i.get("zu"))
-													 .get((byte) i.get("j") - 1).equals((BigInteger) i.get("xmodp")),
-											 "zu", "j", "xmodp"));
+		protocol.add(Instructions.createFrom("xmodp", "calculate x mod p",
+				(i, r) -> ((BigInteger) i.get("x")).mod((BigInteger) i.get("p")), "x", "p"));
+		protocol.add(Instructions.createFrom("i<j", "check x mod p = z_j",
+				(i, r) -> ((List<BigInteger>) i.get("zu")).get((byte) i.get("j") - 1)
+						.equals((BigInteger) i.get("xmodp")), "zu", "j", "xmodp"));
 		protocol.add(Instructions.send("i<j", "sending Alice answer", bob, alice));
 		protocol.add(Instructions.createFrom("output", "final answer", (i, r) -> (boolean) i.get("i<j"), "i<j"));
 		return protocol;

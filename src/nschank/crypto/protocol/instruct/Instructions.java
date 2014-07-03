@@ -2,6 +2,7 @@ package nschank.crypto.protocol.instruct;
 
 import nschank.crypto.player.Participant;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -29,13 +30,27 @@ public final class Instructions
 		//Utility class
 	}
 
+	/**
+	 * Creates an Instruction which creates a variable named {@code name} by doing whatever is described in
+	 * {@code description}. The function {@code creator} performs the actions required using the created Instruction
+	 * and that Instruction's {@code Random} as inputs.
+	 * @param name
+	 * 		The name of the created variable
+	 * @param description
+	 * 		The description of the action performed by this {@code Instruction}
+	 * @param creator
+	 * 		The action to be performed by this {@code Instruction}. The {@code Instruction} and its random are the inputs
+	 * 		to the function; the output is assigned to the variable {@code name}.
+	 * @param arguments
+	 * 		A list of all variable names required by this {@code Instruction}
+	 * @return An Instruction built from these inputs.
+	 */
 	public static Instruction createFrom(final String name, final String description,
 										 final BiFunction<Instruction, Random, Object> creator,
 										 final String... arguments)
 	{
 		final Set<String> required = new HashSet<>();
-		for(String arg : arguments)
-			required.add(arg);
+		Collections.addAll(required, arguments);
 		return new AbstractInstruction(required, name, description)
 		{
 			@Override
@@ -46,6 +61,16 @@ public final class Instructions
 		};
 	}
 
+	/**
+	 * An Instruction that assigns the value currently at {@code fromname} to the name {@code newname}.
+	 * @param newname
+	 * 		The new name for a variable
+	 * @param description
+	 * 		The description of the action performed by this {@code Instruction}
+	 * @param fromname
+	 * 		An existing variable whose value needs to be reused somehow
+	 * @return An Instruction built from these inputs
+	 */
 	public static Instruction rename(final String newname, final String description, final String fromname)
 	{
 		final Set<String> required = new HashSet<>();
@@ -60,6 +85,20 @@ public final class Instructions
 		};
 	}
 
+	/**
+	 * An Instruction which sends the value at the variable named {@code tosend} from the Participant {@code from} to the
+	 * Participant {@code to}.
+	 * @param tosend
+	 * 		The name of a variable to send
+	 * @param description
+	 * 		The description of the action performed by this {@code Instruction}
+	 * @param from
+	 * 		The Participant sending this value. Should possess a variable named {@code tosend}
+	 * @param to
+	 * 		The Participant expecting this value. Will possess a variable named {@code tosend} after this Instruction
+	 * 		is run.
+	 * @return An Instruction built from these inputs.
+	 */
 	public static Instruction send(final String tosend, final String description, final Participant from,
 								   final Participant to)
 	{
@@ -70,8 +109,7 @@ public final class Instructions
 			@Override
 			public Object call() throws Exception
 			{
-				while(!to.provide(tosend, this.get(tosend), from)) ;
-				return true;
+				return to.provide(tosend, this.get(tosend), from);
 			}
 		};
 	}

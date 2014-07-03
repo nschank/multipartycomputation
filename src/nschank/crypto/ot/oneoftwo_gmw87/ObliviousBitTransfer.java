@@ -7,8 +7,8 @@ import nschank.crypto.player.Participant;
 import nschank.crypto.protocol.Protocol;
 import nschank.crypto.protocol.instruct.Instruction;
 import nschank.crypto.protocol.instruct.Instructions;
-import nschank.crypto.scheme.Scheme;
-import nschank.crypto.scheme.Schemes;
+import nschank.crypto.scheme.EncryptionScheme;
+import nschank.crypto.scheme.RSAScheme;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -32,7 +32,16 @@ public class ObliviousBitTransfer implements Protocol
 	private final Set<Participant> participants;
 
 	/**
-	 * Implements a Protocol for exchanging a bit obliviously
+	 * Implements a Protocol for exchanging a bit obliviously. The sender should know "b0" and "b1" (both true or false),
+	 * while the receiver should know "alpha" (true or false). The receiver's "output" will be equal to b0 (alpha=false)
+	 * or b1 (alpha=true).
+	 *
+	 * @param k
+	 * 		The security parameter to use within the encryption scheme used
+	 * @param receiver
+	 * 		A Participant knowing the value to variable "alpha"
+	 * @param sender
+	 * 		A Participant knowing the values "b0" and "b1"
 	 */
 	public ObliviousBitTransfer(final Participant sender, final Participant receiver, final int k)
 	{
@@ -76,23 +85,34 @@ public class ObliviousBitTransfer implements Protocol
 			System.out.println(event);
 	}
 
+	/**
+	 * @return A set containing the receiver and the sender
+	 */
 	@Override
 	public Set<Participant> getParticipants()
 	{
 		return Collections.unmodifiableSet(this.participants);
 	}
 
+	/**
+	 * Gets the Instructions meant for the receiver
+	 *
+	 * @param sender
+	 * 		The Participant who is sending the bits
+	 * @param receiver
+	 * 		A Participant knowing the value to variable "alpha"
+	 *
+	 * @return A set of Instructions for {@code receiver} to follow
+	 */
 	private Iterable<Instruction> getReceiver(final Participant sender, final Participant receiver)
 	{
 		List<Instruction> protocol = new ArrayList<>();
 
 		protocol.add(Instructions.createFrom("security parameter", "choose a security parameter", (i, r) -> this.k));
 		protocol.add(Instructions.createFrom("r0", "choose a random value in the encryption domain",
-											 (i, r) -> BigInteger.probablePrime((int) i.get("security parameter") - 1,
-																				r), "security parameter"));
+				(i, r) -> BigInteger.probablePrime((int) i.get("security parameter") - 1, r), "security parameter"));
 		protocol.add(Instructions.createFrom("r1", "choose a random value in the encryption domain",
-											 (i, r) -> BigInteger.probablePrime((int) i.get("security parameter") - 1,
-																				r), "security parameter"));
+				(i, r) -> BigInteger.probablePrime((int) i.get("security parameter") - 1, r), "security parameter"));
 		protocol.add(Instructions.createFrom("u", "if alpha=false, Ea(r0); if alpha=true, r0", (i, r) -> {
 			Function<BigInteger, BigInteger> Ea = ((Function<BigInteger, BigInteger>) i.get("Ea"));
 			BigInteger r0 = (BigInteger) i.get("r0");
@@ -130,6 +150,12 @@ public class ObliviousBitTransfer implements Protocol
 		return protocol;
 	}
 
+	/**
+	 * @param sender
+	 * 		The Participant who is sending the bits
+	 *
+	 * @return A mapping from the sender to the values Ea, Bf, d0, and d1
+	 */
 	private Map<Participant, Collection<String>> getReceiverExpects(final Participant sender)
 	{
 		final Map<Participant, Collection<String>> expects = new HashMap<>();
@@ -143,24 +169,33 @@ public class ObliviousBitTransfer implements Protocol
 		return expects;
 	}
 
+	/**
+	 * Gets the Instructions meant for the sender
+	 *
+	 * @param sender
+	 * 		The Participant who is sending the bits
+	 * @param receiver
+	 * 		A Participant knowing the value to variable "alpha"
+	 *
+	 * @return A set of Instructions for {@code sender} to follow
+	 */
 	private Iterable<Instruction> getSender(final Participant sender, final Participant receiver)
 	{
 		List<Instruction> protocol = new ArrayList<>();
 
 		protocol.add(Instructions.createFrom("security parameter", "choose a security parameter", (i, r) -> this.k));
 		protocol.add(Instructions.createFrom("scheme", "create an encryption and decryption scheme (type Scheme)",
-											 (a, b) -> Schemes.RSA(b, (int) a.get("security parameter")),
-											 "security parameter"));
-		protocol.add(Instructions.createFrom("Ea", "specify the encryption function of scheme", (i,
-																								 r) -> (Function<BigInteger, BigInteger>) (((Scheme<BigInteger, BigInteger>) i
-				.get("scheme"))::encrypt), "scheme"));
+				(a, b) -> new RSAScheme((int) a.get("security parameter"), b), "security parameter"));
+		protocol.add(Instructions.createFrom("Ea", "specify the encryption function of scheme",
+				(i, r) -> (Function<BigInteger, BigInteger>) (((EncryptionScheme<BigInteger, BigInteger>) i
+						.get("scheme"))::encrypt), "scheme"));
 		protocol.add(Instructions.send("Ea", "send receiver the encryption function", sender, receiver));
-		protocol.add(Instructions.createFrom("Da", "specify the decryption function", (i,
-																					   r) -> (Function<BigInteger, BigInteger>) (((Scheme<BigInteger, BigInteger>) i
-				.get("scheme"))::decrypt), "scheme"));
-		protocol.add(Instructions.createFrom("Bf", "specify the hardcore predicate", (i,
-																					  r) -> (Function<BigInteger, Boolean>) (((Scheme<BigInteger, BigInteger>) i
-				.get("scheme"))::hardcoreBit), "scheme"));
+		protocol.add(Instructions.createFrom("Da", "specify the decryption function",
+				(i, r) -> (Function<BigInteger, BigInteger>) (((EncryptionScheme<BigInteger, BigInteger>) i
+						.get("scheme"))::decrypt), "scheme"));
+		protocol.add(Instructions.createFrom("Bf", "specify the hardcore predicate",
+				(i, r) -> (Function<BigInteger, Boolean>) (((EncryptionScheme<BigInteger, BigInteger>) i
+						.get("scheme"))::hardcoreBit), "scheme"));
 		protocol.add(Instructions.send("Bf", "send receiver the hardcore predicate", sender, receiver));
 
 		protocol.add(Instructions.createFrom("c0", "c0=Bf(Da(u))", (i, r) -> {
@@ -173,10 +208,10 @@ public class ObliviousBitTransfer implements Protocol
 			Function<BigInteger, Boolean> Bf = (Function<BigInteger, Boolean>) i.get("Bf");
 			return Bf.apply(Da.apply((BigInteger) i.get("v")));
 		}, "v", "Da", "Bf"));
-		protocol.add(Instructions.createFrom("d0", "d0 = c0 XOR b0", (i, r) -> !(i.get("c0")).equals(i.get("b0")), "c0",
-											 "b0"));
-		protocol.add(Instructions.createFrom("d1", "d1 = c1 XOR b1", (i, r) -> !(i.get("c1")).equals(i.get("b1")), "c1",
-											 "b1"));
+		protocol.add(Instructions
+				.createFrom("d0", "d0 = c0 XOR b0", (i, r) -> !(i.get("c0")).equals(i.get("b0")), "c0", "b0"));
+		protocol.add(Instructions
+				.createFrom("d1", "d1 = c1 XOR b1", (i, r) -> !(i.get("c1")).equals(i.get("b1")), "c1", "b1"));
 		protocol.add(Instructions.send("d0", "send receiver d0", sender, receiver));
 		protocol.add(Instructions.send("d1", "send receiver d1", sender, receiver));
 
@@ -184,6 +219,12 @@ public class ObliviousBitTransfer implements Protocol
 		return protocol;
 	}
 
+	/**
+	 * @param receiver
+	 * 		The Participant who knows the value "alpha"
+	 *
+	 * @return A mapping from the sender to the values u and v
+	 */
 	private Map<Participant, Collection<String>> getSenderExpects(final Participant receiver)
 	{
 		final Map<Participant, Collection<String>> expects = new HashMap<>();
@@ -197,10 +238,19 @@ public class ObliviousBitTransfer implements Protocol
 	}
 
 	/**
-	 * A Participant for the LessThan protocol. The byte i is set to the valueName "input"
+	 * A Participant meant to receive a bit using OBT. The given alpha is set to the variable "alpha". Has the name
+	 * "Receiver"
 	 */
 	public static class OBTReceiver extends AbstractParticipant
 	{
+		/**
+		 * Creates a Participant meant to receive a bit.
+		 *
+		 * @param h
+		 * 		The History for the Participant to record to
+		 * @param alpha
+		 * 		Which bit the Participant wants
+		 */
 		public OBTReceiver(History h, boolean alpha)
 		{
 			super(h);
@@ -215,10 +265,21 @@ public class ObliviousBitTransfer implements Protocol
 	}
 
 	/**
-	 * A Participant for the LessThan protocol. The byte i is set to the valueName "input"
+	 * A Participant meant to send a bit using OBT. The given b0,b1 are set to the variables "b0" and "b1". Has the name
+	 * "Sender"
 	 */
 	public static class OBTSender extends AbstractParticipant
 	{
+		/**
+		 * Creates a Participant meant to send a bit.
+		 *
+		 * @param h
+		 * 		The History for the Participant to record to
+		 * @param b0
+		 * 		The first of the possible bits to send
+		 * @param b1
+		 * 		The second of the possible bits to send
+		 */
 		public OBTSender(History h, boolean b0, boolean b1)
 		{
 			super(h);

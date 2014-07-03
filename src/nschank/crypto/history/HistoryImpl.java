@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Created by Nicolas Schank for package nschank.crypto
  * Created on 26 Jun 2014
- * Last updated on 26 Jun 2014
+ * Last updated on 30 Jun 2014
  *
  * An implementation of the History interface.
  *
