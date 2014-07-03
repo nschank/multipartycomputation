@@ -750,6 +750,57 @@
 							<p class="rp_original">
 								At the end of the straight-line program, for each output variable \(\gamma\), each party publicizes his own piece \((x,\gamma_x)\), the ordered product of these pieces is computed, and the output bit recovered so as to satisfy both the correctness and the privacy constraint. (A more formal argument will be given in the final paper.)
 							</p>
+							<p class="rp_annotation">
+								Before moving on, we should bring up an interesting special case that simplifies the problem significantly. When only dealing with two parties, it becomes much easier to drop the entire 5-permutation concept as being too computationally expensive, and instead dealing with exclusive or's.
+							</p>
+							<p class="rp_annotation">
+								For each of their input bits \(b_i\), both parties (\(P_1\) and \(P_2\)) transmit to the other a random bit \(r_i\), and keep for their own "share" \(r_i\oplus b_i\). As always in Boolean circuits, it suffices to demonstrate how to perform NOT, XOR, and AND.
+							</p>
+							<p class="rp_annotation">
+								NOT gates are trivial: one party flips their own share, and the other party does nothing.
+							</p>
+							<p class="rp_annotation">
+								XOR gates, too, are simple. Since XOR is commutative, the two parties can XOR any two values by both XORing their own shares of those values. If the two parties are XORing \(b_1\) and \(b_2\), where \(P_1\) has shares \(b^1_1, b^1_2\) and \(P_2\) has shares \(b^2_1,b^2_2\), they are attempting to evaluate \(b_1\oplus b_2=(b_1^1\oplus b_1^2)\oplus(b_2^1\oplus b_2^2)=(b_1^1\oplus b_2^1) \oplus (b_1^2\oplus b_2^2)\). Since the two parties wish, at the end, to have one share each that XORs to the correct value, the XORs of their own shares clearly work perfectly.
+							</p>
+							<p class="rp_annotation">
+								AND gates are a tad more complex, since XOR does not distribute. To compute the AND of two bits \(b_1,b_2\) where, as above, party \(P_i\) possesses shares \(b^i_x\) for \(x\in\{1,2\}\), one of the parties (for concreteness, \(P_1\)) computes a truth table for the output bit \(b_3\), using the 4 possible shares of the other party and their own known shares:
+							</p>
+							<table class="rp_annotation rp_truthtable">
+								<tr>
+									<th>\(b^2_0\)</th>
+									<th>\(b^2_1\)</th>
+									<th>\(b_3\)</th>
+								</tr>
+								<tr>
+									<td>0</td>
+									<td>0</td>
+									<td>\(b_3^0\)</td>
+								</tr>
+								<tr>
+									<td>0</td>
+									<td>1</td>
+									<td>\(b_3^1\)</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>0</td>
+									<td>\(b_3^2\)</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>1</td>
+									<td>\(b_3^3\)</td>
+								</tr>
+							</table>
+							<p class="rp_annotation">
+								Having calculated the values of \(b_3^j\) for \(j\in\{0,1,2,3\}\), party 1 chooses a new share of the output \(b_3^1\). The two parties then perform a 1-out-of-4 oblivious transfer (a simple extension of 1-out-of-2 oblivious transfer) in which party 2 receives \(b_3^j\oplus b_3^1\) for the \(j\) appropriate to the two shares in his or her possession.
+							</p>
+							<p class="rp_annotation">
+								Through this process, they can follow a similar process to the 5-permutation, multi-party version, by turning it into a series of easily computable gates. The main difference from simply using one of Yao's garbled circuits is that this process is <i>interactive</i>; this is an advantage and a disadvantage, as it makes it easier to prevent cheating, but takes away so called "constant round complexity".
+							</p>
+							<p class="rp_annotation" data-broken-link=true>
+								There will be a tutorial section on the contrasts between Yao's garbled gate protocol and GMW's interactive construction.
+							</p>
 						</section>
 					</section>
 					<section id="sec5">

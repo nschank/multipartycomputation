@@ -90,3 +90,15 @@ img.rp_original {
 	display:block;
 }
 
+.rp_truthtable {
+	width:25%;
+	border-collapse:collapse;
+}
+
+.rp_truthtable td,th {
+	border:1px solid #555555;
+}
+
+.rp_truthtable th {
+	background-color:#DDDDDD;
+}
