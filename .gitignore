@@ -5,3 +5,4 @@ mpcorg.iml
 *~
 *.txt
 !todo.txt
+out/ 
