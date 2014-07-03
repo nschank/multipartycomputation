@@ -1,8 +1,8 @@
 mpcorg.iml
+out/*
 .idea/*
 /nbproject/
 *.pdf
 *~
 *.txt
 !todo.txt
-out/ 
