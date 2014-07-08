@@ -34,7 +34,7 @@ img.rp_link {
 
 .rp_snippet {
     font-style:italic;
-    margin:10px auto;
+    margin:10px 5%;
     color:#666666;
     float:left;
     width:90%;
@@ -68,12 +68,12 @@ img.rp_link {
 
 .rp_definition, .rp_theorem {
     font-size:110%;
-    margin:0px auto auto auto;
+    margin:0px auto 3px auto;
     width:90%;
 }
 
 .rp_sub {
-	margin:0px auto auto auto;
+	margin:0px auto 3px auto;
 	width:95%;
 }
 
@@ -103,4 +103,8 @@ img.rp_original {
 
 .rp_truthtable th {
 	background-color:#DDDDDD;
+}
+
+li > p {
+	margin-left:0px;
 }

@@ -212,3 +212,7 @@ div.main_toc > ol {
 .main_hidden {
 	display:none;
 }
+
+.main_language {
+	font-variant:small-caps;
+}
