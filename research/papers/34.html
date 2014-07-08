@@ -109,11 +109,14 @@
 							Some goals that they had.
 						</p>
 						<p class="rp_analysis">
-							Don't forget some results, too!
+							This paper, along with a similar one <a href="17.html">the next year</a>, demonstrated the most malicious adversaries possible to thwart within a particular (but very common) framework of multiparty computation. Specifically, the <span class="definable">information theoretic security</span> of <i>any</i> function is demonstrated in an <span class="definable" data-define="authenticated network">authenticated</span> <span class="definable" data-define="secrecy network">secrecy</span> network, with or without a <span class="definable">broadcast channel</span>.
 						</p>
 					</section>
 					<section id="assumptions">
 						<h2>Assumptions</h2>
+						<p class="rp_analysis">
+							The authors are quick to note that information-theoretic security is only offered under the assumption that communication between parties is information-theoretically secure in the first place. As such, we must assume the existence of networks which are <span class="definable" data-define="authenticated network">authenticated</span>, <span class="definable" data-define="secrecy network">secret</span>, and unconditionally secure.
+						</p>
 					</section>
 					<section id="defs">
 						<h2>Definitions</h2>
@@ -207,7 +210,7 @@
 						<section id="sec1.1">
 							<h3>1.1. Results</h3>
 							<p class="rp_original">
-								In this paper, we show that essentially any multiparty protocol problem can be solved under the assumption of the existence of authenticated secrecy channels between pairs of participants and that each party's secrets can be unconditionally secure. As explained below, under such a model it is required that less than one third of the participants deviate from the protocol. The number of cheaters tolerated by our solution is therefore optimal.
+								In this paper, we show that essentially any multiparty protocol problem can be solved under the assumption of the existence of <span class="definable" data-define="authenticated network">authenticated</span> <span class="definable" data-define="secrecy network">secrecy</span> channels between pairs of participants and that each party's secrets can be unconditionally secure. As explained below, under such a model it is required that less than one third of the participants deviate from the protocol. The number of cheaters tolerated by our solution is therefore optimal.
 							</p>
 							<p class="rp_original">
 								The techniques presented do not rely on any cryptographic assumptions; they provide secrecy and correctness by means of a new non-cryptographic verifiable secret sharing (VSS) scheme. These schemes were introduced in the cryptographic setting in <span class="reference" data-citation="4"><a href="#citation4">[4]</a></span>. To this day, all previous solutions relied on public key cryptography. We introduce the first VSS scheme that does not rely on such assumptions. Sections <a href="#sec3">3</a> and <a href="#sec4">4</a> are devoted to the construction of this new scheme and to its application toward achieving our goal.
@@ -244,12 +247,15 @@
 							<p class="rp_original">
 								Some concurrent and independent work<sup class="reference" data-citation="11"><a href="#citation11">[11]</a></sup> has also been performed on this topic: during discussions with Shafi Goldwasser and Avi Wigderson, we learned that, together with Michael Ben-Or, they were working on results similar to ours. At that time, all of us had results in a very early stage. Finally, by the time of submission to this conference, both groups have ended up getting almost identical results by quite different means.
 							</p>
+							<p class="rp_annotation">
+								Ben-Or, Goldwasser, and Wigderson's work can be found <a href="17.html">here</a>.
+							</p>
 						</section>
                     </section>
 					<section id="sec2">
 						<h2>2. The Model</h2>
 						<p class="rp_original">
-							For convenience, the number of participants will be called \(n\), which can always be written as \(n=3d+a\), where \(a=\)1, 2, or 3. Let \(P_1,P_2,\cdots,P_n\) be the participants.
+							For convenience, the number of participants will be called \(n\), which can always be written as \(n=3d+a\), where \(a=\) 1, 2, or 3. Let \(P_1,P_2,\cdots,P_n\) be the participants.
 						</p>
 						<p class="rp_original">
 							Our assumptions about at least \(2d+a\) of the participants are that:
@@ -283,7 +289,7 @@
 					<section id="sec3">
 						<h2>3. Implementing Blobs using Secret Sharing</h2>
 						<p class="rp_original">
-							In <span class="reference" data-citation="13"><a href="#citation13">[13]</a></span>, a fundamental protocol primitive is described: <i>the blob</i>. The purpose of blobs is to allow a participant \(P_A\) to <i><span class="definable" data-define="commitment">commit</span></i> to a bit in such a way that he or she cannot later change his or her mind about the bit, but nobody else can discover it without the participant's help. The defining properties of blocks are as follows:
+							In <span class="reference" data-citation="13"><a href="#citation13">[13]</a></span>, a fundamental protocol primitive is described: <i>the blob</i>. The purpose of blobs is to allow a participant \(P_A\) to <i><span class="definable" data-define="commitment">commit</span></i> to a bit in such a way that he or she cannot later change his or her mind about the bit, but nobody else can discover it without the participant's help. The defining properties of blobs are as follows:
 						</p>
 						<ol type="i">
 							<li>\(P_A\) can obtain blobs representing 1 and blocks representing 0.</li>
@@ -297,17 +303,28 @@
 						<p class="rp_original">
 							For our purposes, the scheme may be described as follows: a polynomial \(f\) of degree at most \(d\) over \(GF(2^k)\) is chosen uniformly, where \(k\) is an integer such that \(2^k&gt;n\). The secret to be shared is defined for convenience as the value of \(f\) at 0. The protocol also assigns a distinct non-zero point \(i_B\) in the field to each participant \(P_B\). The secret can now be divided among the \(n\) participants by providing each \(P_B\) with the value of \(f(i_B)\). It is not hard to see that more than \(d\) shares completely determine \(f\), and therefore the secret, while no Shannon information about the secret is revealed by any number of shares not exceeding \(d\).
 						</p>
+						<p class="rp_annotation">
+							Recall GF(n) to be the Galois field of size \(n\); that is, the <span class="definable">group</span> within \(Zn/Z\) with operations multiplication, addition, subtraction, and (non-zero) division.
+						</p>
 						<p class="rp_original">
 							We generalize slightly by allowing blobs to represent any value in \(GF(2^k)\). Blobs are now readily achieved:
 						</p>
-						<ol type="i">
+						<ol type="i" class="rp_original">
 							<li>
-								To obtain a blob representing the value \(v\), participant \(P_A\) chooses uniformly a polynomial \(f\) with \(def(f)\leq d\), such that \(f(0)=v\). She then calculates \(n\) shares as above and distributes one to each participant. Using the subprotocol described below, she convinces the other participants that she has distributed a consistent set of shares.
+								To obtain a blob representing the value \(v\), participant \(P_A\) chooses uniformly a polynomial \(f\) with \(deg(f)\leq d\), such that \(f(0)=v\). \(P_A\) then calculates \(n\) shares as above and distributes one to each participant. Using the subprotocol described below, the other participants are convinced that a consistent set of shares was distributed.
 							</li>
 							<li>
 								Since the number of unreliable participants is smaller than \(d\), no <span class="definable">collusion</span> will gain any information in the Shannon sense about the value represented by a blob.
 							</li>
-							<li>
+						</ol>
+						<p class="rp_annotation">
+							To convince yourself of this fact, recall that given \((d-1)\) points in a polynomial of degree \(d\), any other (distinct) point in the field produces a different polynomial. Let's begin by fixing the input value to the polynomial of the \(d\)-th share; two distinct shares, therefore, must describe two different polynomials. We will quickly prove that, given \(d-1\) shares, we can create a \(d\)-th share which can make the blob represent any secret \(v\). From there we can deduce that, since each value \(v\) could be represented by these distinct polynomials, and the polynomial was chosen uniformly at random, the probability distribution on \(v\) is constant given any \((d-1)\) shares.
+						</p>
+						<p class="rp_annotation">
+							Assume we have two polynomials \(f_1,\,f_2\) which share the \(d-1\) shares within a collusion, and share the secret \(f_1(0)=f_2(0)=v\). From there, we can show that there is a bijection between secrets \(v\) and the last share used to fully describe the polynomial. First, we prove injectivity. Assume we have two distinct final shares, \((x,y_1),\,(x,y_2)\), so we know that \(f_1(x)=y_1,\,f_2(x)=y_2\). 
+						</p>
+						<ol type="i" class="rp_original">
+							<li value="3">
 								To open a blob, \(P_A\) first broadcasts what its shares should be \((\{i_B\;|\;1\leq B\leq n\})\). Then each participant broadcasts a message stating whether they agree with their share that was broadcast by \(P_A\). If a participant does not agree, he is said to be <i>complaining</i> about \(P_A\). It is required that at least \(2d+a\) of the participants do not complain. By the remarks below, this condition ensures that \(P_A\) can only open a blob to reveal the single value it represents.
 							</li>
 							<li>
@@ -497,3 +514,19 @@
         </div>
     </body>
 </html>
+<!--
+7. Annotate paper
+	7.0. proofread
+	7.1. copy assumptions
+	7.2. copy theorems
+	7.3. copy definitions
+	7.4. mark definitions
+	7.5. mark equations
+	7.6. link to previous research
+8. Write protocol descriptions 
+9. Check previous research for places to link
+10. Write intro, goals, results
+11. Tags
+12. Consider implementations
+13. Find reference
+-->
