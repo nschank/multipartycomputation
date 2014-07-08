@@ -129,7 +129,7 @@
                     <section id="a_intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>How To Generate and Exchange Secrets</b> is a 1986 extended abstract by Yao that is, strangely, well-known for something not written in it. Yao's garbled circuit, one of the two most basic general constructions for creating multiparty computation protocols, was actually first mentioned in an oral presentation given about the paper as an example of how to satisfy the specifications Yao laid out. Ironically, it is in the description of the other construction, the <a href="81.html">GMW method</a>, that we can actually find the first major publication of Yao's garbled circuit method.
+							<b>How To Generate and Exchange Secrets</b> is a 1986 extended abstract by Yao that is, strangely, well-known for something not written in it. Yao's garbled circuit, one of the two most basic general constructions for creating multiparty computation protocols, was actually first mentioned in an oral presentation given about the paper as an example of how to satisfy the specifications Yao laid out. Ironically, it is in the description of the <i>other</i> basic construction, the <a href="81.html">GMW method</a>, that we can actually find the first major publication of Yao's garbled circuit method.
 						</p>
 						<p class="rp_analysis">
 							We give a formal construction of the protocol after the Goals and Results section.
@@ -184,19 +184,13 @@
 							<tr><td>\(s_2\)</td><td>\(s_4\)</td><td>\(E_{s_2}(E_{s_4}(s_6))\)</td></tr>
 						</table>
 						<p class="rp_analysis">
-							\(P_1\) shows \(P_2\) some permutation of the rows, but doesn't show \(P_2\) the keys themselves; that is, \(P_2\) knows the evaluation of (for instance) \(E_{s_1}(E_{s_3}(s_5))\), and knows that it <i>uses</i> \(s_1\) and \(s_3\), but does not know the <i>values</i> of \(s_1\) or \(s_3\). 
-						</p>
-						<p class="rp_analysis">
-							\(P_1\) also tells \(P_2\) the association between \(P_2\)'s bit's value and \(s_3,\,s_4\); so \(P_2\) knows that \(s_3\) corresponds to 0 and \(s_4\) corresponds to 1.
+							\(P_1\) shows \(P_2\) some permutation of the rows, but doesn't show \(P_2\) the keys themselves; that is, \(P_2\) knows the evaluation of (for instance) \(E_{s_1}(E_{s_3}(s_5))\), and knows that it <i>uses</i> \(s_1\) and \(s_3\), but does not know the <i>values</i> of \(s_1\) or \(s_3\). \(P_1\) also tells \(P_2\) the association between \(P_2\)'s bit's value and \(s_3,\,s_4\); so \(P_2\) knows that \(s_3\) corresponds to 0 and \(s_4\) corresponds to 1.
 						</p>
 						<p class="rp_analysis">
 							\(P_1\) sends to \(P_2\) the specific key associated with the value of \(b_1\): \(P_2\) now has one of the two keys necessary to decrypt an output value. In order to get the other key, \(P_2\) performs a one-out-of-two oblivious transfer with \(P_1\), retrieving only the key associated with \(b_2\)'s value.
 						</p>
 						<p class="rp_analysis">
-							\(P_2\) now possesses two keys, and can therefore decrypt the output of one row of the encrypted truth table&mdash;that is, the output of the circuit. \(P_2\) now possesses a key which is directly associated with the output of the gate; depending on how the parties which to continue, one of two things occurs.
-						</p>
-						<p class="rp_analysis">
-							If this output is not going to be used in another gate, \(P_1\) simply tells \(P_2\) the associations between (0,1) and (\(s_5,s_6\)), so \(P_2\) knows how to interpret the output. Otherwise, \(P_1\) can use the two possible output keys as new <i>input</i> keys for another garbled gate, ad infinitum.
+							\(P_2\) now possesses two keys, and can therefore decrypt the output of one row of the encrypted truth table&mdash;that is, the output of the circuit. \(P_2\) now possesses a key which is directly associated with the output of the gate; depending on how the parties which to continue, one of two things occurs. If this output is not going to be used in another gate, \(P_1\) simply tells \(P_2\) the associations between (0,1) and (\(s_5,s_6\)), so \(P_2\) knows how to interpret the output. Otherwise, \(P_1\) can use the two possible output keys as new <i>input</i> keys for another garbled gate, ad infinitum.
 						</p>
 					</section>
 					<section id="a_assumptions">
@@ -215,7 +209,10 @@
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - Recovery Algorithm</span></a>
 						<p class="rp_definition">
-							A <i>recovery algorithm</i> \(R\) for A is a probabilistic polynomial-time algorithm which takes \((n,\Delta_A)\) as input, and outputs a string \(v\).
+							A <i>recovery algorithm</i> \(R\) for A is a probabilistic polynomial-time algorithm which takes \((n,\)<span class="equation" data-equation="delta">\(\Delta_A\)</span>\()\) as input, and outputs a string \(v\).
+						</p>
+						<p class="rp_annotation">
+							An optimal recovery algorithm would produce \(v=\)<span class="equation" data-equation="u_X">\(u_A\)</span>.
 						</p>
 					</section>
 					<section id="a_theorems">
@@ -235,7 +232,7 @@
 						</p>
 						<a href="#theorem4"><span class="rp_theorem_header">Theorem 4</span></a>
 						<p class="rp_original rp_theorem">
-							For any interactive computational problem \(\langle h_n,(f_n,g_n)\rangle\), there exists a minimum knowledge transfer protocol \(M\) that achieves validity and fairness.
+							For any interactive computational problem \(\langle\)<span class="equation" data-equation="h_n">\(h_n\)</span>\(,(f_n,g_n)\rangle\), there exists a minimum knowledge transfer protocol \(M\) that achieves validity and fairness.
 						</p>
 					</section>
 					<section id="a_ref">

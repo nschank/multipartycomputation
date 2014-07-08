@@ -115,10 +115,10 @@
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaires' Problem, and for being the first paper to look into Multiparty Computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) Multiparty Computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
+							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaires' Problem, and for being the first paper to look into multiparty computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) multiparty computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
 						</p>
 						<p class="rp_analysis">
-							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaires' Problem. Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it an excellent case study into secure two-party computation (as can be seen in the <a href="../../learn/ch1.html#sec1">tutorial page</a> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaires' Problem nonetheless remains the most common example of multiparty computation to date.
+							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaires' Problem (and Protocol). Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it an excellent case study into secure two-party computation (as can be seen in the <a href="../../learn/ch1.html#sec1">tutorial page</a> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaires' Problem nonetheless remains the most common example of multiparty computation to date.
 						</p>
 						<p class="rp_analysis">
 							The significance of this particular paper to this field is difficult to overstate. Despite its shortcomings (namely, its lack of proof and its limited direct application), its focus on defining a general problem as opposed to being limited to a specific one ultimately vaulted it into the realm of influence, and most research into multiparty computation which followed it can be framed within the definitions Yao presented here.
@@ -130,11 +130,11 @@
 							Yao's main goal was to lay the groundwork for later research by outlining the framework of a few different basic types of problems, as well as citing a few basic applications. He defined the problem of multiparty computation in terms of:
 						</p>
 						<ul class="rp_analysis">
-							<li><b>The limitations of privacy and security constraints.</b> Yao cited two extreme examples to display the difference. On the extreme privacy side, he gave the Millionaires' Problem as an example, in which it is assumed that no saboteurs are on the line, but in which both parties want the other to learn nothing about their own input. On the extreme security side, he cited any basic encryption/decryption scheme in which a message needs to be sent over an unsecure line from one party to the other. Multiparty Computation protocols can be private, secure, or both, and all in varying degrees.</li>
+							<li><b>The limitations of privacy and security constraints.</b> Yao cited two extreme examples to display the difference. On the extreme privacy side, he gave the Millionaires' Problem as an example, in which it is assumed that no saboteurs are on the line, but in which both parties want the other to learn nothing about their own input. On the extreme security side, he cited any basic encryption/decryption scheme in which a message needs to be sent over an insecure line from one party to the other. Multiparty computation protocols can be private, secure, or both, and all in varying degrees.</li>
 							<li><b>Deterministic vs. probabilistic computation.</b> Yao mentions that both are possible, though the latter is rather obviously more difficult to prove secure, especially if the probability density of the inputs is not constant.</li>
 							<li><b>Number of parties.</b> Yao assumes the two-party case for the majority of the paper, but expands the ideas to any \(m\) parties near his conclusions. The \(m\) party case is generally more difficult to deal with due to <span class="definable" data-define="collusion">collusions</span> that are impossible in the two-party case; however, Yao states that it is possible to create a protocol for any \(m\) parties with any function.</li>
 							<li><b>Trust, cheating, and collusion.</b> Parties may not trust that the other parties are following the protocol correctly, and that must be built into some protocols in order to ensure that the results are still viable. Cheating (as opposed to sabotage, below) may affect correctness, privacy, or both. Collusion is a particular subset of cheating under which multiple cheaters work together. Yao states that any computable function \(f\) can be turned into a protocol with an upper-bounded probability of successful cheating.</li>
-							<li><b>Sabotage and eavesdropping.</b> Parties may not be able to communicate without interference or eavesdropping by outside parties, affecting correctness, security, or both. Yao mentions these as issues to be discussed elsewhere, but implies them to be as possible to overcome as cheating.</li>
+							<li><b>Sabotage and eavesdropping.</b> Parties may not be able to communicate without interference or eavesdropping by outside parties, affecting correctness, security, or both. Yao mentions these as issues to be discussed elsewhere, and in general sabotage from the outside and eavesdropping are dealt with using crytographic primitives from outside multiparty computation.</li>
 						</ul>
 						<p class="rp_analysis">
 							Yao specifically mentions, as an aside, that his theorems prove that <span class="definable">mental poker</span> can be played with any public-key system, a generalization of previous research.
@@ -206,7 +206,7 @@
 						</p>
 						<a href="#theorem3"><span class="rp_theorem_header">Theorem 3</span></a>
 						<p class="rp_original rp_theorem">
-							Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(F_n\) be the family of \(0-1\) valued function
+							Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(F_n\) be the family of 0-1 valued function
                                 \(f(i,j)\) with \(i\) and \(j\) being \(n\)-bit integers. Let \(f\) be a random element of \(F_n\),
 							then any protocol \(A\) that computes \(f\) with <span class="definable" data-define="(e,d)-privacy constraint">\((\epsilon,\delta)\)-privacy constraint</span>
 							must have \(T(A)>2^\frac{n}{2}\) for all large \(n\).
@@ -266,10 +266,9 @@
 						<h3><a href="#sec3.1">Millionaires' Protocol</a></h3>
 						<ul class="rp_analysis">
 							<li><b>Number of parties: </b>2</li>
-							<li><b>Function(s): </b>Comparisons between \(x_0\) and \(x_1\) (i.e. \(&lt;, &gt;, \leq ,\geq\)). Two honest parties will find the same return value.</li>
+							<li><b>Function(s): </b>Comparisons between \(x_0\) and \(x_1\) (i.e. \(&lt;, &gt;, \leq ,\geq\)). Two honest parties will get the same output.</li>
 							<li><b>Privacy constraints: </b><span class="definable" data-define="negligible">Negligible probability</span> that \(P_i\) learns more about \(x_{(1-i)}\) than offered by the computed function.</li>
 							<li><b>Cheating: </b><span class="definable" data-define="malicious adversary">Malicious adversaries</span> can change the outcome of the protocol to a value of their choosing.</li>
-							<li><b>Security constraints: </b>None: an outside attacker could easily affect or learn the outcome of the protocol.</li>
 							<li><b>Subprotocols: </b>A <span class="definable">trapdoor permutation</span> for encryption/decryption. Assumed to run in \(T(N)\) time.</li>
 							<li><b>Bits exchanged: </b>\(O(Nn)\) where \(N\) is the bit-length of \(i\) and \(j\), and \(n\) is their range.</li>
 							<li><b>Runtime:</b> \(O(n+T(N))\), where \(n\) is the range of \(i\) and \(j\)</li>
@@ -1075,7 +1074,7 @@
 
                         <p class="rp_original">
                             Different kinds of exchanging secrets have been considered
-                            previously. Blum <span class="reference" data-citation="6"><a href="#citation6">[6]</a></span> showed that it is possible to
+                            previously. Blum<sup class="reference" data-citation="6"><a href="#citation6">[6]</a></sup> showed that it is possible to
                             exchange factors of large composite numbers (a special
                             type of secrets) with vanishing chance for cheating.
                             Even (private communication, 1981) also devised some

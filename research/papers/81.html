@@ -219,16 +219,13 @@
 								If any <span class="definable">trapdoor function</span> exists, any game is <span class="definable" data-define="purely playable game">playable</span> if more than half of the players are honest.
 							</p>
 					</section>
-					<section id="a_protocol">
+					<section id="a_protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#sec4.1.3">One-Out-of-Two Oblivious Transfer</a></h3>
 						<ul class="rp_analysis">
 							<li><b>Number of parties: </b>2</li>
 							<li><b>Function(s): </b>Alice does not calculate anything; Bob receives his choice of one bit from Alice</li>
 							<li><b>Privacy constraints: </b>Alice does not learn which bit Bob received. Bob does not learn the other bit that Alice has.</li>
-							<li><b>Security constraints: </b>
-								Eavesdroppers on the line cannot learn anything, and saboteurs cannot control the output of the protocol.
-							</li>
 							<li><b>Cheating: </b>Bob is able to determine both bits if he does not follow the protocol. Alice cannot cheat.</li>
 							<li><b>Bits exchanged: </b>\(O(k)\) where \(k\) is the security parameter of their trapdoor permutation.</li>
 							<li><b>Runtime: </b>\(O\left(T(k)\right)=O(poly(k))\) for T(k) being the highest runtime between the trapdoor permutation, its decryption, or the calculation of its <span class="definable">hardcore bit</span> (all of which are polynomial).</li>
@@ -240,7 +237,6 @@
 							<li><b>Number of parties: </b>2</li>
 							<li><b>Function(s): </b>Alice has some function \(g\) with two inputs of size less than \(l\). Alice has input \(a\), Bob has input \(b\). Alice calculates \(g(a,b)\), Bob does not calculate anything.</li>
 							<li><b>Privacy constraints: </b>Alice does not learn anything besides \(g(a,b)\); Bob does not learn \(a\), \(g(a,b)\).</li>
-							<li><b>Security constraints: </b>Eavesdroppers cannot learn anything, and saboteurs cannot control the output of the protocol.</li>
 							<li><b>Cheating: </b>If Bob does not follow the protocol, he can change the outcome of the protocol, but not to his advantage. If Alice does not follow the protocol, she can learn Bob's input and alter the outcome of the protocol but not necessarily to her advantage.</li>
 							<li><b>Subprotocols: </b> One-Out-of-Two Oblivious Transfer, above</li>
 							<li><b>Bits exchanged: </b>\(O(kn)\), where \(k\) is the security parameter, and \(n\) is the number of NAND, AND, or NOT gates required to describe \(g\).</li>
@@ -253,12 +249,11 @@
 							<li><b>Number of parties: </b>\(n\) parties, each with an input \(x_i\) of length \(l\) bits</li>
 							<li><b>Function(s): </b>Any function \(f(x_1,x_2,\dots,x_n)\) which can be expressed in a straight-line program of size \(C(f, l)\).</li>
 							<li><b>Privacy constraints: </b>Passive adversaries can learn nothing. Up to \(\frac n 2\) malicious adversaries can learn nothing.</li>
-							<li><b>Security constraints: </b>Communication was assumed to be secret and authenticated.</li>
 							<li><b>Cheating: </b>As is, malicious adversaries can change the output of the protocol without detection, though not to their own advantage.</li>
 							<li><b>Subprotocols: </b>Combined Oblivious Transfer (and therefore, within that, one-out-of-two oblivious transfer)</li>
-							<li><b>Bits exchanged: </b><span class="equation" data-equation="5PB">\(O(kn^2\cdot C(f,l))\)</span>, where \(k\) is the security parameter, \(n\) is the number of parties, and \(C(f)\) is the size of the straight-line program for \(f\).</li>
-							<li><b>Runtime: </b><span class="equation" data-equation="5PR">\(O\left(n^2\cdot C(f,l)\cdot T(k)\right)\)</span>\(=O(n^2\cdot C(f)\cdot poly(k))\) where \(k\) is the security parameter, \(n\) is the number of parties, \(C(f,l)\) is the size of the straight-line program for \(f\) on inputs of size \(l\), \(T(k)\) is the runtime of an encryption algorithm.</li>
-							<li><b>Assumptions: </b>The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span>. Additionally, the presence of secret, authenticated channels between each pair of parties.</li>
+							<li><b>Bits exchanged: </b><span class="equation" data-equation="5PB">\(O(kn^2\cdot C(f,l))\)</span>, where \(k\) is the security parameter, \(n\) is the number of parties, and \(C(f,l)\) is the size of the straight-line program for \(f\).</li>
+							<li><b>Runtime: </b><span class="equation" data-equation="5PR">\(O\left(n^2\cdot C(f,l)\cdot T(k)\right)\)</span>\(=O(n^2\cdot C(f,l)\cdot poly(k))\) where \(k\) is the security parameter, \(n\) is the number of parties, \(C(f,l)\) is the size of the straight-line program for \(f\) on inputs of size \(l\), and \(T(k)\) is the runtime of an encryption algorithm.</li>
+							<li><b>Assumptions: </b>The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span>. Additionally, the presence of authenticated, secrecy-maintaining channels between each pair of parties.</li>
 							<li><b>Note: </b>We can be a bit more specific if we specify only boolean functions that run in time \(O(t(nl))\). Since circuit complexity for a Turing machine which decides some language \(L\) is \(O(t^2(nl))\), we know bits exchanged to be in \(O\left(k\left( n\cdot t(nl)\right)^2\right)\) and runtime to be in \(O\left(T(k)\cdot\left(n\cdot t(nl)\right)^2\right)\).</li>
 						</ul>
 						
@@ -267,8 +262,7 @@
 							<li><b>Number of parties: </b>\(n\) parties, each with an input \(x_i\) of length \(l\) bits</li>
 							<li><b>Function(s): </b>Any function \(f(x_1,x_2,\dots,x_n)\) which can be expressed in a straight-line program of size \(C(f,l)\).</li>
 							<li><b>Privacy constraints: </b>Passive adversaries can learn nothing. Up to \(\frac n 2\) malicious adversaries can learn nothing.</li>
-							<li><b>Security constraints: </b>Communication was assumed to be secret and authenticated.</li>
-							<li><b>Cheating: </b>Malicious adversaries have a negligible advantage (\(O(2^-m)\) for some confidence factor \(m\)) of altering the outcome of the protocol successfully.</li>
+							<li><b>Cheating: </b>Malicious adversaries have a negligible advantage (\(O(2^{-m})\), for some confidence factor \(m\)), of altering the outcome of the protocol successfully.</li>
 							<li><b>Subprotocols: </b>A verifiable secret sharing scheme; a verifiable multiparty coin flipping protocol; a zero-knowledge proof system; 5-permutation computation; combined oblivious transfer; one-out-of-two oblivious transfer.</li>
 							<li><b>Bits exchanged: </b>\(O\left(kln^2+n\cdot S(k)+mk^2n^2\cdot C(f,l)\right)\). We assume:
 								<ul>
@@ -703,7 +697,7 @@
 								<li>each instruction consists of multiplying (composing) two 5-permutations \(\sigma\) and \(\tau\), where \(\sigma\) (\(\tau\)) is either a constant, a variable, or the inverse (in \(S_5\)) of a variable.</li>
 							</ul>
 							<p class="rp_annotation">
-								Exactly when and how to perform each of these instructions in order to compute a program is explained by Barrington, and is mostly outside the scope of this paper.
+								Exactly when and how to perform each of these instructions in order to compute a program is explained by Barrington, and is outside the scope of this paper.
 							</p>
 							<p class="rp_original">
 								At the start, each party takes each of his private bits and encodes it by a 5-permutation \(\sigma\) as in <span class="reference" data-citation="13"><a href="#citation13">[13]</a></span>. Then he divides \(\sigma\). That is, he selects at random \(n-1\) 5-permutations \(\sigma_1,\dots,\sigma_{n-1}\) and gives the pair \((i,\sigma_i)\) to party \(i\) (possibly himself). He then sets \(\sigma_n=(\sigma_1\cdots\sigma_{n-1})^{-1}\cdot\sigma\) and gives \((n,\sigma_n)\) to party \(n\). Now, inductively, assume that each variable is divided among the parties. That is, for each variable \(\sigma\), each player \(i\) possesses an index permutation pair \((x,\sigma_x)\) so that \(\prod\limits_{x=1}^n\sigma_x=\sigma\) and, given only \(n-1\) pieces, \(\sigma\) cannot be guessed better than at random. We now want to show that each instruction can be performed (i.e. that each party can compute his individual piece of the result) respecting the privacy constraint. There are essentially 3 cases.
@@ -739,7 +733,7 @@
 								We know the probability distribution on \(\rho\) to be constant, since \(\rho\) was chosen randomly, so we know that \(w\)'s distribution is statistically indistinguishable from being picked uniformly at random as well. This situation is independent of \(\sigma\), since \(\sigma\) is always fixed before \(\rho\) is chosen.
 							</p>
 							<p class="rp_annotation">
-								With that in mind, we can show that party 1 can easily simulate a run of the protocol not knowing \(\sigma\) or \(\rho\) that is computationally indistinguishable from a real run. Party 1 performs the correct garbled circuit, but chooses a random decryption at each input gate for party \(n\)'s simulated 'input': since \(n\) was going to assign a decryption to his bits at random anyway, and party 1 cannot possibly learn the association, this is indistinguishable. Every internal gate's table can simply be assigned at random, since party 1 never learns anything about its inputs or outputs in either case. Party 1 also assigns each output gate's table randomly so that the full gate's output is any valid \(5\)-permutation; since, as we showed above, \(w\)'s probability distribution is indistinguishable from being selected uniformly at random, we get an identical distribution through party 1 selecting at random.
+								With that in mind, we can show that party 1 can easily simulate a run of the protocol&mdash;not knowing \(\sigma\) or \(\rho\)&mdash;that is computationally indistinguishable from a real run. Party 1 performs the correct garbled circuit, but chooses a random decryption at each input gate for party \(n\)'s simulated 'input': since \(n\) was going to assign a decryption to his bits at random anyway, and party 1 cannot possibly learn the association, this is indistinguishable. Every internal gate's table can simply be assigned at random, since party 1 never learns anything about its inputs or outputs in either case. Party 1 also assigns each output gate's table randomly so that the full gate's output is any valid \(5\)-permutation; since, as we showed above, \(w\)'s probability distribution is indistinguishable from being selected uniformly at random, we get an identical distribution through party 1 selecting at random.
 							</p>
 							<p class="rp_annotation">
 								Since party 1's simulated transcript is indistinguishable from a real transcript at every input gate, at every internal gate, and at the output value, party 1 cannot possibly learn any information from this protocol&mdash;assuming, of course, that party 1 is only a passive adversary, since the one-out-of-two oblivious transfer is still vulnerable to malicious adversaries. [Paragaph break not originally present.]
@@ -774,29 +768,29 @@
 								<tr>
 									<td>0</td>
 									<td>0</td>
-									<td>\(b_3^0\)</td>
+									<td>\(b_{0,3}\)</td>
 								</tr>
 								<tr>
 									<td>0</td>
 									<td>1</td>
-									<td>\(b_3^1\)</td>
+									<td>\(b_{1,3}\)</td>
 								</tr>
 								<tr>
 									<td>1</td>
 									<td>0</td>
-									<td>\(b_3^2\)</td>
+									<td>\(b_{2,3}\)</td>
 								</tr>
 								<tr>
 									<td>1</td>
 									<td>1</td>
-									<td>\(b_3^3\)</td>
+									<td>\(b_{3,3}\)</td>
 								</tr>
 							</table>
 							<p class="rp_annotation">
-								Having calculated the values of \(b_3^j\) for \(j\in\{0,1,2,3\}\), party 1 chooses a new share of the output \(b_3^1\). The two parties then perform a 1-out-of-4 oblivious transfer (a simple extension of 1-out-of-2 oblivious transfer) in which party 2 receives \(b_3^j\oplus b_3^1\) for the \(j\) appropriate to the two shares in his or her possession.
+								Having calculated the values of \(b_3^j\) for \(j\in\{0,1,2,3\}\), party 1 chooses a new share of the output \(b_3^1\). The two parties then perform a 1-out-of-4 oblivious transfer (a simple extension of 1-out-of-2 oblivious transfer) in which party 2 receives \(b_{j,3}\oplus b_3^1\) for the \(j\) appropriate to the two shares in his or her possession.
 							</p>
 							<p class="rp_annotation">
-								Through this process, they can follow a similar process to the 5-permutation, multi-party version, by turning it into a series of easily computable gates. The main difference from simply using one of Yao's garbled circuits is that this process is <i>interactive</i>; this is an advantage and a disadvantage, as it makes it easier to prevent cheating, but takes away so called "constant round complexity".
+								Through this process, they can follow a similar process to the 5-permutation, multiparty version, by turning it into a series of easily computable gates. The main difference from simply using one of Yao's garbled circuits is that this process is <i>interactive</i>; this is an advantage and a disadvantage, notably taking away so called "constant round complexity".
 							</p>
 							<p class="rp_annotation" data-broken-link=true>
 								There will be a tutorial section on the contrasts between Yao's garbled gate protocol and GMW's interactive construction.
@@ -1090,7 +1084,7 @@
 						L. Levin, <i>One-Way Functions and Pseudo-Random Generators</i>, Proc. 17th STOC, 1985, pp. 363-365.
 					</li>
 					<li id="citation12">
-						A. Yao, <i>How to Generate and Exchange Secrets</i>, Proc. 27th STOC, 1986, pp. 162-167
+						Andrew Chi-Chih Yao. <a href="24.html">How to generate and exchange secrets (extended abstract).</a> In <i>27th Annual Symposium on Foundations of Computer Science</i>, pages 162–167, Toronto, Ontario, Canada, 27–29 October 1986. IEEE.
 					</li>
 					<li id="citation13">
 						D. Barrington, <i>Bounded-Width Branching Programs Recognize Exactly Those Languages in NC<sup>1</sup></i>, Proc. 18th STOC, 1986 pp 1-5
