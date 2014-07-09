@@ -171,15 +171,135 @@
                             </li>
                         </ol>
                     </div>
+					<section id="abstract">
+						<h2>Abstract</h2>
+						<p class="rp_original">
+							Every function of \(n\) inputs can be efficiently computed by a complete network of \(n\) processors in such a way that:
+						</p>
+						<ol class="rp_original">
+							<li>If no faults occur, no set of size \(t\lt\frac n 2\) of players gets any additional information (other than the function value),</li>
+							<li>Even if Byzantine faults are allowed, no act of size \(t\lt\frac n 3\) can either disrupt the computation or get additional information.</li>
+						</ol>
+						<p class="rp_original">
+							Furthermore, the above bounds on \(t\) are tight!
+						</p>
+					</section>
                     <section id="sec1">
                         <h2>1. Introduction</h2>
+						<p class="rp_original">
+							The rapid development of distributed systems raised the natural question of what tasks can be performed by them (especially when faults occur). A large body of literature over the past ten years addressed this question. There are two approaches to this question, depending on whether a limit on the computational power of processors is assumed or not.
+						</p>
+						<p class="rp_original">
+							The cryptographic approach, inaugurated by Diffie and Hellman<sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup>, assumes the players are computationally bounded, and further assumes the existence of certain (one-way) functions, that can be computed but not inverted by the player.
+						</p>
+						<p class="rp_original">
+							This simple assumption was postulated in <span class="reference" data-citation="1"><a href="#citation1">[1]</a></span> in order to achieve the basic task of secure message exchange between two of the processors, but turned out to be universal! In subsequent years, ingenious protocols based on the same assumption were given for increasingly harder tasks such as contract signing, secret exchange, joint coin flipping, voting and playing poker. These results culminated, through the definition of zero-knowledge proofs<sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup>, their existence for NP-complete problems<sup class="reference" data-citation="3"><a href="#citation3">[3]</a></sup> in completeness theorems for two-party<sup class="reference" data-citation="4"><a href="#citation4">[4]</a></sup> and multiparty<sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup> cryptographic distributed computation. In particular the results of Goldreich, Micali, and Wigderson in <span class="reference" data-citation="5"><a href="#citation5">[5]</a></span> were the main inspiration to our work. They show that, if (non-uniform) one way functions exist, then every (probabilistic) function of \(n\) inputs can be computed by \(n\) computationally bounded processors in such a way that: (1) If no faults occur, no subset of the players can compute any additional information, and (2) Even if Byzantine faults are allowed, no set of size \(t\lt\frac n 2\) can either disrupt the computation or compute additional information.
+						</p>
+						<p class="rp_original">
+							The non-cryptographic (or information-theoretic) approach does not limit the computational power of the processors. Here, the notion of privacy is much stronger - for a piece of data to be unknown to a set of players it does not suffice that they cannot compute it within a certain time bound from what they know, but simply that it cannot be computed at all!
+						</p>
+						<p class="rp_original">
+							To facilitate the basic primitive of secret message exchange between a pair of players, we have secure channels. (For an excellent source of results and problems in the case no secure channels exist, see <span class="reference" data-citation="6"><a href="#citation6">[6]</a></span>). Unlike the cryptographic case, very little was known about the capabilities of this model. Two main basic problems were studied and solved (in the synchronous case): Byzantine agreement<sup class="reference" data-citation="7"><a href="#citation7">[7]</a></sup><sup class="reference" data-citation="8"><a href="#citation8">[8]</a></sup> and collective coin flipping<sup class="reference" data-citation="9"><a href="#citation9">[9]</a></sup>.
+						</p>
+						<p class="rp_original">
+							This paper provides a full understanding of the power and limits of this model, by proving a few completeness theorems. Comparing these results to the cryptographic case of <span class="reference" data-citation="5"><a href="#citation5">[5]</a></span>, one gets the impression that one-way functions are "more powerful" than secure channels. This should not be surprising, if one considers the case of \(n=2\). Clearly, here a secure channel is useless, and indeed two (non-fault) players can compute the OR function of their bits using cryptography, while the reader can convince herself (it will be proven later) that any protocol will leak information in the information-theoretic sense. The lower bounds we provide show that the same phenomenon is true for any value of \(n\). A similar situation arises in the Byzantine case where, using cryptography, one can allow \(t\lt\frac n 2\) fault players, bit in the non-cryptographic case one must have \(t\lt\frac n 3\).
+						</p>
+						<p class="rp_original">
+							As happened in the cryptographic case, the protocols are based on a new method for computing with shares secrets. Our constructions are based on Algebraic Coding Theory, particularly the use of generalized BCH codes.
+						</p>
+						<p class="rp_original">
+							It is important to stress here that our main protocols require only a polynomial amount of work from the players. (In fact, they are efficient enough to be practical!). Putting no bound on the computational power serves only to allow the most stringent definition of privacy and the most liberal definition of faultiness, both of which we can handle.
+						</p>
+						<p class="rp_original">
+							Essentially the same results we obtain here were independently discovered by Chaum, Crépeau, and Damgård<sup class="reference" data-citation="10"><a href="#citation10">[10]</a></sup>. We briefly point out the small differences of this work from ours. The simple case of no faults is almost identical. Their solution in the case of Byzantine faults is elementary and requires no error correcting codes. The error correction is achieved using a clever scheme of zero knowledge proofs. This has two consequences: They have to allow an exponentially small error probability for both correctness and privacy (we can guarantee them with no errors), and the frequent zero knowledge proofs increase the complexity of their protocols. In the solution of <span class="reference" data-citation="10"><a href="#citation10">[10]</a></span> the simulation is of Boolean operations while our solution allows direct simulation of arithmetic operations in large finite fields. Thus, for example, computing the product of two \(n\)-bit numbers using <span class="reference" data-citation="10"><a href="#citation10">[10]</a></span> calls for \(O(\log{n})\) communication rounds. This can be done in \(O(1)\) rounds using our solution.
+						</p>
+						<p class="rp_original">
+							We mention that the above results already found application in the new constant expected number of rounds protocol for Byzantine agreement of Feldman and Micali<sup class="reference" data-citation="11"><a href="#citation11">[11]</a></sup>.
+						</p>
+						<p class="rp_original">
+							We proceed to define the model, state the results and prove them. In the full paper we mention generalizations and extensions of our results to other tasks (playing games rather than computing functions), to other model parameters (synchrony, communication networks), and other complexity measures (number of rounds).
+						</p>
                     </section>
+					<section id="sec2">
+						<h2>2. Definitions and Results</h2>
+						<p class="rp_original">
+							For this abstract, we define the model and state the results on an intuitive level. Since even the formal definition of the notions of privacy and resiliency are nontrivial, we give them explicitly in an appendix.
+						</p>
+						<p class="rp_original">
+							The model of computation is a complete synchronous network of \(n\) processors. The pairwise communication channels between players are secure, i.e. they cannot be read or tempered with by other players. In one round of computation each of the players can do an arbitrary amount of local computation, send a message to each of the players, and read all messages that were sent to it at this round.
+						</p>
+						<p class="rp_original">
+							We shall be interested in the computational power of this model when imposing privacy and fault tolerance requirements. For simplicity, we restrict ourselves to the computation of (probabilistic) functions \(f\) from \(n\) inputs to \(n\) outputs. We assume that player \(i\) holds the \(i\)-th input at the start of computation, and should obtain the \(i\)-th output at the end, but nothing else.
+						</p>
+						<p class="rp_original">
+							A protocol for computing a function is a specification of \(n\) programs, one for each of the players. We distinguish two kinds of faults: "Gossip" and "Byzantine". In the first, fault processors send messages according to their predetermined program, but try to learn as much as they can by sharing the information they received. In the second, they can use totally different programs, collaborating to acquire more information or even sabotage the computation.
+						</p>
+						<p class="rp_original">
+							A protocol is \(t\)-<i>private</i> if any set of at most \(t\) players cannot compute after the protocol more than they could jointly compute solely from their set of privacy inputs and outputs.
+						</p>
+						<p class="rp_original">
+							A protocol is \(t\)-<i>resilient</i> if no set of \(t\) or fewer players can influence the correctness of the outputs of the remaining players. For this to make sense, the function definition should be extended to specify what it is if some players neglect to give their inputs or are caught cheating (see <span data-broken-link=true>appendix</span>).
+						</p>
+						<p class="rp_original">
+							We can now state the main results of this paper.
+						</p>
+						<span class="rp_theorem_header">Theorem 1:</span>
+						<p class="rp_original rp_theorem">
+							For every (probabilistic) function \(f\) and \(t\lt\frac n 2\) there exists a \(t\)-private protocol.
+						</p>
+						<span class="rp_theorem_header">Theorem 2:</span>
+						<p class="rp_original rp_theorem">
+							There are functions for which there are no \(frac n 2\) private protocols.
+						</p>
+						<span class="rp_theorem_header">Theorem 3:</span>
+						<p class="rp_original rp_theorem">
+							For every probabilistic function and every \(t\lt\frac n 3\) there exists a protocol that is both \(t\)-resilient and \(t\)-private.
+						</p>
+						<span class="rp_theorem_header">Theorem 4:</span>
+						<p class="rp_original rp_theorem">
+							There are functions for which there is not \(\frac n 3\)-resilient protocol.
+						</p>
+					</section>
+					<section id="sec3">
+						<h2>3. Proof of Theorem 1</h2>
+						<p class="rp_original">
+							Let \(P_0,\dots,__{n-1}\) be a set of players, and let \(n\geq 2t+1\). Let \(F\) be the function which this set of players wants to compute \(t\)-privately, where each player holds some input variables to the function \(F\). Let \(E\) be some fixed finite field \(E\), with \(|E|\gt n\). Without loss of generality we may assume that all inputs are elements from \(E\) and that \(F\) is some polynomial ( inthe input variables) over \(E\), and that we are given some arithmetic circuit computing \(|F|\), using the operations \(+,\times\), and constants from \(E\).
+						</p>
+						<p class="rp_original">
+							To simplify our explanation, we divide the computation into three stages.
+						</p>
+						<span class="rp_sub_header">Stage I</span>
+						<p class="rp_original rp_sub">
+							The input stage, where each player will enter his input variables to the computation using a secret sharing procedure.
+						</p>
+						<span class="rp_sub_header">Stage II</span>
+						<p class="rp_original rp_sub">
+							The computation stage, where the players will simulate the circuit computing \(F\), gate by gate, keeping the value of each computed gate as secret shared by all players.
+						</p>
+						<span class="rp_sub_header">Stage III</span>
+						<p class="rp_original rp_sub">
+							The final stage, where the secret shares of the final values of \(F\) are revealed to one or all of the players.
+						</p>
+						<p class="rp_original">
+							Stages I and III are very simple and we describe them below, and delay the details of the computation stage to the next section.
+						</p>
+					</section>
                 </div>
             </div>
             <div class="main_toplevel main_section main_color8">
                 <h1>References</h1>
                 <ol id="referencelist">
-                    <li id="citation1">A citation</li>
+                    <li id="citation1">DH</li>
+					<li id="citation2">GMR</li>
+					<li id="citation3">GMW1</li>
+					<li id="citation4">Y1</li>
+					<li id="citation5">GMW2</li>
+					<li id="citation6">BL</li>
+					<li id="citation7">LPS</li>
+					<li id="citation8">DS</li>
+					<li id="citation9">Y2</li>
+					<li id="citation10">CCD</li>
+					<li id="citation11">FM</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
