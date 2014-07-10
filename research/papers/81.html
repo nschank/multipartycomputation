@@ -460,7 +460,7 @@
 								Simply put, the probability of being correct on an input approaches the probability of being incorrect up to a <span class="definable">negligible</span> distance.
 							</p>
 							<p class="rp_original">
-								This notion was already used by Goldwasser and Micali<sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup> in the context of encryption, and by Yao<sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup> in the context of pseudo-random generation. For other notions of indistinguishability and further discussion see <span class="reference" data-citation="3"><a href="#citation3">[3]</a></span>.
+								This notion was already used by Goldwasser and Micali<sup class="reference" data-citation="GM"></sup> in the context of encryption, and by Yao<sup class="reference" data-citation="Y"></sup> in the context of pseudo-random generation. For other notions of indistinguishability and further discussion see <span class="reference" data-citation="GMR"></span>.
 							</p>
 							<p class="rp_original">
 								<b>Remark 1 - </b>
@@ -547,10 +547,10 @@
 						<section id="sec4.1">
 							<h3>4.1. A New and General Oblivious Transfer Protocol</h3>
 							<p class="rp_original">
-								In <span class="reference" data-citation="4"><a href="#citation4">[4]</a></span>, Rabin proposes the beautiful notion of an <span class="definable">oblivious transfer</span>. This is a probabilistic polynomial-time algorithm that allows A(lice), who knows the prime factorization of an integer \(n\), to send it to B(ob), who knows just \(n\), so that B will receive \(n\)'s factorization with probability &frac12; and A does not know whether or not B received it. Clearly, Rabin's notion of an OT supposes that factoring is computationally hard. Under this assumption, he proposed a protocol that, if A and B are allowed to be at most <span class="definable" data-define="passive adversary">passive adversaries</span>, correctly implements an OT. This protocol, however, may not work (i.e. no longer possesses a proof of correctness) if A and B are allowed to be <span class="definable" data-define="malicious adversary">malicious</span>. Using the interactive proof-systems of <span class="reference" data-citation="1"><a href="#citation1">[1]</a></span>, Fischer, Micali, Rackoff, and Wittenberg found<sup class="reference" data-citation="5"><a href="#citation5">[5]</a></sup> a protocol that correctly implements OT under the simple (and in this context minimal) assumption that factoring is hard. Rabin's OT has proved to be a very fruitful notion, as exemplified by various applications proposed by Blum.<sup class="reference" data-citation="6"><a href="#citation6">[6]</a></sup>
+								In <span class="reference" data-citation="HR"></span>, Rabin proposes the beautiful notion of an <span class="definable">oblivious transfer</span>. This is a probabilistic polynomial-time algorithm that allows A(lice), who knows the prime factorization of an integer \(n\), to send it to B(ob), who knows just \(n\), so that B will receive \(n\)'s factorization with probability &frac12; and A does not know whether or not B received it. Clearly, Rabin's notion of an OT supposes that factoring is computationally hard. Under this assumption, he proposed a protocol that, if A and B are allowed to be at most <span class="definable" data-define="passive adversary">passive adversaries</span>, correctly implements an OT. This protocol, however, may not work (i.e. no longer possesses a proof of correctness) if A and B are allowed to be <span class="definable" data-define="malicious adversary">malicious</span>. Using the interactive proof-systems of <span class="reference" data-citation="GM"></span>, Fischer, Micali, Rackoff, and Wittenberg found<sup class="reference" data-citation="FMR"></sup> a protocol that correctly implements OT under the simple (and in this context minimal) assumption that factoring is hard. Rabin's OT has proved to be a very fruitful notion, as exemplified by various applications proposed by Blum.<sup class="reference" data-citation="Bl"></sup>
 							</p>
 							<p class="rp_original">
-								A more general and useful notion of OT has been proposed by Even, Goldreich, and Lempel<sup class="reference" data-citation="7"><a href="#citation7">[7]</a></sup>, the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span>. In their framework, A has two messages, \(m_0\) and \(m_1\). By using a cryptosystem \(E\) she computes \(\sigma_0=E(m_0)\) and \(\sigma_1=E(m_1)\) and sends \(\sigma_0, \sigma_1\) to B. B chooses one of these encryptions, \(\sigma_i\). A one-out-of-two OT allows B to read the corresponding message \(m_i\), while A will not know which message B has read (whenever \(m_0\neq m_1\)). This notion achieves the right level of generality and is crucial to what follows. Even, Goldreich, and Lempel also proposed the first implementation of a one-out-of-two OT using public-key cryptosystems. Their protocol has the merit of having freed the implementation of an oblivious transfer from the algebraic setting to which it appeared to be confined. Their protocol, though, requires a quite strong set of assumptions even when the adversaries are only passive.
+								A more general and useful notion of OT has been proposed by Even, Goldreich, and Lempel<sup class="reference" data-citation="EGL"></sup>, the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span>. In their framework, A has two messages, \(m_0\) and \(m_1\). By using a cryptosystem \(E\) she computes \(\sigma_0=E(m_0)\) and \(\sigma_1=E(m_1)\) and sends \(\sigma_0, \sigma_1\) to B. B chooses one of these encryptions, \(\sigma_i\). A one-out-of-two OT allows B to read the corresponding message \(m_i\), while A will not know which message B has read (whenever \(m_0\neq m_1\)). This notion achieves the right level of generality and is crucial to what follows. Even, Goldreich, and Lempel also proposed the first implementation of a one-out-of-two OT using public-key cryptosystems. Their protocol has the merit of having freed the implementation of an oblivious transfer from the algebraic setting to which it appeared to be confined. Their protocol, though, requires a quite strong set of assumptions even when the adversaries are only passive.
 							</p>
 							<p class="rp_original">
 								Below, we contribute a new protocol that correctly implements a one-out-of-two OT in presence of passive adversaries. The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span> suffices to prove the correctness of our protocol.
@@ -558,7 +558,7 @@
 							<section id="sec4.1.1">
 								<h4>4.1.1. Trapdoor and One-Way Functions</h4>
 								<p class="rp_original">
-									A satisfactory definition of a <span class="definable" data-define="trapdoor permutation">trapdoor permutation</span> is given in <span class="reference" data-citation="8"><a href="#citation8">[8]</a></span>. Here, let us informally say that a family of trapdoor permutations \(f\) possesses the following properties:
+									A satisfactory definition of a <span class="definable" data-define="trapdoor permutation">trapdoor permutation</span> is given in <span class="reference" data-citation="GMRi"></span>. Here, let us informally say that a family of trapdoor permutations \(f\) possesses the following properties:
 								</p>
 								<ul class="rp_original">
 									<li>It is easy, given an integer \(k\), to randomly select permutations \(f\) in the family which have \(k\) as their security parameter, together with some extra "trapdoor" information allowing easy inversion of the permutations chosen.</li>
@@ -590,7 +590,7 @@
 									Again note that probability of \(\frac{1}{2}+\frac{1}{poly(k)}\) is <span class="definable" data-define="negligible">non-negligible</span>, so it should be \(\geq\), not &gt; as it was originally. Since by definition of a trapdoor permutation we cannot determine determine \(x\) given \(f(x)\) in polynomial time, \(\epsilon^{-1}\) must be greater than polynomial in \(k\), so \(\epsilon &lt; \frac{1}{poly(k)}\), and therefore is negligible.
 								</p>
 								<p class="rp_original">
-									Then notion of a random bit in a one-way permutation was introduced by Blum and Micali<sup class="reference" data-citation="9"><a href="#citation9">[9]</a></sup> who showed a random bit in the <span class="definable" data-define="discrete logarithm problem">Discrete Logarithm Problem</span>, a well known candidate for one-way permutation. Chor and Goldreich show random bits in the RSA function. Do all one-way functions have a random bit? We do not know the answer to this question, but Yao<sup class="reference" data-citation="2"><a href="#citation2">[2]</a></sup> has shown the next best thing. Namely, that given a one-way (trapdoor) permutation \(f\), one can construct a one-way (trapdoor) permutation \(F\) with random bit \(B_F\) (For a detailed proof of this theorem see <span class="reference" data-citation="10"><a href="#citation10">[10]</a></span>). Levin<sup class="reference" data-citation="11"><a href="#citation11">[11]</a></sup> has actually proved a more general version of this theorem.
+									Then notion of a random bit in a one-way permutation was introduced by Blum and Micali<sup class="reference" data-citation="BM"></sup> who showed a random bit in the <span class="definable" data-define="discrete logarithm problem">Discrete Logarithm Problem</span>, a well known candidate for one-way permutation. Chor and Goldreich show random bits in the RSA function. Do all one-way functions have a random bit? We do not know the answer to this question, but Yao<sup class="reference" data-citation="Y"></sup> has shown the next best thing. Namely, that given a one-way (trapdoor) permutation \(f\), one can construct a one-way (trapdoor) permutation \(F\) with random bit \(B_F\) (For a detailed proof of this theorem see <span class="reference" data-citation="BH"></span>). Levin<sup class="reference" data-citation="Lv"></sup> has actually proved a more general version of this theorem.
 								</p>
 							</section>
 							<section id="sec4.1.3">
@@ -599,7 +599,7 @@
 									Without loss of generality, we assume that the two messages in the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> both consist of a single bit.
 								</p>
 								<p class="rp_original">
-									In our protocol, both \(A,B\in\)<span class="equation" data-equation="PA">\(PA\)</span>. \(A\)'s inputs are a pair of bits \((b_0,b_1)\) and their corresponding pair of encryptions \((E(b_0),E(b_1))\) where \(E\) is a probabilistic encryption algorithm<sup class="reference" data-citation="1"><a href="#citation1">[1]</a></sup>. The pair \((E(b_0),E(b_1))\) is also an input to \(B\) who has an additional private input bit \(\alpha\). It is desired that, even if some party is a <span class="definable">passive adversary</span>, the following two properties hold:
+									In our protocol, both \(A,B\in\)<span class="equation" data-equation="PA">\(PA\)</span>. \(A\)'s inputs are a pair of bits \((b_0,b_1)\) and their corresponding pair of encryptions \((E(b_0),E(b_1))\) where \(E\) is a probabilistic encryption algorithm<sup class="reference" data-citation="GM"></sup>. The pair \((E(b_0),E(b_1))\) is also an input to \(B\) who has an additional private input bit \(\alpha\). It is desired that, even if some party is a <span class="definable">passive adversary</span>, the following two properties hold:
 								</p>
 								<ol type="i" class="rp_original">
 									<li>\(B\) will read the bit \(b_\alpha\), but will not be able to predict the other bit \(b_\bar{\alpha}\) essentially better than at random.</li>
@@ -650,7 +650,7 @@
 							<h3>4.2. Strengthening Yao's Combined Oblivious Transfer</h3>
 							<section>
 								<p class="rp_original">
-									In <span class="reference" data-citation="12"><a href="#citation12">[12]</a></span>, Yao presented a protocol that we call <span class="definable">combined oblivious transfer</span> (COT). The protocol involves two parties A and B, respectively owning private inputs \(a\) and \(b\) and any chosen function \(g\). It possesses the following property: upon termination, A computes \(g(a,b)\), while B has no idea of what A has computed. If we think of \(a\) and \(b\) as secrets, B appears to be obliviously transferring a prescribed combination of his and A's secret to A. Yao implemented COT based on the assumption that factoring is hard, (which yields, as shown by <span class="reference" data-citation="6"><a href="#citation6">[6]</a></span>) a particular <span class="definable">trapdoor permutation</span>. We strengthen his result by showing that COT can be correctly implemented based on any trapdoor permutation. We do this by using the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> of <a href="#sec4.1">section 4.1</a> within Yao's scheme. Let us consider first the case where \(a\) and \(b\) are bits and \(g\) is the Boolean \(AND\). Consider figure 1.
+									In <span class="reference" data-citation="Y2"></span>, Yao presented a protocol that we call <span class="definable">combined oblivious transfer</span> (COT). The protocol involves two parties A and B, respectively owning private inputs \(a\) and \(b\) and any chosen function \(g\). It possesses the following property: upon termination, A computes \(g(a,b)\), while B has no idea of what A has computed. If we think of \(a\) and \(b\) as secrets, B appears to be obliviously transferring a prescribed combination of his and A's secret to A. Yao implemented COT based on the assumption that factoring is hard, (which yields, as shown by <span class="reference" data-citation="Bl"></span>) a particular <span class="definable">trapdoor permutation</span>. We strengthen his result by showing that COT can be correctly implemented based on any trapdoor permutation. We do this by using the <span class="definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> of <a href="#sec4.1">section 4.1</a> within Yao's scheme. Let us consider first the case where \(a\) and \(b\) are bits and \(g\) is the Boolean \(AND\). Consider figure 1.
 								</p>
 								<img src="../../img/81.fig1.jpg" alt="A COT AND-gate" class="rp_original" />
 								<p class="rp_original">
@@ -686,7 +686,7 @@
 								Recall that a <span class="definable" data-define="Turing machine game">Tm-game</span> solver wants to compute \(M(x_1,\dots,x_n)\) while respecting the privacy constraint. We want to use <span class="definable" data-define="combined oblivious transfer">COT</span> as a subroutine to construct a Tm-solver. This does not appear to be straightforward. For instance, if two parties \(i\) and \(j\) use COT so that \(i\) will compute \(g(x_i,x_j)\) for some function \(g\), this would already be a violation of the privacy constraint. Recall also that the Tm-game solver has to be polynomial not only in \(M\)'s running time, but also in \(n\), the number of players.
 							</p>
 							<p class="rp_original">
-								We find a way out by making special use of a lemma of Barrington's<sup class="reference" data-citation="13"><a href="#citation13">[13]</a></sup> that simulates computation by composing permutations in \(S_5\), the symmetric group on 5 elements. The general picture is the following. First, transform the <span class="definable">Turing machine</span> \(M\) of a Tm-game to an equivalent circuit \(C\) in a standard way. The Boolean inputs of \(C\) will be \(b_1^1,\dots,b_l^1,\dots,b_1^n,\dots,b_l^n\), the bits of the \(n\), \(l\)-bit long inputs of our parties. This circuit \(C\) is then transformed to <span class="definable">straight-line program</span> as in <span class="reference" data-citation="13"><a href="#citation13">[13]</a></span>. This straight-line program is essentially as long as \(C\) is big. In it,
+								We find a way out by making special use of a lemma of Barrington's<sup class="reference" data-citation="Br"></sup> that simulates computation by composing permutations in \(S_5\), the symmetric group on 5 elements. The general picture is the following. First, transform the <span class="definable">Turing machine</span> \(M\) of a Tm-game to an equivalent circuit \(C\) in a standard way. The Boolean inputs of \(C\) will be \(b_1^1,\dots,b_l^1,\dots,b_1^n,\dots,b_l^n\), the bits of the \(n\), \(l\)-bit long inputs of our parties. This circuit \(C\) is then transformed to <span class="definable">straight-line program</span> as in <span class="reference" data-citation="Br"></span>. This straight-line program is essentially as long as \(C\) is big. In it,
 							</p>
 							<p class="rp_annotation">
 								For some notes on 5-permutations, see the short section at the <a href="#_C">bottom of the page</a>.
@@ -700,7 +700,7 @@
 								Exactly when and how to perform each of these instructions in order to compute a program is explained by Barrington, and is outside the scope of this paper.
 							</p>
 							<p class="rp_original">
-								At the start, each party takes each of his private bits and encodes it by a 5-permutation \(\sigma\) as in <span class="reference" data-citation="13"><a href="#citation13">[13]</a></span>. Then he divides \(\sigma\). That is, he selects at random \(n-1\) 5-permutations \(\sigma_1,\dots,\sigma_{n-1}\) and gives the pair \((i,\sigma_i)\) to party \(i\) (possibly himself). He then sets \(\sigma_n=(\sigma_1\cdots\sigma_{n-1})^{-1}\cdot\sigma\) and gives \((n,\sigma_n)\) to party \(n\). Now, inductively, assume that each variable is divided among the parties. That is, for each variable \(\sigma\), each player \(i\) possesses an index permutation pair \((x,\sigma_x)\) so that \(\prod\limits_{x=1}^n\sigma_x=\sigma\) and, given only \(n-1\) pieces, \(\sigma\) cannot be guessed better than at random. We now want to show that each instruction can be performed (i.e. that each party can compute his individual piece of the result) respecting the privacy constraint. There are essentially 3 cases.
+								At the start, each party takes each of his private bits and encodes it by a 5-permutation \(\sigma\) as in <span class="reference" data-citation="Br"></span>. Then he divides \(\sigma\). That is, he selects at random \(n-1\) 5-permutations \(\sigma_1,\dots,\sigma_{n-1}\) and gives the pair \((i,\sigma_i)\) to party \(i\) (possibly himself). He then sets \(\sigma_n=(\sigma_1\cdots\sigma_{n-1})^{-1}\cdot\sigma\) and gives \((n,\sigma_n)\) to party \(n\). Now, inductively, assume that each variable is divided among the parties. That is, for each variable \(\sigma\), each player \(i\) possesses an index permutation pair \((x,\sigma_x)\) so that \(\prod\limits_{x=1}^n\sigma_x=\sigma\) and, given only \(n-1\) pieces, \(\sigma\) cannot be guessed better than at random. We now want to show that each instruction can be performed (i.e. that each party can compute his individual piece of the result) respecting the privacy constraint. There are essentially 3 cases.
 							</p>
 							<p class="rp_original">
 								<i>Case 1</i>: The instruction is of the form \(\sigma\cdot c\), where \(\sigma\) is a variable and \(c\) a constant. By induction, each party has a piece of the form \((x,\sigma_x)\). Then the party owning the piece \((n,\sigma_n)\) sets his new piece to be \((n,\sigma_n\cdot c)\) and all other parties leave their pieces untouched. It is immediately checked that the ordered product of the new pieces is \(\sigma\cdot c\) and that privacy has been preserved against \(n-1\) <span class="definable" data-define="passive adversary">passive adversaries</span>.
@@ -827,10 +827,10 @@
 							In other words, the engagement protocol makes it so that a party can only choose to be malicious once they have already locked themselves into the protocol; since the protocol will soon be shown to be resistant to malicious adversaries, and the adversary can no longer interrupt the protocol by leaving, maliciousness is essentially rendered moot.
 						</p>
 						<p class="rp_original">
-							Phase 1 of the engagement protocol consists of a verifiable secret sharing in the sense of Awerbuch, Chor, Goldwasser, and Micali<sup class="reference" data-citation="14"><a href="#citation14">[14]</a></sup>. However, we contribute a new protocol both tolerating up to \(\frac{n}{2}\) malicious adversaries and using any <span class="definable">trapdoor function</span> whatsoever. Phase 2 of the engagement protocol is the multi-party version of Blum's <span class="definable" data-define="coin flip">coin flipping</span> by telephone<sup class="reference" data-citation="6"><a href="#citation6">[6]</a></sup>. Despite the (deceptive) similarity with the verifiable secret sharing of phase 1, to implement phase 2 we must make use of a yet unpublished theorem (and algorithm) of ACGM.
+							Phase 1 of the engagement protocol consists of a verifiable secret sharing in the sense of Awerbuch, Chor, Goldwasser, and Micali<sup class="reference" data-citation="CGM"></sup>. However, we contribute a new protocol both tolerating up to \(\frac{n}{2}\) malicious adversaries and using any <span class="definable">trapdoor function</span> whatsoever. Phase 2 of the engagement protocol is the multi-party version of Blum's <span class="definable" data-define="coin flip">coin flipping</span> by telephone<sup class="reference" data-citation="Bl"></sup>. Despite the (deceptive) similarity with the verifiable secret sharing of phase 1, to implement phase 2 we must make use of a yet unpublished theorem (and algorithm) of ACGM.
 						</p>
 						<p class="rp_original">
-							We now give a bird's eye view of how to make any Tm-game \(g\) playable despite malicious adversaries. On input \((M,1^k)\), we first run the engagement protocol, then the <span class="definable" data-define="passive adversary">passive-adversary</span> playable version of the Tm-game. Here, we require all parties to use, as their private inputs, the strings they shared in phase 1 of the engagement protocol and, as a source of randomness, the encrypted random bits each was dealt in phase 2. The key point is that, now, no malicious adversary can deviate from his prescribed program, and thus he becomes a simple passive adversary. In fact, he is required to prove, in <span class="definable" data-define="zero knowledge proof">zero-knowledge</span> (in the sense of the Goldwasser, Micali, and Rackoff<sup class="reference" data-citation="8"><a href="#citation8">[8]</a></sup>), that each message he sends is what he should have sent being honest, given his private input, his random choices, and the messages he received so far. (Here, an essential tool is our recent result that all <span class="definable">NP</span> languages possess zero-knowledge proofs<sup class="reference" data-citation="15"><a href="#citation15">[15]</a></sup>.) If a malicious party, frustrated at not being able to send messages according to a different program, decides to stop, his input and random bits will be reconstructed by the community who will compute his messages when necessary, without skewing the probability distribution of the final outcome.
+							We now give a bird's eye view of how to make any Tm-game \(g\) playable despite malicious adversaries. On input \((M,1^k)\), we first run the engagement protocol, then the <span class="definable" data-define="passive adversary">passive-adversary</span> playable version of the Tm-game. Here, we require all parties to use, as their private inputs, the strings they shared in phase 1 of the engagement protocol and, as a source of randomness, the encrypted random bits each was dealt in phase 2. The key point is that, now, no malicious adversary can deviate from his prescribed program, and thus he becomes a simple passive adversary. In fact, he is required to prove, in <span class="definable" data-define="zero knowledge proof">zero-knowledge</span> (in the sense of the Goldwasser, Micali, and Rackoff<sup class="reference" data-citation="GMRi"></sup>), that each message he sends is what he should have sent being honest, given his private input, his random choices, and the messages he received so far. (Here, an essential tool is our recent result that all <span class="definable">NP</span> languages possess zero-knowledge proofs<sup class="reference" data-citation="GMW"></sup>.) If a malicious party, frustrated at not being able to send messages according to a different program, decides to stop, his input and random bits will be reconstructed by the community who will compute his messages when necessary, without skewing the probability distribution of the final outcome.
 						</p>
 						<p class="rp_annotation">
 							Two things to note here. First, that final point&mdash;that a majority of the community can 'rebuild' the inputs of a frustrated malicious party&mdash;is precisely why \(\frac n 2\) is precisely the (strict) maximum number of malicious parties that can be dealt with by a protocol. If more than half of the parties are colluding, malicious parties, then they can together perform the entire calculation without any of the honest parties, breaking the fairness and privacy constraints. If we try to create a protocol that allows more than \(\frac n 2\) parties to be malicious, then we must either allow parties to stop participating&mdash;breaking the correctness constraint&mdash;or allow a smaller subset than \(\frac n 2\) to be able to take over the protocol, which means the malicious parties could break the privacy constraints since they have such a subset. Therefore, the \(\frac n 2\) constraint is optimal.
@@ -1043,59 +1043,59 @@
             <div class="main_toplevel main_section main_color8">
                 <h1>References</h1>
                 <ol id="referencelist">
-                    <li id="citation1">
+                    <li id="GM">
 						S. Goldwasser, and S. Micali, <i>Probabilistic Encryption</i>, JCSS Vol. 28, No. 2, April 1984.
 						<p>
 							An earlier version (containing other results) was titled <i>Probabilistic Encryption and How to Play Mental Poker Hiding All Partial Information</i>
 						</p>
 					</li>
-					<li id="citation2">
+					<li id="Y">
 						A. Yao, <i>Theory and Application of Trapdoor Functions</i>, Proc. of 23rd FOCS, IEEE, Nov., 1982, pp. 80-91.
 					</li>
-					<li id="citation3">
+					<li id="GMR">
 						S. Goldwasser, S. Micali and C. Rackoff, <i>The Knowledge Complexity of Interactive Proof-Systems</i>, To appear SIAM J. on Computing (manuscript available from authors).
 						<p>
 							Earlier version in Proc. 17th Annual ACM Symp. on Theory of Computing, pp 291-304.
 						</p>
 					</li>
-					<li id="citation4">
+					<li id="HR">
 						J. Halpern and M.O. Rabin, <i>A Logic to reason about likehood</i>, Proc of 15th STOC, 1983.
 					</li>
-					<li id="citation5">
+					<li id="FMR">
 						M. Fischer, S. Micali, C. Rackoff, and D. Witenberg, <i>A Secure Protocol for the Oblivious Transfer</i>, in preparation 1986.
 					</li>
-					<li id="citation6">
+					<li id="Bl">
 						M. Blum, <i>Coin Flipping by Telephone</i>, IEEE COMPCON 1982, pp. 133-137.
 					</li>
-					<li id="citation7">
+					<li id="EGL">
 						S. Even, O. Goldreich, and A. Lempel, <i>A Randomized Protocol for Signing Contracts</i>, CACN, vol. 28, No. 6, 1985, pp. 637-647.
 					</li>
-					<li id="citation8">
+					<li id="GMRi">
 						S. Goldwasser, S. Micali, and R. Rivest, <i>A Digital Signature Scheme Secure Against Adaptive, Chosen Ciphertext Attack</i>. To appear in SAIM J. on Computing (available from authors)
 						<p>Earlier version, titled "<i>A Paradoxical Solution to the Signature Problem</i>", in Proc. 25th FOCS, 1984, pp.441-448.
 					</li>
-					<li id="citation9">
+					<li id="BM">
 						M. Blum and S. Micali, <i>How to Generate Sequences of Cryptographical String Pseudo-Random Bits</i>, SIAM J. on Computing, Vol. 13, Nov 1984, pp. 850-864
 					</li>
-					<li id="citation10">
+					<li id="BH">
 						R. Boppana and R. Hirschfeld, <i>Pseudo-Random Generators and Complexity Classes</i>, To appear in Randomness and Computation, 5th volume of Advances in Computing Research, ed. S. Micali
 					</li>
-					<li id="citation11">
+					<li id="Lv">
 						L. Levin, <i>One-Way Functions and Pseudo-Random Generators</i>, Proc. 17th STOC, 1985, pp. 363-365.
 					</li>
-					<li id="citation12">
+					<li id="Y2">
 						Andrew Chi-Chih Yao. <a href="24.html">How to generate and exchange secrets (extended abstract).</a> In <i>27th Annual Symposium on Foundations of Computer Science</i>, pages 162–167, Toronto, Ontario, Canada, 27–29 October 1986. IEEE.
 					</li>
-					<li id="citation13">
+					<li id="Br">
 						D. Barrington, <i>Bounded-Width Branching Programs Recognize Exactly Those Languages in NC<sup>1</sup></i>, Proc. 18th STOC, 1986 pp 1-5
 					</li>
-					<li id="citation14">
+					<li id="CGM">
 						B. Chor, S. Goldwasser, S. Micali, and B. Awerbuch, <i>Verifiable Secret Sharing and Achieving Simultaneity in the Presence of Faults</i>, Proc. 26th FOCS, 1985, pp. 383-395.
 					</li>
-					<li id="citation15">
+					<li id="GMW">
 						O. Goldreich, S. Micali, and A. Wigderson, <i>Proofs that Yield Nothing but their Validity and a Methodology of Cryptographic Design</i>, Proc. of FOCS 1986.
 					</li>
-					<li id="citation16">
+					<li id="CG">
 						B. Chor and O Goldreich, <i>RSA/Rabin Bits are 1/2+1/poly(logN) Secure</i>, To appear SIAM J. on Computing.
 						<p>Earlier version in PROC. FOCS 1984, pp. 449-463</p>
 					</li>

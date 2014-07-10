@@ -1,18 +1,33 @@
-window.addEventListener("load", addReferenceListeners, true);
+window.addEventListener("load", citeSources, true);
 
-function addReferenceListeners()
+function citeSources()
 {
 	var elements = document.getElementsByClassName("reference");
+	var toorder = {};
+	var inorder = [];
+	
 	for(var i = 0; i < elements.length; i++)
 	{
 		var elem = elements.item(i);
+		var cite = elem.getAttribute("data-citation");
+		var citedElem = document.getElementById(cite);
+		
+		if(!citedElem) continue;
+		if(toorder[cite] === undefined)
+			toorder[cite] = inorder.push(citedElem);
+		var link = "<a href=\"#" + cite + "\">[" + toorder[cite] + "]</a>";
+		elem.innerHTML = link;
 		addDOMR(elem.getAttribute("data-citation"), elem);
 	}
+	var list = document.getElementById("referencelist");
+	while(list.firstChild)
+		list.removeChild(list.firstChild);
+	inorder.forEach(function(elem) { list.appendChild(elem); });
 }
 
 function addDOMR(id, elem)
 {
-	var reference = document.getElementById("citation"+id);
+	var reference = document.getElementById(id);
 	if(reference === null) return false;
 	
 	var block = document.getElementById("ref_block"+id);
@@ -37,5 +52,3 @@ function addDOMR(id, elem)
 	elem.addEventListener('mouseout',mouseOutListener(elem,block));
 	return true;
 }
-
-
