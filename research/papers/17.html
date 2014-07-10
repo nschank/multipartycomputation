@@ -283,6 +283,131 @@
 						<p class="rp_original">
 							Stages I and III are very simple and we describe them below, and delay the details of the computation stage to the next section.
 						</p>
+						<section id="sec3.1">
+							<h3>3.1. The Input Stage</h3>
+							<p class="rp_original">
+								Let \(a_0,\dots,a_{n-1}\) be some \(n\) distinct non-zero points in our field \(E\). (This is why we need \(|E|\gt n\).) Each player holding some input \(s\in E\), introduces the input to the computation by selecting \(t\) random elements \(a_i\in E\), for \(i=1,\dots,t\), setting $$f(x)=s+a_1x+\cdots+a_tx^t$$ and sending to each player \(P_i\) the value \(s_i=f(a_i)\).
+							</p>
+							<p class="rp_original">
+								As in Shamir's<sup class="reference" data-citation="Sh"></sup> secret sharing scheme, the sequence \((s_0,\dots,s_{n-1})\) is a sequence of \(t\)-wise independent random variables uniformly distributed over \(E\), thus the value of the input is completely independent from the shares \(\{s_i\}\) that are given to any set of \(t\) player that does not include the player holding the secret.
+							</p>
+						</section>
+						<section id="sec3.2">
+							<h3>3.2. The Final Stage</h3>
+							<p class="rp_original">
+								To keep the \(t\)-privacy condition, we will make sure that the set of messages received by any set of \(t\) players will be completely independent from all the inputs. During the whole computation each gate which evaluates to some \(s\in E\), will be "evaluated" by the players by sharing the secret value of \(s\) using a completely independent from all the inputs, random polynomial \(f(x)\) of degree \(t\), with the only restriction that \(f(0)=s\). In particular at the end of the computation we will have the value of \(F\) shared among the players in a similar manner. If we want to let just one player know the output value, all the players send their shares to that particular player. This player can compute the interpolation polynomial \(f(x)\) and use its free coefficient as the result.
+							</p>
+							<p class="rp_original">
+								Note that there is a one-to-one correspondence between the set of all shares and the coefficients of the polynomial \(f(x)\). Since all the coefficients of \(f(x)\), except for its free coefficient, are uniform random variables that are independent of the inputs, the set of all shares does not contain any information about the inputs that does not follow from the value of \(f(x)\).
+							</p>
+						</section>
+					</section>
+					<section id="sec4">
+						<h2>4. The Computation Stage</h2>
+						<p class="rp_original">
+							Let \(a,b\in E\) be two secrets that are shared using the polynomials \(f(x),\,g(x)\) respectively, and let \(c\in E,\;c\neq0\) be some constant. It is enough to show how one can "compute" \(c\cdot a,\,a+b\), and \(a\cdot b\).
+						</p>
+						<p class="rp_original">
+							The two linear operations are simply and for their evaluation we do not need any communication between the players. This is because if \(f(x)\) and \(g(x)\) encode \(a\) and \(b\), then the polynomials \(h(x)=c\cdot f(x)\) and \(k(x)=f(x)+g(x)\) encode \(c\cdot a,\,a+b\) respectively. Thus to compute for example \(a+b\), each player \(P_i\) holding \(f(a_i)\), and \(g(a_i)\) can compute \(k(a_i)=f(a_i)+g(a_i)\). Likewise, since \(c\) is a known constant \(P_i\) can compute \(h(a_i)=c\cdot f(a_i)\). Furthermore, \(h(x)\) is random if only \(f(x)\) was, and \(k(x)\) is random if only one of \(f(x)\) or \(g(x)\) was.
+						</p>
+						<p class="rp_original">
+							As a corollary we immediately have
+						</p>
+						<span class="rp_theorem_header">Lemma 1: (Linear Functional)</span>
+						<p class="rp_original rp_theorem">
+							For any \(t,\,(t\leq n-1)\), any linear functional $$F(x_0,\dots,x_{n-1})=a_0x_0+\cdots+a_{n-1}x_{n-1},$$ where each \(P_i\) has input \(x_i\) and the \(a_i\) are known constants, can be computed \(t\)-privately. 
+						</p>
+						<p class="rp_original">
+							From the lemma we have
+						</p>
+						<span class="rp_theorem_header">Corollary 1: (Matrix Multiplication)</span>
+						<p class="rp_original rp_theorem">
+							Let \(A\) be a constant \(n\times n\) matrix, and let each \(P_i\) hae an input variable \(x_i\). Let \(X=(x_0,\dots,x_{n-1})\) and define \(Y=(y_1,\dots,y_n)\) by $$Y=X\cdot A$$ then for any \(t,\,(t\leq n-1)\), we can \(t\)-privately compute the vector \(Y\) such that the only information given to \(P_i\) will be the value of \(Y_i\), for \(i=0,\dots,n-1\).
+						</p>
+						<span class="rp_sub_header">Proof:</span>
+						<p class="rp_original rp_sub">
+							Matrix multiplication is just the evaluation of \(n\) linear functionals. By the LEmma, we can compute each linear functional \(Y_i\) independently, and reveal the outcome only to \(P_i\).
+						</p>
+						<section id="sec4.1">
+							<h3>4.1. The Multiplication Step</h3>
+							<p class="rp_original">
+								The multiplication step is only a bit harder. Let \(a\) and \(b\) be encoded by \(f(x)\) and \(g(x)\) as above. We now assume that \(n\geq 2t+1\). Not that the free coefficient of the polynomial \(h(x)=f(x)g(x)\) is \(a\cdot b\). There are two problems with using \(h(x)\) to encode the product of \(a\) times \(b\). The first, and obvious, one is that the degree of \(h(x)\) is \(2t\) instead of \(t\). While this poses no problem with interpolating \(h(x)\) from its \(n\) pieces since \(n\geq 2t+1\), it is clear that further multiplications will raise the degree, and once the degree passes \(n\) we will not have enough points for the interpolation. The second problem is more subtle. \(h(x)\) is not a <i>random</i> polynomial of degree \(2t\) (ignoring, of course, the free coefficient). For example, \(h(x)\), as a product of two polynomials, cannot be irreducible.
+							</p>
+							<p class="rp_original">
+								To overcome these two problems we will, in one step, randomize the coefficients of \(h(x)\), and reduce its degree while keeping the free coefficient unchanged. We first describe the degree reduction procedure and then combine it with the randomization of the coefficients.
+							</p>
+						</section>
+						<section id="sec4.2">
+							<h3>4.2. The degree reduction step</h3>
+							<p class="rp_original">
+								Let $$h(x)=h_0+h_1x+\cdots+h_{2t}x^{2t}$$ and let $$s_i=h(\alpha_i)=f(\alpha_i)g(\alpha_i),$$ for \(i=0,\dots,n-1\) be the "shares" of \(h(x)\). Each \(P_i\) holds an \(s_i\). Define the truncation of \(h(x)\) to be $$k(x)=h_0+h_1x+\cdots+h_tx^t,$$ and \(r_i=k(\alpha_i)\) for \(i=1,\cdots,n-1\).
+							</p>
+							<span class="rp_sub_header">Claim:</span>
+							<p class="rp_original rp_sub">
+								Let \(S=(s_0,\dots,s_{n-1})\) and \(R=(r_0,\dots,r_{n-1})\) then there is a constant \(n\times n\) matrix \(A\) such that $$R=S\cdot A.$$
+							</p>
+							<span class="rp_sub_header">Proof:</span>
+							<p class="rp_original rp_sub">
+								Let \(H\) be the \(n\)-vector $$H=(h_0,\dots,h_t,\dots,h_{2t},0,\dots,0)$$ and let \(K\) be the \(n\)-vector $$K=(h_0,\dots,h_t,0,\dots,0).$$
+							</p>
+							<p class="rp_original rp_sub">
+								Let \(B=(b_{i,j})\) be the \(n\times n\) (Vandermonde) matrix, where \(b_{i,j}=a_j^i\) for \(i,j=0,\dots,n-1\). Furthermore, let \(P\) be the linear projection $$P(x_0,\dots,x_{n-1})=(x_0,\dots,x_t,0,\dots,0).$$
+							</p>
+							<p class="rp_original rp_sub">
+								We have $$H\cdot B=S$$ $$H\cdot P=K$$ and $$K\cdot B=R.$$
+							</p>
+							<p class="rp_original rp_sub">
+								Since \(B\) is not singular (because the \(\alpha_i\)'s are distinct) we have $$S\cdot(B^{-1}PB)=R$$ but \(A=B^{-1}PB\) is some fixed constant matrix, proving our claim.
+							</p>
+						</section>
+						<section id="sec4.3">
+							<h3>4.3. The Randomization Step</h3>
+							<p class="rp_original">
+								As noted above, the coefficients of the product polynomial are not completely random, and likewise the coefficients of its truncation \(k(x)\) may not be completely random. To randomize the coefficients, each player \(P_i\) randomly selects a polynomial \(q_i(x)\) of degree \(2t\) with a zero free coefficient, and distributes its shares among the player. By a simple generalization of the argument in Shamir's<sup class="reference" data-citation="Sh">[?]</sup> scheme, it is easy to see that knowing \(t\) values on this polynomial gives no information on the vector of coefficients of the monomials of \(x,x^2,\dots,x^t\) of \(q_i(x)\).
+							</p>
+							<p class="rp_original">
+								Thus instead of using \(h(x)\) in our reduction we can use $$\widetilde{h}(x)=h(x)+\sum\limits_{j=0}^{n-1}{q_j(x)}$$ which satisfies \(\widetilde{h}(0)=h(0)\) but the other coefficients of \(x^i,1\leq i\leq t\), are completely random. Since each player can evaluate his or her point \(\widetilde s_i = \widetilde h(\alpha_i)\), we can now apply the truncation procedure using the matrix multiplication lemma to arrive at a completely random polynomial \(\widetilde k(x)\) which satisfies both \(\operatorname{deg}\widetilde k(x)=t\), and \(\widetilde k(0)=a\cdot b\), and \(k(x)\) is properly shared among all the players.
+							</p>
+							<p class="rp_original">
+								Thus (omitting many well known details, see <span class="reference" data-citation="GMW">[?]</span>) we have proved
+							</p>
+							<span class="rp_theorem_header" id="theorem1">Theorem 1:</span>
+							<p class="rp_original rp_theorem">
+								For every (probabilistic) function \(f\) and \(t\lt\frac n 2\) there exists a \(t\)-private protocol.
+							</p>
+							<span class="rp_sub_header">Remarks:</span>
+							<ol class="rp_original rp_sub">
+								<li>The complexity of computing \(F\) \(t\)-privately is bounded by a polynomial (in \(n\)) factor times the complexity of computing \(F\).</li>
+								<li>If \(F\) can be computed by an arithmetic circuit over some field using unbounded fan-in linear operation and bounded fan-in multiplication, in depth \(d\), then \(F\) can be computed \(t\)-privately in \(O(d)\) rounds of exchange of information.</li>
+								<li>
+									<p>
+										In our construction we have to reduce the degree of our polynomial only when its degree is about to pass \(n-1\). Thus if \(t=O(n^{1-\epsilon})\), for some fixed \(\epsilon\gt 0\), and we start with polynomials of degree \(t\), the players can simulate many steps of the computation before the degree comes close to \(n\), by doing the computation each on their own shares, without any communication(!). When the degree does get close to \(n\), we reduce the degree back to \(t\) in one randomizing, degree reducing step.
+									</p>
+									<p>
+										Two simple examples are:
+									</p>
+									<ol type="a">
+										<li>Any Boolean function \(F:\,\{0,1\}^n\;\rightarrow\;\{0,1\}\) can be represented as a multilinear polynomial over the field \(F\). Thus if \(t=O(n^{1-\epsilon})\) we can compute \(t\)-privately, in parallel, all the monomials of \(F\) in \(O(1)\) number of rounds and then use a big fan-in addition to evaluate \(F\). This procedure may use exponentially long messages but only constant number of rounds.</li>
+										<li>The Boolean Majority function has a polynomial size \(O(\log n)\) depth circuit, and thus for \(t\,=\,O(n^{1-\epsilon})\), this function can be computed \(t\)-privately using only polynomically long messages in constant number of rounds.</li>
+									</ol>
+								</li>
+							</ol>
+							<p class="rp_original">
+								For completeness we state the following simple result.
+							</p>
+							<span class="rp_theorem_header">Theorem 2:</span>
+							<p class="rp_original rp_theorem">
+								There are functions for which there are no 	\(frac n 2\) private protocols.
+							</p>
+							<span class="rp_sub_header">Proof:</span>
+							<p class="rp_original rp_sub">
+								It is easy to see that two players, each holding one input bit, cannot compute the OR function of their bits without one of them leaking some information. This immediately generalizes to prove the theorem.
+							</p>
+						</section>
+					</section>
+					<section id="sec5">
+						<h2>5. Sharing a Secret with Cheaters</h2>
+						
 					</section>
                 </div>
             </div>
@@ -294,11 +419,13 @@
 					<li id="DH">W. Diffie and M. E. Helman, New directions in cryptography, <i>IEEE Trans. Inform. Theory</i>, Vol. IT-22, pp.644-654, 1976.</li>
 					<li id="DS">D. Dolev and R. Strong. Polynomial algorithms for multiple processor agreement. <i>STOC82</i>.</li>
 					<li id="FM">P. Feldman and S. Micali, Optimal algorithms for Byzantine agreement. These proceedings</li>
+					
 					<li id="GMW1">O. Goldreich, S. Micali, and A. Wigderson. Proofs that yield nothing but the validity of the assertion, and a methodology of cryptographic protocol design. <i>FOCS86</i>, pp. 174-187.</li>
 					<li id="GMW2">O. Goldreich, S. Micali, and A. Wigderson. How to play any mental game. <i>STOC87</i>, pp.218-229.</li>
 					<li id="GMR">S. Goldwasser, S. Micali, and C. Rackoff. The knowledge complexity of interactive proof systems. <i>STOC85</i>, pp. 291-304.</li>
 					<li id="PSL">M. Pease, R. Shostak, and L. Lamport. Reaching agreement in the presence of faults, <i>JACM</i>. Vol. 27, pp. 228-234. 1980.</li>
 					<li id="PW">W. W. Peterson and E. J. Weldon, Error correcting codes, Second Ed., MIT Press. 1972.</li>
+					
 					<li id="Sh">A. Shamir, How to share a secret. <i>CACM 22</i>, pp. 612-613. 1979.</li>
 					<li id="Y1">A. C. Yao, How to generate and exchange secrets. <i>STOC86</i>.</li>
 					<li id="Y2">A. C. Yao, On the succession problem for Byzantine Generals, manuscript. 1983.</li>
