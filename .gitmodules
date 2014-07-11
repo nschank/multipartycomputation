@@ -1,4 +1,4 @@
 [submodule "nextsteps/code"]
 	path = nextsteps/code
-	url = git://github.com/nschank/multipartycomputation
+	url = https://github.com/nschank/multipartycomputation
 	branch = impl_publish
