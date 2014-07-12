@@ -324,6 +324,38 @@
 						<p class="rp_original">
 							In the following protocol we have a group of \(n\) players, including at most \(t\) knaves, where \(n\geq2t+1\). We assume that the dealer is a knight. He owns a secret \(s\), which he wishes to share among the \(n\) players. Without loss of generality we may assume that the secret \(s\in\mathbb Z_p\), for some prime number \(p\gt n\). (The reader should not confuse this new prime \(p\) which can be a small prime with the large prime number used for the generation and verification of the check vectors described above.) We want to achieve that any set of fewer than \(t+1\) players will have no information about the secret \(s\), and any set of \(t+1\) or more players which contains at least \(t+1\) knights will be able to compute the secret. When the secret is revealed we want that all knights will agree on the same value and that it will be the original secret the dealer shared. This gives a new, simple, polynomial-time solution for the problem treated in <span class="reference" data-citation="TW">[?]</span>.
 						</p>
+						<span class="rp_sub_header">Phase 1 - Sharing the Secret</span>
+						<ol class="rp_original rp_sub">
+							<li>We fix a prime \(p\gt n\), and \(n\) distinct points, \(a_1,\dots,\a_n\in\mathbb Z_p\), known to all players.</li>
+							<li>The dealer chooses randomly \(a_1,\dots,a_t\in\mathbb Z_p\) and defines \(f(x)=a_tx^t+\dots+a_1x+s\).</li>
+							<li>He computes \(f(a_i)\) for all \(i\).</li>
+							<li>For each \(f(a_i)\) he chooses random \(b_{i1}\neq0,y_{i1},\dots,b_{in}\neq0,y_{in}\) and creates the check vectors as described above.</li>
+							<li>The dealer hands over to \(P_i\) the data:	
+								<ul>
+									<li>\(f(a_i)\) - \(P_i\)'s value on the graph of \(f(x)\).</li>
+									<li>\(y_{i1},\dots,y_{in}\) - \(P_i\) will hand \(y_{ij}\) to \(P_j\), so \(P_j\) can authenticate \(P_i\)'s piece.</li>
+									<li>\((b_{1i}c_{1i}),\dots,(b_{ni},c_{ni})\) - check vectors, where \((b_{ji},c_{ji})\) is \(P_i\)'s check vector for \(P_j\)'s piece.</li>
+								</ul>
+							</li>
+						</ol>
+						<p class="rp_original rp_sub">
+							This completes the dealer's part.
+						</p>
+						<span class="rp_sub_header">Phase 2 - Revealing the Secret</span>
+						<p class="rp_original rp_sub">
+							When the secret is to be revealed:
+						</p>
+						<ol class="rp_original">
+							<li>Every \(P_i\) hands to every \(P_j,\;j\neq i\), the pair \((f(a_i),y_{ij})\). (Knaves may, of course, give false values.)</li>
+							<li>For all the pairs that \(P_i\) received he checks, using \((b_{ij},c_{ji})\), that \(f(a_j)+b_{ji}y_{ji}=c_{ji}\) and accepts when appropriate. (Each \(P_i\) who is himself a knight will accept at least \(t+1\) pieces from the knights, and by Lemma 1 will reject, with high probability, all false pieces from the knaves.</li>
+							<li>Say \(P_i\) accepted \(f(a_{i_1}),\dots,f(a_{i_r}),\,r\geq t+1\). He can now take \(t+1\) pieces and compute \(f(x)\) by interpolation. Since the dealer was a knight <i>all</i> the accepted points lie on the graph of \(f(x)\). The reconstructed secret \(s\) is uniquely defined as the constant term of \(f(x)\), and equals the one initially distributed.</li>
+						</ol>
+						<p class="rp_original">
+							It is easy to see that the above algorithm provides us with the possibility or a knight dealer to share a secret, so that the knaves can not interfere in the computations, and that all knights will compute the same value \(s\). This completes the proof of Theorem 1.
+						</p>
+						<section id="sec2.1">
+							<h3>2.1. The Weak Secret Sharing - WSS</h3>
+						</section>
 					</section>
                 </div>
             </div>
