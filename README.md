@@ -8,6 +8,7 @@ The site has three main sections:
 - Research
 - Learning
 - Next Steps
+
 A description of their intended contents, purposes, and layout follows.
 
 ###Research
@@ -44,7 +45,7 @@ Research pages always include:
 	- See the "Alterations During Transcription" (/research/changes.html) for more information about what specific things are changed during transcription.
 	- Annotations (i.e. paragraphs of class 'rp_annotation') should be added to clarify, contextualize, or correct anything within the original ('rp_original') text.
 	- Proofs are annotations, and should ALWAYS be added, if known.
-- Definitions {class: "definable", optional data-define: [word to define] (if no data-define, then innerHTML is used)} for words that should be explained or that were defined in the text, but not as officially as a term to be put in the 'definition' section.
+- Definitions {class: "definable", optional data-define: \[word to define\] \(if no data-define, then innerHTML is used\)} for words that should be explained or that were defined in the text, but not as officially as a term to be put in the 'definition' section.
 	- Definitions used in many pages should be put in /script/def.js.
 	- Definitions used only in the one page should be put in the JavaScript object self_def, in the form self_def["word"]="definition"
 	- A word should only be 'definable' in its first usage in every section.

@@ -44,7 +44,6 @@ function addDOMR(id, elem, references)
 		
 		block.innerHTML += "<h2>Reference</h2>";
 		block.innerHTML += "<p>"+reference.innerHTML+"</p>";
-		block.innerHTML += "<p><a href=\"" + authorLink(id) + "\">See more by this author</a></p>";
 	
 		block.innerHTML += "<p class=\"ref_goto_citations\"><a href=\"#referencelist\">See complete reference list</a></p>";
 		

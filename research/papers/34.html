@@ -36,12 +36,16 @@
 						return "#";
 				}
 			}
-
-			self_def["non-general word"] = "definition";
+			
+			self_def["blob"] = "A blob is a commitment scheme, in this paper defined as a way of committing to any value in \\(GF(2^k)\\) such that \\(2^k\\gt n\\). It has the following properties:<ol><li>A party can obtain a blob representing any value in \\(GF(2^k)\\)</li><li>When presented with a blob, nobody can tell what value it represents.</li><li>The committing participant cannot open it to any value other than the original value used to create the blob.</li><li>Any other participant can also create blobs representing any value in \\(GF(2^k)\\) that look exactly like the blobs obtained by the original participant.</li></ol>";
+			self_def["reliable participant"] = "Any participant which: <ul><li>Does not leak secret information to other participants; and</li><li>Always sends the correct messages defined by the protocol</li></ul>We assume \\(2d+a\\) of the participants in a protocol to be reliable.";
 			//-->
         </script>
     </head>
     <body>
+		<div class="main_hidden">
+			\(\require{cancel}\)
+		</div>
         <div class="main_foreground">
             <div class="main_toplevel main_header">
                 <h1>Multiparty Computation</h1>
@@ -92,7 +96,7 @@
 									<li><a href="#ref">Referencing This Paper</a></li>
 								</ol>
 							</li>
-                            <li><a href="#_B">Annotated Extended Abstract</a></li>
+                            <li><a href="#_B">Annotated Paper</a></li>
                         </ol>
                     </div>
 					
@@ -196,13 +200,13 @@
                         <h2>1. Introduction</h2>
 						
 						<p class="rp_original">
-							The problem of multiparty function computation is as follows: \(n\) participants \(P_1,P_2,\dots,P_n\) sharing the knowledge of a multivariable function \(F\) want to publicly compute \(z=F(x_1,x_2,\dots,x_n)\), where \(x_i\) is a secret input provided by \(P_i\). The goal is to preserve the maximum privacy of the \(x_i\)'s and to simultaneously guarantee the correctness of the common result \(z\). Intrinsically, the value of \(z\) will reveal some information about the secret inputs. We say that input value \(x_i\) is cryptographically secure in this context if it is believed hard to determine in polynomial time more information about \(x_i\) than what is necessarily given by \(z\).
+							The problem of multiparty function computation is as follows: \(n\) participants \(P_1,P_2,\dots,P_n\) sharing the knowledge of a multivariable function \(F\) want to publicly compute \(z=F(x_1,x_2,\dots,x_n)\), where \(x_i\) is a secret input provided by \(P_i\). The goal is to preserve the maximum privacy of the \(x_i\)'s and to simultaneously guarantee the correctness of the common result \(z\). Intrinsically, the value of \(z\) will reveal some information about the secret inputs. We say that input value \(x_i\) is <span class="definable" data-define="cryptographic security">cryptographically secure</span> in this context if it is believed hard to determine in polynomial time more information about \(x_i\) than what is necessarily given by \(z\).
 						</p>
 						<p class="rp_original">
 							The problem of achieving secure multiparty function computation in a public key cryptographic setting, was first posed by Yao<sup class="reference" data-citation="Y82">[?]</sup>. He also asked for which functions this problem admitted a solution. The answer to these questions was found by Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW87">[?]</sup> who showed that a solution, based on the existence of <span class="definable" data-define="trapdoor permutation">trapdoor one-way permutations</span>, exists no matter what the function is. They exhibited a "compiler" that transforms any multiparty function computation problem into a multiparty cryptographically secure protocol.
 						</p>
 						<p class="rp_original">
-							Inspired by their work, Chaum, Damgård, and Van de Graaf presented a more direct and practical solution<sup class="reference" data-citation="CDG">[?]</sup> based on a specific trapdoor function. Their protocol had the advantage that one \(x_i\) was unconditionally secure, i.e. no information at all is available about it, other than the amount released by \(z\). All these constructions rely on trapdoor one-way functions, and therefore must assume essentially that public key cryptography is possible.
+							Inspired by their work, Chaum, Damgård, and Van de Graaf presented a more direct and practical solution<sup class="reference" data-citation="CDG">[?]</sup> based on a specific trapdoor function. Their protocol had the advantage that one \(x_i\) was <span class="definable" data-define="information theoretic security">unconditionally secure</span>, i.e. no information at all is available about it, other than the amount released by \(z\). All these constructions rely on trapdoor one-way functions, and therefore must assume essentially that public key cryptography is possible.
 						</p>
 						<p class="rp_original">
 							A much weaker assumption is to assert the existence of <span class="definable" data-define="authenticated network">authenticated</span> <span class="definable" data-define="secrecy network">secrecy</span> channels, i.e. a way of communicating in which the identity of the sender is known (authentication) and the data transferred is revealed only to the single person it is designed for (secrecy). Such channels are very practical and can be implemented very easily: for example, this channel can be obtained by writing down messages on pieces of paper and physically handing them out to the other parties. They can also be implemented using conventional cryptography (secret key systems). Two fundamental questions remain: Which protocol problems can be solved assuming only the existence of these authenticated secrecy channels between pairs of participants, and can all parties have their secrets unconditionally secure?
@@ -226,7 +230,7 @@
 							</p>
 							<ul class="rp_original">
 								<li>
-									Unconditional Secrecy: In both stages, it is not possible for any subset of less than \(\frac{n}{3}\) participants to gain any information about the remaining people's inputs.
+									<span class="definable" data-define="information theoretic security">Unconditional Secrecy</span>: In both stages, it is not possible for any subset of less than \(\frac{n}{3}\) participants to gain any information about the remaining people's inputs.
 								</li>
 								<li>
 									Built-In Fault Tolerance: In the second phase, no such subset will be able to prevent the honest participants from completing correctly the secret evaluation of the function (see <a href="#sec5">Section 5</a>).
@@ -265,7 +269,7 @@
 							<li>They send the correct messages defined by the protocol</li>
 						</ul>
 						<p class="rp_original">
-							We call a participant satisfying the above properties <i>reliable</i>. At the start of the protocol, it is of course not generally agreed which participants are reliable. Our basic assumptions about the communication between reliable participants \(P_A\) and \(P_B\) are that:
+							We call a participant satisfying the above properties <span class="definable" data-define="reliable participant">reliable</span>. At the start of the protocol, it is of course not generally agreed which participants are reliable. Our basic assumptions about the communication between reliable participants \(P_A\) and \(P_B\) are that:
 						</p>
 						<ul class="rp_original">
 							<li>When \(P_A\) sends a message to \(P_B\), nobody else can learn anything about its content;</li>
@@ -283,13 +287,13 @@
 							Our protocols ensure that all reliable participants obtain the correct result. It is proved constructively in <span class="reference" data-citation="LSP">[?]</span>, under a model like ours, that a necessary and sufficient condition for all reliable participants to agree on a message&mdash;such as the result of a protocol&mdash;is that at least \(2d+a\) of the participants are reliable. Hence, our two-thirds assumption is optimal. A polynomial algorithm solving this problem is presented in <span class="reference" data-citation="DS">[?]</span>. Their construction allows us to obtain an efficient <span class="definable" data-define="broadcast channel">"broadcast" channel</span>: a means allowing any participant to make a message known to all participants, in such a way that all reliable participants will obtain the same value of the message. (Assuming a broadcast channel, moreover, would not enable us to weaken our other requirements, but remains interesting in some other context, as explained in <a href="#sec6">Section 6</a>.)
 						</p>
 						<p class="rp_original">
-							For simplicity in the following descriptions, we use the terminology of information theory because we make the assumption that the channels are unconditionally secure. Notice however that in fact we get protocols as strong as the secrecy and authentication of the channels used. If the channels were not unconditionally secure, for example, the protocol would not be unconditionally secure for all participants but its correctness would still be guaranteed.
+							For simplicity in the following descriptions, we use the terminology of information theory because we make the assumption that the channels are <span class="definable" data-define="information theoretic security">unconditionally secure</span>. Notice however that in fact we get protocols as strong as the secrecy and authentication of the channels used. If the channels were not unconditionally secure, for example, the protocol would not be unconditionally secure for all participants but its correctness would still be guaranteed.
 						</p>
 					</section>
 					<section id="sec3">
 						<h2>3. Implementing Blobs using Secret Sharing</h2>
 						<p class="rp_original">
-							In <span class="reference" data-citation="BCC">[?]</span>, a fundamental protocol primitive is described: <i>the blob</i>. The purpose of blobs is to allow a participant \(P_A\) to <i><span class="definable" data-define="commitment">commit</span></i> to a bit in such a way that he or she cannot later change his or her mind about the bit, but nobody else can discover it without the participant's help. The defining properties of blobs are as follows:
+							In <span class="reference" data-citation="BCC">[?]</span>, a fundamental protocol primitive is described: the <span class="definable">blob</span>. The purpose of blobs is to allow a participant \(P_A\) to <i><span class="definable" data-define="commitment">commit</span></i> to a bit in such a way that he or she cannot later change his or her mind about the bit, but nobody else can discover it without the participant's help. The defining properties of blobs are as follows:
 						</p>
 						<ol type="i">
 							<li>\(P_A\) can obtain blobs representing 1 and blob representing 0.</li>
@@ -304,16 +308,22 @@
 							For our purposes, the scheme may be described as follows: a polynomial \(f\) of degree at most \(d\) over \(GF(2^k)\) is chosen uniformly, where \(k\) is an integer such that \(2^k&gt;n\). The secret to be shared is defined for convenience as the value of \(f\) at 0. The protocol also assigns a distinct non-zero point \(i_B\) in the field to each participant \(P_B\). The secret can now be divided among the \(n\) participants by providing each \(P_B\) with the value of \(f(i_B)\). It is not hard to see that more than \(d\) shares completely determine \(f\), and therefore the secret, while no Shannon information about the secret is revealed by any number of shares not exceeding \(d\).
 						</p>
 						<p class="rp_annotation">
-							Recall \(GF(p^n)\) to be the Galois field of characteristic \(p\) and degree \(n\). A polynomial of degree \(d\) is of the form \(f(x)=\sum\limits_{i=0}^{d}{a_ix^i}\), where \(a_i\in\{0,\dots,2^k-1\}\). As with polynomials over \(\mathbb{R}\), we can interpolate the polynomial using any \(d+1\) points.
+							Recall that \(GF(p^n)\) is the Galois field of characteristic \(p\) and degree \(n\). A polynomial of degree \(d\) is of the form \(f(x)=\sum\limits_{i=0}^{d}{a_ix^i}\), where \(a_i\in\{0,\dots,2^k-1\}\). As with polynomials over \(\mathbb{R}\), we can <span class="definable" data-define="interpolation">interpolate</span> any polynomial of degree \(d\) using any \(d+1\) points on that polynomial.
 						</p>
 						<p class="rp_annotation">
-							To convince yourself of the information theoretic security of a blob (for anything less than \(d+1\) shares), recall that given \(d+1\) points in a polynomial of degree \(d\), we can determine the polynomial completely, e.g. through Lagrange interpolation. If we fix the first \(d\) shares of a polynomial \(f\), and we fix the input \(x\) of the final share, we note that there are \(2^{d+1}\) possible final shares of the form \((x,f(x)\stackrel{\text{def}}{=}y)\) where \(y\in\{0,\dots,2^{d+1}-1\}\). By unisolvence theorem, any distinct \(y\) will produce a distinct polynomial; since, as above, a polynomial can be defined by \(d+1\) points, any two polynomials of degree \(d\) sharing \(d+1\) points must be identical.
+							While the security is indeed clear to see, we prove its security nonetheless. To convince yourself of the information theoretic security of a blob (for anything less than \(d+1\) shares), recall that given \(d+1\) points in a polynomial of degree \(d\), we can determine the polynomial completely, e.g. through Lagrange interpolation. If we fix the first \(d\) shares \((i_1,f(i_1)),\dots,(i_d,f(i_d))\) of some unknown polynomial \(f\), and we fix the input \(i_{d+1}\) of the next share, we note that there are \(2^k\) possible next shares of the form \((i_{d+1},y\stackrel{\text{def}}{=}f(i_{d+1}))\) where \(y\in GF(2^k)\). By unisolvence theorem, any distinct \(y\) will produce a distinct polynomial<sup class="reference" data-citation="theorem_uni">[?]</sup>; since, as above, a polynomial can be defined by \(d+1\) points, any two polynomials of degree \(d\) sharing \(d+1\) points must be identical.
 						</p>
 						<p class="rp_annotation">
-							Let's quickly prove the existence of a bijection between the chosen value \(y=f(x)\) and the value of the function at \(0\), as that will nicely allow us to demonstrate their identical probability distributions. To prove injectivity, we choose any two distinct \(y\)'s for fixed \(x\), and interpolate \(f_0\) and \(f_1\). Assume for a moment that the interpolation is not injective, so \(f_0(0)=f_1(0)\); we now have two polynomials sharing the original \(d\) points, plus an additional point, so they must be identical, violating our assumption that \(f_0(x)\neq f_1(x)\). Clearly, our interpolation is injective. To prove surjectivity, we choose an arbitrary value in GF(\(2^k\)), \(v\), to demonstrate that there exists a \(y\) such that the interpolation will produce \(f(0)=v\). Indeed, we simply need to interpolate a polynomial \(f\) using the original \(d\) shares and the share \((0,v)\), setting \(y=f(x)\). Our relation between \(y\) and \(f(0)\) must therefore be a bijection.
+							We already know that the final share has a constant probability distribution, since the polynomial was chosen uniformly at random (which, as discussed above, is an identical statement to "the \(d+1\) shares were chosen uniformly at random"). Let's prove the existence of a bijection between value of the final share \(y\) and the value of the interpolated function at \(0\), as that will nicely allow us to demonstrate their identical probability distributions. We keep the \(d\) shares and the value \(i_{d+1}\) fixed, and define the relation \(R:\;GF(2^k)\mapsto GF(2^k)\) to map the value of \(y\) to the value of \(f(0)\) (calculated after interpolation). 
 						</p>
 						<p class="rp_annotation">
-							Since each share was chosen randomly, the value of \(y\) has a constant probability distribution even given \(d\) other shares; by property of bijection, the value of \(f(0)\) must also have a constant probability distribution. We can conclude that no information could have been released by only \(d\) shares.
+							To prove injectivity, we must demonstrate that \(y_0=y_1\) implies \(R(y_0)=R(y_1)\). We choose any two distinct shares for \(i_{d+1}\), interpolating \(f_0\) and \(f_1\). Assume for a moment that our relation is not injective, so \(R(f_0(i_{d+1}))\neq R(f_1(i_{d+1}))\). By definition of our relation, this statement is equivalent to \(f_0(0)\neq f_1(0)\). However, we have two polynomials sharing the original \(d\) points, plus an additional shared point \((i_{d+1},y_0=y_1)\), so they must be identical (\(f_0=f_1\)). This violates our assumption that \(f_0(0)\neq f_1(0)\). Clearly, our relation is injective.
+						</p>
+						<p class="rp_annotation">
+							To prove surjectivity, we choose an arbitrary value in GF(\(2^k\)), \(v\), to demonstrate that there exists a \(y\) such that the interpolation to some \(f\) will satisfy \(f(0)=v\). Indeed, we simply need to interpolate polynomial \(f\) using the original \(d\) shares and new share \((0,v)\), setting \(y=f(x)\). Since \(\forall\,y\in GF(2^k)\,\exists x \text{ s.t. } R(x)=y\), our relation is surjective.
+						</p>
+						<p class="rp_annotation">
+							So clearly we have a bijection between \(y\) and \(f(0)\). As previously mentioned, the value of \(y\) has a constant probability distribution even given \(d\) other shares; by property of bijection, the value of \(f(0)\) must also have a constant probability distribution. We can conclude that no information could have been released by only \(d\) shares.
 						</p>
 						<p class="rp_original">
 							We generalize slightly by allowing blobs to represent any value in \(GF(2^k)\). Blobs are now readily achieved:
@@ -326,16 +336,17 @@
 								To obtain a blob representing the value \(v\), participant \(P_A\) chooses uniformly a polynomial \(f\) with \(deg(f)\leq d\), such that \(f(0)=v\). \(P_A\) then calculates \(n\) shares as above and distributes one to each participant. Using the subprotocol described below, the other participants are convinced that a consistent set of shares was distributed.
 							</li>
 							<li>
-								Since the number of unreliable participants is smaller than \(d\), no <span class="definable">collusion</span> will gain any information in the Shannon sense about the value represented by a blob.
+								Since the number of <span class="definable" data-define="reliable participant">unreliable participants</span> is smaller than \(d\), no <span class="definable">collusion</span> will gain any information in the Shannon sense about the value represented by a blob.
 							</li>
-						</ol>
-						<ol type="i" class="rp_original">
-							<li value="3">
-								To open a blob, \(P_A\) first broadcasts what <del>its</del><ins>everyone's</ins> shares should be \((\{i_B\;|\;1\leq B\leq n\})\). Then each participant broadcasts a message stating whether they agree with their share that was broadcast by \(P_A\). If a participant does not agree, that participant is said to be <i>complaining</i> about \(P_A\). It is required that at least \(2d+a\) of the participants do not complain. By the remarks below, this condition ensures that \(P_A\) can only open a blob to reveal the single value it represents.
+							<li>
+								To open a blob, \(P_A\) first broadcasts what <del>its</del><ins>everyone's</ins> shares should be \((\{\cancel{i_B}\boldsymbol{(i_B,f(i_B))}\;|\;1\leq B\leq n\})\). Then each participant broadcasts a message stating whether they agree with their share that was broadcast by \(P_A\). If a participant does not agree, that participant is said to be <i>complaining</i> about \(P_A\). It is required that at least \(2d+a\) of the participants do not complain. By the remarks below, this condition ensures that \(P_A\) can only open a blob to reveal the single value it represents.
 							</li>
 						</ol>
 						<p class="rp_annotation">
-							We note here that, if a participant complains once, then that participant is assumed to be complaining for the remainder of the protocol. A less vague phrasing for the above might say that a participant who disagrees during a round of the protocol <i>becomes a complaining participant</i>, as opposed to simply 'performing the act of complaining' as may be (incorrectly) inferred. Complaining participants can be safely ignored for the remainder of the protocol, since their actions will be ignored regardless.
+							Correction: \(i_B\) was originally defined as only the input value used to define a single share, and did not include the output value. The correct description of a single share in its entirety&mdash;which is what should be sent to open the blob&mdash;is \((i_B,f(i_B))\).
+						</p>
+						<p class="rp_annotation">
+							We note here that, if a participant complains once, then that participant is assumed to be complaining for the remainder of the protocol. A less vague phrasing for the above might say that a participant who disagrees during a round of the protocol <i>becomes a complaining participant</i>, as opposed to simply 'performing the act of complaining' as may be (incorrectly) inferred. Complaining participants can be safely ignored for the remainder of the protocol, assuming there are not enough of them, since their actions and shares will be ignored.
 						</p>
 						<ol class="rp_original" type="i">
 							<li value="4">
@@ -379,10 +390,10 @@
 							To see why this is satisfied, it suffices to consider the behavior of reliable participants, corresponding to the worst case assumption that all unreliable participants will try to help \(P_A\) by always agreeing. For any blob \(\gamma\), consider a polynomial consistent with a maximal number of shares of \(\gamma\), and let \(C(\gamma)\) be the number of remaining shares held by reliable and non-complaining participants. Thus \(C(\gamma)\) may vary over time. In other words, no matter how \(P_A\) tries to open \(\gamma\), at least \(C(\gamma)\) participants will complain. The case where \(P_A\) created \(\gamma\) correctly corresponds of course to \(C(\gamma)=0\).
 						</p>
 						<p class="rp_original">
-							In any of the rounds of the subprotocol above, it is easy to see that because the sum of \(\delta\) and \(\delta+\beta\) is just \(\beta\), \(C(\delta)+C(\delta+\beta)\geq C(\beta)\) must hold. So if at any point \(C(\beta)\gt 0\), then \(P_A\) cannot go through \(m\) rounds without complaints except by predicting roughly \(\frac{2m}{3}\) coinflips.
+							In any of the rounds of the subprotocol above, it is easy to see that because the sum of \(\delta\) and \(\delta+\beta\) is just \(\beta\), \(C(\delta)+C(\delta+\beta)\geq C(\beta)\) must hold. So if at any point \(C(\beta)\gt 0\), then \(P_A\) cannot go through \(m\) rounds without complaints except by predicting roughly \(\frac{2m}{3}\) coin flips.
 						</p>
 						<p class="rp_annotation">
-							The above is not actually that easy to see. A better way of stating the first inequality would be to say that anyone who has complained about \(\beta\) must have done so by complaining about either \(\delta\) or \(\delta+\beta\) first, possibly both.
+							The above inequality is a restatement of the fact that \(P_A\) has no way of opening both \(\delta\) and \(\delta+\beta\) without at least as many inconsistencies as opening \(\beta\).
 						</p>
 						<p class="rp_original">
 							In <span class="reference" data-citation="BCC">[?]</span>, it is shown how one can construct, using only blobs, efficient <i>minimum disclosure proofs</i> for membership in a very large class of languages, including <span class="definable">NP</span> and <span class="definable">BPP</span>. Since we can construct blobs in our model, we can also perform all such proofs directly.
@@ -391,7 +402,10 @@
 					<section id="sec4">
 						<h2>4. VSS and Fault Tolerant Blobs</h2>
 						<p class="rp_original">
-							When opening a blob, \(P_A\) was to broadcast the shares distributed in creating it. If \(P_A\) is trying to prove some statement using the techniques of <span class="reference" data-citation="BCC">[?]</span>, the previous section's results imply that it is in \(P_A\)'s interest to create and broadcast the shares properly. But in other cases, communication failures or a change of heart, for example, might keep \(P_A\) from ultimately broadcasting the shares. Even if the other participants were to make \(P_A\)'s shares public in efforts to open the blob without \(P_A\)'s help, they would be left with a computational problem: unreliable participants might make public false values for their shares, and finding the value represented may require searching the exponentially many subsets of shares of size \(2d+a\) for one consistent with one polynomial of degree smaller than \(d\). Even worse, if \(P_A\) was already cheating when creating the blob, the majority of complainers could be reliable. In such cases, unreliable participants could choose at the time of opening between broadcasts that would leave no unique solution for the secret or other broadcast that would yield a particular value unambiguously.
+							When opening a <span class="definable">blob</span>, \(P_A\) was to broadcast the shares distributed in creating it. If \(P_A\) is trying to prove some statement using the techniques of <span class="reference" data-citation="BCC">[?]</span>, the previous section's results imply that it is in \(P_A\)'s interest to create and broadcast the shares properly. But in other cases, communication failures or a change of heart, for example, might keep \(P_A\) from ultimately broadcasting the shares. Even if the other participants were to make \(P_A\)'s shares public in efforts to open the blob without \(P_A\)'s help, they would be left with a computational problem: <span class="definable" data-define="reliable participant">unreliable participants</span> might make public false values for their shares, and finding the value represented may require searching the exponentially many subsets of shares of size \(2d+a\) for one consistent with one polynomial of degree smaller than \(d\). Even worse, if \(P_A\) was already cheating when creating the blob, the majority of complainers could be reliable. In such cases, unreliable participants could choose at the time of opening between broadcasts that would leave no unique solution for the secret or other broadcast that would yield a particular value unambiguously.
+						</p>
+						<p class="rp_annotation">
+							Aside from the huge (\(\binom{n}{2d+a}\)) search space of subsets, we note that the problem is quite possibly impossible to solve. If, for instance, we find we have some subset of size \(2d+a-1\) that is consistent with a polynomial of degree \(d-1\) or less, then ALL of the additional shares will describe consistent polynomial of degree \(d\) or less. The unreliable participants could easily make the problem impossible to solve by presenting options that are all equally valid.
 						</p>
 						<p class="rp_original">
 							This is where the secret sharing scheme becomes insufficient and a VSS is needed. To avoid the problems mentioned above, and assist with things to be presented later, we provide for the "sharing of the shares of a blob" (as was done for similar reasons in <span class="reference" data-citation="Ch2">[?]</span>). Thus, to create a <i>double</i> blob \(\delta, P_A\) proceeds as follows:
@@ -399,10 +413,10 @@
 						<ol class="rp_original">
 							<li>\(P_A\) creates an ordinary blob in the same way as in the previous section. This blob is called the <i>top level</i> blob, and contains the secret committed to.</li>
 							<li>For each participant \(P_B\), the following is done: suppose \(P_A\) sent the share \(s_B\) of the original blob to \(P_B\). Then \(P_B\) creates a <i>sub-blob</i>, i.e. creates a blob \(\beta_B\) containing the share \(s_B\).</li>
-							<li>By the remarks in the previous section, all participants are now committed to their share of the top-level blob. A cut-and-choose procedure is now used to check that everybody has committed to the proper share: \(P_A\) creates a number of additional double blobs \(\delta_1,\delta_2,\cdots,\delta_t\) (for which all participants create their own sub-blobs), and according to coin flips made by other participants, either all shares of the new double blob are made public or the sum of corresponding shares of the new and the original double blob are broadcast. Thus in each round, all participants open a sub-blob of their own (either a new one or a sum) to confirm their agreement or disagreement with \(P_A\) on what was sent originally. In order for the proof to be accepted, a subset consisting of at least \(2d+a\) participants must agree with \(P_A\) in all rounds. If a participant disagrees with \(P_A\) at any point, then that participant's share and sub-blob will be ignored when the original double blob is later opened.</li>
+							<li>By the remarks in the previous section, all participants are now committed to their share of the top-level blob. A cut-and-choose procedure is now used to check that everybody has committed to the proper share: \(P_A\) creates a number of additional double blobs \(\delta_1,\delta_2,\cdots,\delta_t\) (for which all participants create their own sub-blobs), and according to <span class="definable" data-define="coin flip">coin flips</span> made by other participants, either all shares of the new double blob are made public or the sum of corresponding shares of the new and the original double blob are broadcast. Thus in each round, all participants open a sub-blob of their own (either a new one or a sum) to confirm their agreement or disagreement with \(P_A\) on what was sent originally. In order for the proof to be accepted, a subset consisting of at least \(2d+a\) participants must agree with \(P_A\) in all rounds. If a participant disagrees with \(P_A\) at any point, then that participant's share and sub-blob will be ignored when the original double blob is later opened.</li>
 						</ol>
 						<p class="rp_original">
-							It is easily seen that if the proof in (3) above is accepted, then the following holds with probability exponentially close to 1 in the number of <span class="definable" data-define="coin flip">coin flips</span>:
+							It is easily seen that if the proof in (3) above is accepted, then the following holds with probability exponentially close to 1 in the number of coin flips:
 						</p>
 						<ul class="rp_original">
 							<li>all sub-blobs accepted by the cut-and-choose contain a uniquely defined share of the top-level blob; and</li>
@@ -415,10 +429,10 @@
 					<section id="sec5">
 						<h2>5. Multiparty Computations</h2>
 						<p class="rp_original">
-							This section considers general multiparty computations. These may involve secret input from each participant, and a single output which should become known to all reliable participants.
+							This section considers general multiparty computations. These may involve secret input from each participant, and a single output which should become known to all <span class="definable" data-define="reliable participant">reliable participants</span>.
 						</p>
 						<p class="rp_original">
-							In the first step of the protocol, all participants commit to their secret input bits by distributing shares of them to all participants. The basic idea is now to do the computation by having each participant perform a corresponding computation on the shares he or she received. There are two problems with this idea: first, we cannot trust all participants to do the correct computation. Therefore participants must be committed to their shares, so that they can prove that the protocol was followed. This suggests a structure similar to that of a double blob. Secondly, for technical reasons explained later, all reliable participants must be able to complete the computation on their shares. Thus we cannot tolerate any complaints about the shares distributed, since there may be no way to tell whether a complainer is reliable or not. This leads to the following definition of a <i>robust</i> double blob:
+							In the first step of the protocol, all participants <span class="definable" data-define="commitment">commit</span> to their secret input bits by distributing shares of them to all participants. The basic idea is now to do the computation by having each participant perform a corresponding computation on the shares he or she received. There are two problems with this idea: first, we cannot trust all participants to do the correct computation. Therefore participants must be committed to their shares, so that they can prove that the protocol was followed. This suggests a structure similar to that of a double <span class="definable">blob</span>. Secondly, for technical reasons explained later, all reliable participants must be able to complete the computation on their shares. Thus we cannot tolerate any complaints about the shares distributed, since there may be no way to tell whether a complainer is reliable or not. This leads to the following definition of a <i>robust</i> double blob:
 						</p>
 						<ol class="rp_original">
 							<li>like a double blob, a robust double blob has a top-level blob and sub-blobs, where the top-level contains the bit committed to.</li>
@@ -435,13 +449,16 @@
 							We leave it as an exercise to design a cut-and-choose procedure that will establish this fact.
 						</p>
 						<p class="rp_annotation">
-							We don't. \(P_B\) releases a new blob, \(\zeta_B\). Participants take turns flipping a coin to get random bit \(b\). If \(b=0\), \(P_B\) opens
+							We don't. The first property can be proven using a cut-and-choose technique very similar to the one used for single and double blobs; loosely, \(P_A\) creates a set of other robust double blobs \(\xi_1\dots\xi_t\) and, contingent on a <span class="definable">coin flip</span>, either opens \(\xi_i\) in its entirety, or opens \(\rho+\xi_i\). Some subset of \(2d+a\) participants must not complain in all \(t\) rounds. Just as when performing cut-and-choose on single blobs, \(\rho\) being inconsistent necessarily means that either \(\xi_i\) is inconsistent or \(\rho+\xi_i\) is inconsistent.
+						</p>
+						<p class="rp_annotation">
+							For the second, \(P_B\) creates \(t\) single blobs \(\zeta_1,\dots,\zeta_t\) and \(t\) double blobs \(\eta_1,\dots,\eta_t\) such that \(Contents(\zeta_i)=Contents(\eta_i)\). One round at a time, contingent on a coin flip, \(P_B\) either opens both \(\beta_B+\zeta_i\) and \(\delta_B+\eta_i\) or both \(\zeta_i\) and \(\eta_i\), in both cases to demonstrate their equality. Intuitively, the two pairs should only both be equal polynomials if \(P_B\) did not attempt to cheat.
 						</p>
 						<p class="rp_original">
 							Note that this protocol leaves no possibility for \(P_A\) to cheat and blame the resulting disagreement on some other participant: if less than \(d\) participants complain about \(P_A\), then a valid commitment has (with very high probability) been constructed, and otherwise it is obvious that \(P_A\) is unreliable.
 						</p>
 						<p class="rp_original">
-							When this first phase including creation of commitments for all input bits and proofs of validity is completed successfully, the protocol is <span class="definable" data-define="fault-tolerance">fault-tolerant</span>: there is no way the unreliable participants can stop any reliable participant from computing the result.
+							When this first phase including creation of commitments for all input bits and proofs of validity is completed successfully, the protocol is fault-tolerant: there is no way the unreliable participants can stop any reliable participant from computing the result.
 						</p>
 						<p class="rp_original">
 							The computation is specified by a boolean circuit composed of XOR and AND gates. It is then clearly sufficient to be able to safely compute from two robust double blobs a new one both as the XOR of the two inputs and also as the AND.
@@ -456,16 +473,19 @@
 							Consequently, the AND is instead done in two steps:
 						</p>
 						<ol class="rp_original">
-							<li>Each participant multiplies his shares of the two top-level blobs and commits to the product using a sub-blob. He then proves by a cut-and-choose (to be described below) that the multiplication was done correctly.</li>
+							<li>All participants multiply their shares of the two top-level blobs and commit to the product using a sub-blob. They then each prove by a cut-and-choose (to be described below) that the multiplication was done correctly.</li>
 						</ol>
 						<p class="rp_original">
 							The result of step 1 is a double blob containing the AND of the two bits, but with a large degree polynomial in the top-level blob. We cannot continue the computation with this blob, since for one thing the degree would eventually grow too large for the secrets to be uniquely determined. Therefore, this degree is brought down below \(d\) as follows:
 						</p>
 						<ol class="rp_original">
-							<li value="2">Each participant chooses a pair of robust double blobs constructed as in the beginning of this section, and such that the top level involves a pair of randomly chosen polynomials \((f,g)\), where \(deg(f)\lt 2d, deg(g)\lt d,\) and \(f(0)=g(0)\in\{0,1\}\). We leave as an (easy) exercise construction of a cut-and-choose for proving correctness of such a pair. When all these pairs are added, the result will be a pair stil satisfying the conditions above, but such that nobody knows the common value of \(f\) and \(g\) in 0. Finally, the double blob constructed with \(f\) is x-ored with the one computed in step 1, and the result is opened. If this result is 0, then the computation continues with the blob from \(g\), otherwise \(1+g\) (the complemented bit) is used.</li>
+							<li value="2">Each participant chooses a pair of robust double blobs constructed as in the beginning of this section, and such that the top level involves a pair of randomly chosen polynomials \((f,g)\), where \(\operatorname{deg}(f)\lt 2d, \; \operatorname{deg}(g)\lt d,\) and \(f(0)=g(0)\in\{0,1\}\). We leave as an (easy) exercise construction of a cut-and-choose for proving correctness of such a pair. When all these pairs are added, the result will be a pair still satisfying the conditions above, but such that nobody knows the common value of \(f\) and \(g\) in 0. Finally, the double blob constructed with \(f\) is XORed with the one computed in step 1, and the result is opened. If this result is 0, then the computation continues with the blob from \(g\), otherwise \(1+g\) (the complemented bit) is used.</li>
 						</ol>
 						<p class="rp_original">
-							We have now only to describe the cut-and-choose mentioned in step 1. In principle, this procedure is essentially the same as the computation protocols of <span class="reference" data-citation="BC">[?]</span>: the prover has committed to \(s_1,s_2,\) and \(s_3\), and claims that \(s_1s_2=s_3\). He then commits to a row-permuted version of the multiplication table for the field used. The other participants, responsive to their coin flips, now ask him either to open the entire table or to prove that one of the rows contains commitments to the tuple \((s_1,s_2,s_2)\). This is repeated to attain the desired level of certainty. Note that since the size of the field need only just exceed \(n\), only a number of messages quadratic in \(n\) are sent.
+							We have now only to describe the cut-and-choose mentioned in step 1. In principle, this procedure is essentially the same as the computation protocols of <span class="reference" data-citation="BC">[?]</span>: the prover has committed to \(s_1,s_2,\) and \(s_3\), and claims that \(s_1s_2=s_3\). The prover then commits to a row-permuted version of the multiplication table for the field used. The other participants, responsive to their coin flips, now ask the prover either to open the entire table or to prove that one of the rows contains commitments to the tuple \((s_1,s_2,s_3)\). This is repeated to attain the desired level of certainty. Note that since the size of the field need only just exceed \(n\), only a number of messages quadratic in \(n\) are sent.
+						</p>
+						<p class="rp_annotation">
+							The cut-and-choose for step 2 is simple, and very similar to the cut-and-choose for robust blobs: in each round, the prover chooses double blobs \(\mu,\,\nu\) such that \(\operatorname{deg}(\mu)\lt2d\) and \(\operatorname{deg}(\nu)\lt d\), and such that they contain the same secret. We define \(\kappa,\,\lambda\) to be the robust double blobs for \(f\) and \(g\) respectively. Contingent on coin flips by the verifiers, the prover opens either \((\mu,\nu)\) or \((\mu+\kappa,\nu+\lambda)\). In both cases, the verifier ensures that the first blob has degree \(\lt2d\), the second blob has degree \(\lt d\), and that they contain equal secrets.
 						</p>
 						<p class="rp_original">
 							We call attention to the possibility of a tradeoff between vulnerability to disruption and efficiency of the protocol. The initial commitment phase could in fact be completed correctly using only ordinary double blobs, if we require that <i>nobody</i> complains about anybody during the initial phase. This requirement is easily seen to imply that all the double blobs constructed are (with very high probability) robust. With this method, however, it is not possible to find out who has not been following the protocol in the first phase, if complaints do occur.
@@ -474,10 +494,10 @@
 					<section id="sec6">
 						<h2>6. Generalizations</h2>
 						<p class="rp_original">
-							The one third assumption on the number of unreliable participants is necessary to ensure that Byzantine agreement is possible. It is natural, however, to ask what can be done if we ensure this simply by assuming the existence of a <span class="definable">broadcast channel</span> as part of the model?
+							The one third assumption on the number of <span class="definable" data-define="reliable participant">unreliable participants</span> is necessary to ensure that Byzantine agreement is possible. It is natural, however, to ask what can be done if we ensure this simply by assuming the existence of a <span class="definable">broadcast channel</span> as part of the model?
 						</p>
 						<p class="rp_original">
-							In fact, even with this assumption, it is impossible to implement unconditionally secure blobs while tolerating more than \(d\) unreliable participants. Informally, this is so, since if \(P_A\) tries to commit to some secret, she must send a set of messages containing enough Shannon information to determine her secret completely. She cannot use the broadcast channel for this, since her secret would then become public immediately. Moreover, if there are \(U\) unreliable participants, then no subset of this size of smaller must be given enough information to determine the secret, since the set of unreliable participants is unknown. When later the participants try to determine which secret \(P_A\) is in fact committed to, the unreliable participants are free to fabricate some set of messages which they will claim \(P_A\) sent them originally. Since any subset of \(U\) messages leaves the secret completely undetermined, it is easy to construct the set of false messages such that it is consistent with the messages sent to \(U\) reliable participants. We thus have a situation where \(2U\) participants seem to agree on something, while the rest, say \(R\), participants are complaining. But if we allow \(U\gt n/3\), then \(R\leq U\), and thus there is no way of finding out whether the situation is in fact as described above, or the \(R\) participants are just unreliable ones, complaining for no good reason! Moreover, this ambiguous situation could result, even if \(P_A\) has followed the protocol. However, an extension is possible<sup class="reference" data-citation="Cr">[?]</sup> using this broadcast channel: more unreliable participants can be tolerated if we are willing to revert to a cryptographic assumption in the case where \(n/3\lt U\lt n/2\). An "Obliviously Cryptographic" multiparty computation protocol may therefore be achieved given this feature. 
+							In fact, even with this assumption, it is impossible to implement <span class="definable" data-define="information theoretic security">unconditionally secure</span> <span class="definable" data-define="blob">blobs</span> while tolerating more than \(d\) unreliable participants. Informally, this is so, since if \(P_A\) tries to commit to some secret, then \(P_A\) must send a set of messages containing enough Shannon information to determine that secret completely. \(P_A\) cannot use the broadcast channel for this, since the secret would then become public immediately. Moreover, if there are \(U\) unreliable participants, then no subset of this size or smaller must be given enough information to determine the secret, since the set of unreliable participants is unknown. When later the participants try to determine which secret \(P_A\) is in fact committed to, the unreliable participants are free to fabricate some set of messages which they will claim \(P_A\) sent them originally. Since any subset of \(U\) messages leaves the secret completely undetermined, it is easy to construct the set of false messages such that it is consistent with the messages sent to \(U\) reliable participants. We thus have a situation where \(2U\) participants seem to agree on something, while the rest, say \(R\), participants are complaining. But if we allow \(U\gt n/3\), then \(R\leq U\), and thus there is no way of finding out whether the situation is in fact as described above, or the \(R\) participants are just unreliable ones, complaining for no good reason! Moreover, this ambiguous situation could result, even if \(P_A\) has followed the protocol. However, an extension is possible<sup class="reference" data-citation="Cr">[?]</sup> using this broadcast channel: more unreliable participants can be tolerated if we are willing to revert to a cryptographic assumption in the case where \(n/3\lt U\lt n/2\). An "Obliviously Cryptographic" multiparty computation protocol may therefore be achieved given this feature. 
 						</p>
 						<p class="rp_original">
 							It is also possible to tolerate more unreliable participants, if we change the model by restricting their behavior. If we assume that no participant will ever send an incorrect message during the protocol, then two forms of behavior remain, that may cause problems in the protocol:
@@ -493,10 +513,10 @@
 							Clearly, information about the inputs to a computation must be distributed in such a way that any subset of \(C\) participants or more can recover all inputs, since otherwise there is no guarantee that the computation can be completed. But if the inputs are to remain unconditionally protected, this means that we must have \(L\lt C\).
 						</p>
 						<p class="rp_original">
-							One can now make the simplifying assumption that the set of participants is partitioned in one subset in which participants may show both forms of unreliable behavior mentioned above, and another subset, where there is no deviation from the protocol at all. This means that \(C+L=n\), and therefore that \(L=\lfloor\frac{(n-1)}{2}\rfloor\lt C\). Hence the best a protocol can hope to do in this case is to tolerate the situation where \(L=\lfloor\frac{(n-1)}{2}\rfloor\) and \(C=n-L\). But this can easily be accomplished using our basic protocol with polynomials of degree \(L\). Because of the inequality on \(L\), multiplication of polynomials will not lead to loss of information. As usual, protection against early stopping is effective after the initial commitment phase, where double blobs are used. If a participant stops, the remaining ones can use the corresponding subshares as input to a separate instance of the basic protocol which will simulate the missing participant.
+							One can now make the simplifying assumption that the set of participants is partitioned in one subset in which participants may show both forms of unreliable behavior mentioned above, and another subset, where there is no deviation from the protocol at all. This means that \(C+L=n\), and therefore that \(L=\left\lfloor\frac{(n-1)}{2}\right\rfloor\lt C\). Hence the best a protocol can hope to do in this case is to tolerate the situation where \(L=\left\lfloor\frac{(n-1)}{2}\right\rfloor\) and \(C=n-L\). But this can easily be accomplished using our basic protocol with polynomials of degree \(L\). Because of the inequality on \(L\), multiplication of polynomials will not lead to loss of information. As usual, protection against early stopping is effective after the initial commitment phase, where double blobs are used. If a participant stops, the remaining ones can use the corresponding subshares as input to a separate instance of the basic protocol which will simulate the missing participant.
 						</p>
 						<p class="rp_original">
-							Without the assumption that \(C+L=n\), things seem to become more complicated. It is clear that as long as \(L\leq\lfloor\frac{(n-1)}{2}\rfloor\), then the solution outlined above still works, but without this condition it is not clear what happens. The method with multiplication of polynomials does not work any more, because it leads to polynomials of a degree larger than the number of available shares. Therefore the construction of a general computation protocol under these special assumptions remains an open problem.
+							Without the assumption that \(C+L=n\), things seem to become more complicated. It is clear that as long as \(L\leq\left\lfloor\frac{(n-1)}{2}\right\rfloor\), then the solution outlined above still works, but without this condition it is not clear what happens. The method with multiplication of polynomials does not work any more, because it leads to polynomials of a degree larger than the number of available shares. Therefore the construction of a general computation protocol under these special assumptions remains an open problem.
 						</p>
 					</section>
 					<section id="sec7">
@@ -507,6 +527,37 @@
 					</section>
                 </div>
             </div>
+			<div class="main_toplevel main_section main_color6">
+				 <div class="main_window main_fullwidth">
+					<h1>Notes on Galois Fields and Polynomials</h1>
+                    <div class="main_toc">
+                        <h4 style="color:#333333">Table of Contents</h4>
+                        <ol type="A">
+                            <li><a href="#_A">Overview</a></li>
+                            <li>
+                                <a href="#_B">Annotated Paeper</a>
+                                <ol>
+									<li value="0"><a href="#abstract">Abstract</a></li>
+                                    <li>
+										<a href="#sec1">Introduction</a>
+										<ol>
+											<li><a href="#sec1.1">Results</a></li>
+											<li><a href="#sec1.2">Algorithm</a></li>
+											<li><a href="#sec1.3">Related Works</a></li>
+										</ol>
+									</li>
+									<li><a href="#sec2">The Model</a></li>
+									<li><a href="#sec3">Implementing Blobs using Secret Sharing</a></li>
+									<li><a href="#sec4">VSS and Fault Tolerant Blobs</a></li>
+									<li><a href="#sec5">Multiparty Computations</a></li>
+									<li><a href="#sec6">Generalizations</a></li>
+									<li><a href="#sec7">Acknowledgements</a></li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+				</div>
+			</div>
             <div class="main_toplevel main_section main_color8">
                 <h1>References</h1>
                 <ol id="referencelist">
@@ -515,7 +566,7 @@
 					<li id="CDG">Chaum, Damgard, and van de Graaf. <a href="82.html">Multiparty Computations ensuring secrecy of each party's input and correctness of the result.</a> To appear in <i>Proceedings of Crypto 87</i>.</li>
 					<li id="CGMA">Chor, Goldwasser, Micali, and Awerbuch: Verifiable Secret Sharing and Achieving Simultaneity in the Presence of faults. <i>Proceedings of FOCS 85</i>, pp.383-395.</li>
 					<li id="LSP">Lamport, Shostak, and Pease: The Byzantine Generals Problem. ACM trans. <i>Prog. Languages and Systems</i>, vol.4, no.3, 1982, pp.382-401.</li>
-					<li id="Bl">Blakely: Security proofs for information protection systems. <i>Proceedings of the 1980 Symposium on Security and Privacy</i>, IEEE Computer Society Press, NY, 198, pp.79-88.</li>
+					<li id="Bl">Blakely: Security proofs for information protection systems. <i>Proceedings of the 1980 Symposium on Security and Privacy</i>, IEEE Computer Society Press, NY, 1981, pp.79-88.</li>
 					<li id="Sh">Shamir: How to share a secret. <i>CACM</i>, vol.22, no.11, 1979, pp.612-613.</li>
 					<li id="Be">Benaloh: Secret sharing homomorphisms, <i>Proc. of Crypto 86</i>.</li>
 					<li id="BF">Bárány and Furedi: Mental Poker with Three or More Players, <i>Information and Control</i>, vol. 59, 1983, pp.84-93.</li>
@@ -526,6 +577,8 @@
 					<li id="Ch2">Chaum: How to keep a secret alive.<i>Proceedings of Crypto 84.</i></li>
 					<li id="BC">Brassard and Crépeau: Zero-Knowledge Simulation of Boolean Circuits. <i>Proceedings of Crypto 86</i>.</li>
 					<li id="Cr">Crépeau: Ph.D Thesis, in preparation</li>
+					
+					<li id="theorem_uni">Robin J.Y. McLeod and M. Louisa Baart: Unisolvence. <i>Geometry and Interpolation of Curves and Surfaces.</i> Cambridge University Press. 1998, pp. 33-34.</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
