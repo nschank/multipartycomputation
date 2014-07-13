@@ -14,6 +14,7 @@
         <script type="text/javascript" src="../../script/ref.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
+		<script type="text/javascript" src="../../script/toc.js"></script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
@@ -54,14 +55,14 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1">
+            <div class="main_toplevel main_section main_color1" id="overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
                     <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
                     <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
                 </div>
-                <div class="main_window main_fullwidth" id="_A">
+                <div class="main_window main_fullwidth">
                     <div class="rp_linkbox"><a href="pdf/###.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
                     <span class="rp_title">Paper Title</span>
@@ -74,24 +75,7 @@
 						&ldquo;&rdquo;
 					</div>
 						
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a>
-								<ol>
-									<li><a href="#intro">Introduction</a></li>
-									<li><a href="#goals">Goals and Results</a></li>
-									<li><a href="#assumptions">Assumptions</a></li>
-									<li><a href="#defs">Definitions</a></li>
-									<li><a href="#theorems">Theorems</a></li>
-									<li><a href="#protocols">Protocols</a></li>
-									<li><a href="#further">Further Reading</a></li>
-									<li><a href="#ref">Referencing This Paper</a></li>
-								</ol>
-							</li>
-                            <li><a href="#_B">Annotated Paper</a></li>
-                        </ol>
-                    </div>
+                    <div class="main_toc"></div>
 					
 					<h1>Overview</h1>	
                     <section id="intro">
@@ -155,26 +139,10 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5" id="_B">
-                <div class="main_window main_fullwidth">
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a></li>
-                            <li>
-                                <a href="#_B">Annotated Paper</a>
-                                <ol>
-                                    <li><a href="#sec1">Introduction</a></li>
-                                </ol>
-                            </li>
-                        </ol>
-                    </div>
-                    <section id="sec1">
-                        <h2>1. Introduction</h2>
-                    </section>
-                </div>
+            <div class="main_toplevel main_section main_color5" id="annotated_paper">
+                <div class="main_window main_fullwidth"></div>
             </div>
-			<div class="main_toplevel main_section main_color7">
+			<div class="main_toplevel main_section main_color7" id="footnotes">
                 <h1>Footnotes</h1>
 				
                 <ol id="footnotes">
@@ -183,7 +151,7 @@
 					</li>
                 </ol>
             </div>
-            <div class="main_toplevel main_section main_color8">
+            <div class="main_toplevel main_section main_color8" id="references">
                 <h1>References</h1>
                 <ol id="referencelist">
                     <li id="citation1">A citation</li>
@@ -204,10 +172,9 @@
 1. Save template page
 2. Set hasPage to true
 3. Change ### to number in email and pdf
-4. Headings
-5. Transcribe paper
-6. References
-7. Annotate paper
+4. Transcribe paper
+5. References
+6. Annotate paper
 	7.0. proofread
 	7.1. copy assumptions
 	7.2. copy theorems
@@ -215,10 +182,10 @@
 	7.4. mark definitions
 	7.5. mark equations
 	7.6. link to previous research
-8. Write protocol descriptions 
-9. Check previous research for places to link
-10. Write intro, goals, results
-11. Tags
-12. Consider implementations
-13. Find reference
+7. Write protocol descriptions 
+8. Check previous research for places to link
+9. Write intro, goals, results
+10. Tags
+11. Consider implementations
+12. Find reference
 -->

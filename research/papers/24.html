@@ -14,6 +14,7 @@
         <script type="text/javascript" src="../../script/ref.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
+        <script type="text/javascript" src="../../script/toc.js"></script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
@@ -87,14 +88,14 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1">
+            <div class="main_toplevel main_section main_color1" id="overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
                     <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
                     <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
                 </div>
-                <div class="main_window main_fullwidth"><a id="_A"></a>
+                <div class="main_window main_fullwidth">
                     <div class="rp_linkbox"><a href="pdf/24.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
                     <span class="rp_title">How to Generate and Exchange Secrets</span>
@@ -106,25 +107,8 @@
 						&ldquo;The "fairness" requirement means that a cheater should not be able to obtain the desired output while denying the other party to find the proper output. The problem of exchanging secrets has this requirement as its main concern.&rdquo;
 					</div>	
 					
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a>
-								<ol>
-									<li><a href="#a_intro">Introduction</a></li>
-									<li><a href="#a_goals">Goals and Results</a></li>
-									<li><a href="#a_garbled">Garbled Circuit Construction</a></li>
-									<li><a href="#a_assumptions">Assumptions</a></li>
-									<li><a href="#a_defs">Definitions</a></li>
-									<li><a href="#a_theorems">Theorems</a></li>
-									<li><a href="#a_ref">Referencing This Paper</a></li>
-								</ol>
-							</li>
-                            <li><a href="#_B">Annotated Paper</a></li>
-                        </ol>
-                    </div>
 					<h1>Overview</h1>
-                    
+                    <div class="main_toc"></div>
 						
                     <section id="a_intro">
 						<h2>Introduction</h2>
@@ -244,43 +228,10 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5" id="_B">
+            <div class="main_toplevel main_section main_color5" id="annotated_paper">
                 <div class="main_window main_fullwidth">
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a></li>
-                            <li>
-                                <a href="#_B">Annotated Paper</a>
-                                <ol>
-                                    <li><a href="#sec1">Introduction</a></li>
-									<li><a href="#sec2">Terminology</a></li>
-									<li>
-										<a href="#sec3">Generating a Secret</a>
-										<ol>
-											<li><a href="#sec3.1">Validity</a></li>
-											<li><a href="#sec3.2">Fairness</a></li>
-										</ol>
-									</li>
-									<li>
-										<a href="#sec4">Exchange of Secrets</a>
-									</li>
-									<li>
-										<a href="#sec5">General Computation</a>
-										<ol>
-											<li>
-												<a href="#sec5.1">Model I</a>
-											</li>
-											<li>
-												<a href="#sec5.2">Model II</a>
-											</li>
-										</ol>
-									</li>
-									<li><a href="#sec6">Connections</a></li>
-                                </ol>
-                            </li>
-                        </ol>
-                    </div>
+					<h1>Annotated Paper (extended abstract)</h1>
+                    <div class="main_toc"></div>
 					<section id="abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
@@ -571,62 +522,63 @@
 						<p class="rp_original">
 							In Model II, the constraints are simpler. The input-output formats are as explained at the <a href="#sec5">beginning of this section</a>.
 						</p>
+						<section id="sec5.2">
+							<h3>5.2. Model II</h3>
+							<p class="rp_original">
+								When both A and B follow the protocol, the following is required.
+							</p>
+							<span class="rp_sub_header">Validity</span>
+							<p class="rp_original rp_sub">
+								With probability 1-\(o\)(poly-small), <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B),v_A=(p_A',q_A',N_A')\) and \(w_A=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor. A dual constraint on B is also required.
+							</p>
+							<span class="rp_sub_header">Privacy</span>
+							<ol class="rp_original rp_sub" type="i">
+								<li>	
+									<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\;\)<span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="definable">stochastic</span> process of running \(M\) with input from <span class="equation" data-equation="h_n">\(h\)</span>, and \(\mathcal{L}\) is the stochastic process of having \((i_A,i_B)\) distributed according to <span class="equation" data-equation="h_n">\(h\)</span> and <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B),\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,i_B)\).
+								</li>
+								<li>(Interchange A and B in (i).)</li>
+							</ol>
+							<p class="rp_annotation">
+								So one can not learn anything extra by having \(\Delta, v, w\) that they wouldn't know from the oracle.
+							</p>
+							<p class="rp_original">
+								If A follows the protocol, but B may cheat and execute some \(M_B'\), then let \(d_n\) be the probability of runs in which \(v_A\neq\)CHEATING, and let \(U_{n,i_B}\) be the probability distribution for <span class="equation" data-equation="u_x">\(u_B\)</span> when restricted to such runs and with \(i_B\) being an input for B. If \(d_n\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in\Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following constraints of Validity and Privacy.
+							</p>
+							<span class="rp_sub_header">Validity</span>
+							<p class="rp_original rp_sub">
+								With probability \(d_n-o\)(poly-small), <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A')\) and \(w_A'=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor.
+							</p>
+							<p class="rp_annotation">
+								Only negligibly often can B both cheat undetectedly and change Alice's output.
+							</p>
+							<span class="rp_sub_header">Privacy</span>
+							<p class="rp_original rp_sub">
+								<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\;\)<span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the stochastic process of being given the value of <span class="equation" data-equation="u_x">\(u_B\)</span> distributed according to \(U_{n,i_B}\).
+							</p>
+							<p class="rp_annotation">
+								In other words, cheating undetectedly does not allow B to learn anything more than he would have by using a trusted party.
+							</p>
+							<p class="rp_original">
+								As in Model I, let \(G\) denote a probabilistic polynomial-time <span class="definable">Turing machine</span> that takes \(i_B\) as input and outputs \(z\); let \(\beta_n(G)\) denote the probability that \(z=g_n(i_A,i_B)\).
+							</p>
+							<span class="rp_sub_header">Fairness</span>
+							<p class="rp_original rp_sub">
+								For any fixed \(k\), there exists a recovery algorithm \(R\) (dependent on \(M_B'\)) whose output \(s\) satisfies the following condition:
+								$$Pr\{(u_B=g_n(i_A,i_B))\wedge(s\neq f_n(i_A,i_B))\} \leq\beta_n(G)+O(\frac{1}{n^k})$$
+								for some G.
+							</p>
+							<p class="rp_annotation">
+								We can make a recovery algorithm good enough that the probability of B getting \(g_n\), but our recovery algorithm not working, is negligible, unless B just guessed by using \(G\).
+							</p>
+							<p class="rp_original">
+								When B follows the protocol and A may cheat, we have a set of requirements obtained from the above ones by switching the roles of A and B.
+							</p>
+							<p class="rp_original">
+								<a href="#theorem3">Theorem 3</a> is also true for Model II.
+							</p>
+						</section>
 					</section>
-					<section id="sec5.2">
-						<h3>5.2. Model II</h3>
-						<p class="rp_original">
-							When both A and B follow the protocol, the following is required.
-						</p>
-						<span class="rp_sub_header">Validity</span>
-						<p class="rp_original rp_sub">
-							With probability 1-\(o\)(poly-small), <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B),v_A=(p_A',q_A',N_A')\) and \(w_A=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor. A dual constraint on B is also required.
-						</p>
-						<span class="rp_sub_header">Privacy</span>
-						<ol class="rp_original rp_sub" type="i">
-							<li>	
-								<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\;\)<span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="definable">stochastic</span> process of running \(M\) with input from <span class="equation" data-equation="h_n">\(h\)</span>, and \(\mathcal{L}\) is the stochastic process of having \((i_A,i_B)\) distributed according to <span class="equation" data-equation="h_n">\(h\)</span> and <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B),\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,i_B)\).
-							</li>
-							<li>(Interchange A and B in (i).)</li>
-						</ol>
-						<p class="rp_annotation">
-							So one can not learn anything extra by having \(\Delta, v, w\) that they wouldn't know from the oracle.
-						</p>
-						<p class="rp_original">
-							If A follows the protocol, but B may cheat and execute some \(M_B'\), then let \(d_n\) be the probability of runs in which \(v_A\neq\)CHEATING, and let \(U_{n,i_B}\) be the probability distribution for <span class="equation" data-equation="u_x">\(u_B\)</span> when restricted to such runs and with \(i_B\) being an input for B. If \(d_n\) is <span class="definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in\Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following constraints of Validity and Privacy.
-						</p>
-						<span class="rp_sub_header">Validity</span>
-						<p class="rp_original rp_sub">
-							With probability \(d_n-o\)(poly-small), <span class="equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A')\) and \(w_A'=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor.
-						</p>
-						<p class="rp_annotation">
-							Only negligibly often can B both cheat undetectedly and change Alice's output.
-						</p>
-						<span class="rp_sub_header">Privacy</span>
-						<p class="rp_original rp_sub">
-							<span class="equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\;\)<span class="equation" data-equation="approx">\(\approx\)</span> <span class="equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the stochastic process of being given the value of <span class="equation" data-equation="u_x">\(u_B\)</span> distributed according to \(U_{n,i_B}\).
-						</p>
-						<p class="rp_annotation">
-							In other words, cheating undetectedly does not allow B to learn anything more than he would have by using a trusted party.
-						</p>
-						<p class="rp_original">
-							As in Model I, let \(G\) denote a probabilistic polynomial-time <span class="definable">Turing machine</span> that takes \(i_B\) as input and outputs \(z\); let \(\beta_n(G)\) denote the probability that \(z=g_n(i_A,i_B)\).
-						</p>
-						<span class="rp_sub_header">Fairness</span>
-						<p class="rp_original rp_sub">
-							For any fixed \(k\), there exists a recovery algorithm \(R\) (dependent on \(M_B'\)) whose output \(s\) satisfies the following condition:
-							$$Pr\{(u_B=g_n(i_A,i_B))\wedge(s\neq f_n(i_A,i_B))\} \leq\beta_n(G)+O(\frac{1}{n^k})$$
-							for some G.
-						</p>
-						<p class="rp_annotation">
-							We can make a recovery algorithm good enough that the probability of B getting \(g_n\), but our recovery algorithm not working, is negligible, unless B just guessed by using \(G\).
-						</p>
-						<p class="rp_original">
-							When B follows the protocol and A may cheat, we have a set of requirements obtained from the above ones by switching the roles of A and B.
-						</p>
-						<p class="rp_original">
-							<a href="#theorem3">Theorem 3</a> is also true for Model II.
-						</p>
-					</section>
+					
 					<section id="sec6">
 						<h2>6. Connections</h2>
 						<p class="rp_original">
@@ -644,7 +596,7 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color8">
+            <div class="main_toplevel main_section main_color8" id="references">
                 <h1>References</h1>
                 <ol id="referencelist">
                     <li id="GMR">S. Goldwasser, S. Micali, and C. Rackoff, "The knowledge complexity of interactive proof systems," <i>Proceedings of 17th Annual ACM Symposium on Theory of Computing</i>, 1985, 291-304.</li>

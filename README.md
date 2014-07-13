@@ -64,6 +64,7 @@ Research pages may contain:
 - Footnotes, self explanatory
 - Additional notes; any subject brought up within a paper that is used often may need to be explained, but may take too much space within the paper (e.g. specific linear algebra, a specific group or ring, etc.)
 - Additional overview sections (e.g. if a single protocol is very significant and needs more than the small protocol template)
+- A Table of Contents, which is built automatically by /script/toc.js. The script uses the first heading within any main_section as the section's name. main_sections which contain a heading must also have an id, for linking purposes. Within that, all section tags are used as a reference for what constitutes a subheading. Section names, like main_section names, are taken from the first heading; the section should also have an id. 
 
 ###Next Steps
 Next Steps, not-very-surprisingly, is mostly being dealt with last. It does, however, house the implementation section. For more information, see the Implementations section at the bottom of this README.

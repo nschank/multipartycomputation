@@ -14,6 +14,7 @@
         <script type="text/javascript" src="../../script/ref.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
+		<script type="text/javascript" src="../../script/toc.js"></script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
@@ -82,14 +83,14 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1">
+            <div class="main_toplevel main_section main_color1" id="overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
                     <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
                     <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
                 </div>
-                <div class="main_window main_fullwidth" id="_A">
+                <div class="main_window main_fullwidth">
                     <div class="rp_linkbox"><a href="pdf/81.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
                     <span class="rp_title">How to Play Any Mental Game or A Completeness Theorem for Protocols with Honest Majority</span>
@@ -101,25 +102,7 @@
 						&ldquo;As long as the majority of the players is honest, all protocols may be correctly played.&rdquo;
 					</div>
 						
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a>
-								<ol>
-									<li><a href="#a_intro">Introduction</a></li>
-									<li><a href="#a_goals">Goals and Results</a></li>
-									<li><a href="#a_defs">Definitions</a></li>
-									<li><a href="#a_theorems">Theorems</a></li>
-									<li><a href="#a_protocols">Protocols</a></li>
-									<li><a href="#a_ref">Referencing This Paper</a></li>
-								</ol>
-							</li>
-                            <li><a href="#_B">Annotated Paper</a></li>
-							<li><a href="#_C">Notes on 5-Permutations</a></li>
-							<li><a href="#footnotes">Footnotes</a></li>
-							<li><a href="#referencelist">References</a></li>
-                        </ol>
-                    </div>
+                    <div class="main_toc"></div>
 					
 					<h1>Overview</h1>
 						
@@ -295,62 +278,10 @@
 					</section>
                 </div>
             </div>
-			<div class="main_toplevel main_section main_color3" id="_B">
+			<div class="main_toplevel main_section main_color3" id="annotated_paper">
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper (extended abstract)</h1>
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a></li>
-                            <li>
-                                <a href="#_B">Annotated Paper</a>
-                                <ol>
-									<li value="0"><a href="#abstract">Abstract</a></li>
-                                    <li><a href="#sec1">Introduction</a></li>
-									<li>
-										<a href="#sec2">Preliminary Definitions</a>
-										<ol>
-											<li><a href="#sec2.1">Notation and Conventions for Probabilistic Algorithms</a></li>
-											<li><a href="#sec2.2">Game Networks and Distributed Algorithms</a></li>
-											<li><a href="#sec2.3">Adversaries</a></li>
-											<li><a href="#sec2.4">Indistinguishability of Random Variables</a></li>
-										</ol>
-									</li>
-									<li><a href="#sec3">Tm-games with Passive Adversaries</a></li>
-									<li>
-										<a href="#sec4">Hints on How to Play Tm-games with Passive Adversaries</a>
-										<ol>
-											<li>
-												<a href="#sec4.1">A New and General Oblivious Transfer Protocol</a>
-												<ol>
-													<li><a href="#sec4.1.1">Trapdoor and One-Way Functions</a></li>
-													<li><a href="#sec4.1.2">Random Bits in One-Way Permutations</a></li>
-													<li><a href="#sec4.1.3">Our Protocol</a></li>
-												</ol>
-											</li>
-											<li><a href="#sec4.2">Strengthening Yao's Combined Oblivious Transfer</a></li>
-											<li><a href="#sec4.3">The Tm-game Solver for passive adversaries</a></li>
-										</ol>
-									</li>
-									<li><a href="#sec5">Malicious Adversaries</a></li>
-									<li>
-										<a href="#sec6">General Games</a>
-										<ol>
-											<li><a href="#sec6.1">Games</a></li>
-											<li><a href="#sec6.2">Playable Games</a></li>
-											<li><a href="#sec6.3">A General Result</a></li>
-											<li><a href="#sec6.4">A Completeness Theorem for Fault-Tolerant Computation</a></li>
-										</ol>
-									</li>
-									<li><a href="#sec7">Recent Developments</a></li>
-									<li><a href="#sec8">Acknowledgements</a></li>
-                                </ol>
-                            </li>
-							<li><a href="#_C">Notes on 5-Permutations</a></li>
-							<li><a href="#footnotes">Footnotes</a></li>
-							<li><a href="#referencelist">References</a></li>
-                        </ol>
-                    </div>
+                    <div class="main_toc"></div>
 					<section id="abstract">
 						<h3>Abstract</h3>
 						<p class="rp_original">
@@ -965,28 +896,10 @@
 					</section>
 				</div>
             </div>
-			<div class="main_toplevel main_section main_color5" id="_C">
+			<div class="main_toplevel main_section main_color5" id="notes_5p">
                 <div class="main_window main_fullwidth">
 					<h1>Notes on 5-Permutations</h1>
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a></li>
-                            <li>
-                                <a href="#_B">Annotated Paper</a>
-                            </li>
-							<li>
-								<a href="#_C">Notes on 5-Permutations</a>
-								<ol>
-									<li><a href="#c_notation">Notation</a></li>
-									<li><a href="#c_operations">Operations</a></li>
-									<li><a href="#c_props">Properties</a></li>
-								</ol>
-							</li>
-							<li><a href="#footnotes">Footnotes</a></li>
-							<li><a href="#referencelist">References</a></li>
-                        </ol>
-                    </div>
+                    <div class="main_toc"></div>
 					<p class="rp_original">
 					The <span class="definable">group</span> of 5-permutations is the group of all permutations on a set of 5 (generic) elements, also known as the symmetric group \(S_5\).
 				</p>
@@ -1031,7 +944,7 @@
 				</section>
 				</div>
 			</div>
-			<div class="main_toplevel main_section main_color7">
+			<div class="main_toplevel main_section main_color7" id="footnotes">
                 <h1>Footnotes</h1>
 				
                 <ol id="footnotes">
@@ -1040,7 +953,7 @@
 					</li>
                 </ol>
             </div>
-            <div class="main_toplevel main_section main_color8">
+            <div class="main_toplevel main_section main_color8" id="references">
                 <h1>References</h1>
                 <ol id="referencelist">
                     <li id="GM">
@@ -1072,7 +985,7 @@
 					</li>
 					<li id="GMRi">
 						S. Goldwasser, S. Micali, and R. Rivest, <i>A Digital Signature Scheme Secure Against Adaptive, Chosen Ciphertext Attack</i>. To appear in SAIM J. on Computing (available from authors)
-						<p>Earlier version, titled "<i>A Paradoxical Solution to the Signature Problem</i>", in Proc. 25th FOCS, 1984, pp.441-448.
+						<p>Earlier version, titled "<i>A Paradoxical Solution to the Signature Problem</i>", in Proc. 25th FOCS, 1984, pp.441-448.</p>
 					</li>
 					<li id="BM">
 						M. Blum and S. Micali, <i>How to Generate Sequences of Cryptographical String Pseudo-Random Bits</i>, SIAM J. on Computing, Vol. 13, Nov 1984, pp. 850-864

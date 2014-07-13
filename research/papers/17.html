@@ -14,6 +14,7 @@
         <script type="text/javascript" src="../../script/ref.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
+        <script type="text/javascript" src="../../script/toc.js"></script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
@@ -54,14 +55,14 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1">
+            <div class="main_toplevel main_section main_color1" id="overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
                     <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
                     <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
                 </div>
-                <div class="main_window main_fullwidth" id="_A">
+                <div class="main_window main_fullwidth">
                     <div class="rp_linkbox"><a href="pdf/17.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
                     <span class="rp_title">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</span>
@@ -75,27 +76,10 @@
 					<div class="rp_snippet">
 						&ldquo;&rdquo;
 					</div>
+					<h1>Overview</h1>
 						
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a>
-								<ol>
-									<li><a href="#intro">Introduction</a></li>
-									<li><a href="#goals">Goals and Results</a></li>
-									<li><a href="#assumptions">Assumptions</a></li>
-									<li><a href="#defs">Definitions</a></li>
-									<li><a href="#theorems">Theorems</a></li>
-									<li><a href="#protocols">Protocols</a></li>
-									<li><a href="#further">Further Reading</a></li>
-									<li><a href="#ref">Referencing This Paper</a></li>
-								</ol>
-							</li>
-                            <li><a href="#_B">Annotated Paper</a></li>
-                        </ol>
-                    </div>
-					
-					<h1>Overview</h1>	
+                    <div class="main_toc"></div>
+						
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
@@ -157,20 +141,9 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color3" id="_B">
+            <div class="main_toplevel main_section main_color3" id="annotated_paper">
                 <div class="main_window main_fullwidth">
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Table of Contents</h4>
-                        <ol type="A">
-                            <li><a href="#_A">Overview</a></li>
-                            <li>
-                                <a href="#_B">Annotated Paper</a>
-                                <ol>
-                                    <li><a href="#sec1">Introduction</a></li>
-                                </ol>
-                            </li>
-                        </ol>
-                    </div>
+                    <div class="main_toc"></div>
 					<section id="abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
@@ -469,7 +442,7 @@
 						<section id="sec6.2">
 							<h3>6.2. Absolute Verification of a Secret</h3>
 							<p class="rp_original">
-								The verification procedure described above leaves an exponentially small probability of error. In this section we describe a secret verification procedure that leaves no probability of errors.<sup><a href="#footnote1">1</a></sup>
+								The verification procedure described above leaves an exponentially small probability of error. In this section we describe a secret verification procedure that leaves no probability of errors.<sup><a href="#footnote1" id="fref1">1</a></sup>
 							</p>
 							<p class="rp_original">
 								Instead of just sending the shares \(\{s_i\}\), the dealer of the secret selects \(n\) random polynomials \(f_0(x),\dots,f_{n-1}(x)\), with
@@ -703,7 +676,7 @@
 					</section>
 				</section>
             </div>
-			<div class="main_toplevel main_section main_color7">
+			<div class="main_toplevel main_section main_color7" id="footnotes">
                 <h1>Footnotes</h1>
 				
                 <ol id="footnotes">
@@ -712,7 +685,7 @@
 					</li>
                 </ol>
             </div>
-            <div class="main_toplevel main_section main_color8">
+            <div class="main_toplevel main_section main_color8" id="references">
                 <h1>References</h1>
                 <ol id="referencelist">
 					<li id="BL">M. Ben-Or and N. Linial, Collective coin flipping, <i>FOCS86</i>.</li>
