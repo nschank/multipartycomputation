@@ -4,6 +4,7 @@ function citeSources()
 {
 	var elements = document.getElementsByClassName("reference");
 	var referenceBlocks = document.createElement("div");
+	var references = {refToBlock:{}, div:referenceBlocks};
 	var toorder = {};
 	var inorder = [];
 	
@@ -18,23 +19,24 @@ function citeSources()
 			toorder[cite] = inorder.push(citedElem);
 		var link = "<a href=\"#" + cite + "\">[" + toorder[cite] + "]</a>";
 		elem.innerHTML = link;
-		addDOMR(elem.getAttribute("data-citation"), elem, referenceBlocks);
+		addDOMR(elem.getAttribute("data-citation"), elem, references);
 	}
-	document.body.appendChild(referenceBlocks);
+	
+	document.body.appendChild(references.div);
 	var list = document.getElementById("referencelist");
 	while(list.firstChild)
 		list.removeChild(list.firstChild);
 	inorder.forEach(function(elem) { list.appendChild(elem); });
 }
 
-function addDOMR(id, elem, referenceBlocks)
+function addDOMR(id, elem, references)
 {
 	var reference = document.getElementById(id);
 	if(reference === null) return false;
 	
-	var block = document.getElementById("ref_block"+id);
+	var block = references.refToBlock[id];
 	
-	if(block === null)
+	if(!block)
 	{
 		block = document.createElement("div");
 		block.className="ref_block";
@@ -45,7 +47,10 @@ function addDOMR(id, elem, referenceBlocks)
 		block.innerHTML += "<p><a href=\"" + authorLink(id) + "\">See more by this author</a></p>";
 	
 		block.innerHTML += "<p class=\"ref_goto_citations\"><a href=\"#referencelist\">See complete reference list</a></p>";
-		referenceBlocks.appendChild(block);
+		
+		references.refToBlock[id] = block;
+		references.div.appendChild(block);
+		
 		block.addEventListener('mouseover',keepOpen(block));
 		block.addEventListener('mouseout',maybeClose(block));
 		window.addEventListener('scroll', definitelyClose(block));

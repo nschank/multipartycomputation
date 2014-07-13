@@ -1,10 +1,15 @@
-@font-face {
+/*@font-face {
     font-family:def;
     src:url('../font/Walkway.ttf');
-}
+}*/
 
 .definable {
-    font-family:def;
+    /*font-family:def;*/
+	border-bottom:1px dotted #555555;
+}
+
+.definable:hover {
+	border-bottom:1px dotted #AA0000;
 }
 
 .gl_definition {

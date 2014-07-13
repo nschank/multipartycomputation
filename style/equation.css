@@ -27,7 +27,11 @@ div.equationBlock a:hover {
 }
 
 span.equation {
-        border-bottom:1px dotted #555555;
+	border-bottom:1px dashed #555555;
+}
+
+span.equation:hover {
+	border-bottom:1px dashed #AA0000;
 }
 
 .equationhelp {
