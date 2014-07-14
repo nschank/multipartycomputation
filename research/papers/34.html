@@ -87,22 +87,28 @@
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Multiparty Unconditionally Secure Protocols</b> is...
+							<b>Multiparty Unconditionally Secure Protocols</b> is a 1988 paper by Chaum, Crépeau, and Damgård which offered the first plausibility result for protocols which are <span class="definable" data-define="information theoretic security">information-theoretically secure</span> for all parties. Their work was lightly influenced by the <a href="81.html">GMW compiler</a>, which also used secret sharing (in a cryptographic setting) to perform calculations, and more heavily influenced by <a href="82.html">a protocol</a> published by Chaum and Damgård earlier the same year, which ensures information-theoretic security for a single party in the protocol.
+						</p>
+						<p class="rp_original">
+							This paper was foundational in the subfield of information theoretic multiparty computation. Its most important outcome is most definitely the demonstration that, for \(n\)-party computation, up to \(\left\lfloor n/3\right\rfloor\) parties can be <span class="definable" data-define="malicious party">malicious</span> while allowing all parties to enjoy unconditional security.
 						</p>
 					</section>
 					<section id="goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
-							Some goals that they had.
+							This paper actually only cursorily addresses multiparty <i>computation</i>. After two years in which plausibility results for the computation aspect of the field came out, this research team focused more on what level of security could be hoped for in the face of adversaries. 
 						</p>
 						<p class="rp_analysis">
 							This paper, along with a similar one <a href="17.html">the next year</a>, demonstrated how many malicious adversaries it is possible to thwart within a particular (but very common) framework of multiparty computation. Specifically, the <span class="definable">information theoretic security</span> of <i>any</i> function is demonstrated in an <span class="definable" data-define="authenticated network">authenticated</span> <span class="definable" data-define="secrecy network">secrecy</span> network, with or without a <span class="definable">broadcast channel</span>, in the case where up to &frac13; of participants are malicious.
+						</p>
+						<p class="rp_original">
+							While not the first time that these constraints on the network setting have been brought up or mentioned, it is one of the first times that the network was presented so specifically, laying the groundwork for later generalizations on that setting. 
 						</p>
 					</section>
 					<section id="assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
-							The authors are quick to note that information-theoretic security is only offered under the assumption that communication between parties is information-theoretically secure in the first place. As such, we must assume the existence of networks which are <span class="definable" data-define="authenticated network">authenticated</span>, <span class="definable" data-define="secrecy network">secret</span>, and unconditionally secure.
+							The authors are quick to note that <span class="definable" data-define="information theoretic security">information-theoretic security</span> is only offered under the assumption that communication between parties is information-theoretically secure in the first place. As such, we must assume the existence of networks which are <span class="definable" data-define="authenticated network">authenticated</span>, <span class="definable" data-define="secrecy network">secret</span>, and unconditionally secure.
 						</p>
 					</section>
 					<section id="defs">
@@ -267,10 +273,10 @@
 							For our purposes, the scheme may be described as follows: a polynomial \(f\) of degree at most \(d\) over \(GF(2^k)\) is chosen uniformly, where \(k\) is an integer such that \(2^k&gt;n\). The secret to be shared is defined for convenience as the value of \(f\) at 0. The protocol also assigns a distinct non-zero point \(i_B\) in the field to each participant \(P_B\). The secret can now be divided among the \(n\) participants by providing each \(P_B\) with the value of \(f(i_B)\). It is not hard to see that more than \(d\) shares completely determine \(f\), and therefore the secret, while no Shannon information about the secret is revealed by any number of shares not exceeding \(d\).
 						</p>
 						<p class="rp_annotation">
-							Recall that \(GF(p^n)\) is the Galois field of characteristic \(p\) and degree \(n\). A polynomial of degree \(d\) is of the form \(f(x)=\sum\limits_{i=0}^{d}{a_ix^i}\), where \(a_i\in\{0,\dots,2^k-1\}\). As with polynomials over \(\mathbb{R}\), we can <span class="definable" data-define="interpolation">interpolate</span> any polynomial of degree \(d\) using any \(d+1\) points on that polynomial.
+							Recall that \(GF(p^n)\) is the Galois field of characteristic \(p\) and degree \(n\). For a short introduction to Galois fields and their properties (along with some information about polynomials in the context of Galois fields), see <a href="#notes_gf">the bottom of the page</a>. 
 						</p>
 						<p class="rp_annotation">
-							While the security is indeed clear to see, we prove its security nonetheless. To convince yourself of the information theoretic security of a blob (for anything less than \(d+1\) shares), recall that given \(d+1\) points in a polynomial of degree \(d\), we can determine the polynomial completely, e.g. through Lagrange interpolation. If we fix the first \(d\) shares \((i_1,f(i_1)),\dots,(i_d,f(i_d))\) of some unknown polynomial \(f\), and we fix the input \(i_{d+1}\) of the next share, we note that there are \(2^k\) possible next shares of the form \((i_{d+1},y\stackrel{\text{def}}{=}f(i_{d+1}))\) where \(y\in GF(2^k)\). By unisolvence theorem, any distinct \(y\) will produce a distinct polynomial<sup class="reference" data-citation="theorem_uni">[?]</sup>; since, as above, a polynomial can be defined by \(d+1\) points, any two polynomials of degree \(d\) sharing \(d+1\) points must be identical.
+							While the security is indeed clear to see, we prove its security nonetheless. To convince yourself of the information theoretic security of a blob (for anything less than \(d+1\) shares), recall that given \(d+1\) points in a polynomial of degree \(d\), we can determine the polynomial completely, e.g. through Lagrange interpolation. If we fix the first \(d\) shares \((i_1,f(i_1)),\dots,(i_d,f(i_d))\) of some unknown polynomial \(f\), and we fix the input \(i_{d+1}\) of the next share, we note that there are \(2^k\) possible next shares of the form \((i_{d+1},y\stackrel{\text{def}}{=}f(i_{d+1}))\) where \(y\in GF(2^k)\). By unisolvence theorem, we can <span class="definable" data-define="interpolation">interpolate</span> any polynomial of degree \(d\) using any \(d+1\) points on that polynomial. By that logic, any distinct \(y\) will produce a distinct polynomial<sup class="reference" data-citation="theorem_uni">[?]</sup>, while any two polynomials of degree \(d\) sharing \(d+1\) points must be identical.
 						</p>
 						<p class="rp_annotation">
 							We already know that the final share has a constant probability distribution, since the polynomial was chosen uniformly at random (which, as discussed above, is an identical statement to "the \(d+1\) shares were chosen uniformly at random"). Let's prove the existence of a bijection between value of the final share \(y\) and the value of the interpolated function at \(0\), as that will nicely allow us to demonstrate their identical probability distributions. We keep the \(d\) shares and the value \(i_{d+1}\) fixed, and define the relation \(R:\;GF(2^k)\mapsto GF(2^k)\) to map the value of \(y\) to the value of \(f(0)\) (calculated after interpolation). 
@@ -490,7 +496,60 @@
 				 <div class="main_window main_fullwidth">
 					<h1>Notes on Galois Fields and Polynomials</h1>
                     <div class="main_toc"></div>
-					
+					<p class="rp_analysis">
+						A Finite Field or Galois Field is a <span class="definable">group</span> of prime characteristic and with an order of some power of the same prime. It is expressed as \(GF(b^k)\), where \(b\) is the characteristic and \(b^k\) is the order. In the paper, and in much of computer science, we focus almost exclusively on \(GF(2^k)\) for some \(k\).
+					</p>
+					<p class="rp_analysis">
+						Galois fields are operable with commutative addition, subtraction, multiplication, and division (excepting 0). The operations within Galois fields are <i>not</i> very similar to their equivalent operations on numbers, so should not be treated as such.
+					</p>
+					<p class="rp_analysis">
+						For the remainder of these notes, we will contextualize using \(GF(2^k)\).
+					</p>
+					<section id="notes_gf_elem">
+						<h2>Elements</h2>
+						<p class="rp_analysis">
+							Elements within a Galois field have three main representations. The first, and simplest, is as a number; \(GF(q)\) is <span class="definable" data-define="isomorphism">isomorphic</span> to \(\mathbb Z/q\mathbb Z\). We generally  This representation is not often used, as it invites confusion when operators are applied (e.g. in \(GF(8)\,2+3=1\).
+						</p>
+						<p class="rp_analysis">
+							More often, elements within the Galois field \(GF(p^k)\) are represented by polynomials of the form \(c_{k-1}\alpha^{k-1}+\dots+c_2\alpha^2+c_1\alpha+c_0\), where \(\forall\;0\leq i\lt k,\;c_i\in GF(p)\) and \(\alpha\) is the element representing the value \(p\). The coefficients are also recognizable as the \(p\)-ary form of the number, e.g. in \(GF(2^3),\,7=111_2=\alpha^2+\alpha+1\). Within \(GF(2^k)\), this leads to the very useful result that the numbers have only 0 or 1 coefficients. In the next section, we will see that this polynomial form is extremely convenient when <u>adding</u> elements.
+						</p>
+						<p class="rp_analysis">
+							We can also represent elements of \(GF(p^k)\) by the powers of \(\alpha\). When we define \(GF(p^k)\), we pick some irreducible polynomial \(f\), and define the field under the assumption that \(alpha\) is a root of that polynomial. This ensures that \(\alpha\) generates the field; so \(GF(p^k)=\{0,1,\alpha,\alpha^2,\dots,\alpha^(p^k-2)\}\). Note that this does NOT match up with numerical order. Expressing elements in power notation makes <u>multiplication</u> very simple; however, there is no an easy way to turn an element into power notation, so generally a table is used.
+						</p>
+					</section>
+					<section id="notes_gf_oper">
+						<h2>Operations</h2>
+						<p class="rp_analysis">
+							Addition in polynomial fields is most easily demonstrated through normal polynomial form. Two elements of \(GF(p^k),\; e_0= \sum\nolimits_{i=0}^{k-1}{c^0_i\alpha^i}, \;\text{and}\; e_1=\sum\nolimits_{i=0}^{k-1}{c^1_i\alpha^i}\) have the sum \(e_0+e_1=\sum\nolimits_{i=0}^{k-1}{(c^0_i+c^1_i\bmod p)\alpha^i}\). In \(GF(2)\), this is conveniently identical to the bitwise XOR operation. 
+						</p>
+						<p class="rp_analysis">
+							Multiplying is considerably trickier. Multiplication is done with respect to the <i>particular</i> primitive polynomial we chose. This means that the same field can have more than one multiplication table; the multiplication tables are isomorphic, however, and the choice of primitive polynomial is essentially cosmetic.
+						</p>
+						<p class="rp_analysis">
+							If we fix our primitive polynomial, then multiplication is definitely most simply expressed in terms of the root of that polynomial \(\alpha\); \(e_0\cdot e_1\,=\, \alpha^{r_0}\cdot \alpha^{r_1}\) for some integers \(r_0,r_1\) since the root of a primitive polynomial is \(\alpha\), so the product \(e_0\cdot e_1\,=\,\alpha^{r_0+r_1}\).
+						</p>
+						<p class="rp_analysis">
+							The key connection between the two forms is that we have fixed that \(\alpha\) is the <i>root</i> of the primitive polynomial: this means that, for primitive polynomial \(p(x)\), we have chosen that \(p(\alpha)=0\). Since primitive polynomials must be of degree \(k\), we can use this equation to determine what \(\alpha^k\) is (and, consequently, \(\alpha^r\) for any \(r\)).
+						</p>
+						<p class="rp_analysis">
+							If, for example, we are operating in \(GF(2^4)\), we may choose our primitive polynomial as \(p(x)=x^4+x+1\) (it is of degree \(k=4\), and it is irreducible). Multiplication may be done in terms of powers of \(\alpha\), or may be done in terms of polynomials in \(\alpha\). Let's say we have elements \(e_0=\alpha^7\) and \(e_1=\alpha^8\). We can easily find their product (\(\alpha^15\)) because of their form, but we don't know their actual values from this form.
+						</p>
+						<p class="rp_analysis">
+							We simply use the fact that \(\alpha^4=\alpha+1\) (note that the signs did not change because \(1\equiv-1\pmod 2\)). $$\alpha^7 = \alpha^3(\alpha+1) =\alpha^3+\alpha+1 = 1011_2 = 11\\\alpha^8 = (\alpha+1)(\alpha+1) = \alpha^2+1 = 101_2 = 5$$
+						</p>
+						<p class="rp_analysis">
+							So when multiplying two polynomials in \(GF(p^k)\), we simplify using a chosen primitive polynomial \(f\) and use the equation \(f(\alpha)=0\) to solve.
+						</p>
+					</section>
+					<section id="notes_gf_poly">
+						<h2>Polynomial Functions</h2>
+						<p class="rp_analysis">
+							Herein lies the extremely confusing part: polynomial <i>functions</i> over \(GF(p^k)\) act very differently from polynomial <i>elements</i> in \(GF(p^k)\). In particular, we define a polynomial function \(f(x)\) of degree \(d\) to be of the form: $$f(x)\;=\; \sum\limits_{i=0}^d {c_ix^i}$$ where \(c_i,d,x \in \{0,\dots,p^k\}\).
+						</p>
+						<p class="rp_analysis">
+							Notice the stark contrast with polynomial form, in which coefficients are only in \(\{0,\dots,p\}\), maximum degree (up to <span class="definable">isomorphism</span>) is in \(\{0,\dots,k-1\}\), and the polynomial is over a particular element representing \(p\). The difference lies in the fact that polynomial elements need only represent a total of \(p^k\) values; polynomial functions need to represent all mappings from \(GF(p^k)\) to \(GF(p^k)\), which is \((p^k)^{p^k}\) mappings. 
+						</p>
+					</section>
 				</div>
 			</div>
             <div class="main_toplevel main_section main_color8" id="references">
