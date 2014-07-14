@@ -550,6 +550,40 @@
 							Notice the stark contrast with polynomial form, in which coefficients are only in \(\{0,\dots,p\}\), maximum degree (up to <span class="definable">isomorphism</span>) is in \(\{0,\dots,k-1\}\), and the polynomial is over a particular element representing \(p\). The difference lies in the fact that polynomial elements need only represent a total of \(p^k\) values; polynomial functions need to represent all mappings from \(GF(p^k)\) to \(GF(p^k)\), which is \((p^k)^{p^k}\) mappings. 
 						</p>
 					</section>
+					<section id="notes_gf_ex">
+						<h2>Example</h2>
+						<p class="rp_analysis">
+							We here fully calculate a few short problems in \(GF(2^3)\) to demonstrate all of the above concepts. Remember that \(GF(2^3)\) has 8 elements. We start by choosing our primitive polynomial to be \(x^3+x+1\); this is identical to choosing, as an identity within our field, that \(\alpha^3=\alpha+1\).
+						</p>
+						<p class="rp_analysis">
+							We start by making a table of the 8 elements in exponential form (with binary, numerical, and polynomial form also shown), as below:
+						</p>
+						<table class="rp_truthtable">
+							<tr><th>Power of \(\alpha\)</th><th>Polynomial</th><th>Binary</th><th>Number</th></tr>
+							<tr><td>0</td><td>0</td><td>000</td><td>0</td></tr>
+							<tr><td>\(\alpha^0\)</td><td>1</td><td>001</td><td>1</td></tr>
+							<tr><td>\(\alpha^1\)</td><td>\(\alpha\)</td><td>010</td><td>2</td></tr>
+							<tr><td>\(\alpha^2\)</td><td>\(\alpha^2\)</td><td>100</td><td>4</td></tr>
+							<tr><td>\(\alpha^3\)</td><td>\(\alpha+1\)</td><td>011</td><td>3</td></tr>
+							<tr><td>\(\alpha^4\)</td><td>\(\alpha^2+\alpha\)</td><td>110</td><td>6</td></tr>
+							<tr><td>\(\alpha^5\)</td><td>\(\alpha^2+\alpha+1\)</td><td>111</td><td>7</td></tr>
+							<tr><td>\(\alpha^6\)</td><td>\(\alpha^2+1\)</td><td>101</td><td>5</td></tr>
+						</table>
+						<p class="rp_analysis">
+							We can also define a function \(f\) as a polynomial in \(GF(2^8)\) and show its mapping: $$f(x)\;=\; 6x^2+4x+5\;=\; \alpha^4x^2 +\alpha^2x + \alpha^6$$
+						</p>
+						<table class="rp_truthtable">
+							<tr><th>\(x\)</th><th>Evaluation</th><th>\(f(x)\)</th></tr>
+							<tr><td>0</td><td>\(\alpha^6\)</td><td>\(\alpha^2+1=5\)</td></tr>
+							<tr><td>1</td><td>\(\alpha^4+\alpha^2+\alpha^6\)</td><td>\(\alpha^2+\alpha+1=7\)</td></tr>
+							<tr><td>\(2=\alpha\)</td><td>\(\alpha^6+\alpha^3+\alpha^6\)</td><td>\(\alpha^3=3\)</td></tr>
+							<tr><td>\(3=\alpha^3\)</td><td>\(\alpha^{10}+\alpha^5+\alpha^6\)</td><td>1</td></tr>
+							<tr><td>\(4=\alpha^2\)</td><td>\((\alpha^8+\alpha^4+\alpha^6\)</td><td>1</td></tr>
+							<tr><td>\(5=\alpha^6\)</td><td>\(\alpha^{16}+\alpha^8+\alpha^6\)</td><td>\(\alpha+1=3\)</td></tr>
+							<tr><td>\(6=\alpha^4\)</td><td>\(\alpha^{10}+\alpha^6+\alpha^6\)</td><td>\(\alpha^3=3\)</td></tr>
+							<tr><td>\(7=\alpha^5\)</td><td>\(\alpha^{14}+\alpha^7+\alpha^6\)</td><td>\(\alpha^6=5\)</td></tr>
+						</table>
+					</section>
 				</div>
 			</div>
             <div class="main_toplevel main_section main_color8" id="references">
@@ -581,7 +615,7 @@
                 </div>
                 <p>Created by Nicolas Schank 2014, Brown University</p>
 				<p>All original work is free for any use by anyone whatsoever.</p>
-				<p>For more information about liability and licensing Yao's original paper, see <a href="../liability.html">Liability</a>.</p>
+				<p>For more information about liability and licensing the original paper, see <a href="../liability.html">Liability</a>.</p>
             </div>
         </div>
     </body>
