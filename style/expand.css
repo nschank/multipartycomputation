@@ -1,0 +1,68 @@
+.expandable{
+    width: 80%;
+    margin: 0px auto 15px auto;
+}
+
+.expandable label{
+    padding: 5px 20px;
+    position: relative;
+    z-index: 20;
+    display: block;
+    height: 13px;
+    cursor: pointer;
+    color: #555555;
+    line-height: 13px;
+    font-size: 10px;
+	background:#eeeeee;
+}
+
+.expandable label:hover{
+    background: #cccccc;
+}
+
+.expandable input:checked + label,
+.expandable input:checked + label:hover{
+    background: #c6e1ec;
+    color: #3d7489;
+}
+
+.expandable label:hover:after,
+.expandable input:checked + label:hover:after{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 13px;
+    top: 7px;
+}
+
+.expandable input{
+    display: none;
+}
+
+.expandable div{
+    background: rgba(255, 255, 255, 0.5);
+    margin-top: -1px;
+    overflow: hidden;
+    height: 0px;
+    position: relative;
+    z-index: 10;
+    transition: 
+        height 0.3s ease-in-out, 
+        box-shadow 0.6s linear,
+		padding 0.3s ease-in;
+}
+.expandable input:checked ~ div{
+    transition: 
+        height 0.5s ease-in-out, 
+        box-shadow 0.1s linear;
+    box-shadow: 0px 0px 0px 1px rgba(155,155,155,0.3);
+}
+
+.expandable input:checked ~ div.exp_content{
+    height: 140px;
+	padding:5px;
+}
+
+div.exp_content {
+	overflow-y:scroll;
+}
