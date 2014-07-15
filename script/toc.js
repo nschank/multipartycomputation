@@ -61,7 +61,7 @@ function subs(container)
 	{
 		if(children.item(i).tagName !== "SECTION") continue;
 		var sectionName = name(children.item(i));
-		if(!sectionName) continue;
+		if(!sectionName || sectionName.innerHTML === "Abstract") continue;
 		var sectionId = children.item(i).getAttribute('id');
 		if(!sectionId) continue;
 		var sectionChildren = subs(children.item(i));
