@@ -90,19 +90,22 @@
 							<b>Multiparty Unconditionally Secure Protocols</b> is a 1988 paper by Chaum, Cr&eacute;peau, and Damg&aring;rd which offered the first plausibility result for protocols which are <span class="definable" data-define="information theoretic security">information-theoretically secure</span> for all parties. Their work was lightly influenced by the <a href="81.html">GMW compiler</a>, which also used secret sharing (in a cryptographic setting) to perform calculations, and more heavily influenced by <a href="82.html">a protocol</a> published by Chaum and Damg&aring;rd earlier the same year, which ensures information-theoretic security for a single party in the protocol.
 						</p>
 						<p class="rp_original">
-							This paper was foundational in the subfield of information theoretic multiparty computation. Its most important outcome is most definitely the demonstration that, for \(n\)-party computation, up to \(\left\lfloor n/3\right\rfloor\) parties can be <span class="definable" data-define="malicious party">malicious</span> while allowing all parties to enjoy unconditional security.
+							This paper was foundational in the subfield of information theoretic multiparty computation. Its most important outcome is the demonstration that, for \(n\)-party computation, up to \(\left\lfloor n/3\right\rfloor\) parties can be <span class="definable" data-define="malicious party">malicious</span> while allowing all parties to enjoy unconditional security. This bound (on this type of network) is <u>optimal</u>.
 						</p>
 					</section>
 					<section id="goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
-							This paper actually only cursorily addresses multiparty <i>computation</i>. After two years in which plausibility results for the computation aspect of the field came out, this research team focused more on what level of security could be hoped for in the face of adversaries. 
+							This paper actually only cursorily addresses multiparty <i>computation</i>. After two years in which plausibility results for computation were heavily addressed, this research team focused more on what level of security could be hoped for in the face of adversaries. This paper&mdash;along with a similar one <a href="17.html">the next year</a>&mdash;demonstrated how many malicious adversaries it is possible to thwart within a particular (but very common) framework of multiparty computation. 
 						</p>
 						<p class="rp_analysis">
-							This paper, along with a similar one <a href="17.html">the next year</a>, demonstrated how many malicious adversaries it is possible to thwart within a particular (but very common) framework of multiparty computation. Specifically, the <span class="definable">information theoretic security</span> of <i>any</i> function is demonstrated in an <span class="definable" data-define="authenticated network">authenticated</span> <span class="definable" data-define="secrecy network">secrecy</span> network, with or without a <span class="definable">broadcast channel</span>, in the case where up to &frac13; of participants are malicious.
+							Specifically, the <span class="definable">information theoretic security</span> of <i>any</i> function is demonstrated in an <span class="definable" data-define="authenticated network">authenticated</span> <span class="definable" data-define="secrecy network">secrecy</span> network, with or without a <span class="definable">broadcast channel</span>, in the case where up to &frac13; of participants are <span class="definable" data-define="malicious adversary">malicious</span>. While not the first time that these constraints on the network setting have been brought up or mentioned, it is one of the first times that this foundation network was presented so specifically, laying the groundwork for later generalizations on that setting. 
+						</p>
+						<p class="rp_analysis">
+							Most of these results, as well as their general protocol, are based around the use of <a href="../tag.html#research:tag:VerifiableSecretSharing">verifiable sharing schemes</a>. The authors perform the construction of such a scheme using polynomial functions within Galois fields; notes explaining the key concepts relating to Galois fields and polynomials within them can be found at the <a href="#notes_gf">bottom of the page</a>. Under the assumptions of their network, and under the (optimal) assumption that there are only \(\left\lfloor n/3\right\rfloor\) malicious adversaries, their sharing scheme is information theoretically secure. However, its correctness is only probabilistically guaranteed (that is, a cheater can change the output with <span class="definable">negligible</span> probability).
 						</p>
 						<p class="rp_original">
-							While not the first time that these constraints on the network setting have been brought up or mentioned, it is one of the first times that the network was presented so specifically, laying the groundwork for later generalizations on that setting. 
+							The protocol they present is simply an adaptation of the <a href="81.html">GMW construction</a> to their particular sharing scheme.
 						</p>
 					</section>
 					<section id="assumptions">
@@ -111,42 +114,111 @@
 							The authors are quick to note that <span class="definable" data-define="information theoretic security">information-theoretic security</span> is only offered under the assumption that communication between parties is information-theoretically secure in the first place. As such, we must assume the existence of networks which are <span class="definable" data-define="authenticated network">authenticated</span>, <span class="definable" data-define="secrecy network">secret</span>, and unconditionally secure.
 						</p>
 					</section>
-					<section id="defs">
-						<h2>Definitions</h2>
-						<a href="#def1"><span class="rp_definition_header">Definition 1 - </span></a>
-						<p class="rp_original rp_definition">
-							A definition 
-						</p>
-					</section>
-					<section id="theorems">
-						<h2>Theorems</h2>
-						<p class="rp_original">Some general definitions used by several theorems</p>
-						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
-						<p class="rp_original rp_theorem">
-							A theorem
-						</p>
-					</section>
 					<section id="protocol">
 						<h2>Protocols</h2>
-						<h3><a href="#secxx">Some Protocol Defined</a></h3>
+						<h3><a href="#sec3">Single Blob Commitment Scheme</a></h3>
 						<ul class="rp_analysis">
-							<li><b>Number of parties: </b></li>
-							<li><b>Function(s): </b></li>
-							<li><b>Privacy constraints: </b></li>
-							<li><b>Security constraints: </b></li>
-							<li><b>Cheating: </b></li>
-							<li><b>Bits exchanged: </b></li>
-							<li><b>Runtime:</b></li>
+							<li><b>Number of parties: </b>Any number of parties \(n\)</li>
+							<li><b>Function(s): </b>All parties (including the committing party) receive a single 'share' of polynomial function \(f\) chosen by the committing party. The commitment is opened by the committing party broadcasting everyone's shares and calculating \(f(0)\).</li>
+							<li><b>Privacy constraints: </b>No coalition of fewer than \(\lfloor n/3 \rfloor\) parties can determine \(f(0)\) before the committing party opens the commitment.</li>
+							<li><b>Cheating: </b>The committing party cannot succeed in creating a blob which can be opened in multiple ways except by predicting at least \(2m/3\) coin tosses for some security parameter \(m\). Conversely, no malicious coalition (working against the commitment) can possibly prevent it from being created correctly; however, they <i>can</i> prevent it from being opened correctly (see the next protocol).</li>
+							<li><b>Subprotocols: </b>For security, this protocol uses a cut-and-choose proof as below for up to \(mn/3\) rounds.</li>
+							<li><b>Bits exchanged: </b>\(O(mn^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(O(mn^2\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Assumptions: </b>Identical to paper's assumptions.</li>
+							<li><b>Notes: </b>Byzantine agreement was not taken into account for the above runtime/bit-exchange calculations.</li>
+						</ul>
+						<span class="rp_sub_header"><a href="#sec3">Subprotocol: Cut-and-Choose for Single Blob</a></span>
+						<ul class="rp_analysis rp_sub">
+							<li><b>Bits exchanged: </b>\(O(n^2\log n)\) where \(n\) is the number of parties</li>
+							<li><b>Runtime: </b>\(O(n\log n)\) where \(n\) is the number of parties.</li>
+						</ul>
+						
+						<h3><a href="#sec4">Double Blob Commitment Scheme</a></h3>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b>Any number of parties \(n\)</li>
+							<li><b>Function(s): </b>All parties (including the committing party) receive a single 'share' of polynomial function \(f\) chosen by the committing party, as well as a single 'share' of every other party's share. The commitment is opened by the every party broadcasting everyone's shares and calculating \(f(0)\).</li>
+							<li><b>Privacy constraints: </b>No coalition of fewer than \(\lfloor n/3 \rfloor\) parties can determine \(f(0)\) before the committing party opens the commitment.</li>
+							<li><b>Cheating: </b>The committing party cannot succeed in creating a blob which can be opened in multiple ways except by predicting at least \(2m/3\) coin tosses for some security parameter \(m\). No other party can succeed in doing the same thing with their own share of the committing party's blob with the same probability. No malicious coalition (working against the commitment) can possibly prevent it from being created correctly.</li>
+							<li><b>Subprotocols: </b>This protocol uses the above single blobs, complete with cut-and-chooses. Additionally, another \(m\) cut-and-choose procedures are used on this double blob as a whole (see below).</li>
+							<li><b>Bits exchanged: </b>\(O(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(O(m^2n^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Assumptions: </b>Identical to paper's assumptions.</li>
+							<li><b>Notes: </b>Byzantine agreement was not taken into account for the above runtime/bit-exchange calculations.</li>
+						</ul>
+						<span class="rp_sub_header"><a href="#sec4">Subprotocol: Cut-and-Choose for Double Blob</a></span>
+						<ul class="rp_analysis rp_sub">
+							<li><b>Bits exchanged: </b>\(O(mn^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(O(mn^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+						</ul>
+						
+						<h3><a href="#sec5">Robust Double Blob Commitment Scheme</a></h3>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b>Any number of parties \(n\).</li>
+							<li><b>Function(s): </b>All parties (including the committing party) receive a single 'share' of polynomial function \(f\) chosen by the committing party, as well as a single 'share' of every other party's share. The commitment is opened by the every party broadcasting everyone's shares and calculating \(f(0)\).</li>
+							<li><b>Privacy constraints: </b>No coalition of fewer than \(\lfloor n/3 \rfloor\) parties can determine \(f(0)\) before the committing party opens the commitment.</li>
+							<li><b>Cheating: </b>The committing party cannot succeed in creating a blob which can be opened in multiple ways except by predicting at least \(2m/3\) coin tosses for some security parameter \(m\). No other party can succeed in doing the same thing with their own share of the committing party's blob with the same probability. No malicious coalition (working against the commitment) can possibly prevent it from being created correctly. No malicious coalition can prevent the blob from being opened correctly without cheating in the double blob protocol.</li>
+							<li><b>Subprotocols: </b>This protocol uses the above double blobs and single blobs, complete with cut-and-chooses. Additionally, another cut-and-choose proof is used on this robust double blob as a whole (see below).</li>
+							<li><b>Bits exchanged: </b>\(O(m^3n^5\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(O(m^3n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Assumptions: </b>Identical to paper's assumptions.</li>
+							<li><b>Notes: </b>Byzantine agreement was not taken into account for the above runtime/bit-exchange calculations.</li>
+						</ul>
+						<span class="rp_sub_header"><a href="#sec5">Subprotocol: Cut-and-Choose for Robust Double Blob</a></span>
+						<p class="rp_analysis rp_sub">
+							Note that this protocol was defined here, not in the original paper.
+						</p>
+						<ul class="rp_analysis rp_sub">
+							<li><b>Bits exchanged: </b>\(O(m^2n^5\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(O(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+						</ul>
+						
+						<h3><a href="#sec5">Computing the AND of Two (Robust) Double Blobs</a></h3>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b>Any number of parties \(n\).</li>
+							<li><b>Function(s): </b>All parties compute solely on the shares of the two blobs that they have. They are left with shares of a single blob representing their product (equivalently, AND).</li>
+							<li><b>Privacy constraints: </b>No coalition of fewer than \(\lfloor n/3 \rfloor\) parties can determine \(f(0)\) of the new blob before the committing party opens the commitment.</li>
+							<li><b>Cheating: </b>Parties cannot hold shares of anything other than the product of the original two shares without predicting at least \(2m/3\) coin flips.</li>
+							<li><b>Subprotocols: </b>This protocol uses robust double blobs, and a complex cut-and-choose (as below). Every participant must perform both cut-and-chooses \(m\) times.</li>
+							<li><b>Bits exchanged: </b>\(O(mn^3\log n(S(m,n)+m^2n^2))\) where \(n\) is the number of parties, \(m\) is the security parameter on the cut-and-choose protocol, and \(S(m,n)\) is the number of bits needed for one party to commit to a single bit.</li>
+							<li><b>Runtime: </b>\(O(mn^3\log n(T(m,n)+m^2n))\) where \(n\) is the number of parties, \(m\) is the security parameter on the cut-and-choose protocol, and \(T(m,n)\) is the runtime of the commitment scheme used.</li>
+							<li><b>Assumptions: </b>Identical to paper's assumptions.</li>
+							<li><b>Notes: </b>Byzantine agreement was, at best, included only in the commitment scheme's runtime and bit count.</li>
+						</ul>
+						<span class="rp_sub_header"><a href="#sec5">Subprotocol: Cut-and-Choose for Proving Correctness of Multiplication</a></span>
+						<p class="rp_analysis rp_sub">
+							We assume the existence of some commitment scheme which exchanges \(S(m,n)\) bits to commit to (and later open) one bit, and runs in \(T(m,n)\) time for one bit.
+						</p>
+						<ul class="rp_analysis rp_sub">
+							<li><b>Bits exchanged: </b>\(O(n^2\log n\cdot S(m,n))\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
+							<li><b>Runtime: </b>\(O(n^2\log n\cdot T(m,n))\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
+						</ul>
+						<span class="rp_sub_header"><a href="#sec5">Subprotocol: Cut-and-Choose for Proving Correctness of Constructed Blob Pair</a></span>
+						<p class="rp_analysis rp_sub">
+							For more information on what the constructed blobs actually are, read the section linked.
+						</p>
+						<ul class="rp_analysis rp_sub">
+							<li><b>Bits exchanged: </b>\(O(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
+							<li><b>Runtime: </b>\(O(m^2n^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
 						</ul>
 					</section>
 					<section id="further">
 						<h2>Further Reading</h2>
+						<p class="rp_analysis">
+							For more about the GMW compiler construction, the basis on which this more secure compiler was built, read <a href="81.html">the original paper</a>.
+						</p>
+						<p class="rp_analysis">
+							To see Chaum and Damg&aring;rd's original construction, on which this one was built, visit <a href="82.html">their chapter</a> on it.
+						</p>
+						<p class="rp_analysis">
+							A similar (and concurrent) paper by Ben-Or, Goldwasser, and Wigderson found <a href="17.html">here</a> demonstrates the same results using a different method.
+						</p>
 					</section>
 					<section id="ref">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
-							A reference for this paper
+							D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. Multiparty Unconditionally Secure Protocols (extended abstract). <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing.</i> ACM. 1988, pp. 11-19.
 						</p>
 					</section>
                 </div>
@@ -370,7 +442,7 @@
 							When opening a <span class="definable">blob</span>, \(P_A\) was to broadcast the shares distributed in creating it. If \(P_A\) is trying to prove some statement using the techniques of <span class="reference" data-citation="BCC">[?]</span>, the previous section's results imply that it is in \(P_A\)'s interest to create and broadcast the shares properly. But in other cases, communication failures or a change of heart, for example, might keep \(P_A\) from ultimately broadcasting the shares. Even if the other participants were to make \(P_A\)'s shares public in efforts to open the blob without \(P_A\)'s help, they would be left with a computational problem: <span class="definable" data-define="reliable participant">unreliable participants</span> might make public false values for their shares, and finding the value represented may require searching the exponentially many subsets of shares of size \(2d+a\) for one consistent with one polynomial of degree smaller than \(d\). Even worse, if \(P_A\) was already cheating when creating the blob, the majority of complainers could be reliable. In such cases, unreliable participants could choose at the time of opening between broadcasts that would leave no unique solution for the secret or other broadcast that would yield a particular value unambiguously.
 						</p>
 						<p class="rp_annotation">
-							Aside from the huge (\(\binom{n}{2d+a}\)) search space of subsets, we note that the problem is quite possibly impossible to solve. If, for instance, we find we have some subset of size \(2d+a-1\) that is consistent with a polynomial of degree \(d-1\) or less, then ALL of the additional shares will describe consistent polynomial of degree \(d\) or less. The unreliable participants could easily make the problem impossible to solve by presenting options that are all equally valid.
+							Aside from the huge (\(\binom{n}{2d+a}\)) search space of subsets, we note that the problem is quite possibly impossible to solve. If, for instance, we find we have some subset of size \(2d+a-1\) that is consistent with a polynomial of degree \(d-1\) or less, then ALL of the additional shares will describe consistent polynomials of degree \(d\) or less.
 						</p>
 						<p class="rp_original">
 							This is where the secret sharing scheme becomes insufficient and a VSS is needed. To avoid the problems mentioned above, and assist with things to be presented later, we provide for the "sharing of the shares of a blob" (as was done for similar reasons in <span class="reference" data-citation="Ch2">[?]</span>). Thus, to create a <i>double</i> blob \(\delta, P_A\) proceeds as follows:
@@ -414,7 +486,7 @@
 							We leave it as an exercise to design a cut-and-choose procedure that will establish this fact.
 						</p>
 						<p class="rp_annotation">
-							We don't. The first property can be proven using a cut-and-choose technique very similar to the one used for single and double blobs; loosely, \(P_A\) creates a set of other robust double blobs \(\xi_1\dots\xi_t\) and, contingent on a <span class="definable">coin flip</span>, either opens \(\xi_i\) in its entirety, or opens \(\rho+\xi_i\). Some subset of \(2d+a\) participants must not complain in all \(t\) rounds. Just as when performing cut-and-choose on single blobs, \(\rho\) being inconsistent necessarily means that either \(\xi_i\) is inconsistent or \(\rho+\xi_i\) is inconsistent.
+							We don't. The first property can be proven using a cut-and-choose technique very similar to the one used for single and double blobs; loosely, \(P_A\) creates a set of other robust double blobs \(\xi_1\dots\xi_t\) and, contingent on a <span class="definable">coin flip</span>, either opens \(\xi_i\) in its entirety, or opens \(\rho+\xi_i\). Some subset of \(2d+a\) participants must not complain in all \(t\) rounds. Just as when performing cut-and-choose on single blobs, \(\rho\) being inconsistent necessarily means that either \(\xi_i\) is inconsistent or \(\rho+\xi_i\) is inconsistent; if the latter, then \(\rho\) is inconsistent.
 						</p>
 						<p class="rp_annotation">
 							For the second, \(P_B\) creates \(t\) single blobs \(\zeta_1,\dots,\zeta_t\) and \(t\) double blobs \(\eta_1,\dots,\eta_t\) such that \(Contents(\zeta_i)=Contents(\eta_i)\). One round at a time, contingent on a coin flip, \(P_B\) either opens both \(\beta_B+\zeta_i\) and \(\delta_B+\eta_i\) or both \(\zeta_i\) and \(\eta_i\), in both cases to demonstrate their equality. Intuitively, the two pairs should only both be equal polynomials if \(P_B\) did not attempt to cheat.
@@ -427,6 +499,9 @@
 						</p>
 						<p class="rp_original">
 							The computation is specified by a boolean circuit composed of XOR and AND gates. It is then clearly sufficient to be able to safely compute from two robust double blobs a new one both as the XOR of the two inputs and also as the AND.
+						</p>
+						<p class="rp_annotation">
+							This is why robustness was necessary: the resulting blob may not actually owned by anyone (if the blobs belong to two different participants), so the top level will be <i>completely</i> determined by the sub-blobs.
 						</p>
 						<p class="rp_original">
 							Computing the XOR of two double blobs is easy, based on the remarks in previous sections: all participants simply add their shares, both for the top-level blobs representing the actual bits, and for the sub-blobs. The outcome is just a new double blob representing the XOR of the inputs.
@@ -621,14 +696,7 @@
     </body>
 </html>
 <!--
-7. Annotate paper
-	7.1. copy assumptions
-	7.2. copy theorems
-	7.3. copy definitions
-8. Write protocol descriptions 
 9. Check previous research for places to link
-10. Write intro, goals, results
 11. Tags
-12. Consider implementations
 13. Find reference
 -->
