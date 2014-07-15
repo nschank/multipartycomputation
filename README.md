@@ -22,7 +22,7 @@ Research paper objects have the following properties:
 - *authors*: An (ordered) array of strings, where each string is the name of one author who worked on the paper.
 - *hasPage*: (default: false) A boolean value which indicates whether the paper has a page. If not set or set to a falsy value, the navigation pages will not attempt to link to this paper.
 - *id*: A number that specifies the location of that paper's webpage, if one is present. Must be unique.
-- *include*: (default: true) A boolean value indicating whether or not to include this paper in navigation. Set to false to make all pages ignore this paper. Currently, all papers considered 'related but not major' have this set to false. When the site is more public, we will probably shift to only including those papers which actually have a webpage.
+- *include*: (default: false) A boolean value indicating whether or not to include this paper in navigation. If neither this nor hasPage is true, then this paper is not displayed in research navigation
 - *length*: The length of this paper (in published pages).
 - *self_ref*: (default: "") A string which includes a citation for this paper. Not currently used, but should be included if hasPage is true for possible later usage.
 - *tags*: An (unordered, though preferably alphabetical) array of tags which relate to this paper's content. If this paper's page is not finished, MUST include the tag "Unsorted". We will get to standardizing tags soon.
@@ -64,7 +64,7 @@ Research pages may contain:
 - Footnotes, self explanatory
 - Additional notes; any subject brought up within a paper that is used often may need to be explained, but may take too much space within the paper (e.g. specific linear algebra, a specific group or ring, etc.)
 - Additional overview sections (e.g. if a single protocol is very significant and needs more than the small protocol template)
-- A Table of Contents, which is built automatically by /script/toc.js. The script uses the first heading within any section or tag of class main_section as the section's name. All such sections and main_sections which contain a heading must also have an id, to allow for linking. Section names ignore any preceding numbers and periods (and any whitespace afterward), and drop the last character if it is a colon or period. In regexp terms, section headings use only the capture group in /[\d\.]*\s*(.+?)[\.:]?/
+- A Table of Contents, which is built automatically by /script/toc.js. The script uses the first heading within any section or tag of class main_section as the section's name. All such sections and main_sections which contain a heading must also have an id, to allow for linking. Section names ignore any preceding numbers and periods (and any whitespace afterward), and drop the last character if it is a colon or period. In regexp terms, section headings use only the capture group in /[\\d\\.]*\\s*(.+?)[\\.:]?/. Any section called "Abstract" is ignored.
 
 ###Next Steps
 Next Steps, not-very-surprisingly, is mostly being dealt with last. It does, however, house the implementation section. For more information, see the Implementations section at the bottom of this README.
@@ -78,6 +78,10 @@ The learning section is intended to be similar to an online textbook. A tiny amo
 This was done because this site is meant to be easily extensible and changeable. Normally, such extensibility would be done with server-side code; alas, we have no server (keep in mind, a single college student is hosting this site alone). As such, we must depend on JavaScript, lest we fall back to pure HTML. If we ever get independent funding for a server, we will of course move to a more consistent and safe client/server model.
 We avoided the use of jQuery mostly because most JavaScript was very simple and it really wouldn't have added much.
 We note that JavaScript will likely always be required for most useful pages anyway, due to our usage of MathJax. We currently have no intention of switching away from MathJax.
+
+###Type of Reference
+We follow a particular type of reference for the papers we have pages for: F. Lastname, F. Lastname..., and F. Lastname. Title of Paper in Title Case (extended abstract, if accurate). _Full Name of Publication of Origin_, pp. 0-100. Publisher. Year.
+This was done for no real reason other than a lack of consistency between different reference lists; we simply went with one particularly concise version seen in one paper, and stuck with it. 
 
 ##To Do
 We have a separate file for things to do, at /todo.

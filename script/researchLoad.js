@@ -27,7 +27,7 @@ function createSection(authorSection,titleSection,yearSection,tagSection)
 {	
 	return function(paper)
 	{
-		if(paper.include === false) 
+		if(!paper.hasPage && !paper.include) 
 			return;
 		var researchPiece = document.createElement("div");
 		researchPiece.className = "rl_element";
