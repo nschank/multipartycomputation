@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Multiparty Unconditionally Secure Protocols - Chaum, Crépeau, Damgård, 1988</title>
+        <title>Multiparty Unconditionally Secure Protocols - Chaum, Cr&eacute;peau, Damg&aring;rd, 1988</title>
         <link rel="stylesheet" type="text/css" href="../../style/main.css">
         <link rel="stylesheet" type="text/css" href="../../style/equation.css">
         <link rel="stylesheet" type="text/css" href="../../style/ref.css">
@@ -74,9 +74,9 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="rp_author" href="../authors/David Chaum.html">David Chaum</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="rp_author" href="../authors/Claude Crépeau.html">Claude Crépeau</a>
+						<a class="rp_author" href="../authors/Claude Cr&eacute;peau.html">Claude Cr&eacute;peau</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="rp_author" href="../authors/Ivan Damgård.html">Ivan Damgård</a>
+						<a class="rp_author" href="../authors/Ivan Damg&aring;rd.html">Ivan Damg&aring;rd</a>
 					</span>
 					
 					<div class="rp_snippet">
@@ -87,7 +87,7 @@
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Multiparty Unconditionally Secure Protocols</b> is a 1988 paper by Chaum, Crépeau, and Damgård which offered the first plausibility result for protocols which are <span class="definable" data-define="information theoretic security">information-theoretically secure</span> for all parties. Their work was lightly influenced by the <a href="81.html">GMW compiler</a>, which also used secret sharing (in a cryptographic setting) to perform calculations, and more heavily influenced by <a href="82.html">a protocol</a> published by Chaum and Damgård earlier the same year, which ensures information-theoretic security for a single party in the protocol.
+							<b>Multiparty Unconditionally Secure Protocols</b> is a 1988 paper by Chaum, Cr&eacute;peau, and Damg&aring;rd which offered the first plausibility result for protocols which are <span class="definable" data-define="information theoretic security">information-theoretically secure</span> for all parties. Their work was lightly influenced by the <a href="81.html">GMW compiler</a>, which also used secret sharing (in a cryptographic setting) to perform calculations, and more heavily influenced by <a href="82.html">a protocol</a> published by Chaum and Damg&aring;rd earlier the same year, which ensures information-theoretic security for a single party in the protocol.
 						</p>
 						<p class="rp_original">
 							This paper was foundational in the subfield of information theoretic multiparty computation. Its most important outcome is most definitely the demonstration that, for \(n\)-party computation, up to \(\left\lfloor n/3\right\rfloor\) parties can be <span class="definable" data-define="malicious party">malicious</span> while allowing all parties to enjoy unconditional security.
@@ -171,7 +171,7 @@
 							The problem of achieving secure multiparty function computation in a public key cryptographic setting, was first posed by Yao<sup class="reference" data-citation="Y82">[?]</sup>. He also asked for which functions this problem admitted a solution. The answer to these questions was found by Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW87">[?]</sup> who showed that a solution, based on the existence of <span class="definable" data-define="trapdoor permutation">trapdoor one-way permutations</span>, exists no matter what the function is. They exhibited a "compiler" that transforms any multiparty function computation problem into a multiparty cryptographically secure protocol.
 						</p>
 						<p class="rp_original">
-							Inspired by their work, Chaum, Damgård, and Van de Graaf presented a more direct and practical solution<sup class="reference" data-citation="CDG">[?]</sup> based on a specific trapdoor function. Their protocol had the advantage that one \(x_i\) was <span class="definable" data-define="information theoretic security">unconditionally secure</span>, i.e. no information at all is available about it, other than the amount released by \(z\). All these constructions rely on trapdoor one-way functions, and therefore must assume essentially that public key cryptography is possible.
+							Inspired by their work, Chaum, Damg&aring;rd, and Van de Graaf presented a more direct and practical solution<sup class="reference" data-citation="CDG">[?]</sup> based on a specific trapdoor function. Their protocol had the advantage that one \(x_i\) was <span class="definable" data-define="information theoretic security">unconditionally secure</span>, i.e. no information at all is available about it, other than the amount released by \(z\). All these constructions rely on trapdoor one-way functions, and therefore must assume essentially that public key cryptography is possible.
 						</p>
 						<p class="rp_original">
 							A much weaker assumption is to assert the existence of <span class="definable" data-define="authenticated network">authenticated</span> <span class="definable" data-define="secrecy network">secrecy</span> channels, i.e. a way of communicating in which the identity of the sender is known (authentication) and the data transferred is revealed only to the single person it is designed for (secrecy). Such channels are very practical and can be implemented very easily: for example, this channel can be obtained by writing down messages on pieces of paper and physically handing them out to the other parties. They can also be implemented using conventional cryptography (secret key systems). Two fundamental questions remain: Which protocol problems can be solved assuming only the existence of these authenticated secrecy channels between pairs of participants, and can all parties have their secrets unconditionally secure?
@@ -601,10 +601,10 @@
 					<li id="Ch">Chaum: The Dining Cryptographers Problem, to appear.</li>
 					<li id="BGW">Ben-Or, Goldwasser, and Wigderson: Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation. To appear in <i>Proceedings of STOC 88</i>.</li>
 					<li id="DS">Dole and Strong: Polynomial Algorithms for Multiple Processor Agreement. <i>Proceedings of STOC 82</i>, pp.401-407.</li>
-					<li id="BCC">Brassard, Chaum, and Crépeau: Minimum Disclosure Proofs of knowledge. To appear.</li>
+					<li id="BCC">Brassard, Chaum, and Cr&eacute;peau: Minimum Disclosure Proofs of knowledge. To appear.</li>
 					<li id="Ch2">Chaum: How to keep a secret alive.<i>Proceedings of Crypto 84.</i></li>
-					<li id="BC">Brassard and Crépeau: Zero-Knowledge Simulation of Boolean Circuits. <i>Proceedings of Crypto 86</i>.</li>
-					<li id="Cr">Crépeau: Ph.D Thesis, in preparation</li>
+					<li id="BC">Brassard and Cr&eacute;peau: Zero-Knowledge Simulation of Boolean Circuits. <i>Proceedings of Crypto 86</i>.</li>
+					<li id="Cr">Cr&eacute;peau: Ph.D Thesis, in preparation</li>
 					
 					<li id="theorem_uni">Robin J.Y. McLeod and M. Louisa Baart: Unisolvence. <i>Geometry and Interpolation of Curves and Surfaces.</i> Cambridge University Press. 1998, pp. 33-34.</li>
                 </ol>

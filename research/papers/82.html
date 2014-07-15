@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result - David Chaum, Ivan B. Damgård, Jeroen van de Graaf, 1988</title>
+        <title>Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result - David Chaum, Ivan B. Damg&aring;rd, Jeroen van de Graaf, 1988</title>
         <link rel="stylesheet" type="text/css" href="../../style/main.css">
         <link rel="stylesheet" type="text/css" href="../../style/equation.css">
         <link rel="stylesheet" type="text/css" href="../../style/ref.css">
@@ -70,7 +70,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="rp_author" href="../authors/David Chaum.html">David Chaum</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="rp_author" href="../authors/Ivan Damgård.html">Ivan Damgård</a>
+						<a class="rp_author" href="../authors/Ivan Damg&aring;rd.html">Ivan Damg&aring;rd</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="rp_author" href="../authors/Jeroen van de Graaf.html">Jeroen van de Graaf</a>
 					</span>
@@ -174,7 +174,7 @@
 							The problem of multiparty secure computations is an important one. When stated in its most general form, its solution implies a solution&mdash;at least a theoretical one&mdash;to almost any protocol construction problem. The first to consider this problem was Yao<sup class="reference" data-citation="Y2"></sup>. He devised protocols that, under various cryptographic assumptions, could keep the inputs secret while allowing each participant only a negligible chance of cheating. He did not, however, address the problem of "fairness", i.e. ensuring that the participants learn the output simultaneously. Layer, Yao<span class="reference" data-citation="Y1"></span> solved also this problem for the two-party case. Recently, in work done independently from (but earlier than) ours, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW"></sup> used Yao's two-party construction to devise a multiparty solution, based on the existence of a trapdoor one-way function. This protocol implements a multiparty simulation of the computation in a circuit. Each participant holds a share of each bit in the real computation, and these shares are manipulated by using Yao's two-party construction \(O(n^2)\) times, where \(n\) is the number of participants. In other work done independently from and almost simultaneously with ours, Galil, Haber, and Yung generalize all the properties of Yao's construction to the multiparty case, and simplify the use of Yao's protocol in the multiparty simulation. Also, they give a concrete construction based on Diffie-Hellman key exchange rather than the existence of a trapdoor one way function. Very recently, Goldreich and Vainish<sup class="reference" data-citation="GV"></sup> found another simplification by designing a special purpose two-party protocol which could replace Yao's protocol in the multiparty construction.
 						</p>
 						<p class="rp_original">
-							In comparison, our protocol solves the multiparty case using a totally different concept. It attacks the problem "directly", without using Yao's two-party protocol, and without using reductions to 3-colorability<sup class="reference" data-citation="GMW2"></sup> or to SAT<sup class="reference" data-citation="BC"></sup><sup class="reference" data-citation="C"></sup> to prove the validity of messages. We rely on a stronger cryptographic assumption than <span class="reference" data-citation="GMW"></span>, namely the <i>Quadratic Residuosity Assumption</i><sup class="reference" data-citation="GM"></sup>. This, however, allows a simpler and more efficient construction, capable of implementing all the "primitives for cryptographic computations", defined in <span class="reference" data-citation="GHY"></span>. Although our protocol could also be based only on the existence of a trapdoor one-way function, this would reduce the efficiency considerably. Some of the techniques upon which our protocol is based were previously developed and used in the work of Chaum<sup class="reference" data-citation="C"></sup> and Brassard and Crépeau<sup class="reference" data-citation="BC"></sup>. By specializing to the case where only one participant supplies the inputs, our protocol can provide slightly more efficient solutions to the problems solved there.
+							In comparison, our protocol solves the multiparty case using a totally different concept. It attacks the problem "directly", without using Yao's two-party protocol, and without using reductions to 3-colorability<sup class="reference" data-citation="GMW2"></sup> or to SAT<sup class="reference" data-citation="BC"></sup><sup class="reference" data-citation="C"></sup> to prove the validity of messages. We rely on a stronger cryptographic assumption than <span class="reference" data-citation="GMW"></span>, namely the <i>Quadratic Residuosity Assumption</i><sup class="reference" data-citation="GM"></sup>. This, however, allows a simpler and more efficient construction, capable of implementing all the "primitives for cryptographic computations", defined in <span class="reference" data-citation="GHY"></span>. Although our protocol could also be based only on the existence of a trapdoor one-way function, this would reduce the efficiency considerably. Some of the techniques upon which our protocol is based were previously developed and used in the work of Chaum<sup class="reference" data-citation="C"></sup> and Brassard and Cr&eacute;peau<sup class="reference" data-citation="BC"></sup>. By specializing to the case where only one participant supplies the inputs, our protocol can provide slightly more efficient solutions to the problems solved there.
 						</p>
 						<p class="rp_original">
 							An interesting consequence of our work is that any statement which can be proved interactively, can also be proved in zero knowledge, provided that our cryptographic assumption holds (one assumption which will do in this case is the existence of clawfree trapdoor functions). More formally: any language in IP has a zero knowledge proof system. This result was already proved for protocols with a constant number of rounds in <span class="reference" data-citation="GMW2"></span>, where a proof of the result in full generality is attributed to Ben-Or. As far as we know, this last proof is still unpublished, so we cannot comment on possible differences between this proof and ours.
@@ -884,7 +884,7 @@
 								Under different assumptions, however, it <i>is</i> possible to get unconditional security for all participants. In <span class="reference" data-citation="CDC"></span>, it is shown how to do this using no cryptographic assumptions, in a model where there exists an unconditionally secure secrecy channel between every pair of participants, and where at least two thirds of the participants will follow the protocol.
 							</p>
 							<p class="rp_original">
-								On the positive side, it should be noted that in joint work with Claude Crépeau, we have recently shown that our basic protocol can be made to work, based only on the assumption that a one way function exists, and that there is a protocol solving the ANDOS problem: Clearly, bit commitments are possible if one way functions exist, and the comparability property can always be satisfied using the fact that all NP-statements can be proved in zero knowledge (although using very inefficient protocols). The idea is now to use a protocol for ANDOS to get something which will replace the blinding property: Notice that when participant \(P_i\) blinds other participants' commitments, the basic fact used in the protocol is that \(P_i\) knows the XOR sum of the bit contained in the original commitment, and the one contained in the blinded version. It will therefore be sufficient if he can learn a set of these XOR relations by doing an ANDOS protocol with each \(P_j\) with \(j\lt i\). 
+								On the positive side, it should be noted that in joint work with Claude Cr&eacute;peau, we have recently shown that our basic protocol can be made to work, based only on the assumption that a one way function exists, and that there is a protocol solving the ANDOS problem: Clearly, bit commitments are possible if one way functions exist, and the comparability property can always be satisfied using the fact that all NP-statements can be proved in zero knowledge (although using very inefficient protocols). The idea is now to use a protocol for ANDOS to get something which will replace the blinding property: Notice that when participant \(P_i\) blinds other participants' commitments, the basic fact used in the protocol is that \(P_i\) knows the XOR sum of the bit contained in the original commitment, and the one contained in the blinded version. It will therefore be sufficient if he can learn a set of these XOR relations by doing an ANDOS protocol with each \(P_j\) with \(j\lt i\). 
 							</p>
 							<p class="rp_original">
 								The fact that ANDOS can be based on the existence of a trapdoor one way function<sup class="reference" data-citation="Cr"></sup> then implies that our protocol can also be based only on a trapdoor one way function. The resulting protocol would have the same property as the one of <span class="reference" data-citation="GHY"></span> which is based on the same assumption, namely that only one trapdoor function would have to be generated for each participant, while the solution in <span class="reference" data-citation="GMW"></span> requires generation of \(O(n^2)\) functions.
@@ -929,7 +929,7 @@
 					<section id="sec9">
 						<h2>9. Acknowledgements</h2>
 						<p class="rp_original">
-							We would like to thank Gilles Brassard and Claude Crépeau for may stimulating discussions.
+							We would like to thank Gilles Brassard and Claude Cr&eacute;peau for may stimulating discussions.
 						</p>
 					</section>
                 </div>
@@ -943,15 +943,15 @@
 					<li id="Y2">A.C. Yao. <a href="49.html">Protocols for secure computations (extended abstract).</a> In <i>Proc. of the 23rd Annu. IEEE Symp. on Foundations of Computer Science.</i> pages 160-164. 1982.</li>
 					<li id="GV">Goldreich and Vainish: How to solve any protocol problem: an efficiency improvement. <i>Proc of Crypto</i> 87.</li>
 					<li id="GMW2">Goldreich, Micali, and Wigderson: How to prove all NP-statements in zero-knowledge, and a methodology of cryptographic protocol design. <i>Proc. of Crypto</i> 86.</li>
-					<li id="BC">Brassard and Crépeau: Zero knowledge simulation of boolean circuits. <i>Proc. of Crypto</i> 86.</li>
+					<li id="BC">Brassard and Cr&eacute;peau: Zero knowledge simulation of boolean circuits. <i>Proc. of Crypto</i> 86.</li>
 					<li id="C">Chaum: Demonstrating that a public predicate can be satisfied while revealing no information about how. <i>Proc. of Crypto</i> 86.</li>
 					<li id="GM">Goldwasser and Micali: PRobabilistic Encryption. <i>JCSS, vol. 28, no.2</i>, April 1984, pp.270-299.</li>
 					<li id="PG">Peralta and van de Graaf: A simply an efficient protocol to prove the validity of your public key. To appear in <i>Proceedings of Crypto</i> 87.</li>
 					<li id="Bl">Blum: Coinflipping by telephone: Protocols for solving impossible problems. <i>Proc. of 24. IEEE</i> CompCon, 1982.</li>
 					<li id="GMR">Goldwasser, Micali, and Rackoff: The knowledge complexity of interactive proof systems. <i>Proc. 17th STOC</i>, 1985.</li>
 					<li id="Ch2">Chaum: How to keep a secret alive. <i>Proc. of Crypto</i> 84.</li>
-					<li id="Cr">Crépeau: Equivalence between two flavours of oblivious transfers. To appear in proceedings of <i>Crypto</i> 87.</li>
-					<li id="CDC">Chaum, Damgård, and Crépeau: Fundamental primitives for multiparty unconditionally secure protocols. To appear.</li>
+					<li id="Cr">Cr&eacute;peau: Equivalence between two flavours of oblivious transfers. To appear in proceedings of <i>Crypto</i> 87.</li>
+					<li id="CDC">Chaum, Damg&aring;rd, and Cr&eacute;peau: Fundamental primitives for multiparty unconditionally secure protocols. To appear.</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
