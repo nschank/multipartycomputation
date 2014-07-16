@@ -1,21 +1,34 @@
 window.addEventListener("load", addGlossaryListeners, true);
 
+/**
+ * Looks for all words marked as 'definable' and attempts to create definition boxes for them.
+ */
 function addGlossaryListeners()
 {
 	var definable = document.getElementsByClassName("definable");
+	
+	//Attempt to organize the DOM a bit better by putting the definition boxes in their own div; 
+	// we will put the div in the DOM immediately, however, because they are all styled as
+	// 'display:none' and 'position:fixed', so they add very little overhead.
 	var glossary = document.createElement("div");
 	document.body.appendChild(glossary);
 	
 	for(var i = 0; i < definable.length; i++)
 	{
+		//Try the actual text being surrounded first; barring that, use data-define.
 		var word = definable.item(i).innerHTML;
 		var definition = define(word);
-		if(definition === null)
+		if(definition === null && definable.item(i).getAttribute("data-define"))
 		{
 			word = definable.item(i).getAttribute("data-define");
 			definition = define(word);
 		}
-		if(definition === null) continue;
+		//The following occurs only if a word is not in the glossary.
+		if(definition === null) 
+		{
+			console.log("Developer note: word \"" + word + "\" missing from dictionary.");
+			continue;
+		}
 		addDOMG(definable.item(i), word, definition, glossary);
 	}
 }

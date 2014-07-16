@@ -61,7 +61,7 @@ function subs(container)
 	{
 		if(children.item(i).tagName !== "SECTION") continue;
 		var sectionName = name(children.item(i));
-		if(!sectionName || sectionName.innerHTML === "Abstract") continue;
+		if(!sectionName) continue;
 		var sectionId = children.item(i).getAttribute('id');
 		if(!sectionId) continue;
 		var sectionChildren = subs(children.item(i));
@@ -80,6 +80,10 @@ function buildNode(table, list)
 		var link = document.createElement("a");
 		link.setAttribute("href","#" + table[i].id);
 		link.innerHTML = headingName.exec(table[i].name)[1];
+		
+		var num;
+		if(num = document.getElementById(table[i].id).getAttribute('data-section-number'))
+			li.setAttribute('value', num);
 		
 		li.appendChild(link);
 		if(table[i].children)

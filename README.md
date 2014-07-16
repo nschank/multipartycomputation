@@ -50,6 +50,7 @@ Research pages always include:
 	- Definitions used only in the one page should be put in the JavaScript object self_def, in the form self_def["word"]="definition"
 	- A word should only be 'definable' in its first usage in every section.
 	- Definitions _can_ contain both equations and other definitions within them.
+	- Any definable classes with no matching words in any glossary will be noted by console.log (obviously a feature to remove later)
 - Equation explanations (class: "equation", required data-equation=[equation name])
 	- Equations that are difficult to remember (e.g. some variable "h" defined several sections ago) or difficult to understand should have an explanation attached.
 	- Equations should be explained in _every_ usage.
@@ -64,7 +65,7 @@ Research pages may contain:
 - Footnotes, self explanatory
 - Additional notes; any subject brought up within a paper that is used often may need to be explained, but may take too much space within the paper (e.g. specific linear algebra, a specific group or ring, etc.)
 - Additional overview sections (e.g. if a single protocol is very significant and needs more than the small protocol template)
-- A Table of Contents, which is built automatically by /script/toc.js. The script uses the first heading within any section or tag of class main_section as the section's name. All such sections and main_sections which contain a heading must also have an id, to allow for linking. Section names ignore any preceding numbers and periods (and any whitespace afterward), and drop the last character if it is a colon or period. In regexp terms, section headings use only the capture group in /[\\d\\.]*\\s*(.+?)[\\.:]?/. Any section called "Abstract" is ignored.
+- A Table of Contents, which is built automatically by /script/toc.js. The script uses the first heading within any section or tag of class main_section as the section's name. All such sections and main_sections which contain a heading must also have an id, to allow for linking. Section names ignore any preceding numbers and periods (and any whitespace afterward), and drop the last character if it is a colon or period. In regexp terms, section headings use only the capture group in /[\\d\\.]*\\s*(.+?)[\\.:]?/. Sections are numbered from 1 automatically; to define a section's specific number, set the "data-section-number" attribute of the section to be that section's number (that is, the value of that attribute is copied exactly to an li's "value" attribute).
 
 ###Next Steps
 Next Steps, not-very-surprisingly, is mostly being dealt with last. It does, however, house the implementation section. For more information, see the Implementations section at the bottom of this README.

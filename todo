@@ -22,18 +22,10 @@ Settings (stand alone)
 Composition
 
 Ch1
-34
 animation
-Assumptions page
-submit
 cheat sheet additions
 	boolean gates
 	RSA
 	indistinguishability
-words
-	computational indistinguishability (from indistinguishable)
-	interpolation
-changes
-	truthtables -> truth tables
 open probs
 	34.6: Without the assumption that \(C+L=n\), things seem to become more complicated. It is clear that as long as \(L\leq\left\lfloor\frac{(n-1)}{2}\right\rfloor\), then the solution outlined above still works, but without this condition it is not clear what happens. The method with multiplication of polynomials does not work any more, because it leads to polynomials of a degree larger than the number of available shares. Therefore the construction of a general computation protocol under these special assumptions remains an open problem.

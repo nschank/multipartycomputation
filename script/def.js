@@ -29,6 +29,8 @@ var def_internal = {
 	
 	"completeness":"In complexity, completeness refers to the property of a problem being the 'hardest' or 'most expressive' in its class. In other words, this problem can be reduced to from any other problem within the class under which it is complete.",
 	
+	"computational indistinguishability":"Two distributions are computationally indistinguishable if there exists no polynomial time adversary which can accurately predict whether a particular element was chosen from one or the other. In this case 'accurately' specifically means that the probability the adversary is correct in any case is at best negligibly better than &frac12;. For distributions \\(h\\) and \\(k\\), this is sometimes written \\(h\\stackrel{comp}{\\equiv}k\\).",
+	
 	"cryptographic security":"A protocol is cryptographically secure if adversaries cannot learn the inputs of other parties within a bounded time, generally under certain assumptions about the hardness of a particular (cryptographic) problem. This is in contrast to <span class=\"definable\">information theoretic security</span>.",
 	
 	"discrete logarithm problem":"A discrete logarithm is any integer \\(k\\) solving the equation \\(b^k=g\\), where \\(b,g\\) are two elements in a <span class=\"definable\">group</span>. At current time, the discrete log problem is believed to be computationally hard; that is, no method currently exists that solves it in time polynomial in the size of the group.",
@@ -47,9 +49,11 @@ var def_internal = {
 	
 	"injective":"An injective function (sometimes a one-to-one function or just an injection) is a function which preserves distinctness; that is, if two inputs are distinct, their outputs must also be distinct. More formally, a function \\(f\\) is injective iff \\(f(x)=f(y)\\Rightarrow x=y\\).",
 	
+	"interpolation":"Interpolation is the process of using a finite set of data points in order to produce new data points. This is often used in the form of polynomial interpolation, where a unique polynomial of degree \\(d+1\\) or less can perfectly interpolate any set of \\(d\\) points, i.e. the interpolation function contains those exact points.",
+	
 	"isomorphic":"Being of identical shape and structure. In the case of graphs, two graphs are isomorphic if and only if there is a one-to-one mapping of vertices and edges between the two graphs. More informally, it could be said that one graph is a 'relabelling' of the other.",
 	
-	"Jacobi symbol":"The Jacobi symbol of \\(m\\) modulo \\(n\\) (often written \\(\\frac m n\\) is a way to describe \\(m\\)'s <span class=\"definable\" data-define=\"quadratic residue\">quadratic residuosity</span> modulo \\(n\\). All \\(m\\) with Jacobi symbol -1 are quadratic nonresidues, though the the converse is not true.",
+	"Jacobi symbol":"The Jacobi symbol of \\(m\\) modulo \\(n\\) (often written \\(\\left(\\frac m n\\right)\\)) is a way to describe \\(m\\)'s <span class=\"definable\" data-define=\"quadratic residue\">quadratic residuosity</span> modulo \\(n\\). All \\(m\\) with Jacobi symbol -1 are quadratic nonresidues, though the the converse is not true.",
     
 	"malicious adversary":"An adversary who deviates from the rules of a protocol.",
 	
