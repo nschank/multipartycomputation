@@ -6,3 +6,4 @@ out/*
 *~
 *.txt
 !todo.txt
+.rp

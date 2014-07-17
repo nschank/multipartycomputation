@@ -11,11 +11,15 @@ var def_internal = {
 	
     "bias":"A systematic error which skews all values in a particular direction or towards a particular value.",
 	
+	"Blum integer":"A Blum integer is any composite number \\(N\\) with two prime factors \\(p,q\\) where \\(p\\equiv q\\equiv3\\bmod4\\). Blum integers are important largely due to special properties their <span class=\"definable\" data-define=\"quadratic residue\">quadratic residues</span> hold.",
+	
 	"BPP":"Bounded Probabilistic Polynomial time is the class of problems that can be solved by a probabilistic <span class=\"definable\">Turing machine</span> in polynomial time with an error upper-bounded by &frac13; over 1 run of the algorithm.",
 	
 	"broadcast channel":"A broadcast channel is a cryptographic primitive referring to any communication method that any party can write to and all parties can read from. This allows a protocol to very simply refer to the ability of any party to send a single message to every other party, while every party agrees that the same message was sent to everyone. Simplifies the exposition of a protocol, since Byzantine Agreement <span data-broken-link=true></span>allows for the same thing, but with many more complications.",
 	
 	"cartesian product":"The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}. The Cartesian product is often extended into many dimensions, as in the expression \\(A\\times B\\times C\\times D\\), which would be the set of all ordered quadruples \\((a,b,c,d)\\) that can be formed from an \\(a\\in A, b\\in B, c\\in C, d\\in D\\).",
+	
+	"clawfree":"A pair of <span class=\"definable\" data-define=\"trapdoor permutation\">trapdoor permutations</span> \\(f_1,f_2\\) is clawfree if there does not exist a PPT algorithm which can determine a triplet of values \\((x,y,z)\\) such that \\(f_1(x)=f_2(y)=z. Such a triplet is called a claw.",
     
 	"coin flip":"A common metaphor in cryptography research to refer to the creation of a truly random bit: 1 (heads) or 0 (tails). Note that, without external stimulus, it is impossible for a computer to create true randomness. There will be a tutorial on randomness.",
     
@@ -85,7 +89,7 @@ var def_internal = {
     
 	"probability density function":"A function (often called \\(p(i)\\)) used to calculate the probability of a particular instance \\(i\\) within the entire domain of possible inputs \\(I\\). Must satisfy the constraints that:<ol><li>Given any \\(i\\in I\\), \\(0\\leq p(i)\\leq 1\\)</li><li>\\(\\sum\\limits_{i\\in I} p(i) = 1\\)</li></ol>Basically, all possibilities must have a well-defined probability, and no possibilities may be missing.",
 	
-	"quadratic residue":"An integer \\(q\\) is a quadratic residue \\(\\bmod{n}\\) if there exists some \\(x\\) such that \\(q \\equiv x^2\\pmod{n}\\). Determining whether a number is a quadratic residue \\(\\bmod{n}\\) is a member of the complexity class <span class=\"definable\">NP</span>.",
+	"quadratic residue":"An integer \\(q\\) is a quadratic residue \\(\\bmod{n}\\) if there exists some \\(x\\) such that \\(q \\equiv x^2\\pmod{n}\\). Determining whether a number is a quadratic residue \\(\\bmod{n}\\) for a <span class=\"definable\">Blum integer</span> \\(n\\) is not known to be as hard as factoring, but is considered to be computationally very difficult.",
 	
 	"secrecy network":"A network in which it is assumed that any party can communicate with any other party without anyone else knowing what was said. Often assumed in multiparty computation, as the use of an encryption scheme makes this relatively simple while significantly complicating explanation of the protocol.",
 	
