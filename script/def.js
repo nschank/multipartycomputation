@@ -19,7 +19,7 @@ var def_internal = {
 	
 	"cartesian product":"The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}. The Cartesian product is often extended into many dimensions, as in the expression \\(A\\times B\\times C\\times D\\), which would be the set of all ordered quadruples \\((a,b,c,d)\\) that can be formed from an \\(a\\in A, b\\in B, c\\in C, d\\in D\\).",
 	
-	"clawfree":"A pair of <span class=\"definable\" data-define=\"trapdoor permutation\">trapdoor permutations</span> \\(f_1,f_2\\) is clawfree if there does not exist a PPT algorithm which can determine a triplet of values \\((x,y,z)\\) such that \\(f_1(x)=f_2(y)=z. Such a triplet is called a claw.",
+	"clawfree":"A pair of <span class=\"definable\" data-define=\"trapdoor permutation\">trapdoor permutations</span> \\(f_1,f_2\\) is clawfree if there does not exist a PPT algorithm which can determine a triplet of values \\((x,y,z)\\) such that \\(f_1(x)=f_2(y)=z\\). Such a triplet is called a claw.",
     
 	"coin flip":"A common metaphor in cryptography research to refer to the creation of a truly random bit: 1 (heads) or 0 (tails). Note that, without external stimulus, it is impossible for a computer to create true randomness. There will be a tutorial on randomness.",
     

@@ -28,6 +28,7 @@ div.equationBlock a:hover {
 
 span.equation {
 	border-bottom:1px dashed #555555;
+	display:inline-block;
 }
 
 span.equation:hover {
