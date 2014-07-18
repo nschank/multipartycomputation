@@ -72,8 +72,13 @@ img.rp_link {
     width:90%;
 }
 
+.rp_sub_header + .rp_sub {
+	margin:0px auto 8px auto;
+	width:95%;
+}
+
 .rp_sub {
-	margin:0px auto 3px auto;
+	margin:8px auto;
 	width:95%;
 }
 

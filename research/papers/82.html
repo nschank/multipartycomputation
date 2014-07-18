@@ -27,17 +27,17 @@
 					case "fC":
 						return "<p>\\(f_{C}\\) represents the output of \\(C\\), taking as input the inputs and the randomness supplied to the circuit.</p>";
 					case "ip":
-						return "<p>\\(ip_i\\) represents the contents of the input tape of participant \\(P_i\\)";
+						return "<p>\\(ip_i\\) represents the contents of the input tape of participant \\(P_i\\). \\(I_i\\) is a partition of the input wires into the gate such that there is exactly one input wire per bit of \\(ip_i\\).</p>";
 					case "JacobiSymbol":
 						return "<p>\\(\\left(\\frac m n\\right)\\) represents the <span class=\"definable\">Jacobi symbol</span> of \\(m\\bmod n\\).</p>";
 					case "op":
-						return "<p>\\(op_i\\) represents the contents of the output tape of participant \\(P_i\\)";
+						return "<p>\\(op_i\\) represents the contents of the output tape of participant \\(P_i\\).</p>";
 					case "Pprot":
 						return "<p>\\(P_{prot}^{(m)}\\) represents the probability distribution of a protocol conversation of \\(prot\\) with security parameter \\(m\\), taking as input the inputs to the protocol and the randomness used by all parties.</p>";
 					case "R_m^b":
 						return "<p>\\(R_m^b\\) is a finite set containing all elements \\(r\\) such that \\(BCS_m(b,r)\\) will be a valid commitment for \\(b\\).</p>";
 					case "ra":
-						return "<p>A (fixed) string of random bits used by a protocol or circuit.</p>";
+						return "<p>\\(ra\\) represents a (fixed) string of random bits used by a protocol or circuit. The set of input wires in the circuit which correspond to these random bits is \\(R\\).</p>";
 					case "Sm":
 						return "<p>\\(S_m\\) is a finite set containing all valid commitments for both 0 and 1 within a particular signature scheme.</p>";
 					case "X":
@@ -165,13 +165,42 @@
 							T_{lk}&=T(G)_{\sigma(l)k}\oplus csum(k,T)\oplus rsum(l,T),\quad &\mbox{if}\;k= t+1,
 							\end{split} $$ where \(T_{lk}\) (resp. \(T(G)_{lk}\)) is the entry in the \(l\)-th row and \(k\)-th column of \(T\) (resp. \(T(G)\)).
 						</p>
+						<a href="#def6.1"><span class="rp_definition_header">Definition 6.1</span></a>
+						<p class="rp_original rp_definition">
+							By a <i>computation \(\Gamma^*\) in \(C^*\)</i>, we mean a selection of exactly one row in each \(n\)-transform in \(C^*\).
+						</p>
+						<p class="rp_original rp_definition">
+							A computation \(\Gamma^*\) is said to be <i>consistent</i>, if the following is satisfied: Suppose output column \(k_1\) in the transform \(T^*_1\) is connected with column \(k_2\) in the transform \(T_2^*\), and let \(\Gamma^*(k_1)\) and \(\Gamma^*(k_2)\) be the entries selected by \(\Gamma^*\) in the two columns then $$\Gamma^*(k_1)\oplus rsum(l_1,T_1)\;=\;\Gamma^*(k_2),$$ where \(l_1\) is the index of the row selected by \(\Gamma^*\) in \(T_1^*\).
+						</p>
 					</section>
 					<section id="theorems">
 						<h2>Theorems</h2>
-						<p class="rp_original">Some general definitions used by several theorems</p>
-						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
+						<p class="rp_annotation rp_theorem">
+							We define 'the protocol' to be the multiparty computation protocol consisting of procedures <a href="#protocol1"><span class="main_language">Transform Circuit</span></a>, <a href="#protocol2"><span class="main_language">Check Transformation</span></a>, and <a href="#protocol3"><span class="main_language">Construct Computation</span></a>.
+						</p>
+						<a href="#theorem6.1"><span class="rp_theorem_header">Theorem 6.1</span></a>
 						<p class="rp_original rp_theorem">
-							A theorem
+							For every \(i=1\cdots n\), the probability that \(P_i\) has cheated (i.e. sent incorrect messages) anywhere in the protocol is smaller than \(m^{-c}\) for any constant \(c\) and all sufficiently large \(m\). If no cheating occurs, then the encryption phase ends with \(P_n\) outputting a valid \(n\)-transform of every truth table in \(C\).
+						</p>
+						<a href="#lemma6.2"><span class="rp_theorem_header">Lemma 6.2</span></a>
+						<p class="rp_original rp_theorem">
+							Let \(\Gamma^*\) be a computation in \(C^*\) and suppose all transforms in \(C^*\) are valid. Then the corresponding computation \(\Gamma\) in \(C\) is consistent if and only if \(\Gamma^*\) is consistent.
+						</p>
+						<a href="#theorem6.3"><span class="rp_theorem_header">Theorem 6.3</span></a>
+						<p class="rp_original rp_theorem">
+							The protocol is correct, as defined in <a href="#def4.1">definition 4.1</a>.
+						</p>
+						<a href="#theorem6.4"><span class="rp_theorem_header">Theorem 6.4</span></a>
+						<p class="rp_original rp_theorem">
+							The protocol is secure.
+						</p>
+						<a href="#theorem6.5"><span class="rp_theorem_header">Theorem 6.5.</span></a>
+						<p class="rp_original rp_theorem">
+							If \(P_n\) is honest and uses DLS for bit <span class="definable" data-define="commitment">commitments</span>, then the protocol releases no information in the Shannon sense about the private input of \(P_n\) and all intermediate results in the computation.
+						</p>
+						<a href="#theorem8.1"><span class="rp_theorem_header">Theorem 8.1</span></a>
+						<p class="rp_original rp_theorem">
+							Assume that pairs of <span class="definable">clawfree</span> trapdoor functions exist. Then any language in IP has a zero knowledge proof system.
 						</p>
 					</section>
 					<section id="protocol">
@@ -239,7 +268,7 @@
 							In comparison, our protocol solves the multiparty case using a totally different concept. It attacks the problem "directly", without using Yao's two-party protocol, and without using reductions to 3-colorability<sup class="reference" data-citation="GMW2"></sup> or to SAT<sup class="reference" data-citation="BC">[?]</sup><sup class="reference" data-citation="C">[?]</sup> to prove the validity of messages. We rely on a stronger cryptographic assumption than <span class="reference" data-citation="GMW">[?]</span>, namely the <i><span class="definable" data-define="quadratic residue">Quadratic Residuosity</span> Assumption</i><sup class="reference" data-citation="GM">[?]</sup>. This, however, allows a simpler and more efficient construction, capable of implementing all the "primitives for cryptographic computations", defined in <span class="reference" data-citation="GHY">[?]</span>. Although our protocol could also be based only on the existence of a <span class="definable" data-define="trapdoor function">trapdoor one-way function</span>, this would reduce the efficiency considerably. Some of the techniques upon which our protocol is based were previously developed and used in the work of Chaum<sup class="reference" data-citation="C">[?]</sup> and Brassard and Cr&eacute;peau<sup class="reference" data-citation="BC">[?]</sup>. By specializing to the case where only one participant supplies the inputs, our protocol can provide slightly more efficient solutions to the problems solved there.
 						</p>
 						<p class="rp_original">
-							An interesting consequence of our work is that any statement which can be proved interactively, can also be proved in zero knowledge, provided that our cryptographic assumption holds (one assumption which will do in this case is the existence of <span class="definable" data-define="clawfree trapdoor function">clawfree trapdoor functions</span>). More formally: any language in IP has a zero knowledge proof system. This result was already proved for protocols with a constant number of rounds in <span class="reference" data-citation="GMW2"></span>, where a proof of the result in full generality is attributed to Ben-Or. As far as we know, this last proof is still unpublished, so we cannot comment on possible differences between this proof and ours.
+							An interesting consequence of our work is that any statement which can be proved interactively, can also be proved in zero knowledge, provided that our cryptographic assumption holds (one assumption which will do in this case is the existence of <span class="definable" data-define="clawfree">clawfree trapdoor functions</span>). More formally: any language in IP has a zero knowledge proof system. This result was already proved for protocols with a constant number of rounds in <span class="reference" data-citation="GMW2"></span>, where a proof of the result in full generality is attributed to Ben-Or. As far as we know, this last proof is still unpublished, so we cannot comment on possible differences between this proof and ours.
 						</p>
                     </section>
 					<section id="sec2">
@@ -512,7 +541,7 @@
 							</p>
 							<span class="rp_definition_header" id="def4.1">Definition 4.1</span>
 							<p class="rp_original rp_definition">
-								A protocol is said to be <i>correct</i> if for any choice of inputs \(I=(ip_1,\dots,ip_n)\), and any binary string \(op\) and constant \(c,\) $$|OP_I^C(op)-OP_{I,m}^{prot}(op)|\lt m^{-c}$$ for all sufficiently large \(m\).
+								A protocol is said to be <i>correct</i> if for any choice of inputs \(I=\)<span class="equation" data-equation="ip">\((ip_1,\dots,ip_n)\)</span>, and any binary string \(op\) and constant \(c,\) $$|OP_I^C(op)-OP_{I,m}^{prot}(op)|\lt m^{-c}$$ for all sufficiently large \(m\).
 							</p>
 							<p class="rp_original">
 								A <span class="definable">conspiracy</span> is a subset \(X\) of \(\{P_1,\dots,P_n\}\) with \(|X|\lt n\). The machines in a conspiracy may follow any (polynomial time) program, and they may establish private communication channels to share all the information available to them.
@@ -568,7 +597,7 @@
 							A wire may be connected only into a gate, in which case it is called an <i>input wire</i>. If it leaves a gate without connecting it into another, we call it an <i>output wire</i>.
 						</p>
 						<p class="rp_original">
-							The input wires are partitioned into \(n+1\) disjoint subsets, \(I_1,\dots,I_n,R.\,I_j\) corresponds to the secret input chosen by \(P_j\), such that <span class="equation" data-equation="ip">\(ip_j\)</span> contains one bit for each wire in \(I_j\). In a similar way, \(R\) corresponds to the random inputs to \(C\).
+							The input wires are partitioned into \(n+1\) disjoint subsets, \(I_1,\dots,I_n,R\). <span class="equation" data-equation="ip">\(I_j\)</span> corresponds to the secret input chosen by \(P_j\), such that <span class="equation" data-equation="ip">\(ip_j\)</span> contains one bit for each wire in <span class="equation" data-equation="ip">\(I_j\)</span>. In a similar way, <span class="equation" data-equation="ra">\(R\)</span> corresponds to the random inputs to \(C\).
 						</p>
 						<p class="rp_original">
 							For each gate, a function is specified that maps the input bits to a one bit output. For the gate \(G\), this function is given by the <i>truth table</i> \(T(G).\,T(G)\) is a 0-1 matrix with \(t+1\) columns and \(2^t\) rows, where \(t\) is the number of wires connecting into \(G\). The rows, apart from the last entry, contain each possible assignment of bits to the input of \(G\) exactly once, and the last column contains the corresponding output bits. Note that each input column in each truth table corresponds to exactly one wire in \(C\), and that an output column may correspond to any number of wires ("fan-out" from a gate is allowed). Thus, two columns may correspond to the same wire. Two such columns are said to be <i>connected</i>.
@@ -637,7 +666,7 @@
 							</p>
 							<section id="protocol1">
 								<h4>Procedure <span class="main_language">Transform Circuit</span>.</h4>
-								<p class="rp_original rp_sub"><i>Input: in the i-th iteration, one (i-1)-transform of each truth table in C. Output: one i-transform of each truth table in C</i>.</p>
+								<p class="rp_original rp_sub"><i>Input: in the \(i\)-th iteration, one \((i-1)\)-transform of each truth table in \(C\). Output: one \(i\)-transform of each truth table in \(C\)</i>.</p>
 								<p class="rp_original">
 									For each \((i-1)\)-transform \(S\) supplied in the input, do the following:
 								</p>
@@ -645,7 +674,7 @@
 									<li>Suppose the corresponding gate in \(C\) has \(t\) input wires, so that \(S\) has \(2^t\) rows and \(t+1\) columns. Choose a permutation \(\sigma\) of \(\{1,\dots,2^t\}\) at random and apply \(\sigma\) to the rows of \(S\) with attached lists. Call the result \(T\).</li>
 									<li>For \(l=1\cdots 2^t\), and each \(j\lt i\), do:
 									<p class="rp_original">
-										choose a bit \(s_{ij}(l,T)\in\{0,1\}\) at random and XOR the last entry in the \(l\)-th row of \(T\) with \(s_{ij}(l,T)\). Find the commitment $$BCS_j(b_j(l,T),rj(l,T))\in rlist(l,T),$$ and use the blinding property of \(BCS_j\) to replace this commitment with $$ BCS_j(b_j(l,T)\oplus s_ij(l,T), r'_j(l,T))\in rlist(l,T).$$
+										choose a bit \(s_{ij}(l,T)\in\{0,1\}\) at random and XOR the last entry in the \(l\)-th row of \(T\) with \(s_{ij}(l,T)\). Find the commitment $$BCS_j(b_j(l,T),r_j(l,T))\in rlist(l,T),$$ and use the blinding property of \(BCS_j\) to replace this commitment with $$ BCS_j(b_j(l,T)\oplus s_{ij}(l,T), r'_j(l,T))\in rlist(l,T).$$
 									</p></li>
 									<li>For \(k=1\cdots t+1\) do:
 									<p class="rp_original">
@@ -665,25 +694,25 @@
 								</p>
 							</section>
 							<p class="rp_original">
-								The interactive proof that every \(T\) was created according to the protocol proceeds as follows:
+								The interactive proof <ins>demonstrating</ins> that every \(T\) was created according to the protocol proceeds as follows:
 							</p>
 							<section id="protocol2">
 								<h4>Protocol <span class="main_language">Check Transformation</span></h4>
-								<p class="rp_original">
+								<p class="rp_original rp_sub">
 									<i>Input: for every truth table in \(C\), an \((i-1)\)-transform \(S\) and an \(i\)-transform \(T\), which \(P_i\) claims was created correctly from \(S\).</i>
 								</p>
 								<ol class="rp_original">
 									<li>For every corresponding pair \(S,T\) in the input, \(P_i\) creates from \(S\) another \(i\)-transform \(T'\) in exactly the same way as \(T\), but with new independent choices of permutation and bits. \(T'\) is made public.</li>
 									<li>The mutually trusted source of random bits chooses \(b\in\{0,1\}\) at random.</li>
-									<li>If \(b=1,\,P_i\) must for every \(T'\): make public the row permutation used for creating \(T'\), open all bit commitments attached to \(T'\), and reveal all blinding factors (see <a href="#sec2">Section 2</a>) he used in blinding other commitments. This allows everybody to check that \(T'\) was correctly constructed.</li>
+									<li>If \(b=1,\,P_i\) must for every \(T'\): make public the row permutation used for creating \(T'\), open all bit commitments attached to \(T'\), and reveal all blinding factors (see <a href="#sec2">Section 2</a>) used in blinding other commitments. This allows everybody to check that \(T'\) was correctly constructed.</li>
 									<li><p class="rp_original">
 										If \(b=0,\,P_i\) must show for all corresponding \((T,T')\) a relation between \(T\) and \(T'\):
 									</p><p class="rp_original">
 										\(P_i\) makes public the permutation \(\pi=\sigma(\sigma')^{-1}\), where \(\sigma\) (resp. \(\sigma'\)) is the permutation used in creating \(T\) (resp. \(T'\)).
 									</p><p class="rp_original">
-										For \(k=1\cdots t+1:\) if \(P_i\) appended commitments to \(clist(k,T)\) and \(clist(k,T),\,P_i\) uses comparability of \(BCS_i\) to show from his commitments the value of $$b_i(k,T)\oplus b_i(k,T').$$
+										For \(k=1\cdots t+1:\) if \(P_i\) appended commitments to \(clist(k,T)\) and \(clist(k,T'),\,P_i\) uses comparability of \(BCS_i\) to show from those commitments the value of $$b_i(k,T)\oplus b_i(k,T').$$
 									</p><p class="rp_original">
-										For \(l=1\cdots 2^t,\,P_i\) uses comparability of his commitments in \(rlist(l,T)\) and \(rlist(\pi(l),T')\) to show the value of $$s_{ij}(l,T)\oplus s_{ij}(\pi(l),T').$$
+										For \(l=1\cdots 2^t,\,P_i\) uses comparability of commitments in \(rlist(l,T)\) and \(rlist(\pi(l),T')\) to show the value of $$s_{ij}(l,T)\oplus s_{ij}(\pi(l),T').$$
 									</p><p class="rp_original">
 										This allows everybody to check that the following holds: $$\begin{split}T_{lk}\;&=\;T'_{\pi(l)k}\oplus csum(k,T)\oplus csum(k,T'), &\mbox{if}\;k\lt t+1,\\T_{lk}\;&=\;T'_{\pi(l)k}\oplus csum(k,T)\oplus csum(k,T')\oplus rsum(l,T)\oplus rsum(\pi(l),T'),\;&\mbox{if}\;k=t+1.\end{split}$$
 									</p></li>
@@ -694,14 +723,14 @@
 							</section>
 							<span class="rp_theorem_header" id="theorem6.1">Theorem 6.1</span>
 							<p class="rp_original rp_theorem">
-								For ever \(i=1\cdots n\), the probability hat \(P_i\) has cheated (i.e. sent incorrect messages) anywhere in the protocol is smaller for any constant \(c\) and al sufficiently large \(m\). If no cheating occurs, then the encryption phase ends with \(P_n\) outputting a valid \(n\)-transform of every truth table in \(C\).
+								For every \(i=1\cdots n\), the probability that \(P_i\) has cheated (i.e. sent incorrect messages) anywhere in the protocol is smaller than \(m^{-c}\) for any constant \(c\) and all sufficiently large \(m\). If no cheating occurs, then the encryption phase ends with \(P_n\) outputting a valid \(n\)-transform of every truth table in \(C\).
 							</p>
 							<span class="rp_sub_header">Proof</span>
 							<p class="rp_original rp_sub">
 								It is not hard to see that if at least one iteration in the <span class="main_language">Check Transformation</span> protocol, \(P_i\) was able to give satisfying answers in <i>both</i> steps 3 and 4, and if \(P_i\) was not able to change the contents of his bit commitments, then \(T\) must have been correctly constructed. This and the unforgeability property of all bit commitment schemes used suffice to prove the first statement. The second follows from the obvious fact that if \(T\) was created correctly from \(S\) in the <span class="main_language">Transform Circuit</span> protocol, then \(T\) is valid if \(S\) was valid.
 							</p>
 							<p class="rp_original">
-								If all participants use QRS for bit commitments, then the unforgeability property holds unconditionally for all participants, which means that the probability of undetected cheating will be at most \(2^-m\).
+								If all participants use QRS for bit commitments, then the unforgeability property holds unconditionally for all participants, which means that the probability of undetected cheating will be at most \(2^{-m}\).
 							</p>
 							<p class="rp_original">
 								Intuitively, the <span class="main_language">Check Transformation</span> protocol is secure from \(P_i\)'s point of view because all the other participants never see anything but random "copies" of \(S\) or \(T\), which they could also have produced themselves. All other participants will therefore be convinced that \(T\) was correctly constructed, but will learn nothing more about \(T\). A formal proof can be found in <a href="#sec6.3">Section 6.3</a>.
@@ -713,10 +742,10 @@
 								At the end of the encryption phase, \(P_n\) has output a set of \(n\)-transforms of the truth tables in \(C\). This set will be called \(C^*\).
 							</p>
 							<p class="rp_original">
-								Let \(w\) be an input wire in \(C\) connecting into the gate \(G\), and suppose \(w\) corresponds to column \(k\) in \(T(G)\). Let \(T^*\) be the \(n\) transform of \(T(G)\) contained in \(C^*\).
+								Let \(w\) be an input wire in \(C\) connecting into the gate \(G\), and suppose \(w\) corresponds to column \(k\) in \(T(G)\). Let \(T^*\) be the \(n\)-transform of \(T(G)\) contained in \(C^*\).
 							</p>
 							<p class="rp_original">
-								As the first step in the computation phase, <i>encrypted</i> input bits are specified for each such \(w\). This is done as follows: if \(w\in R\), then the mutually trusted source of random bits selects a bit \(b_w\), which is made public; if \(w\in I_i\) for some \(i,\,P_i\) reads a bit \(b\) in \(ip_i\) corresponding to \(w\) from its private input tape, and then makes \(b_w=b\oplus b_i(k,T^*)\) public.
+								As the first step in the computation phase, <i>encrypted</i> input bits are specified for each such \(w\). This is done as follows: if \(w\in\) <span class="equation" data-equation="ra">\(R\)</span>, then the mutually trusted source of random bits selects a bit \(b_w\), which is made public; if \(w\in\)<span class="equation" data-equation="ip">\(I_i\)</span> for some \(i,\,P_i\) reads a bit \(b\) in <span class="equation" data-equation="ip">\(ip_i\)</span> corresponding to \(w\) from its private input tape, and then makes \(b_w=b\oplus b_i(k,T^*)\) public.
 							</p>
 							<p class="rp_original">
 								To describe the next steps in the computation phase, we need to define the notion of computations in \(C^*\).
@@ -743,24 +772,24 @@
 							</p>
 							<section id="protocol3">
 								<h4>Procedure <span class="main_language">Construct Computation</span></h4>
-								<p class="rp_original">
-									<i>Input: The fully encrypted circuit \(C^*\) and for each input wire \(w\) an attached input bit \(b_w\) specified as above. Output: a consistent computation \(\Gamma^*\) in \(C^*\) and its output.</i>
+								<p class="rp_original rp_sub">
+									<i>Input: The fully encrypted circuit \(C^*\) and, for each input wire \(w\), an attached input bit \(b_w\) specified as above. Output: a consistent computation \(\Gamma^*\) in \(C^*\) and its output.</i>
 								</p>
 								<ol class="rp_original">
-									<li>Mark every input wire</li>
-									<li><p>
-										For every gate \(G\) for which all input wires are marked, do the following:
-									</p><p>
-										Let \(T^*\) be the \(n\)-transform in \(C^*\) of \(T(G)\). Let \(l\) be the index of the row in \(T^*\), whose first entries match the bits attached to the input wires of \(G\), and let \(b_l\) be the last entry in this row.
-									</p><p>
-										Record row number \(l\) as selected by \(\Gamma^*\). Open all bit commitments in \(rlist(l,T^*)\), and put $$b_l^*=b_l\oplus rsum(l,T^*).$$
-									</p></li>
+									<li>Mark every input wire.</li>
+									<li>
+										<p>For every gate \(G\) for which all input wires are marked, do the following:</p>
+										<p>Let \(T^*\) be the \(n\)-transform in \(C^*\) of \(T(G)\). Let \(l\) be the index of the row in \(T^*\), whose first entries match the bits attached to the input wires of \(G\), and let \(b_l\) be the last entry in this row.
+										</p><p>
+											Record row number \(l\) as selected by \(\Gamma^*\). Open all bit commitments in \(rlist(l,T^*)\), and put $$b_l^*=b_l\oplus rsum(l,T^*).$$
+										</p>
+									</li>
 									<li>For every wire \(w\) connecting out of \(G\), mark \(w\) and attach to it $$b_w=b_l^*.$$</li>
 									<li>If any wires in \(C\) are still unmarked, go to Step 2.</li>
 									<li><p>
 										For every output wire \(w\), do the following:
 									</p><p>
-										suppose \(w\) corresponds to output column \(k\) in \(T^*\). Then open al commitments in \(clist(k,T^*)\), and compute the final result for this wire as: $$Result(w)=b_w\oplus csum(k,T^*).$$
+										suppose \(w\) corresponds to output column \(k\) in \(T^*\). Then open all commitments in \(clist(k,T^*)\), and compute the final result for this wire as: $$Result(w)=b_w\oplus csum(k,T^*).$$
 									</p></li>
 								</ol>
 								<p class="rp_original">
@@ -776,38 +805,38 @@
 							<p class="rp_original">
 								Using the results proved in preceding sections, it is now not hard to prove:
 							</p>
-							<span class="rp_theorem_header">Theorem 6.3</span>
+							<span class="rp_theorem_header" id="theorem6.3">Theorem 6.3</span>
 							<p class="rp_original rp_theorem">
 								The protocol is correct, as defined in <a href="#def4.1">definition 4.1</a>.
 							</p>
 							<span class="rp_sub_header">Proof</span>
 							<p class="rp_original rp_sub">
-								First note that for each input wire \(w\) in \(R\), the input bit given to \(C\) is the XOR sum of one bit chosen by the mutually trusted random source, and one bit chosen by each participant (namely the bit committed to in the \(clist\) corresponding to \(w\)). By <a href="#lemma6.2">Lemma 6.2</a>, this means that the conditional probability distribution of the ouput of the protocol assuming that no cheating has occurred, is exactly equal to the "right" probability distribution \(OP_C^I\), for any choice \(I\) of inputs. The theorem now follows from <a href="#theorem6.1">Theorem 6.1</a> and elementary probability theory.
+								First note that for each input wire \(w\) in <span class="equation" data-equation="ra">\(R\)</span>, the input bit given to \(C\) is the XOR sum of one bit chosen by the mutually trusted random source, and one bit chosen by each participant (namely the bit committed to in the \(clist\) corresponding to \(w\)). By <a href="#lemma6.2">Lemma 6.2</a>, this means that the conditional probability distribution of the output of the protocol assuming that no cheating has occurred, is exactly equal to the "right" probability distribution \(OP_C^I\), for any choice \(I\) of inputs. The theorem now follows from <a href="#theorem6.1">Theorem 6.1</a> and elementary probability theory.
 							</p>
 							<p class="rp_original">
-								To show that the protocol is secure, we assume the existence of some conspiracy \(X\). We must then exhibit a simulator \(M_X\) for \(X\) and prove that its output is polynomially indistinguishable from an actual proof conversation. Only informal descriptions will be given, we trust that this will make the proofs easier to understand, and that the reader will have no trouble in filling in the necessary details.
+								To show that the protocol is secure, we assume the existence of some conspiracy <span class="equation" data-equation="X">\(X\)</span>. We must then exhibit a simulator \(M_X\) for <span class="equation" data-equation="X">\(X\)</span> and prove that its output is polynomially indistinguishable from an actual proof conversation. Only informal descriptions will be given, we trust that this will make the proofs easier to understand, and that the reader will have no trouble in filling in the necessary details.
 							</p>
 							<p class="rp_original">
 								We begin with the description of the simulator \(M_X\):
 							</p>
 							<p class="rp_original">
-								Recall that \(M_X\) is given as input the security parameter value \(m\), the output of a "real" computation \(f_C(ip_1,\dots,ip_n,ra)\), and the part of the input "known" to \(X,\,\{ip_1\,|\,P_i\in X\}\). In addition to this, \(M_X\) is of course allowed to use the machines in \(X\) in any (feasible) way it likes. We will describe the algorithm of \(M_X\) as a simulated protocol execution, where the participants in \(X\) act "as themselves" and \(M_X\) plays the parts of all other participants.
+								Recall that \(M_X\) is given as input the security parameter value \(m\), the output of a "real" computation <span class="equation" data-equation="fC">\(f_C(ip_1,\dots,ip_n,ra)\)</span>, and the part of the input "known" to <span class="equation" data-equation="X">\(X\)</span> \(\{\)<span class="equation" data-equation="ip">\(ip_i\)</span>\(|\,P_i\in\)<span class="equation" data-equation="X">\(X\)</span>\(\}\). In addition to this, \(M_X\) is of course allowed to use the machines in <span class="equation" data-equation="X">\(X\)</span> in any (feasible) way it likes. We will describe the algorithm of \(M_X\) as a simulated protocol execution, where the participants in <span class="equation" data-equation="X">\(X\)</span> act "as themselves" and \(M_X\) plays the parts of all other participants.
 							</p>
 							<p class="rp_original">
-								\(M_x\) starts by putting \(ip_i\) on the input tape of \(P_i\) for every \(P_i\in X\). Also, the random tapes of all machines in \(X\) are filled in using \(M_X\)'s own random tape. This means that all the machines in \(X\) are "deterministic from now on.
+								\(M_X\) starts by putting <span class="equation" data-equation="ip">\(ip_i\)</span> on the input tape of \(P_i\) for every \(P_i\in\)<span class="equation" data-equation="X">\(X\)</span>. Also, the random tapes of all machines in <span class="equation" data-equation="X">\(X\)</span> are filled in using \(M_X\)'s own random tape. This means that all the machines in <span class="equation" data-equation="X">\(X\)</span> are deterministic from now on.
 							</p>
 							<p class="rp_original">
-								For simplicity, we assume that all participants use QRS for bit commitments. \(M_X\) therefore chooses a modulus \(N_i\) for all participants \(P_i\) not in the conspiracy, while the participants in \(X\) choose their own moduli. Although this means that \(M_X\) in fact knows some of the factorizations involved, it is of course essential that this is not used in the simulation!
+								For simplicity, we assume that all participants use QRS for bit commitments. \(M_X\) therefore chooses a modulus \(N_i\) for all participants \(P_i\) not in the conspiracy, while the participants in <span class="equation" data-equation="X">\(X\)</span> choose their own moduli. Although this means that \(M_X\) in fact knows some of the factorizations involved, it is of course essential that this is not used in the simulation!
 							</p>
 							<p class="rp_original">
-								Next, \(M_X\) executes a simulation of the proof that \(N_i\) is a Blum integer, for every \(i=1\cdots n\). When \(i\) is such that \(P_i\in X,\,P_i\) can be used directly as the prover, otherwise the simulation from <span class="reference" data-citation="PG">[?]</span> can be used.
+								Next, \(M_X\) executes a simulation of the proof that \(N_i\) is a Blum integer, for every \(i=1\cdots n\). When \(i\) is such that \(P_i\in\)<span class="equation" data-equation="X">\(X\)</span>, \(P_i\) can be used directly as the prover, otherwise the simulation from <span class="reference" data-citation="PG">[?]</span> can be used.
 							</p>
 							<p class="rp_original">
-								We now come to the executions of the <span class="main_language">Transform Circuit</span> procedure. If \(P_i\in X\), then the \(i\)-th iteration of this procedure is replaced by an execution of the procedure <span class="main_language">Simulate Conspiracy</span> below, otherwise the procedure <span class="main_language">Simulate Honest Participant</span> is used.
+								We now come to the executions of the <span class="main_language">Transform Circuit</span> procedure. If \(P_i\in\)<span class="equation" data-equation="X">\(X\)</span>, then the \(i\)-th iteration of this procedure is replaced by an execution of the procedure <span class="main_language">Simulate Conspiracy</span> below, otherwise the procedure <span class="main_language">Simulate Honest Participant</span> is used.
 							</p>
 							<section id="protocol4">
 								<h4>Procedure <span class="main_language">Simulate Honest Participant</span>.</h4>
-								<p class="rp_original">
+								<p class="rp_original rp_sub">
 									<i>Input: one \((i-1)\)-transform of every truth table in \(C\). Output: one \((i-1)\)-transform of every truth table in \(C\).</i>
 								</p>
 								<ol class="rp_original" type="i">
@@ -815,7 +844,7 @@
 									<li>
 										For every \((i-1)\)-transform \(S\) corresponding to an output gate, an \(i\)-transform \(T\) is created in exactly the same way as in step i. In addition to this, the following is done:
 										<p>
-											Recall that for each output gate \(G\) of \(C\), a bit \(b_G\) is specified in the input to \(M_X\), as part of the given value of \(f_C(ip_1,\dots,ip_n,ra)\). The simulated computation must produce this bit as output from \(G\). This is ensured by simply multiplying the commitment from \(P_i\) in some of the row lists by -1, so that the last column of \(T\) becomes an encryption of a column with all entries equal to \(b_G\).
+											Recall that for each output gate \(G\) of \(C\), a bit \(b_G\) is specified in the input to \(M_X\), as part of the given value of <span class="equation" data-equation="fC">\(f_C(ip_1,\dots,ip_n,ra)\)</span>. The simulated computation must produce this bit as output from \(G\). This is ensured by simply multiplying the commitment from \(P_i\) in some of the row lists by -1, so that the last column of \(T\) becomes an encryption of a column with all entries equal to \(b_G\).
 										</p><p>
 											Note that the above modification only has to be done once, even if the simulation is done with more than one honest participant.
 										</p>
@@ -824,7 +853,7 @@
 									<li>The trusted source outputs a bit \(b\). If \(b=b_M,\,M_X\) just executes step 3 in the <span class="main_language">Check Transformation</span> protocol if \(b=1\), and step 4 if \(b=0\). This is possible by construction of \(T'\). Otherwise, \(M_X\) rewinds all machines in \(X\) to their configuration just after the last execution of step ii. We then go back to step iii and try again with a new independent choice of \(b_M\) and \(T'\).</li>
 								</ol>
 								<p class="rp_original">
-									Steps iii and iv are repeated until step iv has bene successful \(m\) times.
+									Steps iii and iv are repeated until step iv has been successful \(m\) times.
 								</p>
 								<p class="rp_original">
 									Note that the expected number of "trial \(T'\)'s", we must create in the above procedure before \(b\) happens to be equal to \(b_M\) is constant, and that the above procedure therefore takes expected linear time in \(m\).
@@ -832,7 +861,7 @@
 							</section>
 							<section id="protocol5">
 								<h4>Procedure <span class="main_language">Simulate Conspiracy</span>.</h4>
-								<p class="rp_original">
+								<p class="rp_original rp_sub">
 									<i>Input: one \((i-1)\)-transform of every truth table in \(C\). Output: one \(i\)-transform of every truth table in \(C\).</i>
 								</p>
 								<ol class="rp_original" type="i">
@@ -847,30 +876,30 @@
 								</p>
 							</section>
 							<p class="rp_original">
-								In the computation phase, \(M_X\) lets all machines in \(X\) specify their encrypted choice of input bits, and specifies randomly chosen bits for all other participants. It is now easy to see that the <span class="main_language">Construct Computation</span> procedure can be executed exactly as in the protocol: by the remarks in the <span class="main_language">Simulate Conspiracy</span> procedure, \(M_X\) has all the information it needs to open all bit commitments from participants not in \(X\).
+								In the computation phase, \(M_X\) lets all machines in <span class="equation" data-equation="X">\(X\)</span> specify their encrypted choice of input bits, and specifies randomly chosen bits for all other participants. It is now easy to see that the <span class="main_language">Construct Computation</span> procedure can be executed exactly as in the protocol: by the remarks in the <span class="main_language">Simulate Conspiracy</span> procedure, \(M_X\) has all the information it needs to open all bit commitments from participants not in <span class="equation" data-equation="X">\(X\)</span>.
 							</p>
 							<p class="rp_original">
 								Why does this simulation look just like a "real" protocol conversation? Consider the set of messages sent by participant \(P_i\) in the protocol, and suppose \(P_i\) is honest. It is easy to see that the bits shown "in clear" in the messages will be distributed in exactly the same way in the simulation as in an actual protocol conversation. The difference between simulation and protocol therefore lies only in the distribution of the bits hidden in \(P_i\)'s bit commitments. It is intuitively clear that to notice this difference, a distinguisher would need the ability to tell the difference between commitments containing 0's and those containing 1's. But by assumption, this cannot be done efficiently. This argument is formalized below.
 							</p>
-							<span class="rp_theorem_header">Theorem 6.4.</span>
+							<span class="rp_theorem_header" id="theorem6.4">Theorem 6.4.</span>
 							<p class="rp_original rp_theorem">
 								The protocol is secure.
 							</p>
-							<span class="rp_sub_header">Proof.</span>
+							<span class="rp_sub_header">Proof</span>
 							<p class="rp_original rp_sub">
 								It remains to be shown that the output of the simulator described above is polynomially indistinguishable from an actual protocol conversation. For simplicity, we will only do this in the case where \(n-1\) participants conspire against one honest participant \(P_i\). Cases with smaller conspiracies are in principle similar and introduce only technical differences.
 							</p>
 							<p class="rp_original rp_sub">
-								Recall that a polynomial time distinguisher \(\Delta\) is a probabilistic polynomial time algorithm which takes as input a binary string and gives a one bit output. Let \(p_{prot}(m)\) be the probability that \(\Delta\) outputs a 1 when given an actual protocol conversation with security parameter \(m\) as input. Similarly, \(p_{sim}(m)\) is the probability that \(\Delta\) outputs a 1 when given a simulated conversation created as above. By way of contradiction, we assume that there exists a choice of inputs \((ip_1,\dots,ip_n,ra)\) which will result in distinguishable protocol and simulated conversations, i.e. there exists a constant \(c\), such that $$\begin{equation}\left|p_{prot}(m)-p_{sim}(m)\right|\;\gt\;m^{-c}\end{equation}$$ for infinitely many \(m\).
+								Recall that a polynomial time distinguisher \(\Delta\) is a probabilistic polynomial time algorithm which takes as input a binary string and gives a one bit output. Let \(p_{prot}(m)\) be the probability that \(\Delta\) outputs a 1 when given an actual protocol conversation with security parameter \(m\) as input. Similarly, \(p_{sim}(m)\) is the probability that \(\Delta\) outputs a 1 when given a simulated conversation created as above. By way of contradiction, we assume that there exists a choice of inputs (<span class="equation" data-equation="ip">\(ip_1,\dots,ip_n\)</span>,<span class="equation" data-equation="ra">ra</span>) which will result in distinguishable protocol and simulated conversations, i.e. there exists a constant \(c\), such that $$\left|p_{prot}(m)-p_{sim}(m)\right|\;\gt\;m^{-c}$$ for infinitely many \(m\).
 							</p>
 							<p class="rp_original rp_sub">
-								Below, we will derive a contradiction with the quadratic residuosity assumption by showing how to use \(\Delta\) to construct an algorithm that will distinguish quadratic residues from non residues modulo a Blum integer \(N\), whenever \(N\) has \(m\)-bit prime factors, and \(m\) satisfies the above equation. Let us therefore assume that we are given an element \(x\) in \(Z_N^*\) of Jacobi symbol 1.
+								Below, we will derive a contradiction with the <a href="#assumptions">quadratic residuosity assumption</a> by showing how to use \(\Delta\) to construct an algorithm that will distinguish <span class="definable" data-define="quadratic residue">quadratic residues</span> from nonresidues modulo a <span class="definable">Blum integer</span> \(N\), whenever \(N\) has \(m\)-bit prime factors, and \(m\) satisfies the above equation. Let us therefore assume that we are given an element \(x\) in \(Z_N^*\) of <span class="definable">Jacobi symbol</span> 1.
 							</p>
 							<p class="rp_original rp_sub">
-								Below, we will describe a polynomial time Turing machine \(M_X;\), which on input \((ip_1,\dots,ip_n,ra)\) and \(x\) chosen as above will generate a conversation. This conversation will be a "real" protocol conversation if \(x\) is a quadratic residue, and it will be distributed exactly as a simulated one if \(x\) is a quadratic nonresidue.
+								Below, we will describe a polynomial time <span class="definable">Turing machine</span> \(M_X'\), which on input (<span class="equation" data-equation="ip">\(ip_1,\dots,ip_n\)</span>,<span class="equation" data-equation="ra">ra</span>) and \(x\) chosen as above will generate a conversation. This conversation will be a "real" protocol conversation if \(x\) is a quadratic residue, and it will be distributed exactly as a simulated one if \(x\) is a quadratic nonresidue.
 							</p>
 							<p class="rp_original rp_sub">
-								The description of \(M_X'\) is easy, based on the algorithm of \(M_X:\,M_X'\) assigns \(N\) as modulus to \(P_i\), and then works exactly as \(M_X\), except for steps i and ii in the <span class="main_language">Simulate Honest Participant</span> procedure. In step i, \(M_X'\) will: for each commitment placed by \(P_i\) in an input column list choose a bit \(b\) at random and multiply the commitment by \(x^b\). To see why this is done, observe that in a real protocol conversation the bits used in the (encrypted) computation and the bits contained in column lists are correlated: they all-ways XOR together to the bits used in the unencrypted computation. If \(x\) is a quadratic nonresidue, this correlation is destroyed by the multiplications by \(x\), corresponding to the fact that we should be producing a simulated conversation in this case. The resulting transformation, however, is no longer valid. Since both simulation and protocol conversations produce valid transforms for non-output gates, we have to do something about this. But it is not hard to see that the correctness of the transform can be ensured by also multiplying appropriately chosen commitments in row lists and output column list by \(x\). Note that \(M_X'\) will know how to do this, since it knows exactly how every transform was computed. Finally in step ii, the multiplications by -1 are replaced by multiplications by \(x\).
+								The description of \(M_X'\) is easy, based on the algorithm of \(M_X:\,M_X'\) assigns \(N\) as modulus to \(P_i\), and then works exactly as \(M_X\), except for steps i and ii in the <a href="#protocol4"><span class="main_language">Simulate Honest Participant</span></a> procedure. In step i, \(M_X'\) will: for each commitment placed by \(P_i\) in an input column list choose a bit \(b\) at random and multiply the commitment by \(x^b\). To see why this is done, observe that in a real protocol conversation the bits used in the (encrypted) computation and the bits contained in column lists are correlated: they always XOR together to the bits used in the unencrypted computation. If \(x\) is a quadratic nonresidue, this correlation is destroyed by the multiplications by \(x\), corresponding to the fact that we should be producing a simulated conversation in this case. The resulting transformation, however, is no longer valid. Since both simulation and protocol conversations produce valid transforms for non-output gates, we have to do something about this. But it is not hard to see that the correctness of the transform can be ensured by also multiplying appropriately chosen commitments in row lists and output column list by \(x\). Note that \(M_X'\) will know how to do this, since it knows exactly how every transform was computed. Finally in step ii, the multiplications by -1 are replaced by multiplications by \(x\).
 							</p>
 							<p class="rp_original rp_sub">
 								In the computation phase, \(M_X'\) specifies inputs for \(P_i\) according to the protocol, i.e. as if the \(x\)'s had not been multiplied in. The reader may have observed that a problem could arise here: to complete this phase, \(M_X'\) must be able to open some of the commitments from \(P_i\) placed in row lists. But this is of course impossible if the commitment has been multiplied by \(x\). Note, however, that since all inputs are known to \(M_X'\), it is known which rows will be used in the computation in \(C\), and therefore it can be predicted which rows will be used in the encrypted computation. This, together with the observation that the necessary adjustments can always be done while leaving at least one row untouched, solves the problem.
@@ -879,11 +908,11 @@
 								Now observe that, if \(x\) is a quadratic residue, multiplying a commitment by \(x\) does not change the bit contained in the commitment, while if \(x\) is a quadratic nonresidue, the bit is complemented. Using this fact, it is straightforward to check that the claim above about the output of \(M_X'\) holds.
 							</p>
 							<p class="rp_original rp_sub">
-								Let \(p_{prot}(m\,|\,N)\) be the probability that \(\Delta\) outputs a 1 when given as input a protocol conversation in which \(P_i\) chooses \(N\) as modulus. \(p_{sim}(m\,|\,N)\) is defined similarly. An easy calculation will show that (1) implies $$\begin{equation}\left|p_{prot}(m\,|\,N)\;-\;p_{sim}(m\,|\,N)\right|\;\gt\;m^{-c+1}\end{equation}$$ for infinitely many \(m\) and for more than a negligible (i.e. polynomial) fraction of the possible choices of \(N\) Elementary probability theory now shows that if \(x\) is a randomly chosen element in \(\mathbb{Z}_N^*\) of Jacobi symbol 1, then we can guess whether \(x\) is a quadratic residue with an advantage polynomially larger than &frac12;, whenever (2) holds. But this contradicts the hiding property of QRS, i.e. the intractability assumption on the quadratic residuosity problem.
+								Let \(p_{prot}(m\,|\,N)\) be the probability that \(\Delta\) outputs a 1 when given as input a protocol conversation in which \(P_i\) chooses \(N\) as modulus. \(p_{sim}(m\,|\,N)\) is defined similarly. An easy calculation will show that the equation above implies $$\left|p_{prot}(m\,|\,N)\;-\;p_{sim}(m\,|\,N)\right|\;\gt\;m^{-c+1}$$ for infinitely many \(m\) and for more than a <span class="definable">negligible</span> (i.e. polynomial) fraction of the possible choices of \(N\). Elementary probability theory now shows that if \(x\) is a randomly chosen element in \(\mathbb{Z}_N^*\) of Jacobi symbol 1, then we can guess whether \(x\) is a quadratic residue with an advantage polynomially larger than &frac12;, whenever this derived equation holds. But this contradicts the hiding property of QRS, i.e. the intractability assumption on the quadratic residuosity problem.
 							</p>
 							<span class="rp_theorem_header" id="theorem6.5">Theorem 6.5.</span>
 							<p class="rp_original rp_theorem">
-								If \(P_n\) is honest and uses DLS for bit commitments, then the protocol releases no information in the Shannon sense about the private input of \(P_n\) and all intermediate results in the computation
+								If \(P_n\) is honest and uses DLS for bit <span class="definable" data-define="commitment">commitments</span>, then the protocol releases no information in the Shannon sense about the private input of \(P_n\) and all intermediate results in the computation.
 							</p>
 							<span class="rp_sub_header">Proof.</span>
 							<p class="rp_original rp_sub">
@@ -897,7 +926,7 @@
 					<section id="sec7">
 						<h2>7. Generalizations</h2>
 						<p class="rp_original">
-							In this section, we will show how to adopt the protocol to various additional requirements. It will be shown that a very flexible functionality can be obtained from a general computation protocol, as long as it protects the private inputs, computes correct results, and allows execution of <i>coordinated</i> instances, i.e. participants can prove relations between inputs and outputs used in different instances of the protocol. In particular, a protocol which implements the "input-secure computation"-primitive as defined in <span class="reference" data-citation="GHY">[?]</span> and allows coordinated instances can in fact implement all four "primitives for cryptographic computation" defined in <span class="reference" data-citation="GHY">[?]</span>. From the comparability property of the bit commitment schemes used, it is clear that our basic protocol satisfies these requirements.
+							In this section, we will show how to adopt the protocol to various additional requirements. It will be shown that a very flexible functionality can be obtained from a general computation protocol, as long as it protects the private inputs, computes correct results, and allows execution of <i>coordinated</i> instances, i.e. participants can prove relations between inputs and outputs used in different instances of the protocol. In particular, a protocol which implements the "input-secure computation"-primitive as defined in <span class="reference" data-citation="GHY">[?]</span> and allows coordinated instances can in fact implement all four "primitives for cryptographic computation" defined in <span class="reference" data-citation="GHY">[?]</span>. From the comparability property of the bit <span class="definable">commitment</span> schemes used, it is clear that our basic protocol satisfies these requirements.
 						</p>
 						<section id="sec7.1">
 							<h3>7.1. Private Outputs</h3>
@@ -905,13 +934,16 @@
 								How can we make some of the output bits private to a participant \(P_i\)? First, note that this problem could always be solved by rewriting the circuit, such that each of the output bits in question were XORed with a bit chosen at random by the participant.
 							</p>
 							<p class="rp_original">
-								With out protocol, however, this is not needed: we can just modify the protocol such that \(P_i\) is not required to open his bit commitments corresponding to the output wires in question. The proof of security could easily be modified to take this into account: just note that if some output bits are private to a participant not belonging to a conspiracy, then the simulation can be done without knowing these bits.
+								With out protocol, however, this is not needed: we can just modify the protocol such that \(P_i\) is not required to open his or her bit commitments corresponding to the output wires in question. The proof of security could easily be modified to take this into account: just note that if some output bits are private to a participant not belonging to a conspiracy, then the simulation can be done without knowing these bits.
+							</p>
+							<p class="rp_annotation">
+								This is important because, since the conspiracy does not learn those secret outputs, they cannot use the bits of those outputs in their protocol. As mentioned, they don't need them.
 							</p>
 						</section>
 						<section id="sec7.2">
 							<h3>7.2. Simultaneous Release of the Output</h3>
 							<p class="rp_original">
-								An obvious strategy for a set of dishonest participants would be to try stopping the protocol early in such a way that this conspiracy could found out about the output while preventing honest participants from getting it. To solve this problem in general, one could just execute a set of coordinated instances, such that the input was constant over all rounds, while the circuit was rewritten such that exactly one bit of the result was computed in each instance.
+								An obvious strategy for a set of dishonest participants would be to try stopping the protocol early in such a way that this conspiracy could find out about the output while preventing honest participants from getting it. To solve this problem in general, one could just execute a set of coordinated instances, such that the input was constant over all rounds, while the circuit was rewritten such that exactly one bit of the result was computed in each instance.
 							</p>
 							<p class="rp_original">
 								Note, however, that our basic protocol already implements a bit by bit release, since the "encryptions" of the output columns are opened for one column at a time. Thus, each participant will never have more than a one bit advantage over any other participant. Also this statement could be incorporated into the formal security proof: loosely speaking, if the protocol stops without computing the complete result, then the simulation can be done without knowing all output bits.
@@ -932,22 +964,22 @@
 								Is it possible for a non-participant to check from, say, a recording of all messages sent in the protocol that the result computed is a correct one? It is clear that such a check cannot be possible without interacting with the participants, since otherwise the protocol could not be minimum knowledge with respect to the private inputs: recall that there should be no way for anyone to tell whether he is presented with a genuine protocol conversation or a simulated one. But this is exactly what we would be asking the non-participant above to do!
 							</p>
 							<p class="rp_original">
-								<i>With</i> interaction, however, checking is easy: each participant could be asked to prove once again using the <span class="main_language">Check Transformation</span> protocol that he has computed valid transforms. Then all the computation phase could be checked without interaction.
+								<i>With</i> interaction, however, checking is easy: all participants could be asked to prove once again using the <span class="main_language">Check Transformation</span> protocol that they had computed valid transforms. Then all the computation phase could be checked without interaction.
 							</p>
 						</section>
 						<section id="sec7.5">
 							<h3>7.5. Fault Recovery</h3>
 							<p class="rp_original">
-								In our basic construction, there is not much one can do short of stopping the protocol, if some participant sends incorrect messages, or just stops completely. In the recent literature, a number of techniques have been proposed for recovering for such situations.
+								In our basic construction, there is not much one can do short of stopping the protocol if some participant sends incorrect messages or just stops completely. In the recent literature, a number of techniques have been proposed for recovering for such situations.
 							</p>
 							<p class="rp_original">
-								Under the assumption that the majority of users are honest, <span class="reference" data-citation="GMW">[?]</span> propose to verifiably secret share the secret inputs of all participants. In the event of a fault, a majority of users would recover all the secrets of the participant who stopped, and complete the computation. Thus, it is assumed by definition that an honest participant will always send the messages he is supposed to. This hardly seems a realistic assumption, however: in practice, almost all faults may occur by accident, or even worse, as a result of dishonest participants sabotaging honest ones to reveal their secrets!
+								Under the assumption that the majority of users are honest, <span class="reference" data-citation="GMW">[?]</span> propose to verifiably secret share the secret inputs of all participants. In the event of a fault, a majority of users would recover all the secrets of the participant who stopped, and complete the computation. Thus, it is assumed by definition that all honest participants will always send the messages they are supposed to. This hardly seems a realistic assumption, however: in practice, almost all faults may occur by accident, or even worse, as a result of dishonest participants sabotaging honest ones to reveal their secrets!
 							</p>
 							<p class="rp_original">
-								Galil, Haber, and Yung<sup class="reference" data-citation="GHY">[?]</sup> propose instead a secret sharing in two levels: first, for each secret bit of a use, the user distributes one "XOR share" to each of the other participants, where the exclusive-or of these XOR shares is the original secret bit. The XOR shares are then verifiably secret shared. Recovery in now possible by reconstructing the XOR shares held by the stopped participant, which has the effect of preserving that participant's privacy.
+								Galil, Haber, and Yung<sup class="reference" data-citation="GHY">[?]</sup> propose instead a secret sharing in two levels: first, for each secret bit of a user, the user distributes one "XOR share" to each of the other participants, where the exclusive-or of these XOR shares is the original secret bit. The XOR shares are then verifiably secret shared. Recovery in now possible by reconstructing the XOR shares held by the stopped participant, which has the effect of preserving that participant's privacy.
 							</p>
 							<p class="rp_original">
-								Our protocol could easily be adapted to include the procedure of <span class="reference" data-citation="GHY">[?]</span>: In case QRS is used, participant \(P_i\) would first commit to his input, and then distribute XOR shares of the factorization of his modulus to the other participants. If \(P_i\) stops working, any majority of users could reconstruct the XOR shares of his factorization, and use instances of our basic protocol to simulate \(P_i\): open his commitments as needed, etc.
+								Our protocol could easily be adapted to include the procedure of <span class="reference" data-citation="GHY">[?]</span>: In case QRS is used, participant \(P_i\) would first commit to \(ip_i\), and then distribute XOR shares of the factorization of his or her modulus to the other participants. If \(P_i\) stops working, any majority of users could reconstruct the XOR shares of the factorization of \(P_i\)'s modulus, and use instances of our basic protocol to simulate \(P_i\): open his commitments as needed, etc.
 							</p>
 							<p class="rp_original">
 								In addition to this, the techniques presented in <span class="reference" data-citation="Ch2">[?]</span> can be used to add flexibility to the protocol. Here, it is shown how to change the <i>quorum</i>, i.e. the number of participants necessary to reconstruct the secret, during the protocol. This can be useful in applications, where it can be assumed that almost all faults occur by accident, because of breakdown of communication lines, etc. In this case, it may be desirable to keep the ratio between the quorum and the number of remaining participants constant.
@@ -961,8 +993,11 @@
 							<p class="rp_original">
 								To understand this question better, consider the All-or-nothing-disclosure problem (ANDOS).
 							</p>
+							<p class="rp_annotation">
+								Also known as one-of-\(n\) oblivious transfer
+							</p>
 							<p class="rp_original">
-								In this problem, party A possesses a number of secrets, of which she is willing to disclose exactly one to B. B would like to be able to choose which secret to get, without disclosing to A which secret he is interested in.
+								In this problem, party A(lice) possesses a number of secrets, of which she is willing to disclose exactly one to B(ob). B would like to be able to choose which secret to get, without disclosing to A which secret he is interested in.
 							</p>
 							<p class="rp_original">
 								Clearly, ANDOS is just a special case of the general computation problem. Furthermore, the folklore of the subject has it that for fundamental information theoretical reasons, a two party ANDOS cannot be implemented such that the secrets of both parties are unconditionally protected. Informally, this is so since, if A is unconditionally protected, the messages she sends must contain enough Shannon information to determine exactly one of her secrets. But this must then be the secret B learns, which means that he is anything but unconditionally protected!
@@ -974,7 +1009,7 @@
 								Under different assumptions, however, it <i>is</i> possible to get unconditional security for all participants. In <span class="reference" data-citation="CDC">[?]</span>, it is shown how to do this using no cryptographic assumptions, in a model where there exists an unconditionally secure secrecy channel between every pair of participants, and where at least two thirds of the participants will follow the protocol.
 							</p>
 							<p class="rp_original">
-								On the positive side, it should be noted that in joint work with Claude Cr&eacute;peau, we have recently shown that our basic protocol can be made to work, based only on the assumption that a one way function exists, and that there is a protocol solving the ANDOS problem: Clearly, bit commitments are possible if one way functions exist, and the comparability property can always be satisfied using the fact that all NP-statements can be proved in zero knowledge (although using very inefficient protocols). The idea is now to use a protocol for ANDOS to get something which will replace the blinding property: Notice that when participant \(P_i\) blinds other participants' commitments, the basic fact used in the protocol is that \(P_i\) knows the XOR sum of the bit contained in the original commitment, and the one contained in the blinded version. It will therefore be sufficient if he can learn a set of these XOR relations by doing an ANDOS protocol with each \(P_j\) with \(j\lt i\). 
+								On the positive side, it should be noted that in joint work with Claude Cr&eacute;peau, we have recently shown that our basic protocol can be made to work, based only on the assumption that a one way function exists, and that there is a protocol solving the ANDOS problem: Clearly, bit commitments are possible if one way functions exist, and the comparability property can always be satisfied using the fact that all NP-statements can be proved in zero knowledge (although using very inefficient protocols). The idea is now to use a protocol for ANDOS to get something which will replace the blinding property: Notice that when participant \(P_i\) blinds other participants' commitments, the basic fact used in the protocol is that \(P_i\) knows the XOR sum of the bit contained in the original commitment, and the one contained in the blinded version. It will therefore be sufficient if that participant can learn a set of these XOR relations by doing an ANDOS protocol with each \(P_j\) with \(j\lt i\). 
 							</p>
 							<p class="rp_original">
 								The fact that ANDOS can be based on the existence of a trapdoor one way function<sup class="reference" data-citation="Cr">[?]</sup> then implies that our protocol can also be based only on a trapdoor one way function. The resulting protocol would have the same property as the one of <span class="reference" data-citation="GHY">[?]</span> which is based on the same assumption, namely that only one trapdoor function would have to be generated for each participant, while the solution in <span class="reference" data-citation="GMW">[?]</span> requires generation of \(O(n^2)\) functions.
@@ -993,7 +1028,7 @@
 							The idea is now to use our computation protocol on each of the circuits specifying the verifier's computations. More specifically, the following is done:
 						</p>
 						<p class="rp_original">
-							At each point where the prover is about to send a message in the original protocol, it will instead send a collection of bit commitments containing the bits of this message. The parties will now use our computation protocol on the circuit specified by the original proof system to be used by the verifier at this point. This circuit may take as input any message sent so far, but also some secret input coin frlips for example from the verifier. The comparability property of the bit commitment schemes will ensure that the same set of messages and input is used consistently throughout. The computation protocol will be executed so that the output of the circuit, i.e. the verifiers next message in the original proof system, is private to the prover, by techniques introduces in the previous section. The prover is now free to read this message and compute a response, perhaps even using its infinite computing power.
+							At each point where the prover is about to send a message in the original protocol, it will instead send a collection of bit commitments containing the bits of this message. The parties will now use our computation protocol on the circuit specified by the original proof system to be used by the verifier at this point. This circuit may take as input any message sent so far, but also some secret input coin flips, for example, from the verifier. The comparability property of the bit commitment schemes will ensure that the same set of messages and input is used consistently throughout. The computation protocol will be executed so that the output of the circuit, i.e. the verifiers next message in the original proof system, is private to the prover, by techniques introduces in the previous section. The prover is now free to read this message and compute a response, perhaps even using its infinite computing power.
 						</p>
 						<p class="rp_original">
 							The last circuit processed is the one doing the computation that the verifier should use in deciding whether or not to accept the proof in the original proof system. The output of this circuit is opened to the verifier, who can check that indeed it is "accept".
@@ -1009,11 +1044,11 @@
 						</p>
 						<span class="rp_theorem_header" id="theorem8.1">Theorem 8.1</span>
 						<p class="rp_original rp_theorem">
-							Assume that pairs of claw-free trapdoor functions exist. Then any language in IP has a zero knowledge proof system.
+							Assume that pairs of <span class="definable">clawfree</span> trapdoor functions exist. Then any language in IP has a zero knowledge proof system.
 						</p>
 						<span class="rp_sub_header">Proof</span>
 						<p class="rp_original rp_sub">
-							The existence of trapdoor one way functions will make our basic computation protocol work with conditional security, which is what we need for the prover. The claw-freeness implies that the existence of a bit commitment scheme hiding the bits unconditionally<sup class="reference" data-citation="C">[?]</sup>, which means that the verifier can be protected as required above.
+							The existence of <span class="definable" data-define="trapdoor function">trapdoor one way functions</span> will make our basic computation protocol work with conditional security, which is what we need for the prover. The clawfreeness implies that the existence of a bit <span class="definable">commitment</span> scheme hiding the bits unconditionally<sup class="reference" data-citation="C">[?]</sup>, which means that the verifier can be protected as required above.
 						</p>
 					</section>
 					<section id="sec9">
@@ -1037,7 +1072,7 @@
 					<li id="C">Chaum: Demonstrating that a public predicate can be satisfied while revealing no information about how. <i>Proc. of Crypto</i> 86.</li>
 					<li id="GB">S. Goldwasser and M. Bellare. Lecture Notes on Cryptography. Web resource, MIT. 2008.</li>
 					<li id="GM">Goldwasser and Micali: Probabilistic Encryption. <i>JCSS, vol. 28, no.2</i>, April 1984, pp.270-299.</li>
-					<li id="PG">Peralta and van de Graaf: A simply an efficient protocol to prove the validity of your public key. To appear in <i>Proceedings of Crypto</i> 87.</li>
+					<li id="PG">Peralta and van de Graaf: A simple an efficient protocol to prove the validity of your public key. To appear in <i>Proceedings of Crypto</i> 87.</li>
 					<li id="Bl">Blum: Coinflipping by telephone: Protocols for solving impossible problems. <i>Proc. of 24. IEEE</i> CompCon, 1982.</li>
 					<li id="GMR">Goldwasser, Micali, and Rackoff: The knowledge complexity of interactive proof systems. <i>Proc. 17th STOC</i>, 1985.</li>
 					<li id="Ch2">Chaum: How to keep a secret alive. <i>Proc. of Crypto</i> 84.</li>
