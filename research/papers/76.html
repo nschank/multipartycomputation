@@ -713,6 +713,88 @@
 								There is a publicly known constant \(d\) and we would like to compute the value \(u*d\) so that this product will be a verified secret. This multiplication is trivial. All that \(P_i\) needs to do is multiply his share \(\beta_i^u\) by the constant \(d\). When at a later stage he receives the piece \(\beta_j^{u*d}\) and the value \(y_{ji}^u\) from player \(P_j\), he should just the check vector \((b,c)\) which he holds for the original piece of the player \(P_j\) by computing \(\beta_j^{u*d}+bdy^u_{ji}=cd\).
 							</p>
 						</section>
+						<section id="sec6.3">
+							<h3>6.3. Linear Computations</h3>
+							<p class="rp_original">
+								The combination of the protocol for addition and the protocol for multiplication by a constant provides us with the ability to compute any linear combination of verified secrets.
+							</p>
+						</section>
+						<section id="sec6.4">
+							<h3>6.4. Multiplication Protocol</h3>
+							<p class="rp_original">
+								Before we proceed to show how to compute the product of two verified secrets, let us prove two lemmas which will be needed later.
+							</p>
+							<span class="rp_theorem_header" id="lemma9">Lemma 9</span>
+							<p class="rp_original rp_theorem">
+								A dealer can prove that two secrets, \(s_1\) and \(s_2\), which he shared using VSS, are equal.
+							</p>
+							<span class="rp_sub_header">Proof</span>
+							<p class="rp_original rp_sub">
+								All players carry out the subtraction protocol for \(s_1\) and \(s_2\). Based on the lemma for addition/subtraction, this new value is a verified secret, and can be reconstructed by the players. They reconstruct the value \(s_1-s_2\). Now, \(s_1-s_2=0\) iff \(s_1=s_2\).
+							</p>
+							<span class="rp_theorem_header" id="lemma10">Lemma 10</span>
+							<p class="rp_original rp_theorem">
+								Using the Zero Knowledge technique the dealer can prove that three secrets \(a,\,b\), and \(c\), satisfy \(a\cdot b=c\).
+							</p>
+							<span class="rp_sub_header">Proof</span>
+							<p class="rp_original rp_sub">
+								Let \(f,\,g\), and \(h\) be the polynomials used to distribute \(a,\,b\), and \(c\) respectively. We recall that all our secrets are elements of a small finite field \(E,\,|E|=p\), and we can pick \(p\) to satisfy \(n\lt p\lt2n\). Let \(Z=\{(x,y,z)\,|\,xy=z,\,\forall\,x,y\inE\}\) be the multiplication table of \(E\). The dealer randomly permutes the members of \(Z\) to a list \(\{(x_i,y_i,z_i)\}\). He then generates random polynomials of degree \(t,\,f_i,\,g_i\) and \(h_i,\,i=1\dots p^2\), encoding this list, (e.g. \(f_i(0)=x_i\), etc.). The dealer prepares \(m=knp^2\) independent encoded copies of the multiplication table of \(E\) and distributes all the randomly chosen triples in these lists using our secret sharing protocol. At this point each player broadcasts a list of \(kp^2\) requests asking the dealer to either open completely one of the encoded lists or two show, using the equality protocol of Lemma 9, that for some \(i\) on the list \(f(0)-f_i(0),\, g(0)=g_i(0)\), and \(h(0)=h_i(0)\). It is easy to see that this procedure provides a zero knowledge proof to the fact that \(h(0)=f(0)g(0)\), with probability of failure at most \(2^{-k}\).
+							</p>
+							<p class="rp_original">
+								We now proceed to exhibit the multiplication protocol. For the above \(u\) and \(V\), we would like to compute \(u*v\), and to ensure that the product will be a verified secret.
+							</p>
+							<p class="rp_original">
+								The polynomial \(f^u(x)*f^v(x)=f^{u*v}_1(x)\) has as its constant term the desired value \(u*v\), but two problems arise: (1) The polynomial is of degree \(2t\). (2) Its is not a random polynomial. To overcome these problems, we will adapt the methods described in <span class="reference" data-citation="BGW">[?]</span>, and in combination with the VSS protocol, we will return to the state in which all data in the computation is verified data. The protocol is as follows:
+							</p>
+							<ol class="rp_original">
+								<li>
+									<p>The player \(P_i\) must extend his WSS of \(\beta_i^u\) and \(\beta_i^v\) to VSS This is easily done: (the protocol given is for \(\beta^u_i\), and the same is done for \(\beta^v_i\).</p>
+									<ul>
+										<li>Each \(P_j\) holds a piece \(\beta^u_{ij}\) which is a share of \(P_i\text{'s}\,\beta_i^u\). He shares \(\beta_{ij}^u\) using WSS</li>
+										<li>Then \(P_i\) carries out the zero knowledge proof, as in our VSS protocol, to show that all shares held by the players lie on a polynomial \(h_i^u(x)\) of degree \(t\).</li>
+									</ul>
+								</li>
+								<li>
+									<p>If some player refuses to cooperate, or is disqualified in the above process, then his pieces are reconstructed by the other players, and become common knowledge. The players which participate in this computation, are players who have extended their WSS to VSS, that is that they were not disqualified. Thus, their pieces \(\beta_j^u\), which are now shared by VSS, are points on the graph of the polynomial of the shared secret \(u\). Assume that \(P_i\) didn't follow the protocol, his pieces \(\beta_i^u\) is computed in the following way:</p>
+									<p>Since \(\beta^u_i\) is on a polynomial of degree \(t\), we can represent \(\beta^u_i\) as a linear combination with publicly known (and easily computable) coefficients of any other \(t+1\) point on this polynomial. Since at least \(t+1\) players will extend the WSS of their points on this polynomial to a VSS, we can use this linear relation together with the Linear Computation Lemma to compute a verified secret of the missing \(\beta\)'s and make them public. Now it holds, that either \(\beta_i^u\) was shared, using VSS, or it was made public.</p>
+								</li>
+								<li>The player \(P_i\) computes \(\beta_i^u*\beta_i^v=\beta_i^{u*v}\), and distributes it with a new polynomial \(h_i^{u*v}(x)\), using the VSS protocol. Then he proves that \(h^u_i(0)*h_i^v(0)=h_i^{u*v}(0)\), as described above in Lemma 10. If he fails to do the above, his pieces are reconstructed and exposed.</li>
+								<li>In order to randomize the polynomial \(f_1^{u*v}(x)\), each \(P_i\) shares \(t\) random polynomials \(g_{i,j}(x)\), of degree \(t\), and proves that he has done just this. Using the method described in <span class="reference" data-citation="BGW">[?]</span>, they generate a random polynomial of degree \(2t\) with a zero free coefficient. By adding this polynomial to \(f_1^{u*v}(x)\) we obtain a new random polynomial \(f_2^{u*v}(x)\) with the same free coefficient.</li>
+								<li>To preform the reduction of the degree of the polynomial, \(f_2^{u*v}(x)\) to degree \(t\), we carry out the linear computation described in <span class="reference" data-citation="BGW">[?]</span>. If a player doesn't cooperate, his piece is revealed using the VSS for this piece. The result of this computation will be that each player holds a verified share of a piece of \(u*v\), shared by the polynomial \(f^{u*v}(x)\) of degree \(t\), so that \(f^{u*v}(0)=f_1^{u*v}(0)\). Each player manages to compute his own, new piece, after all information held by the other players has been passed on to him.</li>
+								<li>
+									<p>As a result of the above computation, the following facts hold:</p>
+									<ul>
+										<li>Each player holds a share \(\beta_i^{u*v}\) of the secret \(u*v\).</li>
+										<li>This piece is already shared using VSS.</li>
+										<li>Due to the VSS of \(\beta_1^{u*v}\), each player \(P_j\) holds a share \(\beta_{ij}^{u*v}\) of \(\beta_i^{u*v}\).</li>
+									</ul>
+									<p>
+										To achieve condition 3 of a verified secret for \(u*v,\,\beta_i^{u*v}\) must be shared by WSS. To transform the VSS of this piece to WSS the following is done:
+									</p>
+									<ul>
+										<li>The player \(P_i\) creates and distributes check vectors for all \(\beta_{ij}^{u*v}\).</li>
+										<li>All players execute the Modified Verification of Check Vectors.</li>
+										<li>If \(P_i\) fails to cooperate his piece is exposed using the VSS for it.</li>
+									</ul>
+								</li>
+							</ol>
+							<p class="rp_original">
+								We therefore have
+							</p>
+							<span class="rp_theorem_header" id="lemma11">Lemma 11</span>
+							<p class="rp_original rp_theorem">
+								After the above multiplication protocol is carried out the product \(u*v\) is a verified secret.
+							</p>
+							<p class="rp_original">
+								And this completes the proof of Theorem 4.
+							</p>
+						</section>
+					</section>
+					<section id="sec7">
+						<h2>7. Acknowledgement</h2>
+						<p class="rp_original">
+							The first author wishes to thank her advisor Michael Ben-Or for suggesting the VSS problem and for his encouragement and many important comments, as well as Michael Rabin for several useful comments.
+						</p>
 					</section>
 				</div>
             </div>
@@ -728,7 +810,20 @@
             <div class="main_toplevel main_section main_color8" id="references">
                 <h1>References</h1>
                 <ol id="referencelist">
-                    <li id="citation1">A citation</li>
+                    <li id="B">M. Ben-Or. Multiparty Protocols with Honest Majority, in preparation.</li>
+					<li id="BGW">M. Ben-Or, S. Goldwasser, and A. Wigderson. Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation, <i>STOC88</i>, pp. 1-10.</li>
+					<li id="CCD">D. Chaum, C. Cr&eacute;peau, and I. Damg&aring;rd. Multiparty Unconditionally Secure Protocols. <i>STOC88</i>, pp. 11-19.</li>
+					<li id="CGMA">B. Chor, S. Goldwasser, S. Micali, and B. Awerbuch. Verifiable Secret Sharing and Achieving Simultaneity in the Presence of Faults. <i>FOCS85</i>, pp.383-395.</li>
+					<li id="D">D. Dolev. The Byzantine Generals Strike Again, <i>J. of Algorithms, Vol. 3</i>, pp. 14-30. 1980.</li>
+					<li id="DDY">D. Dolev, C. Dwork, M. Yung. Non-Cryptographic Secure Communication on General Networks. Preprint.</li>
+					<li id="F">P. Feldman. Optimal Algorithms for Byzantine Agreement. MIT Ph.D Thesis, to appear.</li>
+					<li id="FM">P. Feldman, S. Micali. Optimal Algorithms for Byzantine Agreement. <i>STOC88</i>, pp. 148-161.</li>
+					<li id="GMW">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority.</a> <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
+					<li id="R1">M. Rabin. Randomized Byzantine Generals. <i>FOCS83</i>, pp. 403-409.</li>
+					<li id="R2">M. Rabin. Digitalized Signatures, Foundations of Secure Computations, R. Demillo et.al. editors, Academic Press, (1978), pp. 155-165.</li>
+					<li id="RT">T. Rabin. Robust Sharing of Secrets when the Dealer is Honest or Cheating. M.Sc. Thesis, The Hebrew University, July 1988.</li>
+					<li id="S">A. Shamir. How to Share a Secret. <i>CACN, 22</i>, pp. 612-613. 1979.</li>
+					<li id="TW">M. Tompa and H. Woll. How to Share a Secret with Cheaters. IBM Research Report, RC 11840 (Log #52910). 1986.</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
