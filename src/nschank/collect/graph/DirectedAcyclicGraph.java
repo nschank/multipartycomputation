@@ -10,20 +10,20 @@ import java.util.stream.Collectors;
  * Last updated on 22 Jul 2014
  *
  * A DirectedAcyclicGraph is a specific type of Graph (which, coincidentally, is directed and acyclic). It is meant to
- *  deal with the majority of the problems associated with such Graphs in a general sense, as well as dealing with all
- *  the Collection-related methods. Acyclicity is maintained through equality; as such, this graph maintains many of the
- *  properties of a Set (i.e. only one of any element can be added). Loops are considered cycles and are not allowed.
+ * deal with the majority of the problems associated with such Graphs in a general sense, as well as dealing with all
+ * the Collection-related methods. Acyclicity is maintained through equality; as such, this graph maintains many of the
+ * properties of a Set (i.e. only one of any element can be added). Loops are considered cycles and are not allowed.
  *
  * @author nschank, Brown University
- * @version 1.1
+ * @version 2.1
  */
 public class DirectedAcyclicGraph<T> implements Graph<T>
 {
+	protected final Map<T, DAGNode> nodeMap;
 	protected final Set<T> top;
-	protected final Map<T,DAGNode> nodeMap;
 
 	/**
-	 *
+	 * Creates a DirectedAcyclicGraph with 0 elements.
 	 */
 	public DirectedAcyclicGraph()
 	{
@@ -31,54 +31,85 @@ public class DirectedAcyclicGraph<T> implements Graph<T>
 		this.top = new HashSet<>();
 	}
 
+	/**
+	 * Adds the given element to this DAG.
+	 *
+	 * @param t
+	 * 		Any value
+	 *
+	 * @return {@literal true} if this element wasn't already in this DAG
+	 */
 	@Override
-	public boolean connectedTo(final T from, final T to)
+	public boolean add(final T t)
 	{
-		return this.nodeMap.get(from).getChildren().stream().anyMatch(e -> e.elem.equals(to));
+		if(this.nodeMap.containsKey(t)) return false;
+
+		this.nodeMap.put(t, new DAGNode(t));
+		this.top.add(t);
+		return true;
 	}
 
+	@Override
+	public boolean addAll(final Collection<? extends T> c)
+	{
+		return c.stream().map(this::add).reduce(false, (a, b) -> a || b);
+	}
+
+	/**
+	 * @param element
+	 * 		A single element in this Graph.
+	 *
+	 * @return A Collection of all the elements {@code x} such that {@code connectedTo(element, x)} is true.
+	 */
 	@Override
 	public Collection<T> allConnectedTo(final T element)
 	{
 		if(this.nodeMap.containsKey(element))
-			return this.nodeMap.get(element).getChildren().stream().map(child -> child.elem).collect(Collectors.toList());
+			return this.nodeMap.get(element).getChildren().stream().map(child -> child.elem)
+					.collect(Collectors.toList());
 		else return new ArrayList<>();
 	}
 
 	@Override
+	public void clear()
+	{
+		this.nodeMap.clear();
+		this.top.clear();
+	}
+
+	/**
+	 * Causes two elements in this DAG to connect, given they are both already in the DAG AND it would not
+	 * create a cycle.
+	 *
+	 * @param a
+	 * 		Any element
+	 * @param b
+	 * 		Any other element
+	 *
+	 * @return Whether {@code a} and {@code b} are now connected.
+	 */
+	@Override
 	public boolean connect(final T a, final T b)
 	{
-		if(!nodeMap.containsKey(a) || !nodeMap.containsKey(b))
-			return false;
-		try //TODO move away from Error-based throwing
-		{
-			this.nodeMap.get(a).makeParentOf(this.nodeMap.get(b));
-			this.top.remove(b);
-			return true;
-		}
-		catch(Exception e)
-		{
-			throw new Error("We'll deal with this later! Feasibility results yay!");
-		}
+		if(!nodeMap.containsKey(a) || !nodeMap.containsKey(b)) return false;
+		return this.nodeMap.get(a).makeParentOf(this.nodeMap.get(b));
 	}
 
+	/**
+	 * @param from
+	 * 		The element in the graph a connection must start from, in
+	 * 		order for this procedure to return true.
+	 * @param to
+	 * 		The element in the graph a connection must reach, in order for
+	 * 		this procedure to return true.
+	 *
+	 * @return {@literal true} if {@code from} and {@code to} are both elements in this DAG and {@code from}
+	 * is connected to {@code to}
+	 */
 	@Override
-	public boolean disconnect(final T a, final T b)
+	public boolean connectedTo(final T from, final T to)
 	{
-		return !(!nodeMap.containsKey(a) || !nodeMap.containsKey(b)) &&
-				this.nodeMap.get(a).removeAsParentOf(this.nodeMap.get(b));
-	}
-
-	@Override
-	public int size()
-	{
-		return nodeMap.size();
-	}
-
-	@Override
-	public boolean isEmpty()
-	{
-		return nodeMap.isEmpty();
+		return this.nodeMap.get(from).getChildren().stream().anyMatch(e -> e.elem.equals(to));
 	}
 
 	@Override
@@ -88,34 +119,38 @@ public class DirectedAcyclicGraph<T> implements Graph<T>
 	}
 
 	@Override
+	public boolean containsAll(final Collection<?> c)
+	{
+		return c.stream().allMatch(this::contains);
+	}
+
+	@Override
+	public boolean disconnect(final T a, final T b)
+	{
+		return this.nodeMap.containsKey(a) && this.nodeMap.containsKey(b) &&
+				this.nodeMap.get(a).removeAsParentOf(this.nodeMap.get(b));
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		return nodeMap.isEmpty();
+	}
+
+	@Override
 	public Iterator<T> iterator()
 	{
 		return this.nodeMap.keySet().iterator();
 	}
 
-	@Override
-	public Object[] toArray()
-	{
-		return this.nodeMap.keySet().toArray();
-	}
-
-	@Override
-	public <T1> T1[] toArray(final T1[] a)
-	{
-		return this.nodeMap.keySet().toArray(a);
-	}
-
-	@Override
-	public boolean add(final T t)
-	{
-		if(!this.nodeMap.containsKey(t))
-		{
-			this.nodeMap.put(t, new DAGNode(t));
-			this.top.add(t);
-		}
-		return true;
-	}
-
+	/**
+	 * Removes the given element from this DAG
+	 *
+	 * @param o
+	 * 		Any value
+	 *
+	 * @return {@literal true} if this element was in this DAG and was removed correctly
+	 */
 	@Override
 	public boolean remove(final Object o)
 	{
@@ -130,21 +165,9 @@ public class DirectedAcyclicGraph<T> implements Graph<T>
 	}
 
 	@Override
-	public boolean containsAll(final Collection<?> c)
-	{
-		return c.stream().allMatch(this::contains);
-	}
-
-	@Override
-	public boolean addAll(final Collection<? extends T> c)
-	{
-		return !c.stream().allMatch(t -> !this.add(t));
-	}
-
-	@Override
 	public boolean removeAll(final Collection<?> c)
 	{
-		return !c.stream().allMatch(t -> !this.remove(t));
+		return c.stream().map(this::remove).reduce(false, (a, b) -> a || b);
 	}
 
 	@Override
@@ -154,112 +177,144 @@ public class DirectedAcyclicGraph<T> implements Graph<T>
 	}
 
 	@Override
-	public void clear()
+	public int size()
 	{
-		this.nodeMap.clear();
+		return nodeMap.size();
 	}
 
-	private class DAGNode
+	@Override
+	public Object[] toArray()
 	{
-		private final T elem;
+		return this.nodeMap.keySet().toArray();
+	}
+
+	@Override
+	public <T1> T1[] toArray(final T1[] a)
+	{
+		return this.nodeMap.keySet().toArray(a);
+	}
+
+	/**
+	 * A DAGNode is a single node within a DAG. It knows its own parents and children, as well as its
+	 * 'layer', which is exactly one greater than the maximum layer of its parents.
+	 */
+	protected class DAGNode
+	{
 		private final Set<DAGNode> children;
-		private final Set<DAGNode> parents;
+		private final T elem;
 		private int layer;
+		private final Set<DAGNode> parents;
 
-		public Collection<DAGNode> getChildren()
-		{
-			return Collections.unmodifiableSet(this.children);
-		}
-
-		public Collection<DAGNode> getParents()
-		{
-			return Collections.unmodifiableSet(this.parents);
-		}
-
-		public void remove()
-		{
-			for(DAGNode child : this.children)
-			{
-				child.parents.remove(this);
-				try
-				{
-					child.realign(null);
-				} catch(CycleException e)
-				{
-					//Impossible
-					e.printStackTrace();
-				}
-			}
-			for(DAGNode parent : this.parents)
-				parent.children.remove(this);
-
-		}
-
-		public boolean removeAsParentOf(DAGNode oldChild)
-		{
-			if(!this.children.contains(oldChild))
-				return false;
-			this.children.remove(oldChild);
-			oldChild.parents.remove(this);
-			try
-			{
-				oldChild.realign(null);
-			} catch(CycleException e)
-			{
-				//Impossible. Just to be sure
-				e.printStackTrace();
-			}
-			return true;
-		}
-
-		public void makeParentOf(DAGNode newChild) throws CycleException
-		{
-			this.children.add(newChild);
-			newChild.parents.add(this);
-
-			newChild.realign(this);
-		}
-
+		/**
+		 * Creates a DAGNode with the given element. Has no children or parents and a layer of 0.
+		 *
+		 * @param elem
+		 * 		The element to add to the DAG
+		 */
 		public DAGNode(final T elem)
 		{
 			this.elem = elem;
 			this.children = new HashSet<>();
 			this.parents = new HashSet<>();
 			this.layer = 0;
+			DirectedAcyclicGraph.this.top.add(elem);
+		}
+
+		private boolean ancestorOf(final DAGNode possibleDescendant)
+		{
+			if(this.layer >= possibleDescendant.layer) return false;
+			Set<DAGNode> checked = new HashSet<>();
+			Set<DAGNode> toCheck = Collections.unmodifiableSet(this.children);
+			checked.add(this);
+			while(!toCheck.isEmpty())
+			{
+				if(toCheck.contains(possibleDescendant)) return true;
+				checked.addAll(toCheck);
+				toCheck = toCheck.stream().flatMap(node -> node.children.stream())
+						.filter(node -> node.layer <= possibleDescendant.layer).collect(Collectors.toSet());
+			}
+			return false;
 		}
 
 		/**
-		 * TODO: improve the obvious inefficiency problems here (after feasibility results)
+		 * @return An (unmodifiable) collection of children
 		 */
-		private void realign(DAGNode aligningNode) throws CycleException
+		public Collection<DAGNode> getChildren()
 		{
-			if(this == aligningNode)
-				throw new CycleException(aligningNode.elem);
+			return Collections.unmodifiableSet(this.children);
+		}
 
+		/**
+		 * @return An (unmodifiable) collection of parents
+		 */
+		public Collection<DAGNode> getParents()
+		{
+			return Collections.unmodifiableSet(this.parents);
+		}
+
+		/**
+		 * @param newChild
+		 * 		Some DAGNode to connect to this node
+		 *
+		 * @return {@literal true} if the connection took place, {@literal false} if the nodes were
+		 * already connected or if the connection would cause a cycle
+		 */
+		public boolean makeParentOf(DAGNode newChild)
+		{
+			if(this.children.contains(newChild) || newChild.ancestorOf(this)) return false;
+			this.children.add(newChild);
+			newChild.parents.add(this);
+
+			if(newChild.layer <= this.layer) newChild.realign();
+			return true;
+		}
+
+		private void realign()
+		{
 			int newlayer = 0;
+
 			for(DAGNode parent : this.parents)
-				if(parent.layer + 1 > newlayer)
-					newlayer = parent.layer+1;
+				if(parent.layer + 1 > newlayer) newlayer = parent.layer + 1;
+
 			if(newlayer != this.layer)
 			{
 				this.layer = newlayer;
 				if(this.layer == 0) top.add(this.elem);
 				else top.remove(this.elem);
-				for(DAGNode child : this.children)
-				{
-					child.realign(aligningNode);
-				}
+
+				this.children.stream().filter(child -> child.layer < this.layer + 1).forEach(DAGNode::realign);
 			}
 		}
 
-
-	}
-
-	private static class CycleException extends Exception
-	{
-		public CycleException(final Object aligningNode)
+		/**
+		 * Removes this DAGNode from the tree. Must:
+		 * - disconnect from its parents and children
+		 * - tell its children to realign, if their layer may not be accurate
+		 */
+		public void remove()
 		{
-			super("The element " + aligningNode + " was involved in a cycle.");
+			for(DAGNode child : this.children)
+			{
+				child.parents.remove(this);
+				if(child.layer == this.layer + 1) child.realign();
+			}
+			for(DAGNode parent : this.parents)
+				parent.children.remove(this);
+		}
+
+		/**
+		 * @param oldChild
+		 * 		Some DAGNode which was may have been a child of this node
+		 *
+		 * @return {@literal true} if the removal needed to take place
+		 */
+		public boolean removeAsParentOf(DAGNode oldChild)
+		{
+			if(!this.children.contains(oldChild)) return false;
+			this.children.remove(oldChild);
+			oldChild.parents.remove(this);
+			if(oldChild.layer == this.layer + 1) oldChild.realign();
+			return true;
 		}
 	}
 }
