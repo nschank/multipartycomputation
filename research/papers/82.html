@@ -91,7 +91,7 @@
 					</span>
 					
 					<div class="rp_snippet">
-						&ldquo;&rdquo;
+						&ldquo;[A] participant with bounded resources can perform computations securely with a participant who may have unlimited computing power.&rdquo;
 					</div>
 					
 					<h1>Overview</h1>						
@@ -100,26 +100,38 @@
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Paper Title</b> is...
+							<b>Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result</b> is a 1988 paper by Chaum, Damg&aring;rd, and van de Graaf which presented the first example of a protocol offering <span class="definable">information theoretic security</span>, even if only to a single participant. Later that same year, Chaum and Damg&aring;ard (along with Claude Cr&eacute;peau) would follow up this work with a <a href="34.html">feasibility result</a> demonstrating that it was possible to offer information theoretic security to <i>all participants</i> (under certain assumptions). While this paper is important in its own right, the results of that following paper had a much larger effect on multiparty computation research as a whole.
+						</p>
+						<p class="rp_analysis">
+							The protocol presented offers a different perspective to computation than the papers before it. It is in some ways similar to Yao's garbled circuit construction, but offers very different characteristics (e.g. the information theoretic security of one party) and operates in an \(n\) party case as opposed to the 2 party case.
 						</p>
 					</section>
 					<section id="goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
-							Some goals that they had.
+							The authors were largely attempting to offer a more efficient and usable construction for multiparty computation. In this, historically, they failed; this protocol is of comparable efficiency to most other constructions already known at the time, except perhaps for very small circuits. They <i>did</i> succeed in making a protocol that was immensely extensible and private, much more so than a garbled circuit or the <a href="81.html">GMW construction</a>. This protocol easily tolerates multiple outputs, allows for optimal fairness, and can be composed with other runs of the protocol. Its main drawback is that it requires significant (and <a href="34.html">inherently  obsolescent</a>) alterations in order to become fault tolerant to any degree.
 						</p>
 						<p class="rp_analysis">
-							Don't forget some results, too!
+							As a mostly unrelated aside, this paper interestingly shows that any language for which membership can be proven interactively can also be proven in zero knowledge (under the assumption that <span class="definable">clawfree</span> <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span> exist).
 						</p>
 					</section>
 					<section id="assumptions">
 						<h2>Assumptions</h2>
+						<p class="rp_analysis">
+							Minimally, this paper operates under the assumption that <span class="definable">clawfree</span> <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span> exist, as this assumption implies the existence of bit <span class="definable">commitment</span> schemes. (Note that this is not necessarily the minimal assumption implying the existence of bit commitment schemes, but it <i>is</i> the minimal assumption proving the existence of bit commitment schemes with the properties used in this paper.)
+						</p>
+						<p class="rp_analysis">
+							For one of the bit commitment schemes mentioned as an example, the following assumption must be held additionally: 
+						</p>
 						<span class="rp_sub_header"><a href="#sec3.1">Quadratic Residuosity Assumption</a></span>
 						<p class="rp_analysis rp_sub">
 							Given any element \(y\in\mathbb Z_N\), where \(N=p\cdot q\) for primes \(p\equiv q\equiv 3\bmod4\), there does not exist a probabilistic polynomial-time method of determining whether \(\exists\,x\in\mathbb Z_N\) such that \(x^2\equiv y\pmod N\). 
 						</p>
 						<p class="rp_analysis">
-							The existence of <span class="definable">clawfree</span> <span class="definable" data-define="trapdoor function">trapdoor functions</span>. This is a bit of a less common assumption, so we can be a little more general and depend on the hardness of factoring (since that implies the existent of clawfree permutations<span class="reference" data-citation="GB">[?]</span>. Indeed, since we are already depending on the hardness of quadratic residuosity (which implies the hardness of factoring, since factoring \(N\) makes residuosity apparent), this does not add any additional assumptions. 
+							The quadratic residuosity assumption is known to imply that factoring is hard<sup class="reference" data-citation="QRtoF">[?]</sup>; in turn, the hardness of factoring is known to imply that clawfree permutations exist<sup class="reference" data-citation="GB">[?]</sup>. As such, we can make <i>either</i> assumption, as opposed to needing both in the case that we want to use the QRS commitment scheme.
+						</p>
+						<p class="rp_analysis">
+							In terms of what network this protocol requires, <span class="definable" data-define="synchronous network">synchrony</span> is assumed. While not declared outright, a <span class="definable">broadcast channel</span> is implicitly assumed based on the definition of rounds and messages presented in <a href="#sec4">Section 4</a>.
 						</p>
 					</section>
 					<section id="defs">
@@ -208,23 +220,23 @@
 						<h3><a href="#sec6.1">The Encryption Phase</a></h3>
 						<ul class="rp_analysis">
 							<li><b>Number of parties: </b> Any \(n\) parties</li>
-							<li><b>Function(s): </b> Takes in the description of a circuit \(C\) that the \(n\) parties wish to collectively determine. We define the circuit to have \(c\) gates with average \(t\) fan-in, and each party has an equal number of input bits (plus an also-equal set of random input bits). The parties collectively create a new, encrypted version of the circuit.</li>
+							<li><b>Function(s): </b> Takes in the description of a circuit \(C\) that the \(n\) parties wish to collectively determine. We define the circuit to have \(c\) gates with maximum \(t\) fan-in, and each party has an equal number of input bits (plus an also-equal set of random input bits). The parties collectively create a new, encrypted version of the circuit.</li>
 							<li><b>Privacy constraints: </b>No party learns the input bits of any other party.</li>
 							<li><b>Cheating: </b>No party can incorrectly create the circuit without being caught, except negligibly often.</li>
 							<li><b>Subprotocols: </b> Procedure <span class="main_language">Transform Circuit</span> is done once per party. Procedure <span class="main_language">Check Transform</span> is done \(m\) times per party, where \(m\) is the security parameter.</li>
-							<li><b>Bits exchanged: </b>\(\operatorname{O}(cmn2^t(t+m+n))\), where \(m\) is the security parameter, \(n\) is the number of parties, \(c\) is the number of gates in the circuit, and \(t\) is the average fan-in of those gates.</li>
-							<li><b>Runtime: </b>\(\operatorname{O}(cm2^t(t+n^2))\), where \(m\) is the security parameter, \(n\) is the number of parties, \(c\) is the number of gates in the circuit, and \(t\) is the average fan-in of those gates.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(cmn2^t(t+m+n))\), where \(m\) is the security parameter, \(n\) is the number of parties, \(c\) is the number of gates in the circuit, and \(t\) is the maximum fan-in of those gates.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(cm2^t(t+n^2))\), where \(m\) is the security parameter, \(n\) is the number of parties, \(c\) is the number of gates in the circuit, and \(t\) is the maximum fan-in of those gates.</li>
 							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not using Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
 						</ul>
 						
 						<h4><a href="#protocol1">Procedure <span class="main_language">Transform Circuit</span></a></h4>
 						<ul class="rp_analysis">
 							<li><b>Number of parties: </b> Performed by 1 party at a time, with the result being sent to all \(n\) parties after completion.</li>
-							<li><b>Function(s): </b> Takes in the description of a circuit \(C\) that the \(n\) parties wish to collectively determine. We define the circuit to have \(c\) gates with average \(t\) fan-in, and each party has an equal number of input bits (plus an also-equal set of random input bits). The party performing the procedure encrypts the circuit in a special, composable way.</li>
+							<li><b>Function(s): </b> Takes in the description of a circuit \(C\) that the \(n\) parties wish to collectively determine. We define the circuit to have \(c\) gates with maximum \(t\) fan-in, and each party has an equal number of input bits (plus an also-equal set of random input bits). The party performing the procedure encrypts the circuit in a special, composable way.</li>
 							<li><b>Privacy constraints: </b>No party learns the performing party's input bits or in what way the performing party changed the circuit.</li>
 							<li><b>Cheating: </b>Cheating is dealt with by procedure <span class="main_language">Check Transform</span>, which is done as part of the overall Encryption Phase (above).</li>
-							<li><b>Bits exchanged: </b>\(\operatorname{O}(c2^t(t+m))\), where \(m\) is the security parameter, \(c\) is the number of gates in the circuit, and \(t\) is the average fan-in of those gates.</li>
-							<li><b>Runtime: </b>\(\operatorname{O}(c2^t(\frac t n + i))\), where \(n\) is the number of parties, \(c\) is the number of gates in the circuit, \(t\) is the average fan-in of those gates, and \(i\) is which iteration of this protocol is being run (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(c2^t(t+m))\), where \(m\) is the security parameter, \(c\) is the number of gates in the circuit, and \(t\) is the maximum fan-in of those gates.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(c2^t(\frac t n + i))\), where \(n\) is the number of parties, \(c\) is the number of gates in the circuit, \(t\) is the maximum fan-in of those gates, and \(i\) is which iteration of this protocol is being run (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
 							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not needing Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
 							<li><b>Notes: </b>We are operating under the simplifying assumption that each party has a \(\frac 1 n\) probability of using one of their input bits as any given input bit to a gate. We additionally assume that the bit commitments (and their openings) are each \(m\) bits.</li>
 						</ul>
@@ -236,8 +248,8 @@
 							<li><b>Privacy constraints: </b>No party learns how the prover transformed the circuit originally.</li>
 							<li><b>Cheating: </b>After one run of this procedure, the verifiers know with probability &frac12; that the prover performed the above protocol correctly. After \(m\) runs, this probability is \(1-2^{-m}\).</li>
 							<li><b>Subprotocols: </b>A single (additional) run of the <span class="main_language">Transform Circuit</span> protocol is performed for each run of this proof.</li>
-							<li><b>Bits exchanged: </b>\(\operatorname{O}(c2^t(t+m+i))\), where \(m\) is the security parameter, \(c\) is the number of gates in the circuit, \(t\) is the average fan-in of those gates, and \(i\) is which iteration of the <span class="main_language">Transform Circuit</span> protocol is being checked (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
-							<li><b>Runtime: </b>\(\operatorname{O}(c2^t(\frac t n + i))\), where \(n\) is the number of parties, \(c\) is the number of gates in the circuit, \(t\) is the average fan-in of those gates, and \(i\) is which iteration of the <span class="main_language">Transform Circuit</span> protocol is being checked (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(c2^t(t+m+i))\), where \(m\) is the security parameter, \(c\) is the number of gates in the circuit, \(t\) is the maximum fan-in of those gates, and \(i\) is which iteration of the <span class="main_language">Transform Circuit</span> protocol is being checked (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(c2^t(\frac t n + i))\), where \(n\) is the number of parties, \(c\) is the number of gates in the circuit, \(t\) is the maximum fan-in of those gates, and \(i\) is which iteration of the <span class="main_language">Transform Circuit</span> protocol is being checked (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
 							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not needing Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
 						</ul>
 						
@@ -254,6 +266,12 @@
 					</section>
 					<section id="further">
 						<h2>Further Reading</h2>
+						<p class="rp_analysis">
+							 This paper had a sequel later the same year which is essentially required reading in order to see how the ideas presented here developed: it can be found <a href="34.html">here</a>.
+						</p>
+						<p class="rp_analysis">
+							For the foundations of the circuit building construction presented here, see Yao's <a href="24.html">1986 paper</a> that analyzed the two party case.
+						</p>
 					</section>
 					<section id="ref">
 						<h2>Referencing This Paper</h2>
@@ -277,8 +295,13 @@
 							The protocol has the following properties:
 						</p>
 						<ul class="rp_original">
-							<li>One participant is allowed to hide his secrets <i>unconditionally</i>, i.e. the protocol releases no Shannon information about these secrets. This means that a participant with bounded resources can perform computations securely with a participant who may have unlimited computing power. To the best of our knowledge, our protocol is the first of its kind to provide this possibility.</li>
+							<li>One participant is allowed to hide his or her secrets <i>unconditionally</i>, i.e. the protocol releases no Shannon information about these secrets. This means that a participant with bounded resources can perform computations securely with a participant who may have unlimited computing power. To the best of our knowledge, our protocol is the first of its kind to provide this possibility.</li>
 							<li>The cost of our protocol is linear in the number of gates in a circuit performing the computation, and in the number of participants. We believe it is conceptually simpler and more efficient than other protocols solving related problems<sup class="reference" data-citation="Y1">[?]</sup><sup class="reference" data-citation="GMW">[?]</sup><sup class="reference" data-citation="GHY">[?]</sup>. It therefore leads to practical solutions on problems involving small circuits.</li>
+						</ul>
+						<p class="rp_annotation">
+							The above (being linear in the number of gates and in the number of participants) is inaccurate; it is actually quadratic in the number of participants, because the procedure <span class="main_language">Transform Circuit</span> has an \(i\) term in it, where \(i\) is the number of participants who have participated so far, which of course sums to \(\frac{n(n-1)}2\).
+						</p>
+						<ul class="rp_original">
 							<li>The protocol is <span class="definable">openly verifiable</span>, i.e. any number of people can later come in and rechallenge any participant to verify that no cheating has occurred.</li>
 							<li>The protocol is optimally secure against conspiracies: even if \(n-1\) out of the \(n\) participants <span class="definable" data-define="collusion">collude</span>, they will not find out more about the remaining participants' secrets than what they could already infer from their own input and the public output.</li>
 							<li>Each participant has a chance of undetected cheating that is only exponentially small in the amount of time and space needed for the protocol.</li>
@@ -293,7 +316,7 @@
                     <section id="sec1">
                         <h2>1. Related Work</h2>
 						<p class="rp_original">
-							The problem of multiparty secure computations is an important one. When stated in its most general form, its solution implies a solution&mdash;at least a theoretical one&mdash;to almost any protocol construction problem. The first to consider this problem was Yao<sup class="reference" data-citation="Y2">[?]</sup>. He devised protocols that, under various cryptographic assumptions, could keep the inputs secret while allowing each participant only a <span class="definable">negligible</span> chance of cheating. He did not, however, address the problem of "fairness", i.e. ensuring that the participants learn the output simultaneously. Later, Yao<span class="reference" data-citation="Y1">[?]</span> solved also this problem for the two-party case. Recently, in work done independently from (but earlier than) ours, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW">[?]</sup> used Yao's two-party construction to devise a multiparty solution, based on the existence of a trapdoor one-way function. This protocol implements a multiparty simulation of the computation in a circuit. Each participant holds a share of each bit in the real computation, and these shares are manipulated by using Yao's two-party construction \(O(n^2)\) times, where \(n\) is the number of participants. In other work done independently from and almost simultaneously with ours, Galil, Haber, and Yung generalize all the properties of Yao's construction to the multiparty case, and simplify the use of Yao's protocol in the multiparty simulation. Also, they give a concrete construction based on Diffie-Hellman key exchange rather than the existence of a trapdoor one way function. Very recently, Goldreich and Vainish<sup class="reference" data-citation="GV">[?]</sup> found another simplification by designing a special purpose two-party protocol which could replace Yao's protocol in the multiparty construction.
+							The problem of multiparty secure computations is an important one. When stated in its most general form, its solution implies a solution&mdash;at least a theoretical one&mdash;to almost any protocol construction problem. The first to consider this problem was Yao<sup class="reference" data-citation="Y2">[?]</sup>. He devised protocols that, under various cryptographic assumptions, could keep the inputs secret while allowing each participant only a <span class="definable">negligible</span> chance of cheating. He did not, however, address the problem of "fairness", i.e. ensuring that the participants learn the output simultaneously. Later, Yao<sup class="reference" data-citation="Y1">[?]</sup> solved also this problem for the two-party case. Recently, in work done independently from (but earlier than) ours, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW">[?]</sup> used Yao's two-party construction to devise a multiparty solution, based on the existence of a trapdoor one-way function. This protocol implements a multiparty simulation of the computation in a circuit. Each participant holds a share of each bit in the real computation, and these shares are manipulated by using Yao's two-party construction \(O(n^2)\) times, where \(n\) is the number of participants. In other work done independently from and almost simultaneously with ours, Galil, Haber, and Yung generalize all the properties of Yao's construction to the multiparty case, and simplify the use of Yao's protocol in the multiparty simulation. Also, they give a concrete construction based on Diffie-Hellman key exchange rather than the existence of a trapdoor one way function. Very recently, Goldreich and Vainish<sup class="reference" data-citation="GV">[?]</sup> found another simplification by designing a special purpose two-party protocol which could replace Yao's protocol in the multiparty construction.
 						</p>
 						<p class="rp_annotation">
 							Indeed, Yao's original two-party construction was very distinctly <i>un</i>fair: one party was guaranteed to learn the output before the other party, and could easily make the other party believe anything.
@@ -826,11 +849,14 @@
 									<li><p>
 										For every output wire \(w\), do the following:
 									</p><p>
-										suppose \(w\) corresponds to output column \(k\) in \(T^*\). Then open all commitments in \(clist(k,T^*)\), and compute the final result for this wire as: $$Result(w)=b_w\oplus csum(k,T^*).$$
+										suppose \(w\) corresponds to output column \(k\) in \(T^*\). Then open all commitments in \(clist(k,T^*)\), and compute the final result for this wire as: $$\operatorname{Result}(w)=b_w\oplus csum(k,T^*).$$
 									</p></li>
 								</ol>
 								<p class="rp_original">
 									The reader can easily verify that if all participants supply the information needed in step 2, then the procedure runs in time linear in the number of gates in \(C\), and constructs a consistent computation \(\Gamma^*\). Furthermore, it is easy to see that step 5 above in fact produces the output of the computation in \(C\) corresponding to \(\Gamma^*\).
+								</p>
+								<p class="rp_annotation">
+									<i>This</i> procedure is linear; the encryption stage is not, and is the bulk of a calculation's runtime.
 								</p>
 							</section>
 						</section>
@@ -992,7 +1018,7 @@
 						<section id="sec7.3">
 							<h3>7.3. Other Special Requirements</h3>
 							<p class="rp_original">
-								Since our basic protocol protects not only the inputs, but also all intermediate results, a variety of special properties can be obtained by rewriting the circuit. For example, the result could be distributed only to a secret subset of users, the subset being chosen at random or based on the result. Also, a secret permutation could be applied to the private output of some participant to hide the order in which he obtains his output bits. This could be important, e.g. in the implementation of a game such a poker.
+								Since our basic protocol protects not only the inputs, but also all intermediate results, a variety of special properties can be obtained by rewriting the circuit. For example, the result could be distributed only to a secret subset of users, the subset being chosen at random or based on the result. Also, a secret permutation could be applied to the private output of some participant to hide the order in which that participant obtains his or her output bits. This could be important, e.g. in the implementation of a game such a poker.
 							</p>
 						</section>
 						<section id="sec7.4">
@@ -1115,6 +1141,7 @@
 					<li id="Ch2">Chaum: How to keep a secret alive. <i>Proc. of Crypto</i> 84.</li>
 					<li id="Cr">Cr&eacute;peau: Equivalence between two flavours of oblivious transfers. To appear in proceedings of <i>Crypto</i> 87.</li>
 					<li id="CDC">Chaum, Damg&aring;rd, and Cr&eacute;peau: Fundamental primitives for multiparty unconditionally secure protocols. To appear.</li>
+					<li id="QRtoF">H. Delfs and H. Knebl. Quadratic Residuosity Property. <i>Introduction to Cryptography: Principles and Applications</i>, pages 162-163. Springer. 2007.</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
