@@ -554,6 +554,48 @@
 							<p class="rp_original">
 								Before describing our non-committing encryption protocol, let us note that one-time pad is a valid non-committing encryption protocol.<sup id="fref11"><a href="#footnote11">11</a></sup> The drawback of this trivial solution is that it requires an initial setup in which each pair of parties share a random string of length at least the number of bits they need to exchange. Such an initial setup is no desirable in practice and does not resolve the theoretically important problem of dealing with a setting in which <i>no secret information is shared a-priori</i>.
 							</p>
+							<p class="rp_original">
+								Our scheme uses a collection of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span> together with a corresponding hardcore predicate<sup class="reference" data-citation="BM">[?]</sup><sup class="reference" data-citation="Y">[?]</sup><sup class="reference" data-citation="GrL">[?]</sup>. Actually, we need a collection of trapdoor permutations with the additional property that they are many permutations over the same domain. Furthermore, we assume that given a permutation \(f\) over a domain \(D\) (but not \(f\)'s trapdoor), one can efficiently generate at random another permutation \(f'\) over \(D\) together with the trapdoor of \(f'\). Such a collection is called a <b>common-domain trapdoor system.</b>
+							</p>
+							<span class="rp_definition_header" id="def4.3">Definition 4.3</span>
+							<p class="rp_original rp_definition">
+								A <b>common-domain trapdoor system</b> is an infinite set of ifnite permutations \(\{f_{\alpha,\beta}\,:\,D_\alpha\stackrel{1-1}{\mapsto}D_\alpha\}_{(\alpha,\beta)\in P}\), where \(P\subseteq\{0,1\}^*\times\{0,1\}^*\), so that:
+							</p>
+							<ul class="rp_original rp_definition">
+								<li><b>domain selection:</b> There exists a probabilistic polynomial-time algorithm \(G_1\) so that on input \(1^n\) algorithm \(G_1\) outputs a description \(\alpha\in\{0,1\}^n\) of domain \(D_\alpha\).</li>
+								<li><b>function selection:</b> There exists a probabilistic polynomial-time algorithm \(G_2\) so that on input \(\alpha\), algorithm \(G_2\) outputs a pair \((\beta,t(\beta))\) so that \((\alpha,\beta)\in P\). (\(\beta\) is a description of a permutation over \(D_\alpha\) and \(t(\beta)\) is the corresponding trapdoor.)</li>
+								<li><b>domain sampling:</b> There exists a probabilistic polynomial-time algorithm \(S\) that on input \(\alpha\), uniformly selects an element of \(D_\alpha\).</li>
+								<li><b>function evaluation:</b> There exists a probabilistic polynomial-time algorithm \(F\) that on inputs \((\alpha,\beta)\in P\) and \(x\in D_\alpha\) returns \(f_{\alpha,\beta}(x)\).</li>
+								<li><b>function inversion:</b> There exists a polynomial-time algorithm \(I\) that on inputs \((\alpha,t(\beta))\) and \(y\in D_\alpha\), where \((\alpha,\beta)\in P\), returns \(f^{-1}_{\alpha,\beta}(y)\).</li>
+								<li><b>one-wayness:</b> For any probabilistic polynomial-time algorithm \(A\), the probability that on input \((\alpha,\beta)\in P\) and \(y=f_{\alpha,\beta}(x)\), algorithm \(A\) outputs \(x\) is negligible (in \(n\)), where the probability distribution is over the random choices of \(\alpha=G_1(1^n),\,\beta=G_2(\alpha),\,x=S(\alpha)\) and the coin tosses of algorithm \(A\).</li>
+							</ul>
+							<span class="rp_sub_header">Remarks</span>
+							<ul class="rp_original rp_sub">
+								<li>The standard definitions of trapdoor permutations can be derived from the above by replacing the two selection algorithms, \(G_1\) and \(G_2\), by a single algorithm \(G\) that on input \(1^n\) generates a pair \((\beta,t(\beta))\) so that \(\beta\) specifies a domain \(D_\beta\) as well as a permutation \(f_\beta\) over this domain (and \(t(\beta)\) is \(f_\beta\)'s trapdoor). Thus, the standard definition does not guarantee any structural resemblance among domains of different permutations. Furthermore, it does not allow to generate a new permutation with corresponding trapdoor for a given domain (or given permutation). Nevertheless some popular trapdoor permutations can be formulated in a way which essentially meets the requirements of a common-domain trapdoor system.</li>
+								<li>Common-domain trapdoor systems can be constructed based on an arbitrary family of trapdoor permutations, \(\{f_\beta\,:\;D_\beta\stackrel{1-1}{\mapsto}D_\beta\}\), with the extra property that the domain of any permutation, generated on input \(1^n\), has non-negligible inside \(\{0,1\}^n\) (i.e. \(|D_\beta|\geq\frac{1}{\operatorname{poly}(|\beta|)}\cdot2^{|\beta|}\)). We construct a common-domain family where the domain is \(\{0,1\}^n\) and the permutations are natural extensions of the given permutations. That is, we let \(G_1(1^n)=1^n,\,G_2(1^n)=G(1^n)\) and extends \(f_\beta\) into \(g_\beta\) so that \(g_\beta(x)=f_\beta(x)\) if \(x\in D_\beta\) and \(g_\beta(x)=x\) otherwise. This yields a collection of "common-domain" permutations, \(\{g_\beta\,:\;\{0,1\}^{|\beta|}\stackrel{1-1}{\mapsto}\{0,1\}^{|\beta|}\}\), which are weakly one-way. Employing amplification techniques (e.g. <span class="reference" data-citation="Y">[?]</span><span class="reference" data-citation="GILVZ">[?]</span>) we obtain a proper common-domain system.</li>
+							</ul>
+							<p class="rp_original">
+								In the sequel we refer to common-domain trapdoor systems in a less formal way. We say that two one-way permutations, \(f_a\) and \(f_b\), are a <b>pair</b> if they are both permutations over the same domain (i.e. \(a=(\alpha,\beta_1)\) and \(b=(\alpha,\beta_2)\), where the domain is \(D_\alpha\)). We associate the permutations with their descriptions (and the corresponding inverse permutations with their trapdoors). Finally, as stated above, we augment any common-domain trapdoor system with a hardcore predicate, denoted \(B\). (That is, \(B\) is a polynomial-time computable, but give (\(f_a\) and) \(f_a(x)\) it is infeasible to predict \(B(x)\) with non-negligible advantage over &frac12;.)
+							</p>
+							<span class="rp_sub_header">Outline of Our Scheme</span>
+							<p class="rp_original rp_sub">
+								The scheme consists of two stages. In this first stage, called the <b>key generation</b> stage, the parties arrive at a situation where the sender has two trapdoor permutations \(f_a,\,f_b\) of a common-domain system, the trapdoor of only <i>one</i> of which is known to the receiver. Furthermore, the simulator will be able to generate, in a simulated execution of the protocol, two trapdoor permutations with the same distribution as in a real execution and such that the trapdoors of both permutations are known. (The simulator will later open dummy ciphertexts as either '0' or '1' by claiming the decryption key held by the receiver is either \(f_a^{-1}\) or \(f_b^{-1}\). The correspondence between \(\{0,1\}\) and \(\{a,b\}\) will be chosen at random by the simulator and never revealed). The key generation stage is independent of the bit to be transmitted (and can be performed before this bit is even determined).
+							</p>
+							<p class="rp_original rp_sub">
+								Our most general implementation of this stage, based on any common-domain system, requires participation of all parties. It is described in <a href="#sec4.2.2">Section 4.2.2</a>. In the implementations based on the RSA and DH assumptions (see <a href="#sec4.3">Section 4.3</a>) the key-generation stage of only one message sent from the receiver to the sender.
+							</p>
+							<p class="rp_original rp_sub">
+								The second stage, in which the actual transmission takes place, consists of only one message sent from the sender to the receiver. This stage consists of <b>encryption</b> and <b>decryption</b> algorithms, invoked by the sender and the receiver respectively.
+							</p>
+							<p class="rp_original rp_sub">
+								We first present, in <a href="#sec4.2.1">Section 4.2.1</a>, the encryption and decryption algorithms as well as observations that will be instrumental for the simulation. In <a href="#sec4.2.2">Section 4.2.2</a> we present the key generation protocol. (A reader that is satisfied with a construction based on specific number theoretic assumptions may, for simplicity, skip Section 4.2.2 and read <a href="#sec4.3">Section 4.3</a> instead.) Finally we show that these together constitute the desired non-committing encryption protocol.
+							</p>
+							<section id="sec4.2.1">
+								<h4>4.2.1. Encryption and Decryption</h4>
+								<p class="rp_original">
+									Let \(f_a\) and \(f_b\) be two randomly selected permutations over the domain \(D\), and let \(B\) be a hardcore predicate associated with them. The scheme uses a security parameter, \(k\), which can be thought to equal \(log_2|D|\).
+								</p>
+							</section>
 						</section>
 					</section>
 				</div>
@@ -591,6 +633,9 @@
 					</li>
 					<li id="footnote10">
 						<a href="#fref10">[^]</a> A security proof of the <span class="reference" data-citation="BGW">[?]</span> construction can be extracted from <span class="reference" data-citation="C">[?]</span> (chapter 3), which deals with the more involved asynchronous model.
+					</li>
+					<li id="footnote11">
+						<a href="#fref11">[^]</a> Assume that each pair of parties share a sufficiently long secret random string, and each message is encrypted by bitwise XORing it with a new segment of the shared random string. Then <a href="#def3.10">Definition 3.10</a> is satisfied in a straightforward way. Specifically, the simulated message from the sender to the receiver (i.e. the dummy ciphertext), denoted \(c\), can be uniformly chosen in \(\{0,1\}\). When either the sender or the receiver are corrupted, and the simulator has to demonstrate that \(c\) is an encryption of a bit \(\sigma\), the simulator claims that the corresponding shared random bit was \(\tau=c\oplus\sigma\). Clearly \(\tau\) is uniformly distributed, regardless of the value of \(\sigma\).
 					</li>
                 </ol>
             </div>

@@ -35,7 +35,7 @@
 					case "Pprot":
 						return "<p>\\(P_{prot}^{(m)}\\) represents the probability distribution of a protocol conversation of \\(prot\\) with security parameter \\(m\\), taking as input the inputs to the protocol and the randomness used by all parties.</p>";
 					case "R_m^b":
-						return "<p>\\(R_m^b\\) is a finite set containing all elements \\(r\\) such that \\(BCS_m(b,r)\\) will be a valid commitment for \\(b\\).</p>";
+						return "<p>\\(R_m^b\\) is a finite set containing all elements \\(r\\) such that \\(\\operatorname{BCS}_(b,r)\\) will be a valid commitment for \\(b\\).</p>";
 					case "ra":
 						return "<p>\\(ra\\) represents a (fixed) string of random bits used by a protocol or circuit. The set of input wires in the circuit which correspond to these random bits is \\(R\\).</p>";
 					case "Sm":
@@ -205,17 +205,51 @@
 					</section>
 					<section id="protocol">
 						<h2>Protocols</h2>
-						<h3><a href="#secxx">Some Protocol Defined</a></h3>
+						<h3><a href="#sec6.1">The Encryption Phase</a></h3>
 						<ul class="rp_analysis">
-							<li><b>Number of parties: </b></li>
-							<li><b>Function(s): </b></li>
-							<li><b>Privacy constraints: </b></li>
-							<li><b>Security constraints: </b></li>
-							<li><b>Cheating: </b></li>
-							<li><b>Bits exchanged: </b></li>
-							<li><b>Subprotocols: </b></li>
-							<li><b>Runtime:</b></li>
-							<li><b>Assumptions:</b></li>
+							<li><b>Number of parties: </b> Any \(n\) parties</li>
+							<li><b>Function(s): </b> Takes in the description of a circuit \(C\) that the \(n\) parties wish to collectively determine. We define the circuit to have \(c\) gates with average \(t\) fan-in, and each party has an equal number of input bits (plus an also-equal set of random input bits). The parties collectively create a new, encrypted version of the circuit.</li>
+							<li><b>Privacy constraints: </b>No party learns the input bits of any other party.</li>
+							<li><b>Cheating: </b>No party can incorrectly create the circuit without being caught, except negligibly often.</li>
+							<li><b>Subprotocols: </b> Procedure <span class="main_language">Transform Circuit</span> is done once per party. Procedure <span class="main_language">Check Transform</span> is done \(m\) times per party, where \(m\) is the security parameter.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(cmn2^t(t+m+n))\), where \(m\) is the security parameter, \(n\) is the number of parties, \(c\) is the number of gates in the circuit, and \(t\) is the average fan-in of those gates.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(cm2^t(t+n^2))\), where \(m\) is the security parameter, \(n\) is the number of parties, \(c\) is the number of gates in the circuit, and \(t\) is the average fan-in of those gates.</li>
+							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not using Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
+						</ul>
+						
+						<h4><a href="#protocol1">Procedure <span class="main_language">Transform Circuit</span></a></h4>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b> Performed by 1 party at a time, with the result being sent to all \(n\) parties after completion.</li>
+							<li><b>Function(s): </b> Takes in the description of a circuit \(C\) that the \(n\) parties wish to collectively determine. We define the circuit to have \(c\) gates with average \(t\) fan-in, and each party has an equal number of input bits (plus an also-equal set of random input bits). The party performing the procedure encrypts the circuit in a special, composable way.</li>
+							<li><b>Privacy constraints: </b>No party learns the performing party's input bits or in what way the performing party changed the circuit.</li>
+							<li><b>Cheating: </b>Cheating is dealt with by procedure <span class="main_language">Check Transform</span>, which is done as part of the overall Encryption Phase (above).</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(c2^t(t+m))\), where \(m\) is the security parameter, \(c\) is the number of gates in the circuit, and \(t\) is the average fan-in of those gates.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(c2^t(\frac t n + i))\), where \(n\) is the number of parties, \(c\) is the number of gates in the circuit, \(t\) is the average fan-in of those gates, and \(i\) is which iteration of this protocol is being run (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
+							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not needing Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
+							<li><b>Notes: </b>We are operating under the simplifying assumption that each party has a \(\frac 1 n\) probability of using one of their input bits as any given input bit to a gate. We additionally assume that the bit commitments (and their openings) are each \(m\) bits.</li>
+						</ul>
+						
+						<h4><a href="#protocol1">Procedure <span class="main_language">Check Transform</span></a></h4>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b> Performed by 1 prover and \(n-1\) verifiers.</li>
+							<li><b>Function(s): </b> The prover proves to all the verifiers (in zero knowledge) that the prover performed the above <span class="main_language">Transform Circuit</span> protocol correctly.</li>
+							<li><b>Privacy constraints: </b>No party learns how the prover transformed the circuit originally.</li>
+							<li><b>Cheating: </b>After one run of this procedure, the verifiers know with probability &frac12; that the prover performed the above protocol correctly. After \(m\) runs, this probability is \(1-2^{-m}\).</li>
+							<li><b>Subprotocols: </b>A single (additional) run of the <span class="main_language">Transform Circuit</span> protocol is performed for each run of this proof.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(c2^t(t+m+i))\), where \(m\) is the security parameter, \(c\) is the number of gates in the circuit, \(t\) is the average fan-in of those gates, and \(i\) is which iteration of the <span class="main_language">Transform Circuit</span> protocol is being checked (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(c2^t(\frac t n + i))\), where \(n\) is the number of parties, \(c\) is the number of gates in the circuit, \(t\) is the average fan-in of those gates, and \(i\) is which iteration of the <span class="main_language">Transform Circuit</span> protocol is being checked (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
+							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not needing Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
+						</ul>
+						
+						<h3><a href="#protocol3">The Computation Phase (i.e. Procedure <span class="main_language">Construct Computation</span>)</a></h3>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b> Any \(n\) parties</li>
+							<li><b>Function(s): </b> Takes in the encrypted version of a circuit created by the Encryption Phase above. Output is identical to the output of the circuit input to the Encryption Phase.</li>
+							<li><b>Privacy constraints: </b>No party learns the input bits of any other party.</li>
+							<li><b>Cheating: </b>No party can alter the output of the circuit without claiming a commitment has a different value than intended.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(cmn)\), where \(m\) is the security parameter, \(n\) is the number of parties, and \(c\) is the number of gates in the circuit.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(cmn)\), where \(m\) is the security parameter, \(n\) is the number of parties, and \(c\) is the number of gates in the circuit.</li>
+							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not using Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
 						</ul>
 					</section>
 					<section id="further">
@@ -397,39 +431,39 @@
 							To use the commitment scheme, \(A\) will choose an instance, i.e. she will choose a value of \(m\), run \(\Omega\) and make \(m,\,f_m^{(0)}\) and \(f_m^{(1)}\) public.
 						</p>
 						<p class="rp_original">
-							To commit to a bit \(b,\,A\) chooses an element \(r\) uniformly in \(R_m^{(b)}\) and makes public $$BCS_{A,m}(b,r)=f_m^{(b)}(r).$$
+							To commit to a bit \(b,\,A\) chooses an element \(r\) uniformly in \(R_m^{(b)}\) and makes public $$\operatorname{BCS}_{A,m}(b,r)=f_m^{(b)}(r).$$
 						</p>
 						<p class="rp_original">
 							Below, we list the properties of bit commitment schemes that are of interest in our protocol:
 						</p>
 						<span class="rp_sub_header">Hiding the bit:</span>
 						<p class="rp_original rp_sub">
-							Let \(\Delta\) be any probabilistic polynomial time algorithm which takes as input a commitment \(BCS_{A,m}(b,r)\) and gives a one bit output \(\Delta(BCS_{A,m}(b,r))\). Then for all constants \(c\),$$\left|\operatorname{Pr}\Big(\Delta\left(BCS_{A,m}(b,r)\right)=b\Big)-\frac 1 2\right|\lt m^{-c}$$ for all sufficiently large \(m\). This holds for all but a fraction \(\epsilon(m)\) of the instances in \(I_m\), and as a function of \(m,\,\epsilon(m)\) <span class="definable" data-define="negligible">vanishes faster than any polynomial fraction</span>.
+							Let \(\Delta\) be any probabilistic polynomial time algorithm which takes as input a commitment \(\operatorname{BCS}_{A,m}(b,r)\) and gives a one bit output \(\Delta(\operatorname{BCS}_{A,m}(b,r))\). Then for all constants \(c\),$$\left|\operatorname{Pr}\Big(\Delta\left(\operatorname{BCS}_{A,m}(b,r)\right)=b\Big)-\frac 1 2\right|\lt m^{-c}$$ for all sufficiently large \(m\). This holds for all but a fraction \(\epsilon(m)\) of the instances in \(I_m\), and as a function of \(m,\,\epsilon(m)\) <span class="definable" data-define="negligible">vanishes faster than any polynomial fraction</span>.
 						</p>
 						<p class="rp_original rp_sub">
-							Thus, guessing from a commitment which bit it contains is a hard problem. Note that \(b\) must be uniquely determined from \(BCS_{A,m}(b,r)\) and \(r\), but not necessarily from \(BCS_{A,m}(b,r)\) alone. This also means that \(b\) may be impossible to find from a commitment to \(b\), even with infinite computing power.
+							Thus, guessing from a commitment which bit it contains is a hard problem. Note that \(b\) must be uniquely determined from \(\operatorname{BCS}_{A,m}(b,r)\) and \(r\), but not necessarily from \(\operatorname{BCS}_{A,m}(b,r)\) alone. This also means that \(b\) may be impossible to find from a commitment to \(b\), even with infinite computing power.
 						</p>
 						<span class="rp_sub_header">Unforgeability:</span>
 						<p class="rp_original rp_sub">
-							Let \(\Delta\) be a probabilistic polynomial time algorithm which takes as input a commitment \(BCS_{A,m}(b,r),\,b\) and \(r\), and gives as output an element \(r_\Delta\) in \(R_m^{(b\oplus 1)}\). Then, for any constant \(c\), $$\operatorname{Pr}\Big(BCS_{A,m}(b,r)=BCS_{A,m}(b\oplus 1,r_\Delta)\Big)\lt m^{-c}$$ for all sufficiently large \(m\). Again this holds for all but a fraction \(\epsilon(m)\) of the instances in \(I_m\), and as a function of \(m,\,\epsilon(m)\) vanishes faster than any polynomial fraction.
+							Let \(\Delta\) be a probabilistic polynomial time algorithm which takes as input a commitment \(\operatorname{BCS}_{A,m}(b,r),\,b\) and \(r\), and gives as output an element \(r_\Delta\) in \(R_m^{(b\oplus 1)}\). Then, for any constant \(c\), $$\operatorname{Pr}\Big(\operatorname{BCS}_{A,m}(b,r)=\operatorname{BCS}_{A,m}(b\oplus 1,r_\Delta)\Big)\lt m^{-c}$$ for all sufficiently large \(m\). Again this holds for all but a fraction \(\epsilon(m)\) of the instances in \(I_m\), and as a function of \(m,\,\epsilon(m)\) vanishes faster than any polynomial fraction.
 						</p>
 						<p class="rp_original rp_sub">
 							Thus it is not possible for a polynomially bounded \(A\) to lie about the contents of her commitments. But note that an \(r_\Delta\) satisfying the condition above may not exist at all, in which case it is impossible to lie, even with infinite computing power.
 						</p>
 						<span class="rp_sub_header">Opening a commitment:</span>
 						<p class="rp_original rp_sub">
-							Given \(BCS_{A,m}(b,r),\,A\) can convince anyone that, for a given value of \(n\), she knows an \(r\) which will produce the given commitment. Typically, she will just reveal \(r\).
+							Given \(\operatorname{BCS}_{A,m}(b,r),\,A\) can convince anyone that, for a given value of \(n\), she knows an \(r\) which will produce the given commitment. Typically, she will just reveal \(r\).
 						</p>
 						<span class="rp_sub_header">Comparability:</span>
 						<p class="rp_original rp_sub">
-							Given two commitments, \(BCS_{A,m}(b,r)\) and \(BCS_{A,m}(b',r')\), there exists a Minimum Knowledge Interactive Proof (MKIP) by which \(A\) can convince anyone about the value of \(b\oplus b'\).
+							Given two commitments, \(\operatorname{BCS}_{A,m}(b,r)\) and \(\operatorname{BCS}_{A,m}(b',r')\), there exists a Minimum Knowledge Interactive Proof (MKIP) by which \(A\) can convince anyone about the value of \(b\oplus b'\).
 						</p>
 						<span class="rp_sub_header">Blinding:</span>
 						<p class="rp_original rp_sub">
-							Given a commitment \(BCS_{A,m}(b,r)\), <i>another</i> participant, \(B\), can choose \(b'\in\{0,1\}\) and compute from this a blinded commitment \(BCS_{A,m}(b\oplus b',r')\), where \(r'\) is uniformly distributed in \(R_m^{(b\oplus b')}\). There exists a MKIP such that, given these two commitments, \(B\) can convince anyone about the value of \(b'\).
+							Given a commitment \(\operatorname{BCS}_{A,m}(b,r)\), <i>another</i> participant, \(B\), can choose \(b'\in\{0,1\}\) and compute from this a blinded commitment \(\operatorname{BCS}_{A,m}(b\oplus b',r')\), where \(r'\) is uniformly distributed in \(R_m^{(b\oplus b')}\). There exists a MKIP such that, given these two commitments, \(B\) can convince anyone about the value of \(b'\).
 						</p>
 						<p class="rp_original rp_sub">
-							Moreover, we require that given two commitments \(BCS_{A,m}(b\oplus b',r')\) and \(BCS_{A,m}(b\oplus b'',r'')\), which have been computed by \(B\) as above, there exists a MKIP by which B can convince anyone about the value of \((b\oplus b')\oplus(b\oplus b'')=b'\oplus b''\).
+							Moreover, we require that given two commitments \(\operatorname{BCS}_{A,m}(b\oplus b',r')\) and \(\operatorname{BCS}_{A,m}(b\oplus b'',r'')\), which have been computed by \(B\) as above, there exists a MKIP by which B can convince anyone about the value of \((b\oplus b')\oplus(b\oplus b'')=b'\oplus b''\).
 						</p>
 						<p class="rp_original rp_sub">
 							Finally, it must be possible for \(A\) to open commitments which have been blinded as above, just as if she had computed them herself.
@@ -446,19 +480,19 @@
 								In QRS, \(A\)(lice) uses the algorithm \(\Omega\) to select at random two \(m\)-bit primes, \(p\) and \(q\) with \(p\equiv q\equiv -1\pmod 4\). She then puts \(N=pq,\,\)<span class="equation" data-equation="R_m^b">\(R_m^{(0)}\)</span>\(=\)<span class="equation" data-equation="R_m^b">\(R_m^{(1)}\)</span>\(=\mathbb Z_N^*\) and <span class="equation" data-equation="Sm">\(S_m\)</span>\(=\Bigg\{x\in\mathbb Z_N^*\,\Bigg|\,\)<span class="equation" data-equation="JacobiSymbol">\(\left(\frac x N\right)\)</span>\(=1\Bigg\}\). She makes public \(N\) and uses for example the zero knowledge protocol from <span class="reference" data-citation="PG">[?]</span> to convince everyone that \(N\) is of the right form. In particular, this implies that -1 is a <span class="definable" data-define="quadratic residue">quadratic nonresidue</span> modulo \(N\) of <span class="definable">Jacobi symbol</span> 1. If we define $$f_m^{(b)}(r)=(-1)^br^2\bmod N$$ it is easy to see that a commitment will contain a 1 if and only if the commitment is a quadratic nonresidue modulo \(N\).
 							</p>
 							<p class="rp_annotation">
-								In particular, \(N\) is a <span class="definable">Blum integer</span> and therefore has the property that .
+								In particular, \(N\) is a <span class="definable">Blum integer</span> and therefore has the mentioned property that -1 is a nonresidue but must have a Jacobi symbol of 1.
 							</p>
 							<p class="rp_original">
 								The "hiding" condition above now translates into the well known <i>quadratic residuosity assumption</i>: it is hard, even probabilistically, to distinguish quadratic residues from quadratic nonresidues modulo \(N\) (a formal statement can be found in <span class="reference" data-citation="GM">[?]</span>). Moreover, even with infinite computing power, clearly \(A\) cannot lie about the contents of a commitment.
 							</p>
 							<p class="rp_original">
-								The opening and comparability properties are easily verified for QRS: \(A\) simply makes public a square root modulo \(N\) of $$(-1)^bBCS_{A,m}(b,r)\quad \left(\text{resp.}\quad(-1)^{b\oplus b'}BCS_{A,m}(b,r)BCS_{A,m}(b',r')^{-1}\right).$$ These proofs will be MKIPs because the commitments were chosen by \(A\) herself at random.
+								The opening and comparability properties are easily verified for QRS: \(A\) simply makes public a square root modulo \(N\) of $$(-1)^b\operatorname{BCS}_{A,m}(b,r)\quad \left(\text{resp.}\quad(-1)^{b\oplus b'}\operatorname{BCS}_{A,m}(b,r)\operatorname{BCS}_{A,m}(b',r')^{-1}\right).$$ These proofs will be MKIPs because the commitments were chosen by \(A\) herself at random.
 							</p>
 							<p class="rp_original">
-								Blinding is also a simple process: having chosen \(b',\,B\)(ob) computes the new commitment as $$(-1)^{b'}s^2BCS_{A,m}(b,r)=BCS_{A,m}(b\oplus b',rs),$$ where \(s\) is randomly chosen from \(Z_n^*.\,B\) can show the value of \(b'\) by showing a square root of $$(-1)^{b'}BCS_{A,m}(b\oplus b',rs)(BCS_{A,m}(b,r))^{-1},$$ which equals \(s.\,s\) is called <i>the blinding factor</i>.
+								Blinding is also a simple process: having chosen \(b',\,B\)(ob) computes the new commitment as $$(-1)^{b'}s^2\operatorname{BCS}_{A,m}(b,r)=\operatorname{BCS}_{A,m}(b\oplus b',rs),$$ where \(s\) is randomly chosen from \(Z_n^*.\,B\) can show the value of \(b'\) by showing a square root of $$(-1)^{b'}\operatorname{BCS}_{A,m}(b\oplus b',rs)(\operatorname{BCS}_{A,m}(b,r))^{-1},$$ which equals \(s.\,s\) is called <i>the blinding factor</i>.
 							</p>
 							<p class="rp_original">
-								Also, given two blinded commitments as above, \(B\) can show a square root of $$(-1)^{b'\oplus b''}BCS_{A,m}(b\oplus b',r')(BCS_{A,m}(b\oplus b'',r''))^{-1}$$ to convince everyone about the value of \(b'\oplus b''\).
+								Also, given two blinded commitments as above, \(B\) can show a square root of $$(-1)^{b'\oplus b''}\operatorname{BCS}_{A,m}(b\oplus b',r')(\operatorname{BCS}_{A,m}(b\oplus b'',r''))^{-1}$$ to convince everyone about the value of \(b'\oplus b''\).
 							</p>
 							<p class="rp_original">
 								Clearly, \(A\) can open any commitment by using her knowledge of the factors of \(N\) to compute square roots. But it is important to note that it will only be safe for her to do so if she is convinced that she will always be opening blinded forms of commitments chosen by <i>herself</i>. This will be ensured by the construction of our main protocol.
@@ -470,10 +504,10 @@
 								In the JSS (first introduced by Blum<sup class="reference" data-citation="Bl">[?]</sup>), some participant \(B\) chooses a modulus \(N\) of the same form as above, such that the factorization is unknown to \(A\), and convinces her as above that \(N\) was correctly chosen. We then put $$\begin{align}R_m^{(0)}\;&=\;\left\{x\in\mathbb Z_N^*\,\middle|\,\left(\frac x N\right)=1\right\},\\ R_m^{(1)}\;&=\;\left\{x\in\mathbb Z_N^*\,\middle|\,\left(\frac x N\right)=-1\right\},\end{align}\\ \text{and}\quad S_m\;=\;QR(N),$$ where \(QR(N)\) denotes the set of <span class="definable" data-define="quadratic residue">quadratic residues</span> modulo \(N\). Finally, we set $$f_m^{(b)}(r)\;=\;r^2\bmod N,$$ where \(r\in R_m^{(b)}\).
 							</p>
 							<p class="rp_original">
-								This scheme hides the bits unconditionally: since each square modulo \(N\) has two square roots of Jacobi symbol +1 and two of Jacobi symbol -1, release by \(A\) of \(BCS_{A,m}(b,r)\) gives away no Shannon information about \(b\). On the other hand, the unforgeability property only holds conditionally here: if \(A\) could factor \(N\), she could lie about the value of \(b\).
+								This scheme hides the bits unconditionally: since each square modulo \(N\) has two square roots of Jacobi symbol +1 and two of Jacobi symbol -1, release by \(A\) of \(\operatorname{BCS}_{A,m}(b,r)\) gives away no Shannon information about \(b\). On the other hand, the unforgeability property only holds conditionally here: if \(A\) could factor \(N\), she could lie about the value of \(b\).
 							</p>
 							<p class="rp_original">
-								JSS also satisfies the comparability property: Given two commitments \(s_1\,=\,BCS_{A,m}(b,r)\) and \(s_2\,=\,BCS_{A,m}(b',r'),\,A\) can make public a square root of \(s_1(s_2)^{-1}\) of Jacobi symbol \((-1)^{b\oplus b'}\) to convince everybody about the value of \(b\oplus b'\). Note that this is still information theoretically secure: after having seen a proof that \(b\oplus b'\,=\,1\), say, the two possibilities \((b,b')\,=\,(1,0)\) and \((b,b')\,=\,(0,1)\) remain equally likely, even to someone who knows the factorization of \(N\).
+								JSS also satisfies the comparability property: Given two commitments \(s_1\,=\,\operatorname{BCS}_{A,m}(b,r)\) and \(s_2\,=\,\operatorname{BCS}_{A,m}(b',r'),\,A\) can make public a square root of \(s_1(s_2)^{-1}\) of Jacobi symbol \((-1)^{b\oplus b'}\) to convince everybody about the value of \(b\oplus b'\). Note that this is still information theoretically secure: after having seen a proof that \(b\oplus b'\,=\,1\), say, the two possibilities \((b,b')\,=\,(1,0)\) and \((b,b')\,=\,(0,1)\) remain equally likely, even to someone who knows the factorization of \(N\).
 							</p>
 							<p class="rp_original">
 								Note that if \(A\) is going to commit to bits using JSS in a multiparty protocol, every participant except \(A\) must supply a different modulus, and when committing to a bit, \(A\) must make public a set of commitments to this bit, one for each modulus supplied. This is to prevent the possibility that \(A\) breaks the unforgeability property by conspiring with somebody who knows the factorizations. This of course means that the other participants must be convinced that the same bit is contained in all commitments in a given set. Fortunately, the construction of our main protocol is such that this automatically ensured whenever JSS is used.
@@ -488,10 +522,10 @@
 								This scheme also hides the bits unconditionally, since the bit contained in a commitment is not uniquely determined, if the random choice made by \(A\) is unknown. Note that if \(p\) is determined such that the factorization of \(p-1\) is known, \(A\) can easily check for herself that \(p\) is a prime and that \(g\) is a generator.
 							</p>
 							<p class="rp_original">
-								To open a commitment, \(A\) must show the discrete log base \(g\) of $$a^{-b}BCS_{A,m}(b,r),$$ namely \(r\). It is also easy to see that the unforgeability property holds, assuming that \(A\) cannot find the discrete log of \(a\).
+								To open a commitment, \(A\) must show the discrete log base \(g\) of $$a^{-b}\operatorname{BCS}_{A,m}(b,r),$$ namely \(r\). It is also easy to see that the unforgeability property holds, assuming that \(A\) cannot find the discrete log of \(a\).
 							</p>
 							<p class="rp_original">
-								Given two commitments \(BCS_{A,m}(b,r)\) and \(BCS_{A,m}(b',r'),\,A\) can prove that \(b\oplus b'=0\) by showing the discrete log of $$BCS_{A,m}(b,r)(BCS_{A,m}(b',r'))^{-1}$$ and to show that \(b\oplus b'=1\), she shows the discrete log of $$a^{-1}BCS_{A,m}(b,r)BCS_{A,m}(b',r').$$ Once again, it is easy to see that \(A\) cannot make a false claim about \(b\oplus b'\) unless she can find the discrete log of \(a\).
+								Given two commitments \(\operatorname{BCS}_{A,m}(b,r)\) and \(\operatorname{BCS}_{A,m}(b',r'),\,A\) can prove that \(b\oplus b'=0\) by showing the discrete log of $$\operatorname{BCS}_{A,m}(b,r)(\operatorname{BCS}_{A,m}(b',r'))^{-1}$$ and to show that \(b\oplus b'=1\), she shows the discrete log of $$a^{-1}\operatorname{BCS}_{A,m}(b,r)\operatorname{BCS}_{A,m}(b',r').$$ Once again, it is easy to see that \(A\) cannot make a false claim about \(b\oplus b'\) unless she can find the discrete log of \(a\).
 							</p>
 							<p class="rp_original">
 								An additional advantage of DLS compared to JSS is that it is not necessary in a multiparty application that all participants different from \(A\) choose their own instances, and that \(A\) then must commit to a bit "in parallel" using all the published instances. Since there is no trapdoor present in DLS, all participants can collaborate in choosing \(p,\,g\) and \(a\) using some multiparty coinflipping protocol.
@@ -505,6 +539,9 @@
 						</p>
 						<p class="rp_original">
 							Each machine has private input, output, and random tapes, and one communication tape. The contents of the input tape of \(P_i\) is called <span class="equation" data-equation="ip">\(ip_i\)</span>, the contents of the output tape after execution of the protocol is called <span class="equation" data-equation="op">\(op_i\)</span>. All machines are <span class="definable" data-define="synchronous network">clocked by a common clock</span>, and the protocol proceeds in rounds. In each round, exactly one machine can do some computation and perhaps write a message on the other machines' communication tapes. By definition, all messages sent in the protocol are written simultaneously on all communication tapes. If a machine receives a message which does not obey the constraints specified in the protocol, it stops immediately, and we say that <i>cheating has been detected</i>.
+						</p>
+						<p class="rp_annotation">
+							The above implicitly defines a <span class="definable">broadcast channel</span>: that is, all communication tapes are written to with identical messages simultaneously, which is equivalent to every machine being able to write to a single channel that all parties can read. This is not terribly important in terms of the results of the paper, it simply makes exposition simpler.
 						</p>
 						<p class="rp_original">
 							We assume the existence of a mutually trusted source of random bits. Such a source could easily be implemented using e.g. Blum's coin flipping problem<sup class="reference" data-citation="Bl">[?]</sup>. But since the construction of such a subprotocol is independent of our main protocol, we have chosen to abstract away the fact that a subprotocol is used.
@@ -648,13 +685,13 @@
 							The first step in the protocol is that each participant chooses an instance of a bit commitment scheme and uses the protocols mentioned in <a href="#sec2">Section 2</a> to convince all other participants that the choice was made correctly. We assume for simplicity that all participants use the same value of \(m\) as security parameter but, in principle, different participants could choose different levels of security.
 						</p>
 						<p class="rp_original">
-							The commitment scheme chosen by participant \(P_i\) is called \(BCS_i\).
+							The commitment scheme chosen by participant \(P_i\) is called \(\operatorname{BCS}_i\).
 						</p>
 						<p class="rp_original">
-							All commitment schemes \(BCS_i\) with \(i\lt n\) must satisfy all properties defined in <a href="#sec2">Section 2</a>, so they can be instances of QRS, but not of JSS or DLS. \(\cancel{c_n}\;BCS_n\) must satisfy all the properties from <a href="#sec2">Section 2</a>, except the blinding property, so it could be an instance of JSS or DLS.
+							All commitment schemes \(\operatorname{BCS}_i\) with \(i\lt n\) must satisfy all properties defined in <a href="#sec2">Section 2</a>, so they can be instances of QRS, but not of JSS or DLS. \(\cancel{c_n}\;\operatorname{BCS}_n\) must satisfy all the properties from <a href="#sec2">Section 2</a>, except the blinding property, so it could be an instance of JSS or DLS.
 						</p>
 						<p class="rp_annotation">
-							Notice that above we corrected the (undefined) value \(c_n\) with \(BCS_n\), based on context.
+							Notice that above we corrected the (undefined) value \(c_n\) with \(\operatorname{BCS}_n\), based on context.
 						</p>
 						<p class="rp_original">
 							The main part of the protocol proceeds in two phases: 1) The Encryption Phase and 2) The Computation Phase. Each is described formally in separate subsections below.
@@ -674,16 +711,16 @@
 									<li>Suppose the corresponding gate in \(C\) has \(t\) input wires, so that \(S\) has \(2^t\) rows and \(t+1\) columns. Choose a permutation \(\sigma\) of \(\{1,\dots,2^t\}\) at random and apply \(\sigma\) to the rows of \(S\) with attached lists. Call the result \(T\).</li>
 									<li>For \(l=1\cdots 2^t\), and each \(j\lt i\), do:
 									<p class="rp_original">
-										choose a bit \(s_{ij}(l,T)\in\{0,1\}\) at random and XOR the last entry in the \(l\)-th row of \(T\) with \(s_{ij}(l,T)\). Find the commitment $$BCS_j(b_j(l,T),r_j(l,T))\in rlist(l,T),$$ and use the blinding property of \(BCS_j\) to replace this commitment with $$ BCS_j(b_j(l,T)\oplus s_{ij}(l,T), r'_j(l,T))\in rlist(l,T).$$
+										choose a bit \(s_{ij}(l,T)\in\{0,1\}\) at random and XOR the last entry in the \(l\)-th row of \(T\) with \(s_{ij}(l,T)\). Find the commitment $$\operatorname{BCS}_j(b_j(l,T),r_j(l,T))\in rlist(l,T),$$ and use the blinding property of \(\operatorname{BCS}_j\) to replace this commitment with $$ \operatorname{BCS}_j(b_j(l,T)\oplus s_{ij}(l,T), r'_j(l,T))\in rlist(l,T).$$
 									</p></li>
 									<li>For \(k=1\cdots t+1\) do:
 									<p class="rp_original">
 										if the \(k\)-th column in \(T\) does not correspond to any input wire in \(I_i\), then do nothing.
 									</p><p class="rp_original">
-										Otherwise, choose a bit \(b_i(k,T)\in\{0,1\}\) in the following way: If column \(k\) in \(T\) is connected to another column in another transform for which a bit \(b\) has already been chosen, then put \(b_i(k,T)=b\). Otherwise, choose \(b_i(k,T)\) at random. Now XOR all entries in the \(k\)-th column of \(T\) with \(b_i(k,T)\), and append to \(clist(k,T)\) a commitment $$BCS_i(b_i(k,T),r_i(k,T)).$$
+										Otherwise, choose a bit \(b_i(k,T)\in\{0,1\}\) in the following way: If column \(k\) in \(T\) is connected to another column in another transform for which a bit \(b\) has already been chosen, then put \(b_i(k,T)=b\). Otherwise, choose \(b_i(k,T)\) at random. Now XOR all entries in the \(k\)-th column of \(T\) with \(b_i(k,T)\), and append to \(clist(k,T)\) a commitment $$\operatorname{BCS}_i(b_i(k,T),r_i(k,T)).$$
 									</p></li>
 									<li>For \(l=1\cdots 2^t\) do:<p class="rp_original">
-										Choose a bit \(b_i(l,T)\in\{0,1\}\) at random, XOR the last entry in the \(l\)-th row of \(T\) with \(b_i(l,T)\), and append to \(rlist(l,T)\) a commitment $$BCS_i(b_i(l,T),r_i(l,T)).$$
+										Choose a bit \(b_i(l,T)\in\{0,1\}\) at random, XOR the last entry in the \(l\)-th row of \(T\) with \(b_i(l,T)\), and append to \(rlist(l,T)\) a commitment $$\operatorname{BCS}_i(b_i(l,T),r_i(l,T)).$$
 									</p></li>
 								</ol>
 								<p class="rp_original">
@@ -710,7 +747,7 @@
 									</p><p class="rp_original">
 										\(P_i\) makes public the permutation \(\pi=\sigma(\sigma')^{-1}\), where \(\sigma\) (resp. \(\sigma'\)) is the permutation used in creating \(T\) (resp. \(T'\)).
 									</p><p class="rp_original">
-										For \(k=1\cdots t+1:\) if \(P_i\) appended commitments to \(clist(k,T)\) and \(clist(k,T'),\,P_i\) uses comparability of \(BCS_i\) to show from those commitments the value of $$b_i(k,T)\oplus b_i(k,T').$$
+										For \(k=1\cdots t+1:\) if \(P_i\) appended commitments to \(clist(k,T)\) and \(clist(k,T'),\,P_i\) uses comparability of \(\operatorname{BCS}_i\) to show from those commitments the value of $$b_i(k,T)\oplus b_i(k,T').$$
 									</p><p class="rp_original">
 										For \(l=1\cdots 2^t,\,P_i\) uses comparability of commitments in \(rlist(l,T)\) and \(rlist(\pi(l),T')\) to show the value of $$s_{ij}(l,T)\oplus s_{ij}(\pi(l),T').$$
 									</p><p class="rp_original">

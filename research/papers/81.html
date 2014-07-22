@@ -210,8 +210,8 @@
 							<li><b>Function(s): </b>Alice does not calculate anything; Bob receives his choice of one bit from Alice</li>
 							<li><b>Privacy constraints: </b>Alice does not learn which bit Bob received. Bob does not learn the other bit that Alice has.</li>
 							<li><b>Cheating: </b>Bob is able to determine both bits if he does not follow the protocol. Alice cannot cheat.</li>
-							<li><b>Bits exchanged: </b>\(O(k)\) where \(k\) is the security parameter of their trapdoor permutation.</li>
-							<li><b>Runtime: </b>\(O\left(T(k)\right)=O(poly(k))\) for T(k) being the highest runtime between the trapdoor permutation, its decryption, or the calculation of its <span class="definable">hardcore bit</span> (all of which are polynomial).</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(k)\) where \(k\) is the security parameter of their trapdoor permutation.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}\left(T(k)\right)=O(poly(k))\) for T(k) being the highest runtime between the trapdoor permutation, its decryption, or the calculation of its <span class="definable">hardcore bit</span> (all of which are polynomial).</li>
 							<li><b>Assumptions: </b>The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span>.</li>
 							<li><b>Implementations: </b>We have our own version in Java <a href="../../nextsteps/codeViewer.html#code/src/nschank/crypto/ot/oneoftwo_gmw87/ObliviousBitTransfer.java">here</a>.</li>
 						</ul>
@@ -222,7 +222,7 @@
 							<li><b>Privacy constraints: </b>Alice does not learn anything besides \(g(a,b)\); Bob does not learn \(a\), \(g(a,b)\).</li>
 							<li><b>Cheating: </b>If Bob does not follow the protocol, he can change the outcome of the protocol, but not to his advantage. If Alice does not follow the protocol, she can learn Bob's input and alter the outcome of the protocol but not necessarily to her advantage.</li>
 							<li><b>Subprotocols: </b> One-Out-of-Two Oblivious Transfer, above</li>
-							<li><b>Bits exchanged: </b>\(O(kn)\), where \(k\) is the security parameter, and \(n\) is the number of NAND, AND, or NOT gates required to describe \(g\).</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(kn)\), where \(k\) is the security parameter, and \(n\) is the number of NAND, AND, or NOT gates required to describe \(g\).</li>
 							<li><b>Runtime: </b><span class="equation" data-equation="COTR">\(O\left(n\cdot T(k)\right)\)</span>\(=O(n\cdot poly(k))\), where \(k\) is the security parameter, \(n\) is the number of gates used to describe \(g\), and \(T(k)\) is the runtime of the encryption algorithm used (both within the one-out-of-two OT protocol, and for the encryptions used for gate input and output).</li>
 							<li><b>Assumptions: </b>The existence of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span>.</li>
 						</ul>
@@ -247,7 +247,7 @@
 							<li><b>Privacy constraints: </b>Passive adversaries can learn nothing. Up to \(\frac n 2\) malicious adversaries can learn nothing.</li>
 							<li><b>Cheating: </b>Malicious adversaries have a negligible advantage (\(O(2^{-m})\), for some confidence factor \(m\)), of altering the outcome of the protocol successfully.</li>
 							<li><b>Subprotocols: </b>A verifiable secret sharing scheme; a verifiable multiparty coin flipping protocol; a zero-knowledge proof system; 5-permutation computation; combined oblivious transfer; one-out-of-two oblivious transfer.</li>
-							<li><b>Bits exchanged: </b>\(O\left(kln^2+n\cdot S(k)+mk^2n^2\cdot C(f,l)\right)\). We assume:
+							<li><b>Bits exchanged: </b>\(\operatorname{O}\left(kln^2+n\cdot S(k)+mk^2n^2\cdot C(f,l)\right)\). We assume:
 								<ul>
 									<li>\(k\) is the security parameter, \(n\) is the number of parties, \(l\) is the bit-length of their inputs.</li>
 									<li>The encryption protocol requires the exchange of \(O(k)\) bits.</li>
@@ -257,7 +257,7 @@
 									<li>We are computing a function with a straight-line program of size \(C(f,l)\).</li>
 								</ul>
 							</li>
-							<li><b>Runtime: </b>\(O\left(T_{VSS}(k,n,l)+T_R(k,n,l)+mn^2\cdot C(f,l)\cdot T_E(k)\cdot T_{ZKP}(k)\right)=O(poly(n,mk,C(f,l)))\). We assume:
+							<li><b>Runtime: </b>\(\operatorname{O}\left(T_{VSS}(k,n,l)+T_R(k,n,l)+mn^2\cdot C(f,l)\cdot T_E(k)\cdot T_{ZKP}(k)\right)=O(poly(n,mk,C(f,l)))\). We assume:
 								<ul>
 									<li>\(k\) is the security parameter, \(n\) is the number of parties, \(l\) is the bit-length of their inputs.</li>
 									<li>We are using an encryption protocol which runs in time \(O(T_E(k))\).</li>

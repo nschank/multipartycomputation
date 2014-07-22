@@ -123,15 +123,15 @@
 							<li><b>Privacy constraints: </b>No coalition of fewer than \(\lfloor n/3 \rfloor\) parties can determine \(f(0)\) before the committing party opens the commitment.</li>
 							<li><b>Cheating: </b>The committing party cannot succeed in creating a blob which can be opened in multiple ways except by predicting at least \(2m/3\) coin tosses for some security parameter \(m\). Conversely, no malicious coalition (working against the commitment) can possibly prevent it from being created correctly; however, they <i>can</i> prevent it from being opened correctly (see the next protocol).</li>
 							<li><b>Subprotocols: </b>For security, this protocol uses a cut-and-choose proof as below for up to \(mn/3\) rounds.</li>
-							<li><b>Bits exchanged: </b>\(O(mn^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
-							<li><b>Runtime: </b>\(O(mn^2\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(mn^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(mn^2\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
 							<li><b>Assumptions: </b>Identical to paper's assumptions.</li>
 							<li><b>Notes: </b>Byzantine agreement was not taken into account for the above runtime/bit-exchange calculations.</li>
 						</ul>
 						<span class="rp_sub_header"><a href="#sec3">Subprotocol: Cut-and-Choose for Single Blob</a></span>
 						<ul class="rp_analysis rp_sub">
-							<li><b>Bits exchanged: </b>\(O(n^2\log n)\) where \(n\) is the number of parties</li>
-							<li><b>Runtime: </b>\(O(n\log n)\) where \(n\) is the number of parties.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(n^2\log n)\) where \(n\) is the number of parties</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(n\log n)\) where \(n\) is the number of parties.</li>
 						</ul>
 						
 						<h3><a href="#sec4">Double Blob Commitment Scheme</a></h3>
@@ -141,15 +141,15 @@
 							<li><b>Privacy constraints: </b>No coalition of fewer than \(\lfloor n/3 \rfloor\) parties can determine \(f(0)\) before the committing party opens the commitment.</li>
 							<li><b>Cheating: </b>The committing party cannot succeed in creating a blob which can be opened in multiple ways except by predicting at least \(2m/3\) coin tosses for some security parameter \(m\). No other party can succeed in doing the same thing with their own share of the committing party's blob with the same probability. No malicious coalition (working against the commitment) can possibly prevent it from being created correctly.</li>
 							<li><b>Subprotocols: </b>This protocol uses the above single blobs, complete with cut-and-chooses. Additionally, another \(m\) cut-and-choose procedures are used on this double blob as a whole (see below).</li>
-							<li><b>Bits exchanged: </b>\(O(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
-							<li><b>Runtime: </b>\(O(m^2n^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(m^2n^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
 							<li><b>Assumptions: </b>Identical to paper's assumptions.</li>
 							<li><b>Notes: </b>Byzantine agreement was not taken into account for the above runtime/bit-exchange calculations.</li>
 						</ul>
 						<span class="rp_sub_header"><a href="#sec4">Subprotocol: Cut-and-Choose for Double Blob</a></span>
 						<ul class="rp_analysis rp_sub">
-							<li><b>Bits exchanged: </b>\(O(mn^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
-							<li><b>Runtime: </b>\(O(mn^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(mn^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(mn^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
 						</ul>
 						
 						<h3><a href="#sec5">Robust Double Blob Commitment Scheme</a></h3>
@@ -159,8 +159,8 @@
 							<li><b>Privacy constraints: </b>No coalition of fewer than \(\lfloor n/3 \rfloor\) parties can determine \(f(0)\) before the committing party opens the commitment.</li>
 							<li><b>Cheating: </b>The committing party cannot succeed in creating a blob which can be opened in multiple ways except by predicting at least \(2m/3\) coin tosses for some security parameter \(m\). No other party can succeed in doing the same thing with their own share of the committing party's blob with the same probability. No malicious coalition (working against the commitment) can possibly prevent it from being created correctly. No malicious coalition can prevent the blob from being opened correctly without cheating in the double blob protocol.</li>
 							<li><b>Subprotocols: </b>This protocol uses the above double blobs and single blobs, complete with cut-and-chooses. Additionally, another cut-and-choose proof is used on this robust double blob as a whole (see below).</li>
-							<li><b>Bits exchanged: </b>\(O(m^3n^5\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
-							<li><b>Runtime: </b>\(O(m^3n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(m^3n^5\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(m^3n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
 							<li><b>Assumptions: </b>Identical to paper's assumptions.</li>
 							<li><b>Notes: </b>Byzantine agreement was not taken into account for the above runtime/bit-exchange calculations.</li>
 						</ul>
@@ -169,8 +169,8 @@
 							Note that this protocol was defined here, not in the original paper.
 						</p>
 						<ul class="rp_analysis rp_sub">
-							<li><b>Bits exchanged: </b>\(O(m^2n^5\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
-							<li><b>Runtime: </b>\(O(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(m^2n^5\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter on the cut-and-choose protocol.</li>
 						</ul>
 						
 						<h3><a href="#sec5">Computing the AND of Two (Robust) Double Blobs</a></h3>
@@ -180,8 +180,8 @@
 							<li><b>Privacy constraints: </b>No coalition of fewer than \(\lfloor n/3 \rfloor\) parties can determine \(f(0)\) of the new blob before the committing party opens the commitment.</li>
 							<li><b>Cheating: </b>Parties cannot hold shares of anything other than the product of the original two shares without predicting at least \(2m/3\) coin flips.</li>
 							<li><b>Subprotocols: </b>This protocol uses robust double blobs, and a complex cut-and-choose (as below). Every participant must perform both cut-and-chooses \(m\) times.</li>
-							<li><b>Bits exchanged: </b>\(O(mn^3\log n(S(m,n)+m^2n^2))\) where \(n\) is the number of parties, \(m\) is the security parameter on the cut-and-choose protocol, and \(S(m,n)\) is the number of bits needed for one party to commit to a single bit.</li>
-							<li><b>Runtime: </b>\(O(mn^3\log n(T(m,n)+m^2n))\) where \(n\) is the number of parties, \(m\) is the security parameter on the cut-and-choose protocol, and \(T(m,n)\) is the runtime of the commitment scheme used.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(mn^3\log n(S(m,n)+m^2n^2))\) where \(n\) is the number of parties, \(m\) is the security parameter on the cut-and-choose protocol, and \(S(m,n)\) is the number of bits needed for one party to commit to a single bit.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(mn^3\log n(T(m,n)+m^2n))\) where \(n\) is the number of parties, \(m\) is the security parameter on the cut-and-choose protocol, and \(T(m,n)\) is the runtime of the commitment scheme used.</li>
 							<li><b>Assumptions: </b>Identical to paper's assumptions.</li>
 							<li><b>Notes: </b>Byzantine agreement was, at best, included only in the commitment scheme's runtime and bit count.</li>
 						</ul>
@@ -190,16 +190,16 @@
 							We assume the existence of some commitment scheme which exchanges \(S(m,n)\) bits to commit to (and later open) one bit, and runs in \(T(m,n)\) time for one bit.
 						</p>
 						<ul class="rp_analysis rp_sub">
-							<li><b>Bits exchanged: </b>\(O(n^2\log n\cdot S(m,n))\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
-							<li><b>Runtime: </b>\(O(n^2\log n\cdot T(m,n))\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(n^2\log n\cdot S(m,n))\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(n^2\log n\cdot T(m,n))\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
 						</ul>
 						<span class="rp_sub_header"><a href="#sec5">Subprotocol: Cut-and-Choose for Proving Correctness of Constructed Blob Pair</a></span>
 						<p class="rp_analysis rp_sub">
 							For more information on what the constructed blobs actually are, read the section linked.
 						</p>
 						<ul class="rp_analysis rp_sub">
-							<li><b>Bits exchanged: </b>\(O(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
-							<li><b>Runtime: </b>\(O(m^2n^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
+							<li><b>Bits exchanged: </b>\(\operatorname{O}(m^2n^4\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
+							<li><b>Runtime: </b>\(\operatorname{O}(m^2n^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
 						</ul>
 					</section>
 					<section id="further">
