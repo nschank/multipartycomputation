@@ -18,6 +18,8 @@ function fillTOC()
 		toc.innerHTML = "<h4 style=\"color:#333333\">Table of Contents</h4>";
 		toc.appendChild(ol.cloneNode(true));
 	}
+	
+	addNav(table);
 }
 
 function buildTable()
@@ -33,7 +35,7 @@ function buildTable()
 			continue;
 		var children = subs(sectionName.parentNode);
 		
-		table.push({name:sectionName.innerHTML, id:section.getAttribute('id'), children:children});
+		table.push({name:sectionName.innerHTML, id:section.getAttribute('id'), children:children, nameElement:sectionName});
 	}
 	return table;
 }
@@ -66,7 +68,7 @@ function subs(container)
 		if(!sectionId) continue;
 		var sectionChildren = subs(children.item(i));
 		
-		table.push({name:sectionName.innerHTML, id:sectionId, children:sectionChildren});
+		table.push({name:sectionName.innerHTML, id:sectionId, children:sectionChildren, nameElement:sectionName});
 	}
 	
 	return table;
@@ -91,4 +93,37 @@ function buildNode(table, list)
 		list.appendChild(li);
 	}
 	return list;
+}
+
+function addNav(table)
+{
+	var cursor = {last:undefined, current:undefined};
+	addNavHelper(cursor, table, 0);
+	addNavDiv(cursor.current, cursor.last, undefined);
+}
+
+function addNavHelper(cursor, objectArray, index)
+{
+	if(!objectArray || objectArray.length <= index)
+		return;
+	if(cursor.current)
+		addNavDiv(cursor.current, cursor.last, objectArray[index]);
+	cursor.last = cursor.current;
+	cursor.current = objectArray[index];
+	addNavHelper(cursor, cursor.current.children, 0);
+	addNavHelper(cursor, objectArray, index+1);
+}
+
+function addNavDiv(current, last, next)
+{
+	if(!current) return;
+	var div = document.createElement("div");
+	div.className = "rp_linkbox";
+	var html = "<a href=\"#" + current.id + "\" title=\"Link to this section\">&#8592;</a>";
+	if(last)
+		html += "&nbsp;&nbsp;<a href=\"#" + last.id + "\" title=\"Previous section\">&#8593;</a>";
+	if(next)
+		html += "&nbsp;<a href=\"#" + next.id + "\" title=\"Next section\">&#8595;</a>";
+	div.innerHTML = html;
+	current.nameElement.parentNode.insertBefore(div, current.nameElement);
 }
