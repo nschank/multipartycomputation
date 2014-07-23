@@ -20,6 +20,7 @@ step by step. During the run, Participants tell their History of any calculation
 they learn, and Historys can be easily printed either separately or together as one Protocol's entire history.
 
 ##Protocols
+
 ###Multi-Party Computation
 - Two-Party comparison between two values from 1 to 127 (i.e. i < j, i > j)
 - The "fourth-grade" protocol: determines from any number of participants who has a requited "crush"
