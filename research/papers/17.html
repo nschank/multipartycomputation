@@ -134,11 +134,11 @@
 						<p class="rp_original rp_theorem">
 							There are functions for which there are no \(\frac n 2\)-<span class="definable" data-define="t-private">private</span> protocols.
 						</p>
-						<span class="rp_theorem_header">Theorem 3:</span>
+						<a href="#theorem3"><span class="rp_theorem_header">Theorem 3:</span></a>
 						<p class="rp_original rp_theorem">
 							For every probabilistic function and every \(t\lt\frac n 3\) there exists a protocol that is both <span class="definable" data-define="t-resilient">\(t\)-resilient</span> and <span class="definable" data-define="t-private">\(t\)-private</span>.
 						</p>
-						<span class="rp_theorem_header">Theorem 4:</span>
+						<a href="#theorem4"><span class="rp_theorem_header">Theorem 4:</span></a>
 						<p class="rp_original rp_theorem">
 							There are functions for which there is no \(\frac n 3\)-<span class="definable" data-define="t-resilient">resilient</span> protocol.
 						</p>
@@ -436,6 +436,12 @@
 						<p class="rp_annotation">
 							While originally the above stated \(1\lt j\lt n\), we can expand this to \(1\leq j\) because, if \(\omega^1=1\), then obviously \(\omega=1\) and therefore the statement would be false for all \(j\).
 						</p>
+						<p class="rp_annotation">
+							We note that the above requirement on \(E\)&mdash;that it have a primitive \(n\)th <span class="definable">root of unity</span>&mdash;is non-trivial. A finite field of order \(q\) has a primitive \(n\)th root of unity if and only if \(n\,|\,q-1\). To quickly demonstrate this, assume we have a primitive \(n\)th root of unity \(\omega\) for \(GF(q)\) where \(n\not|\;q-1\). Take any generator \(g\) in this field: by definition of a generator, there exists an \(a\) such that \(g^a=\omega\). Since the field is a multiplicative ring, \(g^{q-1}=g^0=1\). But \(g^{an}=1\), and by definition of a primitive root of unity, there is no smaller (non-zero) exponent such that this is true. So \(g^{an}=g^{q-1}\) therefore implies \(an=q-1\), clearly contradicting our assumption that \(n\not|\;q-1\).
+						</p>
+						<p class="rp_annotation">
+							We must therefore restrict ourselves to finite fields of order \(p^k\) such that \(n\,|\,p^k-1\). Since the statement \(n\,|\,p^k-1\) is equivalent to the statement \(p^k\equiv1\bmod n\), we can solve this congruency using the <span class="definable">Fermat-Euler theorem</span>: for any \(p\) coprime to \(n\), \(p^{\operatorname\phi(n)}\equiv1\bmod n\). Since \(p\) must be prime anyway, we come to the conclusion that we must use \(E=GF(p^{\phi(n)})\) for any \(p\in\mathbb P\) such that \(p\not|\;n\). Notably, if \(n\) is even, \(p\) cannot be 2.
+						</p>
 						<p class="rp_original">
 							Pick a random polynomial \(f(x)\in\)<span class="equation" data-equation="E[x]">\(E[x]\)</span>, of degree \(t\) such that \(f(0)=s\). That is, set \(\alpha_0=s\) and pick random \(a_i\in E\) for \(i=1\dots t\) and set $$f(x)=a_0+a_1x+\cdots+a_tx^t.$$ Define the share of \(P_i,\,i=0\dots n-1,\) to be \(s_i=f(\omega^i)\). As in <span class="reference" data-citation="Sh">[?]</span>, the \(s_i\)'s are \(t\)-wise independent random variables that are uniformly distributed over \(E\), and thus our first requirement (A) is met.
 						</p>
@@ -501,7 +507,7 @@
 								In other words, the dealer selects a random polynomial \(f(x,y)\), of degree \(t\) in both variables \(x\) and \(y\), with the only restriction that \(f(0,0)=s\) (the secret to share). The dealer then sends the polynomials \(f_i(x)=f(x,\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\()\) and \(g_i(y)=f(\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\(,y)\) to player \(P_i\), for \(i=0,\dots,n-1\). The real share is just \(s_i=f_i(0)\), but for the purpose of its verification, the dealer also sends the polynomials \(f_i(x)\) and \(g_i(y)\). At this point, each player \(P_i\) sends \(s_{i,j}=f_i(\)<span class="equation" data-equation="omega">\(\omega^j\)</span>\()=f(\)<span class="equation" data-equation="omega">\(\omega^j,\omega^i\)</span>\()=g_j(\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\()\) to each player \(P_j\).
 							</p>
 							<p class="rp_original">
-								Note that if the dealer is correct, then when a good player \(P_j\) is looking at the sequence \(SS_j=(s_{0,j},s_{i,j},\dots,s_{n-1,j})\), then all these points should be on his polynomial \(g_j(y)\). Therefore \(P_j\) can compare the incoming values with his own computation and find out which values are wrong. Furthermore it is clear that in this case no good player will have to correct any value coming from other good players.
+								Note that if the dealer is correct, then when a good player \(P_j\) is looking at the sequence \(SS_j=(s_{0,j},s_{i,j},\dots,s_{n-1,j})\), then all these points should be on \(P_j\)'s known polynomial \(g_j(y)\). Therefore \(P_j\) can compare the incoming values with that polynomial and find out which values are wrong. Furthermore it is clear that in this case no good player will have to correct any value coming from other good players.
 							</p>
 							<p class="rp_original">
 								On the other hand we have
@@ -515,16 +521,16 @@
 								Simple algebra. Omitted.
 							</p>
 							<p class="rp_original">
-								To make sure that the condition of this lemma is satisfied, each player \(P_j\) broadcasts a request to make the coordinates \((i,j)\) he had to correct public. If \(P_j\) detects more than \(t\) wrong incoming values, or had to correct his own value, the dealer is clearly faulty. In such a case \(P_j\) broadcasts a request to make both \(f_j(x)\) and \(g_j(y)\) public. At this point the dealer broadcasts the (supposedly true) values \(s_{i,j}\) at all these points, and the polynomials that were to be made public. Note that making \(f_j\) and \(g_j\) public makes all the \(s_{k,j}\) and \(s_{j,k}\) public for \(0\leq k\lt n\), for that particular \(j\).
+								To make sure that the condition of this lemma is satisfied, each player \(P_j\) broadcasts a request to make public the coordinates \((i,j)\) that were incorrect. If \(P_j\) detects more than \(t\) wrong incoming values, or had to correct his or her own value, the dealer is clearly faulty. In such a case \(P_j\) broadcasts a request to make both \(f_j(x)\) and \(g_j(y)\) public. At this point the dealer broadcasts the (supposedly true) values \(s_{i,j}\) at all these points, and the polynomials that were to be made public. Note that making \(f_j\) and \(g_j\) public makes all the \(s_{k,j}\) and \(s_{j,k}\) public for \(0\leq k\lt n\), for that particular \(j\).
 							</p>
 							<p class="rp_original">
-								Now if some player \(P_i\) observes that some new public \(s_{i,j}\) contradicts the polynomials he is holding, or finds out that the public information already contradicts itself, he broadcasts a request to make all his information public. Here once more, the dealer makes public all the requested information. Finally, each \(P_i\) checks all the public and private information he received from the dealer. If \(P_i\) finds an inconsistencies he broadcasts a complaint by asking all his private information to be made public.
+								Now if some \(P_i\) observes that some new public \(s_{i,j}\) contradicts the polynomials in that player's possession, or finds out that the public information already contradicts itself, he or she broadcasts a request to make all of his or her information public. Here once more, the dealer makes public all the requested information. Finally, each \(P_i\) checks all the public and private information received from the dealer. If any \(P_i\) finds an inconsistencies, the player broadcasts a complaint by asking all his  or her private information to be made public.
 							</p>
 							<p class="rp_original">
-								If all this point \(t+1\) or more players have asked to make their information public, the dealer is clearly faulty and all the players pick the default zero polynomial as the dealer's polynomial. Likewise, if the dealer did not answer all the broadcasted requests, he is declared faulty. On the other hand, if \(t\) or fewer players have complained, then there are at least \(t+1\) good players who are satisfied. These uniquely define the polynomial \(f(x,y)\) and they conform with all the information that was made public. In this case, the complaining players take the public information as their share.
+								If all this point \(t+1\) or more players have asked to make their information public, the dealer is clearly faulty and all the players pick the default zero polynomial as the dealer's polynomial. Likewise, if the dealer did not answer all the broadcasted requests, the dealer is declared faulty. On the other hand, if \(t\) or fewer players have complained, then there are at least \(t+1\) good players who are satisfied. These uniquely define the polynomial \(f(x,y)\) and they conform with all the information that was made public. In this case, the complaining players take the public information as their share.
 							</p>
 							<p class="rp_original">
-								Note that if the dealer has distributed a correct secret then no piece of information of any good player was revealed during the verification process. If however the dealer was bad, we do not have to protect the privacy of his information, and the verification procedure ensures us that all the good players values lie on some polynomial of degree \(t\).
+								Note that if the dealer has distributed a correct secret then no piece of information of any good player was revealed during the verification process. If however the dealer was bad, we do not have to protect the privacy of the secret, and the verification procedure ensures us that all the good players values lie on some polynomial of degree \(t\).
 							</p>
 						</section>
 					</section>
@@ -543,7 +549,7 @@
 						<section id="sec7.1">
 							<h3>7.1. Generating Polynomials of Degree \(2t\)</h3>
 							<p class="rp_original">
-								Let each player \(P_i\) distribute \(T\) random (including the free coefficient) polynomials \(g_{i,k}(x),\,k=1,\dots,t\), of degree \(t\). Define \(f_i(x)\) by $$f_i(x) = \sum\limits_{k=1}^t{x^k\cdot g_{i,k}}$$ and let the players evaluate from their points on the \(g_{i,k}\)'s their corresponding point on \(f_i(x)\).
+								Let each player \(P_i\) distribute \(t\) random (including the free coefficient) polynomials \(g_{i,k}(x),\,k=1,\dots,t\), of degree \(t\). Define \(f_i(x)\) by $$f_i(x) = \sum\limits_{k=1}^t{x^k\cdot g_{i,k}}$$ and let the players evaluate from their points on the \(g_{i,k}\)'s their corresponding point on \(f_i(x)\).
 							</p>
 							<p class="rp_original">
 								After we have verified that indeed \(\operatorname{deg}g_{i,k}\leq t\), it is clear that \(\operatorname{deg}f_i(x)\leq 2t\), and \(f_i(0)=0\). (It is also clear that the vector of coefficients of the monomials of \(x^i,\,i=1,\dots,t\), in \(f_i(x)\) are uniformly distributed and are completely independent from the information held by any set of at most \(t\) players that does not include \(P_i\).)
@@ -555,40 +561,40 @@
 						<section id="sec7.2">
 							<h3>7.2. Verifying that \(c=a\cdot b\)</h3>
 							<p class="rp_original">
-								Let the player \(P\) distribute \(a\) and \(b\) using the polynomials \(A(x)\) and \(B(x)\) respectively. We want \(P\) to also distribute a random polynomial encoding \(c=a\cdot b\), in such a way that the players can all verify that indeed \(c=a\cdot b\). Let $$D(x)=A(x)\cdot B(x)=c+c_1x+\dots+c_{2t}x^{2t}$$ and let $$\begin{align}D_t(x)&=r_{t,0}+r_{t,1}x+\dots+r_{t,t-1}x^{t-1}+c_{2t}x^t\\D_{t-1}(x)&=r_{t-1,0}+\dots+r_{t-1,t-1}x^{t-1}+[c_{2t-1}-r_{t,t-1}]x^t\\\vdots\quad&\quad\vdots\\D_1(x)&=r_{1,0}+\dots+r_{1,t-1}x^{t-1}+[c_t-r_{t,1}-r_{t-1,2}-\dots-r_{2,t-1}]x^t\end{align}$$ where the \(r_{i,j}\) are random elements from \(E.\;P\) selects the \(D_i(x)\) and distributes their shares to all the players. After verifying that \(A(x),\,B(x)\) and all the \(D_i(x)\) are of degree \(t\), define $$C(x)=D(x)-\sum\limits_{i=1}^tx^i\cdot D_i(x).$$ and verify that \(C(x)\) is also og degree \(t\). From the construction of \(C(x)\) it is clear that \(C(x)\) is a random polynomial of degree \(t\) with the only restriction that \(C(0)=a\cdot b\).
+								Let the player \(P\) distribute \(a\) and \(b\) using the polynomials \(A(x)\) and \(B(x)\) respectively. We want \(P\) to also distribute a random polynomial encoding \(c=a\cdot b\), in such a way that the players can all verify that indeed \(c=a\cdot b\). Let $$D(x)=A(x)\cdot B(x)=c+c_1x+\dots+c_{2t}x^{2t}$$ and let $$\begin{align}D_t(x)&=r_{t,0}+r_{t,1}x+\dots+r_{t,t-1}x^{t-1}+c_{2t}x^t\\D_{t-1}(x)&=r_{t-1,0}+\dots+r_{t-1,t-1}x^{t-1}+[c_{2t-1}-r_{t,t-1}]x^t\\\vdots\quad&\quad\vdots\\D_1(x)&=r_{1,0}+\dots+r_{1,t-1}x^{t-1}+[c_t-r_{t,1}-r_{t-1,2}-\dots-r_{2,t-1}]x^t\end{align}$$ where the \(r_{i,j}\) are random elements from \(E.\;P\) selects the \(D_i(x)\) and distributes their shares to all the players. After verifying that \(A(x),\,B(x)\) and all the \(D_i(x)\) are of degree \(t\), define $$C(x)=D(x)-\sum\limits_{i=1}^tx^i\cdot D_i(x).$$ and verify that \(C(x)\) is also of degree \(t\). From the construction of \(C(x)\) it is clear that \(C(x)\) is a random polynomial of degree \(t\) with the only restriction that \(C(0)=a\cdot b\).
 							</p>
 						</section>
 					</section>
 					<section id="sec8">
 						<h2>8. Proof of Theorem 3</h2>
 						<p class="rp_original">
-							We separate again the computation to its Input, Computation, and Final stages. At the input stage, we let each player enter his inputs to the computation using our secret sharing scheme, while verifying that each secret shared is indeed some polynomial of degree \(t\). The secret verification assures that the inputs of any Byzantine player is well defined, but does not ensure that it is in the domain of our function. For example, in a 0-1 vote, we must verify that the input is 0 or 1. We defer this type of verification to the computation stage.
+							We separate again the computation to its Input, Computation, and Final stages. At the input stage, we let all players enter their inputs to the computation using our secret sharing scheme, while verifying that each secret shared is indeed some polynomial of degree \(t\). The secret verification assures that the inputs of any Byzantine player is well defined, but does not ensure that it is in the domain of our function. For example, in a 0-1 vote, we must verify that the input is 0 or 1. We defer this type of verification to the computation stage.
 						</p>
 						<p class="rp_original">
-							The final stage is exactly the same as in the proof of Theorem 1. When we have simulated the circuit, and the players are holding the pieces of a properly shared secret, encoding the final output, they send all the pieces to one or all the players. As at most \(t\) pieces are wrong, each player can use the error correcting procedure and recover the result.
+							The final stage is exactly the same <a href="#sec3.2">as in the proof of Theorem 1</a>. When we have simulated the circuit, and the players are holding the pieces of a properly shared secret encoding the final output, they send all the pieces to one or all the players. As at most \(t\) pieces are wrong, each player can use the error correcting procedure and recover the result.
 						</p>
 						<section id="sec8.1">
 							<h2>8.1. The Computation Stage - Byzantine Case</h2>
 							<p class="rp_original">
-								Let \(a\) and \(b\) be properly encoded by \(f(x)\) and \(g(x)\) respectively, where by "properly encoded" we mean that all the pieces of the good players are on some polynomial of degree \(t\). Since \(f(x)\ and \(g(x)\) are properly encoded, the polynomials \(f(x)+g(x)\) and \(c\cdot f(x)\), properly encode \(a+b\) and \(c\cdot a\), for any constant \(c\in E\). The same argument of <a href="#theorem1">Theorem 1</a> implies that we can do the computation of any linear operation with no communication at all.
+								Let \(a\) and \(b\) be properly encoded by \(f(x)\) and \(g(x)\) respectively, where by "properly encoded" we mean that all the pieces of the good players are on some polynomial of degree \(t\). Since \(f(x)\) and \(g(x)\) are properly encoded, the polynomials \(f(x)+g(x)\) and \(c\cdot f(x)\) properly encode \(a+b\) and \(c\cdot a\) for any constant \(c\in E\). The same argument of <a href="#theorem1">Theorem 1</a> implies that we can do the computation of any linear operation with no communication at all.
 							</p>
 							<p class="rp_original">
-								Here again, the multiplication step is more involved. To repeat the procedure of theorem 1, using the degree reduction step, via the <a href="#corollary1">Matrix Multiplication Lemma</a>, we must make sure that all the players use, as input to this procedure, their correct point on the product polynomial \(h(x)=f(x)g(x)\). To guarantee that this indeed happens, we use the Error Correcting Codes again.
+								Here again, the multiplication step is more involved. To repeat the procedure of theorem 1 using the degree reduction step, via the <a href="#corollary1">Matrix Multiplication Lemma</a>, we must make sure that all the players use, as input to this procedure, their correct point on the product polynomial \(h(x)=f(x)g(x)\). To guarantee that this indeed happens, we use the <span class="definable" data-define="error correcting code">Error Correcting Codes</span> again.
 							</p>
 							<p class="rp_original">
-								Let \(a_i=f(\omega^i),\,b_i=g(\omega^i)\) and \(c_i=g(\omega^i)=a_i\cdot b_i\) be the points of \(P_i\) on these polynomials. We ask each \(P_i\) to pick a random polynomial of degree \(t,\,A_i(x)\), such that \(a_i=A_i(0)\), and use this polynomial to distribute \(a_i\) as a secret to all the players. Similarly, \(P_i\) distributes \(b_i\) using \(B_i(x)\). We also ask \(P_i\) to distribute \(c_i\) using the polynomial \(C_i(x)\), while verifying that \(A_i(x),\,B_i(x),\,C_i(x)\) are all of degree \(t\), and that \(C_i(0)=A_i(0)B_i(0)\).
+								Let \(a_i=f(\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\(),\,b_i=g(\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\()\) and \(c_i=h(\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\()=a_i\cdot b_i\) be the points of \(P_i\) on these polynomials. We ask each \(P_i\) to pick a random polynomial of degree \(t,\,A_i(x)\), such that \(a_i=A_i(0)\), and use this polynomial to distribute \(a_i\) as a secret to all the players. Similarly, \(P_i\) distributes \(b_i\) using \(B_i(x)\). We also ask \(P_i\) to distribute \(c_i\) using the polynomial \(C_i(x)\), while verifying that \(A_i(x),\,B_i(x),\,C_i(x)\) are all of degree \(t\), and that \(C_i(0)=A_i(0)B_i(0)\).
 							</p>
 							<p class="rp_original">
 								We want to verify that the free coefficients of the polynomials \(C_i(x)\) are all points on the product polynomial \(h(x)\). It is enough to verify that all the free coefficients of the \(A_i(x)\) and \(B_i(x)\) are on \(f(x)\) and \(g(x)\) respectively. We do this as follows.
 							</p>
 							<p class="rp_original">
-								The free coefficient of the \(A_i(x)\)'s are a code word with at most \(t\) errors. By our assumption, all the \(A_i(x)\) are properly distributed. We can therefore use them to compute any linear functional. In particular, using the same \(A_i(x)\)'s we can compute the polynomials $$S_r(x)=\sum\limits_{i=0}^{n-1}{\omega^{r\cdot i}A_i(x)}$$ for \(r=1,\dots,2t\). At this point, all the players reveal their points on the polynomials \(S_r(x)\), enabling all the players to recover the value of \(s_r=S_r(0)\), for \(r=1,\dots,2t\).
+								The free coefficients of the \(A_i(x)\)'s are a code word with at most \(t\) errors. By our assumption, all the \(A_i(x)\) are properly distributed. We can therefore use them to compute any linear functional. In particular, using the same \(A_i(x)\)'s we can compute the polynomials $$S_r(x)=\sum\limits_{i=0}^{n-1}{\omega^{r\cdot i}A_i(x)}$$ for \(r=1,\dots,2t\). At this point, all the players reveal their points on the polynomials \(S_r(x)\), enabling all the players to recover the value of \(s_r=S_r(0)\), for \(r=1,\dots,2t\).
 							</p>
 							<p class="rp_original">
 								Note that if all the \(A_i(0)\) are correct (i.e. on a polynomial of degree \(t\)) then \(s_r=0\) for all \(r\). Thus the computed value of the \(s_r\) are just a function of the errors introduced by the Byzantine players. In particular, this implies that the value of the \(s_r\) does not reveal any information that is held in the hands of the good players!
 							</p>
 							<p class="rp_original">
-								Since at most \(t\) of the \(A_i(0)\) can be wrong, the value of the \(s_r\)'s, the so-called Syndrome Vector, is the only information needed by the error correction procedure to detect which coordinates \(A_i(x)\) encode a wrong \(A_i(0)\), and give the correct value. Therefore if some \(s_r\neq 0\), all the players compute the wrong coordinates, the correct value of \(f(\omega^i)\), and use the constant polynomial with this value, instead of \(A_i(x)\).
+								Since at most \(t\) of the \(A_i(0)\) can be wrong, the value of the \(s_r\)'s, the so-called Syndrome Vector, is the only information needed by the error correction procedure to detect which coordinates \(A_i(x)\) encode a wrong \(A_i(0)\), and give the correct value. Therefore if some \(s_r\neq 0\), all the players compute the wrong coordinates, the correct value of \(f\)(<span class="equation" data-equation="omega">\(\omega^i\)</span>), and use the constant polynomial with this value, instead of \(A_i(x)\).
 							</p>
 							<p class="rp_original">
 								In a similar way we can check and correct the \(B_i(x)\). We can, therefore, also check (and correct) the \(C_i(x)\), so we are sure that all the inputs to the linear computation we have to do in the degree reduction procedure are correct.
@@ -601,18 +607,18 @@
 							</p>
 							<span class="rp_theorem_header" id="theorem3">Theorem 3:</span>
 							<p class="rp_original rp_theorem">
-								For every probabilistic function and every \(t\lt\frac n 3\) there exists a protocol that is both \(t\)-resilient and \(t\)-private.
+								For every probabilistic function and every \(t\lt\frac n 3\) there exists a protocol that is both <span class="definable" data-define="t-resilient">\(t\)-resilient</span> and <span class="definable" data-define="t-private">\(t\)-private</span>.
 							</p>
 							<p class="rp_original">
 								For completeness we state,
 							</p>
 							<span class="rp_theorem_header" id="theorem4">Theorem 4:</span>
 							<p class="rp_original rp_theorem">
-								There are functions for which there is no \(\frac n 3\)-resilient protocol.
+								There are functions for which there is no \(\frac n 3\)-<span class="definable" data-define="t-resilient">resilient</span> protocol.
 							</p>
 							<span class="rp_sub_header">Proof:</span>
 							<p class="rp_original rp_sub">
-								Follows immediately from the lower bound for Byzantine Agreement in this model. We note that even if we allow broadcast as a primitive operation, theorem 4 remains true. This is because we can exhibit functions for three players that cannot be computed resiliently, when one player is bad. This generalizes immediately to \(\frac n 3\).
+								Follows immediately from the lower bound for Byzantine Agreement in this model. We note that even if we allow broadcast as a primitive operation, theorem 4 remains true. This is because we can exhibit functions for three players that cannot be computed <span class="definable" data-define="t-resilient">resiliently</span>, when one player is bad. This generalizes immediately to \(\frac n 3\).
 							</p>
 							<span class="rp_sub_header">Remark:</span>
 							<p class="rp_original rp_sub">

@@ -29,10 +29,11 @@ word
 	Vandermonde matrix
 	singular matrix
 	root of unity
-	e[x] (eq)
+	e[x] (eq) -> polynomial ring
 	Discrete Fourier Transform
 	error-correcting code
 	cyclic code
+	Fermat-Euler theorem
 cheat sheet additions
 	boolean gates
 	RSA
