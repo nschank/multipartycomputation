@@ -603,32 +603,103 @@
 								<p class="rp_original rp_sub">
 									Upon receiving the ciphertext \(y_1,\dots,y_{16k}\), when having private key \(f^{-1}_r\) (where \(r\in\{a,b\}\)), the receiver computes \(B(f^{-1}_r(y_1)),\dots,B(f_r^{-1}(y_{16k}))\), and outputs the majority value among these bits.
 								</p>
-								<p class="rp_original">
-									<b>Correctness of decryption.</b> Let us first state a simple technical claim.
-								</p>
-								<span class="rp_theorem_header" id="claim4.4">Claim 4.4</span>
-								<p class="rp_original rp_theorem">
-									For all but a negligible fraction of the \(\alpha\)'s and all but a negligible fraction of permutation pairs \(f_a\) and \(f_b\) over \(D_\alpha\), $$\left|\operatorname{Pr}(B(f_b^-1(f_a(x)))=B(x))-\frac 1 2\right|\text{ is negligible}\quad\quad(2)$$ where the probability is taken uniformly over the choices of \(x\in D_\alpha\).
-								</p>
-								<span class="rp_sub_header">Proof</span>
-								<p class="rp_original rp_sub">
-									Assume for the sake of contradiction that the claim does not hold. Then, without loss of generality, there exists a positive polynomial \(p\) so that for infinitely many \(n\)'s, we have $$\operatorname{Pr}\left(\left|\left\{y\in D_\alpha\,:\,B\left(f_b^{-1}(y)\right)\,=\,B\left(f_a^{-1}(y)\right)\right\}\right|\;\gt\;\left(\frac 1 2+\frac{1}{p(n)}\right)\cdot |D_\alpha|\right)\;\gt\;\frac{1}{p(n)}$$ when \(f_a\) and \(f_b\) are independently generated from \(\alpha=G_1(1^n)\). This means that for these \((\alpha,a,b)\)'s \(B(f_a^{-1}(y))\) gives a non-trivial prediction for \(B(f_b^{-1}(y))\). Intuitively this cannot be the case and indeed this leads to a contradiction as follows.
-								</p>
-								<p class="rp_original rp_sub">
-									Given \(a=(\alpha,\beta)\in P\) and \(y\in D_\alpha\) we may predict \(B(f_a^{-1}(y))\) as follows. First we randomly generate a new permutation. \(f_b\), over \(D_\alpha\), together with its trapdoor. Next we test to see if indeed \(B(f_a^{-1}(z))\) is correlated with \(B(f_b^{-1}(z))\). (The testing is done by uniformly selecting polynomially many \(x_i\)'s in \(D_\alpha\), computing \(z_i=f_a(x_i)\), and comparing \(B(f_a^{-1}(z_i))=B(x_i)\) with \(B(f_b^{-1}(z_i))\).) If a non-negligible correlation is detectes then we output \(B(f_b^{-1}(y))\) (as our prediction for \(B(f_a^{-1}(y))\)). Otherwise we output a uniformly selected bit. (Note that \(\left|\operatorname{Pr}\left(B(x)=1\right)-\frac 1 2\right|\) must be negligible otherwise a constant function contradicts the hardcore hypothesis.)
-								</p>
-								<p class="rp_original">
-									From this point on, we assume that the pair \((f_a,f_b)\) satisfies Equation 2.
-								</p>
-								<span class="rp_theorem_header" id="lemma4.5">Lemma 4.5</span>
-								<p class="rp_original rp_theorem">
-									Let \(\vec y=y_1,\dots,y_{16k}\) be a random encryption of a bit \(\sigma\). Then with probability \(1-2^{-\operatorname\Omega(k)}\) the bit decrypted from \(\vec y\) is \(\sigma\).
-								</p>
-								<span class="rp_sub_header">Proof</span>
-								<p class="rp_original rp_sub">
-									Assume without loss of generality that the private key is \(f_a^{-1}\). Then the receiver outputs the majority value of the bits \(B(f_a^{-1}(y_1)),\dots,B(f_a^{-1}(y_{16k}))\). Recall that \(8k\) of the \(y_i\)'s are associated with \(f_a\). Out of them, \(5k\) (of the \(y_i\)'s) satisfy \(B(f_a^{-1}(y_1))=B(x_i)=\sigma\), and \(3k\) satisfy \(B(f_a^{-1}(y_i))=B(x_i)=1-\sigma\). Thus the receiver outputs \(1-\sigma\) only if at least \(5k\) out of the rest of the \(y_i\)'s (that is, the \(y_i\)'s associated with \(f_b\)) satisfy \(B(f_a^{-1}(y_i))=1-\sigma\). However, Eq2 implies that \(|\operatorname(Pr)(B(f_a^{-1}(y_i))=\sigma)-\frac 1 2|\) is negligible for each \(y_i\) associated with \(f_b\). Thus only an expected \(4k\) of the \(y_i\)'s associated with \(f_b\) satisfy \(B(f_a^{-1}(y_i))=1-\sigma\). Using a large deviation bound, it follows that decryption errors occur with probability \(2^{-\operatorname\Omega(k)}\).
-								</p>
-								<!-- page 20-->
+								<section id="sec4.2.1.1">
+									<h5>Correctness of decryption</h5>
+									<p class="rp_original">
+										Let us first state a simple technical claim.
+									</p>
+									<span class="rp_theorem_header" id="claim4.4">Claim 4.4</span>
+									<p class="rp_original rp_theorem">
+										For all but a negligible fraction of the \(\alpha\)'s and all but a negligible fraction of permutation pairs \(f_a\) and \(f_b\) over \(D_\alpha\), $$\left|\operatorname{Pr}(B(f_b^-1(f_a(x)))=B(x))-\frac 1 2\right|\text{ is negligible}\quad\quad(2)$$ where the probability is taken uniformly over the choices of \(x\in D_\alpha\).
+									</p>
+									<span class="rp_sub_header">Proof</span>
+									<p class="rp_original rp_sub">
+										Assume for the sake of contradiction that the claim does not hold. Then, without loss of generality, there exists a positive polynomial \(p\) so that for infinitely many \(n\)'s, we have $$\operatorname{Pr}\left(\left|\left\{y\in D_\alpha\,:\,B\left(f_b^{-1}(y)\right)\,=\,B\left(f_a^{-1}(y)\right)\right\}\right|\;\gt\;\left(\frac 1 2+\frac{1}{p(n)}\right)\cdot |D_\alpha|\right)\;\gt\;\frac{1}{p(n)}$$ when \(f_a\) and \(f_b\) are independently generated from \(\alpha=G_1(1^n)\). This means that for these \((\alpha,a,b)\)'s \(B(f_a^{-1}(y))\) gives a non-trivial prediction for \(B(f_b^{-1}(y))\). Intuitively this cannot be the case and indeed this leads to a contradiction as follows.
+									</p>
+									<p class="rp_original rp_sub">
+										Given \(a=(\alpha,\beta)\in P\) and \(y\in D_\alpha\) we may predict \(B(f_a^{-1}(y))\) as follows. First we randomly generate a new permutation. \(f_b\), over \(D_\alpha\), together with its trapdoor. Next we test to see if indeed \(B(f_a^{-1}(z))\) is correlated with \(B(f_b^{-1}(z))\). (The testing is done by uniformly selecting polynomially many \(x_i\)'s in \(D_\alpha\), computing \(z_i=f_a(x_i)\), and comparing \(B(f_a^{-1}(z_i))=B(x_i)\) with \(B(f_b^{-1}(z_i))\).) If a non-negligible correlation is detectes then we output \(B(f_b^{-1}(y))\) (as our prediction for \(B(f_a^{-1}(y))\)). Otherwise we output a uniformly selected bit. (Note that \(\left|\operatorname{Pr}\left(B(x)=1\right)-\frac 1 2\right|\) must be negligible otherwise a constant function contradicts the hardcore hypothesis.)
+									</p>
+									<p class="rp_original">
+										From this point on, we assume that the pair \((f_a,f_b)\) satisfies Equation 2.
+									</p>
+									<span class="rp_theorem_header" id="lemma4.5">Lemma 4.5</span>
+									<p class="rp_original rp_theorem">
+										Let \(\vec y=y_1,\dots,y_{16k}\) be a random encryption of a bit \(\sigma\). Then with probability \(1-2^{-\operatorname\Omega(k)}\) the bit decrypted from \(\vec y\) is \(\sigma\).
+									</p>
+									<span class="rp_sub_header">Proof</span>
+									<p class="rp_original rp_sub">
+										Assume without loss of generality that the private key is \(f_a^{-1}\). Then the receiver outputs the majority value of the bits \(B(f_a^{-1}(y_1)),\dots,B(f_a^{-1}(y_{16k}))\). Recall that \(8k\) of the \(y_i\)'s are associated with \(f_a\). Out of them, \(5k\) (of the \(y_i\)'s) satisfy \(B(f_a^{-1}(y_1))=B(x_i)=\sigma\), and \(3k\) satisfy \(B(f_a^{-1}(y_i))=B(x_i)=1-\sigma\). Thus the receiver outputs \(1-\sigma\) only if at least \(5k\) out of the rest of the \(y_i\)'s (that is, the \(y_i\)'s associated with \(f_b\)) satisfy \(B(f_a^{-1}(y_i))=1-\sigma\). However, Eq2 implies that \(|\operatorname(Pr)(B(f_a^{-1}(y_i))=\sigma)-\frac 1 2|\) is negligible for each \(y_i\) associated with \(f_b\). Thus only an expected \(4k\) of the \(y_i\)'s associated with \(f_b\) satisfy \(B(f_a^{-1}(y_i))=1-\sigma\). Using a large deviation bound, it follows that decryption errors occur with probability \(2^{-\operatorname\Omega(k)}\).
+									</p>
+								</section>
+								<section id="4.2.1.2">
+									<h5>Simulation Assuming Knowledge of Both Trapdoors</h5>
+									<p class="rp_original">
+										In <a href="#lemma4.7">Lemma 4.7</a> (below) we show how the simulator, knowing the trapdoors of both \(f_a\) and \(f_b\), can generate "dummy ciphertexts" \(\vec z=z_1,\dots,z_{16k}\) that can be later "opened" as encryptions of both 0 and 1. Essentially, the values \(B(f_a^{-1}(z_i))\) and \(B(f_b^{-1}(z_i))\) for each \(z_i\) are carefully chosen so that this "cheating" is possible. We use the following notations. Fix an encryption key (\(f_a,f_b\)). Let the random variable \(\lambda_\sigma=(\sigma;\vec x,\phi;\vec y;r,f_r^-1)\) describe a <i>legal encryption and decryption process</i> of the bit \(\sigma\). That is: 
+									</p>
+									<ul class="rp_original">
+										<li>\(\vec x=x_1,\dots,x_{16k}\) is a vector of domain elements chosen at random as specified in the encryption algorithm.</li>
+										<li>\(\phi\) is a random permutation on \([16k]\).</li>
+										<li>\(\vec y=y_1,\dots,y_{16k}\) is generated from \(\vec x\) and \(\phi\) as specified in the encryption algorithm.</li>
+										<li>\(r\) is uniformly chosen in \(\{a,b\}\) and \(f_r^{-1}\) is the inverse of \(f_r\). (Note that the decrypted bit is defined by the majority of the bits \(B(f_r^{-1}(y_i)\).)</li>
+									</ul>
+									<p class="rp_original">
+										We remark that the information seen by the adversary, after the sender and receiver are corrupted, includes either \(\lambda_0\) or \(\lambda_1\) (but not both).
+									</p>
+									<p class="rp_original">
+										Let us first prove a simple technical claim, that will help us in proving <a href="#lemma4.7">Lemma 4.7</a>. Let \(\operatorname{BIN}_m\) denote the binomial distribution over \([m]\).
+									</p>
+									<span class="rp_sub_header">Claim 4.6</span>
+									<p class="rp_original rp_sub">
+										There exists an efficiently samplable distribution \(\mu\) over \(\{0,1,\dots,4k\}\) so that the distribution \(\widetilde\mu\) construted by sampling an integer from \(\mu\) and adding \(2k\) is statistically close to \(\operatorname{BIN}_{8k}\). That is, the statistical distance between \(\tilde\mu\) and \(\operatorname{BIN}_{8k}\) is \(2^{-\Omega(k)}\).
+									</p>
+									<span class="rp_sub_header">Proof</span>
+									<p class="rp_original rp_sub">
+										Let \(\operatorname{BIN}_{8k}(i)\) denote the probability of \(i\) under \(\operatorname{BIN}_{8k}\) (i.e. \(\operatorname{BIN}_{8k}(i)=\binom{8k}{i}\cdot 2^{-8k}\)). We construct the distribution  \(\mu\) (over \(\{0,1,\dots,4k\}\) so that \(\operatorname{Pr}[\mu=i]=\operatorname{BIN}_{8k}(i+2k)\) for \(i=1,\dots,4n\) and \(\operatorname{Pr}(\mu=0)\) equals the remaining mass of \(\operatorname{BIN}_{8k}\) (i.e. equals \(\sum\nolimits_{i=0}^{2k}\operatorname{BIN}_{8k}(i)+\sum\nolimits_{i=6k+1}^{8k}\operatorname{BIN}_{8k}(i)\)).
+									</p>
+									<p class="rp_original rp_sub">
+										It can be easily seen that each \(i\in\{2k+1,\dots,6k\}\) occurs under \(\tilde\mu\) with exactly the same probability as under \(\operatorname{BIN}_{8k}\). Integers \(i\) such that \(i\lt2k\) or \(i\gt6k\) have probability 0 under \(\tilde\mu\) (whereas \(2k\) is more likely to occur under \(\mu\) than under \(\operatorname{BIN}_{8k}\)). Thus, the statistical distance between \(\tilde\mu\) and \(\operatorname{BIN}_{8k}\) equals the probability, under \(\operatorname{BIN}_{8k}\), that \(i\) is smaller than \(2k\) or larger than \(6k\). This probability is bounded by \(2^{-\Omega(k)}\).
+									</p>
+									<span class="rp_theorem_header" id="lemma4.7">Lemma 4.7</span>
+									<p class="rp_original rp_theorem">
+										Let (\(f_a,f_b\)) be the public key, and assume that both \(f_a^{-1}\) and \(f_b^{-1}\) are known. Then it is possible to efficiently generate \(\vec z,\vec x^{(0)},\vec x^{(1)},\phi^{(0)},\phi^{(1)},r^{(0)},r^{(1)}\), such that:
+									</p>
+									<ul class="rp_original rp_theorem">
+										<li>\((0;\vec x^{(0)},\phi^{(0)};\vec z;r^{(0)},f_{r^{(0)}}^{-1})\stackrel{c}{\approx}\lambda_0.\)</li>
+										<li>\((1;\vec x^{(1)},\phi^{(1)};\vec z;r^{(1)},f_{r^{(1)}}^{-1})\stackrel{c}{\approx}\lambda_1.\)</li>
+									</ul>
+									<p class="rp_original rp_theorem">
+										Here \(\stackrel{c}{\approx}\) stands for 'computationally indistinguishable'. We stress that the <i>same</i> <b>dummy ciphertext</b>, \(\vec z\), appears in both (1) and (2).
+									</p>
+									<span class="rp_sub_header">Proof</span>
+									<p class="rp_original rp_sub">
+										Before describing how the dummy ciphertext \(\vec z\) and the rest of the data are constructed, we summarize in Figure 1, the distribution of the <span class="definable" data-define="hardcore bit">hardcore bits</span>, \(B(f_a^{-1}(Y_1)),\dots,b(F_a^{-1}(y_{16k}))\) and \(B(f_b^{-1}(y_1)),\dots,B(f_b^{-1}(y_{16k}))\), with respect to a real encryption \(y_{\phi(1)},\dots,y_{\phi(16k)}\) of the bit \(\sigma=0\). Here \(\operatorname{\widetilde{BIN}}_{8k}\) denotes the distribution of the number of 1s in \(B(f_b^{-1}(y_i))\) for \(i=1,\dots,8k\). Eq. (2) implies that the statistical difference between \(\operatorname{BIN}_{8k}\) and \(\operatorname{\widetilde{BIN}}_{8k}\) is negligible. The distribution of \(B(f_a^{-1}(y_i))\) for \(i=8k+1,\dots,16k\) is similar. Given only \(\lambda_0\) (or only \(\lambda_1\)), only three-quarters of the \(B(f^{-1}_s(y_i))\)'s, \(i\in[16k]\) and
+									</p>
+									<table style="width:50%;margin:5px auto; border-collapse:collapse; border:1px solid">
+										<tr>
+											<th></th>
+											<th>\(I=\{1,\dots,8k\}\)</th>
+											<th>\(I=\{8k+1,\dots,16k\}\)</th>
+										</tr>
+										<tr style="border-bottom:1px solid">
+											<td style="border-right:1px solid">\(\forall\,i\in I\)</td>
+											<td style="border-right:1px solid">\(y_i=f_a(x_i)\)</td>
+											<td>\(y_i=f_b(x_i)\)</td>
+										</tr>
+										<tr style="border-bottom:1px solid">
+											<td style="border-right:1px solid">\(\sum\nolimits_{i\in I}B(f_a^{-1}(y_i))=\)</td>
+											<td style="border-right:1px solid">\(3k\)</td>
+											<td>\(\operatorname{\widetilde{BIN}}_{8k}\)</td>
+										</tr>
+										<tr>
+											<td style="border-right:1px solid">\(\sum\nolimits_{i\in I}B(f_b^{-1}(y_i))=\)</td>
+											<td style="border-right:1px solid">\(\operatorname{\widetilde{BIN}}_{8k}\)</td>
+											<td>\(3k\)</td>
+										</tr>
+									</table>
+									<p class="rp_original">
+										Figure 1: The distribution of the \(B(f_s^{-1}(y_i))\)'s with respect to \(\lambda_0\), where \(s\in\{a,b\}\). (The case of \(\lambda_1\) is similar, with the exception that \(5k\) replaces \(3k\).)
+									</p>
+								</section>
 							</section>
 						</section>
 					</section>
