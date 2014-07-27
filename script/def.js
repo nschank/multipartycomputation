@@ -17,6 +17,8 @@ var def_internal = {
 	
 	"broadcast channel":"A broadcast channel is a cryptographic primitive referring to any communication method that any party can write to and all parties can read from. This allows a protocol to very simply refer to the ability of any party to send a single message to every other party, while every party agrees that the same message was sent to everyone. Simplifies the exposition of a protocol, since Byzantine Agreement <span data-broken-link=true></span>allows for the same thing, but with many more complications.",
 	
+	"Byzantine fault":"In distributed computing, a Byzantine fault is a mistake made by any single processor (or, metaphorically, any participant). Any type of mistake can be a Byzantine fault: purposeful, memory-based, communication-based, and so on. <span class=\"definable\" data-define=\"malicious adversary\">Malicious adversaries</span> make Byzantine faults.",
+	
 	"cartesian product":"The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}. The Cartesian product is often extended into many dimensions, as in the expression \\(A\\times B\\times C\\times D\\), which would be the set of all ordered quadruples \\((a,b,c,d)\\) that can be formed from an \\(a\\in A, b\\in B, c\\in C, d\\in D\\).",
 	
 	"clawfree":"A pair of <span class=\"definable\" data-define=\"trapdoor permutation\">trapdoor permutations</span> \\(f_1,f_2\\) is clawfree if there does not exist a PPT algorithm which can determine a triplet of values \\((x,y,z)\\) such that \\(f_1(x)=f_2(y)=z\\). Such a triplet is called a claw.",
@@ -37,9 +39,17 @@ var def_internal = {
 	
 	"cryptographic security":"A protocol is cryptographically secure if adversaries cannot learn the inputs of other parties within a bounded time, generally under certain assumptions about the hardness of a particular (cryptographic) problem. This is in contrast to <span class=\"definable\">information theoretic security</span>.",
 	
+	"cyclic code":"A cyclic code is a type of <span class=\"definable\">error-correcting code</span> in which any codeword for \\(x\\) can be right or left shifted any number of times and still be a correct codeword for \\(x\\).",
+	
+	"Discrete Fourier Transform":"The Discrete Fourier Transform of some function uses a set of 'equally spaced' points on the function (where the inputs are all intermediate powers of an \\(n\\)th <span class=\"definable\">root of unity</span>) to create a function within the frequency domain of the function.",
+	
 	"discrete logarithm problem":"A discrete logarithm is any integer \\(k\\) solving the equation \\(b^k=g\\), where \\(b,g\\) are two elements in a <span class=\"definable\">group</span>. At current time, the discrete log problem is believed to be computationally hard; that is, no method currently exists that solves it in time polynomial in the size of the group.",
     
 	"encryption":"A method of representing a message (generally called <i>plaintext</i> or \\(m\\)) as an encoded message (<i>ciphertext</i> or \\(c\\)) such that the following properties are true:<ol><li>There exists a <b>decryption</b> algorithm (often called \\(D\\))</li><li>Using the decryption algorithm, any \\(c\\) is mapped back to its original message \\(m\\)</li><li>Without the decryption algorithm, no adversary (\\(\\mathcal{A}\\)) can learn \\(m\\) from \\(c\\) with more than <span class=\"definable\">negligible</span> probability.</li></ol>This is the most common definition of encryption, but many exist in research to serve many different purposes. The first lesson in the tutorial section goes through several other common ones.",
+	
+	"error-correcting code":"An error-correcting code is some way of encoding data with redundancy so that, even over a noisy channel (or in the face of <span class=\"definable\" data-define=\"Byzantine fault\">Byzantine faults</span>), the data can be decoded correctly. Formally, an error-correcting code consists of some encoding function \\(C\\,:\\;\\Sigma^n\\mapsto\\Sigma^k\\) and decoding/correcting function \\(D\\,:\\;\\Sigma^k\\mapsto\\Sigma^n\\), where \\(\\Sigma\\) is the alphabet of the code (often a finite field), \\(n\\) is the <i>block length</i> of the code, and \\(k\\) is the <i>message length</i>. \\(C,D\\) are an error-correcting code with a <i>minimum distance</i> of \\(d\\) if \\(D(N^{\\frac{d-1}{2}}(C(x)))=x\\) for all \\(N\\), where we define the noise function \\(N^y\\,:\\;\\Sigma^x\\mapsto\\Sigma^x\\) to return its input with no more than \\(y\\) bits flipped. The output of the encoding function is a <i>codeword</i>.",
+	
+	"Fermat-Euler theorem":"The Fermat-Euler theorem is a generalization of Fermat's Little Theorem which states that: $$\\operatorname{gcd}(a,\\,n)\\quad\\Rightarrow\\quad a^{\\operatorname\\phi(n)}\\equiv1\\pmod n.$$",
 	
 	"GF(2)":"The <span class=\"definable\">group</span> of two elements, generally \\(\\{0,1\\}\\). Has two group operations: AND (multiplication) and XOR (addition).",
 	
@@ -83,6 +93,8 @@ var def_internal = {
 	
 	"permutation":"Any bijective (onto and 1-1) function with the same domain and range. In other words, any function that arranges its entire domain into a one-way cycle (or group of cycles) and, on any input, returns whatever is 'next' in the cycle.",
 	
+	"polynomial ring":"A polynomial ring \\(E[X]\\) is the ring of polynomial equations where the indeterminate (variable) is \\(X\\) and the coefficients of the polynomial are all elements of the ring \\(E\\).",
+	
 	"polynomial time":"A protocol, algorithm, or Turing machine runs in polynomial time if, for input of size \\(n\\), its average time complexity is in \\(O(n^k)\\) for a constant \\(k\\). In general, an algorithm that runs in polynomial time is called 'efficient' or 'fast'. If a protocol can be brute-forced in polynomial-time, it is generally considered insecure. An algorithm that can be calculated in polynomial time is in the complexity class <b>P</b>.",
     
 	"privacy constraint":"A constraint on what information (that you own) can be learned by other parties who are members of the computation.",
@@ -91,10 +103,14 @@ var def_internal = {
 	
 	"quadratic residue":"An integer \\(q\\) is a quadratic residue \\(\\bmod{n}\\) if there exists some \\(x\\) such that \\(q \\equiv x^2\\pmod{n}\\). Determining whether a number is a quadratic residue \\(\\bmod{n}\\) for a <span class=\"definable\">Blum integer</span> \\(n\\) is not known to be as hard as factoring, but is considered to be computationally very difficult.",
 	
+	"root of unity":"An \\(n\\)th root of unity in a field is any element \\(e\\) such that \\(e^n=i\\), where \\(i\\) is the identity element in the field. A primitive \\(n\\)th root of unity in a field is some \\(\\omega\\) such that \\(\\omega^n=i\\) but there is no positive integer \\(k\\lt n\\) such that \\(\\omega^k=i\\). \\(n\\)-th roots of unity in the complex numbers \\(\\mathbb C\\) are the \\(n\\)th roots of 1, and are of the form \\(\\cos\\left(\\frac{2x\\pi}{n}\\right)+i\\sin\\left(\\frac{2x\\pi}{n}\\right)\\;\\forall\\;x\\in[0,n-1]\\).",
+	
 	"secrecy network":"A network in which it is assumed that any party can communicate with any other party without anyone else knowing what was said. Often assumed in multiparty computation, as the use of an encryption scheme makes this relatively simple while significantly complicating explanation of the protocol.",
 	
     "security constraint":"A constraint on what information (that you own) can be learned by other parties who are not intended to be members of the computation.",
     
+	"singular matrix":"A singular matrix is one with a determinant of 0, and therefore no inverse. That is, iff a matrix \\(M\\) is singular, \\(\\operatorname{det}(M)=0\\) and \\(\\nexists N\\) s.t. \\(MN=I\\).",
+	
 	"stochastic":"randomly determined; having a random probability distribution or pattern that may be analyzed statistically but may not be predicted precisely.",
 	
 	"straight-line program":"A program that does not loop. All circuit diagrams (which do not contain memory circuits) can be expressed as straight-line programs.",
@@ -113,6 +129,8 @@ var def_internal = {
 	"Turing machine":"A theoretical machine often used in computer science to analyze the complexity or limits of a computation. It is imagined as an infinitely long 'tape' separated into discrete boxes or squares. At any given moment, there is a specific square being 'scanned'; based on the symbol within that square, the machine may choose either to write to that square or not, and then to move either left or right one square.",
 	
 	"WLOG":"without loss of generality",
+	
+	"Vandermonde matrix":"A Vandermonde matrix is an \\(m\\times n\\) in which every row is a geometric progression. It is of the form: $$\\left[\\begin{array}{ccccc} 1 & \\alpha_1 & \\alpha_1^2 & \\cdots & \\alpha_1^{n-1}\\\\1 & \\alpha_2 & \\alpha_2^2 & \\cdots & \\alpha_2^{n-1}\\\\\\vdots & \\vdots & \\vdots & \\ddots & \\vdots\\\\1 & \\alpha_n & \\alpha_n^2 & \\cdots & \\alpha_{n-1}^m\\end{array}\\right].$$ It has some special properties that make it useful; in particular, if all the \\(\\alpha\\)'s are distinct, then the matrix is invertible. Additionally, it transforms the coefficient matrix of any polynomial of degree less than \\(n-1\\) to the values of that polynomial at the points given by the \\(\\alpha\\)'s. These two facts taken together mean that, with unique \\(\\alpha\\)'s, the inverse Vandermonde matrix will <span class=\"definable\" data-define=\"interpolation\">interpolate</span> a polynomial's coefficients from its values.",
 	
 	"zero knowledge proof":"A zero knowledge proof is a cryptographic primitive in which Peggy (the prover) proves something to Victor (the verifier) without revealing any information other than the fact that the statement is true. Let's say that the statement that Peggy is trying to prove is a predicate \\(P\\) over her private inputs \\(x\\in X\\), and she is trying to convince Victor that \\(P(X)=1\\). We say that a proof is zero knowledge if, after the proof is over: <ul><li>Victor is convinced. More formally, the probability that Peggy lied, based on the information conveyed to him during the protocol, is <span class=\"definable\">negligible</span>.</li><li>Victor has learned nothing he couldn't have learned from just trusting Peggy in the first place. More formally, the probability distribution that Victor can create over the possible value of \\(X\\) from the information received during the protocol is <span class=\"definable\">indistinguishable</span> from the probability distribution he could create knowing only that \\(P(X)=1\\).</li></ul>"
 };

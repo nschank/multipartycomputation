@@ -25,9 +25,9 @@
 				switch (box)
 				{
 					case "E[x]":
-						return "<p></p>";
+						return "<p>\\(E[x]\\) refers to the <span class=\"definable\">polynomial ring</span> over the variable \\(x\\) on the field \\(E\\).</p>";
 					case "omega":
-						return "<p></p>";
+						return "<p>\\(\\omega\\) is a primitive \\(n\\)th <span class=\"definable\">root of unity</span> within \\(E\\).</p>";
 					case "truncation":
 						return "<p>The truncation \\(k(x)\\) of \\(h(x)\\), where \\(h(x)\\) is the degree \\(2t\\) function defined to be \\(h(x)=f(x)g(x)\\) for shared secrets \\(f(x)\\) and \\(g(x)\\), is defined to be $$k(x)=h_0+h_1x+\\dots+h_tx^t.$$</p>";
 					default:
@@ -90,29 +90,35 @@
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Paper Title</b> is...
+							<b>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</b> is a 1988 paper by Ben-Or, Goldwasser, and Wigderson which demonstrated the bounds of (and described a protocol for) multiparty computation which is <span class="definable" data-define="information theoretic security">information theoretically secure</span>. It is one of <a href="34.html">two papers</a> in the same year which demonstrates that up to &frac13; parties can be actively <span class="definable" data-define="malicious adversary">malicious</span> without affecting correctness or privacy. The other paper offers information theoretic security in a very similar manner, while this paper additionally guarantees correctness (as opposed to a <span class="definable">negligible</span> probability of incorrectness).
+						</p>
+						<p class="rp_original">
+							One major difference between this paper and <a href="34.html">its chronological counterpart</a> is the type of computation performed. Chaum's construction is based around Boolean operation simulations, while this protocol uses an arithmetic circuit within a finite field. Very significantly, this finite field is <u>not</u> arbitrary as implied in the paper: it must be of the form \(GF(p^{k\operatorname\phi(n)})\), where \(n\) is the number of parties who must participate, \(p\) is any prime that is not a factor of \(n\) (generally the minimal prime), and \(k\) is any positive integer (generally 1). This is necessary in order to allow for the fault tolerance properties sought; more details can be found in <a href="#sec5">Section 5</a>.
 						</p>
 					</section>
 					<section id="goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
-							Some goals that they had.
+							The authors intended to find upper bounds on what types of computation are possible in the <span class="definable" data-define="information-theoretic security">information-theoretic model</span>, and the bounds they found were optimal. This result is, of course, dependent on the specification of the network (which can be found in <a href="#assumptions">Assumptions</a>).
 						</p>
 						<p class="rp_analysis">
-							Don't forget some results, too!
+							Simply put, protocols can guarantee both correctness and information-theoretic security in the case when \(t\lt\frac n 3\) parties are <span class="definable" data-define="malicious adversary">malicious</span>. This paper additionally extends the cryptographic privacy on <span class="definable" data-define="passive adversary">passive adversaries</span>&mdash;\(t\lt\frac n 2\)&mdash;to information-theoretic multiparty computation. These two limits are not achievable simultaneously through the protocol presented.
 						</p>
 					</section>
 					<section id="assumptions">
 						<h2>Assumptions</h2>
+						<p class="rp_analysis">
+							This paper made a point of not relying on any cryptographic assumptions; its results are only based on the type of network, which is specified to be complete, <span class="definable" data-define="synchronous network">synchronous</span>, <span class="definable" data-define="secure network">secure</span>, and <span class="definable" data-define="authenticated network">authenticated</span>.
+						</p>
 					</section>
 					<section id="defs">
 						<h2>Definitions</h2>
-						<a href="#sec2"><span class="rp_definition_header">Definition 1 - \(t\)-privacy</span></a>
-						<p class="rp_original">
+						<a href="#appendix"><span class="rp_definition_header">Definition 1 - \(t\)-privacy</span></a>
+						<p class="rp_original rp_definition">
 							A protocol is \(t\)-<i>private</i> if any set of at most \(t\) players cannot compute after the protocol more than they could jointly compute solely from their set of privacy inputs and outputs.
 						</p>
-						<a href="#sec2"><span class="rp_definition_header">Definition 2 - \(t\)-resiliency</span></a>
-						<p class="rp_original">
+						<a href="#appendix"><span class="rp_definition_header">Definition 2 - \(t\)-resiliency</span></a>
+						<p class="rp_original rp_definition">
 							A protocol is \(t\)-<i>resilient</i> if no set of \(t\) or fewer players can influence the correctness of the outputs of the remaining players. For this to make sense, the function definition should be extended to specify what it is if some players neglect to give their inputs or are caught cheating (see <a href="#appendix">appendix</a>).
 						</p>
 					</section>
@@ -161,12 +167,15 @@
 					</section>
 					<section id="further">
 						<h2>Further Reading</h2>
+						<p class="rp_analysis">
+							For a similar but differently presented take on information-theoretic computation within a finite field, see Chaum, Cr&eacute;peau, and Damg&aring;rd's <a href="34.html">work of the same year</a>.
+						</p>
 					</section>
 					<section id="ref">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
-							A reference for this paper
+							M. Ben-Or, S. Goldwasser, and A. Wigderson. Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. 
 						</p>
 					</section>
                 </div>
@@ -200,7 +209,7 @@
 							This simple assumption was postulated in <span class="reference" data-citation="DH"></span> in order to achieve the basic task of secure message exchange between two of the processors, but turned out to be universal! In subsequent years, ingenious protocols based on the same assumption were given for increasingly harder tasks such as contract signing, secret exchange, joint coin flipping, voting, and playing poker. These results culminated, through the definition of zero-knowledge proofs<sup class="reference" data-citation="GMR"></sup> and their existence for NP-complete problems<sup class="reference" data-citation="GMW1"></sup>, in completeness theorems for two-party<sup class="reference" data-citation="Y1"></sup> and multiparty<sup class="reference" data-citation="GMW2"></sup> cryptographic distributed computation. In particular the results of Goldreich, Micali, and Wigderson in <span class="reference" data-citation="GMW2"></span> were the main inspiration to our work. They show that, if (non-uniform) <span class="definable" data-define="one-way function">one-way functions</span> exist, then every (probabilistic) function of \(n\) inputs can be computed by \(n\) computationally bounded processors in such a way that: (1) If no faults occur, no subset of the players can compute any additional information, and (2) Even if <span class="definable" data-define="Byzantine fault">Byzantine faults</span> are allowed, no set of size \(t\lt\frac n 2\) can either disrupt the computation or compute additional information.
 						</p>
 						<p class="rp_original">
-							The non-cryptographic (or <span class="definable" data-define="information-theoretic security">information-theoretic</span>) approach does not limit the computational power of the processors. Here, the notion of privacy is much stronger - for a piece of data to be unknown to a set of players it does not suffice that they cannot compute it within a certain time bound from what they know, but simply that it cannot be computed at all!
+							The non-cryptographic (or <span class="definable" data-define="information theoretic security">information-theoretic</span>) approach does not limit the computational power of the processors. Here, the notion of privacy is much stronger - for a piece of data to be unknown to a set of players it does not suffice that they cannot compute it within a certain time bound from what they know, but simply that it cannot be computed at all!
 						</p>
 						<p class="rp_original">
 							To facilitate the basic primitive of secret message exchange between a pair of players, we have <span class="definable" data-define="secure network">secure channels</span>. (For an excellent source of results and problems in the case no secure channels exist, see <span class="reference" data-citation="BL"></span>). Unlike the cryptographic case, very little was known about the capabilities of this model. Two main basic problems were studied and solved (in the synchronous case): Byzantine agreement<sup class="reference" data-citation="LPS"></sup><sup class="reference" data-citation="DS"></sup> and collective coin flipping<sup class="reference" data-citation="Y2"></sup>.
@@ -340,6 +349,9 @@
 							<p class="rp_original">
 								The multiplication step is only a bit harder. Let \(a\) and \(b\) be encoded by \(f(x)\) and \(g(x)\) as above. We now assume that \(n\geq 2t+1\). Note that the free coefficient of the polynomial \(h(x)=f(x)g(x)\) is \(a\cdot b\). There are two problems with using \(h(x)\) to encode the product of \(a\) times \(b\). The first, and obvious, one is that the degree of \(h(x)\) is \(2t\) instead of \(t\). While this poses no problem with <span class="definable" data-define="interpolation">interpolating</span> \(h(x)\) from its \(n\) pieces since \(n\geq 2t+1\), it is clear that further multiplications will raise the degree, and once the degree passes \(n\) we will not have enough points for the <span class="definable">interpolation</span>. The second problem is more subtle. \(h(x)\) is not a <i>random</i> polynomial of degree \(2t\) (ignoring, of course, the free coefficient). For example, \(h(x)\), as a product of two polynomials, cannot be irreducible.
 							</p>
+							<p class="rp_annotation">
+								To be more direct, this is a problem because the final share of the polynomial now no longer (necessarily) has a constant probability distribution, which means that \(2t\) shares may leak information: so if, by some odd coincidence, only one final share would make the polynomial reducible, it must be the final share.
+							</p>
 							<p class="rp_original">
 								To overcome these two problems we will, in one step, randomize the coefficients of \(h(x)\), and reduce its degree while keeping the free coefficient unchanged. We first describe the degree reduction procedure and then combine it with the randomization of the coefficients.
 							</p>
@@ -376,7 +388,10 @@
 								This is also a simple generalization of the argument we make for the information-theoretic security of any \(k\lt x\) shares for any \(x\)-degree polynomial, <a href="34.html#sec3">here</a>.
 							</p>
 							<p class="rp_original">
-								Thus instead of using \(h(x)\) in our reduction we can use $$\widetilde{h}(x)=h(x)+\sum\limits_{j=0}^{n-1}{q_j(x)}$$ which satisfies \(\widetilde{h}(0)=h(0)\) but the other coefficients of \(x^i,1\leq i\leq t\), are completely random. Since each player can evaluate his or her point \(\widetilde s_i = \widetilde h(\alpha_i)\), we can now apply the truncation procedure using the <a href="#corollary1">matrix multiplication lemma</a> to arrive at a completely random polynomial <span class="equation" data-equation="truncation">\(\widetilde k(x)\)</span> which satisfies both \(\operatorname{deg}\widetilde k(x)=t\) and \(\widetilde k(0)=a\cdot b\), and \(k(x)\) is properly shared among all the players.
+								Thus instead of using \(h(x)\) in our reduction we can use $$\widetilde{h}(x)=h(x)+\sum\limits_{j=0}^{n-1}{q_j(x)}$$ which satisfies \(\widetilde{h}(0)=h(0)\) but the other coefficients of \(x^i,1\leq i\leq t\), are completely random. Since each player can evaluate his or her point \(\widetilde s_i = \widetilde h(\alpha_i)\), we can now apply the truncation procedure using the <a href="#corollary1">matrix multiplication lemma</a> to arrive at a completely random polynomial <span class="equation" data-equation="truncation">\(\widetilde k(x)\)</span> which satisfies both \(\operatorname{deg}\widetilde k(x)=t\) and \(\widetilde k(0)=a\cdot b\), and \(\widetilde k(x)\) is properly shared among all the players.
+							</p>
+							<p class="rp_annotation">
+								Corrected "\(k(x)\) is shared properly" to "\(\widetilde k(x)\) is shared properly".
 							</p>
 						</section>
 						<p class="rp_original">
@@ -388,7 +403,7 @@
 						</p>
 						<span class="rp_sub_header">Remarks:</span>
 						<ol class="rp_original rp_sub">
-							<li>The complexity of computing \(F\) \(t\)-privately is bounded by a factor polynomial in \(n\) times the complexity of computing \(F\).</li>
+							<li>The complexity of computing \(F\) \(t\)-privately is bounded by a factor polynomial in \(n\) multiplied by the complexity of computing \(F\).</li>
 							<li>If \(F\) can be computed by an arithmetic circuit over some field using unbounded fan-in linear operations and bounded fan-in multiplication, in depth \(d\), then \(F\) can be computed \(t\)-privately in \(O(d)\) rounds of exchange of information.</li>
 							<li>
 								<p>
@@ -444,9 +459,9 @@
 						</p>
 						<p class="rp_original">
 							Note that setting \(a_i=0\) for \(i\gt t\) makes our secret shares the <span class="definable">Discrete Fourier Transform</span> of the sequence \((a_0,\dots,a_{n-1})\). Let \(\hat f(x)=s_0+s_1x+\cdots+s_{n-1}x^{n-1}\). By the well known formula for the inverse transform $$a_i=\frac 1 n\hat f(\omega^{-i})$$ and in particular \(\hat f(\omega^{-i})=0\) for \(i=t+1,\dots,n-1\). Explicitly the \(s_i\) satisfy the linear equations $$\sum\limits_{i=0}^{n-1}\omega^{r\cdot i}\cdot s_i=0\;\text{for}\;r=1,\dots,2t.$$ Thus the polynomial \(g(x)\,=\,\prod\nolimits_{i=t+1}^{n-1}(x-\omega^{-i})\) divides the polynomial \(\hat f(x)\), which in the language of <span class="definable" data-define="error-correcting code">Error Correcting Codes</span> says that the vector \(s=(s_0,\dots,s_{n-1})\) is a codeword in the <span class="definable" data-define="cyclic code">Cyclic Code</span> of length \(n\) generated by \(g(x)\). By our choice of \(g(x)\), this <span class="definable">cyclic code</span> is the well known Generalized Reed-M&uuml;ller code. Such codes have a simple error correction procedure to correct \(\frac 1 2\operatorname{deg}g(x)=t\) errors. See for example <span class="reference" data-citation="PW">[?]</span>, page 283.
-						</p
+						</p>
 						<p class="rp_annotation">
-							Intuitively, we can see that \(g(x)\,|\,\hat f(x)\) since they share the same 0's.
+							Intuitively, we can see that \(g(x)\,|\,\hat f(x)\) since they share the same zeroes.
 						</p>
 						<p class="rp_annotation">
 							Reed-M&uuml;ller codes and how to work with them is well outside the scope of this website; for more on working with them, we recommend <a href="http://mathworld.wolfram.com/Reed-MullerError-CorrectingCode.html">MathWorld</a>, an explanatory <a href="http://www-math.mit.edu/phase2/UJM/vol1/COOKE7FF.PDF">research paper</a> published by MIT, or the <a href="http://books.google.com/books?id=5kfwlFeklx0C&pg=PR6&lpg=PR6&dq=W.+W.+Peterson+and+E.+J.+Weldon,+Error+correcting+codes,+Second+Ed.&source=bl&ots=PZzgA2fcQJ&sig=wB6fNlB5CL4Pp45FOEXlH34M9RU&hl=en&sa=X&ei=C8vPU9--CZKqyASFqoKACA&ved=0CCwQ6AEwAg#v=onepage&q=W.%20W.%20Peterson%20and%20E.%20J.%20Weldon%2C%20Error%20correcting%20codes%2C%20Second%20Ed.&f=false">book</a> mentioned in the reference (on Google Books).
@@ -579,7 +594,7 @@
 								Let \(a\) and \(b\) be properly encoded by \(f(x)\) and \(g(x)\) respectively, where by "properly encoded" we mean that all the pieces of the good players are on some polynomial of degree \(t\). Since \(f(x)\) and \(g(x)\) are properly encoded, the polynomials \(f(x)+g(x)\) and \(c\cdot f(x)\) properly encode \(a+b\) and \(c\cdot a\) for any constant \(c\in E\). The same argument of <a href="#theorem1">Theorem 1</a> implies that we can do the computation of any linear operation with no communication at all.
 							</p>
 							<p class="rp_original">
-								Here again, the multiplication step is more involved. To repeat the procedure of theorem 1 using the degree reduction step, via the <a href="#corollary1">Matrix Multiplication Lemma</a>, we must make sure that all the players use, as input to this procedure, their correct point on the product polynomial \(h(x)=f(x)g(x)\). To guarantee that this indeed happens, we use the <span class="definable" data-define="error correcting code">Error Correcting Codes</span> again.
+								Here again, the multiplication step is more involved. To repeat the procedure of theorem 1 using the degree reduction step, via the <a href="#corollary1">Matrix Multiplication Lemma</a>, we must make sure that all the players use, as input to this procedure, their correct point on the product polynomial \(h(x)=f(x)g(x)\). To guarantee that this indeed happens, we use the <span class="definable" data-define="error-correcting code">Error Correcting Codes</span> again.
 							</p>
 							<p class="rp_original">
 								Let \(a_i=f(\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\(),\,b_i=g(\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\()\) and \(c_i=h(\)<span class="equation" data-equation="omega">\(\omega^i\)</span>\()=a_i\cdot b_i\) be the points of \(P_i\) on these polynomials. We ask each \(P_i\) to pick a random polynomial of degree \(t,\,A_i(x)\), such that \(a_i=A_i(0)\), and use this polynomial to distribute \(a_i\) as a secret to all the players. Similarly, \(P_i\) distributes \(b_i\) using \(B_i(x)\). We also ask \(P_i\) to distribute \(c_i\) using the polynomial \(C_i(x)\), while verifying that \(A_i(x),\,B_i(x),\,C_i(x)\) are all of degree \(t\), and that \(C_i(0)=A_i(0)B_i(0)\).
@@ -631,8 +646,8 @@
 			<div class="main_toplevel main_section main_color5" id="appendix">
 				<div class="main_window main_fullwidth">
 					<h1>Appendix</h1>
-					<section id="appendix1">
-						<h2>Formal Notation</h2>
+					<section id="appendixnotation">
+						<h3>Formal Notation</h3>
 						<p class="rp_original">
 							Let \(F\) be a field. Let \(U=F^n\) denote the standard \(n\)-dimensional vector space over \(F\) and \(M_n(F)\) the ring of \(n\times n\) matrices over \(F\).
 						</p>
@@ -643,90 +658,93 @@
 						<p class="rp_original rp_sub">
 							Unless otherwise specified, \(F\) will be finite, and \(D\) the uniform distribution over \(F\).
 						</p>
-						<section id="appendix1.1">
-							<h3>The Basic Model:</h3>
-							<p class="rp_original">
-								Fix \(n\gt 0\) and a field \(F\). Intuitively, an \((n,F)\)-<i>network</i> is a complete synchronous network of \(n\) probabilistic machines (players) \(P_0,P_1,\dots,P_{n-1}\). At every round each players can send one message (element of \(F\)) to each other player, receive a message from each other player, and perform arbitrary computation.
-							</p>
-							<p class="rp_original">
-								If we assume for convenience that players send messages to themselves too, a round of communication is nearly described by a matrix \(M\in M_n(F)\), where each \(P_i\) sent the \(i\)-th row of \(M\), and receives the \(i\)-th column of \(M\). (This formalizes the security of private channels).
-							</p>
-							<p class="rp_original">
-								Formally, a \(T\) round \((n,F)\)-<i>network</i> is a set of players \(\{P_0,P_1,\dots,P_{n-1}\}\). Each \(P_i\) is a tuple $$P_i=\left\langle Q_i,q_i^{(0)},R_i,\delta_i\right\rangle,$$ where \(Q_i\) is a set of states, \(q_i^{0}\) the initial state, \(R_i\) is a random variable over \(F\) (distributed like \(R\)) and $$\delta_i:\,[T]\times Q_i\times F^n\times R_i^*\rightarrow Q_i\times F^n$$ is a transition function that, given a round number, state, previous round input, and private coin tosses, computes the next state and this round's output.
-							</p>
-							<p class="rp_original">
-								A <i>protocol</i> is simply \(\delta=\left\langle\delta_0,\delta_1,\dots,\delta_{n-1}\right\rangle\), the transition functions prescribing to each player what to do in each round.
-							</p>
-							<p class="rp_original">
-								A <i>run</i> \(M\) of a protocol \(\delta\) is a sequence \((M_1,M_2,\dots,M_T),\,M_j\in M_n(F)\) of matrices describing the communication in rounds \(j=1,2,\dots,T\). Note that \(M\) is a random variable, depending on \(\{w_i^{(0)}\}\), the initial states, and \(\{R_i^*\},\,(=R^*)\), the random draws from \(D\).
-							</p>
-							<p class="rp_original">
-								A <i>(probabilistic) function</i> is a function \(f\), $$f:\;F^n\times R^m\rightarrow F^n.$$
-							</p>
-							<p class="rp_original">
-								Intuitively, a protocol <i>computes</i> a function \(f\) if, for all \(v\in F^n\), if \(P_i\) is given \(v_i\in F\) before round 1, then after round \(T\) it knows \(u_i\), such that \(u=\left\langle u_0,u_1,\dots,u_{n-1}\right\rangle\) is distributed exactly like \(f(v\times R^m)\). For convenience we denote a vector \(\left\langle a_0,a_1,\dots,a_{n-1}\right\rangle\) by \(\langle a_i\rangle\). Also, \(q_i^{(j)}\) denote the state of \(P_i\) after round \(j\).
-							</p>
-							<p class="rp_original">
-								To formally define what it means for a protocol to compute a function, we assume fixed input and output functions, \(I_i,O_i:\,Q_i\rightarrow F\) for each player \(P_i\). Now \(\delta\) computes \(f\), if for every choice of \(\left\langle q_i^{(0)}\right\rangle\), we have \(\left\langle O_i\left(q_i^{(T)}\right)\right\rangle=f\left(I_i(q_i^{(0)})\times R^m\right)\) (as random variables).
-							</p>
-						</section>
-						<section id="appendix1.2">
-							<h3>Some Intuition</h3>
-							<p class="rp_original">
-								The bad players in our model can completely coordinate their actions. Hence, for a bad set (coalition) \(C\subseteq[n]=\{0,1,2,\dots,n-1\}\), the transition functions \(\delta_i,\,i\in C\) are replaced by arbitrary functions \(\delta_i'\) that compute the next state and messages of \(P_i\) from the joint information of the current state, previously received messages and random choices of all \(\{P_i\},\,i\in C\). We denote any protocol in which a set of \(C\) is bad (in this sense) by \(\delta_C\).
-							</p>
-							<p class="rp_original">
-								We distinguish two types of bad behavior. The benign (gossip) kind, in which bad players send messages according to the original protocol \(\delta\), but try to learn as much as they can from it by joining their forces. The malign (Byzantine) kind puts no restrictions on the bad players, i.e. the \(\delta_i'\) can really be arbitrary.
-							</p>
-							<p class="rp_original">
-								To formalize the benign kind of bad behavior we need the following definition: Two protocols \(\delta\) and \(\delta'\) <i>look alike</i> if their runs have the same distribution, i.e. \(M=M'\) as random variables, for every fixed initial state \(\left\langle q_i^{(0)}\right\rangle\) of all players.
-							</p>
-							<p class="rp_original">
-								A bad coalition \(C\) is called <i>gossip</i> if the protocol \(\delta_C\) looks like \(\delta\), otherwise it is called <i>Byzantine</i>.
-							</p>
-							<p class="rp_original">
-								In the case of gossip, we don't have to worry about the correctness of computing \(f\)&mdash;this follows from the definition "look alike". Here all we shall have to prevent is leakage of information. In case of Byzantine faults, we will have to guarantee also the correctness of the computation. We proceed now to define the important notions of Privacy and Correctness.
-							</p>
-						</section>
-						<section id="appendix1.3">
-							<h3>Privacy (preliminary):</h3>
-							<p class="rp_original">
-								Intuitively, a coalition \(C\) did not learn anything from a protocol for computing \(f\), if whatever it can compute after the protocol (from its final states), it could compute only from its input (initial states) and its components of the function values.
-							</p>
-							<p class="rp_original">
-								Let \(Q_C=\prod\nolimits_{i\in C}Q_i\) and \(A\) be an arbitrary set. Also, if \(u=\left\langle u_0,u_1,\dots,u_{n-1}\right\rangle,\,u_C\) denotes the sub-vector of \(u\) that contains \(u_i,\,i\in C\). Formally a set \(C\) is <i>ignorant</i> in a protocol \(\delta\) (for computing \(f\)), if for every set of initial states \(\left\langle q_i^{(0)}\right\rangle\), ever protocol \(\delta_C\), that looks like \(\delta\) and every function \(g':\;Q_C\rightarrow A\) there exists a function \(d:\;Q_C\times F^{|C|}\rightarrow A\) satisfying $$g'\left(q_C^{(T)}\right)=g\left(q_C^{(0)},\,f,\,\left(\left\langle I_i(q_i^{(0)})\right\rangle\right)_C\right)\quad\quad(*)$$
-							</p>
-							<p class="rp_original">
-								A protocol \(\delta\) (for computing \(f\)) is \(t\)-<i>private</i> if every coalition \(C\) with \(|C|\leq t\) is ignorant.
-							</p>
-						</section>
-						<section id="appendix1.4">
-							<h3>Correctness:</h3>
-							<p class="rp_original">
-								This issue is problematic, since some of the bad players can obliterate their initial inputs, and the function value is not well defined (a simple example is Byzantine agreement). To ignore bad inputs for every set \(B\subseteq[n]\), we need a (sub)function of \(f\) that depends on the input coordinates of only \([n]\backslash B\). (A special case is assigned default values to input coordinates in \(B\)).
-							</p>
-							<p class="rp_original">
-								So now by \(f\) we mean a family of functions \(\{f_B:\;F^{n\backslash B}\times R^m\rightarrow F^n\}\;B\subseteq[n]\), with \(f_\phi\) being the original function \(f\). Typically, (as in Byzantine agreement) this exponential size family is very succinctly described.
-							</p>
-							<p class="rp_original">
-								So now, a computation is correct if all good players compute a function \(f_B\), where \(B\) is a subset of the bad players.
-							</p>
-							<p class="rp_original">
-								More formally, a coalition \(C\) is <i>harmless</i> if, for every set of initial states \(\left\langle q_i^{(0)}\right\rangle\) and every protocol \(\delta_C\), $$\left\{\left\langle O_i\left(q_i^{(T)}\right)\right\rangle\right\}_{[n]\backslash C}\;=\;f_B\left(\left\{\left\langle I_i\left(q_i^{(0)}\right)\right\rangle\right\}_{[n]\backslash B}\right)_{[n]\backslash C}$$ for some \(B\subseteq C\).
-							</p>
-							<p class="rp_original">
-								A protocol is \(t\)-<i>resilient</i> if every coalition \(C\) with \(|C|\leq t\) is harmless.
-							</p>
-						</section>
-						<section id="appendix1.5">
-							<h3>Privacy Revisited:</h3>
-							<p class="rp_original">
-								For the case of Byzantine faults, the assumption that \(\delta_C\) looks like \(\delta\) is invalid. For any harmless coalition \(C\) we can remove this assumption from the definition of ignorance, and replace \(f\) in \((*)\) above, by \(f_B\), the function that will actually be computed by the good players.
-							</p>
-							<p class="rp_original">
-								Now the notion of a protocol that is both \(t\)-resilient and \(t\)-private is well defined.
-							</p>
-						</section>
+					</section>
+					<section id="appendix1.1">
+						<h3>The Basic Model</h3>
+						<p class="rp_original">
+							Fix \(n\gt 0\) and a field \(F\). Intuitively, an \((n,F)\)-<i>network</i> is a complete synchronous network of \(n\) probabilistic machines (players) \(P_0,P_1,\dots,P_{n-1}\). At every round each players can send one message (element of \(F\)) to each other player, receive a message from each other player, and perform arbitrary computation.
+						</p>
+						<p class="rp_original">
+							If we assume for convenience that players send messages to themselves too, a round of communication is neatly described by a matrix \(M\in M_n(F)\), where each \(P_i\) sent the \(i\)-th row of \(M\), and receives the \(i\)-th column of \(M\). (This formalizes the security of private channels).
+						</p>
+						<p class="rp_original">
+							Formally, a \(T\) round \((n,F)\)-<i>network</i> is a set of players \(\{P_0,P_1,\dots,P_{n-1}\}\). Each \(P_i\) is a tuple $$P_i=\left\langle Q_i,q_i^{(0)},R_i,\delta_i\right\rangle,$$ where \(Q_i\) is a set of states, \(q_i^{0}\) the initial state, \(R_i\) is a random variable over \(F\) (distributed like \(R\)) and $$\delta_i:\,[T]\times Q_i\times F^n\times R_i^*\rightarrow Q_i\times F^n$$ is a transition function that, given a round number, state, previous round input, and private coin tosses, computes the next state and this round's output.
+						</p>
+						<p class="rp_original">
+							A <i>protocol</i> is simply \(\delta=\left\langle\delta_0,\delta_1,\dots,\delta_{n-1}\right\rangle\), the transition functions prescribing to each player what to do in each round.
+						</p>
+						<p class="rp_original">
+							A <i>run</i> \(M\) of a protocol \(\delta\) is a sequence \((M_1,M_2,\dots,M_T),\,M_j\in M_n(F)\) of matrices describing the communication in rounds \(j=1,2,\dots,T\). Note that \(M\) is a random variable, depending on \(\{w_i^{(0)}\}\), the initial states, and \(\{R_i^*\},\,(=R^*)\), the random draws from \(D\).
+						</p>
+						<p class="rp_original">
+							A <i>(probabilistic) function</i> is a function \(f\), $$f:\;F^n\times R^m\rightarrow F^n.$$
+						</p>
+						<p class="rp_original">
+							Intuitively, a protocol <i>computes</i> a function \(f\) if, for all \(v\in F^n\), if \(P_i\) is given \(v_i\in F\) before round 1, then after round \(T\) it knows \(u_i\), such that \(u=\left\langle u_0,u_1,\dots,u_{n-1}\right\rangle\) is distributed exactly like \(f(v\times R^m)\). For convenience we denote a vector \(\left\langle a_0,a_1,\dots,a_{n-1}\right\rangle\) by \(\langle a_i\rangle\). Also, \(q_i^{(j)}\) denotes the state of \(P_i\) after round \(j\).
+						</p>
+						<p class="rp_original">
+							To formally define what it means for a protocol to compute a function, we assume fixed input and output functions, \(I_i,O_i:\,Q_i\rightarrow F\) for each player \(P_i\). Now \(\delta\) computes \(f\), if for every choice of \(\left\langle q_i^{(0)}\right\rangle\), we have \(\left\langle O_i\left(q_i^{(T)}\right)\right\rangle=\operatorname f\left(I_i(q_i^{(0)})\times R^m\right)\) (as random variables).
+						</p>
+					</section>
+					<section id="appendix1.2">
+						<h3>Some Intuition</h3>
+						<p class="rp_original">
+							The bad players in our model can completely coordinate their actions. Hence, for a bad set (coalition) \(C\subseteq[n]=\{0,1,2,\dots,n-1\}\), the transition functions \(\delta_i,\,i\in C\) are replaced by arbitrary functions \(\delta_i'\) that compute the next state and messages of \(P_i\) from the joint information of the current state, previously received messages and random choices of all \(\{P_i\},\,i\in C\). We denote any protocol in which a set of \(C\) is bad (in this sense) by \(\delta_C\).
+						</p>
+						<p class="rp_original">
+							We distinguish two types of bad behavior. The benign (gossip) kind, in which bad players send messages according to the original protocol \(\delta\), but try to learn as much as they can from it by joining their forces. The malign (Byzantine) kind puts no restrictions on the bad players, i.e. the \(\delta_i'\) can really be arbitrary.
+						</p>
+						<p class="rp_original">
+							To formalize the benign kind of bad behavior we need the following definition: Two protocols \(\delta\) and \(\delta'\) <i>look alike</i> if their runs have the same distribution, i.e. \(M=M'\) as random variables, for every fixed initial state \(\left\langle q_i^{(0)}\right\rangle\) of all players.
+						</p>
+						<p class="rp_original">
+							A bad coalition \(C\) is called <i>gossip</i> if the protocol \(\delta_C\) looks like \(\delta\), otherwise it is called <i>Byzantine</i>.
+						</p>
+						<p class="rp_original">
+							In the case of gossip, we don't have to worry about the correctness of computing \(f\)&mdash;this follows from the definition "look alike". Here all we shall have to prevent is leakage of information. In case of Byzantine faults, we will have to guarantee also the correctness of the computation. We proceed now to define the important notions of Privacy and Correctness.
+						</p>
+					</section>
+					<section id="appendix1.3">
+						<h3>Privacy (preliminary):</h3>
+						<p class="rp_original">
+							Intuitively, a coalition \(C\) did not learn anything from a protocol for computing \(f\), if whatever it can compute after the protocol (from its final states), it could compute only from its input (initial states) and its components of the function values.
+						</p>
+						<p class="rp_original">
+							Let \(Q_C=\prod\nolimits_{i\in C}Q_i\) and \(A\) be an arbitrary set. Also, if \(u=\left\langle u_0,u_1,\dots,u_{n-1}\right\rangle,\,u_C\) denotes the sub-vector of \(u\) that contains \(u_i,\,i\in C\). Formally a set \(C\) is <i>ignorant</i> in a protocol \(\delta\) (for computing \(f\)), if for every set of initial states \(\left\langle q_i^{(0)}\right\rangle\), every protocol \(\delta_C\) that looks like \(\delta\), and every function \(g':\;Q_C\rightarrow A\) there exists a function \(g:\;Q_C\times F^{|C|}\rightarrow A\) satisfying $$g'\left(q_C^{(T)}\right)=g\left(q_C^{(0)},\,f\left(\left\langle I_i(q_i^{(0)})\right\rangle\right)_C\right)\quad\quad(*)$$
+						</p>
+						<p class="rp_annotation">
+							The above was corrected; originally, a function \(d\) was defined, but never used, while \(g\) was used, but never defined. There was additionally an extra comma after \(f\) which made the function poorly-defined.
+						</p>
+						<p class="rp_original">
+							A protocol \(\delta\) (for computing \(f\)) is <span class="definable" data-define="t-private">\(t\)-<i>private</i></span> if every coalition \(C\) with \(|C|\leq t\) is ignorant.
+						</p>
+					</section>
+					<section id="appendix1.4">
+						<h3>Correctness:</h3>
+						<p class="rp_original">
+							This issue is problematic, since some of the bad players can obliterate their initial inputs, and the function value is not well defined (a simple example is Byzantine agreement). To ignore bad inputs for every set \(B\subseteq[n]\), we need a (sub)function of \(f\) that depends on the input coordinates of only \([n]\backslash B\). (A special case is assigned default values to input coordinates in \(B\)).
+						</p>
+						<p class="rp_original">
+							So now by \(f\) we mean a family of functions \(\{f_B:\;F^{n\backslash B}\times R^m\rightarrow F^n\}\;B\subseteq[n]\), with \(f_\varnothing\) being the original function \(f\). Typically, (as in Byzantine agreement) this exponential size family is very succinctly described.
+						</p>
+						<p class="rp_original">
+							So now, a computation is correct if all good players compute a function \(f_B\), where \(B\) is a subset of the bad players.
+						</p>
+						<p class="rp_original">
+							More formally, a coalition \(C\) is <i>harmless</i> if, for every set of initial states \(\left\langle q_i^{(0)}\right\rangle\) and every protocol \(\delta_C\), $$\left\{\left\langle O_i\left(q_i^{(T)}\right)\right\rangle\right\}_{[n]\backslash C}\;=\;f_B\left(\left\{\left\langle I_i\left(q_i^{(0)}\right)\right\rangle\right\}_{[n]\backslash B}\right)_{[n]\backslash C}$$ for some \(B\subseteq C\).
+						</p>
+						<p class="rp_original">
+							A protocol is <span class="definable" data-define="t-resilient">\(t\)-<i>resilient</i></span> if every coalition \(C\) with \(|C|\leq t\) is harmless.
+						</p>
+					</section>
+					<section id="appendix1.5">
+						<h3>Privacy Revisited:</h3>
+						<p class="rp_original">
+							For the case of <span class="definable" data-define="Byzantine fault">Byzantine faults</span>, the assumption that \(\delta_C\) looks like \(\delta\) is invalid. For any harmless coalition \(C\) we can remove this assumption from the definition of ignorance, and replace \(f\) in \((*)\) above, by \(f_B\), the function that will actually be computed by the good players.
+						</p>
+						<p class="rp_original">
+							Now the notion of a protocol that is both <span class="definable" data-define="t-resilient">\(t\)-resilient</span> and <span class="definable" data-define="t-private">\(t\)-private</span> is well defined.
+						</p>
 					</section>
 				</div>
             </div>
@@ -741,7 +759,7 @@
 						<a href="#fref2">[^]</a> Claim: \(GF(q)\) has a primitive \(n\)th <span class="definable">root of unity</span> if and only if \(n\,|\,q-1\). To quickly demonstrate this, assume we have a primitive \(n\)th root of unity \(\omega\) for \(GF(q)\) where \(n\not|\;q-1\). Take any generator \(g\) in this field: by definition of a generator, there exists an \(a\) such that \(g^a=\omega\). Since the field is a multiplicative ring, \(g^{q-1}=g^0=1\). But \(g^{an}=1\), and by definition of a primitive root of unity, there is no smaller (non-zero) exponent such that this is true. So \(g^{an}=g^{q-1}\) therefore implies \(an=q-1\), clearly contradicting our assumption that \(n\not|\;q-1\).
 					</li>
 					<li id="footnote3">
-						<a href="#fref3">[^]</a> Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from the lower bound on \(phi(n)\): for any \(n\geq3,\,\phi(n)\geq\frac{n}{e^\gamma\log{\log n}}+\operatorname O\left(\frac{n}{(\log{\log n})^2}\right)\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^\phi(n)\gt n\). Since we are minimizing \(\phi(n)\) anyway, for simplicity we can assume the big-oh is 0, leaving us with: $$2^{\frac{e^{-\gamma}n}{\log{\log n}}}\geq n.$$ The left side clearly dominates the right side (both intuitively and through analysis of their derivatives), and the left overtakes the right by \(n=5\), so we are left only to demonstrate that \(p^{\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)) and for 4 (\(3^2\gt 4\)). With the exception of 4, we have demonstrated that for the lowest possible \(p,\,p^{\phi(n)}\gt n\); the equation was still demonstrated to be true for all values of \(p\) valid for 4.  
+						<a href="#fref3">[^]</a> Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from the lower bound on \(\operatorname \phi(n)\): for any \(n\geq3,\,\phi(n)\geq\frac{n}{e^\gamma\log{\log n}}+\operatorname O\left(\frac{n}{(\log{\log n})^2}\right)\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^{\operatorname\phi(n)}\gt n\). Since we are minimizing \(\phi(n)\) anyway, for simplicity we can assume the big-oh is 0, leaving us with: <span style="font-size:200%">$$2^{\frac{e^{-\gamma}n}{\log{\log n}}}\geq n.$$</span> The left side clearly dominates the right side (both intuitively and through analysis of their derivatives), and the left is greater than the right starting at \(n=5\), so we are left only to demonstrate that \(p^{\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)) and for 4 (\(3^2\gt 4\)). With the exception of \(n=4\) (where we must use \(p=3\) but without weakening our claim) we have demonstrated that, for the lowest possible \(p,\,p^{\phi(n)}\gt n.\quad\blacksquare\)  
 					</li>
                 </ol>
             </div>
