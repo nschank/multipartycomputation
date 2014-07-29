@@ -44,7 +44,7 @@
 				}
 			}
 
-			self_def["t-private"] = "A protocol is \\(t\\)-<i>private</i> if any set of at most \\(t\\) players cannot compute after the protocol more than they could jointly compute solely from their set of privacy inputs and outputs.";
+			self_def["t-private"] = "A protocol is \\(t\\)-<i>private</i> if any set of at most \\(t\\) players cannot compute more after the protocol than they could jointly compute solely from their own of private inputs and outputs.";
 			self_def["t-resilient"] = "A protocol is \\(t\\)-<i>resilient</i> if no set of \\(t\\) or fewer players can influence the correctness of the outputs of the remaining players.";
 			//-->
         </script>
@@ -81,7 +81,7 @@
 					</span>
 					
 					<div class="rp_snippet">
-						&ldquo;&rdquo;
+						&ldquo;[Chaum, Cr&eacute;peau, and Damg&aring;rd] have to allow an exponentially small error probability for both correctness and privacy (we can guarantee them with no errors).... In [their solution] the simulation is of Boolean operations while our solution allows direct simulation of arithmetic operations in large finite fields.&rdquo;
 					</div>
 					<h1>Overview</h1>
 						
@@ -93,7 +93,7 @@
 							<b>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</b> is a 1988 paper by Ben-Or, Goldwasser, and Wigderson which demonstrated the bounds of (and described a protocol for) multiparty computation which is <span class="definable" data-define="information theoretic security">information theoretically secure</span>. It is one of <a href="34.html">two papers</a> in the same year which demonstrates that up to &frac13; parties can be actively <span class="definable" data-define="malicious adversary">malicious</span> without affecting correctness or privacy. The other paper offers information theoretic security in a very similar manner, while this paper additionally guarantees correctness (as opposed to a <span class="definable">negligible</span> probability of incorrectness).
 						</p>
 						<p class="rp_original">
-							One major difference between this paper and <a href="34.html">its chronological counterpart</a> is the type of computation performed. Chaum's construction is based around Boolean operation simulations, while this protocol uses an arithmetic circuit within a finite field. Very significantly, this finite field is <u>not</u> arbitrary as implied in the paper: it must be of the form \(GF(p^{k\operatorname\phi(n)})\), where \(n\) is the number of parties who must participate, \(p\) is any prime that is not a factor of \(n\) (generally the minimal prime), and \(k\) is any positive integer (generally 1). This is necessary in order to allow for the fault tolerance properties sought; more details can be found in <a href="#sec5">Section 5</a>.
+							One major difference between this paper and <a href="34.html">its chronological counterpart</a> is the type of computation performed. Chaum's construction is based around Boolean operation simulations, while this protocol uses an arithmetic circuit within a finite field. Very significantly, this finite field is <u>not</u> arbitrary as implied in the paper: it must be of the form \(GF(p^{k\operatorname\phi(n)})\), where \(n\) is the number of parties who must participate, \(p\) is any prime that is not a factor of \(n\) (generally the minimal prime), and \(k\) is any<sup class="footnote" id="fref3"><a href="#footnote3">3</a></sup> positive integer. This is necessary in order to allow for the fault tolerance properties sought; more details can be found in <a href="#sec5">Section 5</a>.
 						</p>
 					</section>
 					<section id="goals">
@@ -148,22 +148,6 @@
 						<p class="rp_original rp_theorem">
 							There are functions for which there is no \(\frac n 3\)-<span class="definable" data-define="t-resilient">resilient</span> protocol.
 						</p>
-					</section>
-					<section id="protocol">
-						<h2>Protocols</h2>
-						<h3><a href="#secxx">Some Protocol Defined</a></h3>
-						<ul class="rp_analysis">
-							<li><b>Number of parties: </b></li>
-							<li><b>Function(s): </b></li>
-							<li><b>Privacy constraints: </b></li>
-							<li><b>Cheating: </b></li>
-							<li><b>Bits exchanged: </b></li>
-							<li><b>Subprotocols: </b></li>
-							<li><b>Runtime: </b></li>
-							<li><b>Assumptions: </b></li>
-							<li><b>Implementations: </b></li>
-							<li><b>Notes: </b></li>
-						</ul>
 					</section>
 					<section id="further">
 						<h2>Further Reading</h2>
@@ -385,7 +369,7 @@
 								As noted above, the coefficients of the product polynomial are not completely random, and likewise the coefficients of its truncation <span class="equation" data-equation="truncation">\(k(x)\)</span> may not be completely random. To randomize the coefficients, each player \(P_i\) randomly selects a polynomial \(q_i(x)\) of degree \(2t\) with a zero free coefficient, and distributes its shares among the player. By a simple generalization of the argument in Shamir's<sup class="reference" data-citation="Sh">[?]</sup> scheme, it is easy to see that knowing \(t\) values on this polynomial gives no information on the vector of coefficients of the monomials of \(x,x^2,\dots,x^t\) of \(q_i(x)\).
 							</p>
 							<p class="rp_annotation">
-								This is also a simple generalization of the argument we make for the information-theoretic security of any \(k\lt x\) shares for any \(x\)-degree polynomial, <a href="34.html#sec3">here</a>.
+								This is also a simple generalization of the argument we make for the information-theoretic security of any \(k\leq x\) shares for any \(x\)-degree polynomial, <a href="34.html#sec3">here</a>.
 							</p>
 							<p class="rp_original">
 								Thus instead of using \(h(x)\) in our reduction we can use $$\widetilde{h}(x)=h(x)+\sum\limits_{j=0}^{n-1}{q_j(x)}$$ which satisfies \(\widetilde{h}(0)=h(0)\) but the other coefficients of \(x^i,1\leq i\leq t\), are completely random. Since each player can evaluate his or her point \(\widetilde s_i = \widetilde h(\alpha_i)\), we can now apply the truncation procedure using the <a href="#corollary1">matrix multiplication lemma</a> to arrive at a completely random polynomial <span class="equation" data-equation="truncation">\(\widetilde k(x)\)</span> which satisfies both \(\operatorname{deg}\widetilde k(x)=t\) and \(\widetilde k(0)=a\cdot b\), and \(\widetilde k(x)\) is properly shared among all the players.
