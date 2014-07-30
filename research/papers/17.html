@@ -92,8 +92,11 @@
 						<p class="rp_analysis">
 							<b>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</b> is a 1988 paper by Ben-Or, Goldwasser, and Wigderson which demonstrated the bounds of (and described a protocol for) multiparty computation which is <span class="definable" data-define="information theoretic security">information theoretically secure</span>. It is one of <a href="34.html">two papers</a> in the same year which demonstrates that up to &frac13; parties can be actively <span class="definable" data-define="malicious adversary">malicious</span> without affecting correctness or privacy. The other paper offers information theoretic security in a very similar manner, while this paper additionally guarantees correctness (as opposed to a <span class="definable">negligible</span> probability of incorrectness).
 						</p>
-						<p class="rp_original">
+						<p class="rp_analysis">
 							One major difference between this paper and <a href="34.html">its chronological counterpart</a> is the type of computation performed. Chaum's construction is based around Boolean operation simulations, while this protocol uses an arithmetic circuit within a finite field. Very significantly, this finite field is <u>not</u> arbitrary as implied in the paper: it must be of the form \(GF(p^{k\operatorname\phi(n)})\), where \(n\) is the number of parties who must participate, \(p\) is any prime that is not a factor of \(n\) (generally the minimal prime), and \(k\) is any<sup class="footnote" id="fref3"><a href="#footnote3">3</a></sup> positive integer. This is necessary in order to allow for the fault tolerance properties sought; more details can be found in <a href="#sec5">Section 5</a>.
+						</p>
+						<p class="rp_analysis">
+							Note that a true protocol specification is not given in this work; it offers completeness theorems, and uses a more general specification in order to prove its purposes. For example, no particular algorithm for the error checking and correctness is given, but its existence is sufficient to prove their claims.
 						</p>
 					</section>
 					<section id="goals">
@@ -103,6 +106,9 @@
 						</p>
 						<p class="rp_analysis">
 							Simply put, protocols can guarantee both correctness and information-theoretic security in the case when \(t\lt\frac n 3\) parties are <span class="definable" data-define="malicious adversary">malicious</span>. This paper additionally extends the cryptographic privacy on <span class="definable" data-define="passive adversary">passive adversaries</span>&mdash;\(t\lt\frac n 2\)&mdash;to information-theoretic multiparty computation. These two limits are not achievable simultaneously through the protocol presented.
+						</p>
+						<p class="rp_analysis">
+							The authors provided privacy using a familiar verifiable secret sharing scheme based on finite fields. Their methodology for correctness is more clever; by ensuring the VSS scheme was constructed such that it had an <span class="definable" data-define="error-correcting code">error correcting code</span> (using the <span class="definable">Discrete Fourier Transform</span>), they reduced fault tolerance within the scheme to known algorithms for error correction.
 						</p>
 					</section>
 					<section id="assumptions">
