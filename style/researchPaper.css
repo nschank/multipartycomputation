@@ -66,10 +66,6 @@ div.rp_linkbox a {
     display:inline-block;
 }
 
-.rp_theorem {
-    font-style:italic;
-}
-
 .rp_definition, .rp_theorem {
     font-size:110%;
     margin:0px auto 3px auto;

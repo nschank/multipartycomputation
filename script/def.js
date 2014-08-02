@@ -37,9 +37,13 @@ var def_internal = {
 	
 	"computational indistinguishability":"Two distributions are computationally indistinguishable if there exists no polynomial time adversary which can accurately predict whether a particular element was chosen from one or the other. In this case 'accurately' specifically means that the probability the adversary is correct in any case is at best negligibly better than &frac12;. For distributions \\(h\\) and \\(k\\), this is sometimes written \\(h\\stackrel{comp}{\\equiv}k\\).",
 	
+	"connectivity":"The connectivity of a graph \\(G\\) is the minimal number of nodes or edges which can be removed in order to make the graph disconnected. That is, if \\(G=(V,E)\\) has edge-connectivity \\(c\\), then:</p><ol><li>There is some pair of vertices \\(v_1,v_2\\) such that the minimum distance between them is exactly \\(c\\).</li><li>In some graph \\(G'=(V,E')\\), where \\(|E'|=|E|-c\\), there exists no path connecting \\(v_1,v_2\\).</li><li>There does not exist a \\(c'\\lt c\\) where the above conditions are true.</li></ol><p>",
+	
 	"cryptographic security":"A protocol is cryptographically secure if adversaries cannot learn the inputs of other parties within a bounded time, generally under certain assumptions about the hardness of a particular (cryptographic) problem. This is in contrast to <span class=\"definable\">information theoretic security</span>.",
 	
 	"cyclic code":"A cyclic code is a type of <span class=\"definable\">error-correcting code</span> in which any codeword for \\(x\\) can be right or left shifted any number of times and still be a correct codeword for \\(x\\).",
+	
+	"diameter of a graph":"The diameter of a graph is the length of the shortest path between the two points most distant from each other in the graph. So for graph \\(G\\) with diameter \\(d\\):</p><ol><li>There is some pair of points \\(v_1,v_2\\) where the shortest path in \\(G\\) between them has length exactly \\(d\\).</li><li>There is no pair of points \\(w_1,w_2\\) in \\(G\\) such that the distance between them is greater than \\(d\\).</li></ol><p>",
 	
 	"Discrete Fourier Transform":"The Discrete Fourier Transform of some function uses a set of 'equally spaced' points on the function (where the inputs are all intermediate powers of an \\(n\\)th <span class=\"definable\">root of unity</span>) to create a function within the frequency domain of the function.",
 	

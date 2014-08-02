@@ -38,7 +38,9 @@
 				}
 			}
 
-			self_def["non-general word"] = "definition";
+			self_def["define a secret"] = "</p><span class=\"rp_definition_header\"><a href=\"#def1\">Definition 1</a></span><p>It will be said that players \\(P_1,\\dots,P_r,\\, r\\geq t+1\\), holding pieces given by a dealer, <i>define a secret</i> \\(s\\), if (1) every player \\(P_i\\) has a distinct evaluation point, (2) for every subset \\(P_{i_1},\\dots,P_{i_{t+1}}\\), the polynomial \\(f(x)\\) of degree \\(t\\), <span class=\"definable\" data-define=\"interpolation\">interpolated</span> through the pieces \\(\\beta_{i_1},\\dots,\\beta_{i_{t+1}}\\) which they hold, is the same, and its free term is \\(s\\). <b>Note:</b> Checking whether a set of players \\(P_1,\\dots,P_r\\) define a secret \\(s\\) is polynomial.";
+			self_def["coalition"] = "</p><span class=\"rp_definition_header\"><a href=\"#def2\">Definition 2</a></span><p>A <i>coalition</i> is a subset \\(C\\subseteq \\{P_1,\\dots,P_n\\}\\) of the set of all players, for which at the end of <a href=\"#sec3.1.2\">Phase 2</a> each \\(P_i\\in C\\) knows that every other player \\(P_j\\in C\\) will accept his or her piece of the shared secret.";
+			self_def["verified secret"] = "</p><span class=\"rp_definition_header\"><a href=\"#def3\">Definition 3</a></span><p>A group of \\(n\\) players holds a <i>verified secret (data) \\(s\\)</i>, shared using the polynomial \\(f(x)\\), so that \\(f(0)=s\\), and satisfying the conditions of VSS if:</p><ol><li>The polynomial \\(f(x)\\) is of degree \\(t\\).</li><li>Each player \\(P_i\\) holds a share of the secret \\(\\beta_i=f(\\alpha_i)\\).</li><li>Every piece \\(\\beta_i\\) was shared by \\(P_i\\) using WSS.</li></ol><p>"
 			//-->
         </script>
     </head>
@@ -100,40 +102,64 @@
 					</section>
 					<section id="defs">
 						<h2>Definitions</h2>
-						<a href="#def1"><span class="rp_definition_header">Definition 1 - </span></a>
+						<a href="#def1"><span class="rp_definition_header">Definition 1</span></a>
 						<p class="rp_original rp_definition">
-							A definition 
+							It will be said that players \(P_1,\dots,P_r,\, r\geq t+1\), holding pieces given by a dealer, <i>define a secret</i> \(s\), if (1) every player \(P_i\) has a distinct evaluation point, (2) for every subset \(P_{i_1},\dots,P_{i_{t+1}}\), the polynomial \(f(x)\) of degree \(t\), <span class="definable" data-define="interpolation">interpolated</span> through the pieces \(\beta_{i_1},\dots,\beta_{i_{t+1}}\) which they hold, is the same, and its free term is \(s\). <b>Note:</b> Checking whether a set of players \(P_1,\dots,P_r\) define a secret \(s\) is polynomial.
 						</p>
+						<a href="#def2"><span class="rp_definition_header">Definition 2:</span></a>
+						<p class="rp_original rp_definition">
+							A <i>coalition</i> is a subset \(C\subseteq \{P_1,\dots,P_n\}\) of the set of all players, for which at the end of <a href="#sec3.1.2">Phase 2</a> each \(P_i\in C\) knows that every other player \(P_j\in C\) will accept his or her piece of the shared secret.
+						</p>
+						<a href="#def3"><span class="rp_definition_header">Definition 3</span></a>
+						<p class="rp_original rp_definition">
+							A group of \(n\) players holds a <i>verified secret (data) \(s\)</i>, shared using the polynomial \(f(x)\), so that \(f(0)=s\), and satisfying the conditions of VSS if:
+						</p>
+						<ol class="rp_original rp_definition">
+							<li>The polynomial \(f(x)\) is of degree \(t\).</li>
+							<li>Each player \(P_i\) holds a share of the secret \(\beta_i=f(\alpha_i)\).</li>
+							<li>Every piece \(\beta_i\) was shared by \(P_i\) using WSS.</li>
+						</ol>
 					</section>
 					<section id="theorems">
 						<h2>Theorems</h2>
-						<p class="rp_original">Some general definitions used by several theorems</p>
-						<a href="#lemma1"><span class="rp_theorem_header">Lemma 1</span></a>
-						<ol class="rp_original rp_theorem">
-							<li>The probability that \(INT\) will deceive \(R\), when the dealer \(D\) is a knight, is \(\frac1{p-1}\lt\frac1{2^k}\).</li>
-							<li>The receiver \(R\), has no information about \(s\) from the check vector.</li>
-						</ol>
-						<a href="#lemma2"><span class="rp_theorem_header">Lemma 2</span></a>
-						<p class="rp_original rp_theorem">
-							The probability that the intermediary \(INT\) will assume that \(R\) will accept \(s\) when in fact \(R\) will reject it is at most \(\leq\frac{1 }{\binom{2k}{k}} \approx \frac{\sqrt{k}}{2^{2k}}\).
-						</p>
-						<span class="rp_theorem_header">Main Theorem</span>
-						<p class="rp_original rp_theorem">
-							Assuming the existence of a <span class="definable">broadcast channel</span> and private communication channels between each pair of \(n\) players, there exists a (poly-time) Verifiable Secret Sharing protocol tolerating up to \(t\lt\frac n2\) fault players. The secrecy achieved is unconditional, and the probability of error is exponentially small.
-						</p>
-						<span class="rp_theorem_header">Theorem 1: VSS with Honest Dealer</span>
+						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1: VSS with Honest Dealer</span></a>
 						<p class="rp_original rp_theorem">
 							Let \(n\geq2t+1\). Assuming only secure communication channels between each pair of \(n\) players (without <span class="definable" data-define="broadcast channel">broadcast</span>), an honest dealer can distribute a secret such that (a) no set of \(\;t\;\) players has any information about the secret and (b) any set of players containing at least \(t+1\) honest players will be able to reveal the correct secret, with only an exponentially small probability of error.
 						</p>
-						<span class="rp_theorem_header">Theorem 2</span>
+						<a href="#theoremwss"><span class="rp_theorem_header">WSS-Theorem:</span></a>
 						<p class="rp_original rp_theorem">
-							Let \(G\) be a synchronous network of \(\;n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(\;d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). Then there is an \(O(d)\) expected time randomized Byzantine agreement protocol on \(G\) tolerating up to \(t\) <span class="definable" data-define="Byzantine fault">Byzantine faults</span>.
+							Assume \(n\geq2t+1\). For a dealer \(D\), who is present until the end of the protocol, there is a protocol which achieves the Weak Secret Sharing. Moreover, the protocol is of polynomial complexity in both \(n\) and the security parameter \(k\), with any desired probability of success.
 						</p>
-						<span class="rp_theorem_header">Theorem 3</span>
+						<p class="rp_annotation rp_theorem">
+							Weak Secret Sharing has the following properties:
+						</p>
+						<ol class="rp_annotation rp_theorem">
+							<li>If \(D\) and \(R\) (the recipient) are knights, then \(R\) will always accept \(s\) if it actually originated with \(D\), and will reject with probability \(\geq 1-\frac1{2^k}\) any other value \(s'\).</li>
+							<li>Regardless if \(D\) is a knight or a knave, \(INT\) (the intermediary) will know, with probability of mistake \(\leq\frac1{2^k}\), whether \(R\) will accept the \(s\) that \(INT\) holds.</li>
+							<li>If \(D\) is a knave then, after it has been decided (in a sense to be explained later on) that a secret has been distributed, either 
+								<ul class="rp_original">
+									<li><i>All</i> knights will agree upon a secret \(s\) which they <span class="definable" data-define="define a secret">define</span> and which is the one shared to <i>them</i> by the dealer, or</li>
+									<li><i>All</i> knights decide to disqualify the dealer.</li>
+								</ul>
+							</li>
+						</ol>
+						<span class="rp_theorem_header" id="maintheorem">Main Theorem</span>
+						<p class="rp_original rp_theorem">
+							Assuming the existence of a <span class="definable">broadcast channel</span> and private communication channels between each pair of \(n\) players, there exists a (poly-time) Verifiable Secret Sharing protocol tolerating up to \(t\lt\frac n2\) fault players. The secrecy achieved is unconditional, and the probability of error is exponentially small.
+						</p>
+						<a href="#theorem2"><span class="rp_theorem_header">Theorem 2</span></a>
+						<p class="rp_original rp_theorem">
+							Let \(G\) be a synchronous network of \(\;n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(\;d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). Then there is an \(\operatorname O(d)\) expected time randomized Byzantine agreement protocol on \(G\) tolerating up to \(t\) <span class="definable" data-define="Byzantine fault">Byzantine faults</span>.
+						</p>
+						<a href="#theorem3"><span class="rp_theorem_header">Theorem 3</span></a>
 						<p class="rp_original rp_theorem">
 							Let \(G\) be a communication network between \(n\) players satisfying the conditions of theorem 2; then any multiparty protocol can be achieved on \(G\) if at most \(t\) of the players are faulty. Here again, the secrecy achieved is unconditional, and the probability of error is exponentially small.
 						</p>
-						<span class="rp_theorem_header">Theorem 4</span>
+						<a href="#theorem3star"><span class="rp_theorem_header">Theorem 3*</span></a>
+						<p class="rp_original rp_theorem">
+							Let \(G\) be a <span class="definable">synchronous network</span> of \(n\geq3t+1\) processors, with <span class="definable">connectivity</span> at least \(2t+1\), and <span class="definable" data-define="diameter of a graph">diameter</span> \(d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\), then any multiparty protocol \(\mathcal P\) can be achieved on \(G\) if at most \(t\) of the players are faulty. As in <span class="reference" data-citation="DDY">[?]</span>, the computation is completely error-free, and the secrecy achieved is unconditional. Moreover, the expected computation time is only \(\operatorname O(d)\) times the best secure and error-free protocol for \(\mathcal P\) on a complete network.
+						</p>
+						<a href="#theorem4"><span class="rp_theorem_header">Theorem 4</span></a>
 						<p class="rp_original rp_theorem">
 							Assuming that each participant can broadcast a message to all other participants and that each pair of participants can communicate secretly, any multiparty protocol, or game with incomplete information, can be achieved if a majority of the players are honest.
 						</p>
@@ -170,7 +196,7 @@
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper (extended abstract)</h1>
                     <div class="main_toc"></div>
-					<section id="abstract">
+					<section id="abstract" data-section-number="0">
 						<h2>Abstract</h2>
 						<p class="rp_original">
 							Under the assumption that each participant can <span class="definable" data-define="broadcast channel">broadcast</span> a message to all other participants and that each pair of participants can communicate <span class="definable" data-define="secrecy network">secretly</span>, we present a verifiable secret sharing protocol, and show that any multiparty computation, or game with incomplete information, can be achieved if a majority of the players are honest. The secrecy achieved is <span class="definable" data-define="information theoretic security">unconditional</span> and does not rely on any assumption about computational intractability. Applications of these results to Byzantine Agreement are also presented.
@@ -218,7 +244,7 @@
 						</p>
 						<span class="rp_theorem_header">Theorem 2</span>
 						<p class="rp_original rp_theorem">
-							Let \(G\) be a synchronous network of \(\;n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(\;d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). Then there is an \(O(d)\) expected time randomized Byzantine agreement protocol on \(G\) tolerating up to \(t\) <span class="definable" data-define="Byzantine fault">Byzantine faults</span>.
+							Let \(G\) be a synchronous network of \(\;n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(\;d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). Then there is an \(\operatorname O(d)\) expected time randomized Byzantine agreement protocol on \(G\) tolerating up to \(t\) <span class="definable" data-define="Byzantine fault">Byzantine faults</span>.
 						</p>
 						<p class="rp_original">
 							Similarly, Dolev's conditions are sufficient for general multiparty protocols. Extending the complete network results of <span class="reference" data-citation="BGW">[?]</span> and <span class="reference" data-citation="CCD">[?]</span> we have<sup class="footnote" id="fref1"><a href="#footnote1">1</a></sup>
@@ -327,6 +353,13 @@
                     </section>
 					<section id="sec2">
 						<h2>2. Secret Sharing when the Dealer is a Knight</h2>
+						<span class="rp_theorem_header" id="theorem1">Theorem 1: VSS with Honest Dealer</span>
+						<p class="rp_annotation rp_theorem">
+							Let \(n\geq2t+1\). Assuming only secure communication channels between each pair of \(n\) players (without <span class="definable" data-define="broadcast channel">broadcast</span>), an honest dealer can distribute a secret such that (a) no set of \(\;t\;\) players has any information about the secret and (b) any set of players containing at least \(t+1\) honest players will be able to reveal the correct secret, with only an exponentially small probability of error.
+						</p>
+						<p class="rp_annotation">
+							Theorem 1 is restated above as it is proven here.
+						</p>
 						<p class="rp_original">
 							In the following protocol we have a group of \(n\) players, including at most \(t\) knaves, where \(n\geq2t+1\). We assume that the dealer is a knight who owns a secret \(s\), which he or she wishes to share among the \(n\) players. Without loss of generality we may assume that the secret \(s\in\mathbb Z_p\), for some prime number \(p\gt n\). (The reader should not confuse this new prime \(p\), which can be a small prime, with the large prime number used for the generation and verification of the check vectors described above.) We want to achieve that any set of fewer than \(t+1\) players will have no information about the secret \(s\), and any set of \(t+1\) or more players which contains at least \(t+1\) knights will be able to compute the secret. When the secret is revealed we want that all knights will agree on the same value and that it will be the original secret the dealer shared. This gives a new, simple, polynomial-time solution for the problem treated in <span class="reference" data-citation="TW">[?]</span>.
 						</p>
@@ -354,7 +387,7 @@
 						<ol class="rp_original">
 							<li>Every \(P_i\) hands to every \(P_j,\;j\neq i\), the pair \((f(\alpha_i),y_{ij})\). (Knaves may, of course, give false values.)</li>
 							<li>For all the pairs received, \(P_i\) checks, using \((b_{ij},c_{ji})\), that \(f(\alpha_j)+b_{ji}y_{ji}=c_{ji}\) and accepts when appropriate. (Each \(P_i\) who is a knight will accept at least \(t+1\) pieces from the knights, and by <a href="#lemma1">Lemma 1</a> will reject, with high probability, all false pieces from the knaves.)</li>
-							<li>Say \(P_i\) accepted \(f(a_{i_1}),\dots,f(a_{i_r}),\,r\geq t+1\). He can now take \(t+1\) pieces and compute \(f(x)\) by interpolation. Since the dealer was a knight <i>all</i> the accepted points lie on the graph of \(f(x)\). The reconstructed secret \(s\) is uniquely defined as the constant term of \(f(x)\), and equals the one initially distributed.</li>
+							<li>Say \(P_i\) accepted \(f(\alpha_{i_1}),\dots,f(\alpha_{i_r}),\,r\geq t+1\). \(P_i\) can now take \(t+1\) pieces and compute \(f(x)\) by interpolation. Since the dealer was a knight, <i>all</i> the accepted points lie on the graph of \(f(x)\). The reconstructed secret \(s\) is uniquely defined as the constant term of \(f(x)\), and equals the one initially distributed.</li>
 						</ol>
 						<p class="rp_original">
 							It is easy to see that the above algorithm provides us with the possibility or a knight dealer to share a secret, so that the knaves can not interfere in the computations, and that all knights will compute the same value \(s\). This completes the proof of Theorem 1.
@@ -367,21 +400,24 @@
 						</p>
 						<span class="rp_definition_header" id="def1">Definition 1</span>
 						<p class="rp_original rp_definition">
-							It will be said that players \(P_1,\dots,P_r,\, r\geq t+1\), holding pieces given by a dealer, <i>define a secret</i> \(s\), if (1) every player \(P_i\) has a distinct evaluation point, (2) for every subset \(P_{i_1},\dots,P_{i_{t+1}}\), the polynomial \(f(x)\) of degree \(t\), interpolated through the pieces \(\beta_{i_1},\dots,\beta_{i+{t+1}}\), which they hold, is the same, and its free term is \(s\). <b>Note:</b> Checking whether a set of players \(P_1,\dots,P_r\) define a secret \(s\) is polynomial.
+							It will be said that players \(P_1,\dots,P_r,\, r\geq t+1\), holding pieces given by a dealer, <i>define a secret</i> \(s\), if (1) every player \(P_i\) has a distinct evaluation point, (2) for every subset \(P_{i_1},\dots,P_{i_{t+1}}\), the polynomial \(f(x)\) of degree \(t\), <span class="definable" data-define="interpolation">interpolated</span> through the pieces \(\beta_{i_1},\dots,\beta_{i_{t+1}}\) which they hold, is the same, and its free term is \(s\). <b>Note:</b> Checking whether a set of players \(P_1,\dots,P_r\) define a secret \(s\) is polynomial.
+						</p>
+						<p class="rp_annotation">
+							The final note&mdash;that checking if a set of players define a given secret can be done in polynomial time&mdash;is unclear. If this is done in the clear and with no attempt at privacy, this is obvious: any \(t+1\) players interpolate a polynomial, and the others simply check that their shares are on that polynomial. Otherwise, <span data-broken-link=true>...</span>
 						</p>
 						<p class="rp_original">
 							Under this model with broadcast, we shall define the following properties for <i>Weak Secret Sharing</i>:
 						</p>
 						<ol class="rp_original">
-							<li>The properties of the previous secret sharing protocol, when the dealer is a knight.</li>
-							<li>If \(D\) is a knave then after it has been decided, (in a sense to be explained later on), that a secret has been distributed, either 
+							<li>The <a href="#sec1.2">properties</a> of the previous secret sharing protocol, when the dealer is a knight.</li>
+							<li>If \(D\) is a knave then, after it has been decided (in a sense to be explained later on) that a secret has been distributed, either 
 								<ul class="rp_original">
-									<li><i>All</i> knights will agree upon a secret \(s\) which they define (Definition 1) and which is the one shared to <i>them</i> by the dealer, or</li>
+									<li><i>All</i> knights will agree upon a secret \(s\) which they <span class="definable" data-define="define a secret">define</span> and which is the one shared to <i>them</i> by the dealer, or</li>
 									<li><i>All</i> knights decide to disqualify the dealer.</li>
 								</ul>
 							</li>
 						</ol>
-						<span class="rp_theorem_header">WSS-Theorem:</span>
+						<span class="rp_theorem_header" id="theoremwss">WSS-Theorem:</span>
 						<p class="rp_original rp_theorem">
 							Assume \(n\geq2t+1\). For a dealer \(D\), who is present until the end of the protocol, there is a protocol which achieves the Weak Secret Sharing. Moreover, the protocol is of polynomial complexity in both \(n\) and the security parameter \(k\), with any desired probability of success.
 						</p>
@@ -389,37 +425,37 @@
 						<section id="sec3.1">
 							<h3>3.1. Weak Secret Sharing Protocol</h3>
 							<p class="rp_original">
-								This protocol is executed in three phases. The first two phases are the ones which ensure that when the secret will be revealed, the desired properties will be achieved. The last phases is the one in which the secret is revealed.
+								This protocol is executed in three phases. The first two phases are the ones which ensure that, when the secret will be revealed, the desired properties will be achieved. The last phase is the one in which the secret is revealed.
 							</p>
 							<section id="sec3.1.1">
 								<h4>Phase 1: Sharing the Secret</h4>
 								<ol class="rp_original">
-									<li>Following steps 1-4 above, the dealer shares the secret using a random polynomial and creates check vectors to all the pieces.</li>
+									<li>Following steps 1-4 <a href="#sec2">above</a>, the dealer shares the secret using a random polynomial and creates check vectors to all the pieces.</li>
 									<li>He hands over to \(P_i\) the data:
 										<ul class="rp_original">
-											<li>\(\beta_i=f(\alpha_i)\) - \(P_i\)'s point on the graph of \(f(x)\).</li>
-											<li>\(y_{i1},\dots,y_{in}\) - \(P_i\) will hand \(y_{ij}\) over to \(P_j\), so \(P_j\) can authenticate \(\beta_i\).</li>
-											<li>\((b_{1i},c_{1i}),\dots,(b_{ni},c_{ni})\) check vectors, where \((b_{ji},c_{ji})\) is \(P_i\)'s check vector for \(\beta_j\).</li>
+											<li>\(\beta_i=f(\alpha_i):\;P_i\)'s point on the graph of \(f(x)\).</li>
+											<li>\(y_{i1},\dots,y_{in}:\;P_i\) will hand \(y_{ij}\) over to \(P_j\), so \(P_j\) can authenticate \(\beta_i\).</li>
+											<li>\((b_{1i},c_{1i}),\dots,(b_{ni},c_{ni})\): check vectors, where \((b_{ji},c_{ji})\) is \(P_i\)'s check vector for \(\beta_j\).</li>
 										</ul>
 									</li>
 								</ol>
 								<p class="rp_original">
-									This is precisely the protocol executed by a dealer who is a knight. But when \(D\) is a knave he can hand over to \(P_i\) arbitrary values for \(\beta_i,y_{i1},\dots,y_{in},(b_{1i},c_{1i}),\dots,(b_{ni},c_{ni})\).
+									This is precisely the protocol executed by a dealer who is a knight. But a \(D\) who is a knave may can hand over to \(P_i\) arbitrary values for \(\beta_i,y_{i1},\dots,y_{in},(b_{1i},c_{1i}),\dots,(b_{ni},c_{ni})\).
 								</p>
 								<p class="rp_original">
 									Note, whenever a check vector \((b_{ji},c_{ji})\) for the value \(\beta_j\) is mentioned in the above, it is not a single check vector but a set of \(2k\) check vectors for \(\beta_j\). The \(y_{ij}\) is also a set of \(2k\) random values for authentication of \(\beta_i\). All these are requirements for the verification of check vectors as described in Information Checking.
 								</p>
 							</section>
 							<section id="sec3.1.2">
-								<h4>Phase 2: Modification Verification of the Check Vector</h4>
+								<h4>Phase 2: Modified Verification of the Check Vector</h4>
 								<p class="rp_original">
-									The following protocol is carried out by each \(P_i\) with respect to every other player \(P_j\). The player \(P_i\) is to be the intermediary as defined in the Information Checking Protocol, and \(P_j\) will be the receiver. The dealer is the dealer who shared the secret. \(P_i\) wants to verify the check vectors held by all other players for his piece \(\beta_i\). The modification is that if \(P_i\) is not satisfied that all players will accept his piece, he will take measures to ensure that they will.
+									The following protocol is carried out by each \(P_i\) with respect to every other player \(P_j\). The player \(P_i\) is to be the intermediary as defined in the Information Checking Protocol, and \(P_j\) will be the receiver. The dealer is the dealer who shared the secret. \(P_i\) wants to verify the check vectors held by all other players for the piece \(\beta_i\). The modification is that if \(P_i\) is not satisfied that all players will accept this piece, \(P_i\) will take measures to ensure that they will.
 								</p>
 								<ol class="rp_original">
-									<li>The intermediary \(P_i\) chooses \(k\) check vectors in the manner described in Information Checking, which he then asks \(P_j\) to <i>broadcast</i>.</li>
+									<li>The intermediary \(P_i\) chooses \(k\) check vectors in the manner described in Information Checking, then asks \(P_j\) to <i>broadcast</i> them.</li>
 									<li>The receiver \(P_j\) broadcasts the requested \(k\) check vectors.</li>
 									<li>The dealer may: (1) broadcast an approval of these check vectors, or (2) created a new check vector for \(\beta_i\) in the usual manner, hand over to the intermediary \(P_i\) the number \(y_{ij}\), and <i>broadcast</i> \((b_{ij},c_{ij})\). The broadcasted check vector is now taken to be \(P_j\)'s check vector for \(\beta_i\).</li>
-									<li>If the first instance in 3 has occurred, \(P_i\) will continue the verification of check vectors as described above. If he knows that \(P_j\) will accept his point he moves on to the next player to carry out this protocol with him. If he decided that \(P_j\) will reject \(\beta_i\), he broadcasts a request that the dealer \(D\) broadcast his piece on the graph \(f(x)\). After \(P_i\)'s piece has been broadcasted he will stop the verification of check vectors. If the second instance in 3 has occurred, \(P_i\) checks the single check vector, broadcasted by the dealer, and according to the result takes the same measures as defined before.</li>
+									<li>If the first instance in 3 has occurred, \(P_i\) will continue the verification of check vectors as described above. If \(P_i\) knows that \(P_j\) will accept the point \(\beta_i\), he or she moves on to the next player to carry out this protocol. If \(P_i\) decided that \(P_j\) will reject \(\beta_i\), he or she broadcasts a request that the dealer \(D\) broadcast \(P_i\)'s piece on the graph \(f(x)\). After \(P_i\)'s piece has been broadcasted, \(P_i\) will stop the verification of check vectors. If the second instance in 3 has occurred, \(P_i\) checks the single check vector, broadcasted by the dealer, and according to the result takes the same measures as defined before.</li>
 								</ol>
 								<span class="rp_theorem_header" id="lemma3">Lemma 3</span>
 								<p class="rp_original rp_theorem">
@@ -427,38 +463,38 @@
 								</p>
 								<span class="rp_sub_header">Proof of Lemma 3:</span>
 								<p class="rp_original rp_sub">
-									Data unknown to knaves is data which is transferred between knights. If the dealer exposes \(P_j\)'s check vectors it is because \(D\) and/or \(P_j\) are knaves, otherwise \(D\) will be content with what \(P_j\) had broadcasted. If \(INT\) is a knight and he requests the disclosure of his piece, then it must be that \(D\) is a knave. This is because the dealer has the last say about the check vectors and if after that they are still faulty then he must be a knave - so the information broadcasted is the dealer's information which is already known to the knaves.
+									Data unknown to knaves is data which is transferred between knights. If the dealer exposes \(P_j\)'s check vectors it is because \(D\) and/or \(P_j\) are knaves, otherwise \(D\) will be content with what \(P_j\) had broadcasted. If \(INT\) is a knight and requests the disclosure of his or her own piece, then it must be that \(D\) is a knave. This is because the dealer has the last say about the check vectors and if, after that, they are still faulty, then \(D\) must be a knave&mdash;so the information broadcasted is the dealer's information which is already known to the knaves.
 								</p>
 								<span class="rp_sub_header">Remark</span>
 								<p class="rp_original rp_sub">
-									The above verification scheme assures a knight \(P_i\), acting as intermediary, that his piece will be accepted by \(P_j\), the receiver, or that the piece associated with him has been made public by the dealer during the process.
+									The above verification scheme assures a knight \(P_i\), acting as intermediary, that the piece \(\beta_i\) will be accepted by \(P_j\), the receiver, or that the piece associated with \(P_i\) has been made public by the dealer during the process.
 								</p>
 								<p class="rp_original">
-									It is not important if the piece \(\gamma_i\) exposed by \(D\) differs from \(\beta_i\), the piece held by \(P_i\), because \(\gamma_i\) is now a value to which \(D\) has committed himself, as being \(P_i\)'s point on the graph \(f(x)\).
+									It is not important if the piece \(\gamma_i\) exposed by \(D\) differs from \(\beta_i\), the piece held by \(P_i\), because \(\gamma_i\) is now a value to which \(D\) has <span class="definable" data-define="commitment">committed</span> as being \(P_i\)'s point on the graph \(f(x)\).
 								</p>
 								<p class="rp_original">
 									At this point it is useful to introduce the following.
 								</p>
-								<span class="rp_definition_header">Definition 2:</span>
+								<span class="rp_definition_header" id="def2">Definition 2:</span>
 								<p class="rp_original rp_definition">
-									A <i>coalition</i> is a subset \(C\subseteq \{P_1,\dots,P_n\}\) of the set of all players, for which at the end of Phase 2: each \(P_i\in C\) knows that every other player \(P_j\in C\) will accept his piece of the shared secret.
+									A <i>coalition</i> is a subset \(C\subseteq \{P_1,\dots,P_n\}\) of the set of all players, for which at the end of Phase 2 each \(P_i\in C\) knows that every other player \(P_j\in C\) will accept his or her piece of the shared secret.
 								</p>
 								<p class="rp_original">
-									Not that there may be many coalitions among players, and that one player may be a member in several coalitions. However the following lemma holds.
+									Not that there may be many <span class="definable" data-define="coalition">coalitions</span> among players, and that one player may be a member in several coalitions. However the following lemma holds.
 								</p>
 								<span class="rp_theorem_header" id="lemma4">Lemma 4</span>
 								<p class="rp_original rp_theorem">
-									At the end of the verification of check vectors (Phase 2) the set of players who are knights is a coalition.
+									At the end of the verification of check vectors (Phase 2) the set of players who are knights is a <span class="definable">coalition</span>.
 								</p>
 								<span class="rp_sub_header">Proof:</span>
 								<p class="rp_original rp_sub">
-									If a player \(P_i\) is a knight, he was either satisfied that all players will accept his point, including all knights, or if he thought that one player will not accept his point, then he requested that it be broadcasted. In the latter case his piece will definitely be accepted by all players. We see that \(P_i\)'s piece will in fact be accepted by all players. This is true for every player \(P_j\) who is a knight&mdash;thus the knights form a coalition.
+									If a player \(P_i\) is a knight, he or she was either satisfied that all players will accept the point \(\beta_i\)&mdash;including all knights&mdash;or, if \(P_i\) thought that one player will not accept the point, then he or she requested that it be broadcasted. In the latter case the piece will definitely be accepted by all players. We see that \(P_i\)'s piece will in fact be accepted by all players. This is true for every player \(P_j\) who is a knight&mdash;thus the knights form a coalition.
 								</p>
 							</section>
 							<section id="sec3.1.3">
-								<h4>Phase 3 - Revealing the Secret</h4>
+								<h4>Phase 3: Revealing the Secret</h4>
 								<ol class="rp_original">
-									<li>The dealer \(D\) broadcasts his polynomial \(f(X)\), which defines the secret \(s\).</li>
+									<li>The dealer \(D\) broadcasts his polynomial \(f(x)\), which defines the secret \(s\).</li>
 									<li>Each \(P_i\) hands to \(P_j\) his piece \(\beta_i\) and the corresponding \(y_{ij}\)'s.</li>
 									<li>\(P_i\) checks, by use of his check vector, for every pair \((\beta_j,y_{ji})\) if he accepts the piece, and creates the list \(\beta_{i_1},\dots,\beta_{i_r}\) of all pieces which he has accepted. (For each knight it is known that \(r\geq t+1\) because of the fact that the set of all knights is a coalition).</li>
 									<li>For each piece \(\beta_i\) that \(P_i\) accepted, he checks to see if it is on the graph \(f(x)\). If some piece does not fit \(f(x),\,P_i\) broadcasts his vote to disqualify the dealer \(D\).</li>
@@ -466,10 +502,12 @@
 									<li>If the dealer was not disqualified, \(s\), the free term of \(f(x)\), is taken to be \(D\)'s secret.</li>
 								</ol>
 							</section>
-							<span class="rp_sub_header">Proof of the WSS Theorem:</span>
+						</section>
+						<section id="sec3.2">
+							<h3>3.2. Proof of the WSS Theorem</h3>
 							<ol class="rp_original">
-								<li>When the dealer is a knight: We need to show that he will not be disqualifies, and that all knights will agree on the same secret \(s\), results immediately from the properties of the Information Checking.</li>
-								<li>When the dealer is a knave: It is left to show that if he was not disqualified, then the secret \(s\) decided upon is the secret defined by all knights. Step 4 of Phase 3 and the coalition of the knights ensures this. Let us say \(P_i\) is a knight and his piece is not on \(f(X)\), then he casts his vote against the dealer. Because all other knights accept his piece, due to the coalition among them, they will also cast the same vote, and the knave dealer will be disqualified. Now if they agree on \(f(x)\), it must be that they defined it, (see <a href="#def1">Definition 1</a>), thus it is proper to take \(s\), the free term of \(f(x)\), to be the secret.</li>
+								<li>When the dealer is a knight: We need to show that he or she will not be disqualified, and that all knights will agree on the same secret \(s\). This results immediately from the properties of the Information Checking.</li>
+								<li>When the dealer is a knave: It is left to show that if the dealer was not disqualified, then the secret \(s\) decided upon is the secret <span class="definable" data-define="define a secret">defined</span> by all knights. Step 4 of Phase 3 and the <span class="definable">coalition</span> of the knights ensures this. Let us say \(P_i\) is a knight: if his or her piece is not on \(f(x)\), then that knight casts a vote against the dealer. Because all other knights accept that knight's piece due to the coalition among them, they will also cast the same vote, and the knave dealer will be disqualified. Now if they agree on \(f(x)\), it must be that they <span class="definable" data-define="define a secret">defined</span> it, thus it is proper to take \(s\), the free term of \(f(x)\), to be the secret.</li>
 							</ol>
 						</section>
 					</section>
@@ -478,7 +516,7 @@
 						<p class="rp_original">
 							We now turn to the proof of the main theorem of this paper.
 						</p>
-						<span class="rp_theorem_header">Main Theorem:</span>
+						<span class="rp_theorem_header" id="maintheorem">Main Theorem:</span>
 						<p class="rp_original rp_theorem">
 							Assume \(n\geq2t+1\), at most \(t\) players who are knaves and a dealer \(D\), who may be a knight or a knave. There exists a protocol which achieves the Verifiable Secret Sharing. Moreover, the protocol is of polynomial complexity in both \(n\) and the security parameter \(k\), and guarantees any desired probability of success by an appropriate choice of \(k\).
 						</p>
@@ -486,37 +524,37 @@
 							We start by stating the protocol. The protocol has 4 phases: sharing the secret by the dealer; a second-level secret sharing by the \(P_i\)'s; zero knowledge proof; and computing the secret. At the end of the third phase it will be said that a proper secret has been shared by \(D\).
 						</p>
 						<section id="sec4.1">
-							<h3>4.1. Phase 1 - Sharing the Secret</h3>
+							<h3>Phase 1 - Sharing the Secret</h3>
 							<ol class="rp_original">
 								<li>The dealer chooses randomly \(a_1,\dots,a_t\in \mathbb Z_p\) and defines \(f(x)=a_tx^t+\dots+a_1x+s\).</li>
-								<li>He also picks random polynomials, \(g_1(x),\dots,g_{k\cdot n}(x)\) each of degree \(t\).</li>
-								<li>He computes \(f(\alpha_i),\;g_j(\alpha_i)\;\text{ for }1\leq i\leq n,\;1\leq j\leq k\cdot n\).</li>
+								<li>The dealer also picks random polynomials, \(g_1(x),\dots,g_{k\cdot n}(x)\) each of degree \(t\).</li>
+								<li>The dealer computes \(f(\alpha_i),\;g_j(\alpha_i)\;\text{ for }1\leq i\leq n,\;1\leq j\leq k\cdot n\).</li>
 								<li>
-									He hands over to \(P_i\) the data:
+									The dealer hands over to \(P_i\) the data:
 									<ul>
-										<li>\(\beta_i=f(\alpha_i)\;-\;P_i\)'s point on the graph of \(f(x)\).</li>
-										<li>\(\gamma_{ji}=g_j(\alpha_i)\) for all \(j\)'s - \(P_i\)'s points on the polynomials \(g_j(x)\).</li>
+										<li>\(\beta_i=f(\alpha_i):\;P_i\)'s point on the graph of \(f(x)\).</li>
+										<li>\(\gamma_{ji}=g_j(\alpha_i)\) for all \(j\)'s: \(P_i\)'s points on the polynomials \(g_j(x)\).</li>
 									</ul>
 								</li>
 							</ol>
 							<p class="rp_original">
-								This is the protocol executed by a dealer who is a knight. But when \(D\) is a knave, he may of course hand over to \(P_i\) arbitrary values for \(\beta_i,\gamma_{1i},\dots,\gamma_{k\cdot n,i}\).
+								This is the protocol executed by a dealer who is a knight. But a \(D\) which is a knave may of course hand over to \(P_i\) arbitrary values for \(\beta_i,\gamma_{1i},\dots,\gamma_{k\cdot n,i}\).
 							</p>
 						</section>
 						<section id="sec4.2">
-							<h3>4.2. Phase 2 - Second Level Secret Sharing</h3>
+							<h3>Phase 2 - Second Level Secret Sharing</h3>
 							<p class="rp_original">
-								Each \(P_i\) shares by WSS, each pieces received from the dealer \(D\), i.e. the pieces \(\beta_i,\gamma_{1i},\dots,\gamma_{k\cdot n,i}\). Let us say that \(P_i\) shares \(\beta_i\) using \(h_i(x)\), and \(\gamma_{ij}\) using \(h_{ji}(x)\). Player \(P_i\) also computes $$\delta_{ji}=\beta_i+\gamma_{ji},\;1\leq j\leq k\cdot m,$$ and creates and distributes check vectors for these values. He does not share the value \(\delta_{ji}\) by a separate, independent, random, polynomial, because the sum of the two polynomials \(h_i(x)+h_{ji}(x)\) which shared \(\beta_i\) and \(\gamma_{ji}\) respectively, has as its free term the value \(\delta_{ji}\).
+								Each \(P_i\) shares by WSS each piece received from the dealer \(D\), i.e. the pieces \(\beta_i,\gamma_{1i},\dots,\gamma_{k\cdot n,i}\). Let us say that \(P_i\) shares \(\beta_i\) using \(h_i(x)\), and \(\gamma_{ij}\) using \(h_{ji}(x)\). Player \(P_i\) also computes $$\delta_{ji}=\beta_i+\gamma_{ji},\quad1\leq j\leq k\cdot n,$$ and creates and distributes check vectors for these values. \(P_i\) does not share the value \(\delta_{ji}\) by a separate, independent, random polynomial, because the sum of the two polynomials \(h_i(x)+h_{ji}(x)\) which shared \(\beta_i\) and \(\gamma_{ji}\) respectively, has as its free term the value \(\delta_{ji}\).
 							</p>
 						</section>
 						<section id="sec4.3">
-							<h3>4.3. Phase 3 - Zero Knowledge Proof</h3>
+							<h3>Phase 3 - Zero Knowledge Proof</h3>
 							<p class="rp_original">
 								This phase will ensure that \(D\) has in fact shared a secret \(s\) among the players. In this phase it is possible for players to be disqualified. The player \(P_i\) can be <i>disqualified</i> if:
 							</p>
 							<ol class="rp_original">
-								<li>the secret he shared using the WSS disqualifies him, or</li>
-								<li>a vote of at least \(t+1\) players is cast against him.</li>
+								<li>the secret that player shared using the WSS disqualifies him or her, or</li>
+								<li>a vote of at least \(t+1\) players is cast against him or her.</li>
 							</ol>
 							<p class="rp_original">
 								The protocol for this phase:
@@ -524,17 +562,20 @@
 							<p class="rp_original">
 								For each \(g_j(x)\), player \(P_{j\bmod n},\,1\leq j\leq k\cdot n\), decides whether \(D\) will expose \(g_j(x)\) or \(f(x)+g_j(x)\). (This procedure of choosing the polynomial ensures that at least \(k(t+1)\) of the alternatives are randomly chosen). In the \(j\)th round we set \(H(x)\) to be \(g_j(x)\) or \(f(x)+g_j(x)\) depending on the player's decision. This version of zero knowledge proof in the context of VSS was used in <span class="reference" data-citation="CCD">[?]</span>, when \(n\geq3t+1\).
 							</p>
+							<p class="rp_annotation">
+								If it is not obvious, at least \(k(t+1)\) choices will be random since at least \(t+1\) players are knights and will therefore choose randomly, as specified. Knaves may work with a knave dealer to allow the dealer to "predict" the choices of those knaves, but a knave dealer would have only a \(\frac{1}{k(t+1)}\) choice of predicting the choices of the knights. See the proof of Lemma 7 below.
+							</p>
 							<ol class="rp_original">
 								<li>The dealer broadcasts \(H(x)\).</li>
-								<li>Each \(P_i\) checks if his piece \(\gamma_{ji}\), or the sum of his two pieces \(\delta_{ji}=\beta_i+\gamma_{ji}\), as the case may be, is on \(H(x)\). If \(P_i\) is not satisfied then he requests that the dealer \(D\) expose <i>all</i> the information which he had handed to \(P_i\) in Phase 1.</li>
+								<li>Each \(P_i\) checks if the piece \(\gamma_{ji}\), or the sum of the two pieces \(\delta_{ji}=\beta_i+\gamma_{ji}\), as the case may be, is on \(H(x)\). Any \(P_i\) which is not satisfied then requests that the dealer \(D\) expose <i>all</i> the information handed to \(P_i\) in Phase 1.</li>
 								<li>If the dealer \(D\) does not broadcast the required information, the knights decide that <i>no</i> secret was shared.</li>
 								<li>
-									<p>Every \(P_i\) whose pieces were not broadcasted by \(D\) in 2 now broadcasts his piece \(\gamma_{ji}\text{ or }\delta_{ji}\), as the case may be) and the polynomial by which he shared his piece using the WSS. Because \(P_i\) used the WSS protocol he may now</p>
+									<p>Every \(P_i\) whose pieces were not broadcasted by \(D\) in 2 now broadcasts the piece \(\gamma_{ji}\text{ or }\delta_{ji}\), as the case may be, and the polynomial by which \(P_i\) shared that piece using the WSS. Because \(P_i\) used the WSS protocol, \(P_i\) may now</p>
 									<ul>
 										<li>Be disqualified, or</li>
 										<li>Expose a piece \((y_{ji}\text{ or }\delta_{ji})\) on which all knights agree.</li>
 									</ul>
-									<p>All players check if this piece is on \(H(x)\), if yes then OK. Otherwise \(P_i\) is disqualified, because at least \(t+1\) knights will case a vote against him.</p>
+									<p>All players check if this piece is on \(H(x)\), if yes then OK. Otherwise \(P_i\) is disqualified, because at least \(t+1\) knights will cast a vote against that player.</p>
 								</li>
 								<li>If at any time \(t+1\) pieces of the secret have been made public, the polynomial which they define is taken as the dealer's secret \(s\). At each stage of the computation the validity of all public points is checked. If one does not match a certain polynomial publicized by \(D\), then it is decided that <i>no</i> secret was shared.</li>
 							</ol>
@@ -544,7 +585,7 @@
 							</p>
 							<span class="rp_sub_header">Proof of Lemma 5</span>
 							<p class="rp_original rp_sub">
-								If \(P_i\) is a knave - trivial. If \(P_i\) is a knight then the only instance in which his piece \(\gamma_{ji}\) or \(\delta_{ji}\) does not fit \(H(x)\) (and hence causes him to request disclosure) is when \(D\) is a knave, because \(D\) is the one who handed \(P_i\) the pieces \(\beta_i\) and \(\gamma_{ji}\).
+								If \(P_i\) is a knave - trivial. If \(P_i\) is a knight then the only instance in which the piece \(\gamma_{ji}\) or \(\delta_{ji}\) does not fit \(H(x)\) (and hence causes that knight to request disclosure) is when \(D\) is a knave, because \(D\) is the one who handed \(P_i\) the pieces \(\beta_i\) and \(\gamma_{ji}\).
 							</p>
 							<span class="rp_theorem_header" id="lemma6">Lemma 6</span>
 							<p class="rp_original rp_theorem">
@@ -552,11 +593,11 @@
 							</p>
 							<span class="rp_sub_header">Proof of Lemma 6</span>
 							<p class="rp_original rp_sub">
-								A knight can not be disqualified by his WSS as proven in <a href="#theorem1">Theorem 1</a>. And he will not disqualified if his piece is not on \(H(x)\), because he would have complained about it in step 2.
+								A knight can not be disqualified by WSS as proven in <a href="#theorem1">Theorem 1</a>. And a knight will not disqualified if the knight's piece is not on \(H(x)\), because he or she would have complained about it in step 2.
 							</p>
 							<span class="rp_theorem_header" id="lemma7">Lemma 7</span>
 							<p class="rp_original rp_theorem">
-								At the end of Phase 2 with probability \(2^{-k\cdot(t+1)}\), al pieces held by non-disqualified players and all public pieces define the same polynomial of degree \(t\).
+								At the end of Phase 2 with probability \(2^{-k\cdot(t+1)}\), all pieces held by non-disqualified players and all public pieces define the same polynomial of degree \(t\).
 							</p>
 							<span class="rp_sub_header">Proof of Lemma 7</span>
 							<p class="rp_original rp_sub">
@@ -564,22 +605,22 @@
 							</p>
 							<ol class="rp_original rp_sub">
 								<li>\(\gamma_{ji}=g_j(\alpha_i)\)</li>
-								<li>\(\delta_{ji}=f(\alpha_i)+g_j(\alpha_i)</li>
+								<li>\(\delta_{ji}=f(\alpha_i)+g_j(\alpha_i)\)</li>
 							</ol>
 							<p class="rp_original rp_sub">
-								If 1. is true, \(\beta_i+\gamma_{ji}=\delta_{ji}\neq f(\alpha_i)+\gamma_{ji}\). If 2. holds then \(\beta_i+\gamma_{ji}=\delta_{ji} =f(\alpha_i)+g_j(\alpha_i)]) but \(beta_i\neq f(\alpha_i)\) implying that \(\gamma_{ji}\neq g_j(\alpha_i)\).
+								If 1. is true, \(\beta_i+\gamma_{ji}=\delta_{ji}\neq f(\alpha_i)+\gamma_{ji}\). If 2. holds then \(\beta_i+\gamma_{ji}=\delta_{ji} =f(\alpha_i)+g_j(\alpha_i)\) but \(\beta_i\neq f(\alpha_i)\) implying that \(\gamma_{ji}\neq g_j(\alpha_i)\).
 							</p>
 							<p class="rp_original rp_sub">
-								Because the decision whether to disclose \(g_j(x)\) or \(f(x)+g_j(x)\) is made randomly (by the \(t+1\) knights) at least \(k\cdot(t+1)\) times, we achieve the desires probability of being correct.
+								Because the decision whether to disclose \(g_j(x)\) or \(f(x)+g_j(x)\) is made randomly (by the \(t+1\) knights) at least \(k\cdot(t+1)\) times, we achieve the desired probability of being correct.
 							</p>
 						</section>
 						<section id="sec4.4">
-							<h3>4.4. Phase 4 - Computing the Dealer's Secret</h3>
+							<h3>Phase 4 - Computing the Dealer's Secret</h3>
 							<ol class="rp_original">
 								<li>All non-disqualified \(P_i\)'s broadcast their piece \(\beta_i\) and the polynomial \(h_i(x)\), which was used in the WSS for that piece.</li>
 								<li>The \(\beta_i\)'s and all public pieces form a set \(S\).</li>
 								<li>For each piece \(\beta_i\) in \(S\) (excluding public pieces), the non-disqualified players check that it was in fact the one shared by \(h_i(x)\) in the WSS. If a player \(P_i\) who holds the piece \(\beta_i\) is disqualified due to the WSS, then the piece \(\beta_i\) is taken out of \(S\). After this it holds that \(|S|\geq t+1\), because at least all the knights' pieces are in \(S\), due to Secret Sharing when the Dealer is a Knight.</li>
-								<li>Each player may take any \(t+1\) pieces from \(S\) and interpolate the polynomial \(f(x)\). The secret \(s\) will be the free term of the polynomial \(f(x)\).</li>
+								<li>Each player may take any \(t+1\) pieces from \(S\) and <span class="definable" data-define="interpolation">interpolate</span> the polynomial \(f(x)\). The secret \(s\) will be the free term of the polynomial \(f(x)\).</li>
 							</ol>
 						</section>
 						<section id="sec4.5">
@@ -599,12 +640,15 @@
 									The decision that no secret was shared arises if
 									<ul>
 										<li>the dealer refuses to broadcast information requested by one of the players, or</li>
-										<li>public pieces which he broadcasted do not fit on a polynomial which he broadcasted.</li>
+										<li>public pieces which the dealer broadcasted do not fit on a polynomial which the dealer broadcasted.</li>
 									</ul>
 									Since the dealer is a knight, both instances are impossible.
 								</li>
-								<li>At the end of Phase 3, when all knights know that a proper secret has been shared, it is also known, by <a href="#lemma7">Lemma 7</a>, that all pieces held by non-disqualified players, and all public pieces define the same polynomial. Due to the fact that each one of the unpublicized pieces is shared using WSS, in Phase 4 it must be either revealed <i>properly</i> or the dealer of that piece will be disqualified. But a knave will not be able to introduce a new piece into the computations, which will be accepted by knights, (<a href="#theorem3.1">Theorem 3.1</a>). All points revealed by knights will be accepted (Secret Sharing when the Dealer is a Knight). So we will have at least \(t+1\) pieces which define the same polynomial. Thus the desired properties are achieved.</li>
+								<li>At the end of Phase 3, when all knights know that a proper secret has been shared, it is also known, by <a href="#lemma7">Lemma 7</a>, that all pieces held by non-disqualified players, and all public pieces, define the same polynomial. Due to the fact that each one of the unpublicized pieces is shared using WSS, in Phase 4 it must be either revealed <i>properly</i> or the dealer of that piece will be disqualified. But a knave will not be able to introduce a new piece into the computations which will be accepted by knights (<a href="#lemma1">Lemma 1</a>). All points revealed by knights will be accepted (Secret Sharing when the Dealer is a Knight). So we will have at least \(t+1\) pieces which define the same polynomial. Thus the desired properties are achieved.</li>
 							</ol>
+							<p class="rp_annotation">
+								The reference to Lemma 1 was corrected from "Theorem 3.1", which is never defined.
+							</p>
 							<span class="rp_sub_header">Remark</span>
 							<p class="rp_original rp_sub">
 								Instead of revealing the secret to all the players we can reveal the secret to only one of the players by having all the information sent only to this player.
@@ -612,12 +656,23 @@
 						</section>
 					</section>
 					<section id="sec5">
-						<h2>Incomplete Networks</h2>
-						<p class="rp_original">
-							Let \(G\) be a synchronous network of \(n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). To prove both Theorems <a href="#theorem2">2</a> and <a href="#theorem3">3</a>, it is enough to show how to simulate in our partial network a secure communication line between any two honest players given that they are connected by \(2t+1\) vertex disjoint paths in \(O(d)\) steps. Having such a scheme we can simulate on the network \(G\) the constant expected time Byzantine Agreement protocol of Feldman and Micali<sup class="reference" data-citation="FM">[?]</sup> in \(O(d)\) expected time, proving <a href="#theorem2">Theorem 2</a>, or simulate the secure computation protocol of <span class="reference" data-citation="BGW">[?]</span>, proving <a href="#theorem3">Theorem 3</a>.
+						<h2>5. Incomplete Networks</h2>
+						<span class="rp_theorem_header" id="theorem2">Theorem 2</span>
+						<p class="rp_annotation rp_theorem">
+							Let \(G\) be a synchronous network of \(\;n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(\;d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). Then there is an \(\operatorname O(d)\) expected time randomized Byzantine agreement protocol on \(G\) tolerating up to \(t\) <span class="definable" data-define="Byzantine fault">Byzantine faults</span>.
+						</p>
+						<span class="rp_theorem_header" id="theorem3">Theorem 3</span>
+						<p class="rp_annotation rp_theorem">
+							Let \(G\) be a communication network between \(n\) players satisfying the conditions of theorem 2; then any multiparty protocol can be achieved on \(G\) if at most \(t\) of the players are faulty. Here again, the secrecy achieved is unconditional, and the probability of error is exponentially small.
+						</p>
+						<p class="rp_annotation">
+							Theorems 2 and 3 are restated above as they are proven in this section.
 						</p>
 						<p class="rp_original">
-							We can therefore assume that the sender of the message \(D\) is honest, and so we are in a case where <a href="#theorem1">Theorem 1</a> applies. To send a message to \(R,\,D\) encodes the message using a polynomial of degree \(t\) into \(2t+1\) pieces, and sends each piece together with check vectors for all the other pieces along a separate route to \(R\). To read the message, \(R\) tests each piece with all the check vectors arriving from all the routes and discards any pieces that does not match with at least \(t+1\) such vectors. Having collected \(t+1\) such pieces, \(R\) computes the interpolation polynomial and takes its free terms as \(D\)'s message. It is easy to see this simple <i>one phase</i> protocol has all the properties needed to prove <a href="#theorem2">Theorem 2</a> and <a href="#theorem3">Theorem 3</a>.
+							Let \(G\) be a <span class="definable">synchronous network</span> of \(n\geq3t+1\) processors, with <span class="definable">connectivity</span> at least \(2t+1\), and <span class="definable" data-define="diameter of a graph">diameter</span> \(d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). To prove both Theorems 2 and 3, it is enough to show how to simulate in our partial network a secure communication line between any two honest players given that they are connected by \(2t+1\) vertex disjoint paths in \(\operatorname O(d)\) steps. Having such a scheme we can simulate on the network \(G\) the constant expected time Byzantine Agreement protocol of Feldman and Micali<sup class="reference" data-citation="FM">[?]</sup> in \(\operatorname O(d)\) expected time, proving Theorem 2, or simulate the secure computation protocol of <span class="reference" data-citation="BGW">[?]</span>, proving Theorem 3.
+						</p>
+						<p class="rp_original">
+							We can therefore assume that the sender of the message \(D\) is honest, and so we are in a case where <a href="#theorem1">Theorem 1</a> applies. To send a message to \(R,\,D\) encodes the message using a polynomial of degree \(t\) into \(2t+1\) pieces, and sends each piece together with check vectors for all the other pieces along a separate route to \(R\). To read the message, \(R\) tests each piece with all the check vectors arriving from all the routes and discards any piece that does not match with at least \(t+1\) such vectors. Having collected \(t+1\) such pieces, \(R\) computes the <span class="definable">interpolation</span> polynomial and takes its free term as \(D\)'s message. It is easy to see this simple <i>one phase</i> protocol has all the properties needed to prove Theorem 2 and Theorem 3.
 						</p>
 						<p class="rp_original">
 							After submitting this abstract, the authors have learned that Dolev, Dwork, and Yung<sup class="reference" data-citation="DDY">[?]</sup>have shown how to simulate in a \(2t+1\) connected network a secure communication line between any two honest players in a completely error-free manner. Therefore, our Theorem 3 is not the best possible, as under the conditions of Theorem 3, any multiparty protocol can be achieved with absolutely no error at all (see <span class="reference" data-citation="DDY">[?]</span>). We note that in the "error-free" simulation, the faulty players can delay the message between two honest players for \(O(td)\) steps. Therefore their simulation does not provide a proof of Theorem 2. We briefly sketch below how to combine both results and obtain an absolutely error free secure transmission in \(O(d)\) expected time.
@@ -625,10 +680,10 @@
 						<section id="sec5.1">
 							<h3>5.1. Error Free Transmission</h3>
 							<p class="rp_original">
-								Assume \(D\) and \(R\) are \(2t+1\) connected, and \(D\) wants to transmit the message \(M\) to \(R\). \(D\) randomly writes \(M=M_1+M_2\), and sends using the scheme described above \(M_1\) to \(R\). \(R\) collects all the verified messages (i.e. at least \(t+1\) verifications), and if there is a polynomial of degree \(t\) that <span class="definable" data-define="interpolate">interpolates</span> through <i>all</i> the points, \(R\) takes the free coefficient as \(M_1\). In this case \(R\) broadcasts an acknowledgement on all the \(2t+1\) lines to \(D\), and \(D\) tries to send \(M_2\).
+								Assume \(D\) and \(R\) are \(2t+1\) connected, and \(D\) wants to transmit the message \(M\) to \(R\). \(D\) randomly writes \(M=M_1+M_2\), and sends using the scheme described above \(M_1\) to \(R.\;R\) collects all the verified messages (i.e. at least \(t+1\) verifications) and, if there is a polynomial of degree \(t\) that <span class="definable" data-define="interpolation">interpolates</span> through <i>all</i> the points, \(R\) takes the free coefficient as \(M_1\). In this case \(R\) <span class="definable" data-define="broadcast channel">broadcasts</span> an acknowledgement on all the \(2t+1\) lines to \(D\), and \(D\) tries to send \(M_2\).
 							</p>
 							<p class="rp_original">
-								On the other hand, if \(R\) cannot complete the interpolation through all the points, \(R\) broadcasts back to \(D\) (along the \(2t+1\) lines) all the information he received from all lines. This step does no relay any information because this will be done wither for \(M_1\) or for \(M_2\) but never for both, and clearly \(M_1 (M_2)\) alone contains no information.
+								On the other hand, if \(R\) cannot complete the interpolation through all the points, \(R\) broadcasts back to \(D\) (along the \(2t+1\) lines) all the information received from all lines. This step does not relay any information because this will be done either for \(M_1\) or for \(M_2\) but never for both, and clearly \(M_1 (M_2)\) alone contains no information.
 							</p>
 							<p class="rp_original">
 								At this stage, \(D\) compares the broadcast of \(R\) to its original messages. \(D\) marks all the mismatches as "bad", and broadcasts the "bad" list to \(R\). Concurrently, \(D\) breaks up the message \(M\) into new random pieces \(M=N_1+N_2\), and begins the whole procedure again, but now \(R\) will ignore the shares of the secret coming from connections on the bad list.
@@ -642,96 +697,103 @@
 								<li>after a bad transmission the bad list doesn't grow.</li>
 							</ol>
 							<p class="rp_original">
-								Clearly, after at most \(t+1\) retries, a pair of good \(D\) and \(R\) will be able to transmit their value securely with no errors at all. Furthermore, if only one of \(D\) and \(R\) is bad, the good player will never wait for more than \(t+1\) rounds. Moreover, because of the check vectors, only with exponentially small probability there will be any need for retransmission.
+								Clearly, after at most \(t+1\) retries, a pair of good \(D\) and \(R\) will be able to transmit their value securely with no errors at all. Furthermore, if only one of \(D\) and \(R\) is bad, the good player will never wait for more than \(t+1\) rounds. Moreover, because of the check vectors, only with exponentially small probability will there be any need for retransmission.
 							</p>
 						</section>
 						<section id="sec5.2">
 							<h3>5.2. Note</h3>
 							<p class="rp_original">
-								The procedure described above, without the check vectors, is only a slight variation of the transmission scheme of <span class="reference" data-citation="DDY">[?]</span>. It is clear that this procedure works as well without the check vectors, but there is a clear advantage in using the check vectors during this procedure. Without the check vectors, the \(t\) bad players can cause a delay of \(O(t\cdot d)\) steps in the communication between good players, whereas using the check vectors, only with exponentially small probability there will be any need for retransmission.
+								The procedure described above, without the check vectors, is only a slight variation of the transmission scheme of <span class="reference" data-citation="DDY">[?]</span>. It is clear that this procedure works as well without the check vectors, but there is a clear advantage in using the check vectors during this procedure. Without the check vectors, the \(t\) bad players can cause a delay of \(O(t\cdot d)\) steps in the communication between good players, whereas using the check vectors, only with exponentially small probability will there be any need for retransmission.
 							</p>
 							<p class="rp_original">
 								It is clear that if \(D\) and \(R\) are both good, the expected number of communication rounds to get an error free transmission is a constant (\(O(d)\)). A slightly more complicated problem is to handle the case of a bad \(D\) sending a message to a good \(R\). In this case using the scheme described above, the bad \(D\) can easily cause a delay of \(O(td)\) time until \(R\) will be able to continue. Thus, unless we are willing to give up the synchrony of our simulated protocol a single bad player can cause a delay of \(O(td)\) steps.
 							</p>
 							<p class="rp_original">
-								To avoid this problem, we make \(D\) the dealer of the secret in our VSS protocol. Assuming \(R\) is good we get a broadcast channel simulation between all the \(2t+1\) connections and the dealer \(D\) as follows:
+								To avoid this problem, we make \(D\) the dealer of the secret in our VSS protocol. Assuming \(R\) is good we get a <span class="definable">broadcast channel</span> simulation between all the \(2t+1\) connections and the dealer \(D\) as follows:
 							</p>
 							<ul class="rp_original">
 								<li>A broadcast of one of the \(2t+1\) is sent to \(R\) who sends it on all \(2t+1\) connections, and they transmit the message also to \(D\) (who gets the message by a simple majority rule).</li>
-								<li>A broadcast from \(D\) to all the players is done by having \(D\) send the message on all lines to \(R\). \(R\) gets the message (by majority), and sends the value he got to all the \(2t+1\) connections. This value coming from \(R\) is taken as the value of \(D\)'s broadcast.</li>
+								<li>A broadcast from \(D\) to all the players is done by having \(D\) send the message on all lines to \(R\). \(R\) gets the message (by majority), and sends the value received to all the \(2t+1\) connections. This value coming from \(R\) is taken as the value of \(D\)'s broadcast.</li>
 								<li>The private line between two connections can go through \(R\).</li>
 							</ul>
 							<p class="rp_original">
-								Since the VSS uses a constant number of rounds, so will this simulation. Since the VSS guarantees with exponentially small probability of error that there will be a \(t\)-degree polynomial interpolating through all the accepted points, \(R\) will get a message (or realize that \(D\) is faulty) in constant number of rounds with only an exponentially small probability of not being able to decide what happened. In this case we can go back to the previous scheme, and continue for at most \(O(t)\) more rounds. Since this happens only with exponentially small probability, we get an \(O(d)\) expected time transmission even from a bad \(D\) to a good \(R\). (This case of faulty \(R\) and good \(D\) is not needed at all).
+								Since the VSS uses a constant number of rounds, so will this simulation. Since the VSS guarantees with exponentially small probability of error that there will be a \(t\)-degree polynomial interpolating through all the accepted points, \(R\) will get a message (or realize that \(D\) is faulty) in constant number of rounds with only an exponentially small probability of not being able to decide what happened. In this case we can go back to the previous scheme, and continue for at most \(O(t)\) more rounds. Since this happens only with exponentially small probability, we get an \(O(d)\) expected time transmission even from a bad \(D\) to a good \(R\). (The case of faulty \(R\) and good \(D\) is not needed at all).
 							</p>
 							<p class="rp_original">
 								From this constant expected time error-free transmission we can prove a stronger version of Theorem 3.
 							</p>
 							<span class="rp_theorem_header" id="theorem3star">Theorem 3*</span>
 							<p class="rp_original rp_theorem">
-								Let \(G\) be a synchronous network of \(n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\), then any multiparty protocol \(\mathcal P\) can be achieved on \(G\) if at most \(t\) of the players are faulty. As in <span class="reference" data-citation="DDY">[?]</span>, the computation is completely error-free, and the secrecy achieved is unconditional. Moreover, the expected computation time is only \(O(d)\) times the best secure and error-free protocol for \(\mathcal P\) on a complete network.
+								Let \(G\) be a <span class="definable">synchronous network</span> of \(n\geq3t+1\) processors, with <span class="definable">connectivity</span> at least \(2t+1\), and <span class="definable" data-define="diameter of a graph">diameter</span> \(d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\), then any multiparty protocol \(\mathcal P\) can be achieved on \(G\) if at most \(t\) of the players are faulty. As in <span class="reference" data-citation="DDY">[?]</span>, the computation is completely error-free, and the secrecy achieved is unconditional. Moreover, the expected computation time is only \(\operatorname O(d)\) times the best secure and error-free protocol for \(\mathcal P\) on a complete network.
 							</p>
 						</section>
 					</section>
 					<section id="sec6">
 						<h2>6. Multiparty Computations</h2>
+						<span class="rp_theorem_header" id="theorem4">Theorem 4</span>
+						<p class="rp_annotation rp_theorem">
+							Assuming that each participant can broadcast a message to all other participants and that each pair of participants can communicate secretly, any multiparty protocol, or game with incomplete information, can be achieved if a majority of the players are honest.
+						</p>
+						<p class="rp_annotation">
+							Theorem 4 is restated above as it is proven below.
+						</p>
 						<p class="rp_original">
 							In this section, all computations are carried out in a small finite field, for example \(\mathbb Z_p\) where \(n\lt p\lt2n\). Our VSS protocol can be easily modified to work in a small finite field or by using a separate large prime for the check vectors.
 						</p>
 						<p class="rp_original">
-							We say that a group of players \(P_1,\dots,P_n\) <i>will have computed a function \(f(u_1,\dots,u_m)=u\) by a protocol PR</i>, where \(u_1,\dots,u_m\) were entered into the computation using VSS, if at the end of the protocol, \(u\) is a verified shared secret.
+							We say that a group of players \(P_1,\dots,P_n\) <i>will have computed a function \(f(u_1,\dots,u_m)=u\) by a protocol \(PR\)</i>, where \(u_1,\dots,u_m\) were entered into the computation using VSS, if, at the end of the protocol, \(u\) is a verified shared secret.
 						</p>
 						<p class="rp_original">
 							The problem of multiparty computations can be reduced (see <span class="reference" data-citation="GMW">[?]</span>) to the problem of multiparty function computations. We will produce protocols for addition and multiplication of shared secrets and for multiplication by a publicly known constant, which can be carried out in a fault-tolerant and secrecy-preserving manner. Thus we achieve that a group of \(n\) players can secretly and with fault tolerance compute any function.
 						</p>
-						<span class="rp_theorem_header">Definition</span>
-						<p class="rp_original rp_theorem">
+						<span class="rp_definition_header" id="def3">Definition 3</span>
+						<p class="rp_original rp_definition">
 							A group of \(n\) players holds a <i>verified secret (data) \(s\)</i>, shared using the polynomial \(f(x)\), so that \(f(0)=s\), and satisfying the conditions of VSS if:
 						</p>
-						<ol class="rp_original">
+						<ol class="rp_original rp_definition">
 							<li>The polynomial \(f(x)\) is of degree \(t\).</li>
 							<li>Each player \(P_i\) holds a share of the secret \(\beta_i=f(\alpha_i)\).</li>
 							<li>Every piece \(\beta_i\) was shared by \(P_i\) using WSS.</li>
 						</ol>
 						<span class="rp_sub_header">Note</span>
 						<p class="rp_original rp_sub">
-							A result of our VSS protocol to share a secret \(s\) (Theorem ) is that \(s\) will be a <i>verified secret</i>.
+							A result of our VSS protocol to share a secret \(s\) is that \(s\) will be a <span class="definable">verified secret</span>.
 						</p>
 						<p class="rp_original">
-							Now, all we need to show in order to prove Theorem number, is that we can produce protocols for addition and multiplication of verifiable shared secrets \(u\) and \(v\), which maintain the situation that all data in the computation, including the end result, is verified data.
+							Now, all we need to show in order to prove Theorem 4, is that we can produce protocols for addition and multiplication of verifiable shared secrets \(u\) and \(v\), which maintain the situation that all data in the computation, including the end result, is verified data.
 						</p>
 						<p class="rp_original">
-							Let us look at two secrets \(u\) and \(v\), which are verified secrets. Thus it is known that:
+							Let us look at two secrets \(u\) and \(v\), which are <span class="definable" data-define="verified secret">verified secrets</span>. Thus it is known that:
 						</p>
 						<ol class="rp_original">
 							<li>They were shared by \(f^u(x)\) and \(f^v(x)\) respectively, both polynomials of degree \(t\).</li>
-							<li>Each \(P_i holds:
+							<li>Each \(P_i\) holds:
 								<ul>
-									<li>A piece \(f^u(\alpha_i)=\beta_i^u\), which he further shared using the polynomial \(h_i^u(x)\) and the WSS protocol.</li>
-									<li>A piece \(f^v(\alpha_i)=\beta_i^v(x)\) and the WSS protocol.</li>
-									<li>The pieces \(h_j^u(\alpha_i) =\beta_{ji}^u\) and \(h_j^u(\alpha_i) =\beta_{ji}^v\), which are his shares of the other players' pieces. (The player \(P_i\) received them as a result of WSS).</li>
+									<li>A piece \(f^u(\alpha_i)=\beta_i^u\), which the player further shared using the polynomial \(h_i^u(x)\) and the WSS protocol.</li>
+									<li>A piece \(f^v(\alpha_i)=\beta_i^v\), which the player further shared using the polynomial \(h_i^v(x)\) and the WSS protocol.</li>
+									<li>The pieces \(h_j^u(\alpha_i) =\beta_{ji}^u\) and \(h_j^u(\alpha_i) =\beta_{ji}^v\), which are this player's shares of the other players' pieces. (The player \(P_i\) received them as a result of WSS).</li>
 								</ul>
 							</li>
 						</ol>
 						<section id="sec6.1">
 							<h3>6.1. Addition Protocol</h3>
 							<p class="rp_original">
-								We would like to compute \(u+v\), and to achieve that the sum will be a verified secret.
+								We would like to compute \(u+v\), and to achieve that the sum will be a <span class="definable">verified secret</span>.
 							</p>
 							<p class="rp_original">
-								The polynomial \(f^u(x)+f^v(x)=f^{u+v}(x)\) has as its constant term the desired value \(u+v\), and this polynomial is of degree \(t\). If each \(P_i\) adds his pieces \(\beta_i^u+\beta_i^v=\beta_i^{u+v}\), then he will have a share of \(u+v\) by the polynomial \(f^{u+v}(x)\). Therefore, conditions 1 and 2 for a verified secret hold immediately.
+								The polynomial \(f^u(x)+f^v(x)=f^{u+v}(x)\) has as its constant term the desired value \(u+v\), and this polynomial is of degree \(t\). If each \(P_i\) adds the known pieces \(\beta_i^u+\beta_i^v=\beta_i^{u+v}\), then \(P_i\) will have a share of \(u+v\) by the polynomial \(f^{u+v}(x)\). Therefore, conditions 1 and 2 for a <span class="definable">verified secret</span> hold immediately.
 							</p>
 							<p class="rp_original">
-								To achieve condition 3, we need that \(\beta_i^{u+v}\) will be shared using WSS. Note that the value \(\beta_i+{u+v}\) is already shared by the polynomial \(h_i^{u+v}(x)\), which is the sum of the polynomials which shared \(\beta_i^u\) and \(\beta_i^v\), that is \(h_i^u(x)+h_i^v(x) =h_i^{u+v}(x)\). Thus all we need are the appropriate check vectors. This is achieved as follows:
+								To achieve condition 3, we need that \(\beta_i^{u+v}\) will be shared using WSS. Note that the value \(\beta_i^{u+v}\) is already shared by the polynomial \(h_i^{u+v}(x)\), which is the sum of the polynomials which shared \(\beta_i^u\) and \(\beta_i^v\), that is \(h_i^u(x)+h_i^v(x) =h_i^{u+v}(x)\). Thus all we need are the appropriate check vectors. This is achieved as follows:
 							</p>
 							<ol class="rp_original">
 								<li>The player \(P_i\) creates check vectors for \(h_i^u(\alpha_j)+ h_i^v(\alpha_j)= h_i^{u+v}(\alpha_j)\) and distributes them to the other players.</li>
-								<li>All players verify these check vectors using the Modified Verification of Check Vectors Protocol (see Section ).</li>
+								<li>All players verify these check vectors using the <a href="#sec3.1.2">Modified Verification of Check Vectors Protocol</a>.</li>
 							</ol>
 							<p class="rp_original">
 								During the computation of the addition, knaves may act as they wish, but if they don't follow the protocol they are disqualified. (Their data can be reconstructed if needed in a manner which will be described later).
 							</p>
-							<span class="rp_theorem_header">Lemma 8</span>
+							<span class="rp_theorem_header" id="lemma8">Lemma 8</span>
 							<p class="rp_original rp_theorem">
 								After the above addition protocol is carried out, the sum \(u+v\) is a verified secret.
 							</p>
@@ -742,23 +804,23 @@
 						<section id="sec6.2">
 							<h3>6.2. Protocol for Multiplication by a Constant</h3>
 							<p class="rp_original">
-								There is a publicly known constant \(d\) and we would like to compute the value \(u*d\) so that this product will be a verified secret. This multiplication is trivial. All that \(P_i\) needs to do is multiply his share \(\beta_i^u\) by the constant \(d\). When at a later stage he receives the piece \(\beta_j^{u*d}\) and the value \(y_{ji}^u\) from player \(P_j\), he should just the check vector \((b,c)\) which he holds for the original piece of the player \(P_j\) by computing \(\beta_j^{u*d}+bdy^u_{ji}=cd\).
+								There is a publicly known constant \(d\) and we would like to compute the value \(u*d\) so that this product will be a <span class="definable">verified secret</span>. This multiplication is trivial. All that \(P_i\) needs to do is multiply the known share \(\beta_i^u\) by the constant \(d\). When at a later stage \(P_i\) receives the piece \(\beta_j^{u*d}\) and the value \(y_{ji}^u\) from player \(P_j\), \(P_i\) should just use the known check vector \((b,c)\) which \(P_i\) already holds for the original piece of the player \(P_j\) by computing \(\beta_j^{u*d}+bdy^u_{ji}=cd\).
 							</p>
 						</section>
 						<section id="sec6.3">
 							<h3>6.3. Linear Computations</h3>
 							<p class="rp_original">
-								The combination of the protocol for addition and the protocol for multiplication by a constant provides us with the ability to compute any linear combination of verified secrets.
+								The combination of the protocol for addition and the protocol for multiplication by a constant provides us with the ability to compute any linear combination of <span class="definable" data-define="verified secret">verified secrets</span>.
 							</p>
 						</section>
 						<section id="sec6.4">
 							<h3>6.4. Multiplication Protocol</h3>
 							<p class="rp_original">
-								Before we proceed to show how to compute the product of two verified secrets, let us prove two lemmas which will be needed later.
+								Before we proceed to show how to compute the product of two <span class="definable" data-define="verified secret">verified secrets</span>, let us prove two lemmas which will be needed later.
 							</p>
 							<span class="rp_theorem_header" id="lemma9">Lemma 9</span>
 							<p class="rp_original rp_theorem">
-								A dealer can prove that two secrets, \(s_1\) and \(s_2\), which he shared using VSS, are equal.
+								A dealer can prove that two secrets, \(s_1\) and \(s_2\), which the dealer shared using VSS, are equal.
 							</p>
 							<span class="rp_sub_header">Proof</span>
 							<p class="rp_original rp_sub">
@@ -770,43 +832,43 @@
 							</p>
 							<span class="rp_sub_header">Proof</span>
 							<p class="rp_original rp_sub">
-								Let \(f,\,g\), and \(h\) be the polynomials used to distribute \(a,\,b\), and \(c\) respectively. We recall that all our secrets are elements of a small finite field \(E,\,|E|=p\), and we can pick \(p\) to satisfy \(n\lt p\lt2n\). Let \(Z=\{(x,y,z)\,|\,xy=z,\,\forall\,x,y\inE\}\) be the multiplication table of \(E\). The dealer randomly permutes the members of \(Z\) to a list \(\{(x_i,y_i,z_i)\}\). He then generates random polynomials of degree \(t,\,f_i,\,g_i\) and \(h_i,\,i=1\dots p^2\), encoding this list, (e.g. \(f_i(0)=x_i\), etc.). The dealer prepares \(m=knp^2\) independent encoded copies of the multiplication table of \(E\) and distributes all the randomly chosen triples in these lists using our secret sharing protocol. At this point each player broadcasts a list of \(kp^2\) requests asking the dealer to either open completely one of the encoded lists or two show, using the equality protocol of Lemma 9, that for some \(i\) on the list \(f(0)-f_i(0),\, g(0)=g_i(0)\), and \(h(0)=h_i(0)\). It is easy to see that this procedure provides a zero knowledge proof to the fact that \(h(0)=f(0)g(0)\), with probability of failure at most \(2^{-k}\).
+								Let \(f,\,g\), and \(h\) be the polynomials used to distribute \(a,\,b\), and \(c\) respectively. We recall that all our secrets are elements of a small finite field \(E,\,|E|=p\), and we can pick \(p\) to satisfy \(n\lt p\lt2n\). Let \(Z=\{(x,y,z)\,|\,xy=z,\,\forall\,x,y\in E\}\) be the multiplication table of \(E\). The dealer randomly permutes the members of \(Z\) to a list \(\{(x_i,y_i,z_i)\}\). The dealer then generates random polynomials of degree \(t,\,f_i,\,g_i\) and \(h_i,\,i=1\dots p^2\), encoding this list, (e.g. \(f_i(0)=x_i\), etc.). The dealer prepares \(m=knp^2\) independent encoded copies of the multiplication table of \(E\) and distributes all the randomly chosen triples in these lists using our secret sharing protocol. At this point each player broadcasts a list of \(kp^2\) requests asking the dealer to either open completely one of the encoded lists or to show, using the equality protocol of Lemma 9, that for some \(i\) on the list \(f(0)-f_i(0),\, g(0)=g_i(0)\), and \(h(0)=h_i(0)\). It is easy to see that this procedure provides a zero knowledge proof to the fact that \(h(0)=f(0)g(0)\), with probability of failure at most \(2^{-k}\).
 							</p>
 							<p class="rp_original">
-								We now proceed to exhibit the multiplication protocol. For the above \(u\) and \(V\), we would like to compute \(u*v\), and to ensure that the product will be a verified secret.
+								We now proceed to exhibit the multiplication protocol. For the above \(u\) and \(v\), we would like to compute \(u*v\), and to ensure that the product will be a <span class="definable">verified secret</span>.
 							</p>
 							<p class="rp_original">
-								The polynomial \(f^u(x)*f^v(x)=f^{u*v}_1(x)\) has as its constant term the desired value \(u*v\), but two problems arise: (1) The polynomial is of degree \(2t\). (2) Its is not a random polynomial. To overcome these problems, we will adapt the methods described in <span class="reference" data-citation="BGW">[?]</span>, and in combination with the VSS protocol, we will return to the state in which all data in the computation is verified data. The protocol is as follows:
+								The polynomial \(f^u(x)*f^v(x)=f^{u*v}_1(x)\) has as its constant term the desired value \(u*v\), but two problems arise: (1) The polynomial is of degree \(2t\). (2) It is not a random polynomial. To overcome these problems, we will adapt the methods described in <span class="reference" data-citation="BGW">[?]</span>, and in combination with the VSS protocol, we will return to the state in which all data in the computation is verified data. The protocol is as follows:
 							</p>
 							<ol class="rp_original">
 								<li>
-									<p>The player \(P_i\) must extend his WSS of \(\beta_i^u\) and \(\beta_i^v\) to VSS This is easily done: (the protocol given is for \(\beta^u_i\), and the same is done for \(\beta^v_i\).</p>
+									<p>The player \(P_i\) must extend the WSS of \(\beta_i^u\) and \(\beta_i^v\) to VSS. This is easily done: (the protocol given is for \(\beta^u_i\), and the same is done for \(\beta^v_i\))</p>
 									<ul>
-										<li>Each \(P_j\) holds a piece \(\beta^u_{ij}\) which is a share of \(P_i\text{'s}\,\beta_i^u\). He shares \(\beta_{ij}^u\) using WSS</li>
+										<li>Each \(P_j\) holds a piece \(\beta^u_{ij}\) which is a share of \(P_i\text{'s}\,\beta_i^u.\,P_i\) shares \(\beta_{ij}^u\) using WSS</li>
 										<li>Then \(P_i\) carries out the zero knowledge proof, as in our VSS protocol, to show that all shares held by the players lie on a polynomial \(h_i^u(x)\) of degree \(t\).</li>
 									</ul>
 								</li>
 								<li>
-									<p>If some player refuses to cooperate, or is disqualified in the above process, then his pieces are reconstructed by the other players, and become common knowledge. The players which participate in this computation, are players who have extended their WSS to VSS, that is that they were not disqualified. Thus, their pieces \(\beta_j^u\), which are now shared by VSS, are points on the graph of the polynomial of the shared secret \(u\). Assume that \(P_i\) didn't follow the protocol, his pieces \(\beta_i^u\) is computed in the following way:</p>
-									<p>Since \(\beta^u_i\) is on a polynomial of degree \(t\), we can represent \(\beta^u_i\) as a linear combination with publicly known (and easily computable) coefficients of any other \(t+1\) point on this polynomial. Since at least \(t+1\) players will extend the WSS of their points on this polynomial to a VSS, we can use this linear relation together with the Linear Computation Lemma to compute a verified secret of the missing \(\beta\)'s and make them public. Now it holds, that either \(\beta_i^u\) was shared, using VSS, or it was made public.</p>
+									<p>If some player refuses to cooperate, or is disqualified in the above process, then that player's pieces are reconstructed by the other players, and become common knowledge. The players which participate in this computation are players who have extended their WSS to VSS; that is, they were not disqualified. Thus, their pieces \(\beta_j^u\), which are now shared by VSS, are points on the graph of the polynomial of the shared secret \(u\). Assume that \(P_i\) didn't follow the protocol: that player's piece \(\beta_i^u\) is computed in the following way:</p>
+									<p>Since \(\beta^u_i\) is on a polynomial of degree \(t\), we can represent \(\beta^u_i\) as a linear combination with publicly known (and easily computable) coefficients of any other \(t+1\) point on this polynomial. Since at least \(t+1\) players will extend the WSS of their points on this polynomial to a VSS, we can use this linear relation together with the Linear Computation Lemma to compute a <span class="definable">verified secret</span> of the missing \(\beta\)'s and make them public. Now it holds, that either \(\beta_i^u\) was shared, using VSS, or it was made public.</p>
 								</li>
-								<li>The player \(P_i\) computes \(\beta_i^u*\beta_i^v=\beta_i^{u*v}\), and distributes it with a new polynomial \(h_i^{u*v}(x)\), using the VSS protocol. Then he proves that \(h^u_i(0)*h_i^v(0)=h_i^{u*v}(0)\), as described above in Lemma 10. If he fails to do the above, his pieces are reconstructed and exposed.</li>
-								<li>In order to randomize the polynomial \(f_1^{u*v}(x)\), each \(P_i\) shares \(t\) random polynomials \(g_{i,j}(x)\), of degree \(t\), and proves that he has done just this. Using the method described in <span class="reference" data-citation="BGW">[?]</span>, they generate a random polynomial of degree \(2t\) with a zero free coefficient. By adding this polynomial to \(f_1^{u*v}(x)\) we obtain a new random polynomial \(f_2^{u*v}(x)\) with the same free coefficient.</li>
-								<li>To preform the reduction of the degree of the polynomial, \(f_2^{u*v}(x)\) to degree \(t\), we carry out the linear computation described in <span class="reference" data-citation="BGW">[?]</span>. If a player doesn't cooperate, his piece is revealed using the VSS for this piece. The result of this computation will be that each player holds a verified share of a piece of \(u*v\), shared by the polynomial \(f^{u*v}(x)\) of degree \(t\), so that \(f^{u*v}(0)=f_1^{u*v}(0)\). Each player manages to compute his own, new piece, after all information held by the other players has been passed on to him.</li>
+								<li>The player \(P_i\) computes \(\beta_i^u*\beta_i^v=\beta_i^{u*v}\), and distributes it with a new polynomial \(h_i^{u*v}(x)\), using the VSS protocol. Then the player proves that \(h^u_i(0)*h_i^v(0)=h_i^{u*v}(0)\), as described above in Lemma 10. If the player fails to do the above, his or her pieces are reconstructed and exposed.</li>
+								<li>In order to randomize the polynomial \(f_1^{u*v}(x)\), each \(P_i\) shares \(t\) random polynomials \(g_{i,j}(x)\), of degree \(t\), and proves that he or she has done just this. Using the method described in <span class="reference" data-citation="BGW">[?]</span>, they generate a random polynomial of degree \(2t\) with a zero free coefficient. By adding this polynomial to \(f_1^{u*v}(x)\) we obtain a new random polynomial \(f_2^{u*v}(x)\) with the same free coefficient.</li>
+								<li>To preform the reduction of the degree of the polynomial, \(f_2^{u*v}(x)\) to degree \(t\), we carry out the linear computation described in <span class="reference" data-citation="BGW">[?]</span>. If a player doesn't cooperate, his or her piece is revealed using the VSS for this piece. The result of this computation will be that each player holds a verified share of a piece of \(u*v\), shared by the polynomial \(f^{u*v}(x)\) of degree \(t\), so that \(f^{u*v}(0)=f_1^{u*v}(0)\). Each player manages to compute that player's own, new piece, after all information held by the other players has been passed on to him or her.</li>
 								<li>
 									<p>As a result of the above computation, the following facts hold:</p>
 									<ul>
 										<li>Each player holds a share \(\beta_i^{u*v}\) of the secret \(u*v\).</li>
 										<li>This piece is already shared using VSS.</li>
-										<li>Due to the VSS of \(\beta_1^{u*v}\), each player \(P_j\) holds a share \(\beta_{ij}^{u*v}\) of \(\beta_i^{u*v}\).</li>
+										<li>Due to the VSS of \(\beta_i^{u*v}\), each player \(P_j\) holds a share \(\beta_{ij}^{u*v}\) of \(\beta_i^{u*v}\).</li>
 									</ul>
 									<p>
-										To achieve condition 3 of a verified secret for \(u*v,\,\beta_i^{u*v}\) must be shared by WSS. To transform the VSS of this piece to WSS the following is done:
+										To achieve condition 3 of a <span class="definable">verified secret</span> for \(u*v,\,\beta_i^{u*v}\) must be shared by WSS. To transform the VSS of this piece to WSS the following is done:
 									</p>
 									<ul>
 										<li>The player \(P_i\) creates and distributes check vectors for all \(\beta_{ij}^{u*v}\).</li>
-										<li>All players execute the Modified Verification of Check Vectors.</li>
-										<li>If \(P_i\) fails to cooperate his piece is exposed using the VSS for it.</li>
+										<li>All players execute the <a href="#sec3.1.2">Modified Verification of Check Vectors</a>.</li>
+										<li>If \(P_i\) fails to cooperate, that player's piece is exposed using the VSS for it.</li>
 									</ul>
 								</li>
 							</ol>
@@ -815,7 +877,7 @@
 							</p>
 							<span class="rp_theorem_header" id="lemma11">Lemma 11</span>
 							<p class="rp_original rp_theorem">
-								After the above multiplication protocol is carried out the product \(u*v\) is a verified secret.
+								After the above multiplication protocol is carried out the product \(u*v\) is a <span class="definable">verified secret</span>.
 							</p>
 							<p class="rp_original">
 								And this completes the proof of Theorem 4.
@@ -843,8 +905,8 @@
                 <h1>References</h1>
                 <ol id="referencelist">
                     <li id="B">M. Ben-Or. Multiparty Protocols with Honest Majority, in preparation.</li>
-					<li id="BGW">M. Ben-Or, S. Goldwasser, and A. Wigderson. Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation, <i>STOC88</i>, pp. 1-10.</li>
-					<li id="CCD">D. Chaum, C. Cr&eacute;peau, and I. Damg&aring;rd. Multiparty Unconditionally Secure Protocols. <i>STOC88</i>, pp. 11-19.</li>
+					<li id="BGW">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. </li>
+					<li id="CCD">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols (extended abstract)</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.</li>
 					<li id="CGMA">B. Chor, S. Goldwasser, S. Micali, and B. Awerbuch. Verifiable Secret Sharing and Achieving Simultaneity in the Presence of Faults. <i>FOCS85</i>, pp.383-395.</li>
 					<li id="D">D. Dolev. The Byzantine Generals Strike Again, <i>J. of Algorithms, Vol. 3</i>, pp. 14-30. 1980.</li>
 					<li id="DDY">D. Dolev, C. Dwork, M. Yung. Non-Cryptographic Secure Communication on General Networks. Preprint.</li>
