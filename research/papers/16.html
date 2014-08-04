@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Title - Author, Year</title>
+        <title>Complete Characterization of Adversaries Tolerable in Secure Multiparty Computation - Martin Hirt, Ueli Maurer, 1997</title>
         <link rel="stylesheet" type="text/css" href="../../style/main.css">
         <link rel="stylesheet" type="text/css" href="../../style/equation.css">
         <link rel="stylesheet" type="text/css" href="../../style/ref.css">
@@ -63,12 +63,12 @@
                     <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
                 </div>
                 <div class="main_window main_fullwidth">
-                    <div class="rp_linkbox"><a href="pdf/###.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
+                    <div class="rp_linkbox"><a href="pdf/16.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
-                    <span class="rp_title">Paper Title</span>
-                    <span class="rp_info">Year
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="rp_author" href="../authors/authorpage.html">Author</a>
+                    <span class="rp_title">Complete Characterization of Adversaries Tolerable in Secure Multiparty Computation</span>
+                    <span class="rp_info">1997&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="rp_author" href="../authors/Martin Hirt.html">Martin Hirt</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="rp_author" href="../authors/Ueli Maurer.html">Ueli Maurer</a>
 					</span>
 					
 					<div class="rp_snippet">
@@ -168,7 +168,7 @@
 								There exists a rich literature on the subject. These approaches can be classified according to a number of criteria that are briefly discussed below. Some papers (e.g. <span class="reference" data-citation="r29">[?]</span><span class="reference" data-citation="r21">[?]</span><span class="reference" data-citation="r19">[?]</span><span class="reference" data-citation="r2">[?]</span><span class="reference" data-citation="r7">[?]</span><span class="reference" data-citation="r27">[?]</span>) describe protocol constructors which for any function generate a protocol for securely computing it, while other approaches are tailored to a particular function like voting (e.g. <span class="reference" data-citation="r10">[?]</span>), auctioning<sup class="reference" data-citation="r15">[?]</sup>, or collective signing<sup class="reference" data-citation="r28">[?]</sup>. The major reason for considering special functions is the potential gain of efficiency compared to a general solution. The communication models differ with respect to whether or not broadcast channels and/or secure communication channels are available, and whether the communication channels are synchronous or asynchronous. Adversaries are classified according to their computational resources (limited, hence cryptographic security, e.g. <span class="reference" data-citation="r8">[?]</span><span class="reference" data-citation="r21">[?]</span>, or unlimited, hence unconditional or information theoretic security, e.g. <span class="reference" data-citation="r2">[?]</span><span class="reference" data-citation="r7">[?]</span><span class="reference" data-citation="r27">[?]</span>, and according to whether they cheat actively or passively. A set of active adverse players is called an adversary, a set of passive cheaters is called a (passive) collusion.
 							</p>
 							<p class="rp_original">
-								In the information-theoretic model one can distinguish between protocols with small (e.g. <span class="reference" data-citation="r7">[?]</span><span class="reference" data-citation="r27">[?]</span>) or with zero failure probability (e.g. <span class="reference" data-citation="r2">[?]</span>). We refer to the latter as <i>perfect</i> multiparty computation. The types of tolerable adversaries have recently been generalized in a number of directions (adaptive adversaries<sup class="reference" data-citation="r4">[?]</sup> and uncoercibility<sup class="reference" data-citation="r5">[?]</sup>), and some authors have investigated multiparty computation for various minimality and complexity criteria<sup class="reference" data-citation="r12">[?]</sup><sup class="reference" data-citation="r11">[?]</sup><sup class="reference" data-citation="18">[?]</sup><sup class="reference" data-citation="r26">[?]</sup><sup class="reference" data-citation="r27">[?]</sup><sup class="reference" data-citation="r22">[?]</sup>.
+								In the information-theoretic model one can distinguish between protocols with small (e.g. <span class="reference" data-citation="r7">[?]</span><span class="reference" data-citation="r27">[?]</span>) or with zero failure probability (e.g. <span class="reference" data-citation="r2">[?]</span>). We refer to the latter as <i>perfect</i> multiparty computation. The types of tolerable adversaries have recently been generalized in a number of directions (adaptive adversaries<sup class="reference" data-citation="r4">[?]</sup> and uncoercibility<sup class="reference" data-citation="r5">[?]</sup>), and some authors have investigated multiparty computation for various minimality and complexity criteria<sup class="reference" data-citation="r12">[?]</sup><sup class="reference" data-citation="r11">[?]</sup><sup class="reference" data-citation="r18">[?]</sup><sup class="reference" data-citation="r26">[?]</sup><sup class="reference" data-citation="r27">[?]</sup><sup class="reference" data-citation="r22">[?]</sup>.
 							</p>
 							<p class="rp_original">
 								All the previous results in the literature specify the sets of potential adverse players (passive or active) that can be tolerated by their cardinality, i.e. by a threshold. In a setting with perfect security, Ben-Or, Goldwasser, and Widgerson<sup class="reference" data-citation="r2">[?]</sup> proved that with \(n\) players all passive collusions with less than \(n/2\) members or, alternatively, all active adversaries with less that \(n/3\) members can be tolerated. We refer to these two models as the passive and the adtive model. The same results were obtained independently by Chaum, Cr&eacute;peau, and Damg&aring;rd<sup class="reference" data-citation="r7">[?]</sup> in an unconditional model with exponentially small error probability. Rabin and Ben-Or<sup class="reference" data-citation="r27">[?]</sup> proved that, in an unconditional (but not perfect) model with a broadcast channel, active adversaries with less than \(n/2\) members can be tolerated. This model is referred to as the active model with broadcast.
@@ -452,8 +452,145 @@
 						<section id="sec4.3">
 							<h3>4.3. Example</h3>
 							<p class="rp_original">
-								
+								We apply Theorem 3 to construct a protocol among the player set \(P=\{p_1,p_2,p_3,p_4,p_5,p_6\}\) that tolerates the collusion structure \(\overline{\mathcal C}=\{\{p_1,p_2,p_3,p_4\},\{p_1,p_2,p_5\},\{p_1,p_2,p_6\},\{p_1,p_3,p_5\},\{p_1,p_4,p_6\},\{p_2,p_3,p_6\},\{p_2,p_4,p_5\}\}.\)
 							</p>
+							<p class="rp_original">
+								As a simple notation we write \([p_1,p_2,p_3]\) for the protocol generator \(G^\text{p3}\) with the three players \(p_1,p_2\), and \(p_3\), and \([p_1,p_2,[p_1,p_4,p_5]]\) for the protocol generator among the players \(p_1,p_2\) and a virtual players simulated by a protocol generated by the protocol generator \(G^\text{p3}\) among the players \(p_1,p_4,\) and \(p_5\). As a special case, \([p]\) refers to the protocol generator that simply replaces the name of the trusted party in the multiparty computation specification by \(p\).
+							</p>
+							<span class="rp_sub_header">Step 1</span>
+							<p class="rp_original rp_sub">
+								Divide \(\overline{\mathcal C}\) into three partitions, for example: $$\begin{align}\overline{\mathcal C}_1&=\{\{p_1,p_2,p_3,p_4\},\{p_1,p_3,p_5\}\},\\\overline{\mathcal C}_2&=\{\{p_2,p_4,p_5\},\{p_1,p_2,p_5\}\},\\\overline{\mathcal C}_3&=\{\{p_1,p_2,p_6\},\{p_2,p_3,p_6\},\{p_1,p_4,p_6\}\}.\end{align}$$
+							</p>
+							<span class="rp_sub_header">Step 2</span>
+							<p class="rp_original rp_sub">
+								Construct a protocol generator tolerating \(\overline{\mathcal C}_2\cup\overline{\mathcal C}_3\).
+							</p>
+							<div style="width:95%;margin:0px 2.5%; font-size:90%">
+								<span class="rp_sub_header">Step 2.1</span>
+								<p class="rp_original rp_sub rp_sub">
+									Divide \(\overline{\mathcal C}_2\cup\overline{\mathcal C}_3\) into three partitions, for example: $$\begin{align}\overline{\mathcal C}_{11}&=\{\{p_2,p_4,p_5\},\{p_1,p_2,p_5\}\},\\\overline{\mathcal C}_{12}&=\{\{p_1,p_2,p_6\},\{p_2,p_3,p_6\}\},\\\overline{\mathcal C}_{13}&=\{\{p_1,p_4,p_6\}\}.\end{align}$$
+								</p>
+								<span class="rp_sub_header">Step 2.2</span>
+								<p class="rp_original rp_sub">
+									Construct a protocol tolerating \(\overline{\mathcal C}_{12}\cup\overline{\mathcal C}_{13}\). This is achieved by \([p5]\).
+								</p>
+								<span class="rp_sub_header">Step 2.3</span>
+								<p class="rp_original rp_sub">
+									Construct a protocol tolerating \(\overline{\mathcal C}_{11}\cup\overline{\mathcal C}_{13}\). This is achieved by \([p3]\).
+								</p>
+								<span class="rp_sub_header">Step 2.4</span>
+								<p class="rp_original rp_sub">
+									Construct a protocol tolerating \(\overline{\mathcal C}_{11}\cup\overline{\mathcal C}_{12}\).
+								</p>
+								<div style="width:95%;margin:0px 2.5%; font-size:90%">
+									<span class="rp_sub_header">Step 2.4.1</span>
+									<p class="rp_original rp_sub">
+										Divide \(\overline{\mathcal C}_{11}\cup\overline{\mathcal C}_{12}\) into three partitions, for example: $$\begin{align}\overline{\mathcal C}_{131}&=\{\{p_2,p_4,p_5\}\},\\\overline{\mathcal C}_{132}&=\{\{p_1,p_2,p_5\},\{p_1,p_2,p_6\}\},\\\overline{\mathcal C}_{133}&=\{\{p_2,p_3,p_6\}\}.\end{align}$$
+									</p>
+									<span class="rp_sub_header">Step 2.4.2</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{132}\cup\overline{\mathcal C}_{133}\). This is achieved by \([p_4]\).
+									</p>
+									<span class="rp_sub_header">Step 2.4.3</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{131}\cup\overline{\mathcal C}_{133}\). This is achieved by \([p_1]\).
+									</p>
+									<span class="rp_sub_header">Step 2.4.4</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{132}\cup\overline{\mathcal C}_{132}\). This is achieved by \([p_3]\).
+									</p>
+									<span class="rp_sub_header">Step 2.4.5</span>
+									<p class="rp_original rp_sub">
+										The collusion structure \(\overline{\mathcal C}_{11}\cup\overline{\mathcal C}_{12}\) is tolerated by the subprotocol \([p_1,p_3,p_4]\).
+									</p>
+								</div>
+								<span class="rp_sub_header">Step 2.5</span>
+								<p class="rp_original rp_sub">
+									The collusion structure \(\overline{\mathcal C}_2\cup\overline{\mathcal C}_3\) is tolerated by the subprotocol \([p_3,p_5,[p_1,p_3,p_4]]\).
+								</p>
+							</div>
+							<span class="rp_sub_header">Step 3</span>
+							<p class="rp_original rp_sub">
+								Construct a protocols generator tolerating \(\overline{\mathcal C}_1\cup\overline{\mathcal C}_3\).
+							</p>
+							<div style="width:95%;margin:0px 2.5%; font-size:90%">
+								<span class="rp_sub_header">Step 3.1</span>
+								<p class="rp_original rp_sub">
+									Divide \(\overline{\mathcal C}_1\cup\overline{\mathcal C}_3\) into three partitions, for example: $$\begin{align}\overline{\mathcal C}_{21}&=\{\{p_1,p_2,p_3,p_4\},\{p_1,p_3,p_5\}\},\\\overline{\mathcal C}_{22}&=\{\{p_1,p_2,p_6\},\{p_2,p_3,p_6\}\},\\\overline{\mathcal C}_{23}&=\{\{p_1,p_4,p_6\}\}.\end{align}$$
+								</p>
+								<span class="rp_sub_header">Step 3.2</span>
+								<p class="rp_original rp_sub">
+									Construct a protocol tolerating \(\overline{\mathcal C}_{22}\cup\overline{\mathcal C}_{23}\). This is achieved by \([p_5]\).
+								</p>
+								<span class="rp_sub_header">Step 3.3</span>
+								<p class="rp_original rp_sub">
+									Construct a protocol tolerating \(\overline{\mathcal C}_{21}\cup\overline{\mathcal C}_{23}\). 
+								</p>
+								<div style="width:95%;margin:0px 2.5%; font-size:90%">
+									<span class="rp_sub_header">Step 3.3.1</span>
+									<p class="rp_original rp_sub">
+										Divide \(\overline{\mathcal C}_{21}\cup\overline{\mathcal C}_{23}\) into three partitions: $$\begin{align}\overline{\mathcal C}_{221}&=\{\{p_1,p_2,p_3,p_4\}\},\\\overline{\mathcal C}_{222}&=\{\{p_1,p_3,p_5\}\},\\\overline{\mathcal C}_{223}&=\{\{p_1,p_4,p_6\}\}.\end{align}$$
+									</p>
+									<span class="rp_sub_header">Step 3.3.2</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{222}\cup\overline{\mathcal C}_{223}\). This is achieved by \([p_2]\).
+									</p>
+									<span class="rp_sub_header">Step 3.3.3</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{221}\cup\overline{\mathcal C}_{223}\). This is achieved by \([p_5]\).
+									</p>
+									<span class="rp_sub_header">Step 3.3.4</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{221}\cup\overline{\mathcal C}_{222}\). This is achieved by \([p_6]\).
+									</p>
+									<span class="rp_sub_header">Step 3.3.5</span>
+									<p class="rp_original rp_sub">
+										The collusion structure \(\overline{\mathcal C}_{21}\cup\overline{\mathcal C}_{23}\) is tolerated by the subprotocol \([p_2,p_5,p_6]\).
+									</p>
+								</div>
+								<span class="rp_sub_header">Step 3.4</span>
+								<p class="rp_original rp_sub">
+									Construct a protocol tolerating \(\overline{\mathcal C}_{21}\cup\overline{\mathcal C}_{22}\).
+								</p>
+								<div style="width:95%;margin:0px 2.5%; font-size:90%">
+									<span class="rp_sub_header">Step 3.4.1</span>
+									<p class="rp_original rp_sub">
+										Divide \(\overline{\mathcal C}_{21}\cup\overline{\mathcal C}_{22}\) into three partitions: $$\begin{align}\overline{\mathcal C}_{231}&=\{\{p_1,p_2,p_3,p_4\}\},\\\overline{\mathcal C}_{232}&=\{\{p_1,p_3,p_5\}\},\\\overline{\mathcal C}_{233}&=\{\{p_1,p_2,p_6\},\{p_2,p_3,p_6\}\}.\end{align}$$
+									</p>
+									<span class="rp_sub_header">Step 3.4.2</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{232}\cup\overline{\mathcal C}_{233}\). This is achieved by \([p_4]\).
+									</p>
+									<span class="rp_sub_header">Step 3.4.3</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{231}\cup\overline{\mathcal C}_{233}\). This is achieved by \([p_6]\).
+									</p>
+									<span class="rp_sub_header">Step 3.4.4</span>
+									<p class="rp_original rp_sub">
+										Construct a protocol tolerating \(\overline{\mathcal C}_{231}\cup\overline{\mathcal C}_{232}\). This is achieved by \([p_6]\).
+									</p>
+									<span class="rp_sub_header">Step 3.4.5</span>
+									<p class="rp_original rp_sub">
+										The collusion structure \(\overline{\mathcal C}_{21}\cup\overline{\mathcal C}_{22}\) is tolerated by the subprotocol \([p_4,p_5,p_6]\).
+									</p>
+								</div>
+								<span class="rp_sub_header">Step 3.5</span>
+								<p class="rp_original rp_sub">
+									The collusion structure \(\overline{\mathcal C}_{1}\cup\overline{\mathcal C}_{3}\) is tolerated by the subprotocol \([p_5,[p_2,p_5,p_6],[p_4,p_5,p_6]]\).
+								</p>
+							</div>
+							<span class="rp_sub_header">Step 4</span>
+							<p class="rp_original rp_sub">
+								Construct a protocols generator tolerating \(\overline{\mathcal C}_{1}\cup\overline{\mathcal C}_{2}\). This is achievable by \([p_6]\).
+							</p>
+							<span class="rp_sub_header">Step 5</span>
+							<p class="rp_original rp_sub">
+								The stated collusion structure \(\mathcal C\) is a tolerated by \([p_3,p_5,[p_1,p_3,p_4],[p_5,[p_2,p_5,p_6],[p_4,p_5,p_6]],p_6]\).
+							</p>
+							<p class="rp_original">
+								This leads to the construction illustrated in Figure 2. Remember that \(p_i\) for \(i\lt0\) refers to virtual players.
+							</p>
+							<img class="rp_original" src="../../img/16.fig2.jpg" alt="Example of iterated player substitution." />
 						</section>
 					</section>
 					<section id="sec5">
@@ -532,6 +669,15 @@
 					<li id="r18">Franklin, M. K., and Yung, M. Communication complexity of secure computation. In <i>Proc. 24th ACM Symposium on the Theory of Computing (STOC)</i> (1992), pp. 699-710.</li>
 					<li id="r19">Galil, Z., Haber, S., and Yung, M. Cryptographic computation: Secure fault-tolerant protocols and the public-key model. In <i>Advances in Cryptology | CRYPTO '87</i> (1987), vol. 293 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 135-155.</li>
 					<li id="r20">Gennaro, R. <i>Theory and Practice of Verifiable Secret Sharing</i>. PhD thesis, Massachusetts Institute of Technology (MIT), May 1996.</li>
+					<li id="r21">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority</a>. <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
+					<li id="r22">Kushilevitz, E. Privacy and communication complexity (extended abstract). In <i>Proc. 30th IEEE Symposium on the Foundations of Computer Science (FOCS)</i> (1989), pp. 416-421.</li>
+					<li id="r23">Lamport, L., Shostak, R., and Pease, M. The Byzantine generals problem. <i>ACM Transactions on Programming Languages and Systems 4</i>, 3 (1982), 382-401.</li>
+					<li id="r24">Micali, S., and Rogaway, P. Secure computation. In <i>Advances in Cryptology | CRYPTO '91</i> (1991), vol. 576 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 392-404.</li>
+					<li id="r25">Pease, M., Shostak, R., and Lamport, L. Reaching agreement in the presence of faults. <i>Journal of the ACM 27</i>, 2 (1980), 228-234.</li>
+					<li id="r26">Rabin, T. Robust sharing of secrets when the dealer is honest or cheating. <i>Journal of the ACM 41</i>, 6 (1994), 1089-1109.</li>
+					<li id="r27">T. Rabin and M. Ben-Or. <a href="76.html">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</a>. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.</li>
+					<li id="r28">Santis, A. d., Desmedt, Y., Frankel, Y., and Yung, M. How to share a function securely. In <i>Proc. 26th ACM Symposium on the Theory of Computing (STOC)</i> (1994), pp. 522-533.</li>
+					<li id="r29">A.C. Yao. <a href="49.html">Protocols for Secure Computations (extended abstract)</a>. <i>Proceedings of the 23rd Annual IEEE Symposium on the Foundations of Computer Science,</i> pages 160-164. IEEE. 1982.</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
