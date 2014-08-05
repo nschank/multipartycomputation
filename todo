@@ -1,7 +1,6 @@
 Adversaries
 	Malicious vs. Passive
 	Static vs Dynamic/Adaptive
-		Adaptive Security->1996
 Proof Techniques
 	Simulator
 	Reduction
@@ -31,8 +30,6 @@ cheat sheet additions
 	boolean gates
 	RSA
 	indistinguishability
-17
-	protocols
 82
 	correction: no broadcast channel
 open probs

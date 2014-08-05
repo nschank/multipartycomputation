@@ -81,7 +81,7 @@
 						There's a reason that multiparty computation remains so obscure and esoteric among all but cryptographers. Example problems, when offered, are somewhat complex at best, or overtly so at worst; the most basic of protocols tend to be difficult to follow for the uninitiated; and the research itself tends to be on the most subtle differences between problems.
 					</p>
 					<p class="l_content">
-						With that in mind, in this chapter we will examine three different multiparty computation problems (and some of their solutions) that offer the most intuitive look into the field, subtleties and all.
+						With that in mind, in this chapter we will examine three different multiparty computation problems (and some of their solutions) that offer the most intuitive look into the field, subtleties and all. We stress that this is intended to be an intuitive introduction to a few of the major issues in the field; more formal definitions are given in the next chapter.
 					</p>
 					<p class="l_content">
 						The first, the Millionaire Problem, is a classic cryptography problem offered by Andrew Yao in his <a href="../research/papers/49/html">1982 paper</a> which helped to found the entire field of multiparty computation. It gives the perfect example of a two-party computation, complete with a short and easy-to-understand protocol, while also offering an easy demonstration of how dishonest parties can cheat each other in non-optimally private protocols.
@@ -93,7 +93,7 @@
 						The third, the Fourth Grader Problem, is a problem and protocol created here as a final intuitive example. It is the first time we will look at a protocol in which multiple functions are included, and we can contrast the problems created by cheating and those created by <span class="definable">collusion</span>, a special type of cheating. 
 					</p>
 					<p class="l_content">
-						With all of that behind us, we can look at a more technical definition of multiparty computation, and analyze the different variations built into that definition. There, we will look at the type of descriptions used on protocols throughout this website (especially in the research section) in order to describe what variations a particular protocol uses.
+						With all of that behind us, we can look at a more technical definition of multiparty computation, and analyze the different variations built into that definition. While still not as formal as the one to be presented in the next chapter, it will give us a taste of the types of descriptions used on protocols throughout this website (especially in the research section) in order to describe what variations a particular protocol uses.
 					</p>
                 </div>
             </div>
@@ -229,6 +229,28 @@
                 <div class="main_window main_fullwidth">
 					<span class="l_section">Section 2: Secret Voting</span>
 					
+					<p class="l_content">
+						We move on to a usage case that may seem more familiar: a secret ballot. Secret voting can get quite complicated, but we will give the simplest of examples. Let's say we have \(n\) people in a room, and they want to choose between two options, which we will call option 0 and option 1. As a democratic bunch, the group of participants want to define a way that they can choose between the options fairly, but privately. After a discussion amongst themselves, they decide that these are the (basic) constraints they want on their vote:
+					</p>
+					<ul class="l_content">
+						<li>If a majority of the group wants option \(b\in\{0,1\}\), then that is the option the vote will result in. This is a <i>correctness</i> constraint. For simplicity, we will assume that \(n\) is odd so there will always be a majority voting for one option.</li>
+						<li>Nobody can vote more than once, or otherwise change the result of the vote. This is another <i>correctness</i> constraint.</li>
+						<li>Nobody's vote is public; that is, nobody can tell how anybody else voted. This is a <i>privacy</i> constraint.</li>
+						<li>Nobody can vote out of spite. This property is subtle, and refers to <i>independence of inputs</i>: it's not fair for someone to base their vote on somebody else's vote, or they could simply be cancelling a vote out. As another example, independence of inputs is extremely important in a private auction, or else someone could always win the highest bid by one dollar.</li>
+						<li>Everyone finds out what the result was at (approximately) the same time. This is a <i>fairness</i> constraint: if we don't account for this, then we could prevent the protocol from finishing correctly. As an example, if the first person to get the result doesn't like that result, it is <i>unfair</i> for that person to be able to stop participating and prevent others from receiving the answer.</li>
+					</ul>
+					<!--<p class="l_content">
+						All parties \(p_i\) for \(i=1,\dots,n\) have inputs \(x_i\in\{0,\dots,n\}\), where we define 0 to be choosing option 0, and \(n\) to be choosing option 1. We perform the following protocol:
+					</p>
+					<ol class="l_content">
+						<li>First, we will force all parties to <span class="definable" data-define="commitment">commit</span> to their particular input; this will ensure that we achieve independence of inputs, at the very least. We do this by using <u>secret sharing</u>. In this particular case, we will have each party share his or her input \(x_i\) as the sum of \(n\) random elements of \(\mathbb Z_p\), for some \(p\gt n\):
+							<ol>
+								<li>Every party \(p_i\) chooses \(n-1\) random values \(r_{i,k}\in\mathbb Z_p\) for \(k\in\{1,n-1\}\).</li>
+								<li>Every party \(p_i\) calculates \(r_{i,n}=\left(x_i-\sum\nolimits_{k=1}^{n-1}{r_{i,k}}\right)\bmod p\). This ensures that the sum of all \(\sum\nolimits_kr_{i,k}=x_i\) for any \(i\).</li>
+								<li>Every party \(p_i\) tells every party \(p_j\) the values \(r_{i,j}\) and \(r_{i,j+1\bmod p}\); notice that \(p_i\) keeps two values. Since every party has two values, but no two parties share more than one, any group of more than \(\frac12\) parties can rebuild the entire secret, if necessary.</li>
+							</ol>
+						</li>
+					</ol>-->
                 </div>
             </div>
 			
@@ -243,7 +265,27 @@
                 <div class="main_window main_fullwidth">
 					<span class="l_section">Section 3: The Fourth Grader Problem</span>
 					
-                    
+                    <p class="l_content">
+						We wish to give one final example that we think is the most intuitive of all. A classroom of students ("fourth graders") all have 'crushes' on one other student each; they all want to know if their crush likes them back. This, of course, is not easy: if they admit to liking their crush, but the crush is not requited, they would find that extremely embarrassing. As such, we must find a way to ensure that:
+					</p>
+					<ul class="l_content">
+						<li>All fourth graders learn if their crush is requited (<i>correctness</i>).</li>
+						<li>No fourth grader learns about anybody's crush, excepting the case where their own crush is requited (<i>privacy</i>).</li>
+						<li>No fourth grader A, who has a crush on B, can be convinced by B that A's crush is requited unless B had a crush on A before the protocol started (<i>independence of input</i>).</li>
+						<li>No fourth grader can learn whether their crush is requited unless the other fourth graders also learned whether their crushes were requited (<i>fairness</i>).</li>
+					</ul>
+					<p class="l_content">
+						We assume the fourth graders are numbered \(i=\{1,\dots,n\}\) and that each has input \(x_i\in\{1,\dots,n\}\backslash\{i\}\cup\{\varnothing\}\), where we say \(\{\varnothing\}\) is the equivalent of not having a crush. So we define our protocol as follows:
+					</p>
+					<ol class="rp_original">
+						<li>The fourth graders all agree on some public-key encryption scheme (e.g. RSA, DH) \(\mathcal G,E,D\), as well as a security parameter \(k\). We restrict ourselves to encryption schemes where the public keys are indistinguishable from random.</li>
+						<li>All fourth graders sample two key pairs: party \(p_i\) samples \((pk_i,sk_i)\leftarrow\mathcal G(1^k)\) and \((\pi{k_i},\sigma{k_i})\leftarrow\mathcal G(1^k)\).</li>
+						<li>All fourth graders write their \(pk_i\) on the white board, keeping their other values private.</li>
+						<li>All fourth graders \(p_i\) encrypt their second public key \(\pi{k}_i\) under their crush's public key, and call this value \(e_i=\mathcal E(pk_{x_i},\pi{k}_i)\). Any student with no crush encrypts a value chosen uniformly at random and sets \(e_i\) to this encryption. All parties write \(e_i\) on the white board.</li>
+						<li>All fourth graders \(p_i\) decrypt their crush's \(e_i\) under their primary secret key \(s_k\), to get \(d_i=\mathcal D(s_k,e_i)\). We note that, if their crush is requited, then \(d_i=\pi{k_{x_i}}\); otherwise, \(d_i\) is random.</li>
+						<li>All fourth graders encrypt their input \(x_i\) under \(d_i\), calling this \(c_i=\mathcal E(d_i,x_i)\); anyone without a crush can encrypt a value at random, or set \(c_i\) to a random value, as they prefer. Everyone writes their \(c_i\) on the board.</li>
+						<li>All fourth graders check whether \(\mathcal D(\sigma{k_i},c_{x_i})=i\); if so, their crush is requited.</li>
+					</ol>
                 </div>
             </div>
 			
