@@ -76,29 +76,50 @@
 					</span>
 					
 					<div class="rp_snippet">
-						&ldquo;&rdquo;
+						&ldquo;Assuming that each participant can broadcast a message to all other participants and that each pair of participants can communicate secretly, any multiparty protocol, or game with incomplete information, can be achieved if a majority of the players are honest.&rdquo;
 					</div>
 						
-                    <div class="main_toc"></div>
 					
 					<h1>Overview</h1>	
+                    <div class="main_toc"></div>
+					
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Paper Title</b> is...
+							<b>Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</b> is a 1989 by Tal Rabin and Michael Ben-Or, a combination of two separate papers they were working on, which provides some useful theorems for the powers of an adversary in multiparty computations. It is a culmination of several years in which multiparty computation research was mostly focused on fault tolerance in the face of adversarial behavior, and offers the strongest possible protections a multiparty protocol can offer (as always, under certain assumptions). The assumptions made are all related to networks and to the adversary, not to computational intractability, so the secrecy offered is <span class="definable" data-define="information-theoretic security">information-theoretic</span>.
+						</p>
+						<p class="rp_analysis">
+							This paper's main results relate to how <span class="definable" data-define="broadcast channel">broadcast channels</span> affect the tolerability of adversary structures. Since verifiable secret sharing is a primitive used by essentially all multiparty computation protocols presented before, the authors using broadcast as a primitive allows an honest majority to achieve information theoretic security, but requires an exponentially small error probability for \(n/3\leq t\lt n/2\) <span class="definable" data-define="malicious party">faulty players</span>. 
 						</p>
 					</section>
 					<section id="goals">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
-							Some goals that they had.
+							The authors intended to demonstrate the most possible effective form of multiparty computation in the face of the strongest adversary which can be dealt with (in the general case). Specifically, the authors played with the idea of a <span class="definable">broadcast channel</span>, and demonstrated how assuming the presence of a broadcast channel extends the capabilities of verifiable secret sharing schemes (and therefore multiparty computation).
 						</p>
 						<p class="rp_analysis">
-							Don't forget some results, too!
+							In a complete network, assuming the existence of a broadcast channel, information-theoretically secure verifiable secret sharing is achievable for \(t\lt n/2\) <span class="definable" data-define="malicious party">faulty players</span>. However, for \(n/3\leq t\lt n/2\), it is not possible to avoid an exponentially small probability of error. As a result, <b>honest majority is sufficient to provide information-theoretically secure multiparty computation with a <span class="definable">negligible</span> probability of error.</b>
+						</p>
+						<p class="rp_analysis">
+							In an incomplete network, assuming \(2t+1\)-<span class="definable">connectivity</span>, and without a broadcast channel, information-theoretically secure verifiable secret sharing is achievable for \(t\lt n/3\) faulty players, with no probability of error. 
+						</p>
+						<p class="rp_analysis">
+							We note that, as mentioned in some other papers for completeness, in the general case \(t=n/3\) (or \(t=n/2\) with broadcast) does not necessarily offer information-theoretic security.
+						</p>
+						<p class="rp_analysis">
+							The essential technique of this paper is a threshold verified secret-sharing technique similar to the one presented several times in the years previous (using Galois Fields and polynomial sharing), with an additional "weak secret sharing" technique that allows easier transitioning between sub-shares and top-level shares. The Weak Secret Sharing technique uses specially created <i>check vectors</i>, independently selected values which allows a recipient to be sure that a share broadcasted by a player was the one given to that player by the dealer. Very simply put, if the dealer wants to commit player \(P_i\) to the share \(s\) in a field \(\mathbb F\), the dealer gives the player \((s,y)\) (with \(y\) being any random value in \(\mathbb F\)), and gives the player who will later receive that value \((b,c),\;b,x\in\mathbb F,\;s+by=c\). When \(P_i\) wants to release the share, \(P_i\) has an exponentially low probability of lying about \(s\) successfully, since if \(s'+by'\neq c\) for released share \((s',y')\), then the receiving player will reject it.
 						</p>
 					</section>
 					<section id="assumptions">
 						<h2>Assumptions</h2>
+						<p class="rp_analysis">
+							The assumptions made in this paper are complex, as different things are assumed at different times. A quick summary of results is given below, with the assumptions made explicit. All results are in a <span class="definable">synchronous network</span>.
+						</p>
+						<ul class="rp_original">
+							<li>In a complete network with secure channels between all players and a <span class="definable">broadcast channel</span>, assuming honest majority, a function \(f\) can be computed with information-theoretic security, and with a <span class="definable">negligible</span> probability of error.</li>
+							<li>In a complete network with secure channels between all players and a <span class="definable">broadcast channel</span>, assuming \(t\lt n/3\) <span class="definable" data-define="malicious party">faulty players</span>, a function \(f\) can be computed with information-theoretic security, and with no probability of error.</li>
+							<li>In an incomplete network with secure channels between all <i>connected</i> players, and assuming the network has <span class="definable">connectivity</span> \(\gt 2t+1\), a function \(f\) can be computed with information-theoretic security and no probability of error, tolerating \(t\lt n/3\) faulty parties.</li>
+						</ul>
 					</section>
 					<section id="defs">
 						<h2>Definitions</h2>
@@ -106,7 +127,7 @@
 						<p class="rp_original rp_definition">
 							It will be said that players \(P_1,\dots,P_r,\, r\geq t+1\), holding pieces given by a dealer, <i>define a secret</i> \(s\), if (1) every player \(P_i\) has a distinct evaluation point, (2) for every subset \(P_{i_1},\dots,P_{i_{t+1}}\), the polynomial \(f(x)\) of degree \(t\), <span class="definable" data-define="interpolation">interpolated</span> through the pieces \(\beta_{i_1},\dots,\beta_{i_{t+1}}\) which they hold, is the same, and its free term is \(s\). <b>Note:</b> Checking whether a set of players \(P_1,\dots,P_r\) define a secret \(s\) is polynomial.
 						</p>
-						<a href="#def2"><span class="rp_definition_header">Definition 2:</span></a>
+						<a href="#def2"><span class="rp_definition_header">Definition 2</span></a>
 						<p class="rp_original rp_definition">
 							A <i>coalition</i> is a subset \(C\subseteq \{P_1,\dots,P_n\}\) of the set of all players, for which at the end of <a href="#sec3.1.2">Phase 2</a> each \(P_i\in C\) knows that every other player \(P_j\in C\) will accept his or her piece of the shared secret.
 						</p>
@@ -182,6 +203,19 @@
 					</section>
 					<section id="further">
 						<h2>Further Reading</h2>
+						<p class="rp_analysis">
+							The authors touch briefly on the idea of an adaptive (in their words, <i>dynamic</i>) adversary, which is truly codified into the literature formally <a href="5.html">6 years layer</a>.
+						</p>
+						<p class="rp_analysis">
+							This paper is part of a series covering the completeness theorems on <u>tolerability of adversarial structures</u>:
+						</p>
+						<ol class="rp_analysis">
+							<li><b><a href="81.html">How to Play Any Mental Game (1987)</a></b>: Cryptographic Security for Honest Majority, No Fault Tolerance</li>
+							<li><b><a href="82.html">Multiparty Computation Ensuring Privacy... (1988)</a></b>: Information-Theoretic Security for One Party, Negligible Probability of Cheating</li>
+							<li><b><a href="34.html">Multiparty Unconditionally Secure Protocols (1988)</a></b>: Information-Theoretic Security for \(2n/3\) Honest Parties, Negligible Probability of Cheating</li>
+							<li><b><a href="17.html">Completeness Theorems for Non-Cryptographic... (1988)</a></b>: Information-Theoretic Security for \(2n/3\) Honest Parties, Perfectly Fault Tolerant for \(2n/3\) Honest Parties</li>
+							<li><b><i>Verifiable Secret Sharing and Multiparty Protocols... (1989)</i></b>: Information-Theoretic Security for Honest Majority, Negligible Probability of Cheating</li>
+						</ol>
 					</section>
 					<section id="ref">
 						<h2>Referencing This Paper</h2>
@@ -675,7 +709,7 @@
 							We can therefore assume that the sender of the message \(D\) is honest, and so we are in a case where <a href="#theorem1">Theorem 1</a> applies. To send a message to \(R,\,D\) encodes the message using a polynomial of degree \(t\) into \(2t+1\) pieces, and sends each piece together with check vectors for all the other pieces along a separate route to \(R\). To read the message, \(R\) tests each piece with all the check vectors arriving from all the routes and discards any piece that does not match with at least \(t+1\) such vectors. Having collected \(t+1\) such pieces, \(R\) computes the <span class="definable">interpolation</span> polynomial and takes its free term as \(D\)'s message. It is easy to see this simple <i>one phase</i> protocol has all the properties needed to prove Theorem 2 and Theorem 3.
 						</p>
 						<p class="rp_original">
-							After submitting this abstract, the authors have learned that Dolev, Dwork, and Yung<sup class="reference" data-citation="DDY">[?]</sup>have shown how to simulate in a \(2t+1\) connected network a secure communication line between any two honest players in a completely error-free manner. Therefore, our Theorem 3 is not the best possible, as under the conditions of Theorem 3, any multiparty protocol can be achieved with absolutely no error at all (see <span class="reference" data-citation="DDY">[?]</span>). We note that in the "error-free" simulation, the faulty players can delay the message between two honest players for \(O(td)\) steps. Therefore their simulation does not provide a proof of Theorem 2. We briefly sketch below how to combine both results and obtain an absolutely error free secure transmission in \(O(d)\) expected time.
+							After submitting this abstract, the authors have learned that Dolev, Dwork, and Yung<sup class="reference" data-citation="DDY">[?]</sup>have shown how to simulate in a \(2t+1\) connected network a secure communication line between any two honest players in a completely error-free manner. Therefore, our Theorem 3 is not the best possible, as under the conditions of Theorem 3, any multiparty protocol can be achieved with absolutely no error at all (see <span class="reference" data-citation="DDY">[?]</span>). We note that in the "error-free" simulation, the faulty players can delay the message between two honest players for \(\operatorname O(td)\) steps. Therefore their simulation does not provide a proof of Theorem 2. We briefly sketch below how to combine both results and obtain an absolutely error free secure transmission in \(\operatorname O(d)\) expected time.
 						</p>
 						<section id="sec5.1">
 							<h3>5.1. Error Free Transmission</h3>
