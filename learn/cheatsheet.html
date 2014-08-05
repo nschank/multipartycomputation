@@ -14,6 +14,7 @@
         <script type="text/javascript" src="../script/ref.js"></script>
         <script type="text/javascript" src="../script/glossary.js"></script>
         <script type="text/javascript" src="../script/def.js"></script>
+		<script type="text/javascript" src="../script/toc.js"></script>
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
@@ -56,24 +57,18 @@
                 <a href="../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1">
+            <div class="main_toplevel main_section main_color1" id="intro">
                 <div class="main_section_nav_container">
 					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
                 </div>
-                <div class="main_window main_fullwidth" id="intro">
-                    <span class="l_chapter">Cryptography Cheat Sheet</span>
+                <div class="main_window main_fullwidth">
+                    <h2 class="l_chapter">Cryptography Cheat Sheet</h2>
 						
-                    <div class="main_toc">
-                        <h4 style="color:#333333">Categories</h4>
-                        <ul type="A">
-							<li><a href="#mod">Modular Arithmetic</a></li>
-							<li><a href="#O">Big-Oh Notation and Runtime</a></li>
-							<li><a href="#prob">Probability</a></li>
-							<li><a href="#exp">Experiments</a></li>
-                        </ul>
-                    </div>
+                    <div class="main_toc"></div>
 					
-                    
+                    <p class="l_content">
+						Within this page, we summarize some key results and definitions within a few areas of mathematics and computer science that are related to results within this site. In general, lengthy explanations and summary are avoided in favor of equations, identities, or definitions.
+					</p>
                 </div>
             </div>
 			<div class="main_toplevel main_section main_color2" id="mod">
@@ -81,7 +76,85 @@
 					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
                 </div>
                 <div class="main_window main_fullwidth">
-					<span class="l_section">Modular Arithmetic</span>
+					<h3 class="l_section">Modular Arithmetic</h3>
+					<div class="main_toc"></div>
+					
+					<p class="l_content">
+						We begin by stressing the difference between the mod <i>function</i>, and modular <i>equivalence</i>. The mod (or remainder) function is defined as \(x\bmod y = r\quad 0\leq r\lt y\) where \(\exists k\in\mathbb Z\) such that \(ky+r=x.\) Generally, \(x,y,r\in\mathbb Z\), though all can meaningfully be extended to \(\mathbb R\). Modular equivalence between two values \(a,b\) with respect to some quotient \(c\) is expressed as \(a\equiv b\pmod c,\) which is equivalent to the statement \(a\bmod c\quad=\quad b\bmod c.\)
+					</p>
+					<p class="l_content">
+						Notice the the former is a function, whereas the latter is a statement of equivalence within a particular relation; the former has a 'solution', the latter is simply a property of \(a,b\). In particular, we stress that \(a\equiv b\pmod c\) does NOT imply \(a=b\bmod c\), though the reverse is true.
+					</p>
+					<p class="l_content">
+						Now, for some major definitions, algorithms, and theorems. \(a,b,c,n,x,y\in\mathbb Z;\;p,q,\in\mathbb P\) (the set of all primes)
+					</p>
+					<table>
+						<tr>
+							<th>Equation</th>
+							<th>Name</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>$$a\,|\,b$$</td>
+							<td>"\(a\) divides \(b\)"</td>
+							<td>$$\exists k\in\mathbb Z,\,kb=a$$</td>
+						</tr>
+						<tr>
+							<td>$$a\equiv b\pmod c\;\\\Leftrightarrow\;c\,|\,(a-b)$$</td>
+							<td>Equivalence of Congruency and Divisibility</td>
+							<td>If two numbers are equivalent modulo a third number, that third number divides their difference. This is plain from the definition of congruence and basic algebra.</td>
+						</tr>
+						<tr>
+							<td>$$\gcd(a,b)=k\\\text{where }(x|a\wedge x|b)\Leftrightarrow x|k$$</td>
+							<td>Greatest Common Divisor</td>
+							<td>The gcd of two numbers is the greatest number that divides both of them. Two numbers such that \(\gcd(a,b)=1\) are called <u>coprime</u>.</td>
+						</tr>
+						<tr>
+							<td>$$\operatorname{lcm}(a,b)=k\\\text{where }(a|x\wedge b|x)\Leftrightarrow k|x$$</td>
+							<td>Lowest Common Multiple</td>
+							<td>The lcm of two numbers is the smallest number which can be divided by both of them. Two numbers such that \(\operatorname{lcm}(a,b)=a\cdot b\) are also <u>coprime</u>, by the next equation.</td>
+						</tr>
+						<tr>
+							<td>$$a\cdot b=\operatorname{lcm}(a,b)\cdot\gcd(a,b)$$</td>
+							<td>Product of LCM and GCD</td>
+							<td>Intuitively, the lcm and gcd of two numbers are produced from the sets of their prime factors: the intersection of their prime factors is the gcd, and the union of their prime factors is the lcm. As such, the gcd and the lcm together produce both numbers in their entirety.</td>
+						</tr>
+						<tr>
+							<td>$$\exists x,y\text{ such that}\\xa+yb=\gcd(a,b)$$</td>
+							<td>B&eacute;zout's Identity</td>
+							<td>There is no solution to such a linear Diophantine equation (on the integers) when the right side is not a multiple of the gcd. We can find the solutions \(x,y\) to such an equation for given \(a,b\) using the Extended Euclidean Algorithm (which runs in worst case \(\operatorname O(\log\min(a,b))\) time).</td>
+						</tr>
+						<tr>
+							<td>$$\mathbb Z_n=\{x\bmod n\;|\;x\in\mathbb Z\}$$</td>
+							<td>The Integers modulo \(n\)</td>
+							<td>We denote by \(\mathbb Z_n\) the integers between 0 and \(n-1\). The same set not including 0 is often denoted \(\mathbb Z_n^*\). If \(n\) is a prime or a prime power, then this set is a finite field.</td>
+						</tr>
+						<tr>
+							<td>$$\operatorname\phi(n)=\\\left|\left\{k\;|\;k\in\mathbb Z_n^*,\,\gcd(k,n)=1\right\}\right|$$</td>
+							<td>Definition of the Totient Function</td>
+							<td>The function \(\operatorname\phi(n)\) calculates the number of positive integers less than \(n\) which are coprime to \(n\).</td>
+						</tr>
+						<tr>
+							<td>$$\phi(p)=p-1$$</td>
+							<td>Totient of a Prime</td>
+							<td>All numbers below a prime are coprime to it.</td>
+						</tr>
+						<tr>
+							<td>$$\phi(a\cdot b)=\phi(a)\cdot\phi(b)$$</td>
+							<td>Multiplicativity of the Totient</td>
+							<td>The totient function is <span class="definable">multiplicative</span>; this is a property often used as a trapdoor since determining the totient of a Blum integer is thought to be hard.</td>
+						</tr>
+						<tr>
+							<td>$$a^{(p-1)}\equiv 1\pmod p$$</td>
+							<td>Fermat's Little Theorem</td>
+							<td>For any number \(a\), \(a^p\) is equivalent to 1 \(\bmod p\). This is generalized in the next theorem.</td>
+						</tr>
+						<tr>
+							<td>$$\gcd(a,n)=1\Rightarrow\\a^{\operatorname\phi(n)}\equiv 1\pmod n$$</td>
+							<td>Euler's Theorem</td>
+							<td>A generalization of Fermat's Little Theorem which applies to any coprime \(a,n\). A foundational part of RSA.</td>
+						</tr>
+					</table>
                 </div>
             </div>
 			<div class="main_toplevel main_section main_color3" id="O">
@@ -89,27 +162,52 @@
 					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
                 </div>
                 <div class="main_window main_fullwidth">
-					<span class="l_section">Big-Oh Notation and Runtime</span>
+					<h3 class="l_section">Big-Oh Notation and Runtime</h3>
+					<div class="main_toc"></div>
+					<h4>The Five Runtime Functions</h4>
+					<table>
+						<tr>
+							<th>Statement</th>
+							<th>Informal Statement</th>
+							<th>Comparison to Inequality</th>
+							<th>Formal Definition</th>
+						</tr>
+						<tr>
+							<td>$$f(n)\in\operatorname o(g(n))$$</td>
+							<td>\(f\) is dominated by \(g\)</td>
+							<td>$$f\lt g$$</td>
+							<td>$$\forall\,k>0,\exists\,n_0\;|\;\\\forall n\gt n_0,\,f(n)\leq k\cdot g(n)$$</td>
+						</tr>
+						<tr>
+							<td>$$f(n)\in\operatorname O(g(n))$$</td>
+							<td>\(f\) is bounded above by \(g\)</td>
+							<td>$$f\leq g$$</td>
+							<td>$$\exists\,k>0,\exists\,n_0\;|\;\\\forall n\gt n_0,\,f(n)\leq k\cdot g(n)$$</td>
+						</tr>
+						<tr>
+							<td>$$f(n)\in\operatorname \Theta(g(n))$$</td>
+							<td>\(f\) is bounded above and below by \(g\)</td>
+							<td>$$f\approx g$$</td>
+							<td>$$\exists\,k_1,k_2>0,\exists\,n_0\;|\;\\\forall n\gt n_0,\,k_1\cdot g(n)\leq f(n)\leq k_2\cdot g(n)$$</td>
+						</tr>
+						<tr>
+							<td>$$f(n)\in\operatorname \Omega(g(n))$$</td>
+							<td>\(f\) is bounded below by \(g\)</td>
+							<td>$$f\geq g$$</td>
+							<td>$$\exists\,k>0,\exists\,n_0\;|\;\\\forall n\gt n_0,\,f(n)\geq k\cdot g(n)$$</td>
+						</tr>
+						<tr>
+							<td>$$f(n)\in\operatorname \omega(g(n))$$</td>
+							<td>\(f\) dominates \(g\)</td>
+							<td>$$f\gt g$$</td>
+							<td>$$\forall\,k>0,\exists\,n_0\;|\;\\\forall n\gt n_0,\,f(n)\geq k\cdot g(n)$$</td>
+						</tr>
+					</table>
+					<h4>Runtime Sequence</h4>
 					<p class="l_content">
-						We theoretical computer scientists generally don't much care about how fast a program actually runs in seconds or minutes (or months...). When we talk about <i>runtime</i>, we're actually referring to the amount of time it takes <u>relative to something</u>. 
+						The following is a sequence from the lowest to highest runtimes. \(k\) is an arbitrary constant greater than 1. Notice the notation used:
 					</p>
-					<p class="l_content">
-						As an example, let's pretend we had a list of \(n\) items and wanted to check whether the first element was some particular value \(x\). If we triple the size of the list, then change the value of \(x\), the amount of time it would take to check this would not change: the runtime is <i>constant</i> relative to both \(n\) and \(x\). 
-					</p>
-					<p class="l_content">
-						But what if we wanted to check if <u>any</u> value in the list were \(x\)? The simplest way to check would obviously be to check every value one by one. If we triple the length of the list, we can expect that it would take three times as long. This algorithm is <i>linear</i> in \(n\); if we increase \(n\) by some factor, the runtime should increase by about the same factor.
-					</p>
-					<p class="l_content">
-						It was for this purpose that computer scientists started using <b>Big-Oh Notation</b>, which is a way of concisely describing the runtime of an algorithm. There are five main functions used within Big-Oh Notation: \(o,O,\Theta,\Omega,\omega\) (read little-oh, big-oh, big-theta, big-omega, little-omega).
-					</p>
-                </div>
-            </div>
-			<div class="main_toplevel main_section main_color4" id="prob">
-                <div class="main_section_nav_container">
-					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
-                </div>
-                <div class="main_window main_fullwidth">
-					<span class="l_section">Probability</span>
+					$$\operatorname O(1)\subset\operatorname O(\log n)\subset\operatorname O(n^{1/k})\subset\operatorname O(n)\subset\operatorname O(n\log n)\subset\operatorname O(n^k)\subset\operatorname O(k^n)\subset\operatorname O(n!)$$
                 </div>
             </div>
 			<div class="main_toplevel main_section main_color5" id="exp">
@@ -117,20 +215,39 @@
 					<div class="l_toc_link"><a href="../learn.html">Table of Contents</a></div>
                 </div>
                 <div class="main_window main_fullwidth">
-					<span class="l_section">Experiments</span>
+					<h3 class="l_section">Experiments</h3>
+					<div class="main_toc"></div>
+					<p class="l_content">
+						Much of cryptography uses a particular notation for probability that can take some getting used to: <i>experiment notation</i>. A single event is written in the form \(x\leftarrow\mathcal X\), where \(x\) is a variable being sampled from some distribution \(\mathcal X\). We define the probability distribution of a set \(S\) to be the uniform distribution \(\mathcal S\) over that set. We define the probability distribution of some function applied to a variable, as in \(F(x,y)\), to be a probability distribution over the outputs of that function given those inputs. We now define the probability of some predicate p after a series of \(n\) events (in its most general form) as follows: $$\operatorname{Pr}\left[x_1\leftarrow\mathcal X_1;\;x_2\leftarrow\mathcal X_2;\;\dots;\;x_n\leftarrow\mathcal X_n\;:\;\operatorname p(x_1,\dots,x_n)\right].$$
+					</p>
+					<p class="l_content">
+						So, as an example, let's use experiment notation to define the ciphertext indistinguishability of an encryption protocol, then go through it step by step. We define three protocols that make up the encryption scheme: 
+						$$\begin{align} \mathcal G: &1^k\;\mapsto\;(\{0,1\}^k,\{0,1\}^k)\\
+														&\mathcal G(1^k)=(p_k,s_k)\\
+										\mathcal E: &\{0,1\}^k,\{0,1\}^k\;\mapsto\;\{0,1\}^k\\
+														&\mathcal E(p_k,m) = c\\
+										\mathcal D: &\{0,1\}^k,\{0,1\}^k\;\mapsto\;\{0,1\}^k\\
+														&\mathcal D(s_k,c) = m.\end{align}$$
+						To define correctness (very quickly and loosely; see the page on <a data-broken-link=true>primitives</a> for a more official definition), we state that, for any pair \(p_k,s_k\) created by \(\mathcal G(1^k),\;\mathcal D\left(s_k,\mathcal E\left(p_k,x\right)\right)=x\) for all \(x\in\{0,1\}^k\). We now define a particular type of security using experiment notation. We call such an encryption scheme <i>ciphertext indistinguishable under chosen plaintext attack</i> if, for all probabilistic polynomial-time algorithms \(\mathcal A\) and for <span class="definable">negligible</span> function \(\operatorname\mu\): $$\operatorname{Pr}\left[(p_k,s_k)\leftarrow\mathcal G(1^k);\; (m_0,m_1,\text{state})\leftarrow\mathcal A(p_k);\; b\leftarrow\{0,1\};\; b'\leftarrow\mathcal A\left(\text{state},\mathcal E(p_k,m_b)\right)\;:\; b=b'\right]\quad\leq\quad\frac12+\operatorname\mu(k).$$ 
+					</p>
+					<p class="l_content">
+						We now present the same experiment (or "game") as an annotated list of the different pieces, with some explanations for choices made in the writing of the expression:
+					</p>
+					<ol class="l_content">
+						<li>\((p_k,s_k)\leftarrow\mathcal G(1^k)\): We (the challenger) use the key generation algorithm to create a key pair.</li>
+						<li>\((m_0,m_1,\text{state})\leftarrow\mathcal A(p_k)\): We allow the adversary (algorithm) to generate two messages, \(m_0\) and \(m_1\), and some variable representing the state of the algorithm after its initial run. We provide the algorithm with the public key, which means it is able to try as many (polynomially many) encryptions as it wishes before deciding on specific messages. We do not need to provide the public key again, as the algorithm (without loss of generality) will include it in its state.</li>
+						<li>\(b\leftarrow\{0,1\}\): We uniformly at random choose some bit \(b\).</li>
+						<li>\(b'\leftarrow\mathcal A\left(\text{state},\mathcal E(p_k,m_b)\right)\): We let the adversary (algorithm) continue by providing it with its state variable, as well as the encryption of \(m_b\) under the public key. We allow it to make a guess (\(b'\)) for which message \(m_{b'}\) was encrypted.</li>
+						<li>\(b=b'\): We calculated the probability that, having done all this, the adversary correctly guessed which message we encrypted.</li>
+						<li>\(\leq\frac12+\operatorname\mu(k)\): Firstly, we note that we cannot expect the probability to be less than \(\frac12\); guessing at random should produce a probability of \(\frac12\), so we know it will be at least better than that. It is for this exact purpose that <span class="definable">negligible</span> functions are so often used in cryptography: to allow us to define a notion of being <i>barely</i> better (or worse) than some bound. As a thought experiment to demonstrate the need for this extra 'wiggle room', we imagine an adversary which calculates \(k\) encryptions for \(m_0,m_1\), meaning it will definitely be correct if the encryption we give it happens to be equal to any of those calculated encryptions. This is better than guessing, but only negligibly (\(\frac{k}{2^{-k}}\)) so.</li>
+					</ol>
                 </div>
-            </div>
-            <div class="main_toplevel main_section main_color8">
-                <h1>References</h1>
-                <ol id="referencelist">
-                    <li id="citation1">A citation</li>
-                </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+chsh##@gmail.com">Problem with this page?</a></p>
+                    <p><a href="mailto:multipartycomputationorg+chsh@gmail.com">Problem with this page?</a></p>
                 </div>
-                <p>Copyright &copy; Nicolas Schank 2014, Brown University</p>
+                <p>All content on this page is free for use by anyone for any reason.</p>
             </div>
         </div>
     </body>
