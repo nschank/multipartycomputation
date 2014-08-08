@@ -365,13 +365,186 @@
 											<li>Every player \(P_k\) checks whether \(\alpha_kg^{(i)}(\alpha_k)=h^{(i)}(\alpha_k)-f_i(\alpha_k)\).</li>
 										</ol>
 									</li>
+									<li><span class="main_language">Weak Fault Detection</span>. Every player  sends to every other player one bit indicting whether or not any of his consistency checks in Steps 1, 2a, and 2b, have failed.</li>
+									<li><span class="main_language">Lagrange Interpolation</span>. Every player \(P_i\) who has neither detected nor was informed about any inconsistencies computes his degree-\(\delta\) share of \(s\)as a linear combination of his shares of \(s_1,\dots,s_{n'}\).</li>
 								</ol>
+								<p class="rp_original">
+									It is easy to see (using basic algebra), that if no player has reported inconsistencies during the weak fault detection, then the result of re-sharing is a proper \(\delta\)-sharing of \(s\). Otherwise, if at least one (honest) player has sent or received a bit indicating inconsistencies, it will be possible to identify a (1,2)-localization.
+								</p>
+							</section>
+							<section id="sec3.4detect">
+								<h4>Fault Detection</h4>
+								<p class="rp_original">
+									At the end of the segment, every player \(P_i\) broadcasts one bit indicating whether or not an inconsistency was observed by or reported to \(P_i\) in one of the re-sharing protocols in the segment. If all players broadcast a confirmation (i.e., no inconsistency was observed), then the computation of the segment is completed and the next segment can be started. If at least one player broadcasts a complaint, then fault localization is invoked.
+								</p>
+							</section>
+							<section id="sec3.4local">
+								<h4>Fault Localization</h4>
+								<p class="rp_original">
+									The goal of fault-localization is to identify a (1,2)-localization \(\mathcal D\), i.e. a set \(\mathcal D\subset\mathcal P\) containing two players, at least one of them being corrupted. These players will then be eliminated from the protocol, and hence fault localization is invoked at most \(t\) times.
+								</p>
+								<p class="rp_original">
+									The two players to be eliminated are selected from the players involved in the first fault that occurred in the current segment. In order to determine the firrst fault, every player who complained during fault detection broadcasts the index (relative to the segment) of the re-sharing protocol, in which for the first time an inconsistency occurred, together with a number denoting the step of the re-sharing protocol in which the fault was detected (Step 1, 2a or 2b), or reported (Step 3). Among all the broadcast indices the smallest one is selected. Let \(P_k\) denote the player who complained about the selected re-sharing protocol.<sup class="footnote" id="fref6" data-footnote="6"><a href="#footnote6">6</a></sup> The method of determining the (1,2)-localization \(\mathcal D\) depends on the step of the re-sharing protocol in which the first fault appeared. Four cases must be distinguished:
+								</p>
+								<ol class="rp_original" type="i">
+									<li>
+										The first fault is in Step 1, i.e. for some \(i\) and \(j\), the value \(h^{(i)}_j(\alpha_k)\) sent by \(P_j\) differs from \(\tilde h^{(i)}_k(\alpha_j)\): \(P_k\) broadcasts \(i,\,j,\) and \(\tilde h^{(i)}_k(\alpha_j)\). On this request, \(P_j\) broadcasts \(\tilde h^{(i)}_j(\alpha_k)\), and \(P_i\) broadcasts \(p^{(i)}(\alpha_k,\alpha_j)\). Given these three values, the set \(\mathcal D\) is determined as follows:
+										<ul>
+											<li>If \(\tilde h_k^{(i)}(\alpha_k)=h_k^{(i)}(\alpha_k)\), then \(\mathcal D:=\{P_k,P_k\}\), else</li>
+											<li>if \(p^{(i)}(\alpha_k,\alpha_j)\neq\tilde h_k^{(i)}(\alpha_k),\) then \(\mathcal D:=\{P_i,P_k\}\), else</li>
+											<li>\(p^{(i)}(\alpha_k,\alpha_j)\neq h_k^{(i)}(\alpha_k)\), and \(\mathcal D:=\{P_i,P_j\}\).</li>
+										</ul>
+									</li>
+									<li>The first fault is in Step 2a: analogously to the case (i).</li>
+									<li>The first fault is in Step 2b, i.e., for some \(i\) the check \(\alpha_kg^{(i)}(\alpha_k)\stackrel?=h_k^{(i)}(\alpha_k)-f_i(\alpha_k)\) failed: According to \(P_k\), player \(P_i\) is cheating, so \(P_k\) broadcasts the index \(i\), and \(\mathcal D\) is set to \(\{P_i,P_k\}\).</li>
+									<li>The first fault is in Step 3, i.e., \(P_k\) claims that in Step 3 some player reported a fault to him: Since no player admits the discovery of an inconsistency (as follows from the rule for choosing \(P_k\)), obviously either \(P_k\) is lying or the player who reported the fault to him was malicious. \(P_k\) broadcasts the index \(i\) of the player \(P_i\) who in Step 3 reported the fault to him, and \(\mathcal D\) is set to \(\{P_i, P_k\}\).</li>
+								</ol>
+								<p class="rp_original">
+									It is obvious that all players find the same set \(\mathcal D\), and that in each case at least one player in \(\mathcal D\) is corrupted, hence \(\mathcal D\) is a (1,2)-localization.
+								</p>
+							</section>
+							<section id="secsec3.4elim">
+								<h4>Player Elimination</h4>
+								<p class="rp_original">
+									All players set \(\mathcal P'\) to \(\mathcal P'\backslash\mathcal D\), and reduce \(t'\) to \(t'-1\).
+								</p>
+							</section>
+							<section id="secsec3.4correct">
+								<h4>Fault Correction</h4>
+								<p class="rp_original">
+									Fault correction is achieved by repeating the failed segment. Since after each failure at least one malicious player is eliminated, at most \(t\) segments will be repeated in a complete protocol run.
+								</p>
 							</section>
 						</section>
+						<section id="sec3.5">
+							<h3>3.5. Output Stage</h3>
+							<p class="rp_original">
+								Let \(P\) be the designated player supposed to receive a value \(s\) that is \(t\)-shared among the players in \(P'\) with the polynomials \(f\) and \(f_1,\dots,f_{n'}\). First, every player \(P_i\in\mathcal P'\) sends the polynomial \(f_i(x)\) and the share-shares \(s_{1i},\dots,s_{n'i}\) to \(P\). Then, \(P\) interpolates the secret \(s\) from the shares \(s_i = f_i(0)\) for all \(i\) where \(f_i(x)\) is consistent with all but (at most) \(t'\) share-shares \(s_{ij}\). Note that this protocol needs neither error correction nor broadcast.
+							</p>
+							<p class="rp_original">
+								The privacy of this protocol is obvious. The correctness can be proven as follows: At most \(t'\) players send a bad polynomial \(f'\neq f_i\), and they will be inconsistent with at least \(n'−t−t'\gt t'\) share-shares. Hence, \(P\) will ignore bad polynomials and interpolate the correct secret \(s\).
+							</p>
+						</section>
+					</section>
+					<section id="sec4">
+						<h2>4. Complexity Analysis</h2>
+						<p class="rp_original">
+							In this section we analyze the communication complexity of the proposed multiparty computation protocol and compare it with the most efficient protocols known before. We focus on the case when an adversary is present and neglect the efficiency gain that some protocols (e.g. <span class="reference" data-citation="FY92">[?]</span>) achieve when no fault at all occurs.
+						</p>
+						<p class="rp_original">
+							The communication complexity of a protocol is characterized by two quantities: the <i>message complexity</i> (MC, the total number of bits transmitted by all players during the protocol), and the <i>round complexity</i> (RC, the number of communication rounds of the protocol).
+						</p>
+						<p class="rp_original">
+							When analyzing the communication complexity of a multi-party protocol, one must also include the communication costs for simulating the broadcast channels. For most protocols in the literature (but not for ours), these costs are dominating the overall complexity of the protocol. We consider two different types of broadcast sub-protocols: Protocols with optimal message complexity (\(\operatorname O(n^2)\), but \(O(n)\) rounds), e.g. <span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span><span class="reference" data-citation="DR85">[?]</span><span class="reference" data-citation="HH91">[?]</span>, and protocols with optimal round complexity (\(\operatorname O(1)\), but \(\operatorname O(n^4)\) messages), e.g. <span class="reference" data-citation="FM88">[?]</span>. So far, no broadcast protocol with \(\operatorname O(1)\) rounds and \(\operatorname O(n^2)\) messages is known. In the cryptographic setting, such a protocol is known for a model where a trusted dealer is available in the set-up phase<sup class="reference" data-citation="CKS00">[?]</sup>, but this requirement contradicts the main purpose of of secure multiparty computation, namely getting rid of the need for a trusted party. There exist also various techniques which improve the efficiency of (stand-alone) protocols for Byzantine agreement, e.g. "early stopping"<sup class="reference" data-citation="DRS82">[?]</sup>. However, they lead to "staggered termination", and it is unclear how and whether at all they are applicable for multiparty computation protocols.
+						</p>
+						<section id="sec4.1">
+							<h3>4.1. Complexity of the New Protocol</h3>
+							<p class="rp_original">
+								The communication complexity of the proposed MPC protocol (cf. <a href="#sec3">Section 3</a>) is stated in the following theorem. This result is achieved by employing a Byzantine agreement protocol with optimal message complexity<sup class="reference" data-citation="BGP89">[?]</sup><sup class="reference" data-citation="CW89">[?]</sup>.
+							</p>
+							<span class="rp_theorem_header">Theorem 1</span>
+							<p class="rp_original rp_theorem">
+								The protocol of <a href="#sec3">Section 3</a> allows a set of \(n\) players, with at most \(t\lt n=3\) of them being corrupted, to securely compute a function over a finite field \(\mathbb F\), using \(\operatorname O(d+n^2)\) communication rounds and with total communication complexity \(\operatorname O(n_In^4 + mn^3 + n_On^2)\) field elements, where \(n_I\) and \(n_O\) denote the number of inputs and outputs, respectively, \(m\) denotes the number of multiplications and \(d\) the multiplicative depth of the circuit computing the function.
+							</p>
+							<p class="rp_original">
+								The detailed analysis of this protocol is omitted from this extended abstract. We give only a very brief overview. The VSS protocol for providing one input requires in the worst case \(\operatorname O(n^2)\) field elements to be broadcast, which results in \(\operatorname O(n^4)\) field elements per input when using the most efficient broadcast protocols<sup class="reference" data-citation="BGP89">[?]</sup><sup class="reference" data-citation="CW89">[?]</sup>. Each multiplication requires each player to secret-share (with the non-robust VSS protocol) one element, which adds up to \(\operatorname O(n^3)\) field elements per multiplication, and hence \(\operatorname O(m_sn^3) elements per segment with \(m_s\) multiplication gates. Fault-detection requires \(\operatorname O(n)\) bits to be broadcast per segment, and fault-localization requires \(\operatorname O(n\log m_s+\log \mid F\mid)\) bits to be broadcast at the end of up to \(t\) segments. For the proposed segmentation with \(m_s = \lceil m=n\rceil\) and \(d_s = \lceil d=n\rceil\), at most \(2n\) segments are computed, which results in a total message complexity of \(\operatorname O(mn^3)\) field elements. Only \(\operatorname O(n^2)\) field elements must be broadcast in total (independently of the circuit size!), which does not dominate the overall costs when \(m\geq n\). The message complexity of secret reconstruction is \(\operatorname O(n^2)\) elements per output (broadcast is not needed).
+							</p>
+						</section>
+						<section id="sec4.2">
+							<h3>4.2. Comparison with Other Protocols</h3>
+							<p class="rp_original">
+								The complexity of the new protocol is compared with the most efficient multiparty computation protocols for the unconditional model known before. In the sequel, we summarize the most important results. A more detailed complexity analysis can be found in <span class="reference" data-citation="Prz99">[?]</span>. For simplicity we focus on the complexity of the evaluation of the circuit, and ignore the complexities of providing inputs and receiving inputs. The following table lists the message complexity (MC) and the round complexity (RC) of the most efficient protocols for the unconditional model, once when a broadcast protocol with optimal bit complexity is applied, and once when a broadcast protocol with optimal round complexity is applied. The second last row in the table refers to the protocol of <span class="reference" data-citation="BGW88">[?]</span>, where the "Rabin's trick"<sup class="reference" data-citation="GRR98">[?]</sup> for simpler multiplication is used. Note that the other technique for increasing the efficiency of <span class="reference" data-citation="BGW88">[?]</span> suggested in the same paper, namely the efficient proof that a shared secret is indeed the product of two shared factors, is shown to be insecure (see <a href="#appendixa">Appendix A</a>), and hence its impact on the complexity is not analyzed.
+							</p>
+							<p class="rp_original">
+								For completeness, in Table 2 we also state the complexities of the best protocol for the cryptographic model<sup class="reference" data-citation="GRR98">[?]</sup>, in which up to \(t\lt n=2\) of the players can be corrupted, but the security of the protocol relies on unproven assumptions. Subsequently to our work, a new protocol with cryptographic security was proposed in <span class="reference" data-citation="CDN00">[?]</span>, and its complexity is also listed in the table (where \(k\) denotes the security parameter). In contrast to other protocols, here the function must be specified as a Boolean circuit, and the complexity is indicated in bits.
+							</p>
+							<table>
+								<tr>
+									<th>MPC Protocol</th>
+									<th>Broadcast protocol</th>
+									<th>MC</th>
+									<th>RC</th>
+								</tr>
+								<tr>
+									<td><span class="reference" data-citation="BGW88">[?]</span></td>
+									<td><span class="reference" data-citation="FM88">[?]</span><br /><span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span></td>
+									<td>\(\operatorname O(mn^9)\\\operatorname O(mn^7)\)</td>
+									<td>\(\operatorname O(dn)\\\operatorname O(dn^2)\)</td>
+								</tr>
+								<tr>
+									<td><span class="reference" data-citation="CCD88">[?]</span></td>
+									<td><span class="reference" data-citation="FM88">[?]</span><br /><span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span></td>
+									<td>\(\operatorname O(mn^8)\\\operatorname O(mn^6)\)</td>
+									<td>\(\operatorname O(d)\\\operatorname O(d+n)\)</td>
+								</tr>
+								<tr>
+									<td><span class="reference" data-citation="Bea91a">[?]</span></td>
+									<td><span class="reference" data-citation="FM88">[?]</span><br /><span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span></td>
+									<td>\(\operatorname O(mn^8)\\\operatorname O(mn^6)\)</td>
+									<td>\(\operatorname O(d)\\\operatorname O(dn)\)</td>
+								</tr>
+								<tr>
+									<td><span class="reference" data-citation="FY92">[?]</span></td>
+									<td><span class="reference" data-citation="FM88">[?]</span><br /><span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span></td>
+									<td>\(\operatorname O(mn^8)\\\operatorname O(mn^6)\)</td>
+									<td>\(\operatorname O(d)\\\operatorname O(dn)\)</td>
+								</tr>
+								<tr>
+									<td><span class="reference" data-citation="BGW88">[?]</span><span class="reference" data-citation="GRR98">[?]</span></td>
+									<td><span class="reference" data-citation="FM88">[?]</span><br /><span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span></td>
+									<td>\(\operatorname O(mn^3)\)</td>
+									<td>\(\operatorname O(d+n^2)\)</td>
+								</tr>
+								<tr>
+									<td>This Paper</td>
+									<td><span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span></td>
+									<td>\(\operatorname O(mn^3k)\)</td>
+									<td>\(\operatorname O(d+n^2)\)</td>
+								</tr>
+							</table>
+							<p class="rp_original">
+								<b>Table 1</b>. Worst-case communication complexities of unconditional MPC protocols.
+							</p>
+							<table>
+								<tr>
+									<th>MPC Protocol</th>
+									<th>Broadcast Protocol</th>
+									<th>MC</th>
+									<th>RC</th>
+								</tr>
+								<tr>
+									<td><span class="reference" data-citation="GRR98">[?]</span></td>
+									<td><span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span><br /><span class="reference" data-citation="FM88">[?]</span></td>
+									<td>\(\operatorname O(mn^4)\\\operatorname O(mn^6)\)</td>
+									<td>\(\operatorname O(dn)\\\operatorname O(d)\)</td>
+								</tr>
+								<tr>
+									<td><span class="reference" data-citation="CDN00">[?]</span></td>
+									<td><span class="reference" data-citation="BGP89">[?]</span><span class="reference" data-citation="CW89">[?]</span><br /><span class="reference" data-citation="FM88">[?]</span></td>
+									<td>\(\operatorname O(mn^3k)\\\operatorname O(mn^5k)\)</td>
+									<td>\(\operatorname O(dn)\\\operatorname O(d)\)</td>
+								</tr>
+							</table>
+							<p class="rp_original">
+								<b>Table 2</b>. Worst-case communication complexities of cryptographic MPC protocols.
+							</p>
+						</section>
+					</section>
+					<section id="sec5">
+						<h2>5. Conclusions and Open Problems</h2>
+						<p class="rp_original">
+							General secure multi-party computation protocols for evaluating an algebraic circuit will have important applications in distributed information systems. One major reason why such protocols are not yet widely used in practical applications is their hopeless inefficiency. In particular, they all make extensive use of a reliable broadcast channel, which in any reasonable application scenario is not available, and hence must be simulated by an expensive protocol among the players.
+						</p>
+						<p class="rp_original">
+							In this paper we proposed a new framework for communication-efficient distributed protocols, applied it to secure multi-party computations, resulting in a very efficient protocol. We stress that the message complexity (and possibly the round complexity), but not the computation complexity, are the bottlenecks in most distributed applications.
+						</p>
+						<p class="rp_original">
+							There are several open problems to be solved to make general multi-party protocols applicable in distributed systems. The main issue is definitely the model: It is an open problem to generalize the framework to the asynchronous model, and to convert the used techniques accordingly. Furthermore, it might be interesting to generalize the results to non-threshold adversary structures<sup class="reference" data-citation="HM00">[?]</sup>. Finally, it is questionable whether comparable efficiency improvements can be achieved in a model with mobile adversaries, where player elimination seems not to be applicable.
+						</p>
 					</section>
 				</div>
             </div>
-			<div class="main_toplevel main_section main_color7" id="footnotes">
+			<div class="main_toplevel main_section main_color6" id="footnotes">
                 <h1>Footnotes</h1>
 				
                 <ol id="footnotes">
@@ -390,12 +563,76 @@
 					<li id="footnote5">
 						<a href="#fref5">[^]</a> One can show that two rounds of accusations are sufficient to reach agreement. After two rounds of accusations, either the total number of accusations exceeds \(t\), or all accusations in the second round originate from corrupted players.
 					</li>
+					<li id="footnote6">
+						<a href="#fref6">[^]</a> If there are several such players, we consider those who have broadcast the smallest step-number, and from that group the player with the smallest index \(k\) is chosen.
+					</li>
+					<li id="footnote7">
+						<a href="#fref7">[^]</a> After the security problem was discovered, this appendix was deleted from the version available online.
+					</li>
                 </ol>
+            </div>
+			<div class="main_toplevel main_section main_color7" id="appendixa">
+				<div class="main_window main_fullwidth">
+					<h1>Appendix A - Security Flaw in <span class="reference" data-citation="GRR98">[?]</span></h1>
+					<div class="main_toc"></div>
+					<p class="rp_original">
+						In Appendix B ("Computing Multiplication with Faults") of <span class="reference" data-citation="GRR98">[?]</span>,<sup class="footnote" id="fref7" data-footnote="7"><a href="#footnote7">7</a></sup> a very efficient sub-protocol was proposed for proving that for three shared values \(a, b\), and \(c\), the equation \(c = ab\) holds. This sub-protocol was intended to replace the (rather inefficient) verification sub-protocol ("tool (II)") of <span class="reference" data-citation="BGW88">[?]</span>. We show in the sequel that this new sub-protocol of <span class="reference" data-citation="GRR98">[?]</span> is insecure. First we briefly summarize the protocol and then demonstrate the security flaw.
+					</p>
+					<p class="rp_original">
+						Assume that player \(P\) has shared the values \(a, b\), and \(c\) with polynomials \(f(x)\), \(g(x)\), and \(h(x)\) respectively, all of degree at most \(t\). Let \(a_i, b_i\), and \(c_i\) denote the corresponding shares of player \(P_i, i=1,\dots,n\). The protocol of <span class="reference" data-citation="GRR98">[?]</span> works as follows:
+					</p>
+					<ol class="rp_original">
+						<li>The dealer \(P\) shares (using "normal" secret sharing, not VSS) a random value with a polynomial \(r(x)\) of degree \(2t-1\). The share \(r_i\) of player \(P_i\) is \(r_i=r(\alpha_i)\). Furthermore, \(P\) computes and broadcasts the polynomial \(R(x)=x\cdot r(x)+f(x)\cdot g(x)-h(x)\).\,R(x)\) is a random polynomial of degree \(2t\), and if \(c=ab\) holds then \(R(0)=0\).</li>
+						<li>Every player \(P_i\) verifies that \(R(0)=0\) and \(R(\alpha_i)=\alpha_i\cdot r_i+a_i\cdot b_i-c_i.\,P_i\) broadcasts either "OK", if both checks were successful, or otherwise a request to make his values public.</li>
+						<li>If in the previous step some requests occurred (at most \(t\)), \(P\) broadcasts all the requested data. If there were more than \(t\) requests, \(P\) is clearly cheating.</li>
+					</ol>
+					<p class="rp_original">
+						This protocol does not guarantee correctness, in contrast to what is claimed in the paper and was believed before. The dealer \(P\) can pass this verification even if \(c = ab\) does not hold:
+					</p>
+					<ol class="rp_original">
+						<li>Instead of selecting a random polynomial \(r(x)\) of degree \(2t-1\), the dealer first selects a (random) polynomial \(R(x)\) of degree \(2t\) with \(R(0)=0\), then computes and distributes the "shares" \(r_1,\dots,r_n\) as \(r_i=\alpha_i^{-1}(R(\alpha_i)-a_i\cdot b_i+c_i)\). The dealer can do so because the degree of the polynomial \(r(x)\) cannot be verified. Finally, \(P\) broadcasts the polynomial \(R(x)\).</li>
+					</ol>
+					<p class="rp_original">
+						Clearly, the checks in Step 2 of all players will succeed, and no (honest) player will complain.
+					</p>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color8" id="references">
                 <h1>References</h1>
                 <ol id="referencelist">
-                    <li id="citation1">A citation</li>
+                    <li id="BB89">J. Bar-Ilan and D. Beaver. Non-cryptographic fault-tolerant computing in a constant number of rounds of interaction. In <i>Proc. 8th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pages 201-210, 1989.</li>
+					<li id="Bea91a">D. Beaver. Efficient multiparty protocols using circuit randomization. In <i>Advances in Cryptology | CRYPTO '91</i>, vol. 576 of <i>LNCS</i>, pages 420-432, 1991.</li>
+					<li id="Bea91b">D. Beaver. Secure multiparty protocols and zero-knowledge proof systems tolerating a faulty minority. <i>Journal of Cryptology</i>, pp. 75-122, 1991.</li>
+					<li id="BFKR90">D. Beaver, J. Feigenbaum, J. Kilian, and P. Rogaway. Security with low communication overhead (extended abstract). In <i>Advances in Cryptology | CRYPTO '90</i>, pp. 62-76, 1990.</li>
+					<li id="BGP89">P. Berman, J. A. Garay, and K. J. Perry. Towards optimal distributed consensus (extended abstract). In <i>Proc. 21st IEEE Symposium on the Foundations of Computer Science (FOCS)</i>, pp. 410-415, 1989. Expanded version: Bit optimal distributed consensus. In Computer Science Research, 1992.</li>
+					<li id="BGW88">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988.</li>
+					<li id="BMR90">D. Beaver, S. Micali, and P. Rogaway. The round complexity of secure protocols (extended abstract). In <i>Proc. 22nd ACM Symposium on the Theory of Computing (STOC)</i>, pp. 503-513, 1990.</li>
+					<li id="Can00">R. Canetti. Security and composition of multi-party cryptographic protocols. <i>Journal of Cryptology</i>, 13(1):143-202, 2000.</li>
+					<li id="CCD88">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols (extended abstract)</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.</li>
+					<li id="CCDplus99">R. Cramer, I. Damg&aring;rd, S. Dziembowski, M. Hirt, and T. Rabin. Efficient multiparty computations secure against an adaptive adversary. In <i>Advances in Cryptology | EUROCRYPT '99</i>, vol. 1592 of <i>LNCS</i>, pp. 311-326, 1999.</li>
+					<li id="CDM00">R. Cramer, I. Damg&aring;ard, and U. Maurer. General secure multi-party computation from any linear secret sharing scheme. In <i>Advances in Cryptology | EUROCRYPT '00</i>, vol. 1807 of <i>LNCS</i>, pp. 316-334, 2000.</li>
+					<li id="CDN00">R. Cramer, I. Damg&aring;ard, and J.B. Nielsen. Multiparty computation from threshold homomorphic encryption. Manuscript, 2000.</li>
+					<li id="CH94">R. Canetti and A. Herzberg. Maintaining security in the presence of transient faults. In <i>Advances in Cryptology | CRYPTO '94</i>, vol. 839 of <i>LNCS</i>, pp. 425-438, 1994.</li>
+					<li id="CKS00">C. Cachin, K. Kursawe, and V. Shoup. Random oracles in Constantinople: Practical asynchronous Byzantine agreement using cryptography. In <i>Proc. 19th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 123-132, 2000.</li>
+					<li id="CW89">B. A. Coan and J. L. Welch. Modular construction of nearly optimal Byzantine agreement protocols. In <i>Proc. 8th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 295-305, 1989. Expanded version: Modular construction of a Byzantine agreement protocol with optimal message bit complexity. In <i>Information and Computation</i>, 97(1):61-85, 1992.</li>
+					<li id="DFFplus82">D. Dolev, M. J. Fischer, R. Fowler, N. A. Lynch, and H. R. Strong. An efficient algorithm for Byzantine agreement without authentication. <i>Information and Control</i>, 52(3):257-274, 1982.</li>
+					<li id="DR85">D. Dolev and R. Reischuk. Bounds on information exchange for Byzantine agreement. <i>Journal of the ACM</i>, 32(1):191-204, 1985.</li>
+					<li id="DRS82">D. Dolev, R. Reischuk, and H. R. Strong. 'Eventual' is earlier than 'Immediate'. In <i>Proc. 23rd IEEE Symposium on the Foundations of Computer Science (FOCS)</i>, pp. 196-203, 1982. Final version: Early Stopping in Byzantine Agreement. In <i>Journal of the ACM</i>, 37(4):720-741, October 1990.</li>
+					<li id="FHM98">M. Fitzi, M. Hirt, and U. Maurer. Trading correctness for privacy in unconditional multi-party computation. In <i>Advances in Cryptology | CRYPTO '98</i>, vol. 1462 of <i>LNCS</i>, pp. 121-136, 1998.</li>
+					<li id="FM88">P. Feldman and S. Micali. Optimal algorithms for Byzantine agreement. In <i>Proc. 20th ACM Symposium on the Theory of Computing (STOC)</i>, pp. 148-161, 1988. Expanded version in <i>SIAM Journal on Computing</i> 26(4):873-933, August 1997.</li>
+					<li id="FY92">M. K. Franklin and M. Yung. Communication complexity of secure computation. In <i>Proc. 24th ACM Symposium on the Theory of Computing (STOC)</i>, pp. 699-710, 1992.</li>
+					<li id="GHY87">Z. Galil, S. Haber, and M. Yung. Cryptographic computation: Secure fault-tolerant protocols and the public-key model. In <i>Advances in Cryptology | CRYPTO '87</i>, vol. 293 of <i>LNCS</i>, pp. 135{155. Springer-Verlag, 1987.</li>
+					<li id="GMW87">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority</a>. <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
+					<li id="GRR98">R. Gennaro, M. O. Rabin, and T. Rabin. Simplified VSS and fast-track multiparty computations with applications to threshold cryptography. In <i>Proc. 17th ACM Symposium on Principles of Distributed Computing (PODC)</i>, 1998.</li>
+					<li id="HH91">V. Hadzilacos and J. Y. Halpern. Message-optimal protocols for byzantine agreement. In <i>Proc. 10th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 309-324, 1991. Final version in Mathematical Systems Theory, 26:41-102, October 1993.</li>
+					<li id="HM00">M. Hirt and U. Maurer. Player simulation and general adversary structures in perfect multiparty computation. <i>Journal of Cryptology</i>, 13(1):31{60, 2000. Extended abstract in <i>Proc. 16th of ACM PODC '97.</i></li>
+					<li id="MR98">S. Micali and P. Rogaway. Secure computation: The information theoretic case. Manuscript, 1998. Former version: Secure computation, In <i>Advances in Cryptology | CRYPTO '91</i>, volume 576 of <i>LNCS</i>, pp. 392-404, Springer-Verlag, 1991.</li>
+					<li id="OY91">R. Ostrovsky and M. Yung. How to withstand mobile virus attacks (extended abstract). In <i>Proc. 10th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 51-59, 1991.</li>
+					<li id="Prz99">B. Przydatek. Efficiency in multi-party computation. Master's thesis, ETH Zurich, 1999.</li>
+					<li id="PSL80">M. Pease, R. Shostak, and L. Lamport. Reaching agreement in the presence of faults. <i>Journal of the ACM</i>, 27(2):228-234, 1980.</li>
+					<li id="RB89">T. Rabin and M. Ben-Or. <a href="76.html">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</a>. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.</li>
+					<li id="Sha79">A. Shamir. How to share a secret. <i>Communications of the ACM</i>, 22:612-613, 1979.</li>
+					<li id="Yao82">A.C. Yao. <a href="49.html">Protocols for Secure Computations (extended abstract)</a>. <i>Proceedings of the 23rd Annual IEEE Symposium on the Foundations of Computer Science,</i> pages 160-164. IEEE. 1982.</li>
                 </ol>
             </div>
             <div class="main_toplevel main_section main_color9">
