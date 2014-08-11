@@ -51,7 +51,7 @@ function addDOMG(elem, word, definition, glossary)
 		block.id = "gl_block" + g_removeSpaces(word);
 		
 		block.innerHTML += "<h2 class=\"gl_word\">Definition: " + definition.title + "</h2>";
-		block.innerHTML += blockConstruct(definition.def, "gl_def");
+		block.innerHTML += blockConstruct(definition.def, "gl_definition");
 		block.innerHTML += "<p class=\"gl_help\">Visit the full <a href=\"multipartycomputation.org/glossary.html\">glossary</a>.</p>";
 		
 		glossary.appendChild(block);
