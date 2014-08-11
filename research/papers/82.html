@@ -25,32 +25,32 @@
 				switch (box)
 				{
 					case "fC":
-						return "<p>\\(f_{C}\\) represents the output of \\(C\\), taking as input the inputs and the randomness supplied to the circuit.</p>";
+						return [{type:"p",content:"\\(f_{C}\\) represents the output of \\(C\\), taking as input the inputs and the randomness supplied to the circuit."}];
 					case "ip":
-						return "<p>\\(ip_i\\) represents the contents of the input tape of participant \\(P_i\\). \\(I_i\\) is a partition of the input wires into the gate such that there is exactly one input wire per bit of \\(ip_i\\).</p>";
+						return [{type:"p",content:"\\(ip_i\\) represents the contents of the input tape of participant \\(P_i\\). \\(I_i\\) is a partition of the input wires into the gate such that there is exactly one input wire per bit of \\(ip_i\\)."}];
 					case "JacobiSymbol":
-						return "<p>\\(\\left(\\frac m n\\right)\\) represents the <span class=\"definable\">Jacobi symbol</span> of \\(m\\bmod n\\).</p>";
+						return [{type:"p",content:"\\(\\left(\\frac m n\\right)\\) represents the <span class=\"definable\">Jacobi symbol</span> of \\(m\\bmod n\\)."}];
 					case "op":
-						return "<p>\\(op_i\\) represents the contents of the output tape of participant \\(P_i\\).</p>";
+						return [{type:"p",content:"\\(op_i\\) represents the contents of the output tape of participant \\(P_i\\)."}];
 					case "Pprot":
-						return "<p>\\(P_{prot}^{(m)}\\) represents the probability distribution of a protocol conversation of \\(prot\\) with security parameter \\(m\\), taking as input the inputs to the protocol and the randomness used by all parties.</p>";
+						return [{type:"p",content:"\\(P_{prot}^{(m)}\\) represents the probability distribution of a protocol conversation of \\(prot\\) with security parameter \\(m\\), taking as input the inputs to the protocol and the randomness used by all parties."}];
 					case "R_m^b":
-						return "<p>\\(R_m^b\\) is a finite set containing all elements \\(r\\) such that \\(\\operatorname{BCS}_(b,r)\\) will be a valid commitment for \\(b\\).</p>";
+						return [{type:"p",content:"\\(R_m^b\\) is a finite set containing all elements \\(r\\) such that \\(\\operatorname{BCS}_(b,r)\\) will be a valid commitment for \\(b\\)."}];
 					case "ra":
-						return "<p>\\(ra\\) represents a (fixed) string of random bits used by a protocol or circuit. The set of input wires in the circuit which correspond to these random bits is \\(R\\).</p>";
+						return [{type:"p",content:"\\(ra\\) represents a (fixed) string of random bits used by a protocol or circuit. The set of input wires in the circuit which correspond to these random bits is \\(R\\)."}];
 					case "Sm":
-						return "<p>\\(S_m\\) is a finite set containing all valid commitments for both 0 and 1 within a particular signature scheme.</p>";
+						return [{type:"p",content:"\\(S_m\\) is a finite set containing all valid commitments for both 0 and 1 within a particular signature scheme."}];
 					case "X":
-						return "<p>The set of all conspirators.</p>";
+						return [{type:"p",content:"The set of all conspirators."}];
 					default:
-						return "No info on this equation yet.";
+						return [{type:"p",content:"No info on this equation yet."}];
 				}
 			}
 
 			self_def["conspiracy"] = {title:"conspiracy",def:[{type:"p",content:"Any subset of the participants that does not include every participant (or no participants).  We denote this subset by \\(X\\). Machines in a conspiracy may follow any PPT program or establish private communication channels amongst themselves in order to share information."}]};
 			self_def["openly verifiable"] = {title:"conspiracy",def:[{type:"p",content:"A protocol is openly verifiable if participants can be challenged after the termination of the protocol in order to determine no cheating has occurred."}]};
 			self_def["protocol conversation"] = {title:"protocol conversation",def:[{type:"p",content:"The binary string which is the concatenation of all messages sent during an execution of a protocol."}]};
-			self_def["simulator for X"] = {title:"simulator for \\(X\\)",def:[{type:"p",content:"A polynomial time Turing machine which, when given the security parameter, the inputs of all the conspirators, and the output of the circuit, generates a protocol conversation."]}];
+			self_def["simulator for X"] = {title:"simulator for \\(X\\)",def:[{type:"p",content:"A polynomial time Turing machine which, when given the security parameter, the inputs of all the conspirators, and the output of the circuit, generates a protocol conversation."}]};
 			//-->
         </script>
     </head>

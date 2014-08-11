@@ -25,25 +25,25 @@
 				switch (box)
 				{
 					case "cartesianproduct":
-						return "<p>Read: <i>the Cartesian product of V and W.</i></p><p>The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}</p><p>A function with domain \\(V\\times W\\) can be rephrased as a function \\(f(v,w\\) where the domain of \\(v\\) is \\(V\\) and the domain of \\(w\\) is \\(W\\).</p>";
+						return [{type:"p",content:"Read: <i>the Cartesian product of V and W.</i></p><p>The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}</p><p>A function with domain \\(V\\times W\\) can be rephrased as a function \\(f(v,w\\) where the domain of \\(v\\) is \\(V\\) and the domain of \\(w\\) is \\(W\\)."}];
 					case "Eax":
-						return "<p>The encryption of the \\(N\\)-bit integer \\(x\\) under Alice's public key.</p>";
+						return [{type:"p",content:"The encryption of the \\(N\\)-bit integer \\(x\\) under Alice's public key."}];
 					case "fx1xm":
-						return "<p>Any function on \\(m\\) integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer.</p>";
+						return [{type:"p",content:"Any function on \\(m\\) integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer."}];
 					case "NbitZ+":
-						return "<p>All integers between 0 and \\(2^{N}-1\\). For example, if \\(N=3\\), then all numbers from \\(0 = 000_b\\) to \\(7 = 111_b\\).</p>";
+						return [{type:"p",content:"All integers between 0 and \\(2^{N}-1\\). For example, if \\(N=3\\), then all numbers from \\(0 = 000_b\\) to \\(7 = 111_b\\)."}];
 					case "O(N^k)":
-						return "<p>A function that grows more slowly than \\(N^k\\), where \\(N\\) is the number of bits being used, and \\(k\\) is some integer chosen in advance.</p>";
+						return [{type:"p",content:"A function that grows more slowly than \\(N^k\\), where \\(N\\) is the number of bits being used, and \\(k\\) is some integer chosen in advance."}];
 					case "quartic":
-						return "<p>The number of bits exchanged is lower-bounded by the product of the quartic roots of the cardinality of the domain. In this case, the domain of the entire function is being represented by the product of the domains of each individual variable.</p>";
+						return [{type:"p",content:"The number of bits exchanged is lower-bounded by the product of the quartic roots of the cardinality of the domain. In this case, the domain of the entire function is being represented by the product of the domains of each individual variable."}];
 					case "search":
-						return "<p>\\(2^N-1\\) is the maximum value that an encryption under \\(E_a\\) can take.</p><p>We must check every \\(p\\)-th number within that bound in each search, for a total of \\(\\frac{2^N-1}{p}\\) items to search for each \\(z_u\\) value.</p><p>We must additionally check each \\(z_u+1\\) value, doubling the search space.</p>";
+						return [{type:"p",content:"\\(2^N-1\\) is the maximum value that an encryption under \\(E_a\\) can take.</p><p>We must check every \\(p\\)-th number within that bound in each search, for a total of \\(\\frac{2^N-1}{p}\\) items to search for each \\(z_u\\) value.</p><p>We must additionally check each \\(z_u+1\\) value, doubling the search space."}];
 					case "th2":
-						return "<p>Read: <i>the runtime of that algorithm is in big-oh \\(C(f)\\) times the log of the inverse of epsilon times delta</i>.</p><p> Basically, the privacy constraint increases the complexity of the algorithm by at most \\(\\log{\\frac{1}{\\epsilon\\cdot\\delta}}\\). This value grows from 1 (when both variables are 1 and offer no security) to \\(\\infty\\) the closer either or both values get to 0 (complete security). Logarithms grow <u>slowly</u>, so you can get pretty close to zero before this increase in complexity is particularly large.</p><p>You can look at this function <a href=\"http://www.wolframalpha.com/input/?i=z%3Dlog%281%2F%28epsilon+*+delta%29%29+from+epsilon+%3D+0+to+1%3B+delta+%3D+0+to+1\">on WolframAlpha</a>.</p>";
+						return [{type:"p",content:"Read: <i>the runtime of that algorithm is in big-oh \\(C(f)\\) times the log of the inverse of epsilon times delta</i>."},{type:"p",content:"Basically, the privacy constraint increases the complexity of the algorithm by at most \\(\\log{\\frac{1}{\\epsilon\\cdot\\delta}}\\). This value grows from 1 (when both variables are 1 and offer no security) to \\(\\infty\\) the closer either or both values get to 0 (complete security). Logarithms grow <u>slowly</u>, so you can get pretty close to zero before this increase in complexity is particularly large."},{type:"p",content:"You can look at this function <a href=\"http://www.wolframalpha.com/input/?i=z%3Dlog%281%2F%28epsilon+*+delta%29%29+from+epsilon+%3D+0+to+1%3B+delta+%3D+0+to+1\">on WolframAlpha</a>."}];
 					case "yu":
-						return "<p>The decryption of ten values under Alice's private key.</p>";
+						return [{type:"p",content:"The decryption of ten values under Alice's private key."}];
 					default:
-						return "No info on this equation yet.";
+						return [{type:"p",content:"No info on this equation yet."}];
 				}
 			}
 

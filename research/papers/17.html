@@ -26,13 +26,14 @@
 				switch (box)
 				{
 					case "E[x]":
-						return "<p>\\(E[x]\\) refers to the <span class=\"definable\">polynomial ring</span> over the variable \\(x\\) on the field \\(E\\).</p>";
+						return [{type:"p",content:"\\(E[x]\\) refers to the <span class=\"definable\">polynomial ring</span> over the variable \\(x\\) on the field \\(E\\)."}];
 					case "omega":
-						return "<p>\\(\\omega\\) is a primitive \\(n\\)th <span class=\"definable\">root of unity</span> within \\(E\\).</p>";
+						return [{type:"p",content:"\\(\\omega\\) is a primitive \\(n\\)th <span class=\"definable\">root of unity</span> within \\(E\\)."}];
 					case "truncation":
-						return "<p>The truncation \\(k(x)\\) of \\(h(x)\\), where \\(h(x)\\) is the degree \\(2t\\) function defined to be \\(h(x)=f(x)g(x)\\) for shared secrets \\(f(x)\\) and \\(g(x)\\), is defined to be $$k(x)=h_0+h_1x+\\dots+h_tx^t.$$</p>";
+						return [{type:"p",content:"The truncation \\(k(x)\\) of \\(h(x)\\), where \\(h(x)\\) is the degree \\(2t\\) function defined to be \\(h(x)=f(x)g(x)\\) for shared secrets \\(f(x)\\) and \\(g(x)\\), is defined to be $$k(x)=h_0+h_1x+\\dots+h_tx^t.$$"}];
 					default:
-						return "No info on this equation yet.";
+						console.log("Developer note: Equation " + box + " undefined");
+						return [{type:"p",content:"No info on this equation yet."}];
 				}
 			}
 			

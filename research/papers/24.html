@@ -25,42 +25,34 @@
 				switch (box)
 				{
 					case "alpha":
-						return "The function \\(\\alpha\\) maps \\(\\tau\\) to its secret \\(s\\) in any uniquely decipherable puzzle ensemble.";
+						return [{type:"p",content:"The function \\(\\alpha\\) maps \\(\\tau\\) to its secret \\(s\\) in any uniquely decipherable puzzle ensemble."}];
 					case "approx":
-						return "Two probabilities of recovery are equivalent if neither is noticeably harder than the other in any situation.";
+						return [{type:"p",content:"Two probabilities of recovery are equivalent if neither is noticeably harder than the other in any situation."}];
 					case "D=Tn":
-						return "\\(D_n\\) is the probability distribution of \\(\\tau\\) in a uniquely decipherable, <span class=\"definable\">intractable puzzle ensemble</span>.";
+						return [{type:"p",content:"\\(D_n\\) is the probability distribution of \\(\\tau\\) in a uniquely decipherable, <span class=\"definable\">intractable puzzle ensemble</span>."}];
 					case "delta":
-						return "The function \\(\\Delta_X(\\sigma)\\) takes in a run of a particular protocol \\(\\sigma\\) and outputs the history of that run from \\(X\\)'s point of view.";
+						return [{type:"p",content:"The function \\(\\Delta_X(\\sigma)\\) takes in a run of a particular protocol \\(\\sigma\\) and outputs the history of that run from \\(X\\)'s point of view."}];
 					case "h_n":
-						return "The inputs \\((i_A,i_B)\\) to our protocol are distributed within the probability distribution \\(h_n\\) over \\(\\{0,1\\}^*\\times\\{0,1\\}^*\\)";
+						return [{type:"p",content:"The inputs \\((i_A,i_B)\\) to our protocol are distributed within the probability distribution \\(h_n\\) over \\(\\{0,1\\}^*\\times\\{0,1\\}^*\\)"}];
 					case "I_n":
-						return "The probability of recovering some piece of information \\(A\\) using only the information \\(B\\) (which may have been produced through some randomness \\(\\mathcal{R}\\)) is denoted by \\(I_n^{(\\mathcal{R})}(A\\;|\\;B)\\). This is read as <i>the probability of recovering \\(A\\) given \\(B\\).</i>";
+						return [{type:"p",content:"The probability of recovering some piece of information \\(A\\) using only the information \\(B\\) (which may have been produced through some randomness \\(\\mathcal{R}\\)) is denoted by \\(I_n^{(\\mathcal{R})}(A\\;|\\;B)\\). This is read as <i>the probability of recovering \\(A\\) given \\(B\\).</i>"}];
 					case "leq":
-						return "'is not more likely than'";
+						return [{type:"p",content:"'is not more likely than'"}];
 					case "L_n":
-						return "The set of all possible values of \\(f_n(i_A,i_B)\\) when \\((i_A,i_B)\\) are distributed according to <span class=\"equation\" data-equation=\"h_n\">\\(h_N\\)</span>.";
+						return [{type:"p",content:"The set of all possible values of \\(f_n(i_A,i_B)\\) when \\((i_A,i_B)\\) are distributed according to <span class=\"equation\" data-equation=\"h_n\">\\(h_N\\)</span>."}];
 					case "rfunction":
-						return "We denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess for \(d_n(x_n)\) will be produced by \(Q\) when given \(y_n\), where \((x_n,y_n)\) is distributed according to \((X_n,Y_n)\).";
+						return [{type:"p",content:"We denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess for \(d_n(x_n)\) will be produced by \(Q\) when given \(y_n\), where \((x_n,y_n)\) is distributed according to \((X_n,Y_n)\)."}];
 					case "u_x":
-						return "We denote by \\(u_X\\) the output that party \\(X\\) receives after the run of the protocol.";
+						return [{type:"p",content:"We denote by \\(u_X\\) the output that party \\(X\\) receives after the run of the protocol."}];
 					case "U_n":
-						return "We denote by \\(U_n\\) the distribution of \\(u_A\\) under a run of the protocol in which B is cheating.";
+						return [{type:"p",content:"We denote by \\(U_n\\) the distribution of \\(u_A\\) under a run of the protocol in which B is cheating."}];
 					case "v_x":
-						return "We denote by \\(v_X\\) the output that party \\(X\\) receives after the run of the cooperative protocol \\(N\\), which produces the original secret for \\(u_X\\) using information received during the run of the original protocol: <span class=\"equation\" data-equation=\"delta\">\\(\\Delta_X\\)</span>.";
+						return [{type:"p",content:"We denote by \\(v_X\\) the output that party \\(X\\) receives after the run of the cooperative protocol \\(N\\), which produces the original secret for \\(u_X\\) using information received during the run of the original protocol: <span class=\"equation\" data-equation=\"delta\">\\(\\Delta_X\\)</span>."}];
 					case "w":
-						return "The outputs \\((u_A,u_B)\\) of the protocol are distributed according to the probability distribution \\(w_{n,i_A,i_B}\\) over \\(\\{0,1\\}^*\\times\\{0,1\\}^*\\)";
+						return [{type:"p",content:"The outputs \\((u_A,u_B)\\) of the protocol are distributed according to the probability distribution \\(w_{n,i_A,i_B}\\) over \\(\\{0,1\\}^*\\times\\{0,1\\}^*\\)"}];
 					default:
-						return "No info on this equation yet.";
-				}
-			}
-
-			function authorLink(ref)
-			{
-				switch (ref)
-				{
-					default:
-						return "#";
+						console.log("Developer note: Equation " + box + " undefined");
+						return [{type:"p",content:"No info on this equation yet."}];
 				}
 			}
 

@@ -26,27 +26,27 @@
 				switch (box)
 				{
 					case "{0,1}*":
-						return "<p>The set of all 0/1 strings of any length, including the empty string.</p>";
+						return [{type:"p",content:"The set of all 0/1 strings of any length, including the empty string."}];
 					case "5PR":
-						return "<p>We can assume each line of the straight-line program is a call to the most expensive operation, the composition of two variables, since this is an upper bound. As such, at every line we perform COT \\(n^2\\) times, which has a runtime of \\(O(T(k))\\) given a constant number of gates.</p>";
+						return [{type:"p",content:"We can assume each line of the straight-line program is a call to the most expensive operation, the composition of two variables, since this is an upper bound. As such, at every line we perform COT \\(n^2\\) times, which has a runtime of \\(O(T(k))\\) given a constant number of gates."}];
 					case "5PB":
-						return "<p>At every line of the straight-line program, we perform \\(n^2\\) operations in which we transfer \\(O(k)\\) bits (since it is a run of COT for some constant number of gates in each run).</p>";
+						return [{type:"p",content:"At every line of the straight-line program, we perform \\(n^2\\) operations in which we transfer \\(O(k)\\) bits (since it is a run of COT for some constant number of gates in each run)."}];
 					case "COTR":
-						return "<p>We perform a constant number of encryptions and decryptions per gate used, hence \\(n\\cdot T(k)\\). We additionally perform a single call of the one-out-of-two oblivious transfer per input bit, and the runtime of that is also \\(T(k)\\). Since \\(l\\leq n-1\\), this is still \\(O(n\\cdot T(k))\\).</p>";
+						return [{type:"p",content:"We perform a constant number of encryptions and decryptions per gate used, hence \\(n\\cdot T(k)\\). We additionally perform a single call of the one-out-of-two oblivious transfer per input bit, and the runtime of that is also \\(T(k)\\). Since \\(l\\leq n-1\\), this is still \\(O(n\\cdot T(k))\\)."}];
 					case "HS":
-						return "<p>The function \\(HS\\) returns the RV consisting of the public history that is the sequence of all messages sent in an execution of \\(S\\).</p>";
+						return [{type:"p",content:"The function \\(HS\\) returns the RV consisting of the public history that is the sequence of all messages sent in an execution of \\(S\\)."}];
 					case "HSi":
-						return "<p>The function \\(HS_i\\) returns the RV consisting of the sequence of the internal configurations of machine \\(i\\) in an execution of \\(S\\).</p>";
+						return [{type:"p",content:"The function \\(HS_i\\) returns the RV consisting of the sequence of the internal configurations of machine \\(i\\) in an execution of \\(S\\)."}];
 					case "HST":
-						return "<p>For \\(T\\subset \\{1,…,n\\}\\), the function \\(HS_T(x_1,\\dots,x_n)\\) denotes the vector of the private histories of the members of \\(T\\) in an execution of \\(S\\).</p>";
+						return [{type:"p",content:"For \\(T\\subset \\{1,…,n\\}\\), the function \\(HS_T(x_1,\\dots,x_n)\\) denotes the vector of the private histories of the members of \\(T\\) in an execution of \\(S\\)."}];
 					case "OSi":
-						return "<p>The function \\(OS_i(x_1,\\dots,x_n,CI)\\) denotes the RV consisting of the private output of machine \\(i\\) in an execution of \\(S\\).</p>";
+						return [{type:"p",content:"The function \\(OS_i(x_1,\\dots,x_n,CI)\\) denotes the RV consisting of the private output of machine \\(i\\) in an execution of \\(S\\)."}];
 					case "PA":
-						return "<p>The set of all probabilistic polynomial time algorithms.</p>";
+						return [{type:"p",content:"The set of all probabilistic polynomial time algorithms."}];
 					case "PDA":
-						return "<p>The set of all distributed probabilistic polynomial time algorithms.</p>";
+						return [{type:"p",content:"The set of all distributed probabilistic polynomial time algorithms."}];
 					default:
-						return "No info on this equation yet.";
+						return [{type:"p",content:"No info on this equation yet."}];
 				}
 			}
 
