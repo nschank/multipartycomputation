@@ -12,11 +12,11 @@ function addWord(word)
 	
 	var term = document.createElement("div");
 	term.className = "gl_term";
-	term.innerHTML = "<h3>" + word + "</h3>";
+	term.innerHTML = "<h3>" + def_internal[word].title + "</h3>";
 	
 	var def = document.createElement("div");
 	def.className = "gl_def";
-	def.innerHTML = "<p>" + def_internal[word]  + "</p>";
+	def.innerHTML = blockConstruct(def_internal[word].def);
 	
 	block.appendChild(term);
 	block.appendChild(def);

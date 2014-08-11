@@ -33,11 +33,6 @@ function addGlossaryListeners()
 	}
 }
 
-function toTitleCase(str)
-{
-    return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
-}
-
 function g_removeSpaces(str)
 {
 	if(str.length == 0) return "";
@@ -55,9 +50,9 @@ function addDOMG(elem, word, definition, glossary)
 		block.className="gl_block";
 		block.id = "gl_block" + g_removeSpaces(word);
 		
-		block.innerHTML += "<h2 class=\"gl_word\">Definition: " + toTitleCase(word) + "</h2><p class=\"gl_definition\">";
-		block.innerHTML += definition;
-		block.innerHTML += "</p><p class=\"gl_help\">Visit the full <a href=\"multipartycomputation.org/glossary.html\">glossary</a>.</p>";
+		block.innerHTML += "<h2 class=\"gl_word\">Definition: " + definition.title + "</h2>";
+		block.innerHTML += blockConstruct(definition.def, "gl_def");
+		block.innerHTML += "<p class=\"gl_help\">Visit the full <a href=\"multipartycomputation.org/glossary.html\">glossary</a>.</p>";
 		
 		glossary.appendChild(block);
 		

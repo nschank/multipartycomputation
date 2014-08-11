@@ -19,27 +19,9 @@
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
         <script type="text/javascript">
-			<!--
-            function fill(box)
-			{
-				switch (box)
-				{
-					default:
-						return "No info on this equation yet.";
-				}
-			}
-
-			function authorLink(ref)
-			{
-				switch (ref)
-				{
-					default:
-						return "#";
-				}
-			}
-			
-			self_def["blob"] = "A blob is a commitment scheme, in this paper defined as a way of committing to any value in \\(GF(2^k)\\) such that \\(2^k\\gt n\\). It has the following properties:<ol><li>A party can obtain a blob representing any value in \\(GF(2^k)\\)</li><li>When presented with a blob, nobody can tell what value it represents.</li><li>The committing participant cannot open it to any value other than the original value used to create the blob.</li><li>Any other participant can also create blobs representing any value in \\(GF(2^k)\\) that look exactly like the blobs obtained by the original participant.</li></ol>";
-			self_def["reliable participant"] = "Any participant which: <ul><li>Does not leak secret information to other participants; and</li><li>Always sends the correct messages defined by the protocol</li></ul>We assume \\(2d+a\\) of the participants in a protocol to be reliable.";
+			<!--			
+			self_def["blob"] = {title:"blob",def:[{type:"p",content:"A blob is a commitment scheme, in this paper defined as a way of committing to any value in \\(GF(2^k)\\) such that \\(2^k\\gt n\\). It has the following properties:"},{type:"ol",content:[{type:"li",content:[{type:"p",content:"A party can obtain a blob representing any value in \\(GF(2^k)\\)"}]},{type:"li",content:[{type:"p",content:"When presented with a blob, nobody can tell what value it represents."}]},{type:"li",content:[{type:"p",content:"The committing participant cannot open it to any value other than the original value used to create the blob."}]},{type:"li",content:[{type:"p",content:"Any other participant can also create blobs representing any value in \\(GF(2^k)\\) that look exactly like the blobs obtained by the original participant."}]}]}]};
+			self_def["reliable participant"] = {title:"reliable participant",def:[{type:"p",content:"Any participant which:"},{type:"ul",content:[{type:"li",content:[{type:"p",content:"Does not leak secret information to other participants; and"}]},{type:"li",content:[{type:"p",content:"Always sends the correct messages defined by the protocol"}]}]},{type:"p",content:"We assume \\(2d+a\\) of the participants in a protocol to be reliable."}]};
 			//-->
         </script>
     </head>

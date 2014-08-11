@@ -35,18 +35,9 @@
 						return "No info on this equation yet.";
 				}
 			}
-
-			function authorLink(ref)
-			{
-				switch (ref)
-				{
-					default:
-						return "#";
-				}
-			}
-
-			self_def["t-private"] = "A protocol is \\(t\\)-<i>private</i> if any set of at most \\(t\\) players cannot compute more after the protocol than they could jointly compute solely from their own of private inputs and outputs.";
-			self_def["t-resilient"] = "A protocol is \\(t\\)-<i>resilient</i> if no set of \\(t\\) or fewer players can influence the correctness of the outputs of the remaining players.";
+			
+			self_def["t-private"] = {title:"\\(t\\)-private",def:[{type:"p",content:"A protocol is \\(t\\)-<i>private</i> if any set of at most \\(t\\) players cannot compute more after the protocol than they could jointly compute solely from their own of private inputs and outputs."}]};
+			self_def["t-resilient"] = {title:"\\(t\\)-resilient",def:[{type:"p",content:"A protocol is \\(t\\)-<i>resilient</i> if no set of \\(t\\) or fewer players can influence the correctness of the outputs of the remaining players."}]};
 			//-->
         </script>
     </head>

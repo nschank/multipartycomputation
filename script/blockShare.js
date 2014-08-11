@@ -90,3 +90,33 @@ function maybeClose(block)
 		}
     };
 }
+
+function blockConstruct(blockContent, className)
+{
+	var classInsert = "";
+	if(className)
+		classInsert = " class=\"" + className + "\"";
+	var html = "";
+	for(var i = 0; i < blockContent.length; i++)
+	{
+		var thisInsert = classInsert;
+		if(blockContent[i].className)
+			thisInsert = " class=\"" + blockContent[i].className + "\"";
+		switch(blockContent[i].type)
+		{
+			case "p":
+				html += "<" + blockContent[i].type + thisInsert + ">" + blockContent[i].content + "</" + blockContent[i].type + ">";break;
+			case "span":
+				if(blockContent[i].href)
+					html += "<a href=\"" + blockContent[i].href + "\">";
+				html += "<" + blockContent[i].type + thisInsert + ">" + blockContent[i].content + "</" + blockContent[i].type + ">";
+				if(blockContent[i].href)
+					html+="</a>";
+				break;
+			case "ol": case "ul": case "li":
+				html += "<" + blockContent[i].type + thisInsert + ">" + blockConstruct(blockContent[i].content) + "</" + blockContent[i].type + ">"; break;
+			default: break;
+		}
+	}
+	return html;
+}

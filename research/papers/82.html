@@ -47,10 +47,10 @@
 				}
 			}
 
-			self_def["conspiracy"] = "Any subset of the participants that does not include every participant (or no participants).  We denote this subset by \\(X\\). Machines in a conspiracy may follow any PPT program or establish private communication channels amongst themselves in order to share information.";
-			self_def["openly verifiable"] = "A protocol is openly verifiable if participants can be challenged after the termination of the protocol in order to determine no cheating has occurred.";
-			self_def["protocol conversation"] = "The binary string which is the concatenation of all messages sent during an execution of a protocol.";
-			self_def["simulator for X"] = "A polynomial time Turing machine which, when given the security parameter, the inputs of all the conspirators, and the output of the circuit, generates a protocol conversation.";
+			self_def["conspiracy"] = {title:"conspiracy",def:[{type:"p",content:"Any subset of the participants that does not include every participant (or no participants).  We denote this subset by \\(X\\). Machines in a conspiracy may follow any PPT program or establish private communication channels amongst themselves in order to share information."}]};
+			self_def["openly verifiable"] = {title:"conspiracy",def:[{type:"p",content:"A protocol is openly verifiable if participants can be challenged after the termination of the protocol in order to determine no cheating has occurred."}]};
+			self_def["protocol conversation"] = {title:"protocol conversation",def:[{type:"p",content:"The binary string which is the concatenation of all messages sent during an execution of a protocol."}]};
+			self_def["simulator for X"] = {title:"simulator for \\(X\\)",def:[{type:"p",content:"A polynomial time Turing machine which, when given the security parameter, the inputs of all the conspirators, and the output of the circuit, generates a protocol conversation."]}];
 			//-->
         </script>
     </head>
