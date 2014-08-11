@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
+        <script type="text/javascript" src="../../script/fnote.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
@@ -281,7 +282,7 @@
 							Let \(G\) be a synchronous network of \(\;n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(\;d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). Then there is an \(\operatorname O(d)\) expected time randomized Byzantine agreement protocol on \(G\) tolerating up to \(t\) <span class="definable" data-define="Byzantine fault">Byzantine faults</span>.
 						</p>
 						<p class="rp_original">
-							Similarly, Dolev's conditions are sufficient for general multiparty protocols. Extending the complete network results of <span class="reference" data-citation="BGW">[?]</span> and <span class="reference" data-citation="CCD">[?]</span> we have<sup class="footnote" id="fref1"><a href="#footnote1">1</a></sup>
+							Similarly, Dolev's conditions are sufficient for general multiparty protocols. Extending the complete network results of <span class="reference" data-citation="BGW">[?]</span> and <span class="reference" data-citation="CCD">[?]</span> we have<sup class="footnote" id="fref1" data-footenote="1"><a href="#footnote1">1</a></sup>
 						</p>
 						<span class="rp_theorem_header">Theorem 3</span>
 						<p class="rp_original rp_theorem">
@@ -927,32 +928,36 @@
 				</div>
             </div>
 			<div class="main_toplevel main_section main_color7" id="footnotes">
-                <h1>Footnotes</h1>
-				
-                <ol id="footnotes">
-                    <li id="footnote1">
-						<a href="#fref1">[^]</a> See the section on Incomplete Networks for a discussion of stronger results than stated here.
-					</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>Footnotes</h1>
+					
+					<ol id="footnotelist">
+						<li id="footnote1">
+							See the section on Incomplete Networks for a discussion of stronger results than stated here.
+						</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color8" id="references">
-                <h1>References</h1>
-                <ol id="referencelist">
-                    <li id="B">M. Ben-Or. Multiparty Protocols with Honest Majority, in preparation.</li>
-					<li id="BGW">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. </li>
-					<li id="CCD">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols (extended abstract)</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.</li>
-					<li id="CGMA">B. Chor, S. Goldwasser, S. Micali, and B. Awerbuch. Verifiable Secret Sharing and Achieving Simultaneity in the Presence of Faults. <i>FOCS85</i>, pp.383-395.</li>
-					<li id="D">D. Dolev. The Byzantine Generals Strike Again, <i>J. of Algorithms, Vol. 3</i>, pp. 14-30. 1980.</li>
-					<li id="DDY">D. Dolev, C. Dwork, M. Yung. Non-Cryptographic Secure Communication on General Networks. Preprint.</li>
-					<li id="F">P. Feldman. Optimal Algorithms for Byzantine Agreement. MIT Ph.D Thesis, to appear.</li>
-					<li id="FM">P. Feldman, S. Micali. Optimal Algorithms for Byzantine Agreement. <i>STOC88</i>, pp. 148-161.</li>
-					<li id="GMW">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority.</a> <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
-					<li id="R1">M. Rabin. Randomized Byzantine Generals. <i>FOCS83</i>, pp. 403-409.</li>
-					<li id="R2">M. Rabin. Digitalized Signatures, Foundations of Secure Computations, R. Demillo et.al. editors, Academic Press, (1978), pp. 155-165.</li>
-					<li id="RT">T. Rabin. Robust Sharing of Secrets when the Dealer is Honest or Cheating. M.Sc. Thesis, The Hebrew University, July 1988.</li>
-					<li id="S">A. Shamir. How to Share a Secret. <i>CACN, 22</i>, pp. 612-613. 1979.</li>
-					<li id="TW">M. Tompa and H. Woll. How to Share a Secret with Cheaters. IBM Research Report, RC 11840 (Log #52910). 1986.</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>References</h1>
+					<ol id="referencelist">
+						<li id="B">M. Ben-Or. Multiparty Protocols with Honest Majority, in preparation.</li>
+						<li id="BGW">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. </li>
+						<li id="CCD">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols (extended abstract)</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.</li>
+						<li id="CGMA">B. Chor, S. Goldwasser, S. Micali, and B. Awerbuch. Verifiable Secret Sharing and Achieving Simultaneity in the Presence of Faults. <i>FOCS85</i>, pp.383-395.</li>
+						<li id="D">D. Dolev. The Byzantine Generals Strike Again, <i>J. of Algorithms, Vol. 3</i>, pp. 14-30. 1980.</li>
+						<li id="DDY">D. Dolev, C. Dwork, M. Yung. Non-Cryptographic Secure Communication on General Networks. Preprint.</li>
+						<li id="F">P. Feldman. Optimal Algorithms for Byzantine Agreement. MIT Ph.D Thesis, to appear.</li>
+						<li id="FM">P. Feldman, S. Micali. Optimal Algorithms for Byzantine Agreement. <i>STOC88</i>, pp. 148-161.</li>
+						<li id="GMW">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority.</a> <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
+						<li id="R1">M. Rabin. Randomized Byzantine Generals. <i>FOCS83</i>, pp. 403-409.</li>
+						<li id="R2">M. Rabin. Digitalized Signatures, Foundations of Secure Computations, R. Demillo et.al. editors, Academic Press, (1978), pp. 155-165.</li>
+						<li id="RT">T. Rabin. Robust Sharing of Secrets when the Dealer is Honest or Cheating. M.Sc. Thesis, The Hebrew University, July 1988.</li>
+						<li id="S">A. Shamir. How to Share a Secret. <i>CACN, 22</i>, pp. 612-613. 1979.</li>
+						<li id="TW">M. Tompa and H. Woll. How to Share a Secret with Cheaters. IBM Research Report, RC 11840 (Log #52910). 1986.</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">

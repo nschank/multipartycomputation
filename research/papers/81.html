@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
+        <script type="text/javascript" src="../../script/fnote.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
@@ -349,7 +350,7 @@
 								Let us start by briefly describing the communication networks in which games will be played. This is the standard network supporting the execution of multi-party protocols.
 							</p>
 							<p class="rp_original">
-								Informally, a <span class="definable">game network</span> of size \(n\) is a collection of (interacting) probabilistic polynomial-time <span class="definable" data-define="Turing machine">Turing machines</span>. Each machine has a private read-only input tape, a private write-only output tape and a private read-write work tape. All machines share a common read-only input tape and a common write-only output tape. The \(n\) machines communicate by means of \(n\cdot(n-1)\) special tapes. Machine \(i\) publicly sends messages (strings) to machine \(j\) by means of a special tape \(i \rightarrow j\) on which only \(i\) can write and that all other machines can read. There is a common clock whose pulses define time intervals \(1,2,\dots\). Messages are sent at the beginning of a time interval and are received within the same time interval. We stress, though, that our result is largely independent from the specific communication mechanism, and also holds for "less equipped" communication networks.<sup id="fref1"><a href="#footnote1">(1)</a></sup>
+								Informally, a <span class="definable">game network</span> of size \(n\) is a collection of (interacting) probabilistic polynomial-time <span class="definable" data-define="Turing machine">Turing machines</span>. Each machine has a private read-only input tape, a private write-only output tape and a private read-write work tape. All machines share a common read-only input tape and a common write-only output tape. The \(n\) machines communicate by means of \(n\cdot(n-1)\) special tapes. Machine \(i\) publicly sends messages (strings) to machine \(j\) by means of a special tape \(i \rightarrow j\) on which only \(i\) can write and that all other machines can read. There is a common clock whose pulses define time intervals \(1,2,\dots\). Messages are sent at the beginning of a time interval and are received within the same time interval. We stress, though, that our result is largely independent from the specific communication mechanism, and also holds for "less equipped" communication networks.<sup id="fref1" class="footnote" data-footnote="1"><a href="#footnote1">1</a></sup>
 							</p>
 							<p class="rp_annotation">
 								This is indeed the most standard network used in multiparty computation research: <span class="definable" data-define="synchronous network">synchronous</span>, <span class="definable" data-define="authenticated network">authenticated</span>, <span class="definable" data-define="secrecy network">non-secret</span>, and with no <span class="definable">broadcast channel</span>.
@@ -961,74 +962,78 @@
 				</div>
 			</div>
 			<div class="main_toplevel main_section main_color7" id="footnotes">
-                <h1>Footnotes</h1>
-				
-                <ol id="footnotes">
-                    <li id="footnote1">
-						<a href="#fref1">[^]</a> For instance, there may be only one communication tape. In this case, digital signatures can be used to authenticate the sender. In case that not all machines may read all communication tapes, Byzantine agreement can be used to simulate the fact that all processors agree on what message machine \(i\) has sent to machine \(j\) at time \(t\). The common clock may be replaced by local clocks that don't drift "too much". The quite tight synchrony of the message delivery can be replaced by a feasible upper bound on the time it takes a message to be delivered, and so on.
-					</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>Footnotes</h1>
+					
+					<ol id="footnotelist">
+						<li id="footnote1" class="rp_original">
+							For instance, there may be only one communication tape. In this case, digital signatures can be used to authenticate the sender. In case that not all machines may read all communication tapes, Byzantine agreement can be used to simulate the fact that all processors agree on what message machine \(i\) has sent to machine \(j\) at time \(t\). The common clock may be replaced by local clocks that don't drift "too much". The quite tight synchrony of the message delivery can be replaced by a feasible upper bound on the time it takes a message to be delivered, and so on.
+						</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color8" id="references">
-                <h1>References</h1>
-                <ol id="referencelist">
-                    <li id="GM">
-						S. Goldwasser, and S. Micali, <i>Probabilistic Encryption</i>, JCSS Vol. 28, No. 2, April 1984.
-						<p>
-							An earlier version (containing other results) was titled <i>Probabilistic Encryption and How to Play Mental Poker Hiding All Partial Information</i>
-						</p>
-					</li>
-					<li id="Y">
-						A. Yao, <i>Theory and Application of Trapdoor Functions</i>, Proc. of 23rd FOCS, IEEE, Nov., 1982, pp. 80-91.
-					</li>
-					<li id="GMR">
-						S. Goldwasser, S. Micali and C. Rackoff, <i>The Knowledge Complexity of Interactive Proof-Systems</i>, To appear SIAM J. on Computing (manuscript available from authors).
-						<p>
-							Earlier version in Proc. 17th Annual ACM Symp. on Theory of Computing, pp 291-304.
-						</p>
-					</li>
-					<li id="HR">
-						J. Halpern and M.O. Rabin, <i>A Logic to reason about likehood</i>, Proc of 15th STOC, 1983.
-					</li>
-					<li id="FMR">
-						M. Fischer, S. Micali, C. Rackoff, and D. Witenberg, <i>A Secure Protocol for the Oblivious Transfer</i>, in preparation 1986.
-					</li>
-					<li id="Bl">
-						M. Blum, <i>Coin Flipping by Telephone</i>, IEEE COMPCON 1982, pp. 133-137.
-					</li>
-					<li id="EGL">
-						S. Even, O. Goldreich, and A. Lempel, <i>A Randomized Protocol for Signing Contracts</i>, CACN, vol. 28, No. 6, 1985, pp. 637-647.
-					</li>
-					<li id="GMRi">
-						S. Goldwasser, S. Micali, and R. Rivest, <i>A Digital Signature Scheme Secure Against Adaptive, Chosen Ciphertext Attack</i>. To appear in SAIM J. on Computing (available from authors)
-						<p>Earlier version, titled "<i>A Paradoxical Solution to the Signature Problem</i>", in Proc. 25th FOCS, 1984, pp.441-448.</p>
-					</li>
-					<li id="BM">
-						M. Blum and S. Micali, <i>How to Generate Sequences of Cryptographical String Pseudo-Random Bits</i>, SIAM J. on Computing, Vol. 13, Nov 1984, pp. 850-864
-					</li>
-					<li id="BH">
-						R. Boppana and R. Hirschfeld, <i>Pseudo-Random Generators and Complexity Classes</i>, To appear in Randomness and Computation, 5th volume of Advances in Computing Research, ed. S. Micali
-					</li>
-					<li id="Lv">
-						L. Levin, <i>One-Way Functions and Pseudo-Random Generators</i>, Proc. 17th STOC, 1985, pp. 363-365.
-					</li>
-					<li id="Y2">
-						Andrew Chi-Chih Yao. <a href="24.html">How to generate and exchange secrets (extended abstract).</a> In <i>27th Annual Symposium on Foundations of Computer Science</i>, pages 162–167, Toronto, Ontario, Canada, 27–29 October 1986. IEEE.
-					</li>
-					<li id="Br">
-						D. Barrington, <i>Bounded-Width Branching Programs Recognize Exactly Those Languages in NC<sup>1</sup></i>, Proc. 18th STOC, 1986 pp 1-5
-					</li>
-					<li id="CGM">
-						B. Chor, S. Goldwasser, S. Micali, and B. Awerbuch, <i>Verifiable Secret Sharing and Achieving Simultaneity in the Presence of Faults</i>, Proc. 26th FOCS, 1985, pp. 383-395.
-					</li>
-					<li id="GMW">
-						O. Goldreich, S. Micali, and A. Wigderson, <i>Proofs that Yield Nothing but their Validity and a Methodology of Cryptographic Design</i>, Proc. of FOCS 1986.
-					</li>
-					<li id="CG">
-						B. Chor and O Goldreich, <i>RSA/Rabin Bits are 1/2+1/poly(logN) Secure</i>, To appear SIAM J. on Computing.
-						<p>Earlier version in PROC. FOCS 1984, pp. 449-463</p>
-					</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>References</h1>
+					<ol id="referencelist">
+						<li id="GM">
+							S. Goldwasser, and S. Micali, <i>Probabilistic Encryption</i>, JCSS Vol. 28, No. 2, April 1984.
+							<p>
+								An earlier version (containing other results) was titled <i>Probabilistic Encryption and How to Play Mental Poker Hiding All Partial Information</i>
+							</p>
+						</li>
+						<li id="Y">
+							A. Yao, <i>Theory and Application of Trapdoor Functions</i>, Proc. of 23rd FOCS, IEEE, Nov., 1982, pp. 80-91.
+						</li>
+						<li id="GMR">
+							S. Goldwasser, S. Micali and C. Rackoff, <i>The Knowledge Complexity of Interactive Proof-Systems</i>, To appear SIAM J. on Computing (manuscript available from authors).
+							<p>
+								Earlier version in Proc. 17th Annual ACM Symp. on Theory of Computing, pp 291-304.
+							</p>
+						</li>
+						<li id="HR">
+							J. Halpern and M.O. Rabin, <i>A Logic to reason about likehood</i>, Proc of 15th STOC, 1983.
+						</li>
+						<li id="FMR">
+							M. Fischer, S. Micali, C. Rackoff, and D. Witenberg, <i>A Secure Protocol for the Oblivious Transfer</i>, in preparation 1986.
+						</li>
+						<li id="Bl">
+							M. Blum, <i>Coin Flipping by Telephone</i>, IEEE COMPCON 1982, pp. 133-137.
+						</li>
+						<li id="EGL">
+							S. Even, O. Goldreich, and A. Lempel, <i>A Randomized Protocol for Signing Contracts</i>, CACN, vol. 28, No. 6, 1985, pp. 637-647.
+						</li>
+						<li id="GMRi">
+							S. Goldwasser, S. Micali, and R. Rivest, <i>A Digital Signature Scheme Secure Against Adaptive, Chosen Ciphertext Attack</i>. To appear in SAIM J. on Computing (available from authors)
+							<p>Earlier version, titled "<i>A Paradoxical Solution to the Signature Problem</i>", in Proc. 25th FOCS, 1984, pp.441-448.</p>
+						</li>
+						<li id="BM">
+							M. Blum and S. Micali, <i>How to Generate Sequences of Cryptographical String Pseudo-Random Bits</i>, SIAM J. on Computing, Vol. 13, Nov 1984, pp. 850-864
+						</li>
+						<li id="BH">
+							R. Boppana and R. Hirschfeld, <i>Pseudo-Random Generators and Complexity Classes</i>, To appear in Randomness and Computation, 5th volume of Advances in Computing Research, ed. S. Micali
+						</li>
+						<li id="Lv">
+							L. Levin, <i>One-Way Functions and Pseudo-Random Generators</i>, Proc. 17th STOC, 1985, pp. 363-365.
+						</li>
+						<li id="Y2">
+							A.C. Yao. <a href="24.html">How to Generate and Exchange Secrets (extended abstract)</a>. <i>27th Annual Symposium on Foundations of Computer Science</i>. IEEE. 1986, pp. 162-167.
+						</li>
+						<li id="Br">
+							D. Barrington, <i>Bounded-Width Branching Programs Recognize Exactly Those Languages in NC<sup>1</sup></i>, Proc. 18th STOC, 1986 pp 1-5
+						</li>
+						<li id="CGM">
+							B. Chor, S. Goldwasser, S. Micali, and B. Awerbuch, <i>Verifiable Secret Sharing and Achieving Simultaneity in the Presence of Faults</i>, Proc. 26th FOCS, 1985, pp. 383-395.
+						</li>
+						<li id="GMW">
+							O. Goldreich, S. Micali, and A. Wigderson, <i>Proofs that Yield Nothing but their Validity and a Methodology of Cryptographic Design</i>, Proc. of FOCS 1986.
+						</li>
+						<li id="CG">
+							B. Chor and O Goldreich, <i>RSA/Rabin Bits are 1/2+1/poly(logN) Secure</i>, To appear SIAM J. on Computing.
+							<p>Earlier version in PROC. FOCS 1984, pp. 449-463</p>
+						</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">

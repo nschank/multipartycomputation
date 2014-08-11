@@ -111,6 +111,12 @@ img.rp_original {
 	background-color:#DDDDDD;
 }
 
+.rp_annotation_footnote {
+	margin:11px 10px;
+	color:#444444;
+    font-size:10pt;
+}
+
 li > p {
 	margin-left:0px;
 }

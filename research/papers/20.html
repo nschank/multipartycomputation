@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
+        <script type="text/javascript" src="../../script/fnote.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
@@ -544,34 +545,7 @@
 					</section>
 				</div>
             </div>
-			<div class="main_toplevel main_section main_color6" id="footnotes">
-                <h1>Footnotes</h1>
-				
-                <ol id="footnotes">
-                    <li id="footnote1">
-						<a href="#fref1">[^]</a> In this protocol, the field must be large for security reasons.
-					</li>
-					<li id="footnote2">
-						<a href="#fref2">[^]</a> \(n_O\) specifies the total number of outputs&mdash;if the same value is given as output to several players, then this value is counted several times.
-					</li>
-					<li id="footnote3">
-						<a href="#fref3">[^]</a> This is contrast to the protocol in <span class="reference" data-citation="BGW88">[?]</span>, where the existence of an \(n\)th <span class="definable">root of unity</span> in \(\mathbb F\) is assumed.
-					</li>
-					<li id="footnote4">
-						<a href="#fref4">[^]</a> An efficiency gain of a factor 2 can be achieved by setting \(r_{ij} = r_{ji}\), and hence \(f_i(x) = \widetilde{f_i}(x)\). One can prove that privacy is not violated by this technique. See <span class="reference" data-citation="CDM00">[?]</span> for more details.
-					</li>
-					<li id="footnote5">
-						<a href="#fref5">[^]</a> One can show that two rounds of accusations are sufficient to reach agreement. After two rounds of accusations, either the total number of accusations exceeds \(t\), or all accusations in the second round originate from corrupted players.
-					</li>
-					<li id="footnote6">
-						<a href="#fref6">[^]</a> If there are several such players, we consider those who have broadcast the smallest step-number, and from that group the player with the smallest index \(k\) is chosen.
-					</li>
-					<li id="footnote7">
-						<a href="#fref7">[^]</a> After the security problem was discovered, this appendix was deleted from the version available online.
-					</li>
-                </ol>
-            </div>
-			<div class="main_toplevel main_section main_color7" id="appendixa">
+			<div class="main_toplevel main_section main_color6" id="appendixa">
 				<div class="main_window main_fullwidth">
 					<h1>Appendix A - Security Flaw in <span class="reference" data-citation="GRR98">[?]</span></h1>
 					<div class="main_toc"></div>
@@ -597,43 +571,74 @@
 					</p>
 				</div>
             </div>
+			<div class="main_toplevel main_section main_color7" id="footnotes">
+				<div class="main_fullwidth">
+					<h1>Footnotes</h1>
+					
+					<ol id="footnotelist">
+						<li id="footnote1">
+							In this protocol, the field must be large for security reasons.
+						</li>
+						<li id="footnote2">
+							\(n_O\) specifies the total number of outputs&mdash;if the same value is given as output to several players, then this value is counted several times.
+						</li>
+						<li id="footnote3">
+							This is contrast to the protocol in <span class="reference" data-citation="BGW88">[?]</span>, where the existence of an \(n\)th <span class="definable">root of unity</span> in \(\mathbb F\) is assumed.
+						</li>
+						<li id="footnote4">
+							An efficiency gain of a factor 2 can be achieved by setting \(r_{ij} = r_{ji}\), and hence \(f_i(x) = \widetilde{f_i}(x)\). One can prove that privacy is not violated by this technique. See <span class="reference" data-citation="CDM00">[?]</span> for more details.
+						</li>
+						<li id="footnote5">
+							One can show that two rounds of accusations are sufficient to reach agreement. After two rounds of accusations, either the total number of accusations exceeds \(t\), or all accusations in the second round originate from corrupted players.
+						</li>
+						<li id="footnote6">
+							If there are several such players, we consider those who have broadcast the smallest step-number, and from that group the player with the smallest index \(k\) is chosen.
+						</li>
+						<li id="footnote7">
+							After the security problem was discovered, this appendix was deleted from the version available online.
+						</li>
+					</ol>
+				</div>
+            </div>
             <div class="main_toplevel main_section main_color8" id="references">
-                <h1>References</h1>
-                <ol id="referencelist">
-                    <li id="BB89">J. Bar-Ilan and D. Beaver. Non-cryptographic fault-tolerant computing in a constant number of rounds of interaction. In <i>Proc. 8th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pages 201-210, 1989.</li>
-					<li id="Bea91a">D. Beaver. Efficient multiparty protocols using circuit randomization. In <i>Advances in Cryptology | CRYPTO '91</i>, vol. 576 of <i>LNCS</i>, pages 420-432, 1991.</li>
-					<li id="Bea91b">D. Beaver. Secure multiparty protocols and zero-knowledge proof systems tolerating a faulty minority. <i>Journal of Cryptology</i>, pp. 75-122, 1991.</li>
-					<li id="BFKR90">D. Beaver, J. Feigenbaum, J. Kilian, and P. Rogaway. Security with low communication overhead (extended abstract). In <i>Advances in Cryptology | CRYPTO '90</i>, pp. 62-76, 1990.</li>
-					<li id="BGP89">P. Berman, J. A. Garay, and K. J. Perry. Towards optimal distributed consensus (extended abstract). In <i>Proc. 21st IEEE Symposium on the Foundations of Computer Science (FOCS)</i>, pp. 410-415, 1989. Expanded version: Bit optimal distributed consensus. In Computer Science Research, 1992.</li>
-					<li id="BGW88">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988.</li>
-					<li id="BMR90">D. Beaver, S. Micali, and P. Rogaway. The round complexity of secure protocols (extended abstract). In <i>Proc. 22nd ACM Symposium on the Theory of Computing (STOC)</i>, pp. 503-513, 1990.</li>
-					<li id="Can00">R. Canetti. Security and composition of multi-party cryptographic protocols. <i>Journal of Cryptology</i>, 13(1):143-202, 2000.</li>
-					<li id="CCD88">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols (extended abstract)</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.</li>
-					<li id="CCDplus99">R. Cramer, I. Damg&aring;rd, S. Dziembowski, M. Hirt, and T. Rabin. Efficient multiparty computations secure against an adaptive adversary. In <i>Advances in Cryptology | EUROCRYPT '99</i>, vol. 1592 of <i>LNCS</i>, pp. 311-326, 1999.</li>
-					<li id="CDM00">R. Cramer, I. Damg&aring;ard, and U. Maurer. General secure multi-party computation from any linear secret sharing scheme. In <i>Advances in Cryptology | EUROCRYPT '00</i>, vol. 1807 of <i>LNCS</i>, pp. 316-334, 2000.</li>
-					<li id="CDN00">R. Cramer, I. Damg&aring;ard, and J.B. Nielsen. Multiparty computation from threshold homomorphic encryption. Manuscript, 2000.</li>
-					<li id="CH94">R. Canetti and A. Herzberg. Maintaining security in the presence of transient faults. In <i>Advances in Cryptology | CRYPTO '94</i>, vol. 839 of <i>LNCS</i>, pp. 425-438, 1994.</li>
-					<li id="CKS00">C. Cachin, K. Kursawe, and V. Shoup. Random oracles in Constantinople: Practical asynchronous Byzantine agreement using cryptography. In <i>Proc. 19th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 123-132, 2000.</li>
-					<li id="CW89">B. A. Coan and J. L. Welch. Modular construction of nearly optimal Byzantine agreement protocols. In <i>Proc. 8th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 295-305, 1989. Expanded version: Modular construction of a Byzantine agreement protocol with optimal message bit complexity. In <i>Information and Computation</i>, 97(1):61-85, 1992.</li>
-					<li id="DFFplus82">D. Dolev, M. J. Fischer, R. Fowler, N. A. Lynch, and H. R. Strong. An efficient algorithm for Byzantine agreement without authentication. <i>Information and Control</i>, 52(3):257-274, 1982.</li>
-					<li id="DR85">D. Dolev and R. Reischuk. Bounds on information exchange for Byzantine agreement. <i>Journal of the ACM</i>, 32(1):191-204, 1985.</li>
-					<li id="DRS82">D. Dolev, R. Reischuk, and H. R. Strong. 'Eventual' is earlier than 'Immediate'. In <i>Proc. 23rd IEEE Symposium on the Foundations of Computer Science (FOCS)</i>, pp. 196-203, 1982. Final version: Early Stopping in Byzantine Agreement. In <i>Journal of the ACM</i>, 37(4):720-741, October 1990.</li>
-					<li id="FHM98">M. Fitzi, M. Hirt, and U. Maurer. Trading correctness for privacy in unconditional multi-party computation. In <i>Advances in Cryptology | CRYPTO '98</i>, vol. 1462 of <i>LNCS</i>, pp. 121-136, 1998.</li>
-					<li id="FM88">P. Feldman and S. Micali. Optimal algorithms for Byzantine agreement. In <i>Proc. 20th ACM Symposium on the Theory of Computing (STOC)</i>, pp. 148-161, 1988. Expanded version in <i>SIAM Journal on Computing</i> 26(4):873-933, August 1997.</li>
-					<li id="FY92">M. K. Franklin and M. Yung. Communication complexity of secure computation. In <i>Proc. 24th ACM Symposium on the Theory of Computing (STOC)</i>, pp. 699-710, 1992.</li>
-					<li id="GHY87">Z. Galil, S. Haber, and M. Yung. Cryptographic computation: Secure fault-tolerant protocols and the public-key model. In <i>Advances in Cryptology | CRYPTO '87</i>, vol. 293 of <i>LNCS</i>, pp. 135{155. Springer-Verlag, 1987.</li>
-					<li id="GMW87">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority</a>. <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
-					<li id="GRR98">R. Gennaro, M. O. Rabin, and T. Rabin. Simplified VSS and fast-track multiparty computations with applications to threshold cryptography. In <i>Proc. 17th ACM Symposium on Principles of Distributed Computing (PODC)</i>, 1998.</li>
-					<li id="HH91">V. Hadzilacos and J. Y. Halpern. Message-optimal protocols for byzantine agreement. In <i>Proc. 10th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 309-324, 1991. Final version in Mathematical Systems Theory, 26:41-102, October 1993.</li>
-					<li id="HM00">M. Hirt and U. Maurer. Player simulation and general adversary structures in perfect multiparty computation. <i>Journal of Cryptology</i>, 13(1):31{60, 2000. Extended abstract in <i>Proc. 16th of ACM PODC '97.</i></li>
-					<li id="MR98">S. Micali and P. Rogaway. Secure computation: The information theoretic case. Manuscript, 1998. Former version: Secure computation, In <i>Advances in Cryptology | CRYPTO '91</i>, volume 576 of <i>LNCS</i>, pp. 392-404, Springer-Verlag, 1991.</li>
-					<li id="OY91">R. Ostrovsky and M. Yung. How to withstand mobile virus attacks (extended abstract). In <i>Proc. 10th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 51-59, 1991.</li>
-					<li id="Prz99">B. Przydatek. Efficiency in multi-party computation. Master's thesis, ETH Zurich, 1999.</li>
-					<li id="PSL80">M. Pease, R. Shostak, and L. Lamport. Reaching agreement in the presence of faults. <i>Journal of the ACM</i>, 27(2):228-234, 1980.</li>
-					<li id="RB89">T. Rabin and M. Ben-Or. <a href="76.html">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</a>. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.</li>
-					<li id="Sha79">A. Shamir. How to share a secret. <i>Communications of the ACM</i>, 22:612-613, 1979.</li>
-					<li id="Yao82">A.C. Yao. <a href="49.html">Protocols for Secure Computations (extended abstract)</a>. <i>Proceedings of the 23rd Annual IEEE Symposium on the Foundations of Computer Science,</i> pages 160-164. IEEE. 1982.</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>References</h1>
+					<ol id="referencelist">
+						<li id="BB89">J. Bar-Ilan and D. Beaver. Non-cryptographic fault-tolerant computing in a constant number of rounds of interaction. In <i>Proc. 8th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pages 201-210, 1989.</li>
+						<li id="Bea91a">D. Beaver. Efficient multiparty protocols using circuit randomization. In <i>Advances in Cryptology | CRYPTO '91</i>, vol. 576 of <i>LNCS</i>, pages 420-432, 1991.</li>
+						<li id="Bea91b">D. Beaver. Secure multiparty protocols and zero-knowledge proof systems tolerating a faulty minority. <i>Journal of Cryptology</i>, pp. 75-122, 1991.</li>
+						<li id="BFKR90">D. Beaver, J. Feigenbaum, J. Kilian, and P. Rogaway. Security with low communication overhead (extended abstract). In <i>Advances in Cryptology | CRYPTO '90</i>, pp. 62-76, 1990.</li>
+						<li id="BGP89">P. Berman, J. A. Garay, and K. J. Perry. Towards optimal distributed consensus (extended abstract). In <i>Proc. 21st IEEE Symposium on the Foundations of Computer Science (FOCS)</i>, pp. 410-415, 1989. Expanded version: Bit optimal distributed consensus. In Computer Science Research, 1992.</li>
+						<li id="BGW88">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988.</li>
+						<li id="BMR90">D. Beaver, S. Micali, and P. Rogaway. The round complexity of secure protocols (extended abstract). In <i>Proc. 22nd ACM Symposium on the Theory of Computing (STOC)</i>, pp. 503-513, 1990.</li>
+						<li id="Can00">R. Canetti. Security and composition of multi-party cryptographic protocols. <i>Journal of Cryptology</i>, 13(1):143-202, 2000.</li>
+						<li id="CCD88">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols (extended abstract)</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.</li>
+						<li id="CCDplus99">R. Cramer, I. Damg&aring;rd, S. Dziembowski, M. Hirt, and T. Rabin. Efficient multiparty computations secure against an adaptive adversary. In <i>Advances in Cryptology | EUROCRYPT '99</i>, vol. 1592 of <i>LNCS</i>, pp. 311-326, 1999.</li>
+						<li id="CDM00">R. Cramer, I. Damg&aring;ard, and U. Maurer. General secure multi-party computation from any linear secret sharing scheme. In <i>Advances in Cryptology | EUROCRYPT '00</i>, vol. 1807 of <i>LNCS</i>, pp. 316-334, 2000.</li>
+						<li id="CDN00">R. Cramer, I. Damg&aring;ard, and J.B. Nielsen. Multiparty computation from threshold homomorphic encryption. Manuscript, 2000.</li>
+						<li id="CH94">R. Canetti and A. Herzberg. Maintaining security in the presence of transient faults. In <i>Advances in Cryptology | CRYPTO '94</i>, vol. 839 of <i>LNCS</i>, pp. 425-438, 1994.</li>
+						<li id="CKS00">C. Cachin, K. Kursawe, and V. Shoup. Random oracles in Constantinople: Practical asynchronous Byzantine agreement using cryptography. In <i>Proc. 19th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 123-132, 2000.</li>
+						<li id="CW89">B. A. Coan and J. L. Welch. Modular construction of nearly optimal Byzantine agreement protocols. In <i>Proc. 8th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 295-305, 1989. Expanded version: Modular construction of a Byzantine agreement protocol with optimal message bit complexity. In <i>Information and Computation</i>, 97(1):61-85, 1992.</li>
+						<li id="DFFplus82">D. Dolev, M. J. Fischer, R. Fowler, N. A. Lynch, and H. R. Strong. An efficient algorithm for Byzantine agreement without authentication. <i>Information and Control</i>, 52(3):257-274, 1982.</li>
+						<li id="DR85">D. Dolev and R. Reischuk. Bounds on information exchange for Byzantine agreement. <i>Journal of the ACM</i>, 32(1):191-204, 1985.</li>
+						<li id="DRS82">D. Dolev, R. Reischuk, and H. R. Strong. 'Eventual' is earlier than 'Immediate'. In <i>Proc. 23rd IEEE Symposium on the Foundations of Computer Science (FOCS)</i>, pp. 196-203, 1982. Final version: Early Stopping in Byzantine Agreement. In <i>Journal of the ACM</i>, 37(4):720-741, October 1990.</li>
+						<li id="FHM98">M. Fitzi, M. Hirt, and U. Maurer. Trading correctness for privacy in unconditional multi-party computation. In <i>Advances in Cryptology | CRYPTO '98</i>, vol. 1462 of <i>LNCS</i>, pp. 121-136, 1998.</li>
+						<li id="FM88">P. Feldman and S. Micali. Optimal algorithms for Byzantine agreement. In <i>Proc. 20th ACM Symposium on the Theory of Computing (STOC)</i>, pp. 148-161, 1988. Expanded version in <i>SIAM Journal on Computing</i> 26(4):873-933, August 1997.</li>
+						<li id="FY92">M. K. Franklin and M. Yung. Communication complexity of secure computation. In <i>Proc. 24th ACM Symposium on the Theory of Computing (STOC)</i>, pp. 699-710, 1992.</li>
+						<li id="GHY87">Z. Galil, S. Haber, and M. Yung. Cryptographic computation: Secure fault-tolerant protocols and the public-key model. In <i>Advances in Cryptology | CRYPTO '87</i>, vol. 293 of <i>LNCS</i>, pp. 135{155. Springer-Verlag, 1987.</li>
+						<li id="GMW87">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority</a>. <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
+						<li id="GRR98">R. Gennaro, M. O. Rabin, and T. Rabin. Simplified VSS and fast-track multiparty computations with applications to threshold cryptography. In <i>Proc. 17th ACM Symposium on Principles of Distributed Computing (PODC)</i>, 1998.</li>
+						<li id="HH91">V. Hadzilacos and J. Y. Halpern. Message-optimal protocols for byzantine agreement. In <i>Proc. 10th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 309-324, 1991. Final version in Mathematical Systems Theory, 26:41-102, October 1993.</li>
+						<li id="HM00">M. Hirt and U. Maurer. Player simulation and general adversary structures in perfect multiparty computation. <i>Journal of Cryptology</i>, 13(1):31{60, 2000. Extended abstract in <i>Proc. 16th of ACM PODC '97.</i></li>
+						<li id="MR98">S. Micali and P. Rogaway. Secure computation: The information theoretic case. Manuscript, 1998. Former version: Secure computation, In <i>Advances in Cryptology | CRYPTO '91</i>, volume 576 of <i>LNCS</i>, pp. 392-404, Springer-Verlag, 1991.</li>
+						<li id="OY91">R. Ostrovsky and M. Yung. How to withstand mobile virus attacks (extended abstract). In <i>Proc. 10th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pp. 51-59, 1991.</li>
+						<li id="Prz99">B. Przydatek. Efficiency in multi-party computation. Master's thesis, ETH Zurich, 1999.</li>
+						<li id="PSL80">M. Pease, R. Shostak, and L. Lamport. Reaching agreement in the presence of faults. <i>Journal of the ACM</i>, 27(2):228-234, 1980.</li>
+						<li id="RB89">T. Rabin and M. Ben-Or. <a href="76.html">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</a>. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.</li>
+						<li id="Sha79">A. Shamir. How to share a secret. <i>Communications of the ACM</i>, 22:612-613, 1979.</li>
+						<li id="Yao82">A.C. Yao. <a href="49.html">Protocols for Secure Computations (extended abstract)</a>. <i>Proceedings of the 23rd Annual IEEE Symposium on the Foundations of Computer Science,</i> pages 160-164. IEEE. 1982.</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">

@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
+        <script type="text/javascript" src="../../script/fnote.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
@@ -611,74 +612,78 @@
 				</div>
             </div>
 			<div class="main_toplevel main_section main_color7" id="footnotes">
-                <h1>Footnotes</h1>
-				
-                <ol id="footnotes">
-                    <li id="footnote1">
-						<a href="#fref1">[^]</a> The constructions of polynomial protocols are based on joint work with Matthias Fitzi<sup class="reference" data-citation="r14">[?]</sup>.
-					</li>
-					<li id="footnote2">
-						<a href="#fref2">[^]</a> For example, for \(n=7\) players, this technique only applies to 19% of the sets of collusions that can be tolerated with the constructions of this paper, and for larger \(n\) the fraction decreases rapidly.
-					</li>
-					<li id="footnote3">
-						<a href="#fref3">[^]</a> The selection of random bits can easily be realized by selecting a random field element.
-					</li>
-					<li id="footnote4">
-						<a href="#fref4">[^]</a> If \(X,\,Y\), and \(Z\) are random variables, then \(X\) and \(Y\) are statistically independent given \(Z\) if and only if \(P_{XY|Z}(x,y,z)=P_{X|Z}(x,z)\cdot P_{Y|Z}(y,z)\) for all \(x,\,y\), and \(z\).
-					</li>
-					<li id="footnote5">
-						<a href="#fref5">[^]</a> Correctness \(\mathcal A\)-resilience) does not imply that the protocol execution terminates&mdash;the execution could also be aborted.
-					</li>
-					<li id="footnote6">
-						<a href="#fref6">[^]</a> When the ordering is clear from the context or does not matter, we will also use sets instead of lists.
-					</li>
-					<li id="footnote7">
-						<a href="#fref7">[^]</a> Assigning a value to a variable means to define its (global) value and to include it in the player's view. Here the variable corresponds to a share and will not be included in another player's view.
-					</li>
-					<li id="footnote8">
-						<a href="#fref8">[^]</a> The idea of replacing a single player by a subprotocol was used in <span class="reference" data-citation="r6">[?]</span> for a different purpose.
-					</li>
-					<li id="footnote9">
-						<a href="#fref9">[^]</a> Formally, this is a list of players. For simplicity we assume that the ordering is clear from the context.
-					</li>
-					<li id="footnote10">
-						<a href="#fref10">[^]</a> If the two sets in \(\mathcal C\) add up to the full player set, almost every non-trivial function cannot be computed securely. A similar statement holds for the active case (Theorems 4 and 5). For a more precise analysis, see <span class="reference" data-citation="r9">[?]</span><span class="reference" data-citation="r22">[?]</span>.
-					</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>Footnotes</h1>
+					
+					<ol id="footnotelist">
+						<li id="footnote1">
+							The constructions of polynomial protocols are based on joint work with Matthias Fitzi<sup class="reference" data-citation="r14">[?]</sup>.
+						</li>
+						<li id="footnote2">
+							For example, for \(n=7\) players, this technique only applies to 19% of the sets of collusions that can be tolerated with the constructions of this paper, and for larger \(n\) the fraction decreases rapidly.
+						</li>
+						<li id="footnote3">
+							The selection of random bits can easily be realized by selecting a random field element.
+						</li>
+						<li id="footnote4">
+							If \(X,\,Y\), and \(Z\) are random variables, then \(X\) and \(Y\) are statistically independent given \(Z\) if and only if \(P_{XY|Z}(x,y,z)=P_{X|Z}(x,z)\cdot P_{Y|Z}(y,z)\) for all \(x,\,y\), and \(z\).
+						</li>
+						<li id="footnote5">
+							Correctness \(\mathcal A\)-resilience) does not imply that the protocol execution terminates&mdash;the execution could also be aborted.
+						</li>
+						<li id="footnote6">
+							When the ordering is clear from the context or does not matter, we will also use sets instead of lists.
+						</li>
+						<li id="footnote7">
+							Assigning a value to a variable means to define its (global) value and to include it in the player's view. Here the variable corresponds to a share and will not be included in another player's view.
+						</li>
+						<li id="footnote8">
+							The idea of replacing a single player by a subprotocol was used in <span class="reference" data-citation="r6">[?]</span> for a different purpose.
+						</li>
+						<li id="footnote9">
+							Formally, this is a list of players. For simplicity we assume that the ordering is clear from the context.
+						</li>
+						<li id="footnote10">
+							If the two sets in \(\mathcal C\) add up to the full player set, almost every non-trivial function cannot be computed securely. A similar statement holds for the active case (Theorems 4 and 5). For a more precise analysis, see <span class="reference" data-citation="r9">[?]</span><span class="reference" data-citation="r22">[?]</span>.
+						</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color8" id="references">
-                <h1>References</h1>
-                <ol id="referencelist">
-                    <li id="r1">Beaver, D. Foundations of secure interactive computing. In <i>Advances in Cryptology | CRYPTO '91</i> (1991), vol. 576 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 377-391.</li>
-					<li id="r2">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation.</a> <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. </li>
-					<li id="r3">Canetti, R. <i>Studies in Secure Multiparty Computation and Applications</i>. PhD thesis, Weizmann Institute of Science, Rehovot 76100, Israel, June 1995.</li>
-					<li id="r4">R. Canetti, U. Feige, O. Goldreich, and M. Naor. <a href="5.html">Adaptive Secure Multiparty Computation</a>. <i>Proceedings of the Twenty-Eighth ACM Symposium on the Theory of Computing</i>, pages 639-648. ACM. 1996.</li>
-					<li id="r5">Canetti, R., and Gennaro, R. Incoercible multiparty computation. In <i>Proc. 37th IEEE Symposium on the Foundations of Computer Science (FOCS)</i> (1996).</li>
-					<li id="r6">Chaum, D. The spymasters double-agent problem. In <i>Advances in Cryptology | CRYPTO '89</i> (1989), vol. 435 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 591-602.</li>
-					<li id="r7">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols</a> (extended abstract). <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.</li>
-					<li id="r8">D. Chaum, I. Damg&aring;rd, and J. van de Graaf. <a href="82.html">Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result</a>. <i>Advances in Cryptology&mdash;CRYPTO '87 Proceedings</i>, pages 87-119. Springer. 1987.</li>
-					<li id="r9">Chor, B., and Kushilevitz, E. A zero-one law for Boolean privacy. In <i>Proc. 21st ACM Symposium on the Theory of Computing (STOC)</i> (1989), vol. 21, pp. 62-72.</li>
-					<li id="r10">Cramer, R., Franklin, M., Schoenmakers, B., and Yung, M. <i>Multi-authority secret-ballot elections with linear work.</i> In Advances in Cryptology | EUROCRYPT '96 (1996), vol. 1070 of <i>Lecture Notes in Computer Science</i>, IACR, Springer-Verlag, pp. 72-83.</li>
-					<li id="r11">Cr&eacute;epeau, C., Graaf, J. v., and Tapp, A. Committed oblivious transfer and private multi-party computation. In <i>Advances in Cryptology | CRYPTO '95</i> (1995), vol. 963 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 110-123.</li>
-					<li id="r12">Feige, U., Kilian, J., and Naor, M. A minimal model for secure computation. In <i>Proc. 26th ACM Symposium on the Theory of Computing (STOC)</i> (1994) pp. 554-563.</li>
-					<li id="r13">Feldman, P., and Micali, S. Optimal algorithms for Byzantine agreement. In <i>Proc. 20th ACM Symposium on the Theory of Computing (STOC)</i> (1988), pp. 148-161.</li>
-					<li id="r14">Fitzi, M. Erweiterte Zugriffstrukturen in Multi-Party-Computation. Diploma thesis, ETH Z&uuml;rich, 1996.</li>
-					<li id="r15">Franklin, M., and Reiter, M. The design and implementation of a secure auction service. <i>IEEE Transactions on Software Engineering 22</i>, 5 (1996), 302-312.</li>
-					<li id="r16">Franklin, M., and Yung, M. The varieties of secure distributed computation. In <i>Sequences II: Methods in Communication, Security, and Computer Science</i> (1991), Springer-Verlag, pp. 392-417.</li>
-					<li id="r17">Franklin, M. K. Complexity and Security of Distributed Protocols. PhD thesis, Columbia University, 1993.</li>
-					<li id="r18">Franklin, M. K., and Yung, M. Communication complexity of secure computation. In <i>Proc. 24th ACM Symposium on the Theory of Computing (STOC)</i> (1992), pp. 699-710.</li>
-					<li id="r19">Galil, Z., Haber, S., and Yung, M. Cryptographic computation: Secure fault-tolerant protocols and the public-key model. In <i>Advances in Cryptology | CRYPTO '87</i> (1987), vol. 293 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 135-155.</li>
-					<li id="r20">Gennaro, R. <i>Theory and Practice of Verifiable Secret Sharing</i>. PhD thesis, Massachusetts Institute of Technology (MIT), May 1996.</li>
-					<li id="r21">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority</a>. <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
-					<li id="r22">Kushilevitz, E. Privacy and communication complexity (extended abstract). In <i>Proc. 30th IEEE Symposium on the Foundations of Computer Science (FOCS)</i> (1989), pp. 416-421.</li>
-					<li id="r23">Lamport, L., Shostak, R., and Pease, M. The Byzantine generals problem. <i>ACM Transactions on Programming Languages and Systems 4</i>, 3 (1982), 382-401.</li>
-					<li id="r24">Micali, S., and Rogaway, P. Secure computation. In <i>Advances in Cryptology | CRYPTO '91</i> (1991), vol. 576 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 392-404.</li>
-					<li id="r25">Pease, M., Shostak, R., and Lamport, L. Reaching agreement in the presence of faults. <i>Journal of the ACM 27</i>, 2 (1980), 228-234.</li>
-					<li id="r26">Rabin, T. Robust sharing of secrets when the dealer is honest or cheating. <i>Journal of the ACM 41</i>, 6 (1994), 1089-1109.</li>
-					<li id="r27">T. Rabin and M. Ben-Or. <a href="76.html">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</a>. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.</li>
-					<li id="r28">Santis, A. d., Desmedt, Y., Frankel, Y., and Yung, M. How to share a function securely. In <i>Proc. 26th ACM Symposium on the Theory of Computing (STOC)</i> (1994), pp. 522-533.</li>
-					<li id="r29">A.C. Yao. <a href="49.html">Protocols for Secure Computations (extended abstract)</a>. <i>Proceedings of the 23rd Annual IEEE Symposium on the Foundations of Computer Science,</i> pages 160-164. IEEE. 1982.</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>References</h1>
+					<ol id="referencelist">
+						<li id="r1">Beaver, D. Foundations of secure interactive computing. In <i>Advances in Cryptology | CRYPTO '91</i> (1991), vol. 576 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 377-391.</li>
+						<li id="r2">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation.</a> <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. </li>
+						<li id="r3">Canetti, R. <i>Studies in Secure Multiparty Computation and Applications</i>. PhD thesis, Weizmann Institute of Science, Rehovot 76100, Israel, June 1995.</li>
+						<li id="r4">R. Canetti, U. Feige, O. Goldreich, and M. Naor. <a href="5.html">Adaptive Secure Multiparty Computation</a>. <i>Proceedings of the Twenty-Eighth ACM Symposium on the Theory of Computing</i>, pages 639-648. ACM. 1996.</li>
+						<li id="r5">Canetti, R., and Gennaro, R. Incoercible multiparty computation. In <i>Proc. 37th IEEE Symposium on the Foundations of Computer Science (FOCS)</i> (1996).</li>
+						<li id="r6">Chaum, D. The spymasters double-agent problem. In <i>Advances in Cryptology | CRYPTO '89</i> (1989), vol. 435 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 591-602.</li>
+						<li id="r7">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols</a> (extended abstract). <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.</li>
+						<li id="r8">D. Chaum, I. Damg&aring;rd, and J. van de Graaf. <a href="82.html">Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result</a>. <i>Advances in Cryptology&mdash;CRYPTO '87 Proceedings</i>, pages 87-119. Springer. 1987.</li>
+						<li id="r9">Chor, B., and Kushilevitz, E. A zero-one law for Boolean privacy. In <i>Proc. 21st ACM Symposium on the Theory of Computing (STOC)</i> (1989), vol. 21, pp. 62-72.</li>
+						<li id="r10">Cramer, R., Franklin, M., Schoenmakers, B., and Yung, M. <i>Multi-authority secret-ballot elections with linear work.</i> In Advances in Cryptology | EUROCRYPT '96 (1996), vol. 1070 of <i>Lecture Notes in Computer Science</i>, IACR, Springer-Verlag, pp. 72-83.</li>
+						<li id="r11">Cr&eacute;epeau, C., Graaf, J. v., and Tapp, A. Committed oblivious transfer and private multi-party computation. In <i>Advances in Cryptology | CRYPTO '95</i> (1995), vol. 963 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 110-123.</li>
+						<li id="r12">Feige, U., Kilian, J., and Naor, M. A minimal model for secure computation. In <i>Proc. 26th ACM Symposium on the Theory of Computing (STOC)</i> (1994) pp. 554-563.</li>
+						<li id="r13">Feldman, P., and Micali, S. Optimal algorithms for Byzantine agreement. In <i>Proc. 20th ACM Symposium on the Theory of Computing (STOC)</i> (1988), pp. 148-161.</li>
+						<li id="r14">Fitzi, M. Erweiterte Zugriffstrukturen in Multi-Party-Computation. Diploma thesis, ETH Z&uuml;rich, 1996.</li>
+						<li id="r15">Franklin, M., and Reiter, M. The design and implementation of a secure auction service. <i>IEEE Transactions on Software Engineering 22</i>, 5 (1996), 302-312.</li>
+						<li id="r16">Franklin, M., and Yung, M. The varieties of secure distributed computation. In <i>Sequences II: Methods in Communication, Security, and Computer Science</i> (1991), Springer-Verlag, pp. 392-417.</li>
+						<li id="r17">Franklin, M. K. Complexity and Security of Distributed Protocols. PhD thesis, Columbia University, 1993.</li>
+						<li id="r18">Franklin, M. K., and Yung, M. Communication complexity of secure computation. In <i>Proc. 24th ACM Symposium on the Theory of Computing (STOC)</i> (1992), pp. 699-710.</li>
+						<li id="r19">Galil, Z., Haber, S., and Yung, M. Cryptographic computation: Secure fault-tolerant protocols and the public-key model. In <i>Advances in Cryptology | CRYPTO '87</i> (1987), vol. 293 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 135-155.</li>
+						<li id="r20">Gennaro, R. <i>Theory and Practice of Verifiable Secret Sharing</i>. PhD thesis, Massachusetts Institute of Technology (MIT), May 1996.</li>
+						<li id="r21">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority</a>. <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
+						<li id="r22">Kushilevitz, E. Privacy and communication complexity (extended abstract). In <i>Proc. 30th IEEE Symposium on the Foundations of Computer Science (FOCS)</i> (1989), pp. 416-421.</li>
+						<li id="r23">Lamport, L., Shostak, R., and Pease, M. The Byzantine generals problem. <i>ACM Transactions on Programming Languages and Systems 4</i>, 3 (1982), 382-401.</li>
+						<li id="r24">Micali, S., and Rogaway, P. Secure computation. In <i>Advances in Cryptology | CRYPTO '91</i> (1991), vol. 576 of <i>Lecture Notes in Computer Science</i>, Springer-Verlag, pp. 392-404.</li>
+						<li id="r25">Pease, M., Shostak, R., and Lamport, L. Reaching agreement in the presence of faults. <i>Journal of the ACM 27</i>, 2 (1980), 228-234.</li>
+						<li id="r26">Rabin, T. Robust sharing of secrets when the dealer is honest or cheating. <i>Journal of the ACM 41</i>, 6 (1994), 1089-1109.</li>
+						<li id="r27">T. Rabin and M. Ben-Or. <a href="76.html">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</a>. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.</li>
+						<li id="r28">Santis, A. d., Desmedt, Y., Frankel, Y., and Yung, M. How to share a function securely. In <i>Proc. 26th ACM Symposium on the Theory of Computing (STOC)</i> (1994), pp. 522-533.</li>
+						<li id="r29">A.C. Yao. <a href="49.html">Protocols for Secure Computations (extended abstract)</a>. <i>Proceedings of the 23rd Annual IEEE Symposium on the Foundations of Computer Science,</i> pages 160-164. IEEE. 1982.</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">

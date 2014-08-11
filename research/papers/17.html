@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
+        <script type="text/javascript" src="../../script/fnote.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
         <script type="text/javascript" src="../../script/toc.js"></script>
@@ -93,7 +94,7 @@
 							<b>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</b> is a 1988 paper by Ben-Or, Goldwasser, and Wigderson which demonstrated the bounds of (and described a protocol for) multiparty computation which is <span class="definable" data-define="information theoretic security">information theoretically secure</span>. It is one of <a href="34.html">two papers</a> in the same year which demonstrates that up to &frac13; parties can be actively <span class="definable" data-define="malicious adversary">malicious</span> without affecting correctness or privacy. The other paper offers information theoretic security in a very similar manner, while this paper additionally guarantees correctness (as opposed to a <span class="definable">negligible</span> probability of incorrectness).
 						</p>
 						<p class="rp_analysis">
-							One major difference between this paper and <a href="34.html">its chronological counterpart</a> is the type of computation performed. Chaum's construction is based around Boolean operation simulations, while this protocol uses an arithmetic circuit within a finite field. Very significantly, this finite field is <u>not</u> arbitrary as implied in the paper: it must be of the form \(GF(p^{k\operatorname\phi(n)})\), where \(n\) is the number of parties who must participate, \(p\) is any prime that is not a factor of \(n\) (generally the minimal prime), and \(k\) is any<sup class="footnote" id="fref3"><a href="#footnote3">3</a></sup> positive integer. This is necessary in order to allow for the fault tolerance properties sought; more details can be found in <a href="#sec5">Section 5</a>.
+							One major difference between this paper and <a href="34.html">its chronological counterpart</a> is the type of computation performed. Chaum's construction is based around Boolean operation simulations, while this protocol uses an arithmetic circuit within a finite field. Very significantly, this finite field is <u>not</u> arbitrary as implied in the paper: it must be of the form \(GF(p^{k\operatorname\phi(n)})\), where \(n\) is the number of parties who must participate, \(p\) is any prime that is not a factor of \(n\) (generally the minimal prime), and \(k\) is any<sup class="footnote" id="fref3" data-footnote="3"><a href="#footnote3">3</a></sup> positive integer. This is necessary in order to allow for the fault tolerance properties sought; more details can be found in <a href="#sec5">Section 5</a>.
 						</p>
 						<p class="rp_analysis">
 							Note that a true protocol specification is not given in this work; it offers completeness theorems, and uses a more general specification in order to prove its purposes. For example, no particular algorithm for the error checking and correctness is given, but its existence is sufficient to prove their claims.
@@ -452,7 +453,7 @@
 							While originally the above stated \(1\lt j\lt n\), we can expand this to \(1\leq j\) because, if \(\omega^1=1\), then obviously \(\omega=1\) and therefore the statement would be false for all \(j\).
 						</p>
 						<p class="rp_annotation">
-							We note that the above requirement on \(E\)&mdash;that it have a primitive \(n\)th <span class="definable">root of unity</span>&mdash;is non-trivial. A finite field of order \(q\) has a primitive \(n\)th root of unity if and only if \(n\,|\,q-1\).<sup class="footnote"><a href="#footnote2">2</a></sup> We must therefore restrict ourselves to finite fields of order \(p^k\) such that \(n\,|\,p^k-1\). Since the statement \(n\,|\,p^k-1\) is equivalent to the statement \(p^k\equiv1\bmod n\), we can solve this congruency using the <span class="definable">Fermat-Euler theorem</span>: for any \(p\) coprime to \(n\), \(p^{\operatorname\phi(n)}\equiv1\bmod n\). Since \(p\) must be prime anyway, we come to the conclusion that we must use \(E=GF(p^{\phi(n)})\) for any \(p\in\mathbb P\) such that \(p\not|\;n\).  Notably, if \(n\) is even, \(p\) cannot be 2. For completeness, note that \(p^{\phi(n)}\) is always strictly greater than \(n\) for any valid choice of \(p\).<sup class="footnote"><a href="#footnote3">3</a></sup>
+							We note that the above requirement on \(E\)&mdash;that it have a primitive \(n\)th <span class="definable">root of unity</span>&mdash;is non-trivial. A finite field of order \(q\) has a primitive \(n\)th root of unity if and only if \(n\,|\,q-1\).<sup class="footnote" id="fref2" data-footnote="2"><a href="#footnote2">2</a></sup> We must therefore restrict ourselves to finite fields of order \(p^k\) such that \(n\,|\,p^k-1\). Since the statement \(n\,|\,p^k-1\) is equivalent to the statement \(p^k\equiv1\bmod n\), we can solve this congruency using the <span class="definable">Fermat-Euler theorem</span>: for any \(p\) coprime to \(n\), \(p^{\operatorname\phi(n)}\equiv1\bmod n\). Since \(p\) must be prime anyway, we come to the conclusion that we must use \(E=GF(p^{\phi(n)})\) for any \(p\in\mathbb P\) such that \(p\not|\;n\).  Notably, if \(n\) is even, \(p\) cannot be 2. For completeness, note that \(p^{\phi(n)}\) is always strictly greater than \(n\) for any valid choice of \(p\).<sup class="footnote" id="fref3" data-footnote="3"><a href="#footnote3">3</a></sup>
 						</p>
 						<p class="rp_original">
 							Pick a random polynomial \(f(x)\in\)<span class="equation" data-equation="E[x]">\(E[x]\)</span>, of degree \(t\) such that \(f(0)=s\). That is, set \(\alpha_0=s\) and pick random \(a_i\in E\) for \(i=1\dots t\) and set $$f(x)=a_0+a_1x+\cdots+a_tx^t.$$ Define the share of \(P_i,\,i=0\dots n-1,\) to be \(s_i=f(\omega^i)\). As in <span class="reference" data-citation="Sh">[?]</span>, the \(s_i\)'s are \(t\)-wise independent random variables that are uniformly distributed over \(E\), and thus our first requirement (A) is met.
@@ -509,7 +510,7 @@
 						<section id="sec6.2">
 							<h3>6.2. Absolute Verification of a Secret</h3>
 							<p class="rp_original">
-								The verification procedure described above leaves an exponentially small probability of error. In this section we describe a secret verification procedure that leaves no probability of error.<sup class="footnote"><a href="#footnote1" id="fref1">1</a></sup>
+								The verification procedure described above leaves an exponentially small probability of error. In this section we describe a secret verification procedure that leaves no probability of error.<sup class="footnote" id="fref1" data-footnote="1"><a href="#footnote1">1</a></sup>
 							</p>
 							<p class="rp_original">
 								Instead of just sending the shares \(\{s_i\}\), the dealer of the secret selects \(n\) random polynomials \(f_0(x),\dots,f_{n-1}(x)\), with
@@ -749,40 +750,44 @@
 				</div>
             </div>
 			<div class="main_toplevel main_section main_color7" id="footnotes">
-                <h1>Footnotes</h1>
-				
-                <ol id="footnotes">
-                    <li id="footnote1">
-						<a href="#fref1">[^]</a> Our original protocol was simplified by Paul Feldman who independently observed that the verification procedure can be accomplished in a constant number of communication rounds.
-					</li>
-					<li id="footnote2">
-						<a href="#fref2">[^]</a> Claim: \(GF(q)\) has a primitive \(n\)th <span class="definable">root of unity</span> if and only if \(n\,|\,q-1\). To quickly demonstrate this, assume we have a primitive \(n\)th root of unity \(\omega\) for \(GF(q)\) where \(n\not|\;q-1\). Take any generator \(g\) in this field: by definition of a generator, there exists an \(a\) such that \(g^a=\omega\). Since the field is a multiplicative ring, \(g^{q-1}=g^0=1\). But \(g^{an}=1\), and by definition of a primitive root of unity, there is no smaller (non-zero) exponent such that this is true. So \(g^{an}=g^{q-1}\) therefore implies \(an=q-1\), clearly contradicting our assumption that \(n\not|\;q-1\).
-					</li>
-					<li id="footnote3">
-						<a href="#fref3">[^]</a> Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from the lower bound on \(\operatorname \phi(n)\): for any \(n\geq3,\,\phi(n)\geq\frac{n}{e^\gamma\log{\log n}}+\operatorname O\left(\frac{n}{(\log{\log n})^2}\right)\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^{\operatorname\phi(n)}\gt n\). Since we are minimizing \(\phi(n)\) anyway, for simplicity we can assume the big-oh is 0, leaving us with: <span style="font-size:200%">$$2^{\frac{e^{-\gamma}n}{\log{\log n}}}\geq n.$$</span> The left side clearly dominates the right side (both intuitively and through analysis of their derivatives), and the left is greater than the right starting at \(n=5\), so we are left only to demonstrate that \(p^{\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)) and for 4 (\(3^2\gt 4\)). With the exception of \(n=4\) (where we must use \(p=3\) but without weakening our claim) we have demonstrated that, for the lowest possible \(p,\,p^{\phi(n)}\gt n.\quad\blacksquare\)  
-					</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>Footnotes</h1>
+					
+					<ol id="footnotelist">
+						<li id="footnote1" class="rp_original">
+							Our original protocol was simplified by Paul Feldman who independently observed that the verification procedure can be accomplished in a constant number of communication rounds.
+						</li>
+						<li id="footnote2" class="rp_annotation_footnote">
+							Claim: \(GF(q)\) has a primitive \(n\)th <span class="definable">root of unity</span> if and only if \(n\,|\,q-1\). To quickly demonstrate this, assume we have a primitive \(n\)th root of unity \(\omega\) for \(GF(q)\) where \(n\not|\;q-1\). Take any generator \(g\) in this field: by definition of a generator, there exists an \(a\) such that \(g^a=\omega\). Since the field is a multiplicative ring, \(g^{q-1}=g^0=1\). But \(g^{an}=1\), and by definition of a primitive root of unity, there is no smaller (non-zero) exponent such that this is true. So \(g^{an}=g^{q-1}\) therefore implies \(an=q-1\), clearly contradicting our assumption that \(n\not|\;q-1\).
+						</li>
+						<li id="footnote3" class="rp_annotation_footnote">
+							Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from the lower bound on \(\operatorname \phi(n)\): for any \(n\geq3,\,\phi(n)\geq\frac{n}{e^\gamma\log{\log n}}+\operatorname O\left(\frac{n}{(\log{\log n})^2}\right)\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^{\operatorname\phi(n)}\gt n\). Since we are minimizing \(\phi(n)\) anyway, for simplicity we can assume the big-oh is 0, leaving us with: <span style="font-size:200%">$$2^{\frac{e^{-\gamma}n}{\log{\log n}}}\geq n.$$</span> The left side clearly dominates the right side (both intuitively and through analysis of their derivatives), and the left is greater than the right starting at \(n=5\), so we are left only to demonstrate that \(p^{\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)) and for 4 (\(3^2\gt 4\)). With the exception of \(n=4\) (where we must use \(p=3\) but without weakening our claim) we have demonstrated that, for the lowest possible \(p,\,p^{\phi(n)}\gt n.\quad\blacksquare\)  
+						</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color8" id="references">
-                <h1>References</h1>
-                <ol id="referencelist">
-					<li id="BL">M. Ben-Or and N. Linial, Collective coin flipping, <i>FOCS86</i>.</li>
-					<li id="CCD">D. Chaum, C. Cr&eacute;peau, and I. Damg&aring;rd. Multiparty unconditionally secure protocols. These proceedings.</li>
-					<li id="DH">W. Diffie and M. E. Helman, New directions in cryptography, <i>IEEE Trans. Inform. Theory</i>, Vol. IT-22, pp.644-654, 1976.</li>
-					<li id="DS">D. Dolev and R. Strong. Polynomial algorithms for multiple processor agreement. <i>STOC82</i>.</li>
-					<li id="FM">P. Feldman and S. Micali, Optimal algorithms for Byzantine agreement. These proceedings</li>
-					
-					<li id="GMW1">O. Goldreich, S. Micali, and A. Wigderson. Proofs that yield nothing but the validity of the assertion, and a methodology of cryptographic protocol design. <i>FOCS86</i>, pp. 174-187.</li>
-					<li id="GMW2">O. Goldreich, S. Micali, and A. Wigderson. How to play any mental game. <i>STOC87</i>, pp.218-229.</li>
-					<li id="GMR">S. Goldwasser, S. Micali, and C. Rackoff. The knowledge complexity of interactive proof systems. <i>STOC85</i>, pp. 291-304.</li>
-					<li id="PSL">M. Pease, R. Shostak, and L. Lamport. Reaching agreement in the presence of faults, <i>JACM</i>. Vol. 27, pp. 228-234. 1980.</li>
-					<li id="PW">W. W. Peterson and E. J. Weldon, Error correcting codes, Second Ed., MIT Press. 1972.</li>
-					
-					<li id="Sh">A. Shamir, How to share a secret. <i>CACM 22</i>, pp. 612-613. 1979.</li>
-					<li id="Y1">A. C. Yao, How to generate and exchange secrets. <i>STOC86</i>.</li>
-					<li id="Y2">A. C. Yao, On the succession problem for Byzantine Generals, manuscript. 1983.</li>
-                </ol>
-            </div>
+				<div class="main_fullwidth">
+					<h1>References</h1>
+					<ol id="referencelist">
+						<li id="BL">M. Ben-Or and N. Linial, Collective coin flipping, <i>FOCS86</i>.</li>
+						<li id="CCD">D. Chaum, C. Cr&eacute;peau, and I. Damg&aring;rd. Multiparty unconditionally secure protocols. These proceedings.</li>
+						<li id="DH">W. Diffie and M. E. Helman, New directions in cryptography, <i>IEEE Trans. Inform. Theory</i>, Vol. IT-22, pp.644-654, 1976.</li>
+						<li id="DS">D. Dolev and R. Strong. Polynomial algorithms for multiple processor agreement. <i>STOC82</i>.</li>
+						<li id="FM">P. Feldman and S. Micali, Optimal algorithms for Byzantine agreement. These proceedings</li>
+						
+						<li id="GMW1">O. Goldreich, S. Micali, and A. Wigderson. Proofs that yield nothing but the validity of the assertion, and a methodology of cryptographic protocol design. <i>FOCS86</i>, pp. 174-187.</li>
+						<li id="GMW2">O. Goldreich, S. Micali, and A. Wigderson. How to play any mental game. <i>STOC87</i>, pp.218-229.</li>
+						<li id="GMR">S. Goldwasser, S. Micali, and C. Rackoff. The knowledge complexity of interactive proof systems. <i>STOC85</i>, pp. 291-304.</li>
+						<li id="PSL">M. Pease, R. Shostak, and L. Lamport. Reaching agreement in the presence of faults, <i>JACM</i>. Vol. 27, pp. 228-234. 1980.</li>
+						<li id="PW">W. W. Peterson and E. J. Weldon, Error correcting codes, Second Ed., MIT Press. 1972.</li>
+						
+						<li id="Sh">A. Shamir, How to share a secret. <i>CACM 22</i>, pp. 612-613. 1979.</li>
+						<li id="Y1">A. C. Yao, How to generate and exchange secrets. <i>STOC86</i>.</li>
+						<li id="Y2">A. C. Yao, On the succession problem for Byzantine Generals, manuscript. 1983.</li>
+					</ol>
+				</div>
+			</div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">
                     <p><a href="mailto:multipartycomputationorg+17@gmail.com">Problem with this page?</a></p>

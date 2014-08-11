@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
+        <script type="text/javascript" src="../../script/fnote.js"></script>
         <script type="text/javascript" src="../../script/glossary.js"></script>
         <script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
@@ -256,7 +257,7 @@
 									In the real-life model there exists no trusted party and the parties must interact with one another using some protocol in order to compute any "non-trivial" function. We say that the execution of a protocol \(\pi\) for evaluating \(f\) is "equivalent" to evaluating \(f\) in the ideal model, if for any adversary \(\mathcal A\) in the real-life model, there exists an ideal-model-adversary \(\mathcal S\) that has the same effect on the computation as \(\mathcal A\), <i>even through \(\mathcal S\) operates in the ideal model</i>. That is, on any input, the outputs of the parties after running \(\pi\) in the real-life model in the presence of \(\mathcal A\) should be distributed equally to the outputs of parties evaluating \(f\) in the ideal model in the presence of \(\mathcal S\). Furthermore, this condition should hold <i>for any semi-honest protocol \(\pi'\) for \(\pi\)</i> (according to either of the above notions of semi-honesty).
 								</p>
 								<p class="rp_original">
-									We require that the complexity of \(\mathcal S\) be comparable to (i.e. polynomial in) the complexity of \(\mathcal A\). This requirement can be motivated as follows. Machine \(\mathcal S\) represents "what could have been learned in the ideal model". Thus, security of a protocol can be interpreted as the following statement: "whatever \(\mathcal A\) can learn in the real-life model, could have been learned in the ideal model <i>within comparable complexity</i>". A much weaker and arguably unsatisfactory notion of security emerges if the complexity of \(\mathcal S\) does not depend on that of \(\mathcal A\). (This holds even in the non-adaptive case.)<sup id="fref1"><a href="#footnote1">1</a></sup>
+									We require that the complexity of \(\mathcal S\) be comparable to (i.e. polynomial in) the complexity of \(\mathcal A\). This requirement can be motivated as follows. Machine \(\mathcal S\) represents "what could have been learned in the ideal model". Thus, security of a protocol can be interpreted as the following statement: "whatever \(\mathcal A\) can learn in the real-life model, could have been learned in the ideal model <i>within comparable complexity</i>". A much weaker and arguably unsatisfactory notion of security emerges if the complexity of \(\mathcal S\) does not depend on that of \(\mathcal A\). (This holds even in the non-adaptive case.)<sup class="footnote" id="fref1" data-footnote="1"><a href="#footnote1">1</a></sup>
 								</p>
 							</section>
 							<section id="sec2.2.2">
@@ -289,7 +290,7 @@
 							<section id="sec2.3.2">
 								<h4>2.3.2. Problems with Proving Adaptive Security</h4>
 								<p class="rp_original">
-									When adaptive adversaries are considered, the construction of a simulator \(\tilde{\mathcal S}\) in the computational setting encounters the following additional problem. Consider an uncorrupted party \(P\). Since \(\tilde{\mathcal S}\) does not know the input of \(P\), it does not know which messages should be sent by \(P\) to other <i>uncorrupted</i> parties.<sup id="fref2"><a href="#footnote2">2</a></sup> Still, \(\tilde{\mathcal S}\) has to generate dummy ciphertexts to be sent by the simulated \(P\) to uncorrupted parties. These dummy ciphertexts are seen by the adaptive adversary. When the adversary later corrupts the simulated \(P\), it expects to see all of \(P\)'s internal data, as specified <i>by the semi-honest protocol \(pi'\)</i>. Certainly, this data may include the cleartexts of all the ciphertexts sent and received by \(P\) in the past, including the random bits used for encryption and decryption, respectively. Thus, it may be the case that some specific dummy ciphertext \(c\) was generated as an encryption of '0', and the simulated \(P\) now needs to "convince" the adversary that \(c\) is in fact an encryption of '1' (or vice versa). This task is impossible if a standard encryption scheme (i.e. an encryption scheme where no ciphertext can be a legal encryption of both '1' and '0') is used.
+									When adaptive adversaries are considered, the construction of a simulator \(\tilde{\mathcal S}\) in the computational setting encounters the following additional problem. Consider an uncorrupted party \(P\). Since \(\tilde{\mathcal S}\) does not know the input of \(P\), it does not know which messages should be sent by \(P\) to other <i>uncorrupted</i> parties.<sup class="footnote" id="fref2" data-footnote="2"><a href="#footnote2">2</a></sup> Still, \(\tilde{\mathcal S}\) has to generate dummy ciphertexts to be sent by the simulated \(P\) to uncorrupted parties. These dummy ciphertexts are seen by the adaptive adversary. When the adversary later corrupts the simulated \(P\), it expects to see all of \(P\)'s internal data, as specified <i>by the semi-honest protocol \(pi'\)</i>. Certainly, this data may include the cleartexts of all the ciphertexts sent and received by \(P\) in the past, including the random bits used for encryption and decryption, respectively. Thus, it may be the case that some specific dummy ciphertext \(c\) was generated as an encryption of '0', and the simulated \(P\) now needs to "convince" the adversary that \(c\) is in fact an encryption of '1' (or vice versa). This task is impossible if a standard encryption scheme (i.e. an encryption scheme where no ciphertext can be a legal encryption of both '1' and '0') is used.
 								</p>
 								<p class="rp_original">
 									We remark that Feldman, and independently Beaver and Haber, have suggested to solve this problem as follows<sup class="reference" data-citation="F">[?]</sup><sup class="reference" data-citation="BH">[?]</sup>. Instruct each party to <i>erase</i> (say, at the end of each round) all the information involved with encrypting and decrypting of messages. If the parties indeed erase this data, then the adversary will no longer see, upon corrupting a party, how past messages were encrypted and decrypted. Thus the problem of convincing the adversary in the authenticity of past ciphertexts no longer exists. Consequently, such "erasing" protocols can be shown adaptively secure in the computational setting. However, this approach is clearly not valid in the presence of semi-honest parties. In particular, it is not known whether the <span class="reference" data-citation="F">[?]</span><span class="reference" data-citation="BH">[?]</span> protocols (or any other previous protocols) are secure in the presence of non-erasing parties.
@@ -298,10 +299,10 @@
 							<section id="sec2.3.3">
 								<h4>2.3.3. Sketch of Our Solution</h4>
 								<p class="rp_original">
-									We solve this problem by constructing an encryption scheme that serves as an alternative to standard encryption schemes, and enjoys an additional property roughly described as follows. One can efficiently generate dummy ciphertexts that can later be "opened" as encryptions of either '0' or '1', at wish. (Here the word 'ciphertext' is used to denote all the information seen by the adversary during the execution of the protocol.) These dummy ciphertexts are different and yet computationally indistinguishable from the valid encryptions of '0' (or '1') produced in a real communication. We call such encryption protocols <i>non-committing</i>.<sup id="fref3"><a href="#footnote3">3</a></sup>
+									We solve this problem by constructing an encryption scheme that serves as an alternative to standard encryption schemes, and enjoys an additional property roughly described as follows. One can efficiently generate dummy ciphertexts that can later be "opened" as encryptions of either '0' or '1', at wish. (Here the word 'ciphertext' is used to denote all the information seen by the adversary during the execution of the protocol.) These dummy ciphertexts are different and yet computationally indistinguishable from the valid encryptions of '0' (or '1') produced in a real communication. We call such encryption protocols <i>non-committing</i>.<sup class="footnote" id="fref3" data-footnote="3"><a href="#footnote3">3</a></sup>
 								</p>
 								<p class="rp_original">
-									Let \(\mathcal E^{(0)}\) (resp. \(\mathcal E^{(1)}\)) denote the distribution of encryptions of the value 0 (resp. 1) in a public-key encryption scheme. For simplicity, suppose that each of these distributions is generated by applying an efficient deterministic algorithm, denoted \(A^{(0)}\) (resp. \(A^{(1)}\)), to a uniformly selected \(n\)-bit string.<sup id="fref4"><a href="#footnote4">4</a></sup> In a <i>traditional</i> encryption scheme (with no decryption errors) the supports of \(\mathcal E^{(0)}\) and \(\mathcal E^{(1)}\) are disjoint  (and \(\mathcal E^{(0)},\mathcal E^{(1)}\) are computationally indistinguishable). In a <i>non-committing</i> encryption scheme, the supports of \(\mathcal E^{(0)}\) and \(\mathcal E^{(1)}\) are not disjoint but the probability that an encryption (of either '0' or '1') resides in their intersection, denoted \(I\), is negligible. Thus, decryption errors occur only with negligible probability. However, the simulator can efficiently generate a distribution \(\mathcal E^{amb}\) which assumes values in \(I\) so that this distribution is computationally indistinguishable from both \(\mathcal E^{(0)}\) and \(\mathcal E^{(1)}\).<sup id="fref5"><a href="#footnote5">5</a></sup> Furthermore, each "ambiguous ciphertext" \(c\in I\) is generated together with two random-looking \(n\)-bit strings, denoted \(r_0\) and \(r_1\), so that \(A^{(0)}(r_0)=A^{(1)}(r_1)=c\). That is, the string \(r_0\) (resp. \(r_1\)) may serve as a witness to the claim that \(c\) is an encryption of '0' (resp. '1'). See <a href="#sec3.4">Section 3.4</a> for a definition of non-committing encryption protocols.
+									Let \(\mathcal E^{(0)}\) (resp. \(\mathcal E^{(1)}\)) denote the distribution of encryptions of the value 0 (resp. 1) in a public-key encryption scheme. For simplicity, suppose that each of these distributions is generated by applying an efficient deterministic algorithm, denoted \(A^{(0)}\) (resp. \(A^{(1)}\)), to a uniformly selected \(n\)-bit string.<sup class="footnote" id="fref4" data-footnote="4"><a href="#footnote4">4</a></sup> In a <i>traditional</i> encryption scheme (with no decryption errors) the supports of \(\mathcal E^{(0)}\) and \(\mathcal E^{(1)}\) are disjoint  (and \(\mathcal E^{(0)},\mathcal E^{(1)}\) are computationally indistinguishable). In a <i>non-committing</i> encryption scheme, the supports of \(\mathcal E^{(0)}\) and \(\mathcal E^{(1)}\) are not disjoint but the probability that an encryption (of either '0' or '1') resides in their intersection, denoted \(I\), is negligible. Thus, decryption errors occur only with negligible probability. However, the simulator can efficiently generate a distribution \(\mathcal E^{amb}\) which assumes values in \(I\) so that this distribution is computationally indistinguishable from both \(\mathcal E^{(0)}\) and \(\mathcal E^{(1)}\).<sup class="footnote" id="fref5" data-footnote="5"><a href="#footnote5">5</a></sup> Furthermore, each "ambiguous ciphertext" \(c\in I\) is generated together with two random-looking \(n\)-bit strings, denoted \(r_0\) and \(r_1\), so that \(A^{(0)}(r_0)=A^{(1)}(r_1)=c\). That is, the string \(r_0\) (resp. \(r_1\)) may serve as a witness to the claim that \(c\) is an encryption of '0' (resp. '1'). See <a href="#sec3.4">Section 3.4</a> for a definition of non-committing encryption protocols.
 								</p>
 								<p class="rp_original">
 									Using a non-committing encryption protocol, we resolve the simulation problems which were described above. Firstly, when transforming \(\pi\) into \(\tilde\pi\), we replace every bit transmission of \(\pi\) by an invocation of the non-committing encryption protocol. This allows us to generate dummy ciphertexts for messages sent between uncorrupted parties so that at a later stage we can substantiate for each such ciphertext both the claim that it is an encryption of '0' and the claim that it is an encryption of '1'. We stress that although dummy ciphertexts appear with negligible probability in a real execution, they are computationally indistinguishable from a uniformly generated encryption of either '0' or '1'. Thus, using a non-committing encryption protocol, we construct <i>Adaptively secure protocols</i> for computing any (recursive) function <i>in the computational model in the presence of non-erasing parties.</i> Finally, we construct a non-committing encryption protocol based on a primitive called <i>common-domain trapdoor systems</i> (see <a href="#def4.3">Definition 4.3</a>). We also describe two implementations based on the RSA and Diffie-Hellman assumptions respectively. Thus, we get
@@ -373,7 +374,7 @@
 							<section id="sec3.2.1">
 								<h4>3.2.1. The Computation in the Ideal Model</h4>
 								<p class="rp_original">
-									The computation in the ideal model, in the presence of an ideal-model-adversary \(\mathcal S\), proceeds as follows. The parties have inputs \(\vec{x}=x_1\dots x_n\in D^n\) (party \(P_i\) has input \(x_i\)) and wish to compute \(f(x_1,\dots,x_n)\), where \(f\) is a predetermined function.<sup id="fref6"><a href="#footnote6">6</a></sup> The adversary \(\mathcal S\) has no initial input, and is parametrized by \(t\), the maximum number of parties it may corrupt.
+									The computation in the ideal model, in the presence of an ideal-model-adversary \(\mathcal S\), proceeds as follows. The parties have inputs \(\vec{x}=x_1\dots x_n\in D^n\) (party \(P_i\) has input \(x_i\)) and wish to compute \(f(x_1,\dots,x_n)\), where \(f\) is a predetermined function.<sup class="footnote" id="fref6" data-footnote="6"><a href="#footnote6">6</a></sup> The adversary \(\mathcal S\) has no initial input, and is parametrized by \(t\), the maximum number of parties it may corrupt.
 								</p>
 								<span class="rp_sub_header">First corruption stage:</span>
 								<p class="rp_original rp_sub">
@@ -385,7 +386,7 @@
 								</p>
 								<span class="rp_sub_header">Computation stage:</span>
 								<p class="rp_original rp_sub">
-									The parties hand \(\vec{y}\) to the trusted party (party \(P_i\) hands \(y_i\)), and receive \(f(\vec{y})\) from the trusted party.<sup id="fref7"><a href="#footnote7">7</a></sup>
+									The parties hand \(\vec{y}\) to the trusted party (party \(P_i\) hands \(y_i\)), and receive \(f(\vec{y})\) from the trusted party.<sup class="footnote" id="fref7" data-footnote="7"><a href="#footnote7">7</a></sup>
 								</p>
 								<span class="rp_sub_header">Second corruption stage:</span>
 								<p class="rp_original rp_sub">
@@ -468,7 +469,7 @@
 									In the sequel we use a more restricted notion of equivalence of computations, where the ideal-model adversary is limited to black-box simulation of the real-life setting. That is, for any semi-honest protocol \(\pi'\) for \(\pi\) there should exist an ideal-model adversary \(\mathcal S\) with oracle (or black-box) access to a real-life adversary. This black-box represents the input-output relations of the real-life adversary described above. For concreteness, we present the following description of the "mechanics" of this black-box, representing a real-life adversary. The black-box has a <b>random tape</b>, where the black-box expects to find its random input, and an <b>input-output tape</b>. Once a special <b>start</b> input is given on the input-output tape, the interaction on this tape proceeds in iterations, as follows. Initially, no party is corrupted. In each iteration \(l\), first the black-box expects to receive the information gathered in the \(l\)<sup>th</sup> round. (In the secure channels setting this information consists of the messages sent by the uncorrupted parties to the corrupted parties.) Next black-box outputs the messages to be sent the corrupted parties in the \(l\)<sup>th</sup> round. Next, the black-box may issue several '<b>corrupt</b> \(P_i\)' requests. Such a request should be answered by the internal data of \(P_i\), according to protocol \(\pi'\). Also, from this point on \(P_i\) is corrupted. At the end of the interaction, the <b>output of the real-life adversary</b> is defined as the contents of the random tape succeeded by the history of the contents of the input-output tape during the entire interaction. We let \(\mathcal S^{\mathcal A}\) denote the ideal-model adversary \(\mathcal S\) with black-box access to a real-life adversary \(\mathcal A\).
 								</p>
 								<p class="rp_original">
-									The simulator is restricted to probabilistic polynomial-time (where each invocation of the black-box is counted as one operation).<sup id="fref8"><a href="#footnote8">8</a></sup> Furthermore, we limit the operation of the simulator as follows. We require that the <b>start</b> message is sent only once, and that no party is corrupted in the ideal model unless a request to corrupt this party is issued by the black-box.
+									The simulator is restricted to probabilistic polynomial-time (where each invocation of the black-box is counted as one operation).<sup class="footnote" id="fref8" data-footnote="8"><a href="#footnote8">8</a></sup> Furthermore, we limit the operation of the simulator as follows. We require that the <b>start</b> message is sent only once, and that no party is corrupted in the ideal model unless a request to corrupt this party is issued by the black-box.
 								</p>
 								<p class="rp_original">
 									If <a href="#def3.8">Definition 3.8</a> is satisfied by an ideal-model adversary limited to black-box simulation as described above, then we say that \(pi\;t\)-<b>securely computes \(F\) in a simulatable way</b>. In this case we call the ideal-model adversary a <b>black-box simulator</b>, or in short a <b>simulator</b>.
@@ -481,7 +482,7 @@
 						<section id="sec3.3">
 							<h3>3.3. Adaptive Security in the Computational Setting</h3>
 							<p class="rp_original">
-								We now turn to define adaptively secure multiparty computation in the computational setting. Here the communication links between parties are <b>insecure</b>; that is, all messages sent on all links are seen by the adversary.<sup id="fref9"><a href="#footnote9">9</a></sup> All parties, as well as the adversary, are restricted to probabilistic polynomial time. Furthermore, we introduce a <b>security parameter</b>, determining 'how close' a real-life computation is to a computation in the ideal model. All parties are polynomial also in the security parameter. For simplicity of presentation, we identify the security parameter and the length of the inputs with the number of parties, denoted \(n\).
+								We now turn to define adaptively secure multiparty computation in the computational setting. Here the communication links between parties are <b>insecure</b>; that is, all messages sent on all links are seen by the adversary.<sup class="footnote" id="fref9" data-footnote="9"><a href="#footnote9">9</a></sup> All parties, as well as the adversary, are restricted to probabilistic polynomial time. Furthermore, we introduce a <b>security parameter</b>, determining 'how close' a real-life computation is to a computation in the ideal model. All parties are polynomial also in the security parameter. For simplicity of presentation, we identify the security parameter and the length of the inputs with the number of parties, denoted \(n\).
 							</p>
 							<p class="rp_original">
 								The framework of defining adaptively secure multiparty computation in this setting is the same as in the secure channels setting (<a href="#sec3.2">Section 3.2</a>). That is, we compare the real-life computation with a computation in the same ideal model. Since the real-life adversary is restricted to probabilistic polynomial time, so is the ideal model adversary. The execution of a protocol \(\pi\) in the real-life scenario (of the computational setting), as well as the notation \(\operatorname{EXEC}_{\pi,\mathcal A}(\vec x)\), are the same as in the secure channels setting, with the exception that the real-life adversary sees all the communication between the uncorrupted parties. Needless to say that the ideal model is the same in both settings.
@@ -515,7 +516,7 @@
 						</p>
 						<span class="rp_theorem_header" id="theorem4.1">Theorem 4.1</span>
 						<p class="rp_original rp_theorem">
-							The <span class="reference" data-citation="BGW">[?]</span><span class="reference" data-citation="CCD">[?]</span> protocols for computing any function of \(n\) function of \(n\) inputs are \((\lceil\frac n 3\rceil-1)\)-securely computable in a simulatable way, <b>in the secure channels setting</b>, in the presence of non-erasing parties and adaptive adversaries.<sup id="fref10"><a href="#footnote10">10</a></sup>
+							The <span class="reference" data-citation="BGW">[?]</span><span class="reference" data-citation="CCD">[?]</span> protocols for computing any function of \(n\) function of \(n\) inputs are \((\lceil\frac n 3\rceil-1)\)-securely computable in a simulatable way, <b>in the secure channels setting</b>, in the presence of non-erasing parties and adaptive adversaries.<sup class="footnote" id="fref10" data-footnote="10"><a href="#footnote10">10</a></sup>
 						</p>
 						<section id="sec4.1">
 							<h3>4.1. Adaptive Security Given Non-Committing Encryption</h3>
@@ -552,7 +553,7 @@
 						<section id="sec4.2">
 							<h2>4.2. Constructing Non-Committing Encryption</h2>
 							<p class="rp_original">
-								Before describing our non-committing encryption protocol, let us note that one-time pad is a valid non-committing encryption protocol.<sup id="fref11"><a href="#footnote11">11</a></sup> The drawback of this trivial solution is that it requires an initial setup in which each pair of parties share a random string of length at least the number of bits they need to exchange. Such an initial setup is no desirable in practice and does not resolve the theoretically important problem of dealing with a setting in which <i>no secret information is shared a-priori</i>.
+								Before describing our non-committing encryption protocol, let us note that one-time pad is a valid non-committing encryption protocol.<sup class="footnote" id="fref11" data-footnote="11"><a href="#footnote11">11</a></sup> The drawback of this trivial solution is that it requires an initial setup in which each pair of parties share a random string of length at least the number of bits they need to exchange. Such an initial setup is no desirable in practice and does not resolve the theoretically important problem of dealing with a setting in which <i>no secret information is shared a-priori</i>.
 							</p>
 							<p class="rp_original">
 								Our scheme uses a collection of <span class="definable" data-define="trapdoor permutation">trapdoor permutations</span> together with a corresponding hardcore predicate<sup class="reference" data-citation="BM">[?]</sup><sup class="reference" data-citation="Y">[?]</sup><sup class="reference" data-citation="GrL">[?]</sup>. Actually, we need a collection of trapdoor permutations with the additional property that they are many permutations over the same domain. Furthermore, we assume that given a permutation \(f\) over a domain \(D\) (but not \(f\)'s trapdoor), one can efficiently generate at random another permutation \(f'\) over \(D\) together with the trapdoor of \(f'\). Such a collection is called a <b>common-domain trapdoor system.</b>
@@ -701,7 +702,7 @@
 									</p>
 									<span class="rp_sub_header">Initial Construction and Conditions</span>
 									<p class="rp_original rp_sub">
-										Keeping the structure of \(\lambda_\sigma\) in mind, we construct \(\vec z\), along with \(\vec x^{(0)},\vec x^{(1)},\phi^{(0)},\phi^{(1)},r^{(0)} and r^{(1)}\) as follows. First, we select uniformly a bijection, \(\rho\), of \(\{0,1\}\) to \(\{a,b\}\) (i.e. either \(\rho(0)=a\) and \(\rho(1)=b\) or the other way around) and set \(r^{(0)}=\rho(0)\) and \(r^{(1)}=\rho(1)\). Next, we choose, in the way described below, two binary vectors \(\vec\gamma^{(0)}=\gamma_1^{(0)},\dots,\gamma_{16k}^{(0)}\) and \(\vec\gamma^{(1)}=\gamma_1^{(1)},\dots,\gamma_{16k}^{(1)}\). We choose random values \(v_1,\dots,v_{16k}\) such that \(\gamma_i^{(0)}=B(f^{-1}_{\rho(0)}(v_i))\) and \(\gamma_i^{(1)}=B(f^{-1}_{\rho(1)}(v_i))\), for each \(i\in[16k]\). We uniformly select a permutation \(\psi\) over \([16k]\) and let the permuted vector \(v_{\psi(1)},\dots,v_{\psi(16k)}\) be the dummy ciphertext \(\vec z=(z_1,\dots,z_{16k})\). It remains to determine \(\phi^{(0)}\) and \(\phi^{(1)}\), which in turn determine \(\vec x^{(0)}\) and \(\vec x^{(1)}\) so that \(x_i^{(\sigma)}=f_a^{-1}(z_{(\phi^{(\sigma)})^{-1}(i)})\) for \(i\in[8k]\) and \(x_i^{(\sigma)}=f_b^{-1}(z_{\phi^{(\sigma)}(i)})\) otherwise. This should be done so that both permutations \(\phi^{(0)}\) and \(\phi^{(1)}\) are uniformly but not necessarily independently) distributed and so that the known \(B(f_s^{-1}(y_i^{(\sigma)}))\)'s match the distribution seen in a legitimate encryption of \(\sigma\). We stress that \((\sigma;\vec x^{(\sigma)},\phi^{(\sigma)};\vec z;r^{(\sigma)},f_{r^{(\sigma)}}^{-1})\) should appear as a valid encryption of \(\sigma\). In particular, for each \(\sigma\in\{0,1\}\) there should exist a permutation \(\psi^{(\sigma)}\,(=(\phi^{(\sigma)})^{-1}\circ\phi)\) over \([16k]\) so that<sup class="footnote" id="fref12"><a href="#footnote12">12</a></sup>
+										Keeping the structure of \(\lambda_\sigma\) in mind, we construct \(\vec z\), along with \(\vec x^{(0)},\vec x^{(1)},\phi^{(0)},\phi^{(1)},r^{(0)} and r^{(1)}\) as follows. First, we select uniformly a bijection, \(\rho\), of \(\{0,1\}\) to \(\{a,b\}\) (i.e. either \(\rho(0)=a\) and \(\rho(1)=b\) or the other way around) and set \(r^{(0)}=\rho(0)\) and \(r^{(1)}=\rho(1)\). Next, we choose, in the way described below, two binary vectors \(\vec\gamma^{(0)}=\gamma_1^{(0)},\dots,\gamma_{16k}^{(0)}\) and \(\vec\gamma^{(1)}=\gamma_1^{(1)},\dots,\gamma_{16k}^{(1)}\). We choose random values \(v_1,\dots,v_{16k}\) such that \(\gamma_i^{(0)}=B(f^{-1}_{\rho(0)}(v_i))\) and \(\gamma_i^{(1)}=B(f^{-1}_{\rho(1)}(v_i))\), for each \(i\in[16k]\). We uniformly select a permutation \(\psi\) over \([16k]\) and let the permuted vector \(v_{\psi(1)},\dots,v_{\psi(16k)}\) be the dummy ciphertext \(\vec z=(z_1,\dots,z_{16k})\). It remains to determine \(\phi^{(0)}\) and \(\phi^{(1)}\), which in turn determine \(\vec x^{(0)}\) and \(\vec x^{(1)}\) so that \(x_i^{(\sigma)}=f_a^{-1}(z_{(\phi^{(\sigma)})^{-1}(i)})\) for \(i\in[8k]\) and \(x_i^{(\sigma)}=f_b^{-1}(z_{\phi^{(\sigma)}(i)})\) otherwise. This should be done so that both permutations \(\phi^{(0)}\) and \(\phi^{(1)}\) are uniformly but not necessarily independently) distributed and so that the known \(B(f_s^{-1}(y_i^{(\sigma)}))\)'s match the distribution seen in a legitimate encryption of \(\sigma\). We stress that \((\sigma;\vec x^{(\sigma)},\phi^{(\sigma)};\vec z;r^{(\sigma)},f_{r^{(\sigma)}}^{-1})\) should appear as a valid encryption of \(\sigma\). In particular, for each \(\sigma\in\{0,1\}\) there should exist a permutation \(\psi^{(\sigma)}\,(=(\phi^{(\sigma)})^{-1}\circ\phi)\) over \([16k]\) so that<sup class="footnote" id="fref12" data-footnote="12"><a href="#footnote12">12</a></sup>
 									</p>
 									<ol class="rp_original">
 										<li>\(\gamma^{(\rho^{-1}(a))}_{\psi^{(\sigma)}(i)}=B(f_a^{-1}(v_{\psi^{(\sigma)}(i)}))=B(f_a^{-1}(z_{\psi^{(\sigma)}(i)}))=B(x_i^{(\sigma)}=\sigma,\text{ for }i=1,\dots,5k.\) (E.g. if \(\rho(0)=a\) this means \(\gamma^{(0)}_{\psi^{(\sigma)}(i)}=\sigma.\))</li>
@@ -843,7 +844,7 @@
 									We use the implementation of OT described in <span class="reference" data-citation="GMW">[?]</span> (which in turn originates in <span class="reference" data-citation="EGL">[?]</span>). This implementation has an additional property, discussed below, that is useful in our construction. For self containment we sketch, in Figure 5, the <span class="reference" data-citation="GMW">[?]</span> protocol for OT of one bit.
 								</p>
 								<p class="rp_original">
-									It can be easily verified that the receiver outputs the correct value of \(\sigma_\tau\) in Step 4. Alsi, if the receiver is semi-honest in the non-erasing sense, then it cannot predict \(\sigma_{3-\tau}\) with more than negligible advantage over &frac12;.<sup class="footnote" id="fref13"><a href="#footnote13">13</a></sup> The sender view of the interaction is uncorrelated with the value of \(\tau\in\{1,2\}\). Thus it learns nothing from participating in the protocol.
+									It can be easily verified that the receiver outputs the correct value of \(\sigma_\tau\) in Step 4. Alsi, if the receiver is semi-honest in the non-erasing sense, then it cannot predict \(\sigma_{3-\tau}\) with more than negligible advantage over &frac12;.<sup class="footnote" id="fref13" data-footnote="13"><a href="#footnote13">13</a></sup> The sender view of the interaction is uncorrelated with the value of \(\tau\in\{1,2\}\). Thus it learns nothing from participating in the protocol.
 								</p>
 								<p class="rp_original">
 									The important additional property of this protocol is that, in a simulated execution of the protocol, the simulator can learn both \(\sigma_1\) and \(\sigma_2\) by uniformly selecting \(z_1,z_2\in D\) and having the receiver \(R\) send \(f(z_1),f(z_2)\) (in Step 2). Furthermore, if \(R\) is later corrupted, then the simulator can "convince" the adversary that \(R\) received either \(\sigma_1\) or \(\sigma_2\), at wish, by claiming that in Step 2 party \(R\) chose either \((x_1,x_2)=(z_1,f(z_2))\text{ or }(x_1,x_2)=(f(z_1),z_2)\), respectively.
@@ -922,7 +923,7 @@
 									We first construct the following common-domain trapdoor system. The common domain, given security parameter \(n\), is \(\{0,1\}^n\). A permutation over \(\{0,1\}^n\) is chosen as follows. First, choose a number \(N\) uniformly from \([2^{n-1},\dots,2^n]\), <i>together with its factorization</i> (via Bach's algorithm<sup class="reference" data-citation="B">[?]</sup>). Next choose a prime \(2^n\lt e\lt2^{n+1}\). (This way, we are assured that \(\operatorname{gcd}(e,\operatorname\phi(N))=1\), where \(\operatorname\phi(\cdot)\) is Euler's totient function, even if the factorization of \(N\) is not known.) Let \(f_N(x)=x^e\pmod N\) if \(x\lt N\) and \(f_N(x)=x\) otherwise. With non-negligible probability \(N\) is a product of two large primes. Thus, thus construction yields a collection of common domain permutations which are weakly one-way. Employing an amplification procedure (e.g. <span class="reference" data-citation="Y">[?]</span><span class="reference" data-citation="GILVZ">[?]</span>) we obtain a proper common-domain system.
 								</p>
 								<p class="rp_original">
-									This common-domain trapdoor system can be used as described in <a href="#sec4.2">Section 4.2</a>. However, here the key generation stage can be simplified considerably. Observe that it is possible to choose a permutation from the above distribution <i>without knowing its trapdoor</i>. Specifically, this is done by choosing the numbers \(N\) of the different instances of \(f_N\) in the direct way, without knowing their factorization. Thus, the receiver will choose two trapdoor permutations \(f_a,f_b\), where only the trapdoor to \(f_\tau\) (i.e. \(f_\tau^{-1}\)) is known, \(r\in_R\{a,b\}\). Both \(f_a,f_b\) are now sent to the sender, who proceeds as in <a href="#sec4.2.1">Section 4.2.1</a>. In a simulated execution the simulator will choose both \(f_a\) and \(f_b\) together with their trapdoors.<sup class="footnote" id="fref14"><a href="#footnote14"><a href="footnote14">14</a></sup>
+									This common-domain trapdoor system can be used as described in <a href="#sec4.2">Section 4.2</a>. However, here the key generation stage can be simplified considerably. Observe that it is possible to choose a permutation from the above distribution <i>without knowing its trapdoor</i>. Specifically, this is done by choosing the numbers \(N\) of the different instances of \(f_N\) in the direct way, without knowing their factorization. Thus, the receiver will choose two trapdoor permutations \(f_a,f_b\), where only the trapdoor to \(f_\tau\) (i.e. \(f_\tau^{-1}\)) is known, \(r\in_R\{a,b\}\). Both \(f_a,f_b\) are now sent to the sender, who proceeds as in <a href="#sec4.2.1">Section 4.2.1</a>. In a simulated execution the simulator will choose both \(f_a\) and \(f_b\) together with their trapdoors.<sup class="footnote" id="fref14" data-footnote="14"><a href="#footnote14">14</a></sup>
 								</p>
 							</section>
 							<section id="sec4.3.2">
@@ -963,79 +964,83 @@
 				</div>
             </div>
 			<div class="main_toplevel main_section main_color7" id="footnotes">
-                <h1>Footnotes</h1>
-				
-                <ol id="footnotes">
-                    <li id="footnote1">
-						<a href="#fref1">[^]</a> We illustrate this distinction via the following example. Let \(f(x,y)=g(x\oplus y)\) where \(g\) is a one-way permutation and \(\oplus\) denotes bitwise exclusive or. Assume that parties \(A\) and \(B\) have inputs \(x\) and \(y\) respectively, and consider the following protocol for computing \(f\): Party \(A\) announces \(x\), party \(B\) announces \(y\), and both parties compute \(f(x,y)\). Our intuition is that this protocol is insecure against adversaries that may corrupt one party (say \(B\)): it "gives away for free" both \(x\) and \(y\), whereas computing \(x\) given \(y\) and \(f(x,y)\), may take the adversary a large amount of time. Indeed, if the ideal-model adversary \(\mathcal S\) limited to probabilistic polynomial time (and one-way permutations exist), then this protocol is insecure against adversaries that corrupt one party. However, under the model allowing \(\mathcal S\) unlimited computational power regardless of \(\mathcal A\)'s complexity, this protocol is considered secure since \(\mathcal S\) can invert \(g\).
-					</li>
-					<li id="footnote2">
-						<a href="#fref2">[^]</a> There is also the easier problem of generating the messages sent by \(P\) to corrupted parties. This was the problem discussed in the <a href="#sec2.3.2">previous subsection</a>. However, our hypothesis that \(\mathcal S\) is a simulator for the secure channel model means that \(\mathcal S\) is able to generate these cleartext messages. Thus, all that \(\tilde{\mathcal S}\) needs to do is encrypt the messages that it has obtained from \(\mathcal S\).
-					</li>
-					<li id="footnote3">
-						<a href="#fref3">[^]</a> This "non-committing property" is reminiscent of the "Chameleon blobs" of <span class="reference" data-citation="BCC">[?]</span>. The latter are <i>commitment</i> schemes where the recipient of a commitment \(c\) can generate by himself the de-commitments of \(c\) to both 0 and 1, whereas the sender is "effectively committed" to a specific bit value.
-					</li>
-					<li id="footnote4">
-						<a href="#fref4">[^]</a> Each of these algorithms is also given an \(n\)-bit encryption key.
-					</li>
-					<li id="footnote5">
-						<a href="#fref5">[^]</a> Consequently, it must be that \(\mathcal E^{(0)}\) and \(\mathcal E^{(1)}\) are computationally indistinguishable. Thus, a non-committing encryption scheme is also a secure encryption scheme in the traditional sense.
-					</li>
-					<li id="footnote6">
-						<a href="#fref6">[^]</a> A more general formulation allows different parties to compute a different functions of the input. Specifically, in this case the range of \(f\) is an \(n\)-fold Cartesian product and the interpretation is that the \(i\)<sup>th</sup> party should get the \(i\)<sup>th</sup> component of \(f(\vec{x})\).
-					</li>
-					<li id="footnote7">
-						<a href="#fref7">[^]</a> In the case where each party computes a different function of the inputs, as discussed in the previous footnote, the trusted party will hand each party its specified output.
-					</li>
-					<li id="footnote8">
-						<a href="#fref8">[^]</a> For simplicity, we assume that the computed function is polynomially computable. Alternatively, the simulator is polynomial in the complexity of the function.
-					</li>
-					<li id="footnote9">
-						<a href="#fref9">[^]</a> For simplicity we assume that the links are authenticated, namely the adversary cannot <i>alter</i> the communication. Authenticity can be achieved via standard primitives.
-					</li>
-					<li id="footnote10">
-						<a href="#fref10">[^]</a> A security proof of the <span class="reference" data-citation="BGW">[?]</span> construction can be extracted from <span class="reference" data-citation="C">[?]</span> (chapter 3), which deals with the more involved asynchronous model.
-					</li>
-					<li id="footnote11">
-						<a href="#fref11">[^]</a> Assume that each pair of parties share a sufficiently long secret random string, and each message is encrypted by bitwise XORing it with a new segment of the shared random string. Then <a href="#def3.10">Definition 3.10</a> is satisfied in a straightforward way. Specifically, the simulated message from the sender to the receiver (i.e. the dummy ciphertext), denoted \(c\), can be uniformly chosen in \(\{0,1\}\). When either the sender or the receiver are corrupted, and the simulator has to demonstrate that \(c\) is an encryption of a bit \(\sigma\), the simulator claims that the corresponding shared random bit was \(\tau=c\oplus\sigma\). Clearly \(\tau\) is uniformly distributed, regardless of the value of \(\sigma\).
-					</li>
-					<li id="footnote12">
-						<a href="#fref12">[^]</a> In each of the following five conditions, the first equality is by the construction of the \(v_i\)'s, the second equality is by the definition of the \(z_i\)'s, and the third equality represents the relation between \(\vec x^{(\sigma)},\,\vec z,\text{ and }\phi{(\sigma)}\) that holds in a valid encryption (of \(\sigma\)). In conditions (1) through (4), the last equality represents the relation between \(\vec x ^{(\sigma)}\)\text{ and }\sigma\) that holds in a valid encryption of \(\sigma\). In condition (5), the last equality represents the information computable from \(\vec z\) using (the trapdoor) \(f^{-1}_{r^{(\sigma)}}\). Here we refer to the inverses of the \(z_i\)'s which are not \(x_i^{(\sigma)}\)'s. The hardcore values of these inverses should be uniformly distributed.
-					</li>
-					<li id="footnote13">
-						<a href="#fref13">[^]</a> This statement does not hold if \(R\) is semi-honest only in the honest-looking sense. Ironically, this 'flaw' is related to the useful (non-committing) feature discussed below.
-					</li>
-					<li id="footnote14">
-						<a href="#fref14">[^]</a> A similar idea was used in <span class="reference" data-citation="DP">[?]</span>.
-					</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>Footnotes</h1>
+					
+					<ol id="footnotelist">
+						<li id="footnote1">
+							We illustrate this distinction via the following example. Let \(f(x,y)=g(x\oplus y)\) where \(g\) is a one-way permutation and \(\oplus\) denotes bitwise exclusive or. Assume that parties \(A\) and \(B\) have inputs \(x\) and \(y\) respectively, and consider the following protocol for computing \(f\): Party \(A\) announces \(x\), party \(B\) announces \(y\), and both parties compute \(f(x,y)\). Our intuition is that this protocol is insecure against adversaries that may corrupt one party (say \(B\)): it "gives away for free" both \(x\) and \(y\), whereas computing \(x\) given \(y\) and \(f(x,y)\), may take the adversary a large amount of time. Indeed, if the ideal-model adversary \(\mathcal S\) limited to probabilistic polynomial time (and one-way permutations exist), then this protocol is insecure against adversaries that corrupt one party. However, under the model allowing \(\mathcal S\) unlimited computational power regardless of \(\mathcal A\)'s complexity, this protocol is considered secure since \(\mathcal S\) can invert \(g\).
+						</li>
+						<li id="footnote2">
+							There is also the easier problem of generating the messages sent by \(P\) to corrupted parties. This was the problem discussed in the <a href="#sec2.3.2">previous subsection</a>. However, our hypothesis that \(\mathcal S\) is a simulator for the secure channel model means that \(\mathcal S\) is able to generate these cleartext messages. Thus, all that \(\tilde{\mathcal S}\) needs to do is encrypt the messages that it has obtained from \(\mathcal S\).
+						</li>
+						<li id="footnote3">
+							This "non-committing property" is reminiscent of the "Chameleon blobs" of <span class="reference" data-citation="BCC">[?]</span>. The latter are <i>commitment</i> schemes where the recipient of a commitment \(c\) can generate by himself the de-commitments of \(c\) to both 0 and 1, whereas the sender is "effectively committed" to a specific bit value.
+						</li>
+						<li id="footnote4">
+							Each of these algorithms is also given an \(n\)-bit encryption key.
+						</li>
+						<li id="footnote5">
+							Consequently, it must be that \(\mathcal E^{(0)}\) and \(\mathcal E^{(1)}\) are computationally indistinguishable. Thus, a non-committing encryption scheme is also a secure encryption scheme in the traditional sense.
+						</li>
+						<li id="footnote6">
+							A more general formulation allows different parties to compute a different functions of the input. Specifically, in this case the range of \(f\) is an \(n\)-fold Cartesian product and the interpretation is that the \(i\)<sup>th</sup> party should get the \(i\)<sup>th</sup> component of \(f(\vec{x})\).
+						</li>
+						<li id="footnote7">
+							In the case where each party computes a different function of the inputs, as discussed in the previous footnote, the trusted party will hand each party its specified output.
+						</li>
+						<li id="footnote8">
+							For simplicity, we assume that the computed function is polynomially computable. Alternatively, the simulator is polynomial in the complexity of the function.
+						</li>
+						<li id="footnote9">
+							For simplicity we assume that the links are authenticated, namely the adversary cannot <i>alter</i> the communication. Authenticity can be achieved via standard primitives.
+						</li>
+						<li id="footnote10">
+							A security proof of the <span class="reference" data-citation="BGW">[?]</span> construction can be extracted from <span class="reference" data-citation="C">[?]</span> (chapter 3), which deals with the more involved asynchronous model.
+						</li>
+						<li id="footnote11">
+							Assume that each pair of parties share a sufficiently long secret random string, and each message is encrypted by bitwise XORing it with a new segment of the shared random string. Then <a href="#def3.10">Definition 3.10</a> is satisfied in a straightforward way. Specifically, the simulated message from the sender to the receiver (i.e. the dummy ciphertext), denoted \(c\), can be uniformly chosen in \(\{0,1\}\). When either the sender or the receiver are corrupted, and the simulator has to demonstrate that \(c\) is an encryption of a bit \(\sigma\), the simulator claims that the corresponding shared random bit was \(\tau=c\oplus\sigma\). Clearly \(\tau\) is uniformly distributed, regardless of the value of \(\sigma\).
+						</li>
+						<li id="footnote12">
+							In each of the following five conditions, the first equality is by the construction of the \(v_i\)'s, the second equality is by the definition of the \(z_i\)'s, and the third equality represents the relation between \(\vec x^{(\sigma)},\,\vec z,\text{ and }\phi{(\sigma)}\) that holds in a valid encryption (of \(\sigma\)). In conditions (1) through (4), the last equality represents the relation between \(\vec x ^{(\sigma)}\)\text{ and }\sigma\) that holds in a valid encryption of \(\sigma\). In condition (5), the last equality represents the information computable from \(\vec z\) using (the trapdoor) \(f^{-1}_{r^{(\sigma)}}\). Here we refer to the inverses of the \(z_i\)'s which are not \(x_i^{(\sigma)}\)'s. The hardcore values of these inverses should be uniformly distributed.
+						</li>
+						<li id="footnote13">
+							This statement does not hold if \(R\) is semi-honest only in the honest-looking sense. Ironically, this 'flaw' is related to the useful (non-committing) feature discussed below.
+						</li>
+						<li id="footnote14">
+							A similar idea was used in <span class="reference" data-citation="DP">[?]</span>.
+						</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color8" id="references">
-                <h1>References</h1>
-                <ol id="referencelist">
-                    <li id="B">E. Bach, "How to generate factored random numbers", <i>SIAM J. on Comput.</i>, Vol. 17, No. 2, 1988, pp.179-193.</li>
-					<li id="Be1">D. Beaver, "Foundations of Secure Interactive Computing", <i>CRYPTO</i>, 1991.</li>
-					<li id="Be2">D. Beaver, "Adaptive Zero-Knowledge and Computational Equivocation", <i>28th STOC</i>, 1996.</li>
-					<li id="BH">D. Beaver and S. Haber, "Cryptographic Protocols Provably secure Against Dynamic Adversaries", <i>Eurocrypt</i>, 1992.</li>
-					<li id="BGW">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. </li>
-					<li id="BM">M. Blum, and S. Micali, "How to generate Cryptographically strong sequences of pseudo-random bits", <i>SIAM J. on Computing</i>, Vol. 13, 1984, pp. 850-864.</li>
-					<li id="BCC">G. Brassard, D. Chaum and C. Crepeau, "Minimum Disclosure Proofs of Knowledge", <i>JCSS</i>, Vol. 37, No. 2, 1988, pp. 156-189.</li>
-					<li id="C">R. Canetti, "Studies in Secure Multi-Party Computation and Applications", Ph.D. Thesis, Department of Computer Science and Applied Math, Weizmann Institute of Science, Rehovot, Israel, June 1995.</li>
-					<li id="CDNO">R. Canetti, C. Dwork, M. Naor, and R. Ostrovsky, "Deniable Encryptions", manuscript.</li>
-					<li id="CCD">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols (extended abstract)</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pp. 11-19. ACM. 1988.</li>
-					<li id="DP">A. De-Santis and G. Persiano, "Zero-Knowledge proofs of knowledge without interaction", <i>33rd FOCS</i>, pp. 427-436, 1992.</li>
-					<li id="EGL">S. Even, O. Goldreich and A. Lempel, "A randomized protocol for signing contracts", <i>CACM</i>, vol. 28, No. 6, 1985, pp. 637-647.</li>
-					<li id="F">P. Feldman, personal communication via Cynthia Dwork, 1988.</li>
-					<li id="GILVZ">O. Goldreich, R. Impagliazzo, L. Levin, R. Venkatesan and D. Zuckerman, "Security Preserving Amplification of Hardness", <i>31st FOCS</i>, 1990, pp. 318-326.</li>
-					<li id="GrL">O. Goldreich and L. Levin, "A Hard-Core Predicate to any One-Way Function", <i>21st STOC</i>, 1989, pp. 25-32.</li>
-					<li id="GMW">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority</a>. <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
-					<li id="GwL">S. Goldwasser and L. Levin, "Fair Computation of General Functions in Presence of Immoral Majority", <i>CRYPTO</i>, 1990.</li>
-					<li id="MR">S. Micali and P. Rogaway, "Secure Computation", <i>CRYPTO</i>, 1991.</li>
-					<li id="R">M. Rabin, "How to exchange secrets by oblivious transfer", Tech. Memo TR-81, Aiken Computation Laboratory, Harvard U., 1981.</li>
-					<li id="RB">T. Rabin and M. Ben-Or. <a href="76.html">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</a>. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.</li>
-					<li id="RSA">R. Rivest, A. Shamir, and L. Adleman, "A Method for Obtaining Digital Signatures and Public Key Cryptosystems", <i>CACM</i>, Vol. 21, Feb. 1978, pp. 120-126.</li>
-					<li id="Y">A. Yao, "Theory and applications of trapdoor functions", <i>23rd FOCS</i>, 1982, pp. 80-91.</li>
-                </ol>
+				<div class="main_fullwidth">
+					<h1>References</h1>
+					<ol id="referencelist">
+						<li id="B">E. Bach, "How to generate factored random numbers", <i>SIAM J. on Comput.</i>, Vol. 17, No. 2, 1988, pp.179-193.</li>
+						<li id="Be1">D. Beaver, "Foundations of Secure Interactive Computing", <i>CRYPTO</i>, 1991.</li>
+						<li id="Be2">D. Beaver, "Adaptive Zero-Knowledge and Computational Equivocation", <i>28th STOC</i>, 1996.</li>
+						<li id="BH">D. Beaver and S. Haber, "Cryptographic Protocols Provably secure Against Dynamic Adversaries", <i>Eurocrypt</i>, 1992.</li>
+						<li id="BGW">M. Ben-Or, S. Goldwasser, and A. Wigderson. <a href="17.html">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. </li>
+						<li id="BM">M. Blum, and S. Micali, "How to generate Cryptographically strong sequences of pseudo-random bits", <i>SIAM J. on Computing</i>, Vol. 13, 1984, pp. 850-864.</li>
+						<li id="BCC">G. Brassard, D. Chaum and C. Crepeau, "Minimum Disclosure Proofs of Knowledge", <i>JCSS</i>, Vol. 37, No. 2, 1988, pp. 156-189.</li>
+						<li id="C">R. Canetti, "Studies in Secure Multi-Party Computation and Applications", Ph.D. Thesis, Department of Computer Science and Applied Math, Weizmann Institute of Science, Rehovot, Israel, June 1995.</li>
+						<li id="CDNO">R. Canetti, C. Dwork, M. Naor, and R. Ostrovsky, "Deniable Encryptions", manuscript.</li>
+						<li id="CCD">D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. <a href="34.html">Multiparty Unconditionally Secure Protocols (extended abstract)</a>. <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pp. 11-19. ACM. 1988.</li>
+						<li id="DP">A. De-Santis and G. Persiano, "Zero-Knowledge proofs of knowledge without interaction", <i>33rd FOCS</i>, pp. 427-436, 1992.</li>
+						<li id="EGL">S. Even, O. Goldreich and A. Lempel, "A randomized protocol for signing contracts", <i>CACM</i>, vol. 28, No. 6, 1985, pp. 637-647.</li>
+						<li id="F">P. Feldman, personal communication via Cynthia Dwork, 1988.</li>
+						<li id="GILVZ">O. Goldreich, R. Impagliazzo, L. Levin, R. Venkatesan and D. Zuckerman, "Security Preserving Amplification of Hardness", <i>31st FOCS</i>, 1990, pp. 318-326.</li>
+						<li id="GrL">O. Goldreich and L. Levin, "A Hard-Core Predicate to any One-Way Function", <i>21st STOC</i>, 1989, pp. 25-32.</li>
+						<li id="GMW">O. Goldreich, S. Micali, and A. Wigderson. <a href="81.html">How to Play Any Mental Game or a Completeness Theorem for Protocols with Honest Majority</a>. <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229. ACM. 1987.</li>
+						<li id="GwL">S. Goldwasser and L. Levin, "Fair Computation of General Functions in Presence of Immoral Majority", <i>CRYPTO</i>, 1990.</li>
+						<li id="MR">S. Micali and P. Rogaway, "Secure Computation", <i>CRYPTO</i>, 1991.</li>
+						<li id="R">M. Rabin, "How to exchange secrets by oblivious transfer", Tech. Memo TR-81, Aiken Computation Laboratory, Harvard U., 1981.</li>
+						<li id="RB">T. Rabin and M. Ben-Or. <a href="76.html">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</a>. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.</li>
+						<li id="RSA">R. Rivest, A. Shamir, and L. Adleman, "A Method for Obtaining Digital Signatures and Public Key Cryptosystems", <i>CACM</i>, Vol. 21, Feb. 1978, pp. 120-126.</li>
+						<li id="Y">A. Yao, "Theory and applications of trapdoor functions", <i>23rd FOCS</i>, 1982, pp. 80-91.</li>
+					</ol>
+				</div>
             </div>
             <div class="main_toplevel main_section main_color9">
                 <div class="rp_problems">
