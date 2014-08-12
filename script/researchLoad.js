@@ -67,7 +67,10 @@ function authorsOf(paper, from)
 	else
 	{
 		var currentAuthor = paper.authors[from];
-		var linkedAuthor = "<a class=\"rl_author\" href=\"authors/" + currentAuthor + ".html\">" + currentAuthor + "</a>"
+		var linkedAuthor;
+		if(!authorList[currentAuthor] || authorList[currentAuthor].length == 0)
+			linkedAuthor = "<span class=\"rl_author\">" + currentAuthor + "</span>";
+		else linkedAuthor = "<a class=\"rl_author\" href=\"" + authorList[currentAuthor] + "\">" + currentAuthor + "</a>";
 		if(paper.authors.length-1 === from) return linkedAuthor;
 		else return linkedAuthor + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + authorsOf(paper,from+1);
 	}
@@ -121,7 +124,7 @@ function addToTags(paper, section, node)
 function removeSpaces(str)
 {
 	if(str.length == 0) return "";
-	else if(str.charAt(0) == ' ') return removeSpaces(str.substring(1));
+	else if(!/[A-Za-z]/.test(str.charAt(0))) return removeSpaces(str.substring(1));
 	else return str.charAt(0) + removeSpaces(str.substring(1));
 }
 	
