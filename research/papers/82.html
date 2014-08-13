@@ -131,7 +131,7 @@
 							The quadratic residuosity assumption is known to imply that factoring is hard<sup class="reference" data-citation="QRtoF">[?]</sup>; in turn, the hardness of factoring is known to imply that clawfree permutations exist<sup class="reference" data-citation="GB">[?]</sup>. As such, we can make <i>either</i> assumption, as opposed to needing both in the case that we want to use the QRS commitment scheme.
 						</p>
 						<p class="rp_analysis">
-							In terms of what network this protocol requires, <span class="definable" data-define="synchronous network">synchrony</span> is assumed. While not declared outright, a <span class="definable">broadcast channel</span> is implicitly assumed based on the definition of rounds and messages presented in <a href="#sec4">Section 4</a>.
+							In terms of what network this protocol requires, <span class="definable" data-define="synchronous network">synchrony</span> is assumed.
 						</p>
 					</section>
 					<section id="defs">
@@ -226,7 +226,6 @@
 							<li><b>Subprotocols: </b> Procedure <span class="main_language">Transform Circuit</span> is done once per party. Procedure <span class="main_language">Check Transform</span> is done \(m\) times per party, where \(m\) is the security parameter.</li>
 							<li><b>Bits exchanged: </b>\(\operatorname{O}(cmn2^t(t+m+n))\), where \(m\) is the security parameter, \(n\) is the number of parties, \(c\) is the number of gates in the circuit, and \(t\) is the maximum fan-in of those gates.</li>
 							<li><b>Runtime: </b>\(\operatorname{O}(cm2^t(t+n^2))\), where \(m\) is the security parameter, \(n\) is the number of parties, \(c\) is the number of gates in the circuit, and \(t\) is the maximum fan-in of those gates.</li>
-							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not using Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
 						</ul>
 						
 						<h4><a href="#protocol1">Procedure <span class="main_language">Transform Circuit</span></a></h4>
@@ -237,7 +236,6 @@
 							<li><b>Cheating: </b>Cheating is dealt with by procedure <span class="main_language">Check Transform</span>, which is done as part of the overall Encryption Phase (above).</li>
 							<li><b>Bits exchanged: </b>\(\operatorname{O}(c2^t(t+m))\), where \(m\) is the security parameter, \(c\) is the number of gates in the circuit, and \(t\) is the maximum fan-in of those gates.</li>
 							<li><b>Runtime: </b>\(\operatorname{O}(c2^t(\frac t n + i))\), where \(n\) is the number of parties, \(c\) is the number of gates in the circuit, \(t\) is the maximum fan-in of those gates, and \(i\) is which iteration of this protocol is being run (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
-							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not needing Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
 							<li><b>Notes: </b>We are operating under the simplifying assumption that each party has a \(\frac 1 n\) probability of using one of their input bits as any given input bit to a gate. We additionally assume that the bit commitments (and their openings) are each \(m\) bits.</li>
 						</ul>
 						
@@ -250,7 +248,6 @@
 							<li><b>Subprotocols: </b>A single (additional) run of the <span class="main_language">Transform Circuit</span> protocol is performed for each run of this proof.</li>
 							<li><b>Bits exchanged: </b>\(\operatorname{O}(c2^t(t+m+i))\), where \(m\) is the security parameter, \(c\) is the number of gates in the circuit, \(t\) is the maximum fan-in of those gates, and \(i\) is which iteration of the <span class="main_language">Transform Circuit</span> protocol is being checked (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
 							<li><b>Runtime: </b>\(\operatorname{O}(c2^t(\frac t n + i))\), where \(n\) is the number of parties, \(c\) is the number of gates in the circuit, \(t\) is the maximum fan-in of those gates, and \(i\) is which iteration of the <span class="main_language">Transform Circuit</span> protocol is being checked (e.g. the first participant has \(i=1\), the final one has \(i=n\)).</li>
-							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not needing Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
 						</ul>
 						
 						<h3><a href="#protocol3">The Computation Phase (i.e. Procedure <span class="main_language">Construct Computation</span>)</a></h3>
@@ -261,7 +258,6 @@
 							<li><b>Cheating: </b>No party can alter the output of the circuit without claiming a commitment has a different value than intended.</li>
 							<li><b>Bits exchanged: </b>\(\operatorname{O}(cmn)\), where \(m\) is the security parameter, \(n\) is the number of parties, and \(c\) is the number of gates in the circuit.</li>
 							<li><b>Runtime: </b>\(\operatorname{O}(cmn)\), where \(m\) is the security parameter, \(n\) is the number of parties, and \(c\) is the number of gates in the circuit.</li>
-							<li><b>Assumptions: </b>A broadcast channel was implicitly defined in <a href="#sec4">Section 4</a>. Due to this, both bits exchanged and runtime are slightly simplified (in particular by not using Byzantine agreement, and by dividing bits exchanged by \(n\)).</li>
 						</ul>
 					</section>
 					<section id="further">
@@ -572,9 +568,6 @@
 						</p>
 						<p class="rp_original">
 							Each machine has private input, output, and random tapes, and one communication tape. The contents of the input tape of \(P_i\) is called <span class="equation" data-equation="ip">\(ip_i\)</span>, the contents of the output tape after execution of the protocol is called <span class="equation" data-equation="op">\(op_i\)</span>. All machines are <span class="definable" data-define="synchronous network">clocked by a common clock</span>, and the protocol proceeds in rounds. In each round, exactly one machine can do some computation and perhaps write a message on the other machines' communication tapes. By definition, all messages sent in the protocol are written simultaneously on all communication tapes. If a machine receives a message which does not obey the constraints specified in the protocol, it stops immediately, and we say that <i>cheating has been detected</i>.
-						</p>
-						<p class="rp_annotation">
-							The above implicitly defines a <span class="definable">broadcast channel</span>: that is, all communication tapes are written to with identical messages simultaneously, which is equivalent to every machine being able to write to a single channel that all parties can read. This is not terribly important in terms of the results of the paper, it simply makes exposition simpler.
 						</p>
 						<p class="rp_original">
 							We assume the existence of a mutually trusted source of random bits. Such a source could easily be implemented using e.g. Blum's coin flipping problem<sup class="reference" data-citation="Bl">[?]</sup>. But since the construction of such a subprotocol is independent of our main protocol, we have chosen to abstract away the fact that a subprotocol is used.

@@ -12,10 +12,10 @@ The site has three main sections:
 A description of their intended contents, purposes, and layout follows.
 
 ###Research
-This is currently the main focus of the site, and almost all changes are being made here (as of 12 July 2014).
+This is currently the main focus of the site, and almost all changes are being made here (as of 12 August 2014).
 
 ####Storage
-All "major" research papers get their own page, which should be named [id].html, under /research/papers/. Their PDF, if present, should be stored as /research/papers/pdf/[id].pdf. Liability will not be considered until early August.
+All "major" research papers get their own page, which should be named [id].html, under /research/papers/. Their PDF, if present, should be stored as /research/papers/pdf/[id].pdf. Liability will not be considered until early September.
 Every research paper is stored as a single object in /script/researchList.js, and all are stored in a large array (which is ordered, in the file, in id-number order). This file is loaded by /script/researchLoad.js for usage by the four navigation pages under /research/.
 Research paper objects have the following properties:
 - *abstractText*: A string which contains the entire (HTML- and LaTeX-capable) text of this paper's abstract (or introduction, if applicable).
@@ -27,6 +27,8 @@ Research paper objects have the following properties:
 - *self_ref*: (default: "") A string which includes a citation for this paper. Not currently used, but should be included if hasPage is true for possible later usage.
 - *tags*: An (unordered, though preferably alphabetical) array of tags which relate to this paper's content. If this paper's page is not finished, MUST include the tag "Unsorted". We will get to standardizing tags soon.
 - *year*: The year when this paper was published.
+
+Authors also have their own list at authorList.js, with a dictionary going from author name to their own webpage (usually their homepage at their university). If an author is not a key in the dictionary, or goes to a blank string, the author's name is not added as a link.
 
 ####Individual Pages
 Research pages (/research/papers/[id].html) consist of two main components, several optional components, and a few small (and mostly automatic) components. A template can be found at /research/papers/template.html.
@@ -47,19 +49,24 @@ Research pages always include:
 	- Proofs are annotations, and should ALWAYS be added, if known.
 - Definitions {class: "definable", optional data-define: \[word to define\] \(if no data-define, then innerHTML is used\)} for words that should be explained or that were defined in the text, but not as officially as a term to be put in the 'definition' section.
 	- Definitions used in many pages should be put in /script/def.js.
-	- Definitions used only in the one page should be put in the JavaScript object self_def, in the form self_def["word"]="definition"
+	- Definitions used only in the one page should be put in the JavaScript object self_def, under self_def["word"]
 	- A word should only be 'definable' in its first usage in every section.
 	- Definitions _can_ contain both equations and other definitions within them.
 	- Any definable classes with no matching words in any glossary will be noted by console.log (obviously a feature to remove later)
+	- Definitions should take the form of an object where "title" is the word to define (in a fully prettied up form) and "def" points to a constructible array (see the section on constructibles under Design Choices)
 - Equation explanations (class: "equation", required data-equation=[equation name])
 	- Equations that are difficult to remember (e.g. some variable "h" defined several sections ago) or difficult to understand should have an explanation attached.
 	- Equations should be explained in _every_ usage.
 	- Equations cannot contain _either_ definable words or other equation explanations.
-	- Equation explanations should be enclosed in paragraphs.
+	- Equation explanations should be a constructible array. (See the section in Design Choices).
 - References (class: "reference", required data-citation=[citation-id])
 	- Reference numbering is dealt with automatically. Citations will point to the reference at the bottom with identical (string) id to their 'data-citation'. Any citation with no matching reference should display as [?].
 	- The reference list will be reordered automatically. Any reference not cited will not be displayed.
 	- No particular type of reference has been chosen as the site's preference yet; that is yet to come.
+- Footnotes
+	- A footnote reference should be a number in a sup tag, with the required attribute data-footnote=[footnote-id].
+	- A footnote must be contained in a list at the bottom of the page with id "footnotelist". All footnote items (that is, li tags) should have an id of the form id="footnote[footnote-id]".
+	- Numbering is restructured automatically. Footnotes at the bottom are reordered to match the ordering within the text. All footnotes will reference back up to ALL locations that link to that footnote. For example, if a page has a single footnote referenced twice, the footnote engine will always number them as footnote 1 (regardless of their original numbering) and the footnote will have two links of the form "[^]" which link back to the two references to the footnote.
 Research pages may contain:
 - Appendices, self explanatory
 - Footnotes, self explanatory
@@ -83,6 +90,9 @@ We note that JavaScript will likely always be required for most useful pages any
 ###Type of Reference
 We follow a particular type of reference for the papers we have pages for: F. Lastname, F. Lastname..., and F. Lastname. Title of Paper in Title Case (extended abstract, if accurate). _Full Name of Publication of Origin_, pp. 0-100. Publisher. Year.
 This was done for no real reason other than a lack of consistency between different reference lists; we simply went with one particularly concise version seen in one paper, and stuck with it. 
+
+###Constructible Objects
+A very simple nesting data structure was created to allow for style to change consistently across all definitions and equation explanations. Each object represents a single HTML element; a "constructible array" is any array of these objects, which will be rendered in order. A constructible object can be built into any of five (technically six) tags, based on its "type": p,li,ol,ul, or span. All constructibles can specify a "className" that overrides the default styling class being used to style the object, which is specified based on where it is being built. (For example, whether a definition is in a definition box or the glossary). All constructibles should have "content", which is either a string (for p or span types) or another constructible array (for li,ol,ul types). Span types have a special optional attribute, "href", which wraps the entire span in an a tag with that value as its href. This allows for spans to be headings (e.g. Definition headers) that link elsewhere without causing underlines/miscoloration.
 
 ##To Do
 We have a separate file for things to do, at /todo.

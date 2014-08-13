@@ -4,8 +4,6 @@ Adversaries
 Proof Techniques
 	Simulator
 	Reduction
-Time?
-Environment?
 Primitives
 	Addition
 	Multiplication
@@ -14,10 +12,6 @@ Primitives
 	Oblivious Transfer
 	ZKP
 Secret Sharing
-Leakage
-Black boxes
-Models (standard)
-Settings (stand alone)
 Composition
 fix tables in 20
 
@@ -26,13 +20,10 @@ animation
 word
 	secure network (from "secrecy network")
 	Discrete Fourier Transform
-	cyclic code
 cheat sheet additions
 	boolean gates
 	RSA
 	indistinguishability
-82
-	correction: no broadcast channel
 open probs
 	34.6: Without the assumption that \(C+L=n\), things seem to become more complicated. It is clear that as long as \(L\leq\left\lfloor\frac{(n-1)}{2}\right\rfloor\), then the solution outlined above still works, but without this condition it is not clear what happens. The method with multiplication of polynomials does not work any more, because it leads to polynomials of a degree larger than the number of available shares. Therefore the construction of a general computation protocol under these special assumptions remains an open problem.
 	76.1: Is it possible to achieve a 1/3-resilient non-cryptographic asynchronous Byzantine Agreement protocol?
