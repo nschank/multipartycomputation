@@ -188,18 +188,48 @@
 					</section>
 					<section id="protocol">
 						<h2>Protocols</h2>
-						<h3><a href="#secxx">Some Protocol Defined</a></h3>
+						<h3><a href="#sec1.2">Information Checking</a></h3>
 						<ul class="rp_analysis">
-							<li><b>Number of parties: </b></li>
-							<li><b>Function(s): </b></li>
-							<li><b>Privacy constraints: </b></li>
-							<li><b>Cheating: </b></li>
-							<li><b>Bits exchanged: </b></li>
-							<li><b>Subprotocols: </b></li>
-							<li><b>Runtime: </b></li>
-							<li><b>Assumptions: </b></li>
-							<li><b>Implementations: </b></li>
-							<li><b>Notes: </b></li>
+							<li><b>Number of parties: </b> 3 parties: a Dealer, an Intermediary, and a Recipient.</li>
+							<li><b>Function(s): </b> In the first stage, the Dealer commits to a particular value that will be sent to the Recipient. In the second stage, the Recipient is given that value by the Intermediary, and is guaranteed that the value is exactly what the Dealer committed to.</li>
+							<li><b>Privacy constraints: </b> The recipient will not learn the secret until the second stage.</li>
+							<li><b>Cheating: </b> The Intermediary can only lie to the Recipient about the value successfully with <span class="definable">negligible</span> probability.</li>
+							<li><b>Bits exchanged: </b> \(\operatorname O(k\log p)\), where \(p\) is the order of the finite field chosen, and \(k\) is the security parameter.</li>
+							<li><b>Runtime: </b> \(\operatorname O(k\log^2 p)\), where \(p\) is the order of the finite field chosen, and \(k\) is the security parameter.</li>
+						</ul>
+						<h3><a href="#sec2">Basic Secret Sharing</a></h3>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b> \(n\) parties, in which one party is the "dealer" of a secret.</li>
+							<li><b>Function(s): </b> All parties possess a share of the secret, and the dealer can later reveal the secret to all parties. Any one third of the parties, assuming they are all honest, can also reveal the secret.</li>
+							<li><b>Privacy constraints: </b> No party can learn the secret until the dealer (or one third of the participants) choose to reveal it.</li>
+							<li><b>Cheating: </b> No party can lie about their own shares of the secret, except with <span class="definable">negligible</span> probability. The dealer can break the consistency of the protocol; this is fixed below, in Weak Secret Sharing.</li>
+							<li><b>Bits exchanged: </b> \(\operatorname O(n^2\log n)\).</li>
+							<li><b>Runtime: </b> \(\operatorname O(n^2\log n)\).</li>
+							<li><b>Assumptions: </b> We assume that all parties possess a multiplication table within the finite field chosen, which is reasonable up to very large \(n\). Once there are enough parties that this overhead is not reasonable, runtime becomes \(\operatorname O(n^2\log^3n)\). We further assume, even in the previous assumption, that the order of the finite field chosen is greater than, but comparable, to \(n\), which is reasonable as security is not affected by choosing a larger \(p\).</li>
+						</ul>
+						<h3><a href="#sec3.1">Weak Secret Sharing</a></h3>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b> \(n\) parties, in which one party is the "dealer" of a secret.</li>
+							<li><b>Function(s): </b> All parties possess a share of the secret, and the dealer can later reveal the secret to all parties.</li>
+							<li><b>Privacy constraints: </b> No party can learn the secret until the dealer chooses to reveal it.</li>
+							<li><b>Cheating: </b> No party can lie about their own shares of the secret, except with <span class="definable">negligible</span> probability. The dealer is committed to a particular value when the sharing protocol is run, but the secret is not guaranteed to be openable without the dealer's cooperation.</li>
+							<li><b>Subprotocols: </b> It is a modified/combined version of Basic Secret Sharing and the Information Checking Protocol.</li>
+							<li><b>Bits exchanged: </b> \(\operatorname O(kn^2\log{kn})\), where \(k\) is the security parameter.</li>
+							<li><b>Runtime: </b> \(\operatorname O(kn^3\log n)\), where \(k\) is the security parameter.</li>
+							<li><b>Assumptions: </b> Requires the use of a broadcast channel. We assume that all parties possess a multiplication table within the finite field chosen, which is reasonable up to very large \(n\). Once there are enough parties that this overhead is not reasonable, runtime becomes \(\operatorname O(kn^3\log^3n)\). We further assume, even in the previous assumption, that the order of the finite field chosen is greater than, but comparable, to \(n\), which is reasonable as security is not affected by choosing a larger \(p\).</li>
+							<li><b>Notes: </b> We count bits that are broadcasted as being exchanged once, whereas "sending" a bit to every player separately is counted as being \(n\) different bits. This is consistent, for example, with communication tapes between each player, and a single broadcast tape.</li>
+						</ul>
+						<h3><a href="#sec4">Verified Secret Sharing</a></h3>
+						<ul class="rp_analysis">
+							<li><b>Number of parties: </b> \(n\) parties, in which one party is the "dealer" of a secret.</li>
+							<li><b>Function(s): </b> All parties possess a share of the secret, and the dealer can later reveal the secret to all parties. Any one third of the parties can also attempt to open the secret, and will succeed if they are honest.</li>
+							<li><b>Privacy constraints: </b> No party can learn the secret until the dealer (or one third of the participants) choose to reveal it.</li>
+							<li><b>Cheating: </b> No party can lie about their own shares of the secret, except with <span class="definable">negligible</span> probability. Once the sharing protocol is done, all parties will either agree no secret was shared, or the opening protocol will succeed (with or without the dealer's cooperation) except with negligible probability.</li>
+							<li><b>Subprotocols: </b> Uses Weak Secret Sharing (extensively) as a subprotocol.</li>
+							<li><b>Bits exchanged: </b> \(\operatorname O(k^2n^4\log{kn})\), where \(k\) is the security parameter.</li>
+							<li><b>Runtime: </b> \(\operatorname O(k^2n^5\log n)\), where \(k\) is the security parameter.</li>
+							<li><b>Assumptions: </b> Requires the use of a broadcast channel. We assume that all parties possess a multiplication table within the finite field chosen, which is reasonable up to very large \(n\). Once there are enough parties that this overhead is not reasonable, runtime becomes \(\operatorname O(k^2n^5\log^3n)\). We further assume, even in the previous assumption, that the order of the finite field chosen is greater than, but comparable, to \(n\), which is reasonable as security is not affected by choosing a larger \(p\).</li>
+							<li><b>Notes: </b> We count bits that are broadcasted as being exchanged once, whereas "sending" a bit to every player separately is counted as being \(n\) different bits. This is consistent, for example, with communication tapes between each player, and a single broadcast tape.</li>
 						</ul>
 					</section>
 					<section id="further">
@@ -282,7 +312,7 @@
 							Let \(G\) be a synchronous network of \(\;n\geq3t+1\) processors, with connectivity at least \(2t+1\), and diameter \(\;d=d(G)\), that provides private and secure communication links between processors that are directly connected by \(G\). Then there is an \(\operatorname O(d)\) expected time randomized Byzantine agreement protocol on \(G\) tolerating up to \(t\) <span class="definable" data-define="Byzantine fault">Byzantine faults</span>.
 						</p>
 						<p class="rp_original">
-							Similarly, Dolev's conditions are sufficient for general multiparty protocols. Extending the complete network results of <span class="reference" data-citation="BGW">[?]</span> and <span class="reference" data-citation="CCD">[?]</span> we have<sup class="footnote" id="fref1" data-footenote="1"><a href="#footnote1">1</a></sup>
+							Similarly, Dolev's conditions are sufficient for general multiparty protocols. Extending the complete network results of <span class="reference" data-citation="BGW">[?]</span> and <span class="reference" data-citation="CCD">[?]</span> we have<sup class="footnote" id="fref1" data-footnote="1"><a href="#footnote1">1</a></sup>
 						</p>
 						<span class="rp_theorem_header">Theorem 3</span>
 						<p class="rp_original rp_theorem">
@@ -370,7 +400,7 @@
 							<section id="sec1.2.2">
 								<h4>1.2.2. Verification of Check Vectors</h4>
 								<p class="rp_original">
-									To secure property 2 we use the "zero-knowledge" proof technique of <span class="reference" data-citation="R2">[?]</span>. We modify the above procedure as follows: The dealer transfers to \(INT\) an ordered set of pairs \((s,y_1),\dots,(s,y_{2k})\) and to \(R\) an ordered set of check vectors \((b_1,c_1),\dots, (b_{2k},c_{2k})\), where the \(y_i\) and \(b_i\) are chosen by \(D\) as before and hence $$s+b_iy_i\quad\quad\text{for}\,1\leq i\leq2k.$$ The intermediary \(INT\) chooses \(k\) distinct random indices \(d_1,\dots,d_k\;1\leq d_i\leq2k\). \(INT\) then asks \(R\) to reveal \((b_{d_1},c_{d_1}),\dots,(b_{d_k},c_{d_k})\). For each one of these check vectors, \(INT\) computes $$s+b_{d_i}y_{d_i}=c_{d_i}.$$ If <i>all</i> \(k\) check vectors satisfy the equation, then \(INT\) concludes that \(R\) will accept the value \(s\) that \(INT\) holds. Otherwise \(INT\) concludes that \(R\) will reject his value.
+									To secure property 2 we use the "zero-knowledge" proof technique of <span class="reference" data-citation="R2">[?]</span>. We modify the above procedure as follows: The dealer transfers to \(INT\) an ordered set of pairs \((s,y_1),\dots,(s,y_{2k})\) and to \(R\) an ordered set of check vectors \((b_1,c_1),\dots, (b_{2k},c_{2k})\), where the \(y_i\) and \(b_i\) are chosen by \(D\) as before and hence $$s+b_iy_i=c_i\quad\quad\text{for}\,1\leq i\leq2k.$$ The intermediary \(INT\) chooses \(k\) distinct random indices \(d_1,\dots,d_k\;1\leq d_i\leq2k\). \(INT\) then asks \(R\) to reveal \((b_{d_1},c_{d_1}),\dots,(b_{d_k},c_{d_k})\). For each one of these check vectors, \(INT\) computes $$s+b_{d_i}y_{d_i}=c_{d_i}.$$ If <i>all</i> \(k\) check vectors satisfy the equation, then \(INT\) concludes that \(R\) will accept the value \(s\) that \(INT\) holds. Otherwise \(INT\) concludes that \(R\) will reject this value.
 								</p>
 								<p class="rp_original">
 									We stipulate that \(R\) will accept a value \(s\) handed over to him or her by \(INT\), if <i>any one</i> of the <i>unrevealed</i> check vectors, which \(R\) holds for \(s\), satisfy the necessary equation.
@@ -529,10 +559,10 @@
 							<section id="sec3.1.3">
 								<h4>Phase 3: Revealing the Secret</h4>
 								<ol class="rp_original">
-									<li>The dealer \(D\) broadcasts his polynomial \(f(x)\), which defines the secret \(s\).</li>
-									<li>Each \(P_i\) hands to \(P_j\) his piece \(\beta_i\) and the corresponding \(y_{ij}\)'s.</li>
-									<li>\(P_i\) checks, by use of his check vector, for every pair \((\beta_j,y_{ji})\) if he accepts the piece, and creates the list \(\beta_{i_1},\dots,\beta_{i_r}\) of all pieces which he has accepted. (For each knight it is known that \(r\geq t+1\) because of the fact that the set of all knights is a coalition).</li>
-									<li>For each piece \(\beta_i\) that \(P_i\) accepted, he checks to see if it is on the graph \(f(x)\). If some piece does not fit \(f(x),\,P_i\) broadcasts his vote to disqualify the dealer \(D\).</li>
+									<li>The dealer \(D\) broadcasts the polynomial \(f(x)\), which defines the secret \(s\).</li>
+									<li>Each \(P_i\) hands to \(P_j\) the piece \(\beta_i\) and the corresponding \(y_{ij}\)'s.</li>
+									<li>\(P_i\) checks, by use of the check vectors, for every pair \((\beta_j,y_{ji})\) if that piece is valid, and creates the list \(\beta_{i_1},\dots,\beta_{i_r}\) of all pieces which \(P_i\) has accepted. (For each knight it is known that \(r\geq t+1\) because of the fact that the set of all knights is a coalition).</li>
+									<li>For each piece \(\beta_i\) that \(P_i\) accepted, \(P_i\) checks to see if it is on the graph \(f(x)\). If some piece does not fit \(f(x),\,P_i\) broadcasts a vote to disqualify the dealer \(D\).</li>
 									<li>The dealer is disqualified if at least \(t+1\) players so voted.</li>
 									<li>If the dealer was not disqualified, \(s\), the free term of \(f(x)\), is taken to be \(D\)'s secret.</li>
 								</ol>
