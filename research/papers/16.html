@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
         <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
+		<script type="text/javascript" src="../../script/difficulty.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
         <script type="text/javascript" src="../../script/fnote.js"></script>
@@ -27,7 +28,7 @@
 				{
 					default:
 						console.log("Developer note: Equation " + box + " undefined");
-						return [{type:"p",content:"No info on this equation yet."}];
+						return {difficulty:5,info:[{type:"p",content:"No info on this equation yet."}]};
 				}
 			}
 
@@ -141,7 +142,7 @@
 					<section id="abstract" data-section-number="0">
 						<h2>Abstract</h2>
 						<p class="rp_original">
-							The classical results in unconditional multiparty computation among a set of \(n\) players state that less than \(n/2\) passive or less than \(n/3\) active adversaries can be tolerated; assuming a <span class="definable">broadcast channel</span> the threshold for active adversaries is \(n/2\). Strictly generalizing these results we specify the set of misbehaving players as an arbitrary set of subsets of the player set. We prove the necessary and sufficient conditions for the existence of secure multiparty protocols in terms of the potentially misbehaving player sets.
+							The classical results in unconditional multiparty computation among a set of \(n\) players state that less than \(n/2\) passive or less than \(n/3\) active adversaries can be tolerated; assuming a <span class="load-definable">broadcast channel</span> the threshold for active adversaries is \(n/2\). Strictly generalizing these results we specify the set of misbehaving players as an arbitrary set of subsets of the player set. We prove the necessary and sufficient conditions for the existence of secure multiparty protocols in terms of the potentially misbehaving player sets.
 						</p>
 						<p class="rp_original">
 							For every function there exists a protocol secure against a set of potential passive collusions if and only if no two of these collusions add up to the full player set. The same condition applies for active adversaries when assuming a broadcast channel. Without broadcast channels for every function there exists a protocol secure against a set of potential active adverse player sets if and only if no three of these sets add up to the full player set.

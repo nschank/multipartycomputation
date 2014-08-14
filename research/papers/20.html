@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
         <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
+		<script type="text/javascript" src="../../script/difficulty.js"></script>
         <script type="text/javascript" src="../../script/equation.js"></script>
         <script type="text/javascript" src="../../script/ref.js"></script>
         <script type="text/javascript" src="../../script/fnote.js"></script>
@@ -27,7 +28,7 @@
 				{
 					default:
 						console.log("Developer note: Equation " + box + " undefined");
-						return [{type:"p",content:"No info on this equation yet."}];
+						return {difficulty:5,info:[{type:"p",content:"No info on this equation yet."}]};
 				}
 			}
 			self_def["non-general word"] = {title:"word", def:[]};
@@ -574,7 +575,7 @@
 							\(n_O\) specifies the total number of outputs&mdash;if the same value is given as output to several players, then this value is counted several times.
 						</li>
 						<li id="footnote3">
-							This is contrast to the protocol in <span class="reference" data-citation="BGW88">[?]</span>, where the existence of an \(n\)th <span class="definable">root of unity</span> in \(\mathbb F\) is assumed.
+							This is contrast to the protocol in <span class="reference" data-citation="BGW88">[?]</span>, where the existence of an \(n\)th <span class="load-definable">root of unity</span> in \(\mathbb F\) is assumed.
 						</li>
 						<li id="footnote4">
 							An efficiency gain of a factor 2 can be achieved by setting \(r_{ij} = r_{ji}\), and hence \(f_i(x) = \widetilde{f_i}(x)\). One can prove that privacy is not violated by this technique. See <span class="reference" data-citation="CDM00">[?]</span> for more details.

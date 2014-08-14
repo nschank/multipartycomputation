@@ -8,7 +8,6 @@ function bs_contains(lm) {
 			return true;
     return false;
 }
-
 function bs_remove(lm) {
 	var i = bs_open.indexOf(lm);
 	if(i > -1)
@@ -91,32 +90,49 @@ function maybeClose(block)
     };
 }
 
-function blockConstruct(blockContent, className)
+function blockConstruct(container, blockContent, className)
 {
-	var classInsert = "";
-	if(className)
-		classInsert = " class=\"" + className + "\"";
-	var html = "";
 	for(var i = 0; i < blockContent.length; i++)
 	{
-		var thisInsert = classInsert;
-		if(blockContent[i].className)
-			thisInsert = " class=\"" + blockContent[i].className + "\"";
-		switch(blockContent[i].type)
-		{
-			case "p":
-				html += "<" + blockContent[i].type + thisInsert + ">" + blockContent[i].content + "</" + blockContent[i].type + ">";break;
-			case "span":
-				if(blockContent[i].href)
-					html += "<a href=\"" + blockContent[i].href + "\">";
-				html += "<" + blockContent[i].type + thisInsert + ">" + blockContent[i].content + "</" + blockContent[i].type + ">";
-				if(blockContent[i].href)
-					html+="</a>";
-				break;
-			case "ol": case "ul": case "li":
-				html += "<" + blockContent[i].type + thisInsert + ">" + blockConstruct(blockContent[i].content) + "</" + blockContent[i].type + ">"; break;
-			default: break;
-		}
+		var elemInfo = blockContent[i];
+		var elem = container.appendChild(construct(elemInfo, className));
 	}
-	return html;
+	return container;
+}
+
+function construct(constructible, className)
+{
+	var elem = document.createElement(constructible.type);
+	if(constructible.type === "p" || constructible.type === "span")
+		elem.innerHTML = constructible.content;
+	else blockConstruct(elem, constructible.content, className);
+	
+	if(constructible.className)
+		elem.className = constructible.className;
+	else elem.className = className;
+	
+	if(constructible.type === "span" && constructible.href)
+	{
+		var a = document.createElement("a");
+		a.setAttribute("href",constructible.href);
+		a.appendChild(elem);
+		return a;
+	}
+	return elem;
+}
+
+function createFloatingDiv(container, activatingSpan, id, constructor)
+{
+	var block = document.getElementById(id);
+	if(!block)
+	{
+		block = constructor();
+		block.id = id;
+		container.appendChild(block);
+		block.addEventListener('mouseover',keepOpen(block));
+		block.addEventListener('mouseout',maybeClose(block));
+        window.addEventListener('scroll', definitelyClose(block));
+	}
+	activatingSpan.addEventListener('mouseover',mouseOverListener(activatingSpan, block));
+	activatingSpan.addEventListener('mouseout',mouseOutListener(activatingSpan, block));
 }

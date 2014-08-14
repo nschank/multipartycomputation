@@ -5,61 +5,71 @@ window.addEventListener("load", addGlossaryListeners, true);
  */
 function addGlossaryListeners()
 {
-	var definable = document.getElementsByClassName("definable");
+	var allDefinables = document.getElementsByClassName("load-definable");
 	
 	//Attempt to organize the DOM a bit better by putting the definition boxes in their own div; 
 	// we will put the div in the DOM immediately, however, because they are all styled as
 	// 'display:none' and 'position:fixed', so they add very little overhead.
-	var glossary = document.createElement("div");
-	document.body.appendChild(glossary);
+	var blockDiv = document.createElement("div");
+	document.body.appendChild(blockDiv);
 	
-	for(var i = 0; i < definable.length; i++)
+	for(var i = 0; i < allDefinables.length; i++)
 	{
-		//Try the actual text being surrounded first; barring that, use data-define.
-		var word = definable.item(i).innerHTML;
-		var definition = define(word);
-		if(definition === null && definable.item(i).getAttribute("data-define"))
+		//The span to (possibly) make a popup for
+		var span = allDefinables.item(i);
+		
+		//Try data-define first; if it isn't present or doesn't work, we use innerHTML
+		var word = span.getAttribute("data-define");
+		var definitionObject;
+		if(!word || !(definitionObject = define(word)))
 		{
-			word = definable.item(i).getAttribute("data-define");
-			definition = define(word);
+			word = span.innerHTML;
+			definitionObject = define(word);
 		}
+		
 		//The following occurs only if a word is not in the glossary.
-		if(definition === null) 
+		if(definitionObject === null) 
 		{
 			console.log("Developer note: word \"" + word + "\" missing from dictionary.");
 			continue;
 		}
-		addDOMG(definable.item(i), word, definition, glossary);
+		
+		//If we have a difficulty set, we check to see if set difficulty <= word difficulty
+		if(difficulty > definitionObject.difficulty)
+			continue;
+		
+		createFloatingDiv(blockDiv, span, 
+			"gl_block" + definitionObject.blockName, 
+			defBlockConstructor(definitionObject));
+		span.className += " definable";
 	}
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
 
-function g_removeSpaces(str)
+/**
+ Creates a constructor which can be called by blockShare.js's "createFloatingDiv" method in order
+ to make a definition block.
+ */
+function defBlockConstructor(definitionObject)
 {
-	if(str.length == 0) return "";
-	else if(str.charAt(0) == ' ') return g_removeSpaces(str.substring(1));
-	else return str.charAt(0) + g_removeSpaces(str.substring(1));
-}
-
-function addDOMG(elem, word, definition, glossary)
-{
-	var block = document.getElementById("gl_block" + g_removeSpaces(word));
-	
-	if(!block)
+	return function()
 	{
-		block = document.createElement("div");
+		var block = document.createElement("div");
 		block.className="gl_block";
-		block.id = "gl_block" + g_removeSpaces(word);
+
+		var h2 = document.createElement("h2");
+		h2.className = "gl_word";
+		h2.innerHTML = "Definition: " + definitionObject.title;
+		block.appendChild(h2);
 		
-		block.innerHTML += "<h2 class=\"gl_word\">Definition: " + definition.title + "</h2>";
-		block.innerHTML += blockConstruct(definition.def, "gl_definition");
-		block.innerHTML += "<p class=\"gl_help\">Visit the full <a href=\"multipartycomputation.org/glossary.html\">glossary</a>.</p>";
-		
-		glossary.appendChild(block);
-		
-		block.addEventListener('mouseover',keepOpen(block));
-		block.addEventListener('mouseout',maybeClose(block));
-        window.addEventListener('scroll', definitelyClose(block));
+		blockConstruct(block, definitionObject.def, "gl_definition");
+
+		var help = document.createElement("p");
+		help.className = "gl_help";
+		help.innerHTML = "Visit the full <a href=\"http://www.multipartycomputation.org/glossary.html\">glossary</a>.";
+		block.appendChild(help);
+
+		return block;
 	}
-	elem.addEventListener('mouseover',mouseOverListener(elem, block));
-	elem.addEventListener('mouseout',mouseOutListener(elem, block));
 }
+
