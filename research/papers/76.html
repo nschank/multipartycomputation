@@ -193,7 +193,7 @@
 							<li><b>Number of parties: </b> 3 parties: a Dealer, an Intermediary, and a Recipient.</li>
 							<li><b>Function(s): </b> In the first stage, the Dealer commits to a particular value that will be sent to the Recipient. In the second stage, the Recipient is given that value by the Intermediary, and is guaranteed that the value is exactly what the Dealer committed to.</li>
 							<li><b>Privacy constraints: </b> The recipient will not learn the secret until the second stage.</li>
-							<li><b>Cheating: </b> The Intermediary can only lie to the Recipient about the value successfully with <span class="definable">negligible</span> probability.</li>
+							<li><b>Cheating: </b> The Intermediary can only lie to the Recipient about the value successfully with <span class="definable">negligible</span> probability. The Dealer cannot convince the Recipient that the Intermediary held a different value.</li>
 							<li><b>Bits exchanged: </b> \(\operatorname O(k\log p)\), where \(p\) is the order of the finite field chosen, and \(k\) is the security parameter.</li>
 							<li><b>Runtime: </b> \(\operatorname O(k\log^2 p)\), where \(p\) is the order of the finite field chosen, and \(k\) is the security parameter.</li>
 						</ul>
@@ -201,7 +201,7 @@
 						<ul class="rp_analysis">
 							<li><b>Number of parties: </b> \(n\) parties, in which one party is the "dealer" of a secret.</li>
 							<li><b>Function(s): </b> All parties possess a share of the secret, and the dealer can later reveal the secret to all parties. Any one third of the parties, assuming they are all honest, can also reveal the secret.</li>
-							<li><b>Privacy constraints: </b> No party can learn the secret until the dealer (or one third of the participants) choose to reveal it.</li>
+							2<li><b>Privacy constraints: </b> No party can learn the secret until the dealer (or one third of the participants) choose to reveal it.</li>
 							<li><b>Cheating: </b> No party can lie about their own shares of the secret, except with <span class="definable">negligible</span> probability. The dealer can break the consistency of the protocol; this is fixed below, in Weak Secret Sharing.</li>
 							<li><b>Bits exchanged: </b> \(\operatorname O(n^2\log n)\).</li>
 							<li><b>Runtime: </b> \(\operatorname O(n^2\log n)\).</li>
