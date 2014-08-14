@@ -12,9 +12,11 @@
 
 div.gl_block {
 	position:fixed;
-	min-width:150px;
+	min-width:250px;
 	min-height:50px;
-	max-width:300px;
+	max-height:500px;
+	max-width:500px;
+	overflow-y:auto;
 	left:0px;
 	top:0px;
 	display:none;

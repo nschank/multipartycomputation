@@ -25,15 +25,15 @@
 				switch (box)
 				{
 					case "cartesianproduct":
-						return [{type:"p",content:"Read: <i>the Cartesian product of V and W.</i></p><p>The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}</p><p>A function with domain \\(V\\times W\\) can be rephrased as a function \\(f(v,w\\) where the domain of \\(v\\) is \\(V\\) and the domain of \\(w\\) is \\(W\\)."}];
+						return [{type:"p",content:"Read: <i>the Cartesian product of V and W.</i>"},{type:"p",content:"The Cartesian product of two sets is the set of all ordered pairs formed by taking an element from the first set followed by an element from the second set. As an example, a full deck of playing cards can be described as {A,2,3,4...K}\\(\\times\\){♠, ♥, ♦, ♣}"},{type:"p",content:"A function with domain \\(V\\times W\\) can be rephrased as a function \\(f(v,w\\) where the domain of \\(v\\) is \\(V\\) and the domain of \\(w\\) is \\(W\\)."}];
 					case "Eax":
 						return [{type:"p",content:"The encryption of the \\(N\\)-bit integer \\(x\\) under Alice's public key."}];
 					case "fx1xm":
 						return [{type:"p",content:"Any function on \\(m\\) integer inputs. All of the inputs must fall into a particular range. The output of the function must be an integer."}];
 					case "NbitZ+":
 						return [{type:"p",content:"All integers between 0 and \\(2^{N}-1\\). For example, if \\(N=3\\), then all numbers from \\(0 = 000_b\\) to \\(7 = 111_b\\)."}];
-					case "O(N^k)":
-						return [{type:"p",content:"A function that grows more slowly than \\(N^k\\), where \\(N\\) is the number of bits being used, and \\(k\\) is some integer chosen in advance."}];
+					case "T(A)":
+						return [{type:"p",content:"The maximum number of bits exchanged in protocol \\(A\\)."}];
 					case "quartic":
 						return [{type:"p",content:"The number of bits exchanged is lower-bounded by the product of the quartic roots of the cardinality of the domain. In this case, the domain of the entire function is being represented by the product of the domains of each individual variable."}];
 					case "search":
@@ -90,7 +90,7 @@
                         <a class="rp_author" href="../authors/Andrew C. Yao.html">Andrew C. Yao</a></span>
 					
 					<div class="rp_snippet">
-						&ldquo;Suppose \(m\) people wish to compute the value of a function <span class="equation" data-equation="fx1xm">\(f(x_1, x_2, x_3,&hellip;, x_m)\)</span>, which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range. Assume initially person \(P_i\) knows the value of \(x_i\) and no other \(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?&rdquo;
+						&ldquo;Suppose \(m\) people wish to compute the value of a function \(f(x_1, x_2, x_3,&hellip;, x_m)\), which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range. Assume initially person \(P_i\) knows the value of \(x_i\) and no other \(x\)'s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?&rdquo;
 					</div>
 					<h1>Overview</h1>
 					
@@ -98,7 +98,7 @@
                     <section id="intro">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
-							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaires' Problem, and for being the first paper to look into multiparty computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) multiparty computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
+							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaires' Problem, and for being the first paper to pose the problem of multiparty computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) multiparty computation as a whole, as opposed to defining any particular problems, perspectives, or contexts.
 						</p>
 						<p class="rp_analysis">
 							The main exception to that indefiniteness is the basic problem and protocol he detailed, now commonly known as the Millionaires' Problem (and Protocol). Perhaps the most common illustration of multiparty computation, its simplicity and brevity make it an excellent case study into secure two-party computation (as can be seen in the <a href="../../learn/ch1.html#sec1">tutorial page</a> that focuses on it). While Yao mentioned other application cases, some of which were frankly even better candidates for such popularity, the Millionaires' Problem nonetheless remains the most common example of multiparty computation to date.
@@ -117,7 +117,7 @@
 							<li><b>Deterministic vs. probabilistic computation.</b> Yao mentions that both are possible, though the latter is rather obviously more difficult to prove secure, especially if the probability density of the inputs is not constant.</li>
 							<li><b>Number of parties.</b> Yao assumes the two-party case for the majority of the paper, but expands the ideas to any \(m\) parties near his conclusions. The \(m\) party case is generally more difficult to deal with due to <span class="definable" data-define="collusion">collusions</span> that are impossible in the two-party case; however, Yao states that it is possible to create a protocol for any \(m\) parties with any function.</li>
 							<li><b>Trust, cheating, and collusion.</b> Parties may not trust that the other parties are following the protocol correctly, and that must be built into some protocols in order to ensure that the results are still viable. Cheating (as opposed to sabotage, below) may affect correctness, privacy, or both. Collusion is a particular subset of cheating under which multiple cheaters work together. Yao states that any computable function \(f\) can be turned into a protocol with an upper-bounded probability of successful cheating.</li>
-							<li><b>Sabotage and eavesdropping.</b> Parties may not be able to communicate without interference or eavesdropping by outside parties, affecting correctness, security, or both. Yao mentions these as issues to be discussed elsewhere, and in general sabotage from the outside and eavesdropping are dealt with using crytographic primitives from outside multiparty computation.</li>
+							<li><b>Sabotage and eavesdropping.</b> Parties may not be able to communicate without interference or eavesdropping by outside parties, affecting correctness, security, or both. Yao mentions these as issues to be discussed elsewhere, and in general sabotage and eavesdropping are both dealt with by using cryptographic primitives rather than as a part of the protocol.</li>
 						</ul>
 						<p class="rp_analysis">
 							Yao specifically mentions, as an aside, that his theorems prove that <span class="definable">mental poker</span> can be played with any public-key system, a generalization of previous research.
@@ -126,7 +126,7 @@
 					<section id="assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
-							Some of Yao's results are dependent on the existence of <a href="../../learn/assumptions.html"><span class="definable" data-define="one-way function">one-way functions</span></a>. His Millionaires' Problem protocol, for one. Since this extended abstract only briefly explains most of his theorems, we must assume that Theorems 1-5 and 9 depend on the existence of such functions. Theorem 6 determines a lower bound, and 7 and 8 are impossibility results, so we can safely assume that they do not.
+							Some of Yao's results are dependent on the existence of <span class="definable" data-define="one-way function">one-way functions</span>. His Millionaires' Problem protocol, for one. Since this extended abstract only briefly explains most of his theorems, we must assume that Theorems 1-5 and 9 depend on the existence of such functions. Theorem 6 determines a lower bound, and 7 and 8 are impossibility results, so we can safely assume that they do not.
 						</p>
 					</section>
 					<section id="defs">
@@ -286,19 +286,19 @@
                     <section id="sec1">
                         <h2>1. Introduction</h2>
                         <p class="rp_original">
-                            Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other’s wealth. 
+                            Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other's wealth. 
                             How can they carry out such a conversation?
                         </p>
 
                         <p class="rp_original">
                             This is a special case of the following general problem. Suppose \(m\) people wish to compute the value of a function
-                            <span class="equation" data-equation="fx1xm">\(f(x_1, x_2, &hellip;, x_m)\)</span>,
+                            \(f(x_1, x_2, &hellip;, x_m)\),
                             which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range.
                             Assume initially person \(P_i\) knows the value of \(x_i\) and no other
-                            \(x\)’s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?
-                            The millionaire’s problem corresponds to the case when \(m = 2\) and
+                            \(x\)'s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?
+                            The millionaire's problem corresponds to the case when \(m = 2\) and
                             \(f(x_1, x_2) = 1\) if \(x_1 &lt; x_2\),
-                            and \(0\) otherwise. In this paper, we will give precise formulation of this general problem and describe three ways of solving it by use of <span class="definable" data-define="one-way function">one-way functions</span>. These results have applications to secret voting, private querying of database, oblivious negotiation, playing <span class="definable">mental poker</span>, etc. We will also discuss the complexity question “How many bits need to be exchanged for the computation”, and describe methods to prevent participants from cheating. Finally, we study the question “What cannot be accomplished with one-way functions”.
+                            and \(0\) otherwise. In this paper, we will give precise formulation of this general problem and describe three ways of solving it by use of <span class="definable" data-define="one-way function">one-way functions</span>. These results have applications to secret voting, private querying of database, oblivious negotiation, playing <span class="definable">mental poker</span>, etc. We will also discuss the complexity question "How many bits need to be exchanged for the computation", and describe methods to prevent participants from cheating. Finally, we study the question "What cannot be accomplished with one-way functions".
                         </p>
                         <p class="rp_original">
                             Before describing these results, we would like to put this work in perspective by first considering a unified view of secure computation in the next section.
@@ -311,14 +311,14 @@
 
                             The first kind is concerned with the <span class="definable">encryption</span> and transmission of messages to make them unreadable and unalterable for eavesdroppers and saboteurs <sup class="reference" data-citation="DH"></sup><sup class="reference" data-citation="GM"></sup><sup class="reference" data-citation="Ra"></sup><sup class="reference" data-citation="RSA"></sup>.
 
-                            The second kind of applications includes “<span class="definable">mental poker</span>”<sup class="reference" data-citation="SRA"></sup>, in which two players deal cards by communicating over a telephone line, and “<span class="definable" data-define="coin flip">coin flipping</span>” <sup class="reference" data-citation="Bl"></sup>, in which two mutually suspecting parties are to generate an unbiased bit.
+                            The second kind of applications includes "<span class="definable">mental poker</span>"<sup class="reference" data-citation="SRA"></sup>, in which two players deal cards by communicating over a telephone line, and "<span class="definable" data-define="coin flip">coin flipping</span>" <sup class="reference" data-citation="Bl"></sup>, in which two mutually suspecting parties are to generate an unbiased bit.
 
                             It would be desirable to have a unified framework where all these applications can be related, and where common proof techniques can be developed for proving the security of protocols.
 
                             More fundamentally, such a framework is essential if we are ever to understand the intrinsic power and limitation of one-way functions.
 
-                            For example, without a precise model it would be hard to answer a question such as “Is it possible for three mutually suspecting parties to interactively generate a bit with <span class="definable">bias</span>
-                            \(\frac{1}{e}\)?”
+                            For example, without a precise model it would be hard to answer a question such as "Is it possible for three mutually suspecting parties to interactively generate a bit with <span class="definable">bias</span>
+                            \(\frac{1}{e}\)?"
                         </p>
 						<p class="rp_annotation">
 							Yao answers this question in <a href="#theorem7">Theorem 7</a>, which states that <span class="definable">transcendental</span> biases are not achievable <span class="definable" data-define="robust">robustly</span>.
@@ -383,7 +383,7 @@
                                 Let \(E_a\) be the public key of Alice, generated by choosing a random element from \(Q_N\).
                             </p>
 							<p class="rp_annotation">
-								Firstly, it should be noted that in the original paper, Yao put that \(1 &lt; i,j &lt; 10\); however, the protocol is not at any way affected by allowing \(i\) or \(j\) to be \(1\) or \(10\), and it doing so cuts down on unnecessary bits sent.
+								Firstly, it should be noted that in the original paper, Yao put that \(1 &lt; i,j &lt; 10\); however, the protocol is not in any way affected by allowing \(i\) or \(j\) to be \(1\) or \(10\), and the additional restriction wastes bits since the protocol doesn't need it.
 								Secondly, beginning readers should note that, while Bob can calculate \(E_a(x)\), he is unable to calculate \(D_a(x)\)&mdash;the decryption of \(E_a(x)\)&mdash; in a reasonable (polynomial) amount of time.
 							</p>
                             <p class="rp_original">
@@ -466,7 +466,7 @@
                                 Here we will informally argue why the requirement is met.
                             </p>
                             <p class="rp_original">
-                                Firstly, Alice will not know anything about Bob’s wealth \(j\),
+                                Firstly, Alice will not know anything about Bob's wealth \(j\),
                                 except for the constraint on \(j\) implied by the final result that Bob told her,
                                 because the only other information coming from Bob is that Bob knows the value of \(D_a(s)\) for
                                 some \(s\) between \(k-j+1\) to \(k-j+10\).
@@ -480,7 +480,7 @@
                                 or \(z_u+1\).
                             </p>
                             <p class="rp_original">
-                                This has not finished the argument yet, as Alice or Bob might try to figure out the other person’s value by making more calculations.
+                                This has not finished the argument yet, as Alice or Bob might try to figure out the other person's value by making more calculations.
                                 For example, Bob might try to randomly choose a number \(t\) and check if \(E_a(t)=k-j+9\);
                                 if he succeeds, he then knows the value \(y_9\) to be \(t\),
                                 and knows the value of \(z_9\),
@@ -491,7 +491,7 @@
                                 In the formal definition to be given in <a href="#sec3.2">Section 3.2</a>, we will define this precisely.
                             </p>
 							<p class="rp_annotation">
-								This precise example will be addressed in the annotations, because Yao does not return to it. However (spoiler alert), neither party could perform enough calculations to learn something extra in polynomial time. Alice, in particular, cannot possibly learn anything, whereas Bob only has an \(\frac{n}{2^N}\) probability of learning something, where \(n\) is the range of \(i,j\).
+								This precise example will be addressed in the annotations, because Yao does not return to it. As a quick summary, neither party could perform enough calculations to learn something extra in polynomial time. Alice, in particular, cannot possibly learn anything, whereas Bob only has an \(\operatorname O\left(\frac{n}{2^N}\right)\) probability of learning something, where \(n\) is the range of \(i,j\).
 							</p>
                             <p class="rp_original">
                                 One may have noticed the possibility that some party may cheat in the process, by deviating from the agreed protocol.
@@ -524,7 +524,7 @@
                                 is \(0-1\) valued and \(m=2\) (Alice and Bob).
                                 Generalization of the results to general \(m\) will be briefly discussed in
                                 <a href="#sec5">Section 5</a>.  The proofs for the general case involve additional technical complications, and
-                                there are extra security considerations such as possible “<span class="definable" data-define="collusion">collusions</span>” that are absent in the 2-person case.
+                                there are extra security considerations such as possible "<span class="definable" data-define="collusion">collusions</span>" that are absent in the 2-person case.
                             </p>
                             <h4>Protocol</h4>
                             <p class="rp_original">
@@ -555,7 +555,7 @@
                                 By that time, the protocol has an instruction for each participant to compute
                                 the function value \(f\) in private.
                                 Finally, we require that, in a protocol, the total number of evaluations of \(E\)'s
-                                and \(D\)'s by Bob and Alice be bounded by <span class="equation" data-equation="O(n^k)">\(O(N^k)\)</span>, where
+                                and \(D\)'s by Bob and Alice be bounded by \(\operatorname O(N^k)\), where
                                 \(k\) is an integer chosen in advance.
                             </p>
 							<p class="rp_annotation">
@@ -576,7 +576,7 @@
                             </p>
                             <ol class="rp_definition">
                                 <li>
-                                    \(p_i(j)=\frac{1}{|G_i|}(1+O(\epsilon))\)
+                                    \(p_i(j)=\frac{1}{|G_i|}(1+\operatorname O(\epsilon))\)
                                     for \(j \in G_i\), and \(0\) otherwise, where
                                     \(G_i\) is the set of \(j\)
                                     for which \(f(i,j)=v\),
@@ -588,7 +588,7 @@
 							</p>
 							<ol class="rp_definition">
                                 <li value="2">
-                                    if Alice tries afterwards to perform more calculations with no more than \(O(N^k)\) evaluations of
+                                    if Alice tries afterwards to perform more calculations with no more than \(\operatorname O(N^k)\) evaluations of
                                     \(E\)'s and \(D\)'s, then with
                                     probability at least \(1-\delta\) she will still get the
                                     above distribution on \(j\), and
@@ -609,13 +609,13 @@
 								random prime Alice has used to \(\bmod{} y_u\), and he knows either \(y_i\pmod{p}\) or \(y_i+1\pmod{p}\) for all of \(i\in G_j\). He must correctly guess a value \(g\) such that \(E_a(g)\) or \(E_a(g+1)\) is \(k+j-u\) for some \(u&lt;j\).
 							</p>
 							<p class="rp_annotation">
-								This is likely why Yao attempted to specify that no two \(y_u\)'s be within 2 of each other, to force Bob's search space within \((\mathbb{Z}/p\mathbb{Z})^*\) to be of size \(2(j-1)\). This restriction is not necessary, however: assume the very worst case, which is that \(z_u\) is a sequence of only one number repeated (and noting that that would tell Bob nothing about \(i\) by itself), so Bob has a search space of only 2 within \((\mathbb{Z}/p\mathbb{Z})^*\). Since each \(y_u\) could be between 0 and \(2^N-1\), and \(p\) is of maximum size \(2^{\frac{N}{2}}\), this leaves a minimal total search space of \(2*\frac{2^N}{2^{N/2}}=2^{\frac{N}{2}+1}\). Since Bob has no extra information which would allow him to choose from the search space better than randomly, finding a single value which would give him any information has runtime \(O(2^N)\). Since this is the minimal search space, it is the best case for Bob, and therefore the probability of him finding any information through extra calculation is <span class="definable">negligible</span>.
+								This is likely why Yao attempted to specify that no two \(y_u\)'s be within 2 of each other, to force Bob's search space within \((\mathbb{Z}/p\mathbb{Z})^*\) to be of size \(2(j-1)\). This restriction is not necessary, however: assume the very worst case, which is that \(z_u\) is a sequence of only one number repeated (and noting that that would tell Bob nothing about \(i\) by itself), so Bob has a search space of only 2 within \((\mathbb{Z}/p\mathbb{Z})^*\). Since each \(y_u\) could be between 0 and \(2^N-1\), and \(p\) is of maximum size \(2^{\frac{N}{2}}\), this leaves a minimal total search space of \(2*\frac{2^N}{2^{N/2}}=2^{\frac{N}{2}+1}\). Since Bob has no extra information which would allow him to choose from the search space better than randomly, finding a single value which would give him any information has runtime \(\operatorname O(2^N)\). Since this is the minimal search space, it is the best case for Bob, and therefore the probability of him finding any information through extra calculation is <span class="definable">negligible</span>.
 							</p>
 							<p class="rp_annotation">
 								We can set \(\epsilon\) arbitrarily low, since neither party can calculate a probability distribution better than \(\frac{1}{|G|}\).
 							</p>
 							<p class="rp_annotation">
-								We can calculate \(\delta\) a bit more precisely. The probability of Bob changing his probability distribution is \(\frac{O(N^k)}{2^{N/2+1}}\) best case, so for fixed \(k\) we can set \(\delta\leq \frac{N^k}{2^{N/2+1}}\), which <a href="http://www.wolframalpha.com/input/?i=plot+%28N%5Ek%29%2F%282%5E%28N%2F2%2B1%29%29+on+k%3D0..8%2C+N%3D128..256">rapidly</a> approaches \(0\) as \(N\) increases.
+								We can calculate \(\delta\) a bit more precisely. The probability of Bob changing his probability distribution is \(\frac{\operatorname O(N^k)}{2^{N/2+1}}\) best case, so for fixed \(k\) we can set \(\delta\leq \frac{\operatorname O(N^k)}{2^{N/2+1}}\), which <a href="http://www.wolframalpha.com/input/?i=plot+%28N%5Ek%29%2F%282%5E%28N%2F2%2B1%29%29+on+k%3D0..8%2C+N%3D128..256">rapidly</a> approaches \(0\) as \(N\) increases.
 							</p>
                             <span class="rp_theorem_header" id="theorem1">Theorem 1</span>
                             <p class="rp_original rp_theorem">
@@ -646,7 +646,7 @@
                                 between Alice and Bob when \(A\) is used.
                             </p>
 							<p class="rp_annotation">
-								If we set \((\epsilon,\delta)=(1,1)\)&mdash;that is, if we don't require privacy at all&mdash;then the only information that needs to be sent is \(i\) to Bob, followed by \(f(i,j)\) back to Alice, meaning \(T(A)=\log_2{i}+1\leq N+1\); this is the lowest bound possible (\(T(A)\in\Omega(N)\)). This would be increased further by the need for
+								If we set \((\epsilon,\delta)=(1,1)\)&mdash;that is, if we don't require privacy at all&mdash;then the only information that needs to be sent is \(i\) to Bob, followed by \(f(i,j)\) back to Alice, meaning <span class="equation" data-equation="T(A)">\(T(A)\)</span>\(=\log_2{i}+1\leq N+1\); this is the lowest bound possible (\(T(A)\in\Omega(N)\)). This would be increased further by the need for
 								security, of course.
 							</p>
                             <span class="rp_theorem_header" id="theorem2">Theorem 2</span>
@@ -680,7 +680,7 @@
                             <p class="rp_original rp_theorem">
                                 Let \(\frac{1}{5} > \epsilon,\delta > 0\) be fixed. Let \(f\) be a random element of \(F_n\),
                                 then any protocol \(A\) that computes \(f\) with \((\epsilon,\delta)\)-privacy constraint
-                                must have \(T(A)&gt;2^\frac{n}{2}\) for all large \(n\).
+                                must have <span class="equation" data-equation="T(A)">\(T(A)\)</span>\(\gt 2^\frac{n}{2}\) for all large \(n\).
                             </p>
 							<p class="rp_annotation">
 								We are yet uncertain what to make of this theorem: in particular, whether Yao means to indicate something significant about the value \(\frac{1}{5}\), or to specify a particular property of members of \(F_n\).
@@ -724,11 +724,11 @@
                             </p>
                             <span class="rp_theorem_header" id="theorem4">Theorem 4</span>
                             <p class="rp_original rp_theorem">
-                                Let \(1 > \gamma > 0\). Under the same assumption of <a href="#theorem2">Theorem 2</a>, there exists a protocol \(A\)
+                                Let \(1\gt \gamma\gt 0\). Under the same assumption of <a href="#theorem2">Theorem 2</a>, there exists a protocol \(A\)
                                 for computing \(f\) such that
                             </p>
                             <ol class="rp_original rp_theorem">
-                                <li>\(T(A)\in O(C(f)\log{\frac{1}{\epsilon\cdot\delta\cdot\gamma}}\log{\frac{1}{\gamma}})\), and</li>
+                                <li><span class="equation" data-equation="T(A)">\(T(A)\)</span>\(\in \operatorname O\left(C(f)\log{\frac{1}{\epsilon\cdot\delta\cdot\gamma}}\log{\frac{1}{\gamma}}\right)\), and</li>
                                 <li>if one participant behaves according to \(A\), the probability of a successful cheating by the other
                                     participant is at most \(\gamma\)</li>
                             </ol>
@@ -745,7 +745,7 @@
                                 Suppose a committee of \(m\) members
                                 wish to decide on a yes-no action. Each member is to
                                 write an opinion \(x_i\), and the final action can be regarded
-                                as a function <span class="equation" data-equation="fx1xm">\(f(x_1, x_2, x_3,&hellip;, x_m)\)</span>. The results obtained
+                                as a function \(f(x_1, x_2, x_3,&hellip;, x_m)\). The results obtained
                                 in this paper means that it is possible to agree on the
                                 final action \(f\), without anyone knowing the opinion of any
                                 other member's. Furthermore, the protocol makes the probability of anyone having a
