@@ -49,7 +49,7 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1" id="overview">
+            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
@@ -73,13 +73,13 @@
 					<h1>Overview</h1>
                     <div class="main_toc"></div>
 						
-                    <section id="intro">
+                    <section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Paper Title</b> is...
 						</p>
 					</section>
-					<section id="goals">
+					<section id="goals" data-section-name="Goals and Results">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							Some goals that they had.
@@ -88,17 +88,17 @@
 							Don't forget some results, too!
 						</p>
 					</section>
-					<section id="assumptions">
+					<section id="assumptions" data-section-name="Assumptions">
 						<h2>Assumptions</h2>
 					</section>
-					<section id="defs">
+					<section id="defs" data-section-name="Definitions">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - </span></a>
 						<p class="rp_original rp_definition">
 							A definition 
 						</p>
 					</section>
-					<section id="theorems">
+					<section id="theorems" data-section-name="Theorems">
 						<h2>Theorems</h2>
 						<p class="rp_original">Some general definitions used by several theorems</p>
 						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
@@ -106,7 +106,7 @@
 							A theorem
 						</p>
 					</section>
-					<section id="protocol">
+					<section id="protocol" data-section-name="Protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#secxx">Some Protocol Defined</a></h3>
 						<ul class="rp_analysis">
@@ -122,10 +122,10 @@
 							<li><b>Notes: </b></li>
 						</ul>
 					</section>
-					<section id="further">
+					<section id="further" data-section-name="Further Reading">
 						<h2>Further Reading</h2>
 					</section>
-					<section id="ref">
+					<section id="ref" data-section-name="Referencing This Paper">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -134,11 +134,11 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper">
+            <div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper">
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper</h1>
 					<div class="main_toc"></div>
-					<section id="abstract" data-section-number="0">
+					<section id="abstract" data-section-number="0" data-section-name="Abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
 							A fundamental problem in designing secure multiparty protocols is how to deal with adaptive adversaries (i.e. adversaries that may choose the corrupted parties during the course of the computation), in a setting where the channels are insecure and secure communication is achieved by cryptographic primitives based on the computational limitations of the adversary. 
@@ -153,7 +153,7 @@
 							We also consider parties that, even when uncorrupted, may internally deviate from their protocols in arbitrary ways, as long as no external test can detect fault behavior. We show that in this case no non-trivial protocol can be proven adaptively secure using black-box simulation. This holds even if the communication channels are totally secure.
 						</p>
 					</section>
-					<section id="sec1">
+					<section id="sec1" data-section-name="Introduction">
 						<h2>1. Introduction</h2>
 						<p class="rp_original">
 							Consider a set of parties who do not trust each other, nor the channels by which they communicate. Still, the parties wish to correctly compute some common function of their local inputs, while keeping their local data as private as possible. This, in a nutshell, is the problem of secure multiparty computation. The parties' distrust in each other and in the network is usually modeled via an adversary that corrupts some of the parties. Once a party is corrupted it follows the instructions of the adversary. In particular, all the information known to this party becomes known to the adversary.
@@ -185,25 +185,25 @@
 						<p class="rp_original">
 							We present several constructions of non-committing encryption protocols. All constructions consist of a 'key distribution' stage which is independent of the transmitted data, followed by a single message sent from the sender to the receiver. In our most general construction, based on a primitive called common-domain trapdoor system, the key distribution stage requires participation of all parties (and is valid as long as at least <i>one</i> party remains uncorrupted). We also present two alternative constructions, based on the RSA and the Diffie-Hellman assumptions respectively, where the key distribution stage consists of one message sent fro mthe receiver to the sender.
 						</p>
-						<section id="sec1.1">
+						<section id="sec1.1" data-section-name="Related Work">
 							<h3>1.1. Related Work</h3>
 							<p class="rp_original">
 								Independently of our work, Beaver has investigated the problem of converting, in the computational setting, protocols which are adaptively secure against eavesdropping adversaries into protocols adaptively secure against Byzantine adversaries<sup class="reference" data-citation="Be2">[?]</sup>. No protocols adaptively secure against eavesdropping adversaries were known prior to our work, nor are such protocols suggested in <span class="reference" data-citation="Be2">[?]</span>. We believe that the problem of adaptive security retains its difficulty even if only eavesdropping adversaries are considered. Following our work, and motivated by the "Incoercible Voting" Problem, Canetti et. al.<sup class="reference" data-citation="CDNO">[?]</sup> introduced a stronger type of non-committing encryption protocol as well as an implementation of it based on any trapdoor permutation.
 							</p>
 						</section>
-						<section id="sec1.2">
+						<section id="sec1.2" data-section-name="Organization">
 							<h3>1.2. Organization</h3>
 							<p class="rp_original">
 								The rest of this paper is organized as follows. In <a href="#sec2">Section 2</a> we discuss the problem of adaptive security and our solution to it in more detail. We keep the presentation informal throughout this section. Precise definitions are given in <a href="#sec3">Section 3</a>. Our constructions for the non-erasing and honest-looking cases are presented in Sections <a href="#sec4">4</a> and <a href="#sec5">5</a>, respectively.
 							</p>
 						</section>
 					</section>
-					<section id="sec2">
+					<section id="sec2" data-section-name="Semi-honesty and Adaptive Security">
 						<h2>2. Semi-honesty and Adaptive Security</h2>
 						<p class="rp_original">
 							In this section we discuss the problem of adaptive security and our solution to it in more detail. We keep the presentation informal throughout this section. Precise definitions are given in <a href="#sec3">Section 3</a>. In <a href="#sec2.1">Subsection 2.1</a> we discuss the question of what can be expected from an honest party, and present several notions of semi-honest parties. In <a href="#sec2.2">Subsection 2.2</a> we describe the problems encountered when trying to prove adaptive security of protocols <i>in the secure channels setting</i>, and state existing solutions. In <a href="#sec2.3">Subsection 2.3</a> we present the additional problems encountered when trying to prove adaptive security of protocols <i>in the computational setting</i>, and sketch our solution.
 						</p>
-						<section id="sec2.1">
+						<section id="sec2.1" data-section-name="Semi-honest Parties">
 							<h3>2.1. Semi-honest Parties</h3>
 							<p class="rp_original">
 								The problem of adaptively secure computation is intimately related to the following question: To what extend can uncorrupted parties be trusted to carry out instructions that cannot be externally verified, such as erasing local data, or using randomness as instructed? Honest parties internally deviate from their protocol in many real-life scenarios, such as users that keep record of their passwords, stock-market brokers that keep records of their clients' orders, <i>operating systems</i> that "free" old memory instead of erasing it or take periodic snapshots of the memory (for error recovery purposes), and computers that use pseudorandom generators as their source of randomness instead of truly random bits. Consider for example a protocol in which party \(A\) is instructed to choose a random string \(r\) for party \(B\), hand \(r\) to \(B\), and then <i>erase \(r\)</i> from its own memory. Can \(B\) be certain that \(A\) no longer knows \(r\)? Furthermore, can \(A\) now convince a third party (or an adversary that later decides to corrupt \(A\)) that he no longer knows \(r\)?
@@ -227,7 +227,7 @@
 								The focus of our work is mainly on adaptive security in the presence of non-erasing parties (see <a href="#sec4">Section 4</a>). This coincides with the common interpretation of the problem of adaptive security. To the best of our knowledge, honest-looking and weakly-honest parties were not considered before.
 							</p>
 						</section>
-						<section id="sec2.2">
+						<section id="sec2.2" data-section-name="Adaptive Security in the Secure Channels Setting">
 							<h3>2.2. Adaptive Security in the Secure Channels Setting</h3>
 							<p class="rp_original">
 								Although the emphasis of this paper is on the computational setting, we first present the state of knowledge, and sketch the problems involved, in the secure channels setting. We believe that understanding adaptively secure computation in the computational setting is easier when the secure channels setting is considered first.
@@ -238,7 +238,7 @@
 							<p class="rp_original">
 								In order to present the extra difficult in constructing <i>adaptively</i> secure protocols, we roughly sketch the standard definition of secure multiparty computation. (Full definitions appear in <a href="#sec3">Section 3</a>.) Our presentation follows<sup class="reference" data-citation="MR">[?]</sup><sup class="reference" data-citation="Be1">[?]</sup><sup class="reference" data-citation="GwL">[?]</sup><sup class="reference" data-citation="C">[?]</sup>, while incorporating the notion of semi-honest parties in the definition. The definition follows the same outline in the secure channels setting and in the computational settings.
 							</p>
-							<section id="sec2.2.1">
+							<section id="sec2.2.1" data-section-name="Background: How is Security Defined.">
 								<h4>2.2.1. Background: How is Security Defined.</h4>
 								<p class="rp_original">
 									First an <i>ideal model</i> for secure multiparty computation is formulated. A computation in this ideal model captures "the highest level of security we can expect from a multiparty computation". Next we require that executing a secure protocol \(\pi\) for evaluating some function \(f\) of the parties' inputs in the actual <i>real-life setting</i> is "equivalent" to evaluating \(f\) in the ideal model, where the meaning of this "equivalence" is explained below.
@@ -253,7 +253,7 @@
 									We require that the complexity of \(\mathcal S\) be comparable to (i.e. polynomial in) the complexity of \(\mathcal A\). This requirement can be motivated as follows. Machine \(\mathcal S\) represents "what could have been learned in the ideal model". Thus, security of a protocol can be interpreted as the following statement: "whatever \(\mathcal A\) can learn in the real-life model, could have been learned in the ideal model <i>within comparable complexity</i>". A much weaker and arguably unsatisfactory notion of security emerges if the complexity of \(\mathcal S\) does not depend on that of \(\mathcal A\). (This holds even in the non-adaptive case.)<sup class="footnote" id="fref1" data-footnote="1"><a href="#footnote1">1</a></sup>
 								</p>
 							</section>
-							<section id="sec2.2.2">
+							<section id="sec2.2.2" data-section-name="Problems with Proving Adaptive Security">
 								<h4>2.2.2. Problems with Proving Adaptive Security</h4>
 								<p class="rp_original">
 									A standard construction of an ideal-model-adversary, \(\mathcal S\), operates via block-box interaction with the real-life adversary \(\mathcal A\). More specifically let \(\pi'\) be a semi-honest protocol for \(\pi.\;\mathcal S\) runs the black-box representing \(\mathcal A\) on a simulated interaction with a set of parties running \(\pi'.\;\mathcal S\) corrupts (in the ideal model) the same parties that \(\mathcal A\) corrupts in the simulated interaction, and outputs whatever \(\mathcal A\) outputs. From the point of view of \(\mathcal A\), the interaction simulated by \(\mathcal S\) should be distributed identically to an authentic interaction with parties running \(\pi'\). It is crucial that \(\mathcal S\) be able to run a successful simulation based only on the information available to it in the ideal model, and in particular <i>without knowing the inputs of uncorrupted parties</i>. We restrict our presentation to this methodology of proving security of protocols, where \(\mathcal S\) is restricted to probabilistic polynomial time. We remark that no other proof method is known in this context. In the sequel we often call the ideal-model-adversary \(\mathcal S\) a <i>simulator</i>.
@@ -262,25 +262,25 @@
 									Following the above methodology, the simulator that we construct has to generate simulated messages from the uncorrupted parties to the corrupted parties. In the non-adaptive case set of corrupted parties is fixed and known to the simulator. Thus the simulator can corrupt these parties, in the ideal model, before the simulation starts. In the adaptive case the corrupted parties are chosen by the simulated adversary \(\mathcal A\) as the computation unfolds. Here the simulator corrupts a party, in the ideal model, only when the simulated adversary decides on corrupting that party. Thus the following extra problem is encountered. Consider a currently uncorrupted party \(P\). Since \(\mathcal S\) does not know the input of \(P\), it may not know which messages should be sent by \(P\) to the corrupted parties. Still, \(\mathcal S\) has to generate some <i>dummy messages</i> to be sent by the simulated \(P\) to corrupted parties. When the simulated adversary \(\mathcal A\) later corrupts \(P\) it expects to see \(P\)'s internal data. The simulator should now be able to present internal data for \(P\) that is consistent with \(P\)'s <i>newly-learned input and with the messages previously sent by \(P\)</i>, according to <i>the particular semi-honest protocol \(\pi'\)</i> run by \(P\). It turns out that this can be done for the <span class="reference" data-citation="BGW">[?]</span> protocols for computing any function in the presence of non-erasing parties. Thus, the <span class="reference" data-citation="BGW">[?]</span> protocols are adaptively secure <i>in the presence of non-erasing parties</i>. Recall, however, that not every protocol which is secure against non-adaptive adversaries is also secure against adaptive adversaries (see example in the third paragraph of <a href="#sec1">the Introduction</a>).
 								</p>
 							</section>
-							<section id="sec2.2.3">
+							<section id="sec2.2.3" data-section-name="In Face of Honest-Looking Parties">
 								<h4>2.2.3. In Face of Honest-Looking Parties</h4>
 								<p class="rp_original">
 									Further problems are encountered when honest-looking parties are allowed, as demonstrated by the following example. Consider a protocol \(\beta\) that instructs each party, on private input \(\sigma\), to publicise a uniformly and independently chosen value \(r\) in some domain \(D\) and terminate. \(\beta\) looks "harmless" in the sense that no information on the inputs leaks out. However, consider the following honest-looking variant of \(\beta\). Let \(f_0,f_1\) be a <span class="load-definable">clawfree</span> pair of permutations over \(D\). Then, on input \(\sigma\in\{0,1\}\), an honest-looking party can 'commit' to its input by publicizing \(f_\sigma(r)\) instead of publicizing \(r\). If this honest-looking variant of \(\beta\) is shown secure via an efficient black-box simulation as described above, then the constructed simulator can be used to find claws between \(f_0\) and \(f_1\). Similar honest-looking variants can be constructed for the <span class="reference" data-citation="BGW">[?]</span><span class="reference" data-citation="CCD">[?]</span> protocols.  Consequently, if clawfree pairs of permutations exist then adaptive security of the <span class="reference" data-citation="BGW">[?]</span><span class="reference" data-citation="CCD">[?]</span> protocols, <i>in the presence of honest-looking parties</i>, cannot be proven via black-box simulation. In fact, such honest-looking variants can be constructed for any "non-trivial" protocol, with similar effects.
 								</p>
 							</section>
 						</section>
-						<section id="sec2.3">
+						<section id="sec2.3" data-section-name="Adaptive Security in the Computational Setting">
 							<h3>2.3. Adaptive Security in the Computational Setting</h3>
 							<p class="rp_original">
 								We sketch the extra difficult encountered in constructing adaptively secure protocols <i>in the computational setting</i>, and outline our solution for non-erasing parties. Consider the following folklore methodology for constructing secure protocols in the computational setting. Start with an adaptively secure protocol \(\pi\) <i>resilient against non-erasing parties in the secure channels setting</i>, and construct a protocol \(\tilde\pi\) by encrypting each message using a standard encryption scheme. We investigate the security of \(\tilde\pi\) <i>in the computational setting</i>.
 							</p>
-							<section id="sec2.3.1">
+							<section id="sec2.3.1" data-section-name="Proving that \(\tilde\pi\) is Non-Adaptively Secure">
 								<h4>2.3.1. Proving that \(\tilde\pi\) is Non-Adaptively Secure</h4>
 								<p class="rp_original">
 									We first sketch how \(\tilde\pi\) can be shown <i>non-adaptively</i> secure in the computational setting, assuming that \(\pi\) is non-adaptively secure in the secure channels setting. Let \(\mathcal S\) be the ideal-model-adversary (simulator) associated with \(\pi\) in the secure channels setting. (We assume that \(\mathcal S\) operates via "black-box simulation" of the real-life adversary \(\mathcal A\) as described above.) We wish to construct, in the computational setting, a simulator \(\tilde{\mathcal S}\) for \(\tilde\pi\). The simulator \(\tilde{\mathcal S}\) operates just like \(\mathcal S\), with two exceptions. First, in the computational setting the real-life adversary expects the messages sent to corrupted parties to be encrypted. Next, the real-life adversary expects to see the ciphertexts sent between uncorrupted parties. (In the secure channels setting the adversary does not see the communication between uncorrupted parties.) \(\tilde{\mathcal S}\) will imitate this situation as follows. First each message sent to a corrupted party will be appropriately encrypted. Next, the simulated uncorrupted parties will exchange <i>dummy ciphertexts</i>. (These dummy ciphertexts can be generated as, say, encryptions of the value '0'.) The validity of simulator \(\tilde{\mathcal S}\) can be shown to follow, in a straightforward way, from the validity of \(\mathcal S\) and the security of the encryption scheme in use.
 								</p>
 							</section>
-							<section id="sec2.3.2">
+							<section id="sec2.3.2" data-section-name="Problems with Proving Adaptive Security">
 								<h4>2.3.2. Problems with Proving Adaptive Security</h4>
 								<p class="rp_original">
 									When adaptive adversaries are considered, the construction of a simulator \(\tilde{\mathcal S}\) in the computational setting encounters the following additional problem. Consider an uncorrupted party \(P\). Since \(\tilde{\mathcal S}\) does not know the input of \(P\), it does not know which messages should be sent by \(P\) to other <i>uncorrupted</i> parties.<sup class="footnote" id="fref2" data-footnote="2"><a href="#footnote2">2</a></sup> Still, \(\tilde{\mathcal S}\) has to generate dummy ciphertexts to be sent by the simulated \(P\) to uncorrupted parties. These dummy ciphertexts are seen by the adaptive adversary. When the adversary later corrupts the simulated \(P\), it expects to see all of \(P\)'s internal data, as specified <i>by the semi-honest protocol \(pi'\)</i>. Certainly, this data may include the cleartexts of all the ciphertexts sent and received by \(P\) in the past, including the random bits used for encryption and decryption, respectively. Thus, it may be the case that some specific dummy ciphertext \(c\) was generated as an encryption of '0', and the simulated \(P\) now needs to "convince" the adversary that \(c\) is in fact an encryption of '1' (or vice versa). This task is impossible if a standard encryption scheme (i.e. an encryption scheme where no ciphertext can be a legal encryption of both '1' and '0') is used.
@@ -289,7 +289,7 @@
 									We remark that Feldman, and independently Beaver and Haber, have suggested to solve this problem as follows<sup class="reference" data-citation="F">[?]</sup><sup class="reference" data-citation="BH">[?]</sup>. Instruct each party to <i>erase</i> (say, at the end of each round) all the information involved with encrypting and decrypting of messages. If the parties indeed erase this data, then the adversary will no longer see, upon corrupting a party, how past messages were encrypted and decrypted. Thus the problem of convincing the adversary in the authenticity of past ciphertexts no longer exists. Consequently, such "erasing" protocols can be shown adaptively secure in the computational setting. However, this approach is clearly not valid in the presence of semi-honest parties. In particular, it is not known whether the <span class="reference" data-citation="F">[?]</span><span class="reference" data-citation="BH">[?]</span> protocols (or any other previous protocols) are secure in the presence of non-erasing parties.
 								</p>
 							</section>
-							<section id="sec2.3.3">
+							<section id="sec2.3.3" data-section-name="Sketch of Our Solution">
 								<h4>2.3.3. Sketch of Our Solution</h4>
 								<p class="rp_original">
 									We solve this problem by constructing an encryption scheme that serves as an alternative to standard encryption schemes, and enjoys an additional property roughly described as follows. One can efficiently generate dummy ciphertexts that can later be "opened" as encryptions of either '0' or '1', at wish. (Here the word 'ciphertext' is used to denote all the information seen by the adversary during the execution of the protocol.) These dummy ciphertexts are different and yet computationally indistinguishable from the valid encryptions of '0' (or '1') produced in a real communication. We call such encryption protocols <i>non-committing</i>.<sup class="footnote" id="fref3" data-footnote="3"><a href="#footnote3">3</a></sup>
@@ -314,7 +314,7 @@
 							In <a href="#sec5">Section 5</a>, we sketch a solution for the case of honest-looking parties, assuming, in addition to the above, also the existence of a "trusted dealer" at a pre-computation stage. We stress that this result does not hold if an initial (trusted) set-up is not allowed.
 						</p>
 					</section>
-					<section id="sec3">
+					<section id="sec3" data-section-name="Definitions">
 						<h2>3. Definitions</h2>
 						<p class="rp_original">
 							In <a href="#sec3.1">Section 3.1</a> we define semi-honest protocols (with respect to the three variants discussed in <a href="#sec2.1">Section 2.1</a>). This notion underlies all our subsequent definitions. In Sections <a href="#sec3.2">3.2</a> and <a href="#sec3.3">3.3</a> we define adaptively secure multiparty computation in the secure channels and the computational settings, respectively. Although the focus of this work is the computational setting, we state this definition also in the secure channels setting. This will enable us to discuss our results as a general transformation from adaptively secure protocols in the secure channels setting into adaptively secure protocols in the computational setting, without getting into details of specific protocols. In <a href="#sec3.4">Section 3.4</a> we define our main tool, non-committing encryption protocols. Throughout Section 3 we assume that the reader has acquired the intuition provided in <a href="#sec2">Section 2</a>.
@@ -329,7 +329,7 @@
 						<p class="rp_original">
 							We colloquially say that "\(A_x\) and \(B_x\) are computationally indistinguishable", or "\(A_x\stackrel{c}{\approx}B_x\)".
 						</p>
-						<section id="sec3.1">
+						<section id="sec3.1" data-section-name="Semi-honest Protocols">
 							<h3>3.1. Semi-honest Protocols</h3>
 							<p class="rp_original">
 								We define semi-honest parties (or, equivalently, semi-honest protocols) for the three alternative notions of semi-honesty discussed in <a href="#sec2.1">Section 2.1</a>. First we define <b>honest-but-non-erasing</b> (or in short <b>non-erasing</b>) protocols. Informally, a protocol \(\pi'\) may omit instructions to erase data. Actually, it suffices to consider a non-erasing protocol which keeps a record of the entire history of the computation.
@@ -356,7 +356,7 @@
 								Let \(pi\) and \(pi'\) be \(n\)-party protocols. We say that \(\pi'\) is a <b>perfectly weakly-honest</b> protocol for \(\pi\) if for any input \(\vec{x}\) and for any index \(i\in[n]\), we have $$\operatorname{COM}_\pi(\vec{x})\stackrel{d}{=}\operatorname{COM}_{\pi/(i,\pi')}(\vec{x}).$$ If \(\pi\) is restricted to probabilistic polynomial time, and if \(\operatorname{COM}_\pi(\vec{x})\stackrel{c}{\approx}\operatorname{COM}_{\pi/(i,\pi')}(\vec{x})\), then we say that \(\pi'\) is a <b>computationally weakly-honest</b> protocol for \(\pi\).
 							</p>
 						</section>
-						<section id="sec3.2">
+						<section id="sec3.2" data-section-name="Adaptive Security in the Secure Channels Setting">
 							<h3>3.2. Adaptive Security in the Secure Channels Setting</h3>
 							<p class="rp_original">
 								We define adaptively secure multiparty computation in the secure channels setting. That is, we consider a synchronous network where every two parties are connected via a secure communication link (i.e. the adversary does not see, nor alter, messages sent between uncorrupted parties). The adversary is computationally unlimited.
@@ -364,7 +364,7 @@
 							<p class="rp_original">
 								We use the standard methodology presented in <a href="#sec2.2">Section 2.2</a>. That is, the execution of a protocol for computing some function is compared to evaluating the function in an ideal model, where a trusted party is used. We substantiate the definition in three steps. First, we give an exact definition of this ideal model. Next, we formulate our (high level) motion of 'real-life' protocol execution. Finally, we describe and formalize the method of comparing computations.
 							</p>
-							<section id="sec3.2.1">
+							<section id="sec3.2.1" data-section-name="The Computation in the Ideal Model">
 								<h4>3.2.1. The Computation in the Ideal Model</h4>
 								<p class="rp_original">
 									The computation in the ideal model, in the presence of an ideal-model-adversary \(\mathcal S\), proceeds as follows. The parties have inputs \(\vec{x}=x_1\dots x_n\in D^n\) (party \(P_i\) has input \(x_i\)) and wish to compute \(f(x_1,\dots,x_n)\), where \(f\) is a predetermined function.<sup class="footnote" id="fref6" data-footnote="6"><a href="#footnote6">6</a></sup> The adversary \(\mathcal S\) has no initial input, and is parametrized by \(t\), the maximum number of parties it may corrupt.
@@ -433,7 +433,7 @@
 									where \(B^{(t)}\) is the \(t\)<sup>th</sup> set of faulty parties, \(r\) is the random input of \(\mathcal S\), and \(\vec{y}= \vec{x}/_{(B^{(t)}, h(B^{(t)}, \vec{x}_{B^{(t)}}, r))}\) is the substituted input vector for the trusted party.
 								</p>
 							</section>
-							<section id="sec3.2.2">
+							<section id="sec3.2.2" data-section-name="Computation in the Real-Life Setting">
 								<h4>3.2.2. Computation in the Real-Life Setting</h4>
 								<p class="rp_original">
 									Next we describe the execution of a protocol \(\pi\) in the real-life scenario. The parties engage in a synchronous computation in the secure channels setting, running a semi-honest protocol \(\pi'\) for \(\pi\) (according to any one of the notions of semi-honesty defined above). A computationally unbounded \(t\)-<b>limited real-life adversary</b> may choose to corrupt parties at any point during the computation, based on the information known to the previously corrupted parties, and as long as at most \(t\) parties are corrupted altogether. Once a party is corrupted the current contents of its memory (as determined by the semi-honest protocol \(\pi'\)) becomes available to the adversary. From this point on, the corrupted party follows the instructions of the adversary. Once the computation is completed, each uncorrupted party outputs whatever it has computed to be the function value. Without loss of generality, we use the convention by which the corrupted parties output their entire <b>view</b> on the computation. The view consists of all the information gathered by the adversary during the computation. Specifically, the view includes the inputs and random inputs of the corrupted parties and all the communication seen by the corrupted parties.
@@ -442,7 +442,7 @@
 									We use the following notation. Let \(\operatorname{VIEW}_{\pi,\mathcal A}(\vec x, \vec r)\) denote the <b>view</b> of the adversary \(mathcal A\) when interacting with parties running protocol \(\pi\) on input \(\vec x\) and random input \(\vec r\) (\(x_i\) and \(r_i\) for party \(P_i\)), as described above. Let \(\operatorname{EXEC}_{\pi,\mathcal A}(\vec x,\vec r)_i\) denote the output of party \(P_i\) after running protocol \(\pi\) on input \(\vec x=x_1\dots x_n\) and random input \(\vec r=r_1\dots r_n\), and with a real life adversary \(\mathcal A\). (By the above convention, we have \(\operatorname{EXEC}_{\pi,\mathcal A}(\vec x,\vec r)_i=\operatorname{VIEW}_{\pi,\mathcal A}(\vec x,\vec r)\) for corrupted parties \(P_i\).) Let \(\operatorname{EXEC}_{\pi,\mathcal A}(\vec x)_i\) denote the random variable describing \(\operatorname{EXEC}_{\pi,\mathcal A}(\vec x,\vec r)_i\) where \(\vec r\) is uniformly chosen. Let \(\operatorname{EXEC}_{\pi,\mathcal A}(\vec x)=\operatorname{EXEC}_{\pi,\mathcal A}(\vec x)_i\dots\operatorname{EXEC}_{\pi,\mathcal A}(\vec x)_n\).
 								</p>
 							</section>
-							<section id="sec3.2.3">
+							<section id="sec3.2.3" data-section-name="Comparing Computations">
 								<h4>3.2.3. Comparing Computations</h4>
 								<p class="rp_original">
 									Finally we require that executing a secure protocol \(\pi\) for evaluating a function \(f\) be equivalent to evaluating \(f\) in the ideal model, in the following sense.
@@ -456,7 +456,7 @@
 									Definition 3.8 is stated for a single value of \(n\). In order to discuss asymptotic complexity (in \(n\)), we assume that the function \(f\), the protocol \(\pi\), the simulator \(\mathcal S\), and the adversary \(\mathcal A\) are Turing machines that have \(n\), the number of parties, as part of their inputs.
 								</p>
 							</section>
-							<section id="sec3.2.4">
+							<section id="sec3.2.4" data-section-name="Black-box Simulation">
 								<h4>3.2.4. Black-box Simulation</h4>
 								<p class="rp_original">
 									In the sequel we use a more restricted notion of equivalence of computations, where the ideal-model adversary is limited to black-box simulation of the real-life setting. That is, for any semi-honest protocol \(\pi'\) for \(\pi\) there should exist an ideal-model adversary \(\mathcal S\) with oracle (or black-box) access to a real-life adversary. This black-box represents the input-output relations of the real-life adversary described above. For concreteness, we present the following description of the "mechanics" of this black-box, representing a real-life adversary. The black-box has a <b>random tape</b>, where the black-box expects to find its random input, and an <b>input-output tape</b>. Once a special <b>start</b> input is given on the input-output tape, the interaction on this tape proceeds in iterations, as follows. Initially, no party is corrupted. In each iteration \(l\), first the black-box expects to receive the information gathered in the \(l\)<sup>th</sup> round. (In the secure channels setting this information consists of the messages sent by the uncorrupted parties to the corrupted parties.) Next black-box outputs the messages to be sent the corrupted parties in the \(l\)<sup>th</sup> round. Next, the black-box may issue several '<b>corrupt</b> \(P_i\)' requests. Such a request should be answered by the internal data of \(P_i\), according to protocol \(\pi'\). Also, from this point on \(P_i\) is corrupted. At the end of the interaction, the <b>output of the real-life adversary</b> is defined as the contents of the random tape succeeded by the history of the contents of the input-output tape during the entire interaction. We let \(\mathcal S^{\mathcal A}\) denote the ideal-model adversary \(\mathcal S\) with black-box access to a real-life adversary \(\mathcal A\).
@@ -472,7 +472,7 @@
 								</p>
 							</section>
 						</section>
-						<section id="sec3.3">
+						<section id="sec3.3" data-section-name="Adaptive Security in the Computational Setting">
 							<h3>3.3. Adaptive Security in the Computational Setting</h3>
 							<p class="rp_original">
 								We now turn to define adaptively secure multiparty computation in the computational setting. Here the communication links between parties are <b>insecure</b>; that is, all messages sent on all links are seen by the adversary.<sup class="footnote" id="fref9" data-footnote="9"><a href="#footnote9">9</a></sup> All parties, as well as the adversary, are restricted to probabilistic polynomial time. Furthermore, we introduce a <b>security parameter</b>, determining 'how close' a real-life computation is to a computation in the ideal model. All parties are polynomial also in the security parameter. For simplicity of presentation, we identify the security parameter and the length of the inputs with the number of parties, denoted \(n\).
@@ -488,7 +488,7 @@
 								Let \(f\) be an \(n\)-ary function, \(\pi\) be a protocol for \(n\) parties and \(\mathcal T\) a type of semi-honest behavior (i.e. as in any of the Definitions <a href="#def3.2">3.2</a> <a href="#def3.3">through</a> <a href="#def3.4">3.4</a>). We say that <b>\(\pi\;t\)-securely computes \(f\) in the computational setting</b>, in the presence of \(\mathcal T\)-semi-honest parties and adaptive adversaries, if for any \(\mathcal T\)-semi-honest protocol \(\pi'\) for \(\pi\) and for any \(t\)-limited real-life (adaptive) adversary \(\mathcal A\) there exists a \(t\)-limited ideal-model-adversary \(\mathcal S\), such that for every input vector \(\vec x\) we have $$\operatorname{IDEAL}_{f,\mathcal S}(\vec x)\stackrel{c}{\approx}\operatorname{EXEC}_{\pi',\mathcal A}(\vec x).$$ If \(\mathcal S\) is restricted to black-box simulation of real-life adversaries, as described above, then we say that <b>\(pi\;t\)-securely computes \(f\) in a simulatable way</b> in the computational scenario.
 							</p>
 						</section>
-						<section id="sec3.4">
+						<section id="sec3.4" data-section-name="Non-committing Encryption">
 							<h3>3.4. Non-committing Encryption</h3>
 							<p class="rp_original">
 								We present a concise definition of a non-committing encryption protocol in our multiparty scenario. First define the <b>bit transmission</b> function \(\operatorname{BTR}\;:\;\{0,1,\perp\}^n\,\mapsto\,\{0,1,\perp\}^n\). This function is parameterized by two identities of parties (i.e. indices \(s,r\in[n]\)), with the following interpretation. \(\operatorname{BTR}_{s,r}\) describes the secure transmission of a bit from party \(P_s\) (the sender) to party \(P_r\) (the receiver). That is, for \(\vec x=x_1,\dots,x_n\in\{0,1,\perp\}^n\) let $$\operatorname{BTR}_{s,r}(\vec x)_i=\begin{cases} x_s &\text{if }i=r\\\perp &\text{otherwise}\end{cases}$$ where \(\operatorname{BTR}_{s,r}(\vec x)_i\) is the \(i\)<sup>th</sup> component of the vector \(\operatorname{BTR}_{s,r}(\vec x)\). We are interested in input vectors \(\vec x\) where \(x_s\) (i.e. the senders input is in \(\{0,1\}\). All other inputs are assumed to be \(\perp\).
@@ -502,7 +502,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec4">
+					<section id="sec4" data-section-name="Non-erasing Parties">
 						<h2>4. Non-erasing Parties</h2>
 						<p class="rp_original">
 							We show that any recursive function can be securely computed in the computational setting, in the presence of adaptive adversaries and non-erasing parties. In <a href="#sec4.1">Subsection 4.1</a> we show how, using a non-committing encryption protocol, a simulatable protocol for computing some function \(f\) in the computational setting can be constructed from any simulatable protocol for computing \(f\) in the secure channels setting. In <a href="#sec4.2">Subsection 4.2</a> we present our construction of non-committing encryption. We use the following result as our starting point:
@@ -511,7 +511,7 @@
 						<p class="rp_original rp_theorem">
 							The <span class="reference" data-citation="BGW">[?]</span><span class="reference" data-citation="CCD">[?]</span> protocols for computing any function of \(n\) function of \(n\) inputs are \((\lceil\frac n 3\rceil-1)\)-securely computable in a simulatable way, <b>in the secure channels setting</b>, in the presence of non-erasing parties and adaptive adversaries.<sup class="footnote" id="fref10" data-footnote="10"><a href="#footnote10">10</a></sup>
 						</p>
-						<section id="sec4.1">
+						<section id="sec4.1" data-section-name="Adaptive Security Given Non-Committing Encryption">
 							<h3>4.1. Adaptive Security Given Non-Committing Encryption</h3>
 							<p class="rp_original">
 								The following theorem formalizes the discussion in <a href="#sec2.3">Section 2.3</a>.
@@ -543,7 +543,7 @@
 								It remains to show that \(\operatorname{EXEC}_{\pi',\mathcal A}(\vec x)\stackrel{c}{\approx}\operatorname{EXEC}_{\tilde\pi',\tilde{\mathcal A}}(\vec x)\). Essentially the difference between these two executions is that \(\operatorname{EXEC}_{\pi',\mathcal A}(\vec x)\) is a real-life execution in the secure channel setting which is augmented by invocation of \(\delta\) (performed by \(\mathcal A\)), whereas \(\operatorname{EXEC}_{\tilde\pi',\tilde{\mathcal A}}(\vec x)\) is a real-life execution in the computational-setting in which honest parties use the encryption protocol \(\epsilon'\). However, the security of \(\epsilon\) means that invocations of \(\delta\) are indistinguishable from executions by \(\epsilon'\) (both in presence of adaptive adversaries). Using induction on the number of rounds, one thus establishes the last equality of the above equation.
 							</p>
 						</section>
-						<section id="sec4.2">
+						<section id="sec4.2" data-section-name="Constructing Non-Committing Encryption">
 							<h2>4.2. Constructing Non-Committing Encryption</h2>
 							<p class="rp_original">
 								Before describing our non-committing encryption protocol, let us note that one-time pad is a valid non-committing encryption protocol.<sup class="footnote" id="fref11" data-footnote="11"><a href="#footnote11">11</a></sup> The drawback of this trivial solution is that it requires an initial setup in which each pair of parties share a random string of length at least the number of bits they need to exchange. Such an initial setup is no desirable in practice and does not resolve the theoretically important problem of dealing with a setting in which <i>no secret information is shared a-priori</i>.
@@ -584,7 +584,7 @@
 							<p class="rp_original rp_sub">
 								We first present, in <a href="#sec4.2.1">Section 4.2.1</a>, the encryption and decryption algorithms as well as observations that will be instrumental for the simulation. In <a href="#sec4.2.2">Section 4.2.2</a> we present the key generation protocol. (A reader that is satisfied with a construction based on specific number theoretic assumptions may, for simplicity, skip Section 4.2.2 and read <a href="#sec4.3">Section 4.3</a> instead.) Finally we show that these together constitute the desired non-committing encryption protocol.
 							</p>
-							<section id="sec4.2.1">
+							<section id="sec4.2.1" data-section-name="Encryption and Decryption">
 								<h4>4.2.1. Encryption and Decryption</h4>
 								<p class="rp_original">
 									Let \(f_a\) and \(f_b\) be two randomly selected permutations over the domain \(D\), and let \(B\) be a hardcore predicate associated with them. The scheme uses a security parameter, \(k\), which can be thought to equal \(log_2|D|\).
@@ -597,7 +597,7 @@
 								<p class="rp_original rp_sub">
 									Upon receiving the ciphertext \(y_1,\dots,y_{16k}\), when having private key \(f^{-1}_r\) (where \(r\in\{a,b\}\)), the receiver computes \(B(f^{-1}_r(y_1)),\dots,B(f_r^{-1}(y_{16k}))\), and outputs the majority value among these bits.
 								</p>
-								<section id="sec4.2.1.1">
+								<section id="sec4.2.1.1" data-section-name="Correctness of decryption">
 									<h5>Correctness of decryption</h5>
 									<p class="rp_original">
 										Let us first state a simple technical claim.
@@ -625,7 +625,7 @@
 										Assume without loss of generality that the private key is \(f_a^{-1}\). Then the receiver outputs the majority value of the bits \(B(f_a^{-1}(y_1)),\dots,B(f_a^{-1}(y_{16k}))\). Recall that \(8k\) of the \(y_i\)'s are associated with \(f_a\). Out of them, \(5k\) (of the \(y_i\)'s) satisfy \(B(f_a^{-1}(y_1))=B(x_i)=\sigma\), and \(3k\) satisfy \(B(f_a^{-1}(y_i))=B(x_i)=1-\sigma\). Thus the receiver outputs \(1-\sigma\) only if at least \(5k\) out of the rest of the \(y_i\)'s (that is, the \(y_i\)'s associated with \(f_b\)) satisfy \(B(f_a^{-1}(y_i))=1-\sigma\). However, Eq2 implies that \(|\operatorname(Pr)(B(f_a^{-1}(y_i))=\sigma)-\frac 1 2|\) is negligible for each \(y_i\) associated with \(f_b\). Thus only an expected \(4k\) of the \(y_i\)'s associated with \(f_b\) satisfy \(B(f_a^{-1}(y_i))=1-\sigma\). Using a large deviation bound, it follows that decryption errors occur with probability \(2^{-\operatorname\Omega(k)}\).
 									</p>
 								</section>
-								<section id="sec4.2.1.2">
+								<section id="sec4.2.1.2" data-section-name="Simulation Assuming Knowledge of Both Trapdoors">
 									<h5>Simulation Assuming Knowledge of Both Trapdoors</h5>
 									<p class="rp_original">
 										In <a href="#lemma4.7">Lemma 4.7</a> (below) we show how the simulator, knowing the trapdoors of both \(f_a\) and \(f_b\), can generate "dummy ciphertexts" \(\vec z=z_1,\dots,z_{16k}\) that can be later "opened" as encryptions of both 0 and 1. Essentially, the values \(B(f_a^{-1}(z_i))\) and \(B(f_b^{-1}(z_i))\) for each \(z_i\) are carefully chosen so that this "cheating" is possible. We use the following notations. Fix an encryption key (\(f_a,f_b\)). Let the random variable \(\lambda_\sigma=(\sigma;\vec x,\phi;\vec y;r,f_r^-1)\) describe a <i>legal encryption and decryption process</i> of the bit \(\sigma\). That is: 
@@ -828,7 +828,7 @@
 									</p>
 								</section>
 							</section>
-							<section id="sec4.2.2">
+							<section id="sec4.2.2" data-section-name="Key Generation">
 								<h4>4.2.2. Key Generation</h4>
 								<p class="rp_original">
 									We describe how the keys are generated, based on any common-domain trapdoor system. We use Oblivious Transfer<sup class="reference" data-citation="R">[?]</sup><sup class="reference" data-citation="EGL">[?]</sup> in our constructions. Oblivious Transfer (OT) is a protocol executed by a sender \(S\) with inputs \(s_1\) and \(s_2\), and by a receiver \(R\) with input \(\tau\in\{1,2\}\). After executing an OT protocol, the receiver should know \(s_\tau\), and learn nothing else. The sender \(S\) should learn nothing from participating in the protocol. In particular \(S\) should not know whether \(R\) learns \(s_1\) or \(s_2\). We are only concerned with the case where \(R\) is uncorrupted and non-erasing.
@@ -877,7 +877,7 @@
 									</p>
 								</div>
 							</section>
-							<section id="sec4.2.3">
+							<section id="sec4.2.3" data-section-name="Simulation (Adaptive Security of the Encryption Protocol)">
 								<h4>4.2.3. Simulation (Adaptive Security of the Encryption Protocol)</h4>
 								<p class="rp_original">
 									Let \(\epsilon\) denote the combined encryption and decryption protocols, preceded by the key generation protocol.
@@ -905,12 +905,12 @@
 								</p>
 							</section>
 						</section>
-						<section id="sec4.3">
+						<section id="sec4.3" data-section-name="Alternative Implementations of Non-Committing Encryption">
 							<h3>4.3. Alternative Implementations of Non-Committing Encryption</h3>
 							<p class="rp_original">
 								We describe two alternative implementations of our non-committing encryption scheme, based on the RSA and DH assumptions, respectively. These implementations have the advantage that the key generation stage can be simplified to consist of a single message sent from the receiver to the sender.
 							</p>
-							<section id="sec4.3.1">
+							<section id="sec4.3.1" data-section-name="An Implementation Based on RSA">
 								<h4>4.3.1. An Implementation Based on RSA</h4>
 								<p class="rp_original">
 									We first construct the following common-domain trapdoor system. The common domain, given security parameter \(n\), is \(\{0,1\}^n\). A permutation over \(\{0,1\}^n\) is chosen as follows. First, choose a number \(N\) uniformly from \([2^{n-1},\dots,2^n]\), <i>together with its factorization</i> (via Bach's algorithm<sup class="reference" data-citation="B">[?]</sup>). Next choose a prime \(2^n\lt e\lt2^{n+1}\). (This way, we are assured that \(\operatorname{gcd}(e,\operatorname\phi(N))=1\), where \(\operatorname\phi(\cdot)\) is Euler's totient function, even if the factorization of \(N\) is not known.) Let \(f_N(x)=x^e\pmod N\) if \(x\lt N\) and \(f_N(x)=x\) otherwise. With non-negligible probability \(N\) is a product of two large primes. Thus, thus construction yields a collection of common domain permutations which are weakly one-way. Employing an amplification procedure (e.g. <span class="reference" data-citation="Y">[?]</span><span class="reference" data-citation="GILVZ">[?]</span>) we obtain a proper common-domain system.
@@ -919,7 +919,7 @@
 									This common-domain trapdoor system can be used as described in <a href="#sec4.2">Section 4.2</a>. However, here the key generation stage can be simplified considerably. Observe that it is possible to choose a permutation from the above distribution <i>without knowing its trapdoor</i>. Specifically, this is done by choosing the numbers \(N\) of the different instances of \(f_N\) in the direct way, without knowing their factorization. Thus, the receiver will choose two trapdoor permutations \(f_a,f_b\), where only the trapdoor to \(f_\tau\) (i.e. \(f_\tau^{-1}\)) is known, \(r\in_R\{a,b\}\). Both \(f_a,f_b\) are now sent to the sender, who proceeds as in <a href="#sec4.2.1">Section 4.2.1</a>. In a simulated execution the simulator will choose both \(f_a\) and \(f_b\) together with their trapdoors.<sup class="footnote" id="fref14" data-footnote="14"><a href="#footnote14">14</a></sup>
 								</p>
 							</section>
-							<section id="sec4.3.2">
+							<section id="sec4.3.2" data-section-name="An Implementation Based on DH">
 								<h4>4.3.2. An Implementation Based on DH</h4>
 								<p class="rp_original">
 									Consider the following construction. Although it fails to satisfy <a href="#def4.3">Definition 4.3</a>, it will be 'just as good' for our needs. The common domain, given security parameter \(n\), is a prime \(2^{n-1}\lt p\lt2^n\) where the factorization of \(p-1\) is known. Also a generator \(f\) of \(Z_p^*\) is fixed. \(p\) and \(g\) are publicly known. All computations are done modulo \(p\). To choose a permutation over \(Z_p^*\), choose an element \(v\in_R\mathcal Z^*_{p-1}\) and let \(f_v(x)=x^v\). The public description of \(f_v\) is \(y\stackrel{\Delta}=g^v\). The 'trapdoor' is \(v\stackrel\Delta=v^{-1}\pmod{p-1}\).
@@ -938,14 +938,14 @@
 								</p>
 							</section>
 						</section>
-						<section id="sec4.4">
+						<section id="sec4.4" data-section-name="A Concluding Remark to Section 4">
 							<h3>4.4. A Concluding Remark to Section 4</h3>
 							<p class="rp_original">
 								Our solutions for non-erasing parties may appear somewhat unsatisfactory since they are based on 'trusting' the receiver to choose trapdoor permutations without knowing the trapdoor, whereas the permutation can be chosen together with its trapdoor by simple 'honest-looking' behavior. Recall, however, that if honest looking parties are allowed then no (non-trivial) protocol can be proven adaptively secure (via black-box simulation if clawfree pairs exist). We do not see a meaningful way to distinguish between the 'honest-looking behavior' that foils the security of our constructions and the 'honest-looking behavior', described in <a href="#sec2.2">Section 2.2</a>, that foils provability of the adaptive security of any protocol.
 							</p>
 						</section>
 					</section>
-					<section id="sec5">
+					<section id="sec5" data-section-name="Honest-looking Parties">
 						<h2>5. Honest-looking Parties</h2>
 						<p class="rp_original">
 							Our construction for honest-looking parties assumes the existence of a "trusted dealer" at a pre-computation stage. The dealer chooses, for each party \(P), a truly random string \(r_P\) and hands \(r_P\) to \(P\), to be used as random input. (We call \(r_P\) a <b>certified random input</b> for \(P\).) Next, the dealer generates \(n-1\) shares of \(r_P\), so that \(r_P\) can be reconstructed from all \(n-1\) shares, but any subset of \(n-2\) shares are independent of \(r_P\). Finally the dealer hands one share to each party <i>other than \(P\)</i>.
@@ -956,7 +956,7 @@
 					</section>
 				</div>
             </div>
-			<div class="main_toplevel main_section main_color7" id="footnotes">
+			<div class="main_toplevel main_section main_color7" id="footnotes" data-section-name="Footnotes">
 				<div class="main_fullwidth">
 					<h1>Footnotes</h1>
 					
@@ -1006,7 +1006,7 @@
 					</ol>
 				</div>
             </div>
-            <div class="main_toplevel main_section main_color8" id="references">
+            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
 				<div class="main_fullwidth">
 					<h1>References</h1>
 					<ol id="referencelist">

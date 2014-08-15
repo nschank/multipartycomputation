@@ -76,7 +76,7 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1" id="overview">
+            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
@@ -99,7 +99,7 @@
                     <div class="main_toc"></div>
 					
 						
-                    <section id="a_intro">
+                    <section id="a_intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>How to Play Any Mental Game</b> is a 1987 work by Goldreich, Micali, and Widgerson that offers a completeness theorem for any protocol with honest majority. Based on their 1986 work <i>How to Solve Any Protocol Problem</i><a href="pdf/81.1.pdf"><sup>(PDF)</sup></a>, it brings together essentially every major piece of cryptography into one central paper, providing a key piece in the development of multiparty computation protocols. By presenting the building blocks necessary to build any general problem into a private and robust protocol, this paper provides the benchmark by which every new protocol is measured. 
@@ -111,7 +111,7 @@
 							This paper is a demonstration of how <span class="load-definable">oblivious transfer</span> is <span class="load-definable" data-define="completeness">complete</span> with respect to multiparty computation; that is, any oblivious transfer primitive can construct a multiparty computation evaluator for any function.
 						</p>
 					</section>
-					<section id="a_goals">
+					<section id="a_goals" data-section-name="Goals and Results">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							<i>How to Play Any Mental Game</i> makes a big promise with both its title and its premise, and it delivers on that promise fully. Given any <span class="load-definable">Turing machine</span> \(M\) for \(n\) players, it provides a meta-protocol by which we can produce a new distributed protocol \(D\), making the following guarantees:
@@ -127,13 +127,13 @@
 							In particular, Goldreich et al. incorporate oblivious transfer, hardcore bits, zero knowledge proofs, 5-permutations, game theory concepts, and the translation from Turing machines to circuits (and circuits to straight line programs) into their meta-protocol.
 						</p>
 					</section>
-					<section id="a_assumptions">
+					<section id="a_assumptions" data-section-name="Assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
 							All of the above operates under the assumption that <span class="load-definable" data-define="trapdoor function">trapdoor functions</span> exist, a relatively low burden of assumption. Only a year later, <a href="34.html">Chaum, Cr&eacute;peau, and Damg&aring;rd</a> demonstrated a similar completeness theorem for <span class="load-definable">information theoretic security</span> using an even lower burden of assumption.
 						</p>
 					</section>
-					<section id="a_defs">
+					<section id="a_defs" data-section-name="Definitions">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - Computational Indistinguishability</span></a>
 						<p class="rp_definition">
@@ -180,7 +180,7 @@
 							</li>
 						</ol>
 					</section>
-					<section id="a_theorems">
+					<section id="a_theorems" data-section-name="Theorems">
 						<h2>Theorems</h2>
 						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
 						<p class="rp_original rp_theorem">
@@ -195,7 +195,7 @@
 								If any <span class="load-definable">trapdoor function</span> exists, any game is <span class="load-definable" data-define="purely playable game">playable</span> if more than half of the players are honest.
 							</p>
 					</section>
-					<section id="a_protocols">
+					<section id="a_protocols" data-section-name="Protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#sec4.1.3">One-Out-of-Two Oblivious Transfer</a></h3>
 						<ul class="rp_analysis">
@@ -262,7 +262,7 @@
 							<li><b>Assumptions: </b>The existence of <span class="load-definable" data-define="trapdoor permutation">trapdoor permutations</span>. Additionally, the presence of secret, authenticated channels between each pair of parties.</li>
 						</ul>
 					</section>
-					<section id="furtherreading">
+					<section id="furtherreading" data-section-name="Further Reading">
 						<h2>Further Reading</h2>
 						<p class="rp_analysis">
 							The construction in this paper is often compared and contrasted with Yao's Garbled Circuit, which can be found <a href="24.html">here</a>.
@@ -278,7 +278,7 @@
 							<li><b><a href="76.html">Verifiable Secret Sharing and Multiparty Protocols... (1989)</a></b>: Information-Theoretic Security for Honest Majority, Negligible Probability of Cheating</li>
 						</ol>
 					</section>
-					<section id="a_ref">
+					<section id="a_ref" data-section-name="Referencing This Paper">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -287,11 +287,11 @@
 					</section>
                 </div>
             </div>
-			<div class="main_toplevel main_section main_color3" id="annotated_paper">
+			<div class="main_toplevel main_section main_color3" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper (extended abstract)</h1>
                     <div class="main_toc"></div>
-					<section id="abstract" data-section-number="0">
+					<section id="abstract" data-section-number="0" data-section-name="Abstract">
 						<h3>Abstract</h3>
 						<p class="rp_original">
 							We present a polynomial-time algorithm that, given as input the description of a game with incomplete information and any number of players, produces a protocol for playing the game that leaks no partial information, provided the majority of the players is honest.
@@ -301,7 +301,7 @@
 						</p>
 					</section>
 					
-					<section id="sec1">
+					<section id="sec1" data-section-name="Introduction">
 						<h2>1. Introduction</h2>
 						<p class="rp_original">
 							Before discussing how to "make <span class="load-definable" data-define="purely playable game">playable</span>" a general game with incomplete information (which we do in <a href="#sec6">section 6</a>) let us address the problem of making playable a special class of games, the <span class="load-definable" data-define="Turing machine game">Turing machine games</span> (<i>Tm-games</i> for short).
@@ -313,9 +313,9 @@
 							The correctness and privacy constraint of a Tm-game can be easily met with the help of an extra, <span class="load-definable">trusted party</span> \(P\). Each player \(i\) simply gives his secret input \(x_i\) to \(P\). \(P\) will privately run the prescribed Turing machine, \(M\), on these inputs and publicly announce \(M\)’s output. Making a Tm-game playable essentially means that the correctness and privacy constraints can be satisfied by the \(n\) players themselves, without invoking any extra party. Proving that Tm-games are playable retains most of the flavor and difficulties of our general theorem.
 						</p>
 					</section>
-					<section id="sec2">
+					<section id="sec2" data-section-name="Preliminary Definitions">
 						<h2>2. Preliminary Definitions</h2>
-						<section id="sec2.1">
+						<section id="sec2.1" data-section-name="Notation and Conventions for Probabilistic Algorithms">
 							<h3>2.1. Notation and Conventions for Probabilistic Algorithms</h3>
 							<p class="rp_original">
 								We emphasize the number of inputs received by an <span class="load-definable">algorithm</span> as follows. If algorithm \(A\) receives only one input we write “\(A(\cdot)\)", if it receives two inputs we write \(A(\cdot,\cdot)\) and so on.
@@ -336,7 +336,7 @@
 								By \(1^k\) we denote the unary representation of integer \(k\).
 							</p>
 						</section>
-						<section id="sec2.2">
+						<section id="sec2.2" data-section-name="Game Networks and Distributed Algorithms">
 							<h3>2.2. Game Networks and Distributed Algorithms</h3>
 							<p class="rp_original">
 								Let us start by briefly describing the communication networks in which games will be played. This is the standard network supporting the execution of multi-party protocols.
@@ -354,7 +354,7 @@
 								Let \(S\in PDA\) run in a game network of size \(n\) with common input \(CI\) and (respective) private inputs \(x_1,\dots,x_n\). Then <span class="load-equation" data-equation="HS">\(HS(x_1,\dots,x_n,CI)\)</span> denotes the RV consisting of the public history that is the sequence of all messages sent in an execution of \(S\); <span class="load-equation" data-equation="HSi">\(HS_i(x_1,\dots,x_n,CI)\)</span> denotes the RV consisting of the internal configurations of machine \(i\), that is the sequence of the internal configurations of machine \(i\) in an execution of \(S\); for \(T\subset \{1,\dots,n\}\), <span class="load-equation" data-equation="HST">\(HS_T(x_1,\dots,x_n)\)</span> denotes the vector of the private histories of the members of \(T\) in an execution of \(S\); and <span class="load-equation" data-equation="OSi">\(OS_i(x_1,\dots,x_n,CI)\)</span> denotes the RV consisting of the private output of machine \(i\) in an execution of \(S\).
 							</p>
 						</section>
-						<section id="sec2.3">
+						<section id="sec2.3" data-section-name="Adversaries">
 							<h3>2.3. Adversaries</h3>
 							<p class="rp_original">
 								We consider two interesting types of adversaries (faulty machines) in a <span class="load-definable">game network</span>: passive ones (a new notion) and malicious ones (a more standard notion).
@@ -381,7 +381,7 @@
 								Keep in mind that this is operating under the assumption that adversaries run in PPT, and therefore only offers protection in the <span class="load-definable" data-define="cryptographic security">cryptographic</span> sense. In an information theoretic setting, only up to \(\frac{n}{3}\) parties can be malicious, as shown by <a href="34.html">Chaum, Cr&eacute;peau, and Damg&aring;rd</a> the next year. 
 							</p>
 						</section>
-						<section id="sec2.4">
+						<section id="sec2.4" data-section-name="Indistinguishability of Random Variables">
 							<h3>2.4. Indistinguishability of Random Variables</h3>
 							<p class="rp_original">
 								Throughout this paper, we will only consider families of RVs \(U=\{U_k\}\) where the parameter \(k\) ranges in the natural numbers. Let \(U=\{U_k\}\) and \(V=\{V_k\}\) be two families of RVs. The following notion of computational indistinguishability expresses the fact that, when the length of \(k\) increases, \(U_k\) becomes “replaceable” by \(V_k\), in the following sense. A random sample is selected either from \(U\), or from \(V\), and it is handed to a “judge”. After studying the sample, the judge will proclaim his verdict: 0 or 1. (We may interpret 0 as the judge’s decision that that the sample came from \(U_k\); 1 as the decision that the sample came from \(V_k\).) It is then natural to say that \(U_k\) becomes “replaceable” by \(V_k\) for \(k\) large enough if, when \(k\) increases, the verdict of any computationally bounded judge becomes “meaningless”, that is essentially uncorrelated to which of the two distributions the sample came from.
@@ -408,7 +408,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec3">
+					<section id="sec3" data-section-name="Tm-games with Passive Adversaries">
 						<h2>3. Tm-games with Passive Adversaries</h2>
 						<span class="rp_definition_header" id="def2">Definition 2 - Turing machine game</span>
 						<p class="rp_original rp_definition">
@@ -467,9 +467,9 @@
 							This is sometimes known as the ideal vs. real-world argument. From the point of view of the adversary, there is no difference between the 'ideal world' (where the protocol was performed by a <span class="load-definable">trusted party</span> instead) and the real world, where the protocol is being performed.
 						</p>
 					</section>
-					<section id="sec4">
+					<section id="sec4" data-section-name="Hints on How to Play Tm-games with Passive Adversaries">
 						<h2>4. Hints on How to Play Tm-games with Passive Adversaries</h2>
-						<section>
+						<section data-section-name="A New and General Oblivious Transfer Protocol">
 							<p class="rp_original">
 								At a first glance enforcing both correctness and privacy constraints of a <span class="load-definable" data-define="Turing machine game">Tm-game</span> appears easy only for special cases of \(M\), say the ones computing a constant function. Nonetheless,
 							</p>
@@ -495,7 +495,7 @@
 							<p class="rp_original">
 								Below, we contribute a new protocol that correctly implements a one-out-of-two OT in presence of passive adversaries. The existence of <span class="load-definable" data-define="trapdoor permutation">trapdoor permutations</span> suffices to prove the correctness of our protocol.
 							</p>
-							<section id="sec4.1.1">
+							<section id="sec4.1.1" data-section-name="Trapdoor and One-Way Functions">
 								<h4>4.1.1. Trapdoor and One-Way Functions</h4>
 								<p class="rp_original">
 									A satisfactory definition of a <span class="load-definable" data-define="trapdoor permutation">trapdoor permutation</span> is given in <span class="reference" data-citation="GMRi"></span>. Here, let us informally say that a family of trapdoor permutations \(f\) possesses the following properties:
@@ -512,7 +512,7 @@
 									Trapdoor permutations are a special case of <span class="load-definable" data-define="one-way permutation">one-way permutations</span>. These are permutations enjoying the three properties above, except that we do not insist that the trapdoor information exists.
 								</p>
 							</section>
-							<section id="sec4.1.2">
+							<section id="sec4.1.2" data-section-name="Random Bits in One-Way Permutations">
 								<h4>4.1.2. Random Bits in One-Way Permutations</h4>
 								<p class="rp_original">
 									Our <span class="load-definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> protocol makes use of the <span class="load-definable" data-define="trapdoor function">trapdoor functions</span> \(f\) hiding a random bit \(B_f\). Here \(B_f\) is a polynomial-time computable Boolean function; the word "bit" is appropriate as \(B_f\) evaluates to 1 for half of the values in \(f\)'s domain.
@@ -533,7 +533,7 @@
 									Then notion of a random bit in a one-way permutation was introduced by Blum and Micali<sup class="reference" data-citation="BM"></sup> who showed a random bit in the <span class="load-definable" data-define="discrete logarithm problem">Discrete Logarithm Problem</span>, a well known candidate for one-way permutation. Chor and Goldreich show random bits in the RSA function. Do all one-way functions have a random bit? We do not know the answer to this question, but Yao<sup class="reference" data-citation="Y"></sup> has shown the next best thing. Namely, that given a one-way (trapdoor) permutation \(f\), one can construct a one-way (trapdoor) permutation \(F\) with random bit \(B_F\) (For a detailed proof of this theorem see <span class="reference" data-citation="BH"></span>). Levin<sup class="reference" data-citation="Lv"></sup> has actually proved a more general version of this theorem.
 								</p>
 							</section>
-							<section id="sec4.1.3">
+							<section id="sec4.1.3" data-section-name="Our Protocol">
 								<h4>4.1.3. Our Protocol</h4>
 								<p class="rp_original">
 									Without loss of generality, we assume that the two messages in the <span class="load-definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> both consist of a single bit.
@@ -586,9 +586,9 @@
 								</p>
 							</section>
 						</section>
-						<section id="sec4.2">
+						<section id="sec4.2" data-section-name="Strengthening Yao's Combined Oblivious Transfer">
 							<h3>4.2. Strengthening Yao's Combined Oblivious Transfer</h3>
-							<section>
+							<section data-section-name="The Tm-game Solver for passive adversaries">
 								<p class="rp_original">
 									In <span class="reference" data-citation="Y2"></span>, Yao presented a protocol that we call <span class="load-definable">combined oblivious transfer</span> (COT). The protocol involves two parties A and B, respectively owning private inputs \(a\) and \(b\) and any chosen function \(g\). It possesses the following property: upon termination, A computes \(g(a,b)\), while B has no idea of what A has computed. If we think of \(a\) and \(b\) as secrets, B appears to be obliviously transferring a prescribed combination of his and A's secret to A. Yao implemented COT based on the assumption that factoring is hard, (which yields, as shown by <span class="reference" data-citation="Bl"></span>) a particular <span class="load-definable">trapdoor permutation</span>. We strengthen his result by showing that COT can be correctly implemented based on any trapdoor permutation. We do this by using the <span class="load-definable" data-define="one-out-of-two oblivious transfer">one-out-of-two OT</span> of <a href="#sec4.1">section 4.1</a> within Yao's scheme. Let us consider first the case where \(a\) and \(b\) are bits and \(g\) is the Boolean \(AND\). Consider figure 1.
 								</p>
@@ -737,7 +737,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec5">
+					<section id="sec5" data-section-name="Malicious Adversaries">
 						<h2>5. Malicious Adversaries</h2>
 						<p class="rp_original">
 							The complexity of our <span class="load-definable" data-define="Turing machine game">Tm-game</span> solver greatly increases when up to half of the players is allowed to be <span class="load-definable" data-define="malicious adversary">malicious</span> and can more powerfully collaborate to try to disrupt the correctness and the privacy constraints. We used essentially all the cryptographic tools developed in the last ten years in the (correct) hope that they would make possible protocol design. Also, the proof of its correctness is rather delicate and unsuitable for an abstract. We will give it in the final paper. Here we only indicate what making <span class="load-definable" data-define="purely playable game">playable</span> a Tm-game with malicious adversaries may <i>mean</i> and which general ideas are involved in our solution.
@@ -779,7 +779,7 @@
 							We would like to stress our new use of <span class="load-definable" data-define="NP-complete">NP-completeness</span>. From being our most effective way to prove lower-bounds, it now becomes our most effective tool to construct correct protocols.
 						</p>
 					</section>
-					<section id="sec6">
+					<section id="sec6" data-section-name="General Games">
 						<h2>6. General Games</h2>
 						<p class="rp_original">
 							Many actions in life, like negotiating a contract, casting a vote in a ballot, playing cards, bargaining in the market, submitting a STOC abstract, driving a car, or simply living, may be viewed as participating with others in a game with pay-offs/penalties associated with its results. This is not only true for individuals, but also for companies, governments, armies etc. that are engaged in financial, political, and physical struggles. Despite the diversity of these games, all of them can be described in the elegant mathematical framework laid out by Von Neumann and Morgenstern earlier in this century. Game theory, however, exhibits a "gap", in that it neglected to study whether, or how, or under which conditions, games can be <i>implemented</i>. That is, it never addressed the question of whether, given the description of a game, a method exists for physically or mentally playing it. We do fill this gap by showing that, in a complexity theoretic sense, all games can be played.
@@ -787,7 +787,7 @@
 						<p class="rp_original">
 							In this extended abstract we will only informally clarify what and how this is. We start by briefly recalling the ingredients used by game theory to model an \(n\)-player game with incomplete information.
 						</p>
-						<section id="sec6.1">
+						<section id="sec6.1" data-section-name="Games">
 							<h3>6.1. Games</h3>
 							<p class="rp_original">
 								Essentially, a game consists of a set \(S\) of possible <i>states</i>, representing all possible instantaneous descriptions of the game, a set \(M\) of possible <i>moves</i>, describing all possible ways to change the current state of the game, a set \(\{K_1,K_2,\dots,K_n\}\) of <span class="load-definable" data-define="knowledge function">knowledge functions</span>, where \(K_i(\sigma)\) represents the partial information about state \(\sigma\) possessed by player \(i\), and a function \(p\), the <span class="load-definable">pay-off function</span> that, evaluated on the final state, tells the outcome of the game. Without loss of generality, the players make moves in cyclic order and the set of possible moves in any state are the same for all states. Also <span class="load-definable">WLOG</span>, the game goes on for a fixed number of moves \(m\). With little restriction we do assume that the players make use of recursive strategies for selecting their moves. (The classical model does not rule out selecting moves according to an infinite table.)
@@ -829,7 +829,7 @@
 								From this brief description it is immediately apparent that, by properly selecting the knowledge functions, one can enforce any desired  "privacy" constraints in a game.
 							</p>
 						</section>
-						<section id="sec6.2">
+						<section id="sec6.2" data-section-name="Playable Games">
 							<h3>6.2. Playable Games</h3>
 							<p class="rp_original">
 								Game theory, besides an elegant formulation, also suggests to the players strategies satisfying some desired property (e.g. optimality). That is, game theory's primary concern is how TO SELECT MOVES WELL. However, and ironically!, it never addressed the question of how TO PLAY WELL. For a general \(n\)-player game, all we can say is that we need \(n+1\) parties to properly play it; the extra party being the "<span class="load-definable">trusted party</span>". The trusted party communicates privately with all players. At step \(t\), he knows the current state \(\sigma_t\) of the game. He kindly computes \(\alpha=K_{t\bmod{n}}(\sigma_t)\), communicates \(\alpha\) to player \(t\bmod{n}\), receives from him a move \(\mu\), secretly computes the new state \(S_{t+1}=\mu(S_t)\), and so on. At the end, the trusted party will evaluate the <span class="load-definable">pay-off function</span> on the final state and declare the outcome of the game. Clearly, playing with the trusted party achieves exactly the privacy constraints of the game description, and each player will get the correct outcome.
@@ -865,7 +865,7 @@
 								We show that the first question can be affirmatively answered in a computational complexity model.
 							</p>
 						</section>
-						<section id="sec6.3">
+						<section id="sec6.3" data-section-name="A General Result">
 							<h3>6.3. A General Result</h3>
 							<span class="rp_theorem_header" id="theorem3">Theorem 3</span>
 							<p class="rp_original rp_theorem">
@@ -878,7 +878,7 @@
 								We have yet to find the final paper. Without it, however, we can still see some connection between games and Tm-games: since the authors specifically noted in <a href="#sec6.1">section 6.1</a> above that players must have a recursive strategy, it is likely that they connected their definition of general games to a recursive language, meaning that all general games would be decidable by some Turing machine. Since they defined Tm-games above to refer to any general Turing machine, that would mean that general games are a subset of Tm-games and therefore <a href="#theorem2">Theorem 2</a> implies <a href="#theorem 3">Theorem 3</a>.
 							</p>
 						</section>
-						<section id="sec6.4">
+						<section id="sec6.4" data-section-name="A Completeness Theorem for Fault-Tolerant Computation">
 							<h3>6.4. A Completeness Theorem for Fault-Tolerant Computation</h3>
 							<p class="rp_original">
 								Our main theorem has direct impact to the field of fault-tolerant computation. This is so because protocols, when properly formalized (which we will do in the final paper), are games with partial information. Thus, as long as the majority of the players is honest, all protocols may be correctly played. Actually, slightly more strongly, the correct way to play a game can be found in a uniform manner. Namely, we exhibit a specific, efficient algorithm that, on input a protocol problem, outputs an efficient, distributed protocol for solving it.
@@ -888,13 +888,13 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec7">
+					<section id="sec7" data-section-name="Recent Developments">
 						<h2>7. Recent Developments</h2>
 						<p class="rp_original">
 							Recently, Haver and Micali found<span data-broken-link=true></span> a <span class="load-definable" data-define="Turing machine game">Tm-game</span> solver that is algorithmically much simpler (for instance it does not use Barrington's <span class="load-definable" data-define="straight-line program">straight-line programs</span>) but more difficult to prove correct. Also, Goldreich and Vainish found a simpler solution based on a specific assumption, the computational difficulty of <span class="load-definable" data-define="quadratic residue">quadratic residuosity</span>.
 						</p>
 					</section>
-					<section id="sec8">
+					<section id="sec8" data-section-name="Acknowledgements">
 						<h2>8. Acknowledgements</h2>
 						<p class="rp_original">
 							We are very grateful to Shimon Even, Dick Karp, Mike Merritt, Albert Meyer, Yoram Moses for having doubted the generality of some of our intermediate solutions and having encouraged us to reach the right level of generality. In particular, Albert Meyer contributed the beautiful notion of a Turing-machine game, and Dick Karp steered us toward games with incomplete information as the best avenue to our completeness theorem for protocols. 
@@ -905,14 +905,14 @@
 					</section>
 				</div>
             </div>
-			<div class="main_toplevel main_section main_color5" id="notes_5p">
+			<div class="main_toplevel main_section main_color5" id="notes_5p" data-section-name="Notes on 5-Permutations">
                 <div class="main_window main_fullwidth">
 					<h1>Notes on 5-Permutations</h1>
                     <div class="main_toc"></div>
 					<p class="rp_original">
 					The <span class="load-definable">group</span> of 5-permutations is the group of all permutations on a set of 5 (generic) elements, also known as the symmetric group \(S_5\).
 				</p>
-				<section id="#c_notation">
+				<section id="#c_notation" data-section-name="Notation">
 					<h2>Notation</h2>
 					<p class="rp_original">
 						A permutation in \(S_5\) is usually represented as an ordering of the set \(\{1,2,3,4,5\}\); since no elements are permuted in that set, \(\{1,2,3,4,5\}\) is the identity element. The permutation \(\{4,5,2,3,1\}\) should be interpreted as reordering any 5-element set to be the order given: so, the fourth, fifth, second, third, and first elements, in order.
@@ -927,7 +927,7 @@
 						The identity is written as \(()\) in cycle form, since it asks to have no elements switched
 					</p>
 				</section>
-				<section id="#c_operations">
+				<section id="#c_operations" data-section-name="Operations">
 					<h2>Operations</h2>
 					<p class="rp_original">
 						When we perform the composition operation on two permutations in \(S_5\), we pretend the left element is in the order \(\{1,2,3,4,5\}\) and rearrange it to fit the right element. So, for example, \(\{1,2,3,5,4\}\{5,4,3,2,1\}=\{4,5,3,2,1\}\).
@@ -939,7 +939,7 @@
 						It is sometimes shorter to write operations with the cyclic form, due to a few nice properties of that form. The composition of two cycles that are independent of each other (e.g. \((1,3),(2,5)\)) are already in the proper form if you simply place them in the correct order: \((1,3)(2,5)\). The inverse of a single cycle is always the same cycle reversed: \((1,3,2,5)^{-1}=(5,2,3,1)\). 
 					</p>
 				</section>
-				<section id="#c_props">
+				<section id="#c_props" data-section-name="Properties">
 					<h2>Properties</h2>
 					<p class="rp_original">
 						Composition in \(S_5\) is NOT commutative in general; however, the main advantage of the cycle form is that it is simple to tell when two compositions are independent of each other and therefore can be commuted. As an example, \((5,3,2)(1,4)=(1,4)(5,3,2)\). Intuitively, it doesn't matter whether you switch elements 4 and 1 first or shift elements 5, 3, and 2 first, since they do not share elements in common.
@@ -953,7 +953,7 @@
 				</section>
 				</div>
 			</div>
-			<div class="main_toplevel main_section main_color7" id="footnotes">
+			<div class="main_toplevel main_section main_color7" id="footnotes" data-section-name="Footnotes">
 				<div class="main_fullwidth">
 					<h1>Footnotes</h1>
 					
@@ -964,7 +964,7 @@
 					</ol>
 				</div>
             </div>
-            <div class="main_toplevel main_section main_color8" id="references">
+            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
 				<div class="main_fullwidth">
 					<h1>References</h1>
 					<ol id="referencelist">

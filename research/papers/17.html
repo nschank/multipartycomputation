@@ -56,7 +56,7 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1" id="overview">
+            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
@@ -81,7 +81,7 @@
 						
                     <div class="main_toc"></div>
 						
-                    <section id="intro">
+                    <section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</b> is a 1988 paper by Ben-Or, Goldwasser, and Wigderson which demonstrated the bounds of (and described a protocol for) multiparty computation which is <span class="load-definable" data-define="information theoretic security">information theoretically secure</span>. It is one of <a href="34.html">two papers</a> in the same year which demonstrates that up to &frac13; parties can be actively <span class="load-definable" data-define="malicious adversary">malicious</span> without affecting correctness or privacy. The other paper offers information theoretic security in a very similar manner, while this paper additionally guarantees correctness (as opposed to a <span class="load-definable">negligible</span> probability of incorrectness).
@@ -93,7 +93,7 @@
 							Note that a true protocol specification is not given in this work; it offers completeness theorems, and uses a more general specification in order to prove its purposes. For example, no particular algorithm for the error checking and correctness is given, but its existence is sufficient to prove their claims.
 						</p>
 					</section>
-					<section id="goals">
+					<section id="goals" data-section-name="Goals and Results">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							The authors intended to find upper bounds on what types of computation are possible in the <span class="load-definable" data-define="information-theoretic security">information-theoretic model</span>, and the bounds they found were optimal. This result is, of course, dependent on the specification of the network (which can be found in <a href="#assumptions">Assumptions</a>).
@@ -105,13 +105,13 @@
 							The authors provided privacy using a familiar verifiable secret sharing scheme based on finite fields. Their methodology for correctness is more clever; by ensuring the VSS scheme was constructed such that it had an <span class="load-definable" data-define="error-correcting code">error correcting code</span> (using the <span class="load-definable">Discrete Fourier Transform</span>), they reduced fault tolerance within the scheme to known algorithms for error correction.
 						</p>
 					</section>
-					<section id="assumptions">
+					<section id="assumptions" data-section-name="Assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
 							This paper made a point of not relying on any cryptographic assumptions; its results are only based on the type of network, which is specified to be complete, <span class="load-definable" data-define="synchronous network">synchronous</span>, <span class="load-definable" data-define="secure network">secure</span>, and <span class="load-definable" data-define="authenticated network">authenticated</span>.
 						</p>
 					</section>
-					<section id="defs">
+					<section id="defs" data-section-name="Definitions">
 						<h2>Definitions</h2>
 						<a href="#appendix"><span class="rp_definition_header">Definition 1 - \(t\)-privacy</span></a>
 						<p class="rp_original rp_definition">
@@ -122,7 +122,7 @@
 							A protocol is \(t\)-<i>resilient</i> if no set of \(t\) or fewer players can influence the correctness of the outputs of the remaining players. For this to make sense, the function definition should be extended to specify what it is if some players neglect to give their inputs or are caught cheating (see <a href="#appendix">appendix</a>).
 						</p>
 					</section>
-					<section id="theorems">
+					<section id="theorems" data-section-name="Theorems">
 						<h2>Theorems</h2>
 						<a href="#lemma1"><span class="rp_theorem_header">Lemma 1: (Linear Functional)</span></a>
 						<p class="rp_original rp_theorem">
@@ -149,7 +149,7 @@
 							There are functions for which there is no \(\frac n 3\)-<span class="load-definable" data-define="t-resilient">resilient</span> protocol.
 						</p>
 					</section>
-					<section id="further">
+					<section id="further" data-section-name="Further Reading">
 						<h2>Further Reading</h2>
 						<p class="rp_analysis">
 							For a similar but differently presented take on information-theoretic computation within a finite field, see Chaum, Cr&eacute;peau, and Damg&aring;rd's <a href="34.html">work of the same year</a>.
@@ -165,7 +165,7 @@
 							<li><b><a href="76.html">Verifiable Secret Sharing and Multiparty Protocols... (1989)</a></b>: Information-Theoretic Security for Honest Majority, Negligible Probability of Cheating</li>
 						</ol>
 					</section>
-					<section id="ref">
+					<section id="ref" data-section-name="Referencing This Paper">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -174,11 +174,11 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color3" id="annotated_paper">
+            <div class="main_toplevel main_section main_color3" id="annotated_paper" data-section-name="Annotated Paper (extended Abstract)">
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper (extended Abstract)</h1>
                     <div class="main_toc"></div>
-					<section id="abstract" data-section-number="0">
+					<section id="abstract" data-section-number="0" data-section-name="Abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
 							Every function of \(n\) inputs can be efficiently computed by a complete network of \(n\) processors in such a way that:
@@ -191,7 +191,7 @@
 							Furthermore, the above bounds on \(t\) are tight!
 						</p>
 					</section>
-                    <section id="sec1">
+                    <section id="sec1" data-section-name="Introduction">
                         <h2>1. Introduction</h2>
 						<p class="rp_original">
 							The rapid development of distributed systems raised the natural question of what tasks can be performed by them (especially when faults occur). A large body of literature over the past ten years addressed this question. There are two approaches to this question, depending on whether a limit on the computational power of processors is assumed or not.
@@ -227,7 +227,7 @@
 							We proceed to define the model, state the results and prove them. In the full paper we mention generalizations and extensions of our results to other tasks (playing games rather than computing functions), to other model parameters (<span class="load-definable" data-define="synchronous network">synchrony</span>, communication networks), and other complexity measures (number of rounds).
 						</p>
                     </section>
-					<section id="sec2">
+					<section id="sec2" data-section-name="Definitions and Results">
 						<h2>2. Definitions and Results</h2>
 						<p class="rp_original">
 							For this abstract, we define the model and state the results on an intuitive level. Since even the formal definition of the notions of privacy and resiliency are nontrivial, we give them explicitly in <a href="#appendix">an appendix</a>.
@@ -267,7 +267,7 @@
 							There are functions for which there is no \(\frac n 3\)-<span class="load-definable" data-define="t-resilient">resilient</span> protocol.
 						</p>
 					</section>
-					<section id="sec3">
+					<section id="sec3" data-section-name="Proof of Theorem 1">
 						<h2>3. Proof of Theorem 1</h2>
 						<p class="rp_original">
 							Let \(P_0,\dots,P_{n-1}\) be a set of players, and let \(n\geq 2t+1\). Let \(F\) be the function which this set of players wants to compute <span class="load-definable" data-define="t-private">\(t\)-privately</span>, where each player holds some input variables to the function \(F\). Let \(E\) be some fixed finite field, with \(|E|\gt n\). Without loss of generality we may assume that all inputs are elements from \(E\) and that \(F\) is some polynomial (in the input variables) over \(E\), and that we are given some arithmetic circuit computing \(|F|\), using the operations \(+,\times\), and constants from \(E\).
@@ -290,7 +290,7 @@
 						<p class="rp_original">
 							Stages I and III are very simple and we describe them below, and delay the details of the computation stage to the next section.
 						</p>
-						<section id="sec3.1">
+						<section id="sec3.1" data-section-name="The Input Stage">
 							<h3>3.1. The Input Stage</h3>
 							<p class="rp_original">
 								Let \(a_0,\dots,a_{n-1}\) be some \(n\) distinct non-zero points in our field \(E\). (This is why we need \(|E|\gt n\).) Each player holding some input \(s\in E\), introduces the input to the computation by selecting \(t\) random elements \(a_i\in E\), for \(i=1,\dots,t\), setting $$f(x)=s+a_1x+\cdots+a_tx^t$$ and sending to each player \(P_i\) the value \(s_i=f(a_i)\).
@@ -302,7 +302,7 @@
 								We proved the above (and otherwise discuss it further) in <a href="34.html#sec3">Chaum, Damg&aring;rd, and Cr&eacute;peau's paper</a> of the same year.
 							</p>
 						</section>
-						<section id="sec3.2">
+						<section id="sec3.2" data-section-name="The Final Stage">
 							<h3>3.2. The Final Stage</h3>
 							<p class="rp_original">
 								To keep the <span class="load-definable" data-define="t-private">\(t\)-privacy</span> condition, we will make sure that the set of messages received by any set of \(t\) players will be completely independent from all the inputs. During the whole computation each gate which evaluates to some \(s\in E\), will be "evaluated" by the players by sharing the secret value of \(s\) using a random polynomial \(f(x)\) of degree \(t\), completely independent from all the inputs, with the only restriction that \(f(0)=s\). In particular at the end of the computation we will have the value of \(F\) shared among the players in a similar manner. If we want to let just one player know the output value, all the players send their shares to that particular player. This player can compute the <span class="load-definable">interpolation</span> polynomial \(f(x)\) and use its free coefficient as the result.
@@ -312,7 +312,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec4">
+					<section id="sec4" data-section-name="The Computation Stage">
 						<h2>4. The Computation Stage</h2>
 						<p class="rp_original">
 							Let \(a,b\in E\) be two secrets that are shared using the polynomials \(f(x),\,g(x)\) respectively, and let \(c\in E,\;c\neq0\) be some constant. It is enough to show how one can "compute" \(c\cdot a,\,a+b\), and \(a\cdot b\).
@@ -338,7 +338,7 @@
 						<p class="rp_original rp_sub">
 							Matrix multiplication is just the evaluation of \(n\) linear functionals. By the Lemma, we can compute each linear functional \(Y_i\) independently, and reveal the outcome only to \(P_i\).
 						</p>
-						<section id="sec4.1">
+						<section id="sec4.1" data-section-name="The Multiplication Step">
 							<h3>4.1. The Multiplication Step</h3>
 							<p class="rp_original">
 								The multiplication step is only a bit harder. Let \(a\) and \(b\) be encoded by \(f(x)\) and \(g(x)\) as above. We now assume that \(n\geq 2t+1\). Note that the free coefficient of the polynomial \(h(x)=f(x)g(x)\) is \(a\cdot b\). There are two problems with using \(h(x)\) to encode the product of \(a\) times \(b\). The first, and obvious, one is that the degree of \(h(x)\) is \(2t\) instead of \(t\). While this poses no problem with <span class="load-definable" data-define="interpolation">interpolating</span> \(h(x)\) from its \(n\) pieces since \(n\geq 2t+1\), it is clear that further multiplications will raise the degree, and once the degree passes \(n\) we will not have enough points for the <span class="load-definable">interpolation</span>. The second problem is more subtle. \(h(x)\) is not a <i>random</i> polynomial of degree \(2t\) (ignoring, of course, the free coefficient). For example, \(h(x)\), as a product of two polynomials, cannot be irreducible.
@@ -350,7 +350,7 @@
 								To overcome these two problems we will, in one step, randomize the coefficients of \(h(x)\), and reduce its degree while keeping the free coefficient unchanged. We first describe the degree reduction procedure and then combine it with the randomization of the coefficients.
 							</p>
 						</section>
-						<section id="sec4.2">
+						<section id="sec4.2" data-section-name="The degree reduction step">
 							<h3>4.2. The degree reduction step</h3>
 							<p class="rp_original">
 								Let $$h(x)=h_0+h_1x+\cdots+h_{2t}x^{2t}$$ and let $$s_i=h(\alpha_i)=f(\alpha_i)g(\alpha_i),$$ for \(i=0,\dots,n-1\), be the "shares" of \(h(x)\). Each \(P_i\) holds an \(s_i\). Define the truncation of \(h(x)\) to be $$k(x)=h_0+h_1x+\cdots+h_tx^t,$$ and \(r_i=\)<span class="load-equation" data-equation="truncation">\(k(\alpha_i)\)</span>								for \(i=1,\cdots,n-1\).
@@ -373,7 +373,7 @@
 								Since \(B\) is not <span class="load-definable" data-define="singular matrix">singular</span> (because the \(\alpha_i\)'s are distinct) we have $$S\cdot(B^{-1}PB)=R$$ but \(A=B^{-1}PB\) is some fixed constant matrix, proving our claim.
 							</p>
 						</section>
-						<section id="sec4.3">
+						<section id="sec4.3" data-section-name="The Randomization Step">
 							<h3>4.3. The Randomization Step</h3>
 							<p class="rp_original">
 								As noted above, the coefficients of the product polynomial are not completely random, and likewise the coefficients of its truncation <span class="load-equation" data-equation="truncation">\(k(x)\)</span> may not be completely random. To randomize the coefficients, each player \(P_i\) randomly selects a polynomial \(q_i(x)\) of degree \(2t\) with a zero free coefficient, and distributes its shares among the player. By a simple generalization of the argument in Shamir's<sup class="reference" data-citation="Sh">[?]</sup> scheme, it is easy to see that knowing \(t\) values on this polynomial gives no information on the vector of coefficients of the monomials of \(x,x^2,\dots,x^t\) of \(q_i(x)\).
@@ -427,7 +427,7 @@
 							Specifically, this is for the following reason: say that Alice has input 0. Bob must give Alice enough information to output his own bit; this by definition leaks information. This is, of course, not true if Alice has input bit 1&mdash;but without already knowing that Alice has bit 1 (which constitutes a leak), Bob must assume the worst case and give Alice a possibility of a leak.
 						</p>
 					</section>
-					<section id="sec5">
+					<section id="sec5" data-section-name="Sharing a Secret with Cheaters">
 						<h2>5. Sharing a Secret with Cheaters</h2>
 						<p class="rp_original">
 							Let \(n=3t+1\) and let \(P_0,\dots,P_{n-1}\) be a set of \(n\) players among which we want to share a secret such that:
@@ -461,12 +461,12 @@
 							Reed-M&uuml;ller codes and how to work with them is well outside the scope of this website; for more on working with them, we recommend <a href="http://mathworld.wolfram.com/Reed-MullerError-CorrectingCode.html">MathWorld</a>, an explanatory <a href="http://www-math.mit.edu/phase2/UJM/vol1/COOKE7FF.PDF">research paper</a> published by MIT, or the <a href="http://books.google.com/books?id=5kfwlFeklx0C&pg=PR6&lpg=PR6&dq=W.+W.+Peterson+and+E.+J.+Weldon,+Error+correcting+codes,+Second+Ed.&source=bl&ots=PZzgA2fcQJ&sig=wB6fNlB5CL4Pp45FOEXlH34M9RU&hl=en&sa=X&ei=C8vPU9--CZKqyASFqoKACA&ved=0CCwQ6AEwAg#v=onepage&q=W.%20W.%20Peterson%20and%20E.%20J.%20Weldon%2C%20Error%20correcting%20codes%2C%20Second%20Ed.&f=false">book</a> mentioned in the reference (on Google Books).
 						</p>
 					</section>
-					<section id="sec6">
+					<section id="sec6" data-section-name="Verifying a Secret">
 						<h2>6. Verifying a Secret</h2>
 						<p class="rp_original">
 							Assume that player \(P\) has distributed a secret in the manner described above. Before entering this shared secret into a computation, we wish to verify that the secret shares we are holding are shares of a real secret and not some \(n\) random numbers. We want to do so without revealing any information about the secret or any of its shares. This is easily done using the following <span class="load-definable" data-define="zero knowledge proof">Zero Knowledge proof</span> technique. We will later show how to verify a secret using a different technique that has absolutely no probability of error. We present this <span class="load-definable" data-define="zero knowledge proof">Zero Knowledge</span> technique because it is simpler, and uses fewer rounds of communication.
 						</p>
-						<section id="sec6.1">
+						<section id="sec6.1" data-section-name="Simple Verification of a Secret">
 							<h3>6.1. Simple Verification of a Secret</h3>
 							<p class="rp_original">
 								Let \(f_0\) be the original polynomial. Let \(f_1,\dots,f_m,\,m=3n\) be random polynomials of degree \(t\) generated by \(P\), and have \(P\) send to \(P_i\) the values \(f_j(\)<span class="load-equation" data-equation="omega">\(\omega^i)\)</span> for \(j=1,\dots,m\). Each \(P_i\) selects a random \(\alpha_i\neq 0\) from \(E\) and sends it to all the other players. After reaching agreement on the set of \(\alpha\)'s, the dealer broadcasts the set of polynomials \(f^\alpha=\sum\nolimits_{k=0}^m\alpha^kf_k\) to all players. Each player \(P_i\) checks that, at the point <span class="load-equation" data-equation="omega">\(\omega^i)\)</span>, the shares received satisfy the required equations for all the \(\alpha\)'s. If some \(P_i\) finds an error he or she broadcasts a complaint. If \(t+1\) or more players file a complaint, we decide that the dealer is faulty and take some default value, say 0, to be the dealer's secret (and pick 0 for all the needed shares).
@@ -500,7 +500,7 @@
 								Note that if the dealer is correct, then no good player's value will become public during the verification process. This, together with the fact that all the polynomials that the dealer reveals during this verification procedure are completely independent from the secret polynomial \(f_0\), ensures that the bad players will not gain any information about the dealer's secret. (Detailed proof omitted).
 							</p>
 						</section>
-						<section id="sec6.2">
+						<section id="sec6.2" data-section-name="Absolute Verification of a Secret">
 							<h3>6.2. Absolute Verification of a Secret</h3>
 							<p class="rp_original">
 								The verification procedure described above leaves an exponentially small probability of error. In this section we describe a secret verification procedure that leaves no probability of error.<sup class="footnote" id="fref1" data-footnote="1"><a href="#footnote1">1</a></sup>
@@ -543,7 +543,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec7">
+					<section id="sec7" data-section-name="Some More Tools">
 						<h2>7. Some More Tools</h2>
 						<p class="rp_original">
 							Before going into the computation stage, we need two more tools.
@@ -555,7 +555,7 @@
 						<p class="rp_original">
 							Both of these are not needed when \(n\geq4t+1\), but are required to handle the \(n=3t+1\) case.
 						</p>
-						<section id="sec7.1">
+						<section id="sec7.1" data-section-name="Generating Polynomials of Degree \(2t\)">
 							<h3>7.1. Generating Polynomials of Degree \(2t\)</h3>
 							<p class="rp_original">
 								Let each player \(P_i\) distribute \(t\) random (including the free coefficient) polynomials \(g_{i,k}(x),\,k=1,\dots,t\), of degree \(t\). Define \(f_i(x)\) by $$f_i(x) = \sum\limits_{k=1}^t{x^k\cdot g_{i,k}}$$ and let the players evaluate from their points on the \(g_{i,k}\)'s their corresponding point on \(f_i(x)\).
@@ -567,14 +567,14 @@
 								Finally, as our random polynomial we take $$f(x)=\sum\limits_{i=0}^{n-1}{f_i(x)}.$$
 							</p>
 						</section>
-						<section id="sec7.2">
+						<section id="sec7.2" data-section-name="Verifying that \(c=a\cdot b\)">
 							<h3>7.2. Verifying that \(c=a\cdot b\)</h3>
 							<p class="rp_original">
 								Let the player \(P\) distribute \(a\) and \(b\) using the polynomials \(A(x)\) and \(B(x)\) respectively. We want \(P\) to also distribute a random polynomial encoding \(c=a\cdot b\), in such a way that the players can all verify that indeed \(c=a\cdot b\). Let $$D(x)=A(x)\cdot B(x)=c+c_1x+\dots+c_{2t}x^{2t}$$ and let $$\begin{align}D_t(x)&=r_{t,0}+r_{t,1}x+\dots+r_{t,t-1}x^{t-1}+c_{2t}x^t\\D_{t-1}(x)&=r_{t-1,0}+\dots+r_{t-1,t-1}x^{t-1}+[c_{2t-1}-r_{t,t-1}]x^t\\\vdots\quad&\quad\vdots\\D_1(x)&=r_{1,0}+\dots+r_{1,t-1}x^{t-1}+[c_t-r_{t,1}-r_{t-1,2}-\dots-r_{2,t-1}]x^t\end{align}$$ where the \(r_{i,j}\) are random elements from \(E.\;P\) selects the \(D_i(x)\) and distributes their shares to all the players. After verifying that \(A(x),\,B(x)\) and all the \(D_i(x)\) are of degree \(t\), define $$C(x)=D(x)-\sum\limits_{i=1}^tx^i\cdot D_i(x).$$ and verify that \(C(x)\) is also of degree \(t\). From the construction of \(C(x)\) it is clear that \(C(x)\) is a random polynomial of degree \(t\) with the only restriction that \(C(0)=a\cdot b\).
 							</p>
 						</section>
 					</section>
-					<section id="sec8">
+					<section id="sec8" data-section-name="Proof of Theorem 3">
 						<h2>8. Proof of Theorem 3</h2>
 						<p class="rp_original">
 							We separate again the computation to its Input, Computation, and Final stages. At the input stage, we let all players enter their inputs to the computation using our secret sharing scheme, while verifying that each secret shared is indeed some polynomial of degree \(t\). The secret verification assures that the inputs of any Byzantine player is well defined, but does not ensure that it is in the domain of our function. For example, in a 0-1 vote, we must verify that the input is 0 or 1. We defer this type of verification to the computation stage.
@@ -582,7 +582,7 @@
 						<p class="rp_original">
 							The final stage is exactly the same <a href="#sec3.2">as in the proof of Theorem 1</a>. When we have simulated the circuit, and the players are holding the pieces of a properly shared secret encoding the final output, they send all the pieces to one or all the players. As at most \(t\) pieces are wrong, each player can use the error correcting procedure and recover the result.
 						</p>
-						<section id="sec8.1">
+						<section id="sec8.1" data-section-name="The Computation Stage - Byzantine Case">
 							<h2>8.1. The Computation Stage - Byzantine Case</h2>
 							<p class="rp_original">
 								Let \(a\) and \(b\) be properly encoded by \(f(x)\) and \(g(x)\) respectively, where by "properly encoded" we mean that all the pieces of the good players are on some polynomial of degree \(t\). Since \(f(x)\) and \(g(x)\) are properly encoded, the polynomials \(f(x)+g(x)\) and \(c\cdot f(x)\) properly encode \(a+b\) and \(c\cdot a\) for any constant \(c\in E\). The same argument of <a href="#theorem1">Theorem 1</a> implies that we can do the computation of any linear operation with no communication at all.
@@ -637,10 +637,10 @@
 					</section>
                 </div>
             </div>
-			<div class="main_toplevel main_section main_color5" id="appendix">
+			<div class="main_toplevel main_section main_color5" id="appendix" data-section-name="Appendix">
 				<div class="main_window main_fullwidth">
 					<h1>Appendix</h1>
-					<section id="appendixnotation">
+					<section id="appendixnotation" data-section-name="Formal Notation">
 						<h3>Formal Notation</h3>
 						<p class="rp_original">
 							Let \(F\) be a field. Let \(U=F^n\) denote the standard \(n\)-dimensional vector space over \(F\) and \(M_n(F)\) the ring of \(n\times n\) matrices over \(F\).
@@ -653,7 +653,7 @@
 							Unless otherwise specified, \(F\) will be finite, and \(D\) the uniform distribution over \(F\).
 						</p>
 					</section>
-					<section id="appendix1.1">
+					<section id="appendix1.1" data-section-name="The Basic Model">
 						<h3>The Basic Model</h3>
 						<p class="rp_original">
 							Fix \(n\gt 0\) and a field \(F\). Intuitively, an \((n,F)\)-<i>network</i> is a complete synchronous network of \(n\) probabilistic machines (players) \(P_0,P_1,\dots,P_{n-1}\). At every round each players can send one message (element of \(F\)) to each other player, receive a message from each other player, and perform arbitrary computation.
@@ -680,7 +680,7 @@
 							To formally define what it means for a protocol to compute a function, we assume fixed input and output functions, \(I_i,O_i:\,Q_i\rightarrow F\) for each player \(P_i\). Now \(\delta\) computes \(f\), if for every choice of \(\left\langle q_i^{(0)}\right\rangle\), we have \(\left\langle O_i\left(q_i^{(T)}\right)\right\rangle=\operatorname f\left(I_i(q_i^{(0)})\times R^m\right)\) (as random variables).
 						</p>
 					</section>
-					<section id="appendix1.2">
+					<section id="appendix1.2" data-section-name="Some Intuition">
 						<h3>Some Intuition</h3>
 						<p class="rp_original">
 							The bad players in our model can completely coordinate their actions. Hence, for a bad set (coalition) \(C\subseteq[n]=\{0,1,2,\dots,n-1\}\), the transition functions \(\delta_i,\,i\in C\) are replaced by arbitrary functions \(\delta_i'\) that compute the next state and messages of \(P_i\) from the joint information of the current state, previously received messages and random choices of all \(\{P_i\},\,i\in C\). We denote any protocol in which a set of \(C\) is bad (in this sense) by \(\delta_C\).
@@ -698,7 +698,7 @@
 							In the case of gossip, we don't have to worry about the correctness of computing \(f\)&mdash;this follows from the definition "look alike". Here all we shall have to prevent is leakage of information. In case of Byzantine faults, we will have to guarantee also the correctness of the computation. We proceed now to define the important notions of Privacy and Correctness.
 						</p>
 					</section>
-					<section id="appendix1.3">
+					<section id="appendix1.3" data-section-name="Privacy (preliminary):">
 						<h3>Privacy (preliminary):</h3>
 						<p class="rp_original">
 							Intuitively, a coalition \(C\) did not learn anything from a protocol for computing \(f\), if whatever it can compute after the protocol (from its final states), it could compute only from its input (initial states) and its components of the function values.
@@ -713,7 +713,7 @@
 							A protocol \(\delta\) (for computing \(f\)) is <span class="load-definable" data-define="t-private">\(t\)-<i>private</i></span> if every coalition \(C\) with \(|C|\leq t\) is ignorant.
 						</p>
 					</section>
-					<section id="appendix1.4">
+					<section id="appendix1.4" data-section-name="Correctness:">
 						<h3>Correctness:</h3>
 						<p class="rp_original">
 							This issue is problematic, since some of the bad players can obliterate their initial inputs, and the function value is not well defined (a simple example is Byzantine agreement). To ignore bad inputs for every set \(B\subseteq[n]\), we need a (sub)function of \(f\) that depends on the input coordinates of only \([n]\backslash B\). (A special case is assigned default values to input coordinates in \(B\)).
@@ -731,7 +731,7 @@
 							A protocol is <span class="load-definable" data-define="t-resilient">\(t\)-<i>resilient</i></span> if every coalition \(C\) with \(|C|\leq t\) is harmless.
 						</p>
 					</section>
-					<section id="appendix1.5">
+					<section id="appendix1.5" data-section-name="Privacy Revisited:">
 						<h3>Privacy Revisited:</h3>
 						<p class="rp_original">
 							For the case of <span class="load-definable" data-define="Byzantine fault">Byzantine faults</span>, the assumption that \(\delta_C\) looks like \(\delta\) is invalid. For any harmless coalition \(C\) we can remove this assumption from the definition of ignorance, and replace \(f\) in \((*)\) above, by \(f_B\), the function that will actually be computed by the good players.
@@ -742,7 +742,7 @@
 					</section>
 				</div>
             </div>
-			<div class="main_toplevel main_section main_color7" id="footnotes">
+			<div class="main_toplevel main_section main_color7" id="footnotes" data-section-name="Footnotes">
 				<div class="main_fullwidth">
 					<h1>Footnotes</h1>
 					
@@ -759,7 +759,7 @@
 					</ol>
 				</div>
             </div>
-            <div class="main_toplevel main_section main_color8" id="references">
+            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
 				<div class="main_fullwidth">
 					<h1>References</h1>
 					<ol id="referencelist">

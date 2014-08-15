@@ -67,7 +67,7 @@
 				<a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
 				<a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
 			</div>
-			<div class="main_toplevel main_section main_color1" id="overview">
+			<div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
 				<div class="main_section_nav_container">
 					<div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
 					<div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
@@ -87,7 +87,7 @@
 					<h1>Overview</h1>
 					
 					<div class="main_toc"></div>
-					<section id="intro">
+					<section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Protocols for Secure Computations</b> is a short 1982 research paper by Andrew Yao that is known for defining the Millionaires' Problem, and for being the first paper to pose the problem of multiparty computation. Its results were mostly foundational: only a few very general theorems were offered, all without proof, and the vast majority of the paper is spent describing (the not-then named) multiparty computation as a whole, as opposed to defining any particular problems, perspectives, or contexts. 	
@@ -99,7 +99,7 @@
 							The significance of this particular paper to this field is difficult to overstate. Despite its shortcomings (namely, its lack of proof and its limited direct application), its focus on defining a general problem as opposed to being limited to a specific one ultimately vaulted it into the realm of influence, and most research into multiparty computation which followed it can be framed within the definitions Yao presented here. 	
 						</p>
 					</section>
-					<section id="goals">
+					<section id="goals" data-section-name="Goals and Results">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							Yao's main goal was to lay the groundwork for later research by outlining the framework of a few different basic types of problems, as well as citing a few basic applications. He defined the problem of multiparty computation in terms of: 	
@@ -115,13 +115,13 @@
 							Yao specifically mentions, as an aside, that his theorems prove that <span class="load-definable">mental poker</span> can be played with any public-key system, a generalization of previous research. 	
 						</p>
 					</section>
-					<section id="assumptions">
+					<section id="assumptions" data-section-name="Assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
 							Some of Yao's results are dependent on the existence of <span class="load-definable" data-define="one-way function">one-way functions</span>. His Millionaires' Problem protocol, for one. Since this extended abstract only briefly explains most of his theorems, we must assume that Theorems 1-5 and 9 depend on the existence of such functions. Theorem 6 determines a lower bound, and 7 and 8 are impossibility results, so we can safely assume that they do not. 	
 						</p>
 					</section>
-					<section id="defs">
+					<section id="defs" data-section-name="Definitions">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - \((\epsilon,\delta)\)-Privacy Constraint</span></a>
 						<p class="rp_original rp_definition">
@@ -137,7 +137,7 @@
 							Consider an instance in the execution of a protocol. We will consider it to be a successful cheating by Alice, if Alice does not behave consistently with any value of \(i\) and yet Bob does not detect it. A successful cheating by Bob is defined similarly. 	
 						</p>
 					</section>
-					<section id="theorems">
+					<section id="theorems" data-section-name="Theorems">
 						<h2>Theorems</h2>
 						<p class="rp_original">
 							Let \(A\) be a protocol, let \(T(A)\) denote the maximum number of bits exchanged between Alice and Bob when \(A\) is used. 	
@@ -189,7 +189,7 @@
 							Let \(\epsilon &gt; 0\) be fixed. There is a protocol \(A\) with polynomial (in \(N\)) running time which exchanges secrets \(D_b(w)\) and \(D_a(u)\), and under which the probability of anyone double-crossing successfully is bounded by \(\epsilon\). 	
 						</p>
 					</section>
-					<section id="protocols">
+					<section id="protocols" data-section-name="Protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#sec3.1">Millionaires' Protocol</a></h3>
 						<ul class="rp_analysis">
@@ -204,7 +204,7 @@
 							<li><b>Implementations: </b>We have our own version in Java <a href="../../nextsteps/codeViewer.html#code/src/nschank/crypto/mpc/millionaire_y82/LessThan.java">here</a>.</li>
 						</ul>
 					</section>
-					<section id="further">
+					<section id="further" data-section-name="Further Reading">
 						<h2>Further Reading</h2>
 						<p class="rp_analysis">
 							For more about the Millionaires' Problem, see the related <a href="../../learn/ch1.html#sec1">tutorial section</a>. 	
@@ -213,7 +213,7 @@
 							For more about exchanging secrets as in Theorems <a href="#theorem8">8</a> and <a href="#theorem9">9</a>, or for a deep explanation of <a href="#theorem2">Theorem 2</a>, see Yao's follow-up paper <a href="21.html">How to Generate and Exchange Secrets</a>. 	
 						</p>
 					</section>
-					<section id="ref">
+					<section id="ref" data-section-name="Referencing This Paper">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -222,11 +222,11 @@
 					</section>
 				</div>
 			</div>
-			<div class="main_toplevel main_section main_color5" id="annotated_paper">
+			<div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
 				<div class="main_window main_fullwidth">
 					<h1>Annotated Paper (extended abstract)</h1>
 					<div class="main_toc"></div>
-					<section id="sec1">
+					<section id="sec1" data-section-name="Introduction">
 						<h2>1. Introduction</h2>
 						<p class="rp_original">
 							Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other's wealth. How can they carry out such a conversation? 	
@@ -239,7 +239,7 @@
 							Before describing these results, we would like to put this work in perspective by first considering a unified view of secure computation in the next section. 	
 						</p>
 					</section>
-					<section id="sec2">
+					<section id="sec2" data-section-name="A Unified View of Secure Computation">
 						<h2>2. A Unified View of Secure Computation</h2>
 						<p class="rp_original">
 							Since <span class="load-definable" data-define="one-way function">one-way functions</span> were first proposed in 1976 <sup class="reference" data-citation="DH"></sup>, they have been used in two kinds of applications. The first kind is concerned with the <span class="load-definable">encryption</span> and transmission of messages to make them unreadable and unalterable for eavesdroppers and saboteurs <sup class="reference" data-citation="DH"></sup><sup class="reference" data-citation="GM"></sup><sup class="reference" data-citation="Ra"></sup><sup class="reference" data-citation="RSA"></sup>. The second kind of applications includes "<span class="load-definable">mental poker</span>"<sup class="reference" data-citation="SRA"></sup>, in which two players deal cards by communicating over a telephone line, and "<span class="load-definable" data-define="coin flip">coin flipping</span>" <sup class="reference" data-citation="Bl"></sup>, in which two mutually suspecting parties are to generate an unbiased bit. It would be desirable to have a unified framework where all these applications can be related, and where common proof techniques can be developed for proving the security of protocols. More fundamentally, such a framework is essential if we are ever to understand the intrinsic power and limitation of one-way functions. For example, without a precise model it would be hard to answer a question such as "Is it possible for three mutually suspecting parties to interactively generate a bit with <span class="load-definable">bias</span> \(\frac{1}{e}\)?" 	
@@ -263,9 +263,9 @@
 							There is soon to be a <span data-broken-link=true>tutorial section</span> dealing with adversaries and saboteurs, as it is one of the most varied and well-studied aspects of cryptography. 	
 						</p>
 					</section>
-					<section id="sec3">
+					<section id="sec3" data-section-name="Deterministic Computations">
 						<h2>3. Deterministic Computations</h2>
-						<section id="sec3.1">
+						<section id="sec3.1" data-section-name="Solutions to the Millionaires' Problem">
 							<h3>3.1. Solutions to the Millionaires' Problem</h3>
 
 							<p class="rp_original">
@@ -351,7 +351,7 @@
 								To our knowledge, neither has been released by Yao. 	
 							</p>
 						</section>
-						<section id="sec3.2">
+						<section id="sec3.2" data-section-name="Model for the General Problem">
 							<h3>3.2. Model for the General Problem</h3>
 							<p class="rp_original">
 								As these three solutions base their security on different assumptions, a precise model has to be specified in detail for each solution. In this abstract, we will only give the model that corresponds to the first solution. 	
@@ -410,7 +410,7 @@
 								It is possible to consider the more general case when the initial distribution of \((i,j)\) is nonuniform. We will not go into that here. In <a href="#sec4">Section 4</a>, that becomes a special case of probabilistic computations. 	
 							</p>
 						</section>
-						<section id="sec3.3">
+						<section id="sec3.3" data-section-name="Additional Requirements">
 							<h3>3.3. Additional Requirements</h3>
 							<h4>Complexity</h4>
 							<p class="rp_original">
@@ -472,7 +472,7 @@
 								Cheating and colluding are addressed in a <span data-broken-link=true>tutorial section</span>, or under the tags <a href="../tag.html#research:tag:Collusion">Collusion</a> and <a href="../tag.html#research:tag:DishonestParties">Dishonest Parties</a> in the research-by-category section. 	
 							</p>
 						</section>
-						<section id="sec3.4">
+						<section id="sec3.4" data-section-name="Applications">
 							<h3>3.4. Applications</h3>
 
 							<h4>Secret Voting</h4>
@@ -499,8 +499,8 @@
 							</p>
 						</section>
 					</section>
-					<section id="Probabilistic">
-						<h2 id="sec4">4. Probabilistic Computations</h2>
+					<section id="sec4" data-section-name="Probabilistic Computations">
+						<h2>4. Probabilistic Computations</h2>
 						<p class="rp_original">
 							Let us consider the case with two parties Bob and Alice \((m = 2)\). Let \(V\) and \(W\) be finite sets. A function \(p\) from <span class="load-equation" data-equation="cartesianproduct">\(V \times W\)</span> to the interval \([0, 1]\) is called a <span class="load-definable" data-define="probability density function">probability density</span> if the sum of \(p(v,w)\) over \(v\) and \(w\) is equal to \(1\). Let \(P(V,W)\) be the set of all such probability densities. 	
 						</p>
@@ -528,7 +528,7 @@
 							One interesting corollary of our results is that mental poker can be played with any general public-key system. It differs from Shamir et. al's solution<sup class="reference" data-citation="SRA"></sup> in that we do not require the <span class="load-definable" data-define="one-way function">one-way functions</span> used to be <span class="load-definable" data-define="commutativity">commutative</span>, and that we can play it with a public-key system (instead of using private keys). (A solution with a special one-way function with publicized keys for playing mental poker was known in <span class="reference" data-citation="GM"></span>, but that solution depends on the special properties of the one-way function involved.) Moreover, the present solution uses much fewer bits as the number of cards becomes greater. Suppose we have a deck of \(n\) cards, and Alice and Bob each want to draw a random card from the deck in turn. All the previously known solutions transmit \(cn\) bits of information between Bob and Alice, while our scheme only needs about \(c(\log{n})^2\) bits. 	
 						</p>
 					</section>
-					<section id="sec5">
+					<section id="sec5" data-section-name="Generalization to \(m\)-Party Case">
 						<h2>5. Generalization to \(m\)-Party Case</h2>
 						<p class="rp_original">
 							When \(m\) parties \(A_1,A_2,&hellip;,A_m\) collaborate to compute a function \(f(x_1, x_2,&hellip;,x_m)\), more than one parties may <span class="load-definable" data-define="collusion">collude</span> to cheat. We will show that even the most severe constraint can be met in the following sense: No matter how many participants may collude, any cheating act will be detected and identified by all the honest parties (even if as many as \(m−1\) dishonest guys try to help cover up). We now make it precise. 	
@@ -571,8 +571,8 @@
 							The security measure as we considered above is a strong one. For some purposes, less stringent measures would be adequate. (For example, one may only require that no subset \(K'\) be able to force the outcome of the computation to be a certain value.) Sometimes protocols with better running time can be designed under such less stringent requirements. For example, there is a protocol with running time \(O(p(m) \log{q})\), where \(p(m)\) is a polynomial, for \(m\) parties to compute the function \(f(x_1, x_2, &hellip;, x_m) = x_1 +x_2 +\cdots+x_m\pmod{q}\), under a security criterion only slightly relaxed from that given in Theorem 5. 	
 						</p>
 					</section>
-					<section id="sec6">
-						<h2>What Cannot Be Done?</h2>
+					<section id="sec6" data-section-name="What Cannot Be Done?">
+						<h2>6. What Cannot Be Done?</h2>
 						<p class="rp_original">
 							There are security constraints that can not be achieved by any protocols. We will only mention two results here. 	
 						</p>
@@ -614,7 +614,7 @@
 					</section>
 				</div>
 			</div>
-			<div class="main_toplevel main_section main_color8" id="references">
+			<div class="main_toplevel main_section main_color8" id="references"><!-- data-section-name="References">-->
 				<div class="main_fullwidth">
 					<h1>References</h1>
 					<ol class="rp_original" id="referencelist">

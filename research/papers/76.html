@@ -50,7 +50,7 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1" id="overview">
+            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
@@ -76,7 +76,7 @@
 					<h1>Overview</h1>	
                     <div class="main_toc"></div>
 					
-                    <section id="intro">
+                    <section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</b> is a 1989 by Tal Rabin and Michael Ben-Or, a combination of two separate papers they were working on, which provides some useful theorems for the powers of an adversary in multiparty computations. It is a culmination of several years in which multiparty computation research was mostly focused on fault tolerance in the face of adversarial behavior, and offers the strongest possible protections a multiparty protocol can offer (as always, under certain assumptions). The assumptions made are all related to networks and to the adversary, not to computational intractability, so the secrecy offered is <span class="load-definable" data-define="information-theoretic security">information-theoretic</span>.
@@ -85,7 +85,7 @@
 							This paper's main results relate to how <span class="load-definable" data-define="broadcast channel">broadcast channels</span> affect the tolerability of adversary structures. Since verifiable secret sharing is a primitive used by essentially all multiparty computation protocols presented before, the authors using broadcast as a primitive allows an honest majority to achieve information theoretic security, but requires an exponentially small error probability for \(n/3\leq t\lt n/2\) <span class="load-definable" data-define="malicious party">faulty players</span>. 
 						</p>
 					</section>
-					<section id="goals">
+					<section id="goals" data-section-name="Goals and Results">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							The authors intended to demonstrate the most possible effective form of multiparty computation in the face of the strongest adversary which can be dealt with (in the general case). Specifically, the authors played with the idea of a <span class="load-definable">broadcast channel</span>, and demonstrated how assuming the presence of a broadcast channel extends the capabilities of verifiable secret sharing schemes (and therefore multiparty computation).
@@ -103,7 +103,7 @@
 							The essential technique of this paper is a threshold verified secret-sharing technique similar to the one presented several times in the years previous (using Galois Fields and polynomial sharing), with an additional "weak secret sharing" technique that allows easier transitioning between sub-shares and top-level shares. The Weak Secret Sharing technique uses specially created <i>check vectors</i>, independently selected values which allows a recipient to be sure that a share broadcasted by a player was the one given to that player by the dealer. Very simply put, if the dealer wants to commit player \(P_i\) to the share \(s\) in a field \(\mathbb F\), the dealer gives the player \((s,y)\) (with \(y\) being any random value in \(\mathbb F\)), and gives the player who will later receive that value \((b,c),\;b,x\in\mathbb F,\;s+by=c\). When \(P_i\) wants to release the share, \(P_i\) has an exponentially low probability of lying about \(s\) successfully, since if \(s'+by'\neq c\) for released share \((s',y')\), then the receiving player will reject it.
 						</p>
 					</section>
-					<section id="assumptions">
+					<section id="assumptions" data-section-name="Assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
 							The assumptions made in this paper are complex, as different things are assumed at different times. A quick summary of results is given below, with the assumptions made explicit. All results are in a <span class="load-definable">synchronous network</span>.
@@ -114,7 +114,7 @@
 							<li>In an incomplete network with secure channels between all <i>connected</i> players, and assuming the network has <span class="load-definable">connectivity</span> \(\gt 2t+1\), a function \(f\) can be computed with information-theoretic security and no probability of error, tolerating \(t\lt n/3\) faulty parties.</li>
 						</ul>
 					</section>
-					<section id="defs">
+					<section id="defs" data-section-name="Definitions">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1</span></a>
 						<p class="rp_original rp_definition">
@@ -134,7 +134,7 @@
 							<li>Every piece \(\beta_i\) was shared by \(P_i\) using WSS.</li>
 						</ol>
 					</section>
-					<section id="theorems">
+					<section id="theorems" data-section-name="Theorems">
 						<h2>Theorems</h2>
 						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1: VSS with Honest Dealer</span></a>
 						<p class="rp_original rp_theorem">
@@ -178,7 +178,7 @@
 							Assuming that each participant can broadcast a message to all other participants and that each pair of participants can communicate secretly, any multiparty protocol, or game with incomplete information, can be achieved if a majority of the players are honest.
 						</p>
 					</section>
-					<section id="protocol">
+					<section id="protocol" data-section-name="Protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#sec1.2">Information Checking</a></h3>
 						<ul class="rp_analysis">
@@ -224,7 +224,7 @@
 							<li><b>Notes: </b> We count bits that are broadcasted as being exchanged once, whereas "sending" a bit to every player separately is counted as being \(n\) different bits. This is consistent, for example, with communication tapes between each player, and a single broadcast tape.</li>
 						</ul>
 					</section>
-					<section id="further">
+					<section id="further" data-section-name="Further Reading">
 						<h2>Further Reading</h2>
 						<p class="rp_analysis">
 							The authors touch briefly on the idea of an adaptive (in their words, <i>dynamic</i>) adversary, which is truly codified into the literature formally <a href="5.html">6 years layer</a>.
@@ -240,7 +240,7 @@
 							<li><b><i>Verifiable Secret Sharing and Multiparty Protocols... (1989)</i></b>: Information-Theoretic Security for Honest Majority, Negligible Probability of Cheating</li>
 						</ol>
 					</section>
-					<section id="ref">
+					<section id="ref" data-section-name="Referencing This Paper">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -249,11 +249,11 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper">
+            <div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper (extended abstract)</h1>
                     <div class="main_toc"></div>
-					<section id="abstract" data-section-number="0">
+					<section id="abstract" data-section-number="0" data-section-name="Abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
 							Under the assumption that each participant can <span class="load-definable" data-define="broadcast channel">broadcast</span> a message to all other participants and that each pair of participants can communicate <span class="load-definable" data-define="secrecy network">secretly</span>, we present a verifiable secret sharing protocol, and show that any multiparty computation, or game with incomplete information, can be achieved if a majority of the players are honest. The secrecy achieved is <span class="load-definable" data-define="information theoretic security">unconditional</span> and does not rely on any assumption about computational intractability. Applications of these results to Byzantine Agreement are also presented.
@@ -262,7 +262,7 @@
 							Underlying our results is a new tool of Information Checking which provides <span class="load-definable" data-define="authentication network">authentication</span> without cryptographic assumptions and may have wide applications elsewhere.
 						</p>
 					</section>
-                    <section id="sec1">
+                    <section id="sec1" data-section-name="Introduction">
                         <h2>1. Introduction</h2>
 						<p class="rp_original">
 							Comparing the recent unconditional results on multiparty protocols of Ben-Or, Goldwasser, and Widgerson<sup class="reference" data-citation="BGW">[?]</sup> and of Chaum, Cr&eacute;peau, and Damg&aring;rd<sup class="reference" data-citation="CCD">[?]</sup>, to the previous cryptographic results of Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW">[?]</sup>, based on the existence of secure trapdoor functions, we find the following: On the one hand, the cryptographic results are stronger since they require only a majority of the \(n\) participating players to be honest, while the unconditional results require that more than \(\frac{2n}3\) of the players be honest. One the other hand, the unconditional results are both simpler and stronger since their security is "<span class="load-definable" data-define="information theoretic security">Information Theoretic</span>" and does not depend on any assumptions about computational intractability. Moreover, the results of <span class="reference" data-citation="BGW">[?]</span> with up to \(t\not\leq\lt\frac n 3\) faulty players guarantee absolute correctness of the results, and do not allow even an exponentially small probability of error. Such exponentially small errors are inherent to any cryptographic result based on trapdoor functions.
@@ -327,7 +327,7 @@
 						<p class="rp_original">
 							This extended abstract is a combination of two separate papers. The Main Theorem, Theorem 1, and the Information Checking protocol are the main results of Tal Rabin's Master Thesis written under the supervision of Michael Ben-Or<sup class="reference" data-citation="RT">[?]</sup>. The other results are mentioned above are from <span class="reference" data-citation="B">[?]</span>.
 						</p>
-						<section id="sec1.1">
+						<section id="sec1.1" data-section-name="The Model of Computation">
 							<h3>1.1. The Model of Computation</h3>
 							<p class="rp_original">
 								In our model of computation we assume a complete <span class="load-definable">synchronous network</span> together with a <span class="load-definable">broadcast channel</span>. The pairwise communication channels between participants are secure, that is, they cannot be <span class="load-definable" data-define="secrecy network">read</span> or <span class="load-definable" data-define="authenticated network">tampered with</span> by other participants. The broadcast channel enables each participant to send the same message to all participants: it identifies the sender, and it is completely reliable. In particular, if any participant receives a message via the broadcast channel all other players will receive the same message.
@@ -345,7 +345,7 @@
 								We choose a security parameter \(k\), so that \(2^{-k}\) is deemed a small enough error margin for our needs. Our protocols will be randomized in the sense that no matter what the adversary and the knaves will do, the probability of an error, i.e. improper outcome, will be smaller than \(2^{-k}\). All of our protocols and algorithms will be polynomial in the number of players \(n\), and in \(k\).
 							</p>
 						</section>
-						<section id="sec1.2">
+						<section id="sec1.2" data-section-name="The Information Checking Protocol">
 							<h3>1.2. The Information Checking Protocol</h3>
 							<p class="rp_original">
 								We now proceed to describe a simple process, which will be used later on to solve the Verifiable Secret Sharing Problem. This process enables us to carry out authentication of information. It is not as powerful as Digital Signatures, but on the other hand it needs no cryptographic assumptions.
@@ -363,7 +363,7 @@
 							<p class="rp_original">
 								Information Checking is carried out by the three participants in the following way: We assume that a large enough prime, \(p\gt2^k\), has been decided upon for all the computations. Without loss of generality \(s\in\mathbb{Z}_p\).
 							</p>
-							<section id="sec1.2.1">
+							<section id="sec1.2.1" data-section-name="Check Vectors">
 								<h4>1.2.1. Check Vectors</h4>
 								<p class="rp_original">
 									The dealer \(D\) chooses two random numbers \(b\neq0\) and \(y\) both in \(\mathbb Z_p\), and hands to \(INT\) the pair \((s,y)\). The dealer \(D\) computes \(s+by=c\). Then the dealer hands to \(R\) the vector \((b,c)\) which will be known as the <i>Check Vector</i>.
@@ -389,7 +389,7 @@
 									Thus the check vector assures the property 1. That is, if \(D\) is a knight, then \(R\) accepts the original \(s\) transmitted, and rejects substitutes.
 								</p>
 							</section>
-							<section id="sec1.2.2">
+							<section id="sec1.2.2" data-section-name="Verification of Check Vectors">
 								<h4>1.2.2. Verification of Check Vectors</h4>
 								<p class="rp_original">
 									To secure property 2 we use the "zero-knowledge" proof technique of <span class="reference" data-citation="R2">[?]</span>. We modify the above procedure as follows: The dealer transfers to \(INT\) an ordered set of pairs \((s,y_1),\dots,(s,y_{2k})\) and to \(R\) an ordered set of check vectors \((b_1,c_1),\dots, (b_{2k},c_{2k})\), where the \(y_i\) and \(b_i\) are chosen by \(D\) as before and hence $$s+b_iy_i=c_i\quad\quad\text{for}\,1\leq i\leq2k.$$ The intermediary \(INT\) chooses \(k\) distinct random indices \(d_1,\dots,d_k\;1\leq d_i\leq2k\). \(INT\) then asks \(R\) to reveal \((b_{d_1},c_{d_1}),\dots,(b_{d_k},c_{d_k})\). For each one of these check vectors, \(INT\) computes $$s+b_{d_i}y_{d_i}=c_{d_i}.$$ If <i>all</i> \(k\) check vectors satisfy the equation, then \(INT\) concludes that \(R\) will accept the value \(s\) that \(INT\) holds. Otherwise \(INT\) concludes that \(R\) will reject this value.
@@ -408,7 +408,7 @@
 							</section>
 						</section>
                     </section>
-					<section id="sec2">
+					<section id="sec2" data-section-name="Secret Sharing when the Dealer is a Knight">
 						<h2>2. Secret Sharing when the Dealer is a Knight</h2>
 						<span class="rp_theorem_header" id="theorem1">Theorem 1: VSS with Honest Dealer</span>
 						<p class="rp_annotation rp_theorem">
@@ -450,7 +450,7 @@
 							It is easy to see that the above algorithm provides us with the possibility or a knight dealer to share a secret, so that the knaves can not interfere in the computations, and that all knights will compute the same value \(s\). This completes the proof of Theorem 1.
 						</p>
 					</section>
-					<section id="sec3">
+					<section id="sec3" data-section-name="The Weak Secret Sharing - WSS">
 						<h2>3. The Weak Secret Sharing - WSS</h2>
 						<p class="rp_original">
 							For the next two problems we add to our model the option of <i>broadcasting</i>. Each player can announce a message which will be heard by all others. This is necessary for \(2t+1\leq n\leq3t\), otherwise Byzantine Agreement can be used.
@@ -479,12 +479,12 @@
 							Assume \(n\geq2t+1\). For a dealer \(D\), who is present until the end of the protocol, there is a protocol which achieves the Weak Secret Sharing. Moreover, the protocol is of polynomial complexity in both \(n\) and the security parameter \(k\), with any desired probability of success.
 						</p>
 						
-						<section id="sec3.1">
+						<section id="sec3.1" data-section-name="Weak Secret Sharing Protocol">
 							<h3>3.1. Weak Secret Sharing Protocol</h3>
 							<p class="rp_original">
 								This protocol is executed in three phases. The first two phases are the ones which ensure that, when the secret will be revealed, the desired properties will be achieved. The last phase is the one in which the secret is revealed.
 							</p>
-							<section id="sec3.1.1">
+							<section id="sec3.1.1" data-section-name="Phase 1: Sharing the Secret">
 								<h4>Phase 1: Sharing the Secret</h4>
 								<ol class="rp_original">
 									<li>Following steps 1-4 <a href="#sec2">above</a>, the dealer shares the secret using a random polynomial and creates check vectors to all the pieces.</li>
@@ -503,7 +503,7 @@
 									Note, whenever a check vector \((b_{ji},c_{ji})\) for the value \(\beta_j\) is mentioned in the above, it is not a single check vector but a set of \(2k\) check vectors for \(\beta_j\). The \(y_{ij}\) is also a set of \(2k\) random values for authentication of \(\beta_i\). All these are requirements for the verification of check vectors as described in Information Checking.
 								</p>
 							</section>
-							<section id="sec3.1.2">
+							<section id="sec3.1.2" data-section-name="Phase 2: Modified Verification of the Check Vector">
 								<h4>Phase 2: Modified Verification of the Check Vector</h4>
 								<p class="rp_original">
 									The following protocol is carried out by each \(P_i\) with respect to every other player \(P_j\). The player \(P_i\) is to be the intermediary as defined in the Information Checking Protocol, and \(P_j\) will be the receiver. The dealer is the dealer who shared the secret. \(P_i\) wants to verify the check vectors held by all other players for the piece \(\beta_i\). The modification is that if \(P_i\) is not satisfied that all players will accept this piece, \(P_i\) will take measures to ensure that they will.
@@ -548,7 +548,7 @@
 									If a player \(P_i\) is a knight, he or she was either satisfied that all players will accept the point \(\beta_i\)&mdash;including all knights&mdash;or, if \(P_i\) thought that one player will not accept the point, then he or she requested that it be broadcasted. In the latter case the piece will definitely be accepted by all players. We see that \(P_i\)'s piece will in fact be accepted by all players. This is true for every player \(P_j\) who is a knight&mdash;thus the knights form a coalition.
 								</p>
 							</section>
-							<section id="sec3.1.3">
+							<section id="sec3.1.3" data-section-name="Phase 3: Revealing the Secret">
 								<h4>Phase 3: Revealing the Secret</h4>
 								<ol class="rp_original">
 									<li>The dealer \(D\) broadcasts the polynomial \(f(x)\), which defines the secret \(s\).</li>
@@ -560,7 +560,7 @@
 								</ol>
 							</section>
 						</section>
-						<section id="sec3.2">
+						<section id="sec3.2" data-section-name="Proof of the WSS Theorem">
 							<h3>3.2. Proof of the WSS Theorem</h3>
 							<ol class="rp_original">
 								<li>When the dealer is a knight: We need to show that he or she will not be disqualified, and that all knights will agree on the same secret \(s\). This results immediately from the properties of the Information Checking.</li>
@@ -568,7 +568,7 @@
 							</ol>
 						</section>
 					</section>
-					<section id="sec4">
+					<section id="sec4" data-section-name="The Verifiable Secret Sharing - VSS">
 						<h2>4. The Verifiable Secret Sharing - VSS</h2>
 						<p class="rp_original">
 							We now turn to the proof of the main theorem of this paper.
@@ -580,7 +580,7 @@
 						<p class="rp_original">
 							We start by stating the protocol. The protocol has 4 phases: sharing the secret by the dealer; a second-level secret sharing by the \(P_i\)'s; zero knowledge proof; and computing the secret. At the end of the third phase it will be said that a proper secret has been shared by \(D\).
 						</p>
-						<section id="sec4.1">
+						<section id="sec4.1" data-section-name="Phase 1 - Sharing the Secret">
 							<h3>Phase 1 - Sharing the Secret</h3>
 							<ol class="rp_original">
 								<li>The dealer chooses randomly \(a_1,\dots,a_t\in \mathbb Z_p\) and defines \(f(x)=a_tx^t+\dots+a_1x+s\).</li>
@@ -598,13 +598,13 @@
 								This is the protocol executed by a dealer who is a knight. But a \(D\) which is a knave may of course hand over to \(P_i\) arbitrary values for \(\beta_i,\gamma_{1i},\dots,\gamma_{k\cdot n,i}\).
 							</p>
 						</section>
-						<section id="sec4.2">
+						<section id="sec4.2" data-section-name="Phase 2 - Second Level Secret Sharing">
 							<h3>Phase 2 - Second Level Secret Sharing</h3>
 							<p class="rp_original">
 								Each \(P_i\) shares by WSS each piece received from the dealer \(D\), i.e. the pieces \(\beta_i,\gamma_{1i},\dots,\gamma_{k\cdot n,i}\). Let us say that \(P_i\) shares \(\beta_i\) using \(h_i(x)\), and \(\gamma_{ij}\) using \(h_{ji}(x)\). Player \(P_i\) also computes $$\delta_{ji}=\beta_i+\gamma_{ji},\quad1\leq j\leq k\cdot n,$$ and creates and distributes check vectors for these values. \(P_i\) does not share the value \(\delta_{ji}\) by a separate, independent, random polynomial, because the sum of the two polynomials \(h_i(x)+h_{ji}(x)\) which shared \(\beta_i\) and \(\gamma_{ji}\) respectively, has as its free term the value \(\delta_{ji}\).
 							</p>
 						</section>
-						<section id="sec4.3">
+						<section id="sec4.3" data-section-name="Phase 3 - Zero Knowledge Proof">
 							<h3>Phase 3 - Zero Knowledge Proof</h3>
 							<p class="rp_original">
 								This phase will ensure that \(D\) has in fact shared a secret \(s\) among the players. In this phase it is possible for players to be disqualified. The player \(P_i\) can be <i>disqualified</i> if:
@@ -671,7 +671,7 @@
 								Because the decision whether to disclose \(g_j(x)\) or \(f(x)+g_j(x)\) is made randomly (by the \(t+1\) knights) at least \(k\cdot(t+1)\) times, we achieve the desired probability of being correct.
 							</p>
 						</section>
-						<section id="sec4.4">
+						<section id="sec4.4" data-section-name="Phase 4 - Computing the Dealer's Secret">
 							<h3>Phase 4 - Computing the Dealer's Secret</h3>
 							<ol class="rp_original">
 								<li>All non-disqualified \(P_i\)'s broadcast their piece \(\beta_i\) and the polynomial \(h_i(x)\), which was used in the WSS for that piece.</li>
@@ -680,7 +680,7 @@
 								<li>Each player may take any \(t+1\) pieces from \(S\) and <span class="load-definable" data-define="interpolation">interpolate</span> the polynomial \(f(x)\). The secret \(s\) will be the free term of the polynomial \(f(x)\).</li>
 							</ol>
 						</section>
-						<section id="sec4.5">
+						<section id="sec4.5" data-section-name="Proof of the Main Theorem">
 							<h3>4.5. Proof of the Main Theorem</h3>
 							<p class="rp_original">
 								The proof will be divided into two parts:
@@ -712,7 +712,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec5">
+					<section id="sec5" data-section-name="Incomplete Networks">
 						<h2>5. Incomplete Networks</h2>
 						<span class="rp_theorem_header" id="theorem2">Theorem 2</span>
 						<p class="rp_annotation rp_theorem">
@@ -734,7 +734,7 @@
 						<p class="rp_original">
 							After submitting this abstract, the authors have learned that Dolev, Dwork, and Yung<sup class="reference" data-citation="DDY">[?]</sup>have shown how to simulate in a \(2t+1\) connected network a secure communication line between any two honest players in a completely error-free manner. Therefore, our Theorem 3 is not the best possible, as under the conditions of Theorem 3, any multiparty protocol can be achieved with absolutely no error at all (see <span class="reference" data-citation="DDY">[?]</span>). We note that in the "error-free" simulation, the faulty players can delay the message between two honest players for \(\operatorname O(td)\) steps. Therefore their simulation does not provide a proof of Theorem 2. We briefly sketch below how to combine both results and obtain an absolutely error free secure transmission in \(\operatorname O(d)\) expected time.
 						</p>
-						<section id="sec5.1">
+						<section id="sec5.1" data-section-name="Error Free Transmission">
 							<h3>5.1. Error Free Transmission</h3>
 							<p class="rp_original">
 								Assume \(D\) and \(R\) are \(2t+1\) connected, and \(D\) wants to transmit the message \(M\) to \(R\). \(D\) randomly writes \(M=M_1+M_2\), and sends using the scheme described above \(M_1\) to \(R.\;R\) collects all the verified messages (i.e. at least \(t+1\) verifications) and, if there is a polynomial of degree \(t\) that <span class="load-definable" data-define="interpolation">interpolates</span> through <i>all</i> the points, \(R\) takes the free coefficient as \(M_1\). In this case \(R\) <span class="load-definable" data-define="broadcast channel">broadcasts</span> an acknowledgement on all the \(2t+1\) lines to \(D\), and \(D\) tries to send \(M_2\).
@@ -757,7 +757,7 @@
 								Clearly, after at most \(t+1\) retries, a pair of good \(D\) and \(R\) will be able to transmit their value securely with no errors at all. Furthermore, if only one of \(D\) and \(R\) is bad, the good player will never wait for more than \(t+1\) rounds. Moreover, because of the check vectors, only with exponentially small probability will there be any need for retransmission.
 							</p>
 						</section>
-						<section id="sec5.2">
+						<section id="sec5.2" data-section-name="Note">
 							<h3>5.2. Note</h3>
 							<p class="rp_original">
 								The procedure described above, without the check vectors, is only a slight variation of the transmission scheme of <span class="reference" data-citation="DDY">[?]</span>. It is clear that this procedure works as well without the check vectors, but there is a clear advantage in using the check vectors during this procedure. Without the check vectors, the \(t\) bad players can cause a delay of \(O(t\cdot d)\) steps in the communication between good players, whereas using the check vectors, only with exponentially small probability will there be any need for retransmission.
@@ -785,7 +785,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec6">
+					<section id="sec6" data-section-name="Multiparty Computations">
 						<h2>6. Multiparty Computations</h2>
 						<span class="rp_theorem_header" id="theorem4">Theorem 4</span>
 						<p class="rp_annotation rp_theorem">
@@ -832,7 +832,7 @@
 								</ul>
 							</li>
 						</ol>
-						<section id="sec6.1">
+						<section id="sec6.1" data-section-name="Addition Protocol">
 							<h3>6.1. Addition Protocol</h3>
 							<p class="rp_original">
 								We would like to compute \(u+v\), and to achieve that the sum will be a <span class="load-definable">verified secret</span>.
@@ -858,19 +858,19 @@
 								Note: the same protocol can be carried out for subtraction.
 							</p>
 						</section>
-						<section id="sec6.2">
+						<section id="sec6.2" data-section-name="Protocol for Multiplication by a Constant">
 							<h3>6.2. Protocol for Multiplication by a Constant</h3>
 							<p class="rp_original">
 								There is a publicly known constant \(d\) and we would like to compute the value \(u*d\) so that this product will be a <span class="load-definable">verified secret</span>. This multiplication is trivial. All that \(P_i\) needs to do is multiply the known share \(\beta_i^u\) by the constant \(d\). When at a later stage \(P_i\) receives the piece \(\beta_j^{u*d}\) and the value \(y_{ji}^u\) from player \(P_j\), \(P_i\) should just use the known check vector \((b,c)\) which \(P_i\) already holds for the original piece of the player \(P_j\) by computing \(\beta_j^{u*d}+bdy^u_{ji}=cd\).
 							</p>
 						</section>
-						<section id="sec6.3">
+						<section id="sec6.3" data-section-name="Linear Computations">
 							<h3>6.3. Linear Computations</h3>
 							<p class="rp_original">
 								The combination of the protocol for addition and the protocol for multiplication by a constant provides us with the ability to compute any linear combination of <span class="load-definable" data-define="verified secret">verified secrets</span>.
 							</p>
 						</section>
-						<section id="sec6.4">
+						<section id="sec6.4" data-section-name="Multiplication Protocol">
 							<h3>6.4. Multiplication Protocol</h3>
 							<p class="rp_original">
 								Before we proceed to show how to compute the product of two <span class="load-definable" data-define="verified secret">verified secrets</span>, let us prove two lemmas which will be needed later.
@@ -941,7 +941,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec7">
+					<section id="sec7" data-section-name="Acknowledgement">
 						<h2>7. Acknowledgement</h2>
 						<p class="rp_original">
 							The first author wishes to thank her advisor Michael Ben-Or for suggesting the VSS problem and for his encouragement and many important comments, as well as Michael Rabin for several useful comments.
@@ -949,7 +949,7 @@
 					</section>
 				</div>
             </div>
-			<div class="main_toplevel main_section main_color7" id="footnotes">
+			<div class="main_toplevel main_section main_color7" id="footnotes" data-section-name="Footnotes">
 				<div class="main_fullwidth">
 					<h1>Footnotes</h1>
 					
@@ -960,7 +960,7 @@
 					</ol>
 				</div>
             </div>
-            <div class="main_toplevel main_section main_color8" id="references">
+            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
 				<div class="main_fullwidth">
 					<h1>References</h1>
 					<ol id="referencelist">

@@ -6,7 +6,8 @@ var headingName = /[\d\.]*\s*(.+?)[\.:]?$/;
 function fillTOC()
 {
 	var table = buildTable();
-	var ol = document.createElement("ol");
+	console.log(table);
+	/*var ol = document.createElement("ol");
 	ol.setAttribute('type', 'A');
 	ol = buildNode(table,ol);
 	
@@ -19,7 +20,7 @@ function fillTOC()
 		toc.appendChild(ol.cloneNode(true));
 	}
 	
-	addNav(table);
+	addNav(table);*/
 }
 
 function buildTable()
@@ -29,46 +30,52 @@ function buildTable()
 	
 	for(var i = 0; i < sections.length; i++)
 	{
+		console.log(i);
 		var section = sections.item(i);
 		var sectionName = name(section);
+		console.log(sectionName);
 		if(!sectionName)
 			continue;
-		var children = subs(sectionName.parentNode);
+		var children = subs(section);
+		console.log(table);
 		
-		table.push({name:sectionName.innerHTML, id:section.getAttribute('id'), children:children, nameElement:sectionName});
+		table.push({name:sectionName, id:section.id, children:children});
 	}
 	return table;
 }
 
 function name(section)
 {
-	var children = section.children;
-	for(var i = 0; i < children.length; i++)
-	{
-		if(headings.indexOf(children.item(i).tagName) > -1
-			&& headingName.test(children.item(i).innerHTML))
-			return children.item(i);
-		var dfs = name(children.item(i));
-		if(dfs) return dfs;
-	}
-	return undefined;
+	var name = section.getAttribute("data-section-name")
+	if(name)
+		return name;
+	var re = /<h(\d)>[\d\.]*\s*(.+?)<\/h\1>/; 
+	var str = section.innerHTML;
+	var m = re.exec(str);
+	
+	if(!m) return null;
+	return m[2];
 }
 
 function subs(container)
 {
-	var children = container.children;
 	var table = [];
-	
+	var children = container.childNodes;
 	for(var i = 0; i < children.length; i++)
 	{
-		if(children.item(i).tagName !== "SECTION") continue;
-		var sectionName = name(children.item(i));
-		if(!sectionName) continue;
-		var sectionId = children.item(i).getAttribute('id');
-		if(!sectionId) continue;
-		var sectionChildren = subs(children.item(i));
-		
-		table.push({name:sectionName.innerHTML, id:sectionId, children:sectionChildren, nameElement:sectionName});
+		var thisElement = children.item(i);
+		var myChildren = subs(thisElement);
+		if(thisElement.tagName === "SECTION")
+		{
+			var myname = name(thisElement);
+			var id = thisElement.id;
+			if(name && id)
+			{
+				table.push({name:myname, id:id, children:myChildren});
+				continue;
+			}
+		}
+		myChildren.forEach(function(elem){ table.push(elem); });
 	}
 	
 	return table;

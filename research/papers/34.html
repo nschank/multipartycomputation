@@ -42,7 +42,7 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1" id="overview">
+            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
@@ -67,7 +67,7 @@
 					</div>
 					<h1>Overview</h1>	
                     <div class="main_toc"></div>
-                    <section id="intro">
+                    <section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Multiparty Unconditionally Secure Protocols</b> is a 1988 paper by Chaum, Cr&eacute;peau, and Damg&aring;rd which offered the first plausibility result for protocols which are <span class="load-definable" data-define="information theoretic security">information-theoretically secure</span> for all parties. Their work was lightly influenced by the <a href="81.html">GMW compiler</a>, which also used secret sharing (in a cryptographic setting) to perform calculations, and more heavily influenced by <a href="82.html">a protocol</a> published by Chaum and Damg&aring;rd earlier the same year, which ensures information-theoretic security for a single party in the protocol.
@@ -76,7 +76,7 @@
 							This paper was foundational in the subfield of information theoretic multiparty computation. Its most important outcome is the demonstration that, for \(n\)-party computation, up to \(\left\lfloor n/3\right\rfloor\) parties can be <span class="load-definable" data-define="malicious adversary">malicious</span> while allowing all parties to enjoy unconditional security. This bound (on this type of network) is <u>optimal</u>.
 						</p>
 					</section>
-					<section id="goals">
+					<section id="goals" data-section-name="Goals and Results">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							This paper actually only cursorily addresses multiparty <i>computation</i>. After two years in which plausibility results for computation were heavily addressed, this research team focused more on what level of security could be hoped for in the face of adversaries. This paper&mdash;along with a similar one <a href="17.html">the next year</a>&mdash;demonstrated how many malicious adversaries it is possible to thwart within a particular (but very common) framework of multiparty computation. 
@@ -91,13 +91,13 @@
 							The protocol they present is simply an adaptation of the <a href="81.html">GMW construction</a> to their particular sharing scheme.
 						</p>
 					</section>
-					<section id="assumptions">
+					<section id="assumptions" data-section-name="Assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
 							The authors are quick to note that <span class="load-definable" data-define="information theoretic security">information-theoretic security</span> is only offered under the assumption that communication between parties is information-theoretically secure in the first place. As such, we must assume the existence of networks which are <span class="load-definable" data-define="authenticated network">authenticated</span>, <span class="load-definable" data-define="secrecy network">secret</span>, and unconditionally secure.
 						</p>
 					</section>
-					<section id="protocol">
+					<section id="protocol" data-section-name="Protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#sec3">Single Blob Commitment Scheme</a></h3>
 						<ul class="rp_analysis">
@@ -185,7 +185,7 @@
 							<li><b>Runtime: </b>\(\operatorname{O}(m^2n^3\log n)\) where \(n\) is the number of parties and \(m\) is the security parameter.</li>
 						</ul>
 					</section>
-					<section id="further">
+					<section id="further" data-section-name="Further Reading">
 						<h2>Further Reading</h2>
 						<p class="rp_analysis">
 							For more about the GMW compiler construction, the basis on which this more secure compiler was built, read <a href="81.html">the original paper</a>.
@@ -207,7 +207,7 @@
 							<li><b><a href="76.html">Verifiable Secret Sharing and Multiparty Protocols... (1989)</a></b>: Information-Theoretic Security for Honest Majority, Negligible Probability of Cheating</li>
 						</ol>
 					</section>
-					<section id="ref">
+					<section id="ref" data-section-name="Referencing This Paper">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -216,17 +216,17 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper">
+            <div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper (extended abstract)</h1>
                     <div class="main_toc"></div>
 					
 					<h1>Multiparty Unconditionally Secure Protocols</h1>
-					<section id="abstract">
+					<section id="abstract" data-section-name="Abstract">
 						<h2>Abstract</h2>
 						Assume \(n\) participants \(P_1,P_2,\dots,P_n\) share the knowledge of a multivariable function \(F\) and that they want to publicly compute \(z=F(x_1,x_2,\dots,x_n)\), where \(x_i\) is a secret input provided by \(P_i\). The difficulty is to simultaneously provide the secrecy of each \(x_i\) and to guarantee the correctness of the common result \(z\). Such a task has been accomplished in <span class="reference" data-citation="GMW87">[?]</span> under the assumption that <span class="load-definable" data-define="trapdoor permutation">trapdoor permutations</span> exist. The result we propose in this extended abstract is that, under the assumption that each pair of participants can communicate secretly, any reasonable function can be computed if at least \(\frac{2n}{3}\) of the participants are honest and this is proved without any cryptographic assumption. Our result is based on a non-cryptographic verifiable secret-sharing protocol that we also introduce in this paper.
 					</section>
-                    <section id="sec1">
+                    <section id="sec1" data-section-name="Introduction">
                         <h2>1. Introduction</h2>
 						
 						<p class="rp_original">
@@ -241,7 +241,7 @@
 						<p class="rp_original">
 							A much weaker assumption is to assert the existence of <span class="load-definable" data-define="authenticated network">authenticated</span> <span class="load-definable" data-define="secrecy network">secrecy</span> channels, i.e. a way of communicating in which the identity of the sender is known (authentication) and the data transferred is revealed only to the single person it is designed for (secrecy). Such channels are very practical and can be implemented very easily: for example, this channel can be obtained by writing down messages on pieces of paper and physically handing them out to the other parties. They can also be implemented using conventional cryptography (secret key systems). Two fundamental questions remain: Which protocol problems can be solved assuming only the existence of these authenticated secrecy channels between pairs of participants, and can all parties have their secrets unconditionally secure?
 						</p>
-						<section id="sec1.1">
+						<section id="sec1.1" data-section-name="Results">
 							<h3>1.1. Results</h3>
 							<p class="rp_original">
 								In this paper, we show that essentially any multiparty protocol problem can be solved under the assumption of the existence of <span class="load-definable" data-define="authenticated network">authenticated</span> <span class="load-definable" data-define="secrecy network">secrecy</span> channels between pairs of participants and that each party's secrets can be unconditionally secure. As explained below, under such a model it is required that less than one third of the participants deviate from the protocol. The number of cheaters tolerated by our solution is therefore optimal.
@@ -250,7 +250,7 @@
 								The techniques presented do not rely on any cryptographic assumptions; they provide secrecy and correctness by means of a new non-cryptographic verifiable secret sharing (VSS) scheme. These schemes were introduced in the cryptographic setting in <span class="reference" data-citation="CGMA">[?]</span>. To this day, all previous solutions relied on public key cryptography. We introduce the first VSS scheme that does not rely on such assumptions. Sections <a href="#sec3">3</a> and <a href="#sec4">4</a> are devoted to the construction of this new scheme and to its application toward achieving our goal.
 							</p>
 						</section>
-						<section id="sec1.2">
+						<section id="sec1.2" data-section-name="Algorithm">
 							<h3>1.2. Algorithm</h3>
 							<p class="rp_original">
 								The general structure of the algorithms is similar to the ones of <span class="reference" data-citation="GMW87">[?]</span> and <span class="reference" data-citation="CDG">[?]</span> in the sense that it takes place in two steps: Commitment and Computation. First the participants enter a stage in which they commit to their inputs. This commitment is performed using the VSS, so that every participant gets a share of everybody else's secret. If some participants are trying to commit to something improper or are simply not collaborating, this first phase will identify them and the remaining participants will take the actions relevant to this situation. This is the very best we can hope for. What else could you do with someone who does not want to participate? Once everyone has committed to their inputs, the second phase is the actual evaluation of the function. The computation is performed locally by each participant on the shares he or she got from the others.
@@ -270,7 +270,7 @@
 								Again, we mean that our solution does not depend on some restrictions of the computing power of the participants. Earlier solutions relied on cryptographic assumptions both for secrecy of the inputs and correctness of the computation. If in the best case these assumptions turned out to be true, the secrecy and correctness would still be dependent on the limitations in computing power of the participants.
 							</p>
 						</section>
-						<section id="sec1.3">
+						<section id="sec1.3" data-section-name="Related Works">
 							<h3>1.3. Related Works</h3>
 							<p class="rp_original">
 								Our work has drawn inspiration from and relies on a number of earlier contributions. The Byzantine Generals problem proposed and solved by <span class="reference" data-citation="LSP">[?]</span> can be thought of as underlying our work. Also, the type of so-called secret sharing schemes proposed by <span class="reference" data-citation="Bl">[?]</span> and <span class="reference" data-citation="Sh">[?]</span> are basic building blocks. The usefulness of their homomorphic structure was observed by <span class="reference" data-citation="Be">[?]</span>, who proposed techniques very similar to ours.
@@ -286,7 +286,7 @@
 							</p>
 						</section>
                     </section>
-					<section id="sec2">
+					<section id="sec2" data-section-name="The Model">
 						<h2>2. The Model</h2>
 						<p class="rp_original">
 							For convenience, the number of participants will be called \(n\), which can always be written as \(n=3d+a\), where \(a=\) 1, 2, or 3. Let \(P_1,P_2,\cdots,P_n\) be the participants.
@@ -320,7 +320,7 @@
 							For simplicity in the following descriptions, we use the terminology of information theory because we make the assumption that the channels are <span class="load-definable" data-define="information theoretic security">unconditionally secure</span>. Notice however that in fact we get protocols as strong as the secrecy and authentication of the channels used. If the channels were not unconditionally secure, for example, the protocol would not be unconditionally secure for all participants but its correctness would still be guaranteed.
 						</p>
 					</section>
-					<section id="sec3">
+					<section id="sec3" data-section-name="Implementing Blobs using Secret Sharing">
 						<h2>3. Implementing Blobs using Secret Sharing</h2>
 						<p class="rp_original">
 							In <span class="reference" data-citation="BCC">[?]</span>, a fundamental protocol primitive is described: the <span class="load-definable">blob</span>. The purpose of blobs is to allow a participant \(P_A\) to <i><span class="load-definable" data-define="commitment">commit</span></i> to a bit in such a way that he or she cannot later change his or her mind about the bit, but nobody else can discover it without the participant's help. The defining properties of blobs are as follows:
@@ -429,7 +429,7 @@
 							In <span class="reference" data-citation="BCC">[?]</span>, it is shown how one can construct, using only blobs, efficient <i>minimum disclosure proofs</i> for membership in a very large class of languages, including <span class="load-definable">NP</span> and <span class="load-definable">BPP</span>. Since we can construct blobs in our model, we can also perform all such proofs directly.
 						</p>
 					</section>
-					<section id="sec4">
+					<section id="sec4" data-section-name="VSS and Fault Tolerant Blobs">
 						<h2>4. VSS and Fault Tolerant Blobs</h2>
 						<p class="rp_original">
 							When opening a <span class="load-definable">blob</span>, \(P_A\) was to broadcast the shares distributed in creating it. If \(P_A\) is trying to prove some statement using the techniques of <span class="reference" data-citation="BCC">[?]</span>, the previous section's results imply that it is in \(P_A\)'s interest to create and broadcast the shares properly. But in other cases, communication failures or a change of heart, for example, might keep \(P_A\) from ultimately broadcasting the shares. Even if the other participants were to make \(P_A\)'s shares public in efforts to open the blob without \(P_A\)'s help, they would be left with a computational problem: <span class="load-definable" data-define="reliable participant">unreliable participants</span> might make public false values for their shares, and finding the value represented may require searching the exponentially many subsets of shares of size \(2d+a\) for one consistent with one polynomial of degree smaller than \(d\). Even worse, if \(P_A\) was already cheating when creating the blob, the majority of complainers could be reliable. In such cases, unreliable participants could choose at the time of opening between broadcasts that would leave no unique solution for the secret or other broadcast that would yield a particular value unambiguously.
@@ -456,7 +456,7 @@
 							To open a double blob, all participants broadcast their shares of the top level blob as well as all shares of their sub-blobs. The result of the opening is uniquely and easily determined, since in this case the effect of the sub-blobs is to prevent unreliable participants from issuing improper shares of the top level blob: if any participant cannot confirm their share by opening their sub-blob correctly, it will just be ignored.
 						</p>
 					</section>
-					<section id="sec5">
+					<section id="sec5" data-section-name="Multiparty Computations">
 						<h2>5. Multiparty Computations</h2>
 						<p class="rp_original">
 							This section considers general multiparty computations. These may involve secret input from each participant, and a single output which should become known to all <span class="load-definable" data-define="reliable participant">reliable participants</span>.
@@ -524,7 +524,7 @@
 							We call attention to the possibility of a tradeoff between vulnerability to disruption and efficiency of the protocol. The initial commitment phase could in fact be completed correctly using only ordinary double blobs, if we require that <i>nobody</i> complains about anybody during the initial phase. This requirement is easily seen to imply that all the double blobs constructed are (with very high probability) robust. With this method, however, it is not possible to find out who has not been following the protocol in the first phase, if complaints do occur.
 						</p>
 					</section>
-					<section id="sec6">
+					<section id="sec6" data-section-name="Generalizations">
 						<h2>6. Generalizations</h2>
 						<p class="rp_original">
 							The one third assumption on the number of <span class="load-definable" data-define="reliable participant">unreliable participants</span> is necessary to ensure that Byzantine agreement is possible. It is natural, however, to ask what can be done if we ensure this simply by assuming the existence of a <span class="load-definable">broadcast channel</span> as part of the model?
@@ -552,7 +552,7 @@
 							Without the assumption that \(C+L=n\), things seem to become more complicated. It is clear that as long as \(L\leq\left\lfloor\frac{(n-1)}{2}\right\rfloor\), then the solution outlined above still works, but without this condition it is not clear what happens. The method with multiplication of polynomials does not work any more, because it leads to polynomials of a degree larger than the number of available shares. Therefore the construction of a general computation protocol under these special assumptions remains an open problem.
 						</p>
 					</section>
-					<section id="sec7">
+					<section id="sec7" data-section-name="Acknowledgements">
 						<h2>7. Acknowledgements</h2>
 						<p class="rp_original">
 							We would like to thank Gilles Brassard, Ernie Brickell, Shafi Goldwasser, Jeroen van de Graaf, Silvio Micali, Micheal Sacks and Avi Wigderson for the discussions about this paper and their interest in our result.
@@ -560,7 +560,7 @@
 					</section>
                 </div>
             </div>
-			<div class="main_toplevel main_section main_color6" id="notes_gf">
+			<div class="main_toplevel main_section main_color6" id="notes_gf" data-section-name="Notes on Galois Fields and Polynomials">
 				 <div class="main_window main_fullwidth">
 					<h1>Notes on Galois Fields and Polynomials</h1>
                     <div class="main_toc"></div>
@@ -573,7 +573,7 @@
 					<p class="rp_analysis">
 						For the remainder of these notes, we will contextualize using \(GF(2^k)\).
 					</p>
-					<section id="notes_gf_elem">
+					<section id="notes_gf_elem" data-section-name="Elements">
 						<h2>Elements</h2>
 						<p class="rp_analysis">
 							Elements within a Galois field have three main representations. The first, and simplest, is as a number; \(GF(q)\) is <span class="load-definable" data-define="isomorphism">isomorphic</span> to \(\mathbb Z/q\mathbb Z\). We generally  This representation is not often used, as it invites confusion when operators are applied (e.g. in \(GF(8)\,2+3=1\).
@@ -585,7 +585,7 @@
 							We can also represent elements of \(GF(p^k)\) by the powers of \(\alpha\). When we define \(GF(p^k)\), we pick some irreducible polynomial \(f\), and define the field under the assumption that \(alpha\) is a root of that polynomial. This ensures that \(\alpha\) generates the field; so \(GF(p^k)=\{0,1,\alpha,\alpha^2,\dots,\alpha^(p^k-2)\}\). Note that this does NOT match up with numerical order. Expressing elements in power notation makes <u>multiplication</u> very simple; however, there is no an easy way to turn an element into power notation, so generally a table is used.
 						</p>
 					</section>
-					<section id="notes_gf_oper">
+					<section id="notes_gf_oper" data-section-name="Operations">
 						<h2>Operations</h2>
 						<p class="rp_analysis">
 							Addition in polynomial fields is most easily demonstrated through normal polynomial form. Two elements of \(GF(p^k),\; e_0= \sum\nolimits_{i=0}^{k-1}{c^0_i\alpha^i}, \;\text{and}\; e_1=\sum\nolimits_{i=0}^{k-1}{c^1_i\alpha^i}\) have the sum \(e_0+e_1=\sum\nolimits_{i=0}^{k-1}{(c^0_i+c^1_i\bmod p)\alpha^i}\). In \(GF(2)\), this is conveniently identical to the bitwise XOR operation. 
@@ -609,7 +609,7 @@
 							So when multiplying two polynomials in \(GF(p^k)\), we simplify using a chosen primitive polynomial \(f\) and use the equation \(f(\alpha)=0\) to solve.
 						</p>
 					</section>
-					<section id="notes_gf_poly">
+					<section id="notes_gf_poly" data-section-name="Polynomial Functions">
 						<h2>Polynomial Functions</h2>
 						<p class="rp_analysis">
 							Herein lies the extremely confusing part: polynomial <i>functions</i> over \(GF(p^k)\) act very differently from polynomial <i>elements</i> in \(GF(p^k)\). In particular, we define a polynomial function \(f(x)\) of degree \(d\) to be of the form: $$f(x)\;=\; \sum\limits_{i=0}^d {c_ix^i}$$ where \(c_i,d,x \in \{0,\dots,p^k\}\).
@@ -618,7 +618,7 @@
 							Notice the stark contrast with polynomial form, in which coefficients are only in \(\{0,\dots,p\}\), maximum degree (up to <span class="load-definable" data-define="isomorphic">isomorphism</span>) is in \(\{0,\dots,k-1\}\), and the polynomial is over a particular element representing \(p\). The difference lies in the fact that polynomial elements need only represent a total of \(p^k\) values; polynomial functions need to represent all mappings from \(GF(p^k)\) to \(GF(p^k)\), which is \((p^k)^{p^k}\) mappings. 
 						</p>
 					</section>
-					<section id="notes_gf_ex">
+					<section id="notes_gf_ex" data-section-name="Example">
 						<h2>Example</h2>
 						<p class="rp_analysis">
 							We here fully calculate a few short problems in \(GF(2^3)\) to demonstrate all of the above concepts. Remember that \(GF(2^3)\) has 8 elements. We start by choosing our primitive polynomial to be \(x^3+x+1\); this is identical to choosing, as an identity within our field, that \(\alpha^3=\alpha+1\).
@@ -654,7 +654,7 @@
 					</section>
 				</div>
 			</div>
-            <div class="main_toplevel main_section main_color8" id="references">
+            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
 				<div class="main_fullwidth">
 					<h1>References</h1>
 					<ol id="referencelist">

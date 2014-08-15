@@ -49,7 +49,7 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1" id="overview">
+            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
@@ -74,13 +74,13 @@
                     <div class="main_toc"></div>
 					
 						
-                    <section id="intro">
+                    <section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Paper Title</b> is...
 						</p>
 					</section>
-					<section id="goals">
+					<section id="goals" data-section-name="Goals and Results">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							Some goals that they had.
@@ -89,17 +89,17 @@
 							Don't forget some results, too!
 						</p>
 					</section>
-					<section id="assumptions">
+					<section id="assumptions" data-section-name="Assumptions">
 						<h2>Assumptions</h2>
 					</section>
-					<section id="defs">
+					<section id="defs" data-section-name="Definitions">
 						<h2>Definitions</h2>
 						<a href="#def1"><span class="rp_definition_header">Definition 1 - </span></a>
 						<p class="rp_original rp_definition">
 							A definition 
 						</p>
 					</section>
-					<section id="theorems">
+					<section id="theorems" data-section-name="Theorems">
 						<h2>Theorems</h2>
 						<p class="rp_original">Some general definitions used by several theorems</p>
 						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
@@ -107,7 +107,7 @@
 							A theorem
 						</p>
 					</section>
-					<section id="protocol">
+					<section id="protocol" data-section-name="Protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#secxx">Some Protocol Defined</a></h3>
 						<ul class="rp_analysis">
@@ -123,10 +123,10 @@
 							<li><b>Notes: </b></li>
 						</ul>
 					</section>
-					<section id="further">
+					<section id="further" data-section-name="Further Reading">
 						<h2>Further Reading</h2>
 					</section>
-					<section id="ref">
+					<section id="ref" data-section-name="Referencing This Paper">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -135,11 +135,11 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper">
+            <div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper (extended abstract)</h1>
 					<div class="main_toc"></div>
-					<section id="abstract" data-section-number="0">
+					<section id="abstract" data-section-number="0" data-section-name="Abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
 							The classical results in unconditional multiparty computation among a set of \(n\) players state that less than \(n/2\) passive or less than \(n/3\) active adversaries can be tolerated; assuming a <span class="load-definable">broadcast channel</span> the threshold for active adversaries is \(n/2\). Strictly generalizing these results we specify the set of misbehaving players as an arbitrary set of subsets of the player set. We prove the necessary and sufficient conditions for the existence of secure multiparty protocols in terms of the potentially misbehaving player sets.
@@ -151,9 +151,9 @@
 							The complexities of the protocols not using a broadcast channel are polynomial, that of the protocol with broadcast is only slightly higher.
 						</p>
 					</section>
-					<section id="sec1">
+					<section id="sec1" data-section-name="Introduction">
 						<h2>1. Introduction</h2>
-						<section id="sec1.1">
+						<section id="sec1.1" data-section-name="Secure Multiparty Computation">
 							<h3>1.1. Secure Multiparty Computation</h3>
 							<p class="rp_original">
 								Consider a set of payers who do not trust each other. Nevertheless they want t compute some agreed function of their inputs in a secure way. Security here means maintaining correctness of the output while keeping the players' inputs private. This is the well-known secure multiparty computation problem (e.g. <span class="reference" data-citation="r29">[?]</span>,<span class="reference" data-citation="r21">[?]</span>). For an excellent overview see <span class="reference" data-citation="r17">[?]</span><span class="reference" data-citation="r3">[?]</span><span class="reference" data-citation="r16">[?]</span>.
@@ -168,7 +168,7 @@
 								All the previous results in the literature specify the sets of potential adverse players (passive or active) that can be tolerated by their cardinality, i.e. by a threshold. In a setting with perfect security, Ben-Or, Goldwasser, and Widgerson<sup class="reference" data-citation="r2">[?]</sup> proved that with \(n\) players all passive collusions with less than \(n/2\) members or, alternatively, all active adversaries with less that \(n/3\) members can be tolerated. We refer to these two models as the passive and the adtive model. The same results were obtained independently by Chaum, Cr&eacute;peau, and Damg&aring;rd<sup class="reference" data-citation="r7">[?]</sup> in an unconditional model with exponentially small error probability. Rabin and Ben-Or<sup class="reference" data-citation="r27">[?]</sup> proved that, in an unconditional (but not perfect) model with a broadcast channel, active adversaries with less than \(n/2\) members can be tolerated. This model is referred to as the active model with broadcast.
 							</p>
 						</section>
-						<section id="sec1.2">
+						<section id="sec1.2" data-section-name="Contributions of this Paper">
 							<h3>1.2. Contributions of this Paper</h3>
 							<p class="rp_original">
 								This paper is concerned with protocol constructors for arbitrary functions that provide unconditional security against passive or active adversaries with unbounded computing power. The security of the protocols in the passive and active models is perfect, the protocols in the active model with broadcast offer unconditional security with exponentially small error probability.
@@ -190,7 +190,7 @@
 								The emphasis of this paper is on the existence of protocols. In addition, the presented protocols for the passive and the active model have time and communication complexities polynomial in the size of the description of the adversary structures.<sup class="footnote" data-footnote="1" id="fref1"><a href="#footnote1">1</a></sup>. The protocols for the active model with broadcast have complexities slightly greater than polynomial. Due to the exponential size of the description of a general adversary strucutre, our protocols are in general not (and cannot be) polynomial in the number of players. Note that there exist polynomial (in the number of players) protocols for specific adversary structures (e.g. for threshold structures<sup class="reference" data-citation="r2">[?]</sup> and certain other types of structures).
 							</p>
 						</section>
-						<section id="sec1.3">
+						<section id="sec1.3" data-section-name="Motivation and Outline">
 							<h3>1.3. Motivation and Outline</h3>
 							<p class="rp_original">
 								All protocols in the literature provide only security of a threshold type. However, in a more general scenario the set of tolerated dishonest players is not specified by a threshold. As a first example, consider a set of five players, \(P=\{p_1,p_2,p_3,p_4,p_5\}\), where the players of one of the sets \(\{p_1,p_2,p_3\},\,\{p_1,p_2,p_4\},\,\{p_1,p_5\},\,\{p_2,p_4\},\text{ or }\{p_3,p_4\}\) potentially collude to try to obtain some information about the other players' inputs. Can the five players compute an agreed function privately in the sense that none of the stated potential collusions obtains any information about the other players' inputs beyond what is provided by the function output? For this particular case, they can. By assigning an integer weight \(w_i\) to each player \(p_i\) and having every player act for \(w_i\) players in the threshold-type protocol of <span class="reference" data-citation="r2">[?]</span> they can tolerate the stated collusions. In the passive model, privacy is guaranteed if and only if $$\sum\limits_{\text{dishonest}\,p_i}w_i\,\lt\,\frac12\sum\limits_{p_i\in P}w_i.$$ In the active model, security is guaranteed if and only if $$\sum\limits_{\text{dishonest}\,p_i}w_i\,\lt\,\frac13\sum\limits_{p_i\in P}w_i.$$
@@ -206,21 +206,21 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec2">
+					<section id="sec2" data-section-name="Definitions and Models">
 						<h2>2. Definitions and Models</h2>
-						<section id="sec2.1">
+						<section id="sec2.1" data-section-name="Players">
 							<h3>2.1. Players</h3>
 							 <p class="rp_original">
 								There are three types of players in a multiparty computation protocol: players providing inputs, players receiving outputs, and players performing the actual computation. The set of players performing the actual computation is denoted by \(P\). The set of all players, including input, output, and computation players, is denoted by \(\hat P.\,P\) and \(\hat P\) are not necessarily equal (but \(P\subseteq\hat P\)). In the construction of protocols we will also use virtual players. A virtual player is the name of a player to which no real player is associated and that is under only as an auxiliary notation. The name space of all possible virtual players is denoted by \(\mathcal V\). Usually we will refer to players by \(p_i\), where \(i\) is positive for real players and negative for virtual players.
 							 </p>
 						</section>
-						<section id="sec2.2">
+						<section id="sec2.2" data-section-name="Variables">
 							<h3>2.2. Variables</h3>
 							<p class="rp_original">
 								We consider a (global) variable space \(\chi\) containing all quantities ever generated during a protocol, including inputs, local data (e.g. shares), and outputs. For a particular protocol execution each variable takes on only one particular value; hence variables are not to be understood in the sense of an imperative programming language but rather as labels for values. The locality of variables, i.e. the fact that certain variables are seen only by certain players or sets of players, is modelled by associating a view \(\mathcal V(p)\subseteq\chi\) with every player \(p\). The view \(\mathcal V(B)\) of a set \(B\) of players is the union of the views of the players in \(B\). We distinguish between <i>seeing</i> a variable and <i>knowing</i> a variable. Player \(p\) sees a variable \(x\) if it is in his view and he knows (partially knows) \(x\) if he can compute it (has information about it) from the variables in his view.
 							</p>
 						</section>
-						<section id="sec2.3">
+						<section id="sec2.3" data-section-name="Protocols">
 							<h3>2.3. Protocols</h3>
 							<p class="rp_original">
 								The function to be computed by a protocol is without loss of generality specified by a circuit over a finite field \((\mathcal F,+,*)\). The protocols in the previous literature often consider one (global) function of \(|P|\) inputs, where every player learns the function value. These protocols consist of three stages: the input stage, the computation stage, and the output stage. In this paper, we consider a more general model in which a multiparty computation is seen as the simulation of a trusted party<sup class="reference" data-citation="r21">[?]</sup>.
@@ -247,7 +247,7 @@
 								Formally, this definition could be extended to include the condition that the input and output players are the same in both protocols. However, we avoid a formal definition of input and output players in this extended abstract; the above definition is sufficient for our purpose because this additional condition is always satisfied in the context of this paper.
 							</p>
 						</section>
-						<section id="sec2.4">
+						<section id="sec2.4" data-section-name="Adversaries">
 							<h3>2.4. Adversaries</h3>
 							<p class="rp_original">
 								A structure \(\mathcal Z\) for the player set \(P\) is a monotone set of subsets of \(P\), i.e. \(\mathcal Z\subseteq2^P\), where all subsets of \(Z\) are in \(\mathcal Z\) if \(Z\in\mathcal Z\). For a structure \(\mathcal Z,\,\bar{\mathcal Z}\) denotes the <i>basis</i> of the structure, i.e. the set of the maximal sets in \(\mathcal Z\):$$\bar{\mathcal Z}=\{Z\in\mathcal Z\,:\,\nexists\,Z'\in\mathcal Z\,:\,Z\subset Z'\}.$$ To <i>restrict</i> a structure \(\mathcal Z\) to the player set \(P\) means that all sets in \(\mathcal Z\) are intersected with \(P\), e.g. \(\mathcal Z_{|_P}=\{Z\cap P:\,in\mathcal Z\}\). Note that a restricted monotone structure is still monotone but a restricted basis is not necessarily a basis. (However, we have \(\overline{\mathcal Z_{|_P}}\subseteq\bar{\mathcal Z}_{|_P}\)). For simplicity, we will also use this operator to restrict elements of a structure to a player set (i.e. \(Z_{|_P}\) stands for \(Z\cap P\)).
@@ -262,7 +262,7 @@
 								A protocol is \(\mathcal A\)-<i>resilient</i> if no adversary in the adversary structure \(\mathcal A\) can falsify the outcome of the computation. More precisely, even if the players of one adversary in \(\mathcal A\) us an arbitrary joint strategy for cheating, then if the protocol execution terminates<sup class="footnote" id="fref5" data-footnote="5"><a href="#footnote5">5</a></sup>, for all inputs the joint distribution of the output variables of the honest players is equal to the corresponding distribution if no adversary is present. An \(\mathcal A\)-resilient protocol is \(\mathcal A\)-<i>fair</i> if, once the protocol execution has started and the players of one adversary in \(\mathcal A\) have obtained some information about their outputs, the players in the adversary cannot prevent the other players from learning their correct outputs. An \(\mathcal A\)-resilient protocol is \(\mathcal A\)-<i>robust</i> if the players of one adversary in \(\mathcal A\) canot prevent the other players from learning their outputs. Note that \(\mathcal A\)-robustness implies \(\mathcal A\)-fairness. Our protocols are \(\mathcal A\)-resilient and \(\mathcal A\)-robust, thus fairness need not and will not be considered further.
 							</p>
 						</section>
-						<section id="sec2.5">
+						<section id="sec2.5" data-section-name="Models">
 							<h3>2.5. Models</h3>
 							<p class="rp_original">
 								We distinguish between three models: The <i>passive model</i> and the <i>active model</i> are the same of those of <span class="reference" data-citation="r2">[?]</span>: We assume reliable synchronous secure channels between every pair of two players but we do not assume a broadcast channel. The basic protocols of <span class="reference" data-citation="r2">[?]</span> can be realized without broadcast or, more precisely, by simulating it with a protocol among the sender and the receivers of the broadcast<sup class="reference" data-citation="r23">[?]</sup><sup class="reference" data-citation="r13">[?]</sup>. The <i>active model with broadcast</i> is the same as that of <span class="reference" data-citation="r27">[?]</span>: We assume reliable synchronous secure channels between every pair of two players and a broadcast channel.
@@ -274,7 +274,7 @@
 								The protocols in this paper achieve perfect privacy in the passive model, perfect correctness, and perfect robustness in the active model (i.e. information-theoretic security with zero failure probability), and unconditional security in the active model with broadcast (i.e. information-theoretic security with exponentially small failure probability).
 							</p>
 						</section>
-						<section id="sec2.6">
+						<section id="sec2.6" data-section-name="Multiparty Protocol Generators">
 							<h3>2.6. Multiparty Protocol Generators</h3>
 							<p class="rp_original">
 								A <i>multiparty protocol generator</i> is a function that takes as input a multiparty computation specification \((S,\tau)\) involving players from a player set \(\hat P\) and a list<sup class="footnote" id="fref6" data-footnote="6"><a href="#footnote6">6</a></sup> \((p_1,\dots,p_k)\) of players, and returns a protocol for the player set \((\hat P\backslash\{\tau\})\cup\{p_1,\dots,p_k\}\). The intuition is that the protocol generator replaces the virtual trusted player \(\tau\) by a multiparty computation among the players \(p_1,\dots,p_k\).
@@ -296,12 +296,12 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec3">
+					<section id="sec3" data-section-name="Substituting Players">
 						<h2>3. Substituting Players</h2>
 						<p class="rp_original">
 							The basic tool for achieving security in non-threshold scenarios is to replace players by subprotocols.<sup class="footnote" id="fref8" data-footnote="8"><a href="#footnote8">8</a></sup> Each player in the subprotocol can again be a replaced by a subprotocol, and so on.
 						</p>
-						<section id="sec3.1">
+						<section id="sec3.1" data-section-name="Example">
 							<h3>3.1. Example</h3>
 							<p class="rp_original">
 								In this example we illustrate the adversary structure that is tolerated by a protocol among the player set \(\{p_1,p_2,p_3,p_4,p_5,p_6\}\). The protocol is constructed with the protocol generator \(G^\text{a4}\) for the active model. First a protocol among the players \(p_1,p_3\) and the virtual players \(p_{-1}\) and \(p_{-2}\) is constructed. Then \(p_{-1}\) and \(p_{-2}\) are replaced by subprotocols generated by the protocol generator \(G^\text{a4}\) using the player sets \(\{p_1,p_2,p_3,p_4\}\) and \(\{p_1,p_2,p_5,p_6\}\), respectively (see Figure 1).
@@ -311,7 +311,7 @@
 								A construction in Figure 1 tolerates the adversary structure \(\overline{\mathcal{A}}=\{\{p_1\},\{p_2,p_4\},\{p_2,p_5,p_6\},\{p_3,p_5\},\{p_3,p_6\},\{p_4,p_5\},\{p_4,p_6\}\}\). This is a strict extension of the adversary structure tolerated by the 6-player protocol of <span class="reference" data-citation="r2">[?]</span>, which consists of all adversaries containing a single player.
 							</p>
 						</section>
-						<section id="sec3.2">
+						<section id="sec3.2" data-section-name="Definitions">
 							<h3>3.2. Definitions</h3>
 							<p class="rp_original">
 								Consider a multiparty protocol \(S\) among the player set \(\hat P\). To <i>replace</i> a player \(p\in\hat P\) in \(S\) by a subprotocol among a set<sup class="footnote" id="fref9" data-footnote="9"><a href="#footnote9">9</a></sup> \(P'\) of players (the players in \(P'\)) can be members of \(\hat P\) and also need not be distinct) applying a protocol generator \(G'\) means to consider this player as a trusted party and to have this party be simulated by a subprotocol among the given players in \(P'\) according to \(G'\). More precisely, the protocol \(S\) is considered as a specification \((S,p)\), and then used as input for the protocol generator \(G'\) together with the player set \(P'\).
@@ -320,7 +320,7 @@
 								Let \(S\) be a multiparty computation protocol among the player set \(\hat P\). To <i>simultaneously replace</i> the players \(p_{r_1},\dots,p_{r_k}\) by subprotocols among the player sets \(P_1,\dots,P_k\) (the players in the sets can be members of \(\hat P\) and also need not be distinct), applying the protocol generators \(G_1,\dots,G_k\), respectively, is a two-step process. In a first step, for each \(1\leq i\leq k\) the player \(p_{r_i}\) is replaced by a subprotocol among a set of (for each \(i\) newly allocated) virtual players \(V_i=\{p_{i_1},\dots,p_{i_{|P_i|}}\}\), applying the corresponding protocol generator \(G_i\). More formally, the sets \(V_1,dots,V_k\) are chosen arbitrarily as pairwise disjoint sets with elements in \(\mathcal V\backslash\hat P\). Then, the players \(p_{r_1},\dots,p_{r_k}\) are replaced one by one by subprotocols among the player sets \(V_1,\dots,V_k\), applying the protocol generator \(G_1,\dots,G_k\), respectively. (This leads to the protocol \(S_k\), where \(S_0=S\) and \(S_i=G_i\left((S_{i-1},p_{r_i}),V_{i-1}\right)\) for \(i=1,\dots,k\).) In the second step, every virtual player in the sets \(V_1,\dots,V_k\) is replaced by the corresponding player in the sets \(P_1,\dots,P_k\), respectively. (This is a purely syntactic replacement.).
 							</p>
 						</section>
-						<section id="sec3.3">
+						<section id="sec3.3" data-section-name="Tolerated Adversary Structures">
 							<h3>3.3. Tolerated Adversary Structures</h3>
 							<span class="rp_theorem_header" id="theorem1">Theorem 1 (Passive Model)</span>
 							<p class="rp_original rp_theorem">
@@ -372,7 +372,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec4">
+					<section id="sec4" data-section-name="Completeness Results">
 						<h2>4. Completeness Results</h2>
 						<p class="rp_original">
 							In the passive model, the only basic protocol we use in the constructions in \(G^\text{p3}\), the protocol generator of Ben-Or, Goldwasser, and Wigderson<sup class="reference" data-citation="r2">[?]</sup> with three players for the passive model that tolerates all single-player collusions. In the active model, the only protocol generator we use in the constructions is \(G^\text{a4}\), the protocol generator of <span class="reference" data-citation="r2">[?]</span> with four players for the active model that tolerates all single-player adversaries. In the active model with broadcast, the only basic protocol generator we use is \(G^\text{a3b}\), the protocol generator of <span class="reference" data-citation="r27">[?]</span> with three players that tolerates all single-player adversaries.
@@ -380,13 +380,13 @@
 						<p class="rp_original">
 							In this section we show for which adversary structures it is possible to find a substitution strategy such that the adversary structure is tolerated. The derived conditions are shown to be necessary and sufficient.
 						</p>
-						<section id="sec4.1">
+						<section id="sec4.1" data-section-name="Definitions">
 							<h3>4.1. Definitions</h3>
 							<p class="rp_original">
 								Let \(P\) be a player set and let \(\mathcal Z\) be a structure for \(P\). Then \(Q^{(2)}(P,\mathcal Z)\) is the predicate that is satisfied if and only if no two sets in \(\mathcal Z\) add up to the full player set \(P\), i.e. $$Q^{(2)}(P,\mathcal Z)\quad\Longleftrightarrow\quad\forall\, Z_1,Z_2\in\mathcal Z\,:\,Z_1\cup Z_2\neq P.$$ Similarly, \(Q^{(3)}(P,\mathcal Z)\) is the predicate that is satisfied if and only if no three sets in \(\mathcal Z\) add up to the full player set \(P\), i.e. $$Q^{(3)}(P,\mathcal Z)\quad\Longleftrightarrow\quad\forall\,Z_1,Z_2,Z_2\in\mathcal Z\,:\,Z_1\cup Z_2\cup Z_3\neq P.$$
 							</p>
 						</section>
-						<section id="sec4.2">
+						<section id="sec4.2" data-section-name="Characterization of Tolerable Adversaries">
 							<h3>4.2. Characterization of Tolerable Adversaries</h3>
 							<span class="rp_theorem_header" id="theorem3">Theorem 3</span>
 							<p class="rp_original rp_theorem">
@@ -443,7 +443,7 @@
 								In order to prove that the condition is necessary, suppose that there exists a protocol generator for an adversary structure not satisfying \(Q^{(2)}\), i.e. there are two potential adversaries that add up to the full player set. Theorem 3 shows that not even privacy can be guaranteed, and broadcast does not help.\(\quad\quad\blacksquare\)
 							</p>
 						</section>
-						<section id="sec4.3">
+						<section id="sec4.3" data-section-name="Example">
 							<h3>4.3. Example</h3>
 							<p class="rp_original">
 								We apply Theorem 3 to construct a protocol among the player set \(P=\{p_1,p_2,p_3,p_4,p_5,p_6\}\) that tolerates the collusion structure \(\overline{\mathcal C}=\{\{p_1,p_2,p_3,p_4\},\{p_1,p_2,p_5\},\{p_1,p_2,p_6\},\{p_1,p_3,p_5\},\{p_1,p_4,p_6\},\{p_2,p_3,p_6\},\{p_2,p_4,p_5\}\}.\)
@@ -587,7 +587,7 @@
 							<img class="rp_original" src="../../img/16.fig2.jpg" alt="Example of iterated player substitution." />
 						</section>
 					</section>
-					<section id="sec5">
+					<section id="sec5" data-section-name="Conclusions and Open Problems">
 						<h2>5. Conclusions and Open Problems</h2>
 						<p class="rp_original">
 							We have given a complete characterization of adversaries tolerable in unconditional multiparty computation. The protocols in the passive and the active model offer perfect security (as those of <span class="reference" data-citation="r2">[?]</span>) and have complexities polynomial in the size of the description of the adversary structure. The protocols in the active model with broadcast offer unconditional security. The achieved efficiency is slightly greater than polynomial. It remains an open problem to construct such protocols that are strictly polynomial.
@@ -596,7 +596,7 @@
 							The presented techniques are general in the sense that they can be applies to any multiparty protocols. The player substitution techniques can also be applies in the computational model of multiparty computation, but the security of such composite protocols remains to be proven<sup class="reference" data-citation="r1">[?]</sup><sup class="reference" data-citation="r24">[?]</sup>.
 						</p>
 					</section>
-					<section id="sec6">
+					<section id="sec6" data-section-name="Acknowledgements">
 						<h2>6. Acknowledgements</h2>
 						<p class="rp_original">
 							We would like to thank Matthias Fitzi for his contributions on efficient protocols. We are very grateful to Oded Goldreich for his detailed comments and for repeatedly encouraging us to improve the clarity of the presentation. We thank Masayuki Abe, Ronald Cramer, Claude Cr&eacute;, Ivan Damg&aring;rd, Tal Rabin, and Markus Stadler for interesting discussions, and Christian Cachin and Stefan Wolf for comments on drafts of this paper.
@@ -604,7 +604,7 @@
 					</section>
 				</div>
             </div>
-			<div class="main_toplevel main_section main_color7" id="footnotes">
+			<div class="main_toplevel main_section main_color7" id="footnotes" data-section-name="Footnotes">
 				<div class="main_fullwidth">
 					<h1>Footnotes</h1>
 					
@@ -642,7 +642,7 @@
 					</ol>
 				</div>
             </div>
-            <div class="main_toplevel main_section main_color8" id="references">
+            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
 				<div class="main_fullwidth">
 					<h1>References</h1>
 					<ol id="referencelist">

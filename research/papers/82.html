@@ -71,7 +71,7 @@
                 <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
                 <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
             </div>
-            <div class="main_toplevel main_section main_color1" id="overview">
+            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
                 <div class="main_section_nav_container">
                     <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
                     <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
@@ -98,7 +98,7 @@
 					<h1>Overview</h1>						
                     <div class="main_toc"></div>
 					
-                    <section id="intro">
+                    <section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result</b> is a 1988 paper by Chaum, Damg&aring;rd, and van de Graaf which presented the first example of a protocol offering <span class="load-definable">information theoretic security</span>, even if only to a single participant. Later that same year, Chaum and Damg&aring;ard (along with Claude Cr&eacute;peau) would follow up this work with a <a href="34.html">feasibility result</a> demonstrating that it was possible to offer information theoretic security to <i>all participants</i> (under certain assumptions). While this paper is important in its own right, the results of that following paper had a much larger effect on multiparty computation research as a whole.
@@ -107,7 +107,7 @@
 							The protocol presented offers a different perspective to computation than the papers before it. It is in some ways similar to Yao's garbled circuit construction, but offers very different characteristics (e.g. the information theoretic security of one party) and operates in an \(n\) party case as opposed to the 2 party case.
 						</p>
 					</section>
-					<section id="goals">
+					<section id="goals" data-section-name="Goals and Results">
 						<h2>Goals and Results</h2>
 						<p class="rp_analysis">
 							The authors were largely attempting to offer a more efficient and usable construction for multiparty computation. In this, historically, they failed; this protocol is of comparable efficiency to most other constructions already known at the time, except perhaps for very small circuits. They <i>did</i> succeed in making a protocol that was immensely extensible and private, much more so than a garbled circuit or the <a href="81.html">GMW construction</a>. This protocol easily tolerates multiple outputs, allows for optimal fairness, and can be composed with other runs of the protocol. Its main drawback is that it requires significant (and <a href="34.html">inherently  obsolescent</a>) alterations in order to become fault tolerant to any degree.
@@ -116,7 +116,7 @@
 							As a mostly unrelated aside, this paper interestingly shows that any language for which membership can be proven interactively can also be proven in zero knowledge (under the assumption that <span class="load-definable">clawfree</span> <span class="load-definable" data-define="trapdoor permutation">trapdoor permutations</span> exist).
 						</p>
 					</section>
-					<section id="assumptions">
+					<section id="assumptions" data-section-name="Assumptions">
 						<h2>Assumptions</h2>
 						<p class="rp_analysis">
 							Minimally, this paper operates under the assumption that <span class="load-definable">clawfree</span> <span class="load-definable" data-define="trapdoor permutation">trapdoor permutations</span> exist, as this assumption implies the existence of bit <span class="load-definable">commitment</span> schemes. (Note that this is not necessarily the minimal assumption implying the existence of bit commitment schemes, but it <i>is</i> the minimal assumption proving the existence of bit commitment schemes with the properties used in this paper.)
@@ -135,7 +135,7 @@
 							In terms of what network this protocol requires, <span class="load-definable" data-define="synchronous network">synchrony</span> is assumed.
 						</p>
 					</section>
-					<section id="defs">
+					<section id="defs" data-section-name="Definitions">
 						<h2>Definitions</h2>
 						<a href="#def4.1"><span class="rp_definition_header">Definition 4.1</span></a>
 						<p class="rp_annotation rp_definition">
@@ -186,7 +186,7 @@
 							A computation \(\Gamma^*\) is said to be <i>consistent</i>, if the following is satisfied: Suppose output column \(k_1\) in the transform \(T^*_1\) is connected with column \(k_2\) in the transform \(T_2^*\), and let \(\Gamma^*(k_1)\) and \(\Gamma^*(k_2)\) be the entries selected by \(\Gamma^*\) in the two columns then $$\Gamma^*(k_1)\oplus rsum(l_1,T_1)\;=\;\Gamma^*(k_2),$$ where \(l_1\) is the index of the row selected by \(\Gamma^*\) in \(T_1^*\).
 						</p>
 					</section>
-					<section id="theorems">
+					<section id="theorems" data-section-name="Theorems">
 						<h2>Theorems</h2>
 						<p class="rp_annotation rp_theorem">
 							We define 'the protocol' to be the multiparty computation protocol consisting of procedures <a href="#protocol1"><span class="main_language">Transform Circuit</span></a>, <a href="#protocol2"><span class="main_language">Check Transformation</span></a>, and <a href="#protocol3"><span class="main_language">Construct Computation</span></a>.
@@ -216,7 +216,7 @@
 							Assume that pairs of <span class="load-definable">clawfree</span> trapdoor functions exist. Then any language in IP has a zero knowledge proof system.
 						</p>
 					</section>
-					<section id="protocol">
+					<section id="protocol" data-section-name="Protocols">
 						<h2>Protocols</h2>
 						<h3><a href="#sec6.1">The Encryption Phase</a></h3>
 						<ul class="rp_analysis">
@@ -261,7 +261,7 @@
 							<li><b>Runtime: </b>\(\operatorname{O}(cmn)\), where \(m\) is the security parameter, \(n\) is the number of parties, and \(c\) is the number of gates in the circuit.</li>
 						</ul>
 					</section>
-					<section id="further">
+					<section id="further" data-section-name="Further Reading">
 						<h2>Further Reading</h2>
 						<p class="rp_analysis">
 							 This paper had a sequel later the same year which is essentially required reading in order to see how the ideas presented here developed: it can be found <a href="34.html">here</a>.
@@ -280,7 +280,7 @@
 							<li><b><a href="76.html">Verifiable Secret Sharing and Multiparty Protocols... (1989)</a></b>: Information-Theoretic Security for Honest Majority, Negligible Probability of Cheating</li>
 						</ol>
 					</section>
-					<section id="ref">
+					<section id="ref" data-section-name="Referencing This Paper">
 						<h2>Referencing This Paper</h2>
 						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 						<p class="rp_self_reference">
@@ -289,11 +289,11 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper">
+            <div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper">
                 <div class="main_window main_fullwidth">
 					<h1>Annotated Paper</h2>
                     <div class="main_toc"></div>
-					<section id="summary" data-section-number="0">
+					<section id="summary" data-section-number="0" data-section-name="Summary">
 						<h2>Summary</h2>
 						<p class="rp_original">
 							A protocol is presented that allows a set of parties to collectively perform any agreed computation, where every party is able to choose secret inputs and verify that the resulting output is correct, and where all secret inputs are optimally protected.
@@ -320,7 +320,7 @@
 							The rest of this paper is organized as follows: First we survey some related results. Then <a href="#sec2">Section 2</a> gives an intuitive introduction to the protocol. In <a href="#sec3">Section 3</a>, we present one of the main tools used in this paper: <span class="load-definable" data-define="commitment">bit commitment schemes</span>. Sections <a href="#sec4">4</a> and <a href="#sec5">5</a> contain the notation, terminology, etc. used in the paper. In <a href="#sec6">Section 6</a>, the protocol is presented, along with proofs of its security and correctness. In <a href="#sec7">Section 7</a>, we show how to adapt the protocol to various extra requirements and discuss some generalizations and optimizations. Finally, <a href="#sec8">Section 8</a> contains some remarks on how to construct zero knowledge proof systems for any language in IP.
 						</p>
 					</section>
-                    <section id="sec1">
+                    <section id="sec1" data-section-name="Related Work">
                         <h2>1. Related Work</h2>
 						<p class="rp_original">
 							The problem of multiparty secure computations is an important one. When stated in its most general form, its solution implies a solution&mdash;at least a theoretical one&mdash;to almost any protocol construction problem. The first to consider this problem was Yao<sup class="reference" data-citation="Y2">[?]</sup>. He devised protocols that, under various cryptographic assumptions, could keep the inputs secret while allowing each participant only a <span class="load-definable">negligible</span> chance of cheating. He did not, however, address the problem of "fairness", i.e. ensuring that the participants learn the output simultaneously. Later, Yao<sup class="reference" data-citation="Y1">[?]</sup> solved also this problem for the two-party case. Recently, in work done independently from (but earlier than) ours, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW">[?]</sup> used Yao's two-party construction to devise a multiparty solution, based on the existence of a trapdoor one-way function. This protocol implements a multiparty simulation of the computation in a circuit. Each participant holds a share of each bit in the real computation, and these shares are manipulated by using Yao's two-party construction \(O(n^2)\) times, where \(n\) is the number of participants. In other work done independently from and almost simultaneously with ours, Galil, Haber, and Yung generalize all the properties of Yao's construction to the multiparty case, and simplify the use of Yao's protocol in the multiparty simulation. Also, they give a concrete construction based on Diffie-Hellman key exchange rather than the existence of a trapdoor one way function. Very recently, Goldreich and Vainish<sup class="reference" data-citation="GV">[?]</sup> found another simplification by designing a special purpose two-party protocol which could replace Yao's protocol in the multiparty construction.
@@ -335,7 +335,7 @@
 							An interesting consequence of our work is that any statement which can be proved interactively, can also be proved in zero knowledge, provided that our cryptographic assumption holds (one assumption which will do in this case is the existence of <span class="load-definable" data-define="clawfree">clawfree trapdoor functions</span>). More formally: any language in IP has a zero knowledge proof system. This result was already proved for protocols with a constant number of rounds in <span class="reference" data-citation="GMW2"></span>, where a proof of the result in full generality is attributed to Ben-Or. As far as we know, this last proof is still unpublished, so we cannot comment on possible differences between this proof and ours.
 						</p>
                     </section>
-					<section id="sec2">
+					<section id="sec2" data-section-name="Overview of the Constructions">
 						<h2>2. Overview of the Constructions</h2>
 						<p class="rp_original">
 							For the intuitive sketch given in this section, we will make some simplifications. We will consider only two parties, \(A\) and \(B\) and we will do a computation on one AND-gate only. At the end of the section we will see how this method can be generalised to more parties, and to a computation consisting of many gates.
@@ -439,7 +439,7 @@
 							<li>Instead of using only one gate, a computation involving arbitrarily many gates can be done with the protocol. The only condition is that when gate \(T_1\) is connected to \(T_2\), then their corresponding output column and input column were inverted using the <i>same</i> bits. When later a row is selected in the encrypted version of \(T_1\), the inversion bits that apply to the single output column entry will be revealed, while the column inversion bits will remain secret. The revealed inversion bits are now XORed with the output column entry selected, and the result can be used directly as an input bit to the encryption version of \(T_2\).</li>
 						</ul>
 					</section>
-					<section id="sec3">
+					<section id="sec3" data-section-name="Bit Commitment Schemes">
 						<h2>3. Bit Commitment Schemes</h2>
 						<p class="rp_original">
 							A bit <span class="load-definable">commitment</span> scheme is a tool allowing protocol participant \(A\)(lice) to "commit" to a bit \(b\in\{0,1\}\) by releasing some information related to \(b\) such that:
@@ -501,7 +501,7 @@
 						<p class="rp_original">
 							From a theoretical point of view, the opening and comparability properties do not represent demanding assumptions, since the required proofs can always be produced by using standard reductions to <span class="main_language">3Col</span> or <span class="main_language">Sat</span><sup class="reference" data-citation="GMW">[?]</sup><sup class="reference" data-citation="C">[?]</sup><sup class="reference" data-citation="BC">[?]</sup>. We will only be concerned, however, with bit commitment schemes allowing the proofs to be produced directly and efficiently. As a consequence, the main protocol will be much more efficient. 
 						</p>
-						<section id="sec3.1">
+						<section id="sec3.1" data-section-name="Examples">
 							<h3>3.1. Examples</h3>
 							<p class="rp_original">
 								The protocol presented in this paper relies on the existence of bit <span class="load-definable">commitment</span> schemes satisfying the properties defined above. In this subsection, we give three examples of commitment schemes which could be used in the protocol, namely the <i>Quadratic Residuosity Scheme</i> (QRS), <i>the Jacobi Symbol Scheme</i> (JSS), and <i>the Discrete Log Scheme</i> (DLS), of which DLS has not been used in published protocols before.
@@ -562,7 +562,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec4">
+					<section id="sec4" data-section-name="Protocols: notation and definitions">
 						<h2>4. Protocols: notation and definitions</h2>
 						<p class="rp_original">
 							We think of a protocol as occurring among a set of communicating probabilistic <span class="load-definable" data-define="Turing machine">Turing machines</span> \(\{P_1,\dots,P_n\}\) called the participants. The protocol is described as a specification of the program each participant should follow.
@@ -586,7 +586,7 @@
 						<p class="rp_original">
 							Of course, this does not mean that the behavior of e.g. the running time of the protocol as a function of \(C\) is not interesting, only that such dependencies should be considered independently of the security level.
 						</p>
-						<section id="sec4.1">
+						<section id="sec4.1" data-section-name="Correctness and Security">
 							<h3>4.1. Correctness and Security</h3>
 							<p class="rp_original">
 								The definitions in this section are straightforward generalizations of the definition of "<span class="load-definable">zero knowledge proof</span> systems" found in <span class="reference" data-citation="GMR">[?]</span>. This becomes clear if one takes a slightly different point of view of the situation where a prover convinces a verifier about the membership of a string \(x\) in an <span class="load-definable">NP</span>-language \(L\).
@@ -652,7 +652,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec5">
+					<section id="sec5" data-section-name="Circuits, terminology, and notation">
 						<h2>5. Circuits, terminology, and notation</h2>
 						<p class="rp_original">
 							We think of a boolean circuit \(C\) in the usual way, as an acyclic directed graph where the nodes are called <i>gates</i> and the edges are called <i>wires</i>.
@@ -673,7 +673,7 @@
 						<p class="rp_original rp_definition">
 							A computation is said to be <i>consistent</i> if the following is satisfied: whenever two truth table columns \(c_1\) and \(c_2\) are connected, the entry selected by \(\Gamma\) in \(c_1\) equals the entry selected in \(c_2\).
 						</p>
-						<section id="#sec5.2">
+						<section id="#sec5.2" data-section-name="Transformations of Truth Tables">
 							<h3>Transformations of Truth Tables</h3>
 							<p class="rp_original">
 								Our protocol works with "transforms" of truth tables. Basically, a transform of a truth table \(T(G)\) is just a row-permuted version of \(T(G)\) with the last column changed and some extra (encrypted) information about the transformation included.
@@ -706,7 +706,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec6">
+					<section id="sec6" data-section-name="The Protocol">
 						<h2>6. The Protocol</h2>
 						<p class="rp_original">
 							The first step in the protocol is that each participant chooses an instance of a bit commitment scheme and uses the protocols mentioned in <a href="#sec2">Section 2</a> to convince all other participants that the choice was made correctly. We assume for simplicity that all participants use the same value of \(m\) as security parameter but, in principle, different participants could choose different levels of security.
@@ -723,12 +723,12 @@
 						<p class="rp_original">
 							The main part of the protocol proceeds in two phases: 1) The Encryption Phase and 2) The Computation Phase. Each is described formally in separate subsections below.
 						</p>
-						<section id="sec6.1">
+						<section id="sec6.1" data-section-name="The Encryption Phase">
 							<h3>6.1. The Encryption Phase</h3>
 							<p class="rp_original">
 								The procedure <span class="main_language">Transform Circuit</span> below is iterated once by each participant, such that the \(i\)-th iteration is executed by \(P_i\). After each iteration, the protocol <span class="main_language">Check Transformation</span> is executed to verify that the preceding iteration of <span class="main_language">Transform Circuit</span> has been performed correctly. The input to the first iteration will be the truth tables in the original circuit.
 							</p>
-							<section id="protocol1">
+							<section id="protocol1" data-section-name="Procedure <span class="main_language">Transform Circuit</span>.">
 								<h4>Procedure <span class="main_language">Transform Circuit</span>.</h4>
 								<p class="rp_original rp_sub"><i>Input: in the \(i\)-th iteration, one \((i-1)\)-transform of each truth table in \(C\). Output: one \(i\)-transform of each truth table in \(C\)</i>.</p>
 								<p class="rp_original">
@@ -760,7 +760,7 @@
 							<p class="rp_original">
 								The interactive proof <ins>demonstrating</ins> that every \(T\) was created according to the protocol proceeds as follows:
 							</p>
-							<section id="protocol2">
+							<section id="protocol2" data-section-name="Protocol <span class="main_language">Check Transformation</span>">
 								<h4>Protocol <span class="main_language">Check Transformation</span></h4>
 								<p class="rp_original rp_sub">
 									<i>Input: for every truth table in \(C\), an \((i-1)\)-transform \(S\) and an \(i\)-transform \(T\), which \(P_i\) claims was created correctly from \(S\).</i>
@@ -800,7 +800,7 @@
 								Intuitively, the <span class="main_language">Check Transformation</span> protocol is secure from \(P_i\)'s point of view because all the other participants never see anything but random "copies" of \(S\) or \(T\), which they could also have produced themselves. All other participants will therefore be convinced that \(T\) was correctly constructed, but will learn nothing more about \(T\). A formal proof can be found in <a href="#sec6.3">Section 6.3</a>.
 							</p>
 						</section>
-						<section id="sec6.2">
+						<section id="sec6.2" data-section-name="The Computation Phase">
 							<h3>6.2. The Computation Phase</h3>
 							<p class="rp_original">
 								At the end of the encryption phase, \(P_n\) has output a set of \(n\)-transforms of the truth tables in \(C\). This set will be called \(C^*\).
@@ -834,7 +834,7 @@
 							<p class="rp_original">
 								The rest of the protocol is now just an algorithm which constructs a consistent computation in \(C^*\) from the input as specified above.
 							</p>
-							<section id="protocol3">
+							<section id="protocol3" data-section-name="Procedure <span class="main_language">Construct Computation</span>">
 								<h4>Procedure <span class="main_language">Construct Computation</span></h4>
 								<p class="rp_original rp_sub">
 									<i>Input: The fully encrypted circuit \(C^*\) and, for each input wire \(w\), an attached input bit \(b_w\) specified as above. Output: a consistent computation \(\Gamma^*\) in \(C^*\) and its output.</i>
@@ -864,7 +864,7 @@
 								</p>
 							</section>
 						</section>
-						<section id="sec6.3">
+						<section id="sec6.3" data-section-name="Proofs of Correctness and Security">
 							<h3>6.3. Proofs of Correctness and Security</h3>
 							<p class="rp_original">
 								Before starting on this section, the reader is well advised to review the definitions of correctness and security given in <a href="#sec4.1">Section 4.1</a>.
@@ -901,7 +901,7 @@
 							<p class="rp_original">
 								We now come to the executions of the <span class="main_language">Transform Circuit</span> procedure. If \(P_i\in\)<span class="load-equation" data-equation="X">\(X\)</span>, then the \(i\)-th iteration of this procedure is replaced by an execution of the procedure <span class="main_language">Simulate Conspiracy</span> below, otherwise the procedure <span class="main_language">Simulate Honest Participant</span> is used.
 							</p>
-							<section id="protocol4">
+							<section id="protocol4" data-section-name="Procedure <span class="main_language">Simulate Honest Participant</span>.">
 								<h4>Procedure <span class="main_language">Simulate Honest Participant</span>.</h4>
 								<p class="rp_original rp_sub">
 									<i>Input: one \((i-1)\)-transform of every truth table in \(C\). Output: one \((i-1)\)-transform of every truth table in \(C\).</i>
@@ -926,7 +926,7 @@
 									Note that the expected number of "trial \(T'\)'s", we must create in the above procedure before \(b\) happens to be equal to \(b_M\) is constant, and that the above procedure therefore takes expected linear time in \(m\).
 								</p>
 							</section>
-							<section id="protocol5">
+							<section id="protocol5" data-section-name="Procedure <span class="main_language">Simulate Conspiracy</span>.">
 								<h4>Procedure <span class="main_language">Simulate Conspiracy</span>.</h4>
 								<p class="rp_original rp_sub">
 									<i>Input: one \((i-1)\)-transform of every truth table in \(C\). Output: one \(i\)-transform of every truth table in \(C\).</i>
@@ -990,12 +990,12 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec7">
+					<section id="sec7" data-section-name="Generalizations">
 						<h2>7. Generalizations</h2>
 						<p class="rp_original">
 							In this section, we will show how to adopt the protocol to various additional requirements. It will be shown that a very flexible functionality can be obtained from a general computation protocol, as long as it protects the private inputs, computes correct results, and allows execution of <i>coordinated</i> instances, i.e. participants can prove relations between inputs and outputs used in different instances of the protocol. In particular, a protocol which implements the "input-secure computation"-primitive as defined in <span class="reference" data-citation="GHY">[?]</span> and allows coordinated instances can in fact implement all four "primitives for cryptographic computation" defined in <span class="reference" data-citation="GHY">[?]</span>. From the comparability property of the bit <span class="load-definable">commitment</span> schemes used, it is clear that our basic protocol satisfies these requirements.
 						</p>
-						<section id="sec7.1">
+						<section id="sec7.1" data-section-name="Private Outputs">
 							<h3>7.1. Private Outputs</h3>
 							<p class="rp_original">
 								How can we make some of the output bits private to a participant \(P_i\)? First, note that this problem could always be solved by rewriting the circuit, such that each of the output bits in question were XORed with a bit chosen at random by the participant.
@@ -1007,7 +1007,7 @@
 								This is important because, since the conspiracy does not learn those secret outputs, they cannot use the bits of those outputs in their protocol. As mentioned, they don't need them.
 							</p>
 						</section>
-						<section id="sec7.2">
+						<section id="sec7.2" data-section-name="Simultaneous Release of the Output">
 							<h3>7.2. Simultaneous Release of the Output</h3>
 							<p class="rp_original">
 								An obvious strategy for a set of dishonest participants would be to try stopping the protocol early in such a way that this conspiracy could find out about the output while preventing honest participants from getting it. To solve this problem in general, one could just execute a set of coordinated instances, such that the input was constant over all rounds, while the circuit was rewritten such that exactly one bit of the result was computed in each instance.
@@ -1019,13 +1019,13 @@
 								If simultaneous release is to be combined with private outputs, however, then a bit by bit release does not make sense because the private outputs may have different lengths. We propose instead the following solution, the basic idea of which was first introduced by Yao in <span class="reference" data-citation="Y1">[?]</span>: The parties agree on a probabilistic circuit, which will produce as output an instance of a bit commitment scheme based on a trapdoor one-way function, e.g. an instance of QRS, together with the trapdoor information. Our basic protocol can now be used to do a computation in this circuit. The parties open the specification of the instance, such that commitments can be computed, but keep the trapdoor closed. In the case of QRS, this would mean that a public modulus has been computed, but its factorization is still unknown to everyone. Since all coin flips in the computation are secret, no participant can compute the trapdoor information by himself. The parties now go back to the original circuit and do the computation, using the bit commitment instance computed above for all commitments in output column lists. When this is done, the trapdoor information is opened, bit by bit, which is possible by above remarks. Using Yao's terminology, this is a <i>fair</i> protocol because all participants need exactly the same information in order to get their share of the output.
 							</p>
 						</section>
-						<section id="sec7.3">
+						<section id="sec7.3" data-section-name="Other Special Requirements">
 							<h3>7.3. Other Special Requirements</h3>
 							<p class="rp_original">
 								Since our basic protocol protects not only the inputs, but also all intermediate results, a variety of special properties can be obtained by rewriting the circuit. For example, the result could be distributed only to a secret subset of users, the subset being chosen at random or based on the result. Also, a secret permutation could be applied to the private output of some participant to hide the order in which that participant obtains his or her output bits. This could be important, e.g. in the implementation of a game such a poker.
 							</p>
 						</section>
-						<section id="sec7.4">
+						<section id="sec7.4" data-section-name="Verifiability">
 							<h3>7.4. Verifiability</h3>
 							<p class="rp_original">
 								Is it possible for a non-participant to check from, say, a recording of all messages sent in the protocol that the result computed is a correct one? It is clear that such a check cannot be possible without interacting with the participants, since otherwise the protocol could not be minimum knowledge with respect to the private inputs: recall that there should be no way for anyone to tell whether he is presented with a genuine protocol conversation or a simulated one. But this is exactly what we would be asking the non-participant above to do!
@@ -1034,7 +1034,7 @@
 								<i>With</i> interaction, however, checking is easy: all participants could be asked to prove once again using the <span class="main_language">Check Transformation</span> protocol that they had computed valid transforms. Then all the computation phase could be checked without interaction.
 							</p>
 						</section>
-						<section id="sec7.5">
+						<section id="sec7.5" data-section-name="Fault Recovery">
 							<h3>7.5. Fault Recovery</h3>
 							<p class="rp_original">
 								In our basic construction, there is not much one can do short of stopping the protocol if some participant sends incorrect messages or just stops completely. In the recent literature, a number of techniques have been proposed for recovering for such situations.
@@ -1052,7 +1052,7 @@
 								In addition to this, the techniques presented in <span class="reference" data-citation="Ch2">[?]</span> can be used to add flexibility to the protocol. Here, it is shown how to change the <i>quorum</i>, i.e. the number of participants necessary to reconstruct the secret, during the protocol. This can be useful in applications, where it can be assumed that almost all faults occur by accident, because of breakdown of communication lines, etc. In this case, it may be desirable to keep the ratio between the quorum and the number of remaining participants constant.
 							</p>
 						</section>
-						<section id="sec7.6">
+						<section id="sec7.6" data-section-name="The Possibility of Further Generalizations">
 							<h3>7.6. The Possibility of Further Generalizations</h3>
 							<p class="rp_original">
 								From an intuitive point of view, it may seem unnatural that only one participant can be unconditionally protected. Why not try to devise a protocol where any subset of the participants could have this option?
@@ -1083,7 +1083,7 @@
 							</p>
 						</section>
 					</section>
-					<section id="sec8">
+					<section id="sec8" data-section-name="Proving all IP-statements in Zero Knowledge">
 						<h2>8. Proving all IP-statements in Zero Knowledge</h2>
 						<p class="rp_original">
 							Below, we will informally describe how to use our protocol to construct a zero knowledge proof system for any language \(L\) in IP. By definition of IP, we may assume that we have a proof system for \(L\), i.e. a polynomial time Turing machine \(V\) (the verifier), a Turing machine \(P\) with unlimited power (the prover), and an interactive protocol that can be executed by \(P\) and \(V\). The protocol has the property that given a binary string \(x\in L\), the verifier will accept \(x\) at the end of the protocol with overwhelming probability, while if \(x\) is not in \(L,\,x\) will be rejected with overwhelming probability, even if the prover does not follow the protocol.
@@ -1118,7 +1118,7 @@
 							The existence of <span class="load-definable" data-define="trapdoor function">trapdoor one way functions</span> will make our basic computation protocol work with conditional security, which is what we need for the prover. The clawfreeness implies that the existence of a bit <span class="load-definable">commitment</span> scheme hiding the bits unconditionally<sup class="reference" data-citation="C">[?]</sup>, which means that the verifier can be protected as required above.
 						</p>
 					</section>
-					<section id="sec9">
+					<section id="sec9" data-section-name="Acknowledgements">
 						<h2>9. Acknowledgements</h2>
 						<p class="rp_original">
 							We would like to thank Gilles Brassard and Claude Cr&eacute;peau for may stimulating discussions.
@@ -1126,7 +1126,7 @@
 					</section>
                 </div>
             </div>
-            <div class="main_toplevel main_section main_color8" id="references">
+            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
 				<div class="main_window main_fullwidth">
 					<h1>References</h1>
 					<ol id="referencelist">
