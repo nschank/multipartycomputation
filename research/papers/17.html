@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation - Ben-Or, Goldwasser, Wigderson, 1988</title>
-        <link rel="stylesheet" type="text/css" href="../../style/main.css">
-        <link rel="stylesheet" type="text/css" href="../../style/equation.css">
-        <link rel="stylesheet" type="text/css" href="../../style/ref.css">
-        <link rel="stylesheet" type="text/css" href="../../style/glossary.css">
-        <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
-        <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+	<head>
+		<meta charset="utf-8">
+		<title>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation - Ben-Or, Goldwasser, Wigderson, 1988</title>
+		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
+		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
+		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
+		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
+		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
 		<script type="text/javascript" src="../../script/difficulty.js"></script>
-        <script type="text/javascript" src="../../script/equation.js"></script>
-        <script type="text/javascript" src="../../script/ref.js"></script>
-        <script type="text/javascript" src="../../script/fnote.js"></script>
-        <script type="text/javascript" src="../../script/glossary.js"></script>
-        <script type="text/javascript" src="../../script/def.js"></script>
-        <script type="text/javascript" src="../../script/toc.js"></script>
-        <script type="text/javascript"
-                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-        <script type="text/javascript">
+		<script type="text/javascript" src="../../script/equation.js"></script>
+		<script type="text/javascript" src="../../script/ref.js"></script>
+		<script type="text/javascript" src="../../script/fnote.js"></script>
+		<script type="text/javascript" src="../../script/glossary.js"></script>
+		<script type="text/javascript" src="../../script/def.js"></script>
+		<script type="text/javascript" src="../../script/toc.js"></script>
+		<script type="text/javascript"
+				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<script type="text/javascript">
 			<!--
-            function fill(box)
+			function fill(box)
 			{
 				switch (box)
 				{
@@ -41,37 +41,38 @@
 			self_def["t-private"] = {title:"\\(t\\)-private",difficulty:5,blockName:"17private",def:[{type:"p",content:"A protocol is \\(t\\)-<i>private</i> if any set of at most \\(t\\) players cannot compute more after the protocol than they could jointly compute solely from their own of private inputs and outputs."}]};
 			self_def["t-resilient"] = {title:"\\(t\\)-resilient",difficulty:5,blockName:"17resilient",def:[{type:"p",content:"A protocol is \\(t\\)-<i>resilient</i> if no set of \\(t\\) or fewer players can influence the correctness of the outputs of the remaining players."}]};
 			//-->
-        </script>
-    </head>
-    <body>
-        <div class="main_foreground">
-            <div class="main_toplevel main_header">
-                <h1>Multiparty Computation</h1>
-            </div>
-            <div class="main_toplevel main_navigation">
-                <a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
-                <a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
-                <a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
-                <a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
-                <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
-                <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
-            </div>
-            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
-                <div class="main_section_nav_container">
-                    <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
-                    <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
-                    <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
-                    <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
-                </div>
-                <div class="main_window main_fullwidth">
-                    <div class="rp_linkbox"><a href="pdf/17.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
+		</script>
+	</head>
+	<body>
+		<div class="main_foreground">
+			<div class="main_toplevel main_header">
+				<h1>Multiparty Computation</h1>
+			</div>
+			<div class="main_toplevel main_navigation">
+				<a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
+				<a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
+				<a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
+				<a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
+				<a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
+				<a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
+			</div>
+			<div class="main_toplevel main_section main_color1">
+				<div class="main_section_nav_container">
+					<div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
+					<div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
+					<div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
+					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
+				</div>
+				<div class="main_window main_fullwidth">
+				<section class="top_section" id="overview" data-section-name="Overview">
+					<div class="rp_linkbox"><a href="pdf/17.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
-                    <span class="rp_title">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</span>
-                    <span class="rp_info">1988
+					<span class="rp_title">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</span>
+					<span class="rp_info">1988
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="rp_author" href="../authors/Michael Ben-Or.html">Michael Ben-Or</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="rp_author" href="../authors/Shafi Goldwasser.html">Shafi Goldwasser</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="rp_author" href="../authors/Avi Wigderson.html">Avi Wigderson</a>    
+						<a class="rp_author" href="../authors/Avi Wigderson.html">Avi Wigderson</a>	
 					</span>
 					
 					<div class="rp_snippet">
@@ -79,9 +80,9 @@
 					</div>
 					<h1>Overview</h1>
 						
-                    <div class="main_toc"></div>
+					<div class="main_toc"></div>
 						
-                    <section id="intro" data-section-name="Introduction">
+					<section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</b> is a 1988 paper by Ben-Or, Goldwasser, and Wigderson which demonstrated the bounds of (and described a protocol for) multiparty computation which is <span class="load-definable" data-define="information theoretic security">information theoretically secure</span>. It is one of <a href="34.html">two papers</a> in the same year which demonstrates that up to &frac13; parties can be actively <span class="load-definable" data-define="malicious adversary">malicious</span> without affecting correctness or privacy. The other paper offers information theoretic security in a very similar manner, while this paper additionally guarantees correctness (as opposed to a <span class="load-definable">negligible</span> probability of incorrectness).
@@ -172,12 +173,14 @@
 							M. Ben-Or, S. Goldwasser, and A. Wigderson. Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. 
 						</p>
 					</section>
-                </div>
-            </div>
-            <div class="main_toplevel main_section main_color3" id="annotated_paper" data-section-name="Annotated Paper (extended Abstract)">
-                <div class="main_window main_fullwidth">
+				</section>
+				</div>
+			</div>
+			<div class="main_toplevel main_section main_color3">
+				<div class="main_window main_fullwidth">
+				<section class="top_section" id="annotated_paper" data-section-name="Annotated Paper (extended Abstract)">
 					<h1>Annotated Paper (extended Abstract)</h1>
-                    <div class="main_toc"></div>
+					<div class="main_toc"></div>
 					<section id="abstract" data-section-number="0" data-section-name="Abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
@@ -191,8 +194,8 @@
 							Furthermore, the above bounds on \(t\) are tight!
 						</p>
 					</section>
-                    <section id="sec1" data-section-name="Introduction">
-                        <h2>1. Introduction</h2>
+					<section id="sec1" data-section-name="Introduction">
+						<h2>1. Introduction</h2>
 						<p class="rp_original">
 							The rapid development of distributed systems raised the natural question of what tasks can be performed by them (especially when faults occur). A large body of literature over the past ten years addressed this question. There are two approaches to this question, depending on whether a limit on the computational power of processors is assumed or not.
 						</p>
@@ -226,7 +229,7 @@
 						<p class="rp_original">
 							We proceed to define the model, state the results and prove them. In the full paper we mention generalizations and extensions of our results to other tasks (playing games rather than computing functions), to other model parameters (<span class="load-definable" data-define="synchronous network">synchrony</span>, communication networks), and other complexity measures (number of rounds).
 						</p>
-                    </section>
+					</section>
 					<section id="sec2" data-section-name="Definitions and Results">
 						<h2>2. Definitions and Results</h2>
 						<p class="rp_original">
@@ -635,10 +638,12 @@
 							</p>
 						</section>
 					</section>
-                </div>
-            </div>
-			<div class="main_toplevel main_section main_color5" id="appendix" data-section-name="Appendix">
+				</section>
+				</div>
+			</div>
+			<div class="main_toplevel main_section main_color5">
 				<div class="main_window main_fullwidth">
+				<section class="top_section" id="appendix" data-section-name="Appendix">
 					<h1>Appendix</h1>
 					<section id="appendixnotation" data-section-name="Formal Notation">
 						<h3>Formal Notation</h3>
@@ -740,10 +745,12 @@
 							Now the notion of a protocol that is both <span class="load-definable" data-define="t-resilient">\(t\)-resilient</span> and <span class="load-definable" data-define="t-private">\(t\)-private</span> is well defined.
 						</p>
 					</section>
+				</section>
 				</div>
-            </div>
-			<div class="main_toplevel main_section main_color7" id="footnotes" data-section-name="Footnotes">
+			</div>
+			<div class="main_toplevel main_section main_color7">
 				<div class="main_fullwidth">
+				<section class="top_section" id="footnotes" data-section-name="Footnotes">
 					<h1>Footnotes</h1>
 					
 					<ol id="footnotelist">
@@ -757,10 +764,12 @@
 							Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from the lower bound on \(\operatorname \phi(n)\): for any \(n\geq3,\,\phi(n)\geq\frac{n}{e^\gamma\log{\log n}}+\operatorname O\left(\frac{n}{(\log{\log n})^2}\right)\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^{\operatorname\phi(n)}\gt n\). Since we are minimizing \(\phi(n)\) anyway, for simplicity we can assume the big-oh is 0, leaving us with: <span style="font-size:200%">$$2^{\frac{e^{-\gamma}n}{\log{\log n}}}\geq n.$$</span> The left side clearly dominates the right side (both intuitively and through analysis of their derivatives), and the left is greater than the right starting at \(n=5\), so we are left only to demonstrate that \(p^{\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)) and for 4 (\(3^2\gt 4\)). With the exception of \(n=4\) (where we must use \(p=3\) but without weakening our claim) we have demonstrated that, for the lowest possible \(p,\,p^{\phi(n)}\gt n.\quad\blacksquare\)  
 						</li>
 					</ol>
+				</section>
 				</div>
-            </div>
-            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
+			</div>
+			<div class="main_toplevel main_section main_color8">
 				<div class="main_fullwidth">
+				<section class="top_section" id="references" data-section-name="References">
 					<h1>References</h1>
 					<ol id="referencelist">
 						<li id="BL">M. Ben-Or and N. Linial, Collective coin flipping, <i>FOCS86</i>.</li>
@@ -779,18 +788,19 @@
 						<li id="Y1">A. C. Yao, How to generate and exchange secrets. <i>STOC86</i>.</li>
 						<li id="Y2">A. C. Yao, On the succession problem for Byzantine Generals, manuscript. 1983.</li>
 					</ol>
+				</section>
 				</div>
 			</div>
-            <div class="main_toplevel main_section main_color9">
-                <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+17@gmail.com">Problem with this page?</a></p>
-                </div>
-                <p>Created by Nicolas Schank 2014, Brown University</p>
+			<div class="main_toplevel main_section main_color9">
+				<div class="rp_problems">
+					<p><a href="mailto:multipartycomputationorg+17@gmail.com">Problem with this page?</a></p>
+				</div>
+				<p>Created by Nicolas Schank 2014, Brown University</p>
 				<p>All original work is free for any use by anyone whatsoever.</p>
 				<p>For more information about liability and licensing Yao's original paper, see <a href="../liability.html">Liability</a>.</p>
-            </div>
-        </div>
-    </body>
+			</div>
+		</div>
+	</body>
 </html>
 <!--
 4. Headings

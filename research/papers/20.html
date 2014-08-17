@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Efficient Secure Multiparty Computation - Author, Year</title>
-        <link rel="stylesheet" type="text/css" href="../../style/main.css">
-        <link rel="stylesheet" type="text/css" href="../../style/equation.css">
-        <link rel="stylesheet" type="text/css" href="../../style/ref.css">
-        <link rel="stylesheet" type="text/css" href="../../style/glossary.css">
-        <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
-        <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+	<head>
+		<meta charset="utf-8">
+		<title>Efficient Secure Multiparty Computation - Author, Year</title>
+		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
+		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
+		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
+		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
+		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
 		<script type="text/javascript" src="../../script/difficulty.js"></script>
-        <script type="text/javascript" src="../../script/equation.js"></script>
-        <script type="text/javascript" src="../../script/ref.js"></script>
-        <script type="text/javascript" src="../../script/fnote.js"></script>
-        <script type="text/javascript" src="../../script/glossary.js"></script>
-        <script type="text/javascript" src="../../script/def.js"></script>
+		<script type="text/javascript" src="../../script/equation.js"></script>
+		<script type="text/javascript" src="../../script/ref.js"></script>
+		<script type="text/javascript" src="../../script/fnote.js"></script>
+		<script type="text/javascript" src="../../script/glossary.js"></script>
+		<script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
-        <script type="text/javascript"
-                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-        <script type="text/javascript">
+		<script type="text/javascript"
+				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<script type="text/javascript">
 			<!--
-            function fill(box)
+			function fill(box)
 			{
 				switch (box)
 				{
@@ -33,33 +33,34 @@
 			}
 			self_def["non-general word"] = {title:"word", def:[]};
 			//-->
-        </script>
-    </head>
-    <body>
-        <div class="main_foreground">
-            <div class="main_toplevel main_header">
-                <h1>Multiparty Computation</h1>
-            </div>
-            <div class="main_toplevel main_navigation">
-                <a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
-                <a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
-                <a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
-                <a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
-                <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
-                <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
-            </div>
-            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
-                <div class="main_section_nav_container">
-                    <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
-                    <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
-                    <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
-                    <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
-                </div>
-                <div class="main_window main_fullwidth">
-                    <div class="rp_linkbox"><a href="pdf/20.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
+		</script>
+	</head>
+	<body>
+		<div class="main_foreground">
+			<div class="main_toplevel main_header">
+				<h1>Multiparty Computation</h1>
+			</div>
+			<div class="main_toplevel main_navigation">
+				<a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
+				<a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
+				<a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
+				<a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
+				<a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
+				<a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
+			</div>
+			<div class="main_toplevel main_section main_color1">
+				<div class="main_section_nav_container">
+					<div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
+					<div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
+					<div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
+					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
+				</div>
+				<div class="main_window main_fullwidth">
+				<section class="top_section" id="overview" data-section-name="Overview">
+					<div class="rp_linkbox"><a href="pdf/20.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
-                    <span class="rp_title">Efficient Secure Multiparty Computation</span>
-                    <span class="rp_info">2000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="rp_title">Efficient Secure Multiparty Computation</span>
+					<span class="rp_info">2000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a class="rp_author" href="../authors/Martin Hirt.html">Martin Hirt</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a class="rp_author" href="../authors/Ueli Maurer.html">Ueli Maurer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a class="rp_author" href="../authors/Bartosz Przydatek.html">Bartosz Przydatek</a>
@@ -71,10 +72,10 @@
 					
 					THIS PAGE IS UNDER CONSTRUCTION
 					<h1>Overview</h1>
-                    <div class="main_toc"></div>
+					<div class="main_toc"></div>
 					
 						
-                    <section id="intro" data-section-name="Introduction">
+					<section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Paper Title</b> is...
@@ -133,10 +134,12 @@
 							A reference for this paper
 						</p>
 					</section>
-                </div>
-            </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
+				</section>
+				</div>
+			</div>
+			<div class="main_toplevel main_section main_color5">
 				<div class="main_window main_fullwidth">
+				<section class="top_section" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
 					<h1>Annotated Paper (extended abstract)</h1>
 					<div class="main_toc"></div>
 					<section id="abstract" data-section-number="0" data-section-name="Abstract">
@@ -535,10 +538,12 @@
 							There are several open problems to be solved to make general multi-party protocols applicable in distributed systems. The main issue is definitely the model: It is an open problem to generalize the framework to the asynchronous model, and to convert the used techniques accordingly. Furthermore, it might be interesting to generalize the results to non-threshold adversary structures<sup class="reference" data-citation="HM00">[?]</sup>. Finally, it is questionable whether comparable efficiency improvements can be achieved in a model with mobile adversaries, where player elimination seems not to be applicable.
 						</p>
 					</section>
+				</section>
 				</div>
-            </div>
-			<div class="main_toplevel main_section main_color6" id="appendixa" data-section-name="Appendix A - Security Flaw in <span class="reference" data-citation="GRR98">[?]</span>">
+			</div>
+			<div class="main_toplevel main_section main_color6">[?]</span>">
 				<div class="main_window main_fullwidth">
+				<section class="top_section" id="appendixa" data-section-name="Appendix A - Security Flaw in <span class="reference" data-citation="GRR98">
 					<h1>Appendix A - Security Flaw in <span class="reference" data-citation="GRR98">[?]</span></h1>
 					<div class="main_toc"></div>
 					<p class="rp_original">
@@ -561,10 +566,12 @@
 					<p class="rp_original">
 						Clearly, the checks in Step 2 of all players will succeed, and no (honest) player will complain.
 					</p>
+				</section>
 				</div>
-            </div>
-			<div class="main_toplevel main_section main_color7" id="footnotes" data-section-name="Footnotes">
+			</div>
+			<div class="main_toplevel main_section main_color7">
 				<div class="main_fullwidth">
+				<section class="top_section" id="footnotes" data-section-name="Footnotes">
 					<h1>Footnotes</h1>
 					
 					<ol id="footnotelist">
@@ -590,10 +597,12 @@
 							After the security problem was discovered, this appendix was deleted from the version available online.
 						</li>
 					</ol>
+				</section>
 				</div>
-            </div>
-            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
+			</div>
+			<div class="main_toplevel main_section main_color8">
 				<div class="main_fullwidth">
+				<section class="top_section" id="references" data-section-name="References">
 					<h1>References</h1>
 					<ol id="referencelist">
 						<li id="BB89">J. Bar-Ilan and D. Beaver. Non-cryptographic fault-tolerant computing in a constant number of rounds of interaction. In <i>Proc. 8th ACM Symposium on Principles of Distributed Computing (PODC)</i>, pages 201-210, 1989.</li>
@@ -630,18 +639,19 @@
 						<li id="Sha79">A. Shamir. How to share a secret. <i>Communications of the ACM</i>, 22:612-613, 1979.</li>
 						<li id="Yao82">A.C. Yao. <a href="49.html">Protocols for Secure Computations (extended abstract)</a>. <i>Proceedings of the 23rd Annual IEEE Symposium on the Foundations of Computer Science,</i> pages 160-164. IEEE. 1982.</li>
 					</ol>
+				</section>
 				</div>
-            </div>
-            <div class="main_toplevel main_section main_color9">
-                <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+20@gmail.com">Problem with this page?</a></p>
-                </div>
-                <p>Created by Nicolas Schank 2014, Brown University</p>
+			</div>
+			<div class="main_toplevel main_section main_color9">
+				<div class="rp_problems">
+					<p><a href="mailto:multipartycomputationorg+20@gmail.com">Problem with this page?</a></p>
+				</div>
+				<p>Created by Nicolas Schank 2014, Brown University</p>
 				<p>All original work is free for any use by anyone whatsoever.</p>
 				<p>For more information about liability and licensing of the original paper, see <a href="../liability.html">Liability</a>.</p>
-            </div>
-        </div>
-    </body>
+			</div>
+		</div>
+	</body>
 </html>
 <!--
 1. Save template page

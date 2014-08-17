@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Verifiable Secret Sharing and Multiparty Protocols with Honest Majority - Rabin, Ben-Or, 1989</title>
-        <link rel="stylesheet" type="text/css" href="../../style/main.css">
-        <link rel="stylesheet" type="text/css" href="../../style/equation.css">
-        <link rel="stylesheet" type="text/css" href="../../style/ref.css">
-        <link rel="stylesheet" type="text/css" href="../../style/glossary.css">
-        <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
-        <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+	<head>
+		<meta charset="utf-8">
+		<title>Verifiable Secret Sharing and Multiparty Protocols with Honest Majority - Rabin, Ben-Or, 1989</title>
+		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
+		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
+		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
+		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
+		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
 		<script type="text/javascript" src="../../script/difficulty.js"></script>
-        <script type="text/javascript" src="../../script/equation.js"></script>
-        <script type="text/javascript" src="../../script/ref.js"></script>
-        <script type="text/javascript" src="../../script/fnote.js"></script>
-        <script type="text/javascript" src="../../script/glossary.js"></script>
-        <script type="text/javascript" src="../../script/def.js"></script>
+		<script type="text/javascript" src="../../script/equation.js"></script>
+		<script type="text/javascript" src="../../script/ref.js"></script>
+		<script type="text/javascript" src="../../script/fnote.js"></script>
+		<script type="text/javascript" src="../../script/glossary.js"></script>
+		<script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
-        <script type="text/javascript"
-                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-        <script type="text/javascript">
+		<script type="text/javascript"
+				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<script type="text/javascript">
 			<!--
-            function fill(box)
+			function fill(box)
 			{
 				switch (box)
 				{
@@ -35,34 +35,34 @@
 			self_def["coalition"] = {title:"coalition",def:[{type:"span",difficulty:5,blockName:"76coalition",className:"rp_definition_header", href:"#def2",content:"Definition 2"},{type:"p", content:"A <i>coalition</i> is a subset \\(C\\subseteq \\{P_1,\\dots,P_n\\}\\) of the set of all players, for which at the end of <a href=\"#sec3.1.2\">Phase 2</a> each \\(P_i\\in C\\) knows that every other player \\(P_j\\in C\\) will accept his or her piece of the shared secret."}]};
 			self_def["verified secret"] = {title:"verified secret",difficulty:5,blockName:"76verified",def:[{type:"span",className:"rp_definition_header",href:"#def3",content:"Definition 3"},{type:"p",content:"A group of \\(n\\) players holds a <i>verified secret (data) \\(s\\)</i>, shared using the polynomial \\(f(x)\\), so that \\(f(0)=s\\), and satisfying the conditions of VSS if:"},{type:"ol",content:[{type:"li",content:[{type:"p",content:"The polynomial \\(f(x)\\) is of degree \\(t\\)."}]},{type:"li",content:[{type:"p",content:"Each player \\(P_i\\) holds a share of the secret \\(\\beta_i=f(\\alpha_i)\\)."}]},{type:"li",content:[{type:"p",content:"Every piece \\(\\beta_i\\) was shared by \\(P_i\\) using WSS."}]}]}]};
 			//-->
-        </script>
-    </head>
-    <body>
-        <div class="main_foreground">
-            <div class="main_toplevel main_header">
-                <h1>Multiparty Computation</h1>
-            </div>
-            <div class="main_toplevel main_navigation">
-                <a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
-                <a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
-                <a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
-                <a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
-                <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
-                <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
-            </div>
-            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
-                <div class="main_section_nav_container">
-                    <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
-                    <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
-                    <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
-                    <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
-                </div>
-                <div class="main_window main_fullwidth" id="_A">
-                    <div class="rp_linkbox"><a href="pdf/76.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
+		</script>
+	</head>
+	<body>
+		<div class="main_foreground">
+			<div class="main_toplevel main_header">
+				<h1>Multiparty Computation</h1>
+			</div>
+			<div class="main_toplevel main_navigation">
+				<a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
+				<a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
+				<a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
+				<a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
+				<a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
+				<a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
+			</div>
+			<div class="main_toplevel main_section main_color1">
+				<div class="main_section_nav_container">
+					<div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
+					<div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
+					<div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
+					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
+				</div>
+				<div class="main_window main_fullwidth" id="_A">
+					<div class="rp_linkbox"><a href="pdf/76.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
-                    <span class="rp_title">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</span>
-                    <span class="rp_info">1989
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="rp_title">Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</span>
+					<span class="rp_info">1989
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="rp_author" href="../authors/Tal Rabin.html">Tal Rabin</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="rp_author" href="../authors/Michael Ben-Or.html">Michael Ben-Or</a>
@@ -74,9 +74,9 @@
 						
 					
 					<h1>Overview</h1>	
-                    <div class="main_toc"></div>
+					<div class="main_toc"></div>
 					
-                    <section id="intro" data-section-name="Introduction">
+					<section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</b> is a 1989 by Tal Rabin and Michael Ben-Or, a combination of two separate papers they were working on, which provides some useful theorems for the powers of an adversary in multiparty computations. It is a culmination of several years in which multiparty computation research was mostly focused on fault tolerance in the face of adversarial behavior, and offers the strongest possible protections a multiparty protocol can offer (as always, under certain assumptions). The assumptions made are all related to networks and to the adversary, not to computational intractability, so the secrecy offered is <span class="load-definable" data-define="information-theoretic security">information-theoretic</span>.
@@ -247,12 +247,13 @@
 							T. Rabin and M. Ben-Or. Verifiable Secret Sharing and Multiparty Protocols with Honest Majority. <i>Proceedings of the Twenty-First Annual ACM Symposium on Theory of Computing</i>, pages 73-85. ACM. 1989.
 						</p>
 					</section>
-                </div>
-            </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
-                <div class="main_window main_fullwidth">
+				</div>
+			</div>
+			<div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
+				<div class="main_window main_fullwidth">
+				<section class="top_section" id="overview" data-section-name="Overview">
 					<h1>Annotated Paper (extended abstract)</h1>
-                    <div class="main_toc"></div>
+					<div class="main_toc"></div>
 					<section id="abstract" data-section-number="0" data-section-name="Abstract">
 						<h2>Abstract</h2>
 						<p class="rp_original">
@@ -262,8 +263,8 @@
 							Underlying our results is a new tool of Information Checking which provides <span class="load-definable" data-define="authentication network">authentication</span> without cryptographic assumptions and may have wide applications elsewhere.
 						</p>
 					</section>
-                    <section id="sec1" data-section-name="Introduction">
-                        <h2>1. Introduction</h2>
+					<section id="sec1" data-section-name="Introduction">
+						<h2>1. Introduction</h2>
 						<p class="rp_original">
 							Comparing the recent unconditional results on multiparty protocols of Ben-Or, Goldwasser, and Widgerson<sup class="reference" data-citation="BGW">[?]</sup> and of Chaum, Cr&eacute;peau, and Damg&aring;rd<sup class="reference" data-citation="CCD">[?]</sup>, to the previous cryptographic results of Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW">[?]</sup>, based on the existence of secure trapdoor functions, we find the following: On the one hand, the cryptographic results are stronger since they require only a majority of the \(n\) participating players to be honest, while the unconditional results require that more than \(\frac{2n}3\) of the players be honest. One the other hand, the unconditional results are both simpler and stronger since their security is "<span class="load-definable" data-define="information theoretic security">Information Theoretic</span>" and does not depend on any assumptions about computational intractability. Moreover, the results of <span class="reference" data-citation="BGW">[?]</span> with up to \(t\not\leq\lt\frac n 3\) faulty players guarantee absolute correctness of the results, and do not allow even an exponentially small probability of error. Such exponentially small errors are inherent to any cryptographic result based on trapdoor functions.
 						</p>
@@ -407,7 +408,7 @@
 								</p>
 							</section>
 						</section>
-                    </section>
+					</section>
 					<section id="sec2" data-section-name="Secret Sharing when the Dealer is a Knight">
 						<h2>2. Secret Sharing when the Dealer is a Knight</h2>
 						<span class="rp_theorem_header" id="theorem1">Theorem 1: VSS with Honest Dealer</span>
@@ -947,10 +948,12 @@
 							The first author wishes to thank her advisor Michael Ben-Or for suggesting the VSS problem and for his encouragement and many important comments, as well as Michael Rabin for several useful comments.
 						</p>
 					</section>
+				</section>
 				</div>
-            </div>
-			<div class="main_toplevel main_section main_color7" id="footnotes" data-section-name="Footnotes">
+			</div>
+			<div class="main_toplevel main_section main_color7">
 				<div class="main_fullwidth">
+				<section class="top_section" id="footnotes" data-section-name="Footnotes">
 					<h1>Footnotes</h1>
 					
 					<ol id="footnotelist">
@@ -958,10 +961,12 @@
 							See the section on Incomplete Networks for a discussion of stronger results than stated here.
 						</li>
 					</ol>
+				</section>
 				</div>
-            </div>
-            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
+			</div>
+			<div class="main_toplevel main_section main_color8">
 				<div class="main_fullwidth">
+				<section class="top_section" id="references" data-section-name="References">
 					<h1>References</h1>
 					<ol id="referencelist">
 						<li id="B">M. Ben-Or. Multiparty Protocols with Honest Majority, in preparation.</li>
@@ -979,18 +984,19 @@
 						<li id="S">A. Shamir. How to Share a Secret. <i>CACN, 22</i>, pp. 612-613. 1979.</li>
 						<li id="TW">M. Tompa and H. Woll. How to Share a Secret with Cheaters. IBM Research Report, RC 11840 (Log #52910). 1986.</li>
 					</ol>
+				</section>
 				</div>
-            </div>
-            <div class="main_toplevel main_section main_color9">
-                <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+76@gmail.com">Problem with this page?</a></p>
-                </div>
-                <p>Created by Nicolas Schank 2014, Brown University</p>
+			</div>
+			<div class="main_toplevel main_section main_color9">
+				<div class="rp_problems">
+					<p><a href="mailto:multipartycomputationorg+76@gmail.com">Problem with this page?</a></p>
+				</div>
+				<p>Created by Nicolas Schank 2014, Brown University</p>
 				<p>All original work is free for any use by anyone whatsoever.</p>
 				<p>For more information about liability and licensing the original paper, see <a href="../liability.html">Liability</a>.</p>
-            </div>
-        </div>
-    </body>
+			</div>
+		</div>
+	</body>
 </html>
 <!--
 4. Headings

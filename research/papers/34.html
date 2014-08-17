@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Multiparty Unconditionally Secure Protocols - Chaum, Cr&eacute;peau, Damg&aring;rd, 1988</title>
-        <link rel="stylesheet" type="text/css" href="../../style/main.css">
-        <link rel="stylesheet" type="text/css" href="../../style/equation.css">
-        <link rel="stylesheet" type="text/css" href="../../style/ref.css">
-        <link rel="stylesheet" type="text/css" href="../../style/glossary.css">
-        <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
-        <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+	<head>
+		<meta charset="utf-8">
+		<title>Multiparty Unconditionally Secure Protocols - Chaum, Cr&eacute;peau, Damg&aring;rd, 1988</title>
+		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
+		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
+		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
+		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
+		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
 		<script type="text/javascript" src="../../script/difficulty.js"></script>
-        <script type="text/javascript" src="../../script/equation.js"></script>
-        <script type="text/javascript" src="../../script/ref.js"></script>
-        <script type="text/javascript" src="../../script/def.js"></script>
-        <script type="text/javascript" src="../../script/glossary.js"></script>
+		<script type="text/javascript" src="../../script/equation.js"></script>
+		<script type="text/javascript" src="../../script/ref.js"></script>
+		<script type="text/javascript" src="../../script/def.js"></script>
+		<script type="text/javascript" src="../../script/glossary.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
-        <script type="text/javascript"
-                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-        <script type="text/javascript">
+		<script type="text/javascript"
+				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<script type="text/javascript">
 			<!--			
 			self_def["blob"] = {title:"blob",def:[{type:"p",difficulty:5,blockName:"34blob",content:"A blob is a commitment scheme, in this paper defined as a way of committing to any value in \\(GF(2^k)\\) such that \\(2^k\\gt n\\). It has the following properties:"},{type:"ol",content:[{type:"li",content:[{type:"p",content:"A party can obtain a blob representing any value in \\(GF(2^k)\\)"}]},{type:"li",content:[{type:"p",content:"When presented with a blob, nobody can tell what value it represents."}]},{type:"li",content:[{type:"p",content:"The committing participant cannot open it to any value other than the original value used to create the blob."}]},{type:"li",content:[{type:"p",content:"Any other participant can also create blobs representing any value in \\(GF(2^k)\\) that look exactly like the blobs obtained by the original participant."}]}]}]};
 			self_def["reliable participant"] = {title:"reliable participant",difficulty:5,blockName:"34reliable",def:[{type:"p",content:"Any participant which:"},{type:"ul",content:[{type:"li",content:[{type:"p",content:"Does not leak secret information to other participants; and"}]},{type:"li",content:[{type:"p",content:"Always sends the correct messages defined by the protocol"}]}]},{type:"p",content:"We assume \\(2d+a\\) of the participants in a protocol to be reliable."}]};
 			//-->
-        </script>
-    </head>
-    <body>
+		</script>
+	</head>
+	<body>
 		<div class="main_hidden">
 			\(\require{cancel}\)
 		</div>
-        <div class="main_foreground">
-            <div class="main_toplevel main_header">
-                <h1>Multiparty Computation</h1>
-            </div>
-            <div class="main_toplevel main_navigation">
-                <a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
-                <a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
-                <a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
-                <a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
-                <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
-                <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
-            </div>
-            <div class="main_toplevel main_section main_color1" id="overview" data-section-name="Overview">
-                <div class="main_section_nav_container">
-                    <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
-                    <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
-                    <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
-                    <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
-                </div>
-                <div class="main_window main_fullwidth"></a>
-                    <div class="rp_linkbox"><a href="pdf/34.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
+		<div class="main_foreground">
+			<div class="main_toplevel main_header">
+				<h1>Multiparty Computation</h1>
+			</div>
+			<div class="main_toplevel main_navigation">
+				<a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
+				<a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
+				<a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
+				<a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
+				<a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
+				<a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
+			</div>
+			<div class="main_toplevel main_section main_color1">
+				<div class="main_section_nav_container">
+					<div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
+					<div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
+					<div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
+					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
+				</div>
+				<div class="main_window main_fullwidth">
+				<section class="top_section" id="overview" data-section-name="Overview"></a>
+					<div class="rp_linkbox"><a href="pdf/34.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 					
-                    <span class="rp_title">Multiparty Unconditionally Secure Protocols</span>
-                    <span class="rp_info">1988
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="rp_author" href="../authors/David Chaum.html">David Chaum</a>
+					<span class="rp_title">Multiparty Unconditionally Secure Protocols</span>
+					<span class="rp_info">1988
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="rp_author" href="../authors/David Chaum.html">David Chaum</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="rp_author" href="../authors/Claude Cr&eacute;peau.html">Claude Cr&eacute;peau</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -66,8 +67,8 @@
 						&ldquo;[U]nder the assumption that each pair of participants can communicate secretly, any reasonable function can be computed if at least \(\frac{2n}{3}\) of the participants are honest...&rdquo;
 					</div>
 					<h1>Overview</h1>	
-                    <div class="main_toc"></div>
-                    <section id="intro" data-section-name="Introduction">
+					<div class="main_toc"></div>
+					<section id="intro" data-section-name="Introduction">
 						<h2>Introduction</h2>
 						<p class="rp_analysis">
 							<b>Multiparty Unconditionally Secure Protocols</b> is a 1988 paper by Chaum, Cr&eacute;peau, and Damg&aring;rd which offered the first plausibility result for protocols which are <span class="load-definable" data-define="information theoretic security">information-theoretically secure</span> for all parties. Their work was lightly influenced by the <a href="81.html">GMW compiler</a>, which also used secret sharing (in a cryptographic setting) to perform calculations, and more heavily influenced by <a href="82.html">a protocol</a> published by Chaum and Damg&aring;rd earlier the same year, which ensures information-theoretic security for a single party in the protocol.
@@ -214,20 +215,22 @@
 							D. Chaum, C. Cr&eacute;peau, I. Damg&aring;rd. Multiparty Unconditionally Secure Protocols (extended abstract). <i>Proceedings of the Twentieth Annual ACM Symposium on the Theory of Computing,</i> pages 11-19. ACM. 1988.
 						</p>
 					</section>
-                </div>
-            </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
-                <div class="main_window main_fullwidth">
+				</section>
+				</div>
+			</div>
+			<div class="main_toplevel main_section main_color5">
+				<div class="main_window main_fullwidth">
+				<section class="top_section" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
 					<h1>Annotated Paper (extended abstract)</h1>
-                    <div class="main_toc"></div>
+					<div class="main_toc"></div>
 					
 					<h1>Multiparty Unconditionally Secure Protocols</h1>
 					<section id="abstract" data-section-name="Abstract">
 						<h2>Abstract</h2>
 						Assume \(n\) participants \(P_1,P_2,\dots,P_n\) share the knowledge of a multivariable function \(F\) and that they want to publicly compute \(z=F(x_1,x_2,\dots,x_n)\), where \(x_i\) is a secret input provided by \(P_i\). The difficulty is to simultaneously provide the secrecy of each \(x_i\) and to guarantee the correctness of the common result \(z\). Such a task has been accomplished in <span class="reference" data-citation="GMW87">[?]</span> under the assumption that <span class="load-definable" data-define="trapdoor permutation">trapdoor permutations</span> exist. The result we propose in this extended abstract is that, under the assumption that each pair of participants can communicate secretly, any reasonable function can be computed if at least \(\frac{2n}{3}\) of the participants are honest and this is proved without any cryptographic assumption. Our result is based on a non-cryptographic verifiable secret-sharing protocol that we also introduce in this paper.
 					</section>
-                    <section id="sec1" data-section-name="Introduction">
-                        <h2>1. Introduction</h2>
+					<section id="sec1" data-section-name="Introduction">
+						<h2>1. Introduction</h2>
 						
 						<p class="rp_original">
 							The problem of multiparty function computation is as follows: \(n\) participants \(P_1,P_2,\dots,P_n\) sharing the knowledge of a multivariable function \(F\) want to publicly compute \(z=F(x_1,x_2,\dots,x_n)\), where \(x_i\) is a secret input provided by \(P_i\). The goal is to preserve the maximum privacy of the \(x_i\)'s and to simultaneously guarantee the correctness of the common result \(z\). Intrinsically, the value of \(z\) will reveal some information about the secret inputs. We say that input value \(x_i\) is <span class="load-definable" data-define="cryptographic security">cryptographically secure</span> in this context if it is believed hard to determine in polynomial time more information about \(x_i\) than what is necessarily given by \(z\).
@@ -285,7 +288,7 @@
 								Ben-Or, Goldwasser, and Wigderson's work can be found <a href="17.html">here</a>.
 							</p>
 						</section>
-                    </section>
+					</section>
 					<section id="sec2" data-section-name="The Model">
 						<h2>2. The Model</h2>
 						<p class="rp_original">
@@ -558,12 +561,13 @@
 							We would like to thank Gilles Brassard, Ernie Brickell, Shafi Goldwasser, Jeroen van de Graaf, Silvio Micali, Micheal Sacks and Avi Wigderson for the discussions about this paper and their interest in our result.
 						</p>
 					</section>
-                </div>
-            </div>
-			<div class="main_toplevel main_section main_color6" id="notes_gf" data-section-name="Notes on Galois Fields and Polynomials">
+				</section>
+				</div>
+			</div>
+			<div class="main_toplevel main_section main_color6">
 				 <div class="main_window main_fullwidth">
 					<h1>Notes on Galois Fields and Polynomials</h1>
-                    <div class="main_toc"></div>
+					<div class="main_toc"></div>
 					<p class="rp_analysis">
 						A Finite Field or Galois Field is a <span class="load-definable">group</span> of prime characteristic and with an order of some power of the same prime. It is expressed as \(GF(b^k)\), where \(b\) is the characteristic and \(b^k\) is the order. In the paper, and in much of computer science, we focus almost exclusively on \(GF(2^k)\) for some \(k\).
 					</p>
@@ -654,8 +658,9 @@
 					</section>
 				</div>
 			</div>
-            <div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
+			<div class="main_toplevel main_section main_color8" id="references" data-section-name="References">
 				<div class="main_fullwidth">
+				<section class="top_section" id="notes_gf" data-section-name="Notes on Galois Fields and Polynomials">
 					<h1>References</h1>
 					<ol id="referencelist">
 						<li id="GMW87">Oded Goldreich, Silvio Micali, and Avi Wigderson. <a href="81.html">How to play any mental game or a completeness theorem for protocols with honest majority.</a> In <i>Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing</i>, pages 218–229, New York City, 25–27 May 1987.</li>
@@ -677,18 +682,19 @@
 						
 						<li id="theorem_uni">Robin J.Y. McLeod and M. Louisa Baart: Unisolvence. <i>Geometry and Interpolation of Curves and Surfaces.</i> Cambridge University Press. 1998, pp. 33-34.</li>
 					</ol>
+				</section>
 				</div>
-            </div>
-            <div class="main_toplevel main_section main_color9">
-                <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+34@gmail.com">Problem with this page?</a></p>
-                </div>
-                <p>Created by Nicolas Schank 2014, Brown University</p>
+			</div>
+			<div class="main_toplevel main_section main_color9">
+				<div class="rp_problems">
+					<p><a href="mailto:multipartycomputationorg+34@gmail.com">Problem with this page?</a></p>
+				</div>
+				<p>Created by Nicolas Schank 2014, Brown University</p>
 				<p>All original work is free for any use by anyone whatsoever.</p>
 				<p>For more information about liability and licensing the original paper, see <a href="../liability.html">Liability</a>.</p>
-            </div>
-        </div>
-    </body>
+			</div>
+		</div>
+	</body>
 </html>
 <!--
 9. Check previous research for places to link
