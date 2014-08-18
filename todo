@@ -21,6 +21,7 @@ switch researchList to constructibles
 word
 	secure network (from "secrecy network")
 	Discrete Fourier Transform
+	Byzantine agreement
 cheat sheet additions
 	boolean gates
 	RSA

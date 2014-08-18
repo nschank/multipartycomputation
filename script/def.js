@@ -123,6 +123,8 @@ var def_internal = {
 	
 	"straight-line program":{title:"straight-line program",difficulty:3,blockName:"straightlineprogram", def:[{type:"p", content:"A program that does not loop. All circuit diagrams (which do not contain memory circuits) can be expressed as straight-line programs."}]},
 	
+	"surjective":{title:"surjective",difficulty:2,blockName:"surjective", def:[{type:"p", content:"A surjective function (sometimes an onto function or just a surjection) is a function which has a preimage for all elements in its range. More formally, a function \\(f:\\:X\\mapsto Y\\) is surjective iff \\(\\forall y\\in Y\\exists x\\in X\\text{ such that}f(x)=y\\)."}]},
+	
 	"synchronous network":{title:"synchronous network",difficulty:2,blockName:"synchronousnetwork", def:[{type:"p", content:"A synchronous network is one in which it is assumed that all members of the network have a perfectly synchronized clock, and messages between members are received either instantly or within a particular verifiable time frame."}]},
 	
 	"transcendental":{title:"transcendental",difficulty:2,blockName:"transcendental", def:[{type:"p", content:"non-algebraic; not the root of a non-zero polynomial equation with rational coefficients. All transcendental numbers are irrational, and technically most irrational numbers are transcendental, but most irrational numbers commonly used are non-transcendental. The most commonly used transcendental numbers are \\(\\pi\\) and \\(e\\)."}]},
