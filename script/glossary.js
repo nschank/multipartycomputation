@@ -5,6 +5,9 @@ window.addEventListener("load", addGlossaryListeners, true);
  */
 function addGlossaryListeners()
 {
+	//A difficulty of 6 means no glossary
+	if(difficulty == 6)
+		return;
 	var allDefinables = document.getElementsByClassName("load-definable");
 	
 	//Attempt to organize the DOM a bit better by putting the definition boxes in their own div; 

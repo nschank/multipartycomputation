@@ -9,6 +9,9 @@ window.addEventListener("load", addEquationListeners, true);
  */
 function addEquationListeners()
 {
+	//A difficulty of 6 means no equation info
+	if(difficulty == 6)
+		return;
 	//All equations set for loading
     var allEquations = document.getElementsByClassName("load-equation");
 	
