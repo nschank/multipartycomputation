@@ -17,6 +17,8 @@
 		<script type="text/javascript" src="../../script/glossary.js"></script>
 		<script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
+		<script type="text/javascript" src="../../script/authorlist.js"></script>
+		<script type="text/javascript" src="../../script/authorload.js"></script>
 		<script type="text/javascript"
 				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 		</script>
@@ -32,7 +34,7 @@
 				}
 			}
 
-			self_def["word"] = {title: "word", def: [{type: "p", difficulty: 5, blockName: "###blockname", content: "definition"}]};
+			self_def["word"] = {title: "word", blockName: "###blockname", def: [{type: "p", difficulty: 5, content: "definition"}]};
 			//-->
 		</script>
 	</head>
@@ -62,8 +64,7 @@
 						
 						<span class="rp_title">Paper Title</span>
 						<span class="rp_info">Year
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<a class="rp_author" href="../authors/authorpage.html">Author</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="rp_author">Author</a>
 						</span>
 						
 						<div class="rp_snippet">

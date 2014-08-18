@@ -10,7 +10,6 @@ function setDifficulty(d)
 		createCookie("difficulty",d,1);
 		difficulty = d;
 	}
-	console.log(document.cookie);
 }
 
 /**

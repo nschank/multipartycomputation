@@ -8,7 +8,6 @@ var re = /<h(\d)>[\d\.]*\s*(.+?)<\/h\1>/;
 function fillTOC()
 {
 	var table = buildTable();
-	console.log(table);
 	
 	var ol = document.createElement("ol");
 	ol.setAttribute('type', 'A');
@@ -25,7 +24,6 @@ function fillTOC()
 		toc.appendChild(h4.cloneNode(true));
 		toc.appendChild(ol.cloneNode(true));
 	}
-	console.log(table);
 	addNav(table);
 }
 
