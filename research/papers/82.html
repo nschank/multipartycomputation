@@ -46,13 +46,14 @@
 					case "X":
 						return {difficulty: 5, blockName: "X", info: [{type: "p", content: "The set of all conspirators."}]};
 					default:
-						return {difficulty: 5, info: [{type: "p", content: "No info on this equation yet."}]};
+						console.log("Developer note: Equation " + box + " undefined");
+						return {difficulty: 5, blockName:"default", info: [{type: "p", content: "No info on this equation yet."}]};
 				}
 			}
 
-			self_def["conspiracy"] = {title: "conspiracy", difficulty: 2, blockName: "82conspiracy", def: [{type: "p", content: "Any subset of the participants that does not include every participant (or no participants).  We denote this subset by \\(X\\). Machines in a conspiracy may follow any PPT program or establish private communication channels amongst themselves in order to share information."}]};
-			self_def["openly verifiable"] = {title: "openly verifiable", difficulty: 2, blockName: "82overif", def: [{type: "p", content: "A protocol is openly verifiable if participants can be challenged after the termination of the protocol in order to determine no cheating has occurred."}]};
-			self_def["protocol conversation"] = {title: "protocol conversation", difficulty: 2, blockName: "82protconv", def: [{type: "p", content: "The binary string which is the concatenation of all messages sent during an execution of a protocol."}]};
+			self_def["conspiracy"] = {title: "conspiracy", difficulty: 4, blockName: "82conspiracy", def: [{type: "p", content: "Any subset of the participants that does not include every participant (or no participants).  We denote this subset by \\(X\\). Machines in a conspiracy may follow any PPT program or establish private communication channels amongst themselves in order to share information."}]};
+			self_def["openly verifiable"] = {title: "openly verifiable", difficulty: 4, blockName: "82overif", def: [{type: "p", content: "A protocol is openly verifiable if participants can be challenged after the termination of the protocol in order to determine no cheating has occurred."}]};
+			self_def["protocol conversation"] = {title: "protocol conversation", difficulty: 4, blockName: "82protconv", def: [{type: "p", content: "The binary string which is the concatenation of all messages sent during an execution of a protocol."}]};
 			self_def["simulator for X"] = {title: "simulator for \\(X\\)", difficulty: 3, blockName: "82simx", def: [{type: "p", content: "A polynomial time Turing machine which, when given the security parameter, the inputs of all the conspirators, and the output of the circuit, generates a protocol conversation."}]};
 			//-->
 		</script>

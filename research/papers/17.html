@@ -29,14 +29,14 @@
 				switch (box)
 				{
 					case "E[x]":
-						return {difficulty: 5, blockName: "E[x]", info: [{type: "p", content: "\\(E[x]\\) refers to the <span class=\"load-definable\">polynomial ring</span> over the variable \\(x\\) on the field \\(E\\)."}]};
+						return {difficulty: 3, blockName: "Ex", info: [{type: "p", content: "\\(E[x]\\) refers to the <span class=\"load-definable\">polynomial ring</span> over the variable \\(x\\) on the field \\(E\\)."}]};
 					case "omega":
-						return {difficulty: 5, blockName: "omega", info: [{type: "p", content: "\\(\\omega\\) is a primitive \\(n\\)th <span class=\"load-definable\">root of unity</span> within \\(E\\)."}]};
+						return {difficulty: 3, blockName: "omega", info: [{type: "p", content: "\\(\\omega\\) is a primitive \\(n\\)th <span class=\"load-definable\">root of unity</span> within \\(E\\)."}]};
 					case "truncation":
 						return {difficulty: 5, blockName: "truncation", info: [{type: "p", content: "The truncation \\(k(x)\\) of \\(h(x)\\), where \\(h(x)\\) is the degree \\(2t\\) function defined to be \\(h(x)=f(x)g(x)\\) for shared secrets \\(f(x)\\) and \\(g(x)\\), is defined to be $$k(x)=h_0+h_1x+\\dots+h_tx^t.$$"}]};
 					default:
 						console.log("Developer note: Equation " + box + " undefined");
-						return {difficulty: 5, info: [{type: "p", content: "No info on this equation yet."}]};
+						return {difficulty: 5, blockName:"default", info: [{type: "p", content: "No info on this equation yet."}]};
 				}
 			}
 

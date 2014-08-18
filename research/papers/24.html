@@ -32,7 +32,7 @@
 					case "approx":
 						return {difficulty: 5, blockName: "approx", info: [{type: "p", content: "Two probabilities of recovery are equivalent if neither is noticeably harder than the other in any situation."}]};
 					case "D=Tn":
-						return {difficulty: 5, blockName: "D=Tn", info: [{type: "p", content: "\\(D_n\\) is the probability distribution of \\(\\tau\\) in a uniquely decipherable, <span class=\"load-definable\">intractable puzzle ensemble</span>."}]};
+						return {difficulty: 5, blockName: "DTn", info: [{type: "p", content: "\\(D_n\\) is the probability distribution of \\(\\tau\\) in a uniquely decipherable, <span class=\"load-definable\">intractable puzzle ensemble</span>."}]};
 					case "delta":
 						return {difficulty: 5, blockName: "delta", info: [{type: "p", content: "The function \\(\\Delta_X(\\sigma)\\) takes in a run of a particular protocol \\(\\sigma\\) and outputs the history of that run from \\(X\\)'s point of view."}]};
 					case "h_n":
@@ -55,7 +55,7 @@
 						return {difficulty: 5, blockName: "w", info: [{type: "p", content: "The outputs \\((u_A,u_B)\\) of the protocol are distributed according to the probability distribution \\(w_{n,i_A,i_B}\\) over \\(\\{0,1\\}^*\\times\\{0,1\\}^*\\)"}]};
 					default:
 						console.log("Developer note: Equation " + box + " undefined");
-						return {difficulty: 5, info: [{type: "p", content: "No info on this equation yet."}]};
+						return {difficulty: 5, blockName:"default", info: [{type: "p", content: "No info on this equation yet."}]};
 				}
 			}
 
