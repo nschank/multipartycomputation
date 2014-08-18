@@ -42,7 +42,7 @@ Research pages always include:
 	- Protocols, if applicable, a description of each protocol formulated in the paper. See the template page for a sample description. Each should link to the section where the protocol was first formulated.
 	- Further Reading, self explanatory.
 	- Referencing This Paper, self explanatory.
-- A transcription of either the page or the extended abstract of the page. 
+- A transcription of either the page or the extended abstract of the page.
 	- A single webpage should only contain 20 pages of equations (for loading-time reasons), so if more than that is to be added, it should be split into multiple pages. Since we have not dealt with such an issue yet, we may consider doing either only an extended overview, or a regular overview followed by a summary (as opposed to a transcription).
 	- See the "Alterations During Transcription" (/research/changes.html) for more information about what specific things are changed during transcription.
 	- Annotations (i.e. paragraphs of class 'rp_annotation') should be added to clarify, contextualize, or correct anything within the original ('rp_original') text.
@@ -79,7 +79,7 @@ Next Steps, not-very-surprisingly, is mostly being dealt with last. It does, how
 
 ###Learning
 The learning section is intended to be similar to an online textbook. A tiny amount of information is there, but most of the construction of the textbook is intended for significantly later.
-	
+
 ##Design Choices
 
 ###Use of JavaScript
@@ -89,7 +89,7 @@ We note that JavaScript will likely always be required for most useful pages any
 
 ###Type of Reference
 We follow a particular type of reference for the papers we have pages for: F. Lastname, F. Lastname..., and F. Lastname. Title of Paper in Title Case (extended abstract, if accurate). _Full Name of Publication of Origin_, pp. 0-100. Publisher. Year.
-This was done for no real reason other than a lack of consistency between different reference lists; we simply went with one particularly concise version seen in one paper, and stuck with it. 
+This was done for no real reason other than a lack of consistency between different reference lists; we simply went with one particularly concise version seen in one paper, and stuck with it.
 
 ###Constructible Objects
 A very simple nesting data structure was created to allow for style to change consistently across all definitions and equation explanations. Each object represents a single HTML element; a "constructible array" is any array of these objects, which will be rendered in order. A constructible object can be built into any of five (technically six) tags, based on its "type": p,li,ol,ul, or span. All constructibles can specify a "className" that overrides the default styling class being used to style the object, which is specified based on where it is being built. (For example, whether a definition is in a definition box or the glossary). All constructibles should have "content", which is either a string (for p or span types) or another constructible array (for li,ol,ul types). Span types have a special optional attribute, "href", which wraps the entire span in an a tag with that value as its href. This allows for spans to be headings (e.g. Definition headers) that link elsewhere without causing underlines/miscoloration.

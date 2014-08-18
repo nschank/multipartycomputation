@@ -99,7 +99,7 @@
 							&ldquo;[A] participant with bounded resources can perform computations securely with a participant who may have unlimited computing power.&rdquo;
 						</div>
 
-						<h1>Overview</h1>						
+						<h1>Overview</h1>
 						<div class="main_toc"></div>
 
 						<section id="intro" data-section-name="Introduction">
@@ -126,11 +126,11 @@
 								Minimally, this paper operates under the assumption that <span class="load-definable">clawfree</span> <span class="load-definable" data-define="trapdoor permutation">trapdoor permutations</span> exist, as this assumption implies the existence of bit <span class="load-definable">commitment</span> schemes. (Note that this is not necessarily the minimal assumption implying the existence of bit commitment schemes, but it <i>is</i> the minimal assumption proving the existence of bit commitment schemes with the properties used in this paper.)
 							</p>
 							<p class="rp_analysis">
-								For one of the bit commitment schemes mentioned as an example, the following assumption must be held additionally: 
+								For one of the bit commitment schemes mentioned as an example, the following assumption must be held additionally:
 							</p>
 							<span class="rp_sub_header"><a href="#sec3.1">Quadratic Residuosity Assumption</a></span>
 							<p class="rp_analysis rp_sub">
-								Given any element \(y\in\mathbb Z_N\), where \(N=p\cdot q\) for primes \(p\equiv q\equiv 3\bmod4\), there does not exist a probabilistic polynomial-time method of determining whether \(\exists\,x\in\mathbb Z_N\) such that \(x^2\equiv y\pmod N\). 
+								Given any element \(y\in\mathbb Z_N\), where \(N=p\cdot q\) for primes \(p\equiv q\equiv 3\bmod4\), there does not exist a probabilistic polynomial-time method of determining whether \(\exists\,x\in\mathbb Z_N\) such that \(x^2\equiv y\pmod N\).
 							</p>
 							<p class="rp_analysis">
 								The quadratic residuosity assumption is known to imply that factoring is hard<sup class="reference" data-citation="QRtoF">[?]</sup>; in turn, the hardness of factoring is known to imply that clawfree permutations exist<sup class="reference" data-citation="GB">[?]</sup>. As such, we can make <i>either</i> assumption, as opposed to needing both in the case that we want to use the QRS commitment scheme.
@@ -505,7 +505,7 @@
 								Finally, it must be possible for \(A\) to open commitments which have been blinded as above, just as if she had computed them herself.
 							</p>
 							<p class="rp_original">
-								From a theoretical point of view, the opening and comparability properties do not represent demanding assumptions, since the required proofs can always be produced by using standard reductions to <span class="main_language">3Col</span> or <span class="main_language">Sat</span><sup class="reference" data-citation="GMW">[?]</sup><sup class="reference" data-citation="C">[?]</sup><sup class="reference" data-citation="BC">[?]</sup>. We will only be concerned, however, with bit commitment schemes allowing the proofs to be produced directly and efficiently. As a consequence, the main protocol will be much more efficient. 
+								From a theoretical point of view, the opening and comparability properties do not represent demanding assumptions, since the required proofs can always be produced by using standard reductions to <span class="main_language">3Col</span> or <span class="main_language">Sat</span><sup class="reference" data-citation="GMW">[?]</sup><sup class="reference" data-citation="C">[?]</sup><sup class="reference" data-citation="BC">[?]</sup>. We will only be concerned, however, with bit commitment schemes allowing the proofs to be produced directly and efficiently. As a consequence, the main protocol will be much more efficient.
 							</p>
 							<section id="sec3.1" data-section-name="Examples">
 								<h3>3.1. Examples</h3>
@@ -1082,7 +1082,7 @@
 									Under different assumptions, however, it <i>is</i> possible to get unconditional security for all participants. In <span class="reference" data-citation="CDC">[?]</span>, it is shown how to do this using no cryptographic assumptions, in a model where there exists an unconditionally secure secrecy channel between every pair of participants, and where at least two thirds of the participants will follow the protocol.
 								</p>
 								<p class="rp_original">
-									On the positive side, it should be noted that in joint work with Claude Cr&eacute;peau, we have recently shown that our basic protocol can be made to work, based only on the assumption that a one way function exists, and that there is a protocol solving the ANDOS problem: Clearly, bit commitments are possible if one way functions exist, and the comparability property can always be satisfied using the fact that all NP-statements can be proved in zero knowledge (although using very inefficient protocols). The idea is now to use a protocol for ANDOS to get something which will replace the blinding property: Notice that when participant \(P_i\) blinds other participants' commitments, the basic fact used in the protocol is that \(P_i\) knows the XOR sum of the bit contained in the original commitment, and the one contained in the blinded version. It will therefore be sufficient if that participant can learn a set of these XOR relations by doing an ANDOS protocol with each \(P_j\) with \(j\lt i\). 
+									On the positive side, it should be noted that in joint work with Claude Cr&eacute;peau, we have recently shown that our basic protocol can be made to work, based only on the assumption that a one way function exists, and that there is a protocol solving the ANDOS problem: Clearly, bit commitments are possible if one way functions exist, and the comparability property can always be satisfied using the fact that all NP-statements can be proved in zero knowledge (although using very inefficient protocols). The idea is now to use a protocol for ANDOS to get something which will replace the blinding property: Notice that when participant \(P_i\) blinds other participants' commitments, the basic fact used in the protocol is that \(P_i\) knows the XOR sum of the bit contained in the original commitment, and the one contained in the blinded version. It will therefore be sufficient if that participant can learn a set of these XOR relations by doing an ANDOS protocol with each \(P_j\) with \(j\lt i\).
 								</p>
 								<p class="rp_original">
 									The fact that ANDOS can be based on the existence of a trapdoor one way function<sup class="reference" data-citation="Cr">[?]</sup> then implies that our protocol can also be based only on a trapdoor one way function. The resulting protocol would have the same property as the one of <span class="reference" data-citation="GHY">[?]</span> which is based on the same assumption, namely that only one trapdoor function would have to be generated for each participant, while the solution in <span class="reference" data-citation="GMW">[?]</span> requires generation of \(O(n^2)\) functions.

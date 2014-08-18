@@ -27,6 +27,8 @@
 			{
 				switch (box)
 				{
+					case "01x01":
+						return {difficulty: 1, blockName: "01x01", info: [{type: "p", content: "The set of all possible ordered pairs of 0,1 strings of any length."}]};
 					case "alpha":
 						return {difficulty: 5, blockName: "alpha", info: [{type: "p", content: "The function \\(\\alpha\\) maps \\(\\tau\\) to its secret \\(s\\) in any uniquely decipherable puzzle ensemble."}]};
 					case "approx":
@@ -44,7 +46,7 @@
 					case "L_n":
 						return {difficulty: 5, blockName: "L_n", info: [{type: "p", content: "The set of all possible values of \\(f_n(i_A,i_B)\\) when \\((i_A,i_B)\\) are distributed according to <span class=\"equation\" data-equation=\"h_n\">\\(h_N\\)</span>."}]};
 					case "rfunction":
-						return {difficulty: 5, blockName: "rfunction", info: [{type: "p", content: "We denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess for \(d_n(x_n)\) will be produced by \(Q\) when given \(y_n\), where \((x_n,y_n)\) is distributed according to \((X_n,Y_n)\)."}]};
+						return {difficulty: 5, blockName: "rfunction", info: [{type: "p", content: "We denote by \\(r(d_n,X_n,Y_n,Q)\\) the probability that a correct guess for \\(d_n(x_n)\\) will be produced by \\(Q\\) when given \\(y_n\\), where \\((x_n,y_n)\\) is distributed according to \\((X_n,Y_n)\\)."}]};
 					case "u_x":
 						return {difficulty: 5, blockName: "u_x", info: [{type: "p", content: "We denote by \\(u_X\\) the output that party \\(X\\) receives after the run of the protocol."}]};
 					case "U_n":
@@ -67,9 +69,7 @@
 	</head>
 	<body>
 		<div class="main_hidden">
-			\(
-			\require{cancel}
-			\)
+			\(\require{cancel}\)
 		</div>
 		<div class="main_foreground">
 			<div class="main_toplevel main_header">
@@ -100,8 +100,8 @@
 							<span class="rp_author">Andrew C. Yao</span></span>
 
 						<div class="rp_snippet">
-							&ldquo;The "fairness" requirement means that a cheater should not be able to obtain the desired output while denying the other party to find the proper output. The problem of exchanging secrets has this requirement as its main concern.&rdquo;
-						</div>	
+							&ldquo;The "<span class="load-definable" data-define="fair">fairness</span>" requirement means that a cheater should not be able to obtain the desired output while denying the other party to find the proper output. The problem of exchanging secrets has this requirement as its main concern.&rdquo;
+						</div>
 
 						<h1>Overview</h1>
 						<div class="main_toc"></div>
@@ -118,13 +118,13 @@
 						<section id="a_goals" data-section-name="Goals and Results">
 							<h2>Goals and Results</h2>
 							<p class="rp_analysis">
-								Because Yao never completed released a completed version of this paper, there is actually very little that was <i>accomplished</i> per se in this paper. The released abstract deals entirely with definitions for what a protocol must satisfy in order to be valid, private, and 'fair.'
+								Because Yao never completed released a completed version of this paper, there is actually very little that was <i>accomplished</i> per se in this paper. The released abstract deals entirely with definitions for what a protocol must satisfy in order to be valid, private, and '<span class="load-definable" data-define="fairness">fair</span>.'
 							</p>
 							<p class="rp_analysis">
-								The main results from this paper were due to the word of mouth spread of the garbled circuit construction. The garbled circuit&mdash;sometimes also known as the "combined oblivious transfer," thanks to GMW&mdash;is an extremely useful primitive for use in building protocols for several reasons:
+								The main results from this paper were due to the word-of-mouth spread of the garbled circuit construction. The garbled circuit&mdash;sometimes also known as the "combined oblivious transfer," thanks to GMW&mdash;is an extremely useful primitive for use in building protocols for several reasons:
 							</p>
 							<ul class="rp_analysis">
-								<li>It's <i>generalizable</i>: since Boolean gates are complete over computations, a garbled circuit is able to perform any computation.</li>
+								<li>It's <i>generalizable</i>: since Boolean gates are <span class="load-definable" data-define="completeness">complete</span> over computations, a garbled circuit is able to perform any 2-party computation.</li>
 								<li>It operates in <i>constant round complexity</i>; that is, the number of interactions between parties is only relative to the size of the inputs, not to the size of the operation. This is starkly in contrast with the GMW construction, in which the number of interactions is relative to the number of gates.</li>
 							</ul>
 						</section>
@@ -144,7 +144,7 @@
 								<tr><td>1</td><td>1</td><td>1</td></tr>
 							</table>
 							<p class="rp_analysis">
-								Both parties then agree on some symmetric encryption and decryption scheme, \(E,\,D,\) along with some sampling algorithm \(G\) which produces keys within the scheme. Party 1 samples 6 random keys \(s_i\) using \(G\), \(s_1\dots s_6\). Party 1 recreates the table, except now, within each column, \(P_1\) replaces 0 and 1 with two of the keys. 
+								Both parties then agree on some symmetric <span class="load-definable">encryption</span> and decryption scheme, \(\operatorname E,\,\operatorname D,\) along with some sampling algorithm \(\operatorname G\) which produces keys within the scheme. Party 1 samples 6 random keys \(s_i\) using \(\operatorname G\): \(s_1\dots s_6\). Party 1 recreates the table, except now, within each column, \(P_1\) replaces the pair 0 and 1 with a chosen pair of keys out of \(s\).
 							</p>
 							<table class="rp_analysis rp_truthtable">
 								<tr><th>\(b_1\)</th><th>\(b_2\)</th><th>\(b_1\wedge b_2\)</th></tr>
@@ -158,41 +158,41 @@
 							</p>
 							<table class="rp_analysis rp_truthtable">
 								<tr><th>\(b_1\)</th><th>\(b_2\)</th><th>\(b_1\wedge b_2\)</th></tr>
-								<tr><td>\(s_1\)</td><td>\(s_3\)</td><td>\(E_{s_1}(E_{s_3}(s_5))\)</td></tr>
-								<tr><td>\(s_2\)</td><td>\(s_3\)</td><td>\(E_{s_2}(E_{s_3}(s_5))\)</td></tr>
-								<tr><td>\(s_1\)</td><td>\(s_4\)</td><td>\(E_{s_1}(E_{s_4}(s_5))\)</td></tr>
-								<tr><td>\(s_2\)</td><td>\(s_4\)</td><td>\(E_{s_2}(E_{s_4}(s_6))\)</td></tr>
+								<tr><td>\(s_1\)</td><td>\(s_3\)</td><td>\(\operatorname E_{s_1}(\operatorname E_{s_3}(s_5))\)</td></tr>
+								<tr><td>\(s_2\)</td><td>\(s_3\)</td><td>\(\operatorname E_{s_2}(\operatorname E_{s_3}(s_5))\)</td></tr>
+								<tr><td>\(s_1\)</td><td>\(s_4\)</td><td>\(\operatorname E_{s_1}(\operatorname E_{s_4}(s_5))\)</td></tr>
+								<tr><td>\(s_2\)</td><td>\(s_4\)</td><td>\(\operatorname E_{s_2}(\operatorname E_{s_4}(s_6))\)</td></tr>
 							</table>
 							<p class="rp_analysis">
-								\(P_1\) shows \(P_2\) some permutation of the rows, but doesn't show \(P_2\) the keys themselves; that is, \(P_2\) knows the evaluation of (for instance) \(E_{s_1}(E_{s_3}(s_5))\), and knows that it <i>uses</i> \(s_1\) and \(s_3\), but does not know the <i>values</i> of \(s_1\) or \(s_3\). \(P_1\) also tells \(P_2\) the association between \(P_2\)'s bit's value and \(s_3,\,s_4\); so \(P_2\) knows that \(s_3\) corresponds to 0 and \(s_4\) corresponds to 1.
+								\(P_1\) shows \(P_2\) some permutation of the rows, but doesn't show \(P_2\) the keys themselves; that is, \(P_2\) knows the evaluation of (for instance) \(\operatorname E_{s_1}(\operatorname E_{s_3}(s_5))\), and knows that it <i>uses</i> \(s_1\) and \(s_3\), but does not know the <i>values</i> of \(s_1\) or \(s_3\). \(P_1\) also tells \(P_2\) the association between \(P_2\)'s bit's value and \(s_3,\,s_4\); so \(P_2\) knows that \(s_3\) corresponds to 0 and \(s_4\) corresponds to 1. Again, \(P_2\) does not know the value of any keys at this point.
 							</p>
 							<p class="rp_analysis">
-								\(P_1\) sends to \(P_2\) the specific key associated with the value of \(b_1\): \(P_2\) now has one of the two keys necessary to decrypt an output value. In order to get the other key, \(P_2\) performs a one-out-of-two oblivious transfer with \(P_1\), retrieving only the key associated with \(b_2\)'s value.
+								\(P_1\) sends to \(P_2\) the specific key associated with the value of \(b_1\): \(P_2\) now has one of the two keys necessary to decrypt an output value. In order to get the other key, \(P_2\) performs a one-out-of-two <span class="load-definable">oblivious transfer</span> with \(P_1\), retrieving only the key associated with \(b_2\)'s value.
 							</p>
 							<p class="rp_analysis">
-								\(P_2\) now possesses two keys, and can therefore decrypt the output of one row of the encrypted truth table&mdash;that is, the output of the circuit. \(P_2\) now possesses a key which is directly associated with the output of the gate; depending on how the parties which to continue, one of two things occurs. If this output is not going to be used in another gate, \(P_1\) simply tells \(P_2\) the associations between (0,1) and (\(s_5,s_6\)), so \(P_2\) knows how to interpret the output. Otherwise, \(P_1\) can use the two possible output keys as new <i>input</i> keys for another garbled gate, ad infinitum.
+								\(P_2\) now possesses two keys, and can therefore decrypt the output of one row of the <span class="load-definable" data-define="encryption">encrypted</span> truth table&mdash;that is, the output of the circuit. \(P_2\) now possesses a key which is directly associated with the output of the gate; depending on how the parties wish to continue, one of two things occurs. If the output of this gate is not going to be used as input in another gate, \(P_1\) simply tells \(P_2\) the associations between (0,1) and (\(s_5,s_6\)), so \(P_2\) knows how to interpret the output. Otherwise, \(P_1\) can use the two possible output keys as new <i>input</i> keys for another garbled gate, ad infinitum.
 							</p>
 						</section>
 						<section id="a_assumptions" data-section-name="Assumptions">
 							<h2>Assumptions</h2>
 							<p class="rp_original">
-								Let \(W_n\) be the set of all integers \(N\) of the form \(p\cdot q\) where \(p\equiv q\equiv 3\bmod{4}\) are prime numbers. 
+								Let \(W_n\) be the set of all integers \(N\) of the form \(p\cdot q\) where \(p\equiv q\equiv 3\bmod4\) are prime numbers.
 							</p>
 							<span class="rp_theorem_header">
 								<a href="#IAF">The Intractability Assumption of Factoring (IAF)</a>
 							</span>
 							<p class="rp_original rp_theorem">
-								Let \(k&gt;0\) be any fixed number. For any polynomial time probabilistic algorithm for factoring integers, the probability of success for a random input integer from \(W_n\) is less than \(\frac{1}{n^k}\) for all large \(n\).
+								Let \(k\gt0\) be any fixed number. For any polynomial time probabilistic algorithm for factoring integers, the probability of success for a random input integer from \(W_n\) is less than \(\frac{1}{n^k}\) for all large \(n\).
 							</p>
 						</section>
 						<section id="a_defs" data-section-name="Definitions">
 							<h2>Definitions</h2>
 							<a href="#def1"><span class="rp_definition_header">Definition 1 - Recovery Algorithm</span></a>
 							<p class="rp_definition">
-								A <i>recovery algorithm</i> \(R\) for A is a probabilistic polynomial-time algorithm which takes \((n,\)<span class="load-equation" data-equation="delta">\(\Delta_A\)</span>\()\) as input, and outputs a string \(v\).
+								A <i>recovery algorithm</i> \(R\) for A is a probabilistic polynomial-time algorithm which takes (\(n,\)<span class="load-equation" data-equation="delta">\(\Delta_A\)</span>) as input, and outputs a string \(v\).
 							</p>
 							<p class="rp_annotation">
-								An optimal recovery algorithm would produce \(v=\)<span class="load-equation" data-equation="u_X">\(u_A\)</span>.
+								An optimal recovery algorithm would produce \(v=\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>.
 							</p>
 						</section>
 						<section id="a_theorems" data-section-name="Theorems">
@@ -200,26 +200,26 @@
 							<p class="rp_original">Some general definitions used by several theorems</p>
 							<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
 							<p class="rp_original rp_theorem">
-								Let \(P\) be an <span class="load-definable">intractable puzzle ensemble</span> that is uniquely decipherable. There exists a protocol \(M=(M_A,M_B)\) for generating a secret from \(P\) that achieves <a href="#sec3.1">validity</a> and <a href="#sec3.2">fairness</a>.
+								Let \(P\) be an <span class="load-definable">intractable puzzle ensemble</span> that is uniquely decipherable. There exists a protocol \(M=(M_A,M_B)\) for generating a secret from \(P\) that achieves <a href="#sec3.1">validity</a> and <a href="#sec3.2"><span class="load-definable">fairness</span></a>.
 							</p>
 							<a href="#theorem2"><span class="rp_theorem_header">Theorem 2</span></a>
 							<p class="rp_original rp_theorem">
-								Let \(P_A\) and \(P_B\) be any two intractable ensembles. There exists a protocol \(M=(M_A,M_B)\) for exchanging secrets between \(P_A\) and \(P_B\) that achieves validity and fairness.
+								Let \(P_A\) and \(P_B\) be any two intractable ensembles. There exists a protocol \(M=(M_A,M_B)\) for exchanging secrets between \(P_A\) and \(P_B\) that achieves validity and <span class="load-definable">fairness</span>.
 							</p>
 							<a href="#theorem3"><span class="rp_theorem_header">Theorem 3</span></a>
 							<p class="rp_original rp_theorem">
-								For any interactive computational problem \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>\(,(f_n,g_n)\rangle\), there exists a protocol \(M\) that achieves validity, privacy, and fairness.
+								For any interactive computational problem \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>\(,(f_n,g_n)\rangle\), there exists a protocol \(M\) that achieves validity, privacy, and <span class="load-definable">fairness</span>.
 							</p>
 							<a href="#theorem4"><span class="rp_theorem_header">Theorem 4</span></a>
 							<p class="rp_original rp_theorem">
-								For any interactive computational problem \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>\(,(f_n,g_n)\rangle\), there exists a minimum knowledge transfer protocol \(M\) that achieves validity and fairness.
+								For any interactive computational problem \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>\(,(f_n,g_n)\rangle\), there exists a minimum knowledge transfer protocol \(M\) that achieves validity and <span class="load-definable">fairness</span>.
 							</p>
 						</section>
 						<section id="a_ref" data-section-name="Referencing This Paper">
 							<h2>Referencing This Paper</h2>
 							<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 							<p class="rp_self_reference">
-								A.C. Yao. How to Generate and Exchange Secrets (extended abstract). <i>27th Annual Symposium on Foundations of Computer Science</i>. IEEE. 1986, pp. 162-167.
+								A.C. Yao. How to Generate and Exchange Secrets (extended abstract). <i>27th Annual Symposium on Foundations of Computer Science</i>, pages 162-167. IEEE. 1986.
 							</p>
 						</section>
 					</section>
@@ -233,82 +233,82 @@
 						<section id="abstract" data-section-number="0" data-section-name="Abstract">
 							<h2>Abstract</h2>
 							<p class="rp_original">
-								In this paper we introduce a new tool for controlling the knowledge transfer process in cryptographic protocol design. It is applied to solve a general class of problems which include most of the two-party cryptographic problems in the literature. Specifically, we show how two parties A and B can interactively generate a random integer \(N = pq\) such that its secret, i.e. the prime factors \((p, q)\), is hidden from either party individually but is recoverable jointly if desired. This can be utilized to give a protocol for two parties with private values \(i\) and \(j\) to compute any polynomially computable functions \(f(i,j)\) and \(g(i,j)\) with minimal knowledge transfer and a strong fairness property. As a special case, A and B can exchange a pair of secrets \(s_A\), \(s_B\), e.g. the factorization of an integer and a Hamiltonian circuit in a graph, in such a way that \(s_A\) becomes computable by B when and only when \(s_B\) becomes computable by A. All these results are proved assuming only that the problem of factoring large integers is computationally intractable.
+								In this paper we introduce a new tool for controlling the knowledge transfer process in cryptographic protocol design. It is applied to solve a general class of problems which include most of the two-party cryptographic problems in the literature. Specifically, we show how two parties A and B can interactively generate a random integer \(N = pq\) such that its secret, i.e. the prime factors \((p, q)\), is hidden from either party individually but is recoverable jointly if desired. This can be utilized to give a protocol for two parties with private values \(i\) and \(j\) to compute any polynomially computable functions \(f(i,j)\) and \(g(i,j)\) with minimal knowledge transfer and a strong <span class="load-definable">fairness</span> property. As a special case, A and B can exchange a pair of secrets \(s_A\), \(s_B\), e.g. the factorization of an integer and a <span class="load-definable" data-define="Hamiltonian cycle">Hamiltonian circuit</span> in a graph, in such a way that \(s_A\) becomes computable by B when and only when \(s_B\) becomes computable by A. All these results are proved assuming only that the problem of factoring large integers is computationally intractable.
 							</p>
 						</section>
 						<section id="sec1" data-section-name="Introduction">
 							<h2>1. Introduction</h2>
 							<p class="rp_original">
-								A <i>protocol</i> \(M=(M_A,M_B)\) is a pair of communicating probabilistic <span class="load-definable" data-define="Turing machine">Turing machines</span> each with a special "send-receive" tape. Given inputs of the form \((n,i_A)\) and \((n,i_B)\), the two machines will alternately send and receive message strings using the send-receive tapes; each machine will perform computation as a standard Turing machine after receiving a message string, including the computation of the next message to be sent. Eventually both machines halt within a number of steps bounded by some polynomial in \(n\), leaving strings <span class="load-equation" data-equation="u_x">\(u_A\)</span> and <span class="load-equation" data-equation="u_x">\(u_B\)</span> on the output tapes. For a detailed description, see for example <span class="reference" data-citation="GMR"></span><span class="reference" data-citation="GHY"></span>; in our case we allow each machine to have their own private input tape. For any run \(\sigma\) of the protocol, let <span class="load-equation" data-equation="delta">\(\Delta_A(\sigma)\)</span> denote the <i>history</i> of the run from A's view, i.e. a sequence of the instantaneous descriptions of \(M_A\); similarly <span class="load-equation" data-equation="delta">\(\Delta_B(\sigma)\)</span> denote the history of this run from B's view.
+								A <i>protocol</i> \(M=(M_A,M_B)\) is a pair of communicating probabilistic <span class="load-definable" data-define="Turing machine">Turing machines</span> each with a special "send-receive" tape. Given inputs of the form \((n,i_A)\) and \((n,i_B)\), the two machines will alternately send and receive message strings using the send-receive tapes; each machine will perform computation as a standard <span class="load-definable">Turing machine</span> after receiving a message string, including the computation of the next message to be sent. Eventually both machines halt within a number of steps bounded by some polynomial in \(n\), leaving strings <span class="load-equation" data-equation="u_x">\(u_A\)</span> and <span class="load-equation" data-equation="u_x">\(u_B\)</span> on the output tapes. For a detailed description, see for example <span class="reference" data-citation="GMR">[1]</span><span class="reference" data-citation="GHY">[2]</span>; in our case we allow each machine to have their own private input tape. For any run \(\sigma\) of the protocol, let <span class="load-equation" data-equation="delta">\(\Delta_A(\sigma)\)</span> denote the <i>history</i> of the run from A's view, i.e. a sequence of the instantaneous descriptions of \(M_A\); similarly <span class="load-equation" data-equation="delta">\(\Delta_B(\sigma)\)</span> denote the history of this run from B's view.
 							</p>
 							<p class="rp_original">
-								The class of problems we are interested in are as follows. Given inputs \((n,i_A)\) and \((n,i_B)\), where \((i_A,i_B)\) is a random pair of strings distributed according to a probability distribution <span class="load-equation" data-equation="h_n">\(h_n\)</span> over \(\{0,1\}^*\times\{0,1\}^*\), we wish to design a protocol \(M=(M_A,M_B)\) such that the outputs \((\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\) are distributed according to a certain probability distribution <span class="load-equation" data-equation="w">\(w_{n,i_A,i_B}\)</span> over \(\{0,1\}^*\times\{0,1\}^*\). The sequence of distributions \((h_1,h_2,\dots,h_n,\dots)\) is assumed to be a <span class="load-definable">polynomial ensemble</span> in the sense that there is a probabilistic Turing machine which, given input \(n\), will generate in time polynomial in \(n\) a random string \(x\) with a distribution indistinguishable computationally from \(h_n\); similarly we assume that \(w_{n,i_A,i_B}\) is a polynomial ensemble in that a random sample point can be generated in time polynomial in \(n\), when the parameters \(n,i_A,i_B\) have been given. Let us call this a <i>(two-party) interactive computational problem</i> \(\langle h_n,w_n\rangle\). Of special interest is the case when the probability distribution \(w_{n,i_A,i_B}\) is nonzero only at one point, call it \((f_n(i_A,i_B),g_n(i_A,i_B))\), in which case we can regard the problem as the evaluation of a pair of functions \(f_n(i_A,i_B),g_n(i_A,i_B)\); write it as \(\langle h_n,(f_n,g_n)\rangle\).
+								The class of problems we are interested in are as follows. Given inputs \((n,i_A)\) and \((n,i_B)\), where \((i_A,i_B)\) is a random pair of strings distributed according to a probability distribution <span class="load-equation" data-equation="h_n">\(h_n\)</span> over <span class="load-equation" data-equation="01x01">\(\{0,1\}^*\times\{0,1\}^*\)</span>, we wish to design a protocol \(M=(M_A,M_B)\) such that the outputs (<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>) are distributed according to a certain probability distribution <span class="load-equation" data-equation="w">\(w_{n,i_A,i_B}\)</span> over <span class="load-equation" data-equation="01x01">\(\{0,1\}^*\times\{0,1\}^*\)</span>. The sequence of distributions <span class="load-equation" data-equation="h_n">\((h_1,h_2,\dots,h_n,\dots)\)</span> is assumed to be a <span class="load-definable">polynomial ensemble</span> in the sense that there is a probabilistic <span class="load-definable">Turing machine</span> which, given input \(n\), will generate in time polynomial in \(n\) a random string \(x\) with a distribution <span class="load-definable">indistinguishable</span> computationally from <span class="load-equation" data-equation="h_n">\(h_n\)</span>; similarly we assume that <span class="load-equation" data-equation="w">\(w_{n,i_A,i_B}\)</span> is a <span class="load-definable">polynomial ensemble</span> in that a random sample point can be generated in time polynomial in \(n\), when the parameters \(n,i_A,i_B\) have been given. Let us call this a <i>(two-party) interactive computational problem</i> \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>,<span class="load-equation" data-equation="w">\(w_n\)</span>\(\rangle\). Of special interest is the case when the probability distribution <span class="load-equation" data-equation="w">\(w_{n,i_A,i_B}\)</span> is nonzero only at one point, call it \((f_n(i_A,i_B),g_n(i_A,i_B))\), in which case we can regard the problem as the evaluation of a pair of functions \(f_n(i_A,i_B),g_n(i_A,i_B)\); write it as \(\langle h_n,(f_n,g_n)\rangle\).
 							</p>
 							<p class="rp_annotation">
-								Instead of defining the sequence of <span class="load-equation" data-equation="h_n">\(h_n\)</span>'s as a polynomial ensemble, it may be simpler to simply state that, for any \(n\), a string \(x\) in the distribution \(h_n\) can be produced by a probabilistic polynomial-time Turing machine.
+								Instead of defining the sequence of <span class="load-equation" data-equation="h_n">\(h_n\)</span>'s as a <span class="load-definable">polynomial ensemble</span>, it may be simpler to simply state that, for any \(n\), a string \(x\) in the distribution <span class="load-equation" data-equation="h_n">\(h_n\)</span> can be produced by a probabilistic polynomial-time <span class="load-definable">Turing machine</span>.
 							</p>
 							<p class="rp_original">
-								In addition to the <i>validity</i> requirement above, we would like the protocol to have certain <i>privacy</i> and <i>fairness</i> properties. Roughly, "privacy" means that if A behaves according to the protocol, then B will have no more information about the values of \(i_A\),<span class="load-equation" data-equation="u_x">\(u_A\)</span> than in the situation where an oracle does the computation for B and just hands B a value <span class="load-equation" data-equation="u_x">\(u_B\)</span>. Classical examples where privacy is the main concern include <span class="load-definable">oblivious transfer</span><sup class="reference" data-citation="R"></sup><sup class="reference" data-citation="FMR"></sup>, <span class="load-definable" data-define="coin flip">coin tossing</span><sup class="reference" data-citation="Bl"></sup><sup class="reference" data-citation="Cl"></sup>, mental poker<sup class="reference" data-citation="SRA"></sup><sup class="reference" data-citation="GM"></sup>. A general study of this problem is given by Yao<sup class="reference" data-citation="Y"></sup><sup class="reference" data-citation="Y2"></sup>. A related problem is the <i>interactive proof system</i><sup class="reference" data-citation="GMR"></sup> in which player A wishes to convince player B that a string \(\tau\) is in a certain language L. Recently, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW"></sup> proved that, for players with polynomial-time computing power, an language in <span class="load-definable">NP</span> has a <i>minimum knowledge interactive proof</i>, assuming the existence of suitable <span class="load-definable" data-define="one-way function">one-way functions</span>. This latter problem is closely related to, in our formulation, the case of computing a pair of functions \(f_n(i_A,i_B),g_n(i_A,i_B)\), where \(i_A=(s,\tau),\;i_B=\tau,\;g_n(i_A,i_B)=1\) if and only if \(s\) is a short <i>proof</i> for \(t\in L\), and \(f_n(i_A,i_B)\equiv 1\).
+								In addition to the <i>validity</i> requirement above, we would like the protocol to have certain <i>privacy</i> and <i><span class="load-definable">fairness</span></i> properties. Roughly, "privacy" means that if A behaves according to the protocol, then B will have no more information about the values of \(i_A\),<span class="load-equation" data-equation="u_x">\(u_A\)</span> than in the situation where an oracle does the computation for B and just hands B a value <span class="load-equation" data-equation="u_x">\(u_B\)</span>. Classical examples where privacy is the main concern include <span class="load-definable">oblivious transfer</span><sup class="reference" data-citation="R">[3]</sup><sup class="reference" data-citation="FMR">[4]</sup>, <span class="load-definable" data-define="coin flip">coin tossing</span><sup class="reference" data-citation="Bl">[5]</sup><sup class="reference" data-citation="Cl">[6]</sup>, mental poker<sup class="reference" data-citation="SRA">[7]</sup><sup class="reference" data-citation="GM">[8]</sup>. A general study of this problem is given by Yao<sup class="reference" data-citation="Y">[9]</sup><sup class="reference" data-citation="Y2">[10]</sup>. A related problem is the <i>interactive proof system</i><sup class="reference" data-citation="GMR">[1]</sup> in which player A wishes to convince player B that a string \(\tau\) is in a certain language \(L\). Recently, Goldreich, Micali, and Wigderson<sup class="reference" data-citation="GMW">[11]</sup> proved that, for players with polynomial-time computing power, an language in <span class="load-definable main_language">NP</span> has a <i>minimum knowledge interactive proof</i>, assuming the existence of suitable <span class="load-definable" data-define="one-way function">one-way functions</span>. This latter problem is closely related to, in our formulation, the case of computing a pair of functions \(f_n(i_A,i_B),g_n(i_A,i_B)\), where \(i_A=(s,\tau),\;i_B=\tau,\;g_n(i_A,i_B)=1\) if and only if \(s\) is a short <i>proof</i> for \(t\in L\), and \(f_n(i_A,i_B)\equiv 1\).
 							</p>
 							<p class="rp_annotation">
-								Let's give a more specific example for this final sentence. Let's say our language \(L\) is the language \(Isomorphic\), where, given two graphs \(G_1,G_2\), \((G_1,G_2)\in L\) if and only if \(G_1\) is <span class="definable">isomorphic</span> to \(G_2\). \(\tau\) would be \((G_1,G_2)\) since it's what we hope to prove is in \(L\). \(s\) would be a proof for their isomorphism, which would be the one-to-one mapping from vertices in \(G_1\) to vertices in \(G_2\). \(g_n\) should be 1 if and only if A is able to produce such a mapping, which could only be so if \(s\in L\). \(f_n\) does not matter, since \(A\) does not mean to learn anything, so it can simply be any value, such as 1.
+								Let's give a more specific example for this final sentence. Let's say our language \(L\) is the language <span class="main_language">Isomorphic</span>, where, given two graphs \(G_1,G_2\), \((G_1,G_2)\in L\) if and only if \(G_1\) is <span class="definable">isomorphic</span> to \(G_2\). \(\tau\) would be \((G_1,G_2)\) since it's what we hope to prove is in \(L\). \(s\) would be a proof for their <span class="load-definable" data-define="isomorphic">isomorphism</span>, which would be the one-to-one mapping from vertices in \(G_1\) to vertices in \(G_2.\;g_n\) should be 1 if and only if A is able to produce such a mapping, which could only be so if \(s\in L.\;f_n\) does not matter, since \(A\) does not mean to learn anything, so it can simply be any value, such as 1.
 							</p>
 							<p class="rp_original">
-								The "fairness" requirement means that a cheater should not be able to obtain the desired output while denying the other party to find the proper output. The problem of exchanging secrets<sup class="reference" data-citation="Bl2"></sup><sup class="reference" data-citation="LMR"></sup><sup class="reference" data-citation="VV"></sup> has this requirement as its main concern.
+								The "<span class="load-definable">fairness</span>" requirement means that a cheater should not be able to obtain the desired output while denying the other party to find the proper output. The problem of exchanging secrets<sup class="reference" data-citation="Bl2">[12]</sup><sup class="reference" data-citation="LMR">[13]</sup><sup class="reference" data-citation="VV">[14]</sup> has this requirement as its main concern.
 							</p>
 							<p class="rp_original">
-								In this paper, we will give a protocol for performing the computation \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>,<span class="load-equation" data-equation="w">\(w_n\)</span>\(\rangle\) which achieves validity, privacy, and fairness as stated in <a href="#theorem3">Theorem 3</a>, under the assumption that factoring large integers is computationally intractable. Many of the existing results mentioned are special cases of this theorem. A particular interesting special case (stated as <a href="#theorem2">Theorem 2</a>) is that it allows  two parties to exchange <i>secrets</i>, such as the factorization of a publicized integer or the Hamiltonian circuit of a publicized large graph, in a way that the probability of successful cheating can be made arbitrarily small. It is somewhat surprising that the two secrets being exchanged could be of very different apparent complexity, and one would have thought that it is difficult to find an equitable ratio of bits to be maintained during the process of swapping the secrets. Previously Blum<sup class="reference" data-citation="Bl2"></sup> gave a protocol for exchanging prime factors based on several assumptions (see Hastad and Shamir<sup class="reference" data-citation="HS"></sup> for discussions); Luby, Micali, and Rackoff<sup class="reference" data-citation="LMR"></sup>, and Vazirani and Vazirani<sup class="reference" data-citation="VV"></sup> gave protocols for exchanging secrets which are one bit long.
+								In this paper, we will give a protocol for performing the computation \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>,<span class="load-equation" data-equation="w">\(w_n\)</span>\(\rangle\) which achieves validity, privacy, and <span class="load-definable">fairness</span> as stated in <a href="#theorem3">Theorem 3</a>, under the assumption that factoring large integers is computationally intractable. Many of the existing results mentioned are special cases of this theorem. A particular interesting special case (stated as <a href="#theorem2">Theorem 2</a>) is that it allows  two parties to exchange <i>secrets</i>, such as the factorization of a publicized integer or the <span class="load-definable" data-define="Hamiltonian cycle">Hamiltonian circuit</span> of a publicized large graph, in a way that the probability of successful cheating can be made arbitrarily small. It is somewhat surprising that the two secrets being exchanged could be of very different apparent complexity, and one would have thought that it is difficult to find an equitable ratio of bits to be maintained during the process of swapping the secrets. Previously Blum<sup class="reference" data-citation="Bl2">[12]</sup> gave a protocol for exchanging prime factors based on several assumptions (see Hastad and Shamir<sup class="reference" data-citation="HS">[15]</sup> for discussions); Luby, Micali, and Rackoff<sup class="reference" data-citation="LMR">[13]</sup>, and Vazirani and Vazirani<sup class="reference" data-citation="VV">[14]</sup> gave protocols for exchanging secrets which are one bit long.
 							</p>
 							<p class="rp_original">
 								The proof of <a href="#theorem3">Theorem 3</a> depends on the ability of two parties to generate a random integer \(N=p\cdot q\), with its <i>secret</i> \((p,q)\) hidden from each party, but recoverable at a later time by a joint effort. This result is of independent interest, and should serve as another useful tool for cryptographic protocol design. A general form of this result is given as <a href="#theorem1">Theorem 1</a>.
 							</p>
 							<p class="rp_original">
-								Compared with <span class="reference" data-citation="Y"></span><span class="reference" data-citation="Y2"></span>, which deals with the same general problem, the addition of the fairness property is the new motive which leads to the present work. We should mention that all the protocols considered in this paper for solving the interactive computational problems \(\langle h_n,w_n\rangle\) will be independent of \(h_n\), as is traditional in considering cryptographic protocols. The main results (Theorems <a href="#theorem1">1</a>,<a href="#theorem2">2</a>, and <a href="#theorem3">3</a>) are all proved under the following assumption. Let \(W_n\) be the set of all integers \(N\) of the form \(p\cdot q\) where \(p\equiv q\equiv 3\bmod{4}\) are prime numbers. 
+								Compared with <span class="reference" data-citation="Y">[9]</span><span class="reference" data-citation="Y2">[10]</span>, which deals with the same general problem, the addition of the <span class="load-definable">fairness</span> property is the new motive which leads to the present work. We should mention that all the protocols considered in this paper for solving the interactive computational problems \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>,<span class="load-equation" data-equation="w">\(w_n\)</span>\(\rangle\) will be independent of <span class="load-equation" data-equation="h_n">\(h_n\)</span>, as is traditional in considering cryptographic protocols. The main results (Theorems <a href="#theorem1">1</a>,<a href="#theorem2">2</a>, and <a href="#theorem3">3</a>) are all proved under the following assumption. Let \(W_n\) be the set of all integers \(N\) of the form \(p\cdot q\) where \(p\equiv q\equiv 3\bmod{4}\) are prime numbers.
 							</p>
 							<span class="rp_theorem_header" id="IAF">
 								The Intractability Assumption of Factoring (IAF)
 							</span>
 							<p class="rp_original rp_theorem">
-								Let \(k&gt;0\) be any fixed number. For any polynomial time probabilistic algorithm for factoring integers, the probability of success for a random input integer from \(W_n\) is less than \(\frac{1}{n^k}\) for all large \(n\).
+								Let \(k\gt0\) be any fixed number. For any polynomial time probabilistic algorithm for factoring integers, the probability of success for a random input integer from \(W_n\) is less than \(\frac{1}{n^k}\) for all large \(n\).
 							</p>
 						</section>
 						<section id="sec2" data-section-name="Terminology">
 							<h2>2. Terminology</h2>
 							<p class="rp_original">
-								Let \(S=(S_1,S_2,\dots)\) and \(S'=(S_1',S_2',\dots)\) be <span class="load-definable" data-define="polynomial ensemble">polynomial ensembles</span>, where \(S_n=(X_n,Y_n)\) and \(S_n'=(X_n',Y_n')\) and each is a probability distribution over \(\{0,1\}^*\times\{0,1\}^*\). Furthermore, assume that the two ensembles \((X_1,X_2,\dots)\) and \((X_1',X_2',\dots)\) are <span class="load-definable">indistinguishable</span> for polynomial-time computations.
+								Let \(S=(S_1,S_2,\dots)\) and \(S'=(S_1',S_2',\dots)\) be <span class="load-definable" data-define="polynomial ensemble">polynomial ensembles</span>, where \(S_n=(X_n,Y_n)\) and \(S_n'=(X_n',Y_n')\) and each is a probability distribution over <span class="load-equation" data-equation="01x01">\(\{0,1\}^*\times\{0,1\}^*\)</span>. Furthermore, assume that the two ensembles \((X_1,X_2,\dots)\) and \((X_1',X_2',\dots)\) are <span class="load-definable">indistinguishable</span> for polynomial-time computations.
 							</p>
 							<p class="rp_original">
-								Let \(D=(d_1,d_2,\dots)\) be a sequence of predicates \(d_n:\{0,1\}^*\rightarrow\{0,1\}\), where given \(d\) and \(n\), \(d_n(x)\) can be computed probabilistically in time polynomial in \(n\). Define a <i>guessing algorithm</i> \(Q_B\) to be a probabilistic algorithm which takes \((n,y)\) as input, where \(y\in\{0,1\}^*\), and outputs a 0 or 1 in time polynomial in \(n\).
+								Let \(D=(d_1,d_2,\dots)\) be a sequence of predicates \(d_n:\;\{0,1\}^*\rightarrow\{0,1\}\), where given \(d\) and \(n,\,d_n(x)\) can be computed probabilistically in time polynomial in \(n\). Define a <i>guessing algorithm</i> \(Q_B\) to be a probabilistic algorithm which takes \((n,y)\) as input, where \(y\in\{0,1\}^*\), and outputs a 0 or 1 in time polynomial in \(n\).
 							</p>
 							<p class="rp_original">
-								Consider the experiment of taking a random \((x_n,y_n)\) distributed according to \((X_n,Y_n)\). Suppose that one observes the value \(y_n\) and tries to guess what the value of \(d_n(x_n)\) is by using a guessing algorithm \(Q\); let us denote by \(r(d_n,X_n,Y_n,Q)\) the probability that a correct guess will be made. We use the notation \(o\)(poly-small) to denote any sequence \((b_1,b_2,\dots)\) that has the property \(b_n\in o\left(\frac{1}{n^k}\right)\) for all fixed \(k\).
+								Consider the experiment of taking a random \((x_n,y_n)\) distributed according to \((X_n,Y_n)\). Suppose that one observes the value \(y_n\) and tries to guess what the value of \(d_n(x_n)\) is by using a guessing algorithm \(Q\); let us denote by <span class="load-equation" data-equation="rfunction">\(r(d_n,X_n,Y_n,Q)\)</span> the probability that a correct guess will be made. We use the notation \(\operatorname o\)(poly-small) to denote any sequence \((b_1,b_2,\dots)\) that has the property \(b_n\in\operatorname o\left(\frac{1}{n^k}\right)\) for all fixed \(k\).
 							</p>
 							<p class="rp_annotation">
-								\(o\)(poly-small) may be recognizable as the class of all <span class="load-definable">negligible</span> functions. This experiment might be recognized as similar to how a <span class="load-definable">hardcore bit</span> is defined except, since it is not being applied to <span class="load-definable" data-define="one-way function">one-way functions</span>, there are no defined bounds on the outcome of the experiment.
+								\(\operatorname o\)(poly-small) may be recognizable as the class of all <span class="load-definable">negligible</span> functions. This experiment might be recognized as similar to how a <span class="load-definable">hardcore bit</span> is defined, except, since it is not being applied to <span class="load-definable" data-define="one-way function">one-way functions</span>, there are no defined bounds on the outcome of the experiment.
 							</p>
 							<p class="rp_original">
-								We write <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="load-equation" data-equation="leq">\(\leq\)</span>\(\; \)<span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) if \(\forall\,D,Q\;\exists\,Q'\) such that \(r(d_n,X_n',Y_n',Q')-r(d_n,X_n,Y_n,Q)\geq o\)(poly-small).
+								We write <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="load-equation" data-equation="leq">\(\leq\)</span> <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) if \(\forall\,D,Q\;\exists\,Q'\) such that <span class="load-equation" data-equation="rfunction">\(r(d_n,X_n',Y_n',Q')-r(d_n,X_n,Y_n,Q)\)</span>\(\geq\) <span class="load-definable" data-define="negligible">\(\operatorname o\)(poly-small)</span>.
 							</p>
 							<p class="rp_annotation">
 								Given a set of predicates, for all guessing algorithms \(Q\) to be applied on \((X_n,Y_n)\) under those predicates, we can produce a new guessing algorithm \(Q'\) that is strictly not worse on \((X_n',Y_n')\) for the same predicates. It might be said that \((X_n',Y_n')\) is strictly not harder to guess on than \((X_n,Y_n)\), regardless of the predicates.
 							</p>
 							<p class="rp_original">
-								We write <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="load-equation" data-equation="approx">\(\approx\)</span>\(\; \)<span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) if <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="load-equation" data-equation="leq">\(\leq\)</span>\(\; \)<span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) and <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\;\)<span class="load-equation" data-equation="leq">\(\leq\)</span>\(\; \)<span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\).
+								We write <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) if <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\;\)<span class="load-equation" data-equation="leq">\(\leq\)</span> <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) and <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n'\;|\;Y_n')\) <span class="load-equation" data-equation="leq">\(\leq\)</span> <span class="load-equation" data-equation="I_n">\(I_n\)</span>\((X_n\;|\;Y_n)\).
 							</p>
 							<p class="rp_annotation">
-								We cannot produce a set of predicates for which it will be easier to guess on \((X_n,Y_n)\) than \((X_n',Y_n')\), and vice versa - so they are equally hard (or easy) to guess on.
+								We cannot produce a set of predicates for which it will be easier to guess on \((X_n,Y_n)\) than \((X_n',Y_n')\), and vice versa&mdash;so they are equally hard (or easy) to guess on.
 							</p>
 							<p class="rp_original">
-								A <span class="load-definable">puzzle ensemble</span> \(P=(L,F)\) consists of a language \(L\in\) <span class="load-definable">BPP</span> and a <span class="load-definable" data-define="polynomial ensemble">polynomial-time ensemble</span> \(F=(F_1,F_2,\dots)\) where each \(f_n\) is a distribution over \(\{0,1\}^*\times\{0,1\}^*\); we require further than a random \((s,\tau)\) distributed according to \(f_n\) will satisfy \((n,s,\tau)\in L\) with probability 1-\(o\)(poly-small); we will call \(s\) a <i>secret</i> of the <i>text</i> \(\tau\). Let \(T_{P,n}\) denote the distribution of a random \(\tau\) taken from the second component of a random \((s,\tau)\) distributed as \(f_n\). We will call \(P\) <span class="load-definable" data-define="intractable puzzle ensemble">intractable</span> if every probabilistic polynomial-time algorithm \(S\), when given as input a pair \(\cancel{(s,\tau)} (n,\tau)\) where \(\tau\) is distributed according to \(T_{P,n}\), will fail with probability 1-\(o\)(poly-small) to produce an \(s\) satisfying \((n,s,\tau)\in L\).
+								A <span class="load-definable">puzzle ensemble</span> \(P=(L,F)\) consists of a language \(L\in\) <span class="load-definable">BPP</span> and a <span class="load-definable" data-define="polynomial ensemble">polynomial-time ensemble</span> \(F=(F_1,F_2,\dots)\) where each \(f_n\) is a distribution over <span class="load-equation" data-equation="01x01">\(\{0,1\}^*\times\{0,1\}^*\)</span>; we require further than a random \((s,\tau)\) distributed according to \(f_n\) will satisfy \((n,s,\tau)\in L\) with probability 1-\(\operatorname o\)(poly-small); we will call \(s\) a <i>secret</i> of the <i>text</i> \(\tau\). Let \(T_{P,n}\) denote the distribution of a random \(\tau\) taken from the second component of a random \((s,\tau)\) distributed as \(f_n\). We will call \(P\) <span class="load-definable" data-define="intractable puzzle ensemble">intractable</span> if every probabilistic polynomial-time algorithm \(S\), when given as input a pair \(\cancel{(s,\tau)} (n,\tau)\) where \(\tau\) is distributed according to \(T_{P,n}\), will fail with probability 1-\(\operatorname o\)(poly-small) to produce an \(s\) satisfying \((n,s,\tau)\in L\).
 							</p>
 							<p class="rp_annotation">
-								A puzzle ensemble is a language and a probability distribution over secrets and texts where randomly sampling from the distribution produces an invalid secret/text pair only negligibly often. That puzzle ensemble is intractable if we cannot make an algorithm that can produce a secret given its text with more than negligible probability. Note the likely error in the original form above that would give \(S\) the answer to the question it is being asked, as opposed to the security parameter.
+								A <span class="load-definable">puzzle ensemble</span> is a language and a probability distribution over secrets and texts where randomly sampling from the distribution produces an invalid secret/text pair only negligibly often. That <span class="load-definable">puzzle ensemble</span> is intractable if we cannot make an <span class="load-definable">algorithm</span> that can produce a secret given its text with more than <span class="load-definable">negligible</span> probability. Note the likely error in the original form above that would give \(S\) the answer to the question it is being asked, as opposed to the security parameter.
 							</p>
 							<p class="rp_original">
-								For example, let \(L=\{(n;\,p,q,N)\;|\;N=p\cdot q;\;p,q\) are \(n\)-bit primes\(\}\), and \(f_n\) be the uniform distribution over the set \(W_n\). Under the <a href="#IAF">Intractability of Factorization Assumption</a>, the <i>factorization puzzle ensemble</i> \(P=(L,F)\) is an intractable puzzle ensemble.
+								For example, let \(L=\{(n;\,p,q,N)\;|\;N=p\cdot q;\;p,q\) are \(n\)-bit primes\(\}\), and \(f_n\) be the uniform distribution over the set \(W_n\). Under the <a href="#IAF">Intractability of Factorization Assumption</a>, the <i>factorization <span class="load-definable">puzzle ensemble</span></i> \(P=(L,F)\) is an <span class="load-definable">intractable puzzle ensemble</span>.
 							</p>
 							<p class="rp_annotation">
-								This is because, according to the assumption, given our text \(\tau=N\), we will only negligibly often be able to produce the secret \(s=(p,q)\) for sufficiently large \(n\).
+								This is because, according to the assumption, given our text \(\tau=N\), we will only <span class="load-definable" data-define="negligible">negligibly</span> often be able to produce the secret \(s=(p,q)\) for sufficiently large \(n\).
 							</p>
 						</section>
 						<section id="sec3" data-section-name="Generating a Secret">
@@ -325,13 +325,13 @@
 								We should note that we want \(s\) to still be the correct secret for \(\tau\) if a party cheats as well.
 							</p>
 							<p class="rp_original">
-								To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a puzzle ensemble \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization puzzle ensemble is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where <span class="load-equation" data-equation="alpha">\(\alpha=(\alpha_1,\alpha_2,\dots\)</span> and <span class="load-equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span> are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
+								To simplify the presentation of the result, we restrict ourselves to puzzles that have unique secrets. Let us call a <span class="load-definable">puzzle ensemble</span> \(P=(L,F)\) <i>uniquely decipherable</i> if, for every \(n,\tau\), there is at most one \(s\) satisfying \((n,s,\tau)\in L\). For example, the factorization <span class="load-definable">puzzle ensemble</span> is uniquely decipherable. For a uniquely decipherable puzzle ensemble, we can write it as \(P=(\alpha,D)\), where <span class="load-equation" data-equation="alpha">\(\alpha=(\alpha_1,\alpha_2,\dots\)</span> and <span class="load-equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span> are given by \(\alpha_n(\tau)=s\) and \(D_n=T_{P,n}\).
 							</p>
 							<p class="rp_annotation">
-								Though not explicitly stated, we can note here that \(\alpha_n\) is <span class="load-definable">injective</span>, which is what allows us to explicitly define the probability distribution for only \(\tau\) (as it must be identical for \(s\) by definition of injectivity).
+								Though not explicitly stated, we can note here that \(\alpha_n\) is <span class="load-definable">injective</span>, which is what allows us to explicitly define the probability distribution for only \(\tau\) (as it must be identical for \(s\) by definition of <span class="load-definable" data-define="injective">injectivity</span>).
 							</p>
 							<p class="rp_original">
-								Let \(P=(\alpha,D)\) be a uniquely decipherable, intractable puzzle ensemble, where <span class="load-equation" data-equation="alpha">\(\alpha=(\alpha_1,\alpha_2,\dots)\)</span> and <span class="load-equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span>. Formally, we define our requirements on a protocol \(M=(M_A,M_B)\) for generating a secret for \(P\) as follows. (A or B will sometimes output <span class="load-equation" data-equation="u_x">\(u_A\)</span> or <span class="load-equation" data-equation="u_x">\(u_B\)</span>=CHEATING; informally we say that A or B has detected that the other party is cheating.)
+								Let \(P=(\alpha,D)\) be a uniquely decipherable, <span class="load-definable">intractable puzzle ensemble</span>, where <span class="load-equation" data-equation="alpha">\(\alpha=(\alpha_1,\alpha_2,\dots)\)</span> and <span class="load-equation" data-equation="D=Tn">\(D=(D_1,D_2,\dots)\)</span>. Formally, we define our requirements on a protocol \(M=(M_A,M_B)\) for generating a secret for \(P\) as follows. (A or B will sometimes output <span class="load-equation" data-equation="u_x">\(u_A\)</span> or <span class="load-equation" data-equation="u_x">\(u_B\)</span>=<span class="main_language">Cheating</span>; informally we say that A or B has detected that the other party is cheating.)
 							</p>
 							<section id="sec3.1" data-section-name="Validity">
 								<h3>3.1. Validity</h3>
@@ -340,56 +340,54 @@
 								</p>
 								<ol class="rp_original" type="i">
 									<li>
-										With probability 1-\(o\)(poly-small), <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>, and their common value \(\tau\) is distributed according to a distribution indistinguishable (by polynomial-time computations) from <span class="load-equation" data-equation="D=Tn">\(D_n\)</span>.
+										With probability 1-<span class="load-definable" data-define="negligible">\(\operatorname o\)(poly-small)</span>, <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>, and their common value \(\tau\) is distributed according to a distribution indistinguishable (by polynomial-time computations) from <span class="load-equation" data-equation="D=Tn">\(D_n\)</span>.
 									</li>
 									<li>
-										<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\)<span class="load-equation" data-equation="delta">\(\Delta_j\)</span>\()\) <span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\) for \(j\in \{A,B\}\), where \(\mathcal{J}\) is the <span class="load-definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(\mathcal{L}\) is the stochastic process of fetching \(\tau\) according to <span class="load-equation" data-equation="D=Tn">\(D_n\)</span>.
+										<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\)<span class="load-equation" data-equation="delta">\(\Delta_j\)</span>\()\) <span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\) for \(j\in \{A,B\}\), where \(\mathcal{J}\) is the <span class="load-definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B)\), and \(\mathcal{L}\) is the <span class="load-definable">stochastic</span> process of fetching \(\tau\) according to <span class="load-equation" data-equation="D=Tn">\(D_n\)</span>.
 									</li>
 								</ol>
 								<p class="rp_annotation">
-									The ability to guess \(a_n(\tau)\) is precisely as difficult whether done through the protocol (and therefore with extra information  from the run of the protocol \(\Delta_j\)), or done by simply taking \(\tau\) directly from <span class="load-equation" data-equation="D=Tn">\(D_n\)</span> (which, as discussed above by definition of an <span class="load-definable" data-define="intractable puzzle ensemble">intractable puzzle ensemble</span>, is extremely difficult).
+									The ability to guess \(a_n(\tau)\) is precisely as difficult whether done through the protocol (and therefore with extra information  from the run of the protocol <span class="load-equation" data-equation="delta">\(\Delta_j\)</span>), or done by simply taking \(\tau\) directly from <span class="load-equation" data-equation="D=Tn">\(D_n\)</span> (which, as discussed above by definition of an <span class="load-definable" data-define="intractable puzzle ensemble">intractable puzzle ensemble</span>, is extremely difficult).
 								</p>
 								<ol class="rp_original" type="i">
 									<li value="3">
-										\(\exists\) a protocol \(N=(N_A,N_B)\) which, given input (<span class="load-equation" data-equation="delta">\(\Delta_A,\Delta_B\)</span>), computes outputs <span class="load-equation" data-equation="v_x">\(v_A,v_B\)</span>, with the property that \(v_A=v_B=a_n(\tau)\) with probability 1-\(o\)(poly-small).
+										\(\exists\) a protocol \(N=(N_A,N_B)\) which, given input (<span class="load-equation" data-equation="delta">\(\Delta_A,\Delta_B\)</span>), computes outputs <span class="load-equation" data-equation="v_x">\(v_A,v_B\)</span>, with the property that <span class="load-equation" data-equation="v_x">\(v_A=v_B\)</span>\(=a_n(\tau)\) with probability 1-<span class="load-definable" data-define="negligible">\(\operatorname o\)(poly-small)</span>.
 									</li>
 								</ol>
 								<p class="rp_annotation">
-									Given \(\Delta_A\) and \(\Delta_B\) together, a probabilistic polynomial-time algorithm can produce the secret \(s\) of \(\tau\) with only a <span class="load-definable">negligible</span> probability of failure.
+									Given <span class="load-equation" data-equation="delta">\(\Delta_A\)</span> and <span class="load-equation" data-equation="delta">\(\Delta_B\)</span> together, a probabilistic polynomial-time <span class="load-definable">algorithm</span> can produce the secret \(s\) of \(\tau\) with only a <span class="load-definable">negligible</span> probability of failure.
 								</p>
 								<p class="rp_original">
-									Now to discuss the validity concept when one party, say B, may misbehave. Let \(d_n\) be the probability for runs in which \(u_A\neq\)CHEATING, and let \(D_n'\) be the probability distribution for \(\tau\) when restricted to such runs. If \(d_n\) is <span class="load-definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in \Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following two constraints to be true:
+									Now to discuss the validity concept when one party, say B, may misbehave. Let \(d_n\) be the probability for runs in which \(u_A\neq\)<span class="main_language">Cheating</span>, and let \(D_n'\) be the probability distribution for \(\tau\) when restricted to such runs. If \(d_n\) is <span class="load-definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in\operatorname\Omega\left(\frac{1}{n^t}\right)\) for some fixed \(t\gt0\), then we require the following two constraints to be true:
 								</p>
 								<ol class="rp_original" type="i">
 									<li value="4">
-										\(P'=(\alpha,D')\) is a uniquely decipherable intractable puzzle ensemble, where \(D'=(D_1',D_2',\dots)\).
+										\(P'=(\alpha,D')\) is a uniquely decipherable <span class="load-definable">intractable puzzle ensemble</span>, where \(D'=(D_1',D_2',\dots)\).
 									</li>
 									<li>
-										<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\)<span class="load-equation" data-equation="delta">\(\Delta_B)\)</span> <span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\), where \(\mathcal{J}\) is the stochastic process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the stochastic process of fetching \(\tau\) according to \(D_n'\).
+										<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((a_n(\tau)\;|\;\tau,\)<span class="load-equation" data-equation="delta">\(\Delta_B)\)</span> <span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((a_n(\tau)\;|\;\tau)\), where \(\mathcal{J}\) is the <span class="load-definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the <span class="load-definable">stochastic</span> process of fetching \(\tau\) according to \(D_n'\).
 									</li>
 								</ol>
 								<p class="rp_annotation">
-									Basically, the distribution of \(\tau\) when B cheats successfully is still intractable, and \(a_n(\tau)\) is still just as difficult to produce from \((\tau,\Delta_B)\) as it was from a normally chosen \(\tau\). Obviously, the above applies when switching the roles of A and B as well.
+									Basically, the distribution of \(\tau\) when B cheats successfully is still intractable, and \(a_n(\tau)\) is still just as difficult to produce from (\(\tau\),<span class="load-equation" data-equation="delta">\(\Delta_B\)</span>) as it was from a normally chosen \(\tau\). Obviously, the above applies when switching the roles of A and B as well.
 								</p>
 							</section>
 							<p class="rp_original">
-								To develop the concept of fairness, consider the execution of protocol \(M\) and then \(N\). If A follows the protocols, we require that the probability for B to obtain \(s\) while A cannot recover \(s\) to be small.
+								To develop the concept of <span class="load-definable">fairness</span>, consider the execution of protocol \(M\) and then \(N\). If A follows the protocols, we require that the probability for B to obtain \(s\) while A cannot recover \(s\) to be small.
 							</p>
 							<section id="sec3.2" data-section-name="Fairness">
 								<h3>3.2. Fairness</h3>
 								<ol class="rp_original" type="i">
 									<li>
-										[B may cheat.] Suppose protocols \(M=(M_A,M_B)\) and \(N=(N_A,N_B)\) are run with machine pairs \((M_A,M_B'),(N_A,N_B')\). There exists a polynomial-time probabilistic algorithm \(Y\) (dependent on \(M_B'\) and \(N_B'\)), which takes a history pair for \(M\) and \(N\) as input, and outputs a string \(w\). We require that if A follows the protocols \(M\) and \(N\) and then runs \(Y\), the probability that <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=\tau\), \(v_B=a_n(\tau)\) while \(w\neq a_n(\tau)\) is \(o\)(poly-small).
+										[B may cheat.] Suppose protocols \(M=(M_A,M_B)\) and \(N=(N_A,N_B)\) are run with machine pairs \((M_A,M_B'),(N_A,N_B')\). There exists a polynomial-time probabilistic <span class="load-definable">algorithm</span> \(Y\) (dependent on \(M_B'\) and \(N_B'\)), which takes a history pair for \(M\) and \(N\) as input, and outputs a string <span class="load-equation" data-equation="w">\(w\)</span>. We require that if A follows the protocols \(M\) and \(N\) and then runs \(Y\), the probability that <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=\tau\), <span class="load-equation" data-equation="v_x">\(v_B\)</span>\(=a_n(\tau)\) while <span class="load-equation" data-equation="w">\(w\)</span>\(\neq a_n(\tau)\) is <span class="load-definable" data-define="negligible">\(\operatorname o\)(poly-small)</span>.
 									</li>
 									<li>
 										[A may cheat.] (Interchange the roles of A and B in (i).)
 									</li>
 								</ol>
-								<span class="rp_theorem_header" id="theorem1">
-									Theorem 1
-								</span>
+								<span class="rp_theorem_header" id="theorem1">Theorem 1</span>
 								<p class="rp_original rp_theorem">
-									Let \(P\) be an <span class="load-definable">intractable puzzle ensemble</span> that is uniquely decipherable. There exists a protocol \(M=(M_A,M_B)\) for generating a secret from \(P\) that achieves <a href="#sec3.1">validity</a> and <a href="#sec3.2">fairness</a>.
+									Let \(P\) be an <span class="load-definable">intractable puzzle ensemble</span> that is uniquely decipherable. There exists a protocol \(M=(M_A,M_B)\) for generating a secret from \(P\) that achieves <a href="#sec3.1">validity</a> and <a href="#sec3.2"><span class="load-definable">fairness</span></a>.
 								</p>
 							</section>
 						</section>
@@ -400,35 +398,31 @@
 							</p>
 							<span class="rp_sub_header">Validity</span>
 							<p class="rp_original rp_sub">
-								If both parties follow the protocol, then with probability \(1-o\)(poly-small), <span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=s_A\) and <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=s_B\).
+								If both parties follow the protocol, then with probability \(1-\operatorname o\)(poly-small), <span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=s_A\) and <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=s_B\).
 							</p>
 							<span class="rp_sub_header">Fairness</span>
 							<ol class="rp_original rp_sub" type="i">
 								<li>
 									[If B gets \(s_A\), then A can compute \(s_B\).]
-									<p>
-										If A follows the protocols and B does not (i.e., \(M_B'\neq M_B\)), then for any fixed \(k\), there exists a probabilistic polynomial-time algorithm S which takes \((n,\)<span class="load-equation" data-equation="delta">\(\Delta_A\)</span>\()\) as input and outputs a number \(v\) such that the following is true:
-									</p>
+									<p>If A follows the protocols and B does not (i.e., \(M_B'\neq M_B\)), then for any fixed \(k\), there exists a probabilistic polynomial-time <span class="load-definable">algorithm</span> S which takes (\(n\),<span class="load-equation" data-equation="delta">\(\Delta_A\)</span>) as input and outputs a number \(v\) such that the following is true:</p>
 									$$Pr\{(u_B=s_A)\wedge(v\neq s_B)\}\in O\left(\frac{1}{n^k}\right).$$
 								</li>
 								<li>
 									[If A gets \(s_B\), then B can compute \(s_A\).] (Interchange A and B in (i).)
 								</li>
 							</ol>
-							<span class="rp_theorem_header" id="theorem2">
-								Theorem 2
-							</span>
+							<span class="rp_theorem_header" id="theorem2">Theorem 2</span>
 							<p class="rp_original rp_theorem">
-								Let \(P_A\) and \(P_B\) be any two intractable ensembles. There exists a protocol \(M=(M_A,M_B)\) for exchanging secrets between \(P_A\) and \(P_B\) that achieves validity and fairness.
+								Let \(P_A\) and \(P_B\) be any two <span class="load-definable" data-define="intractable puzzle ensemble">intractable ensembles</span>. There exists a protocol \(M=(M_A,M_B)\) for exchanging secrets between \(P_A\) and \(P_B\) that achieves validity and <span class="load-definable">fairness</span>.
 							</p>
 						</section>
 						<section id="sec5" data-section-name="General Computation">
 							<h2>5. General Computation</h2>
 							<p class="rp_original">
-								Consider an interactive computational problem \(\langle h_n,w_n\rangle\) as defined in <a href="#sec1">Section 1</a>. We will show that there exists a protocol for it that satisfies some strong privacy and fairness constraints. In this extended abstract, we restrict ourselves to the case when \(w_n\) represents a pair of functions \((f_n,g_n)\) to be evaluated, i.e. given inputs \(i_A,i_B\), A and B wish to compute \(f_n(i_A,i_B)\) and \(g_n(i_A,i_B)\). The results can be extended to the general case.
+								Consider an interactive computational problem \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>,<span class="load-equation" data-equation="w">\(w_n\)</span>\(\rangle\) as defined in <a href="#sec1">Section 1</a>. We will show that there exists a protocol for it that satisfies some strong privacy and <span class="load-definable">fairness</span> constraints. In this extended abstract, we restrict ourselves to the case when <span class="load-equation" data-equation="w">\(w_n\)</span> represents a pair of functions \((f_n,g_n)\) to be evaluated, i.e. given inputs \(i_A,i_B\), A and B wish to compute \(f_n(i_A,i_B)\) and \(g_n(i_A,i_B)\). The results can be extended to the general case.
 							</p>
 							<p class="rp_original">
-								We will consider two variants, which differ in their input-output format. Model I is the natural one, in which the inputs and outputs are as specified in the previous paragraph. However, since in general A does not have any control over the value of \(i_B\), a dishonest B can pretend that \(i_B\) is an arbitrary value \(y\). As a result, the fairness constraint can at most force B to compute the value of \(f_n(i_A,y)\) for <i>some</i> \(y\). In Model II, A will be given as input \((i_A,p_A,q_A,N_A,N_B,E_{N_B}(i_B))\) where \(N_A=p_A\cdot q_A\) is the product of two large primes, and \(N_B\) is another integer of two large prime factors used to encode B's parameter \(i_B\) as \(E_{N_B}(i_B)\); B has as input \((i_B,p_B,q_B,N_B,N_A,E_{N_A}(i_A))\). The integers \(N_A\) and \(N_B\) are generated from some distributions such that factoring these numbers are computationally intractable; \(E_N\) can be any probabilistic encryption scheme that is provably secure under the <a href="#IAF">Intractability Assumption of Factoring</a> (e.g. the ones in Alexi, Chor, Goldreich, and Schnorr<sup class="reference" data-citation="ACG"></sup> or Blum and Goldwasser<sup class="reference" data-citation="BG"></sup>). In the output, A, B obtain \((\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(,v_A,w_A)\) and \(\cancel{(u_A,v_A,w_A)}\;(\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\). When both parties behave honestly, <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A'),\) and \(w_A=\left(N_B', E_{N_B'}\left(g_n(i_A,i_B)\right)\right)\), where \(N_A'\) and \(N_B'\) are integers which are the products of two large prime factors; similarly for the output of B. Such formats arise quite naturally in concatenating protocols. The privacy and fairness constraints in this model are stronger than the first model.
+								We will consider two variants, which differ in their input-output format. Model I is the natural one, in which the inputs and outputs are as specified in the previous paragraph. However, since in general A does not have any control over the value of \(i_B\), a dishonest B can pretend that \(i_B\) is an arbitrary value \(y\). As a result, the <span class="load-definable">fairness</span> constraint can at most force B to compute the value of \(f_n(i_A,y)\) for <i>some</i> \(y\). In Model II, A will be given as input \((i_A,p_A,q_A,N_A,N_B,E_{N_B}(i_B))\) where \(N_A=p_A\cdot q_A\) is the product of two large primes, and \(N_B\) is another integer of two large prime factors used to encode B's parameter \(i_B\) as \(E_{N_B}(i_B)\); B has as input \((i_B,p_B,q_B,N_B,N_A,E_{N_A}(i_A))\). The integers \(N_A\) and \(N_B\) are generated from some distributions such that factoring these numbers are computationally intractable; \(\operatorname E_N\) can be any probabilistic encryption scheme that is provably secure under the <a href="#IAF">Intractability Assumption of Factoring</a> (e.g. the ones in Alexi, Chor, Goldreich, and Schnorr<sup class="reference" data-citation="ACG">[16]</sup> or Blum and Goldwasser<sup class="reference" data-citation="BG">[17]</sup>). In the output, A, B obtain (<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(,v_A,w_A\)) and \(\cancel{(u_A,v_A,w_A)}\;\)(<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B\)). When both parties behave honestly, <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A'),\) and \(w_A=\left(N_B', E_{N_B'}\left(g_n(i_A,i_B)\right)\right)\), where \(N_A'\) and \(N_B'\) are integers which are the products of two large prime factors; similarly for the output of B. Such formats arise quite naturally in concatenating protocols. The privacy and <span class="load-definable">fairness</span> constraints in this model are stronger than the first model.
 							</p>
 							<p class="rp_annotation">
 								Notice the error corrected above.
@@ -440,12 +434,12 @@
 								</p>
 								<span class="rp_sub_header">Validity</span>
 								<p class="rp_original rp_sub">
-									With probability 1-\(o\)(poly-small), <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B)\) and <span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,i_B)\).
+									With probability 1-<span class="load-definable" data-define="negligible">\(\operatorname o\)(poly-small)</span>, <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B)\) and <span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,i_B)\).
 								</p>
 								<span class="rp_sub_header">Privacy</span>
 								<ol class="rp_original rp_sub">
 									<li>
-										<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="load-equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\;\)<span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="load-definable">stochastic</span> process of running \(M\) with input from <span class="load-equation" data-equation="h_n">\(h\)</span>, and \(\mathcal{L}\) is the stochastic process of having \((i_A,i_B)\) distributed according to <span class="load-equation" data-equation="h_n">\(h\)</span> and <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B),\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,i_B)\).
+										<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="load-equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\;\)<span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="load-definable">stochastic</span> process of running \(M\) with input from <span class="load-equation" data-equation="h_n">\(h\)</span>, and \(\mathcal{L}\) is the <span class="load-definable">stochastic</span> process of having \((i_A,i_B)\) distributed according to <span class="load-equation" data-equation="h_n">\(h\)</span> and <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B),\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,i_B)\).
 									</li>
 									<li>
 										(Interchange A and B in (i).)
@@ -455,17 +449,17 @@
 									That is to say, running our protocol will not make it any easier to find the other person's input than it would have been if an oracle had given us the answer.
 								</p>
 								<p class="rp_original">
-									We now define the constraints when A follows the protocol while B may cheat; that is, B executes the protocol with any \(M_B'\). Since \(M_B'\) is arbitrary, B can always generate an \(i_B'\) and acts as if this is the input value \(i_B\). As A can never detect this method of cheating, A has to cooperate and let B know the value of \(g_n(i_A,i_B')\). This enables B to control A's output <span class="load-equation" data-equation="u_x">\(u_A\)</span>, and to probe somewhat into the value of \(i_A\); this cannot be prevented if we want to preserve the validity condition for honest parties described above. We shall require that B cannot do more than that. Let us denote by \(\mathcal{Z}\) the set \(\{0,1\}^*\cup\{\)CHEATING\(\}\), and extend the function \(f_n\) by \(f_n(i_A,y)=\)CHEATING if \(y=\)CHEATING.
+									We now define the constraints when A follows the protocol while B may cheat; that is, B executes the protocol with any \(M_B'\). Since \(M_B'\) is arbitrary, B can always generate an \(i_B'\) and acts as if this is the input value \(i_B\). As A can never detect this method of cheating, A has to cooperate and let B know the value of \(g_n(i_A,i_B')\). This enables B to control A's output <span class="load-equation" data-equation="u_x">\(u_A\)</span>, and to probe somewhat into the value of \(i_A\); this cannot be prevented if we want to preserve the validity condition for honest parties described above. We shall require that B cannot do more than that. Let us denote by \(\mathcal{Z}\) the set \(\{0,1\}^*\cup\{\)<span class="main_language">Cheating</span>\(\}\), and extend the function \(f_n\) by \(f_n(i_A,y)=\)<span class="main_language">Cheating</span> if \(y=\)<span class="main_language">Cheating</span>.
 								</p>
 								<p class="rp_original">
 									Let \(M_B'\) be any communicating <span class="load-definable">Turing machine</span>, and let <span class="load-equation" data-equation="U_n">\(U_n\)</span> be the distribution corresponding to <span class="load-equation" data-equation="u_x">\(u_A\)</span> when \((M_A,M_B')\) are used to carry out the protocol.
 								</p>
 								<span class="rp_sub_header">Validity</span>
 								<p class="rp_original rp_sub">
-									There exists a probabilistic polynomial-time algorithm \(S\) that takes input \((n,i_B)\) and produces a random \(y\in \mathcal{Z}\) such that <span class="load-equation" data-equation="U_n">\(U_n\)</span> is indistinguishable from the distribution corresponding to \(f_n(i_A,y)\).
+									There exists a probabilistic polynomial-time <span class="load-definable">algorithm</span> \(S\) that takes input \((n,i_B)\) and produces a random \(y\in \mathcal{Z}\) such that <span class="load-equation" data-equation="U_n">\(U_n\)</span> is indistinguishable from the distribution corresponding to \(f_n(i_A,y)\).
 								</p>
 								<p class="rp_original">
-									Let \(\mathcal{J}\) be the <span class="load-definable">stochastic</span> process of running \((M_A,M_B')\) with input \((i_A,i_B)\) distributed according to <span class="load-equation" data-equation="h_n">\(h_n\)</span>. Let \(\mathcal{S}\) be the set of all probabilistic polynomial-time algorithms \(S\) that take input \((n,i_B)\) and produce random \(y\in \mathcal{Z}\). For any \(S\in\mathcal{S}\), let \(\mathcal{L}(S)\) be the stochastic process of generating \((i_A,i_B)\) according to \(h_n\), running \(S\) on input \((n,i_B)\) to produce a random \(y\), and defining <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,y),\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,y)\). Intuitively, B may use \(S\) to generate a random \(y\), and after that, acts as if \(y\) were the value of \(i_B\), and otherwise follows the protocol; \(\mathcal{L}(S)\) is clearly a less informative process for B in which A simply tells B the value of <span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,y)\) without other communications taking place.
+									Let \(\mathcal{J}\) be the <span class="load-definable">stochastic</span> process of running \((M_A,M_B')\) with input \((i_A,i_B)\) distributed according to <span class="load-equation" data-equation="h_n">\(h_n\)</span>. Let \(\mathcal{S}\) be the set of all probabilistic polynomial-time <span class="load-definable" data-define="algorithm">algorithms</span> \(S\) that take input \((n,i_B)\) and produce random \(y\in \mathcal{Z}\). For any \(S\in\mathcal{S}\), let \(\mathcal{L}(S)\) be the <span class="load-definable">stochastic</span> process of generating \((i_A,i_B)\) according to <span class="load-equation" data-equation="h_n">\(h_n\)</span>, running \(S\) on input \((n,i_B)\) to produce a random \(y\), and defining <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,y),\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,y)\). Intuitively, B may use \(S\) to generate a random \(y\), and after that, acts as if \(y\) were the value of \(i_B\), and otherwise follows the protocol; \(\mathcal{L}(S)\) is clearly a less informative process for B in which A simply tells B the value of <span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,y)\) without other communications taking place.
 								</p>
 								<p class="rp_annotation">
 									Yao wasn't extremely clear here: \(\mathcal{J}\) is the first of those two options, in which they run the protocol after B chooses some \(y\), whereas \(\mathcal{L}\) is the oracle model in which B is simply handed the value \(g_n(i_A,y)\).
@@ -475,16 +469,16 @@
 									For any \(M_B'\), there exists an \(S\in\mathcal{S}\) such that <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="load-equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\;\)<span class="load-equation" data-equation="leq">\(\leq\)</span>\(\;\)<span class="load-equation" data-equation="I_n">\(I_n\)</span>\(^{(\mathcal{L}(S))}(i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\,|\,i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\).
 								</p>
 								<p class="rp_annotation">
-									In words, the probability of recovering extra information during a real run of the protocol is not more likely than the probability of recovering extra information in the oracle model. The key intuition here is that we only need to prove the existence of <i>some</i> \(S\) because this is <u>any</u> \(M_B'\). In other words, no matter what \(M_B'\) does, there is some oracle model (for some input) that would give B at least as much information, if not more. 
+									In words, the probability of recovering extra information during a real run of the protocol is not more likely than the probability of recovering extra information in the oracle model. The key intuition here is that we only need to prove the existence of <i>some</i> \(S\) because this is <u>any</u> \(M_B'\). In other words, no matter what \(M_B'\) does, there is some oracle model (for some input) that would give B at least as much information, if not more.
 								</p>
 								<p class="rp_original">
-									The fairness concept refers to obtaining the information that one is entitled to. Suppose B wishes to know the value of \(g_n(i_A,y)\) for some \(y\) other than \(i_B\). As we mentioned earlier, B can succeed by pretending \(i_B=y\) and otherwise follow the protocol; in the process A will obtain also the value of \(f_n(i_A,y)\). The privacy constraint stipulates that no information other than the value of \(g_n(i_A,y)\) is conveyed from A to B. The fairness constraint is concerned with whether it is possible for B to stop at some point, once B has the information about \(g_n(i_A,y)\), and deny the knowledge of \(f_n(i_A,y)\) to A. The following formulation is not the strongest possible version of this constraint, but it is sufficient for some applications such as exchanging secrets of sufficient length. Let \(L_n\) denote the set of all possible values of \(f_n(i_A,i_B)\) when \((i_A,i_B)\) is distributed according to <span class="load-equation" data-equation="h_n">\(h_n\)</span>.
+									The <span class="load-definable">fairness</span> concept refers to obtaining the information that one is entitled to. Suppose B wishes to know the value of \(g_n(i_A,y)\) for some \(y\) other than \(i_B\). As we mentioned earlier, B can succeed by pretending \(i_B=y\) and otherwise follow the protocol; in the process A will obtain also the value of \(f_n(i_A,y)\). The privacy constraint stipulates that no information other than the value of \(g_n(i_A,y)\) is conveyed from A to B. The <span class="load-definable">fairness</span> constraint is concerned with whether it is possible for B to stop at some point, once B has the information about \(g_n(i_A,y)\), and deny the knowledge of \(f_n(i_A,y)\) to A. The following formulation is not the strongest possible version of this constraint, but it is sufficient for some applications such as exchanging secrets of sufficient length. Let <span class="load-equation" data-equation="L-n">\(L_n\)</span> denote the set of all possible values of \(f_n(i_A,i_B)\) when \((i_A,i_B)\) is distributed according to <span class="load-equation" data-equation="h_n">\(h_n\)</span>.
 								</p>
 								<span class="rp_definition_header" id="def1">
 									Definition 1 - Recovery Algorithm
 								</span>
 								<p class="rp_definition">
-									A <i>recovery algorithm</i> \(R\) for A is a probabilistic polynomial-time algorithm which takes \((n,\Delta_A)\) as input, and outputs a string \(v\).
+									A <i>recovery algorithm</i> \(R\) for A is a probabilistic polynomial-time algorithm which takes (\(n\),<span class="load-equation" data-equation="delta">\(\Delta_A\)</span>) as input, and outputs a string \(v\).
 								</p>
 								<p class="rp_annotation">
 									That is to say, a recovery algorithm is any which attempts to determine \(f_n(i_A,i_B)\) given what A knows.
@@ -498,23 +492,23 @@
 								<span class="rp_sub_header">Fairness</span>
 								<p class="rp_original rp_sub">
 									For any fixed \(k\), there exists a recovery algorithm \(R\) (dependent on \(M_B'\)) whose output \(v\) satisfies the following condition:
-									$$Pr\{(u_B=g_n(i_A,i_B))\wedge (v\notin L_n)\}\leq \beta_n(G)+O(\frac{1}{n^k})$$
+									$$\operatorname{Pr}\{(u_B=g_n(i_A,i_B))\wedge (v\notin L_n)\}\leq \beta_n(G)+\operatorname O\left(\frac{1}{n^k}\right)$$
 									for some \(G\).
 								</p>
 								<p class="rp_annotation">
 									Saying it in words is helpful. For any fixed \(k\), we can find a recovery algorithm \(R\) and a guessing algorithm \(G\) so that the probability that B correctly determined \(g_n(i_A,i_B)\) by the end, but that A could not find any possible value for \(f_n(i_A,i_B)\) by the end, is only <span class="load-definable" data-define="negligible">negligibly</span> higher than the probability that B could have just guessed \(g_n(i_A,i_B)\) in the first place.
 								</p>
 								<p class="rp_original">
-									To complete the definitions, we interchange the roles of A and B in the above discussions, which gives the constraints of validity, privacy, and fairness when B follows the protocol and A is cheating.
+									To complete the definitions, we interchange the roles of A and B in the above discussions, which gives the constraints of validity, privacy, and <span class="load-definable">fairness</span> when B follows the protocol and A is cheating.
 								</p>
 								<p class="rp_original">
-									A protocol is said to achieve validity, privacy, and fairness, if all the above constraints are satisfied.
+									A protocol is said to achieve validity, privacy, and <span class="load-definable">fairness</span>, if all the above constraints are satisfied.
 								</p>
 								<span class="rp_theorem_header" id="theorem3">
 									Theorem 3
 								</span>
 								<p class="rp_original rp_theorem">
-									For any interactive computational problem \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>\(,(f_n,g_n)\rangle\), there exists a protocol \(M\) that achieves validity, privacy, and fairness.
+									For any interactive computational problem \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>\(,(f_n,g_n)\rangle\), there exists a protocol \(M\) that achieves validity, privacy, and <span class="load-definable">fairness</span>.
 								</p>
 							</section>
 							<p class="rp_original">
@@ -531,7 +525,7 @@
 								</p>
 								<span class="rp_sub_header">Privacy</span>
 								<ol class="rp_original rp_sub" type="i">
-									<li>	
+									<li>
 										<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="load-equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\;\)<span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="load-definable">stochastic</span> process of running \(M\) with input from <span class="load-equation" data-equation="h_n">\(h\)</span>, and \(\mathcal{L}\) is the stochastic process of having \((i_A,i_B)\) distributed according to <span class="load-equation" data-equation="h_n">\(h\)</span> and <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B),\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(=g_n(i_A,i_B)\).
 									</li>
 									<li>(Interchange A and B in (i).)</li>
@@ -540,21 +534,21 @@
 									So one can not learn anything extra by having \(\Delta, v, w\) that they wouldn't know from the oracle.
 								</p>
 								<p class="rp_original">
-									If A follows the protocol, but B may cheat and execute some \(M_B'\), then let \(d_n\) be the probability of runs in which \(v_A\neq\)CHEATING, and let \(U_{n,i_B}\) be the probability distribution for <span class="load-equation" data-equation="u_x">\(u_B\)</span> when restricted to such runs and with \(i_B\) being an input for B. If \(d_n\) is <span class="load-definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in\Omega(\frac{1}{n^t})\) for some fixed \(t&gt;0\), then we require the following constraints of Validity and Privacy.
+									If A follows the protocol, but B may cheat and execute some \(M_B'\), then let \(d_n\) be the probability of runs in which \(v_A\neq\)<span class="main_language">Cheating</span>, and let <span class="load-equation" data-equation="U_n">\(U_{n,i_B}\)</span> be the probability distribution for <span class="load-equation" data-equation="u_x">\(u_B\)</span> when restricted to such runs and with \(i_B\) being an input for B. If \(d_n\) is <span class="load-definable">negligible</span>, then A will almost always catch B cheating, and no further requirement is needed. On the other hand, if \(d_n\in\operatorname\Omega\left(\frac{1}{n^t}\right)\) for some fixed \(t\gt0\), then we require the following constraints of Validity and Privacy.
 								</p>
 								<span class="rp_sub_header">Validity</span>
 								<p class="rp_original rp_sub">
-									With probability \(d_n-o\)(poly-small), <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A')\) and \(w_A'=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor.
+									With probability \(d_n-\)<span class="load-definable" data-define="negligible">\(\operatorname o\)(poly-small)</span>, <span class="load-equation" data-equation="u_x">\(u_A\)</span>\(=f_n(i_A,i_B), v_A=(p_A',q_A',N_A')\) and \(w_A'=E_{N_B'}(g_n(i_A,i_B))\), where \(N_A'\) is the product of \(n\)-bit primes \(p_A'\) and \(q_A'\); the distribution of \(N_A'\) is such that it is intractable to factor.
 								</p>
 								<p class="rp_annotation">
-									Only negligibly often can B both cheat undetectedly and change Alice's output.
+									Only <span class="load-definable" data-define="negligible">negligibly</span> often can B both cheat undetectedly and change Alice's output.
 								</p>
 								<span class="rp_sub_header">Privacy</span>
 								<p class="rp_original rp_sub">
-									<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="load-equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\;\)<span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="load-definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the stochastic process of being given the value of <span class="load-equation" data-equation="u_x">\(u_B\)</span> distributed according to \(U_{n,i_B}\).
+									<span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{J})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;\)<span class="load-equation" data-equation="delta">\(\Delta_B\)</span>\(,i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\(,v_B,w_B)\;\)<span class="load-equation" data-equation="approx">\(\approx\)</span> <span class="load-equation" data-equation="I_n">\(I_n^{(\mathcal{L})}\)</span>\((i_A,i_B,\)<span class="load-equation" data-equation="u_x">\(u_A\)</span>\(\;|\;i_B,\)<span class="load-equation" data-equation="u_x">\(u_B\)</span>\()\) where \(\mathcal{J}\) is the <span class="load-definable">stochastic</span> process induced by the execution of the protocol \(M=(M_A,M_B')\), and \(\mathcal{L}\) is the <span class="load-definable">stochastic</span> process of being given the value of <span class="load-equation" data-equation="u_x">\(u_B\)</span> distributed according to <span class="load-equation" data-equation="U_n">\(U_{n,i_B}\)</span>.
 								</p>
 								<p class="rp_annotation">
-									In other words, cheating undetectedly does not allow B to learn anything more than he would have by using a trusted party.
+									In other words, cheating undetectedly does not allow B to learn anything more than he would have by using a <span class="load-definable">trusted party</span>.
 								</p>
 								<p class="rp_original">
 									As in Model I, let \(G\) denote a probabilistic polynomial-time <span class="load-definable">Turing machine</span> that takes \(i_B\) as input and outputs \(z\); let \(\beta_n(G)\) denote the probability that \(z=g_n(i_A,i_B)\).
@@ -562,11 +556,11 @@
 								<span class="rp_sub_header">Fairness</span>
 								<p class="rp_original rp_sub">
 									For any fixed \(k\), there exists a recovery algorithm \(R\) (dependent on \(M_B'\)) whose output \(s\) satisfies the following condition:
-									$$Pr\{(u_B=g_n(i_A,i_B))\wedge(s\neq f_n(i_A,i_B))\} \leq\beta_n(G)+O(\frac{1}{n^k})$$
-									for some G.
+									$$Pr\{(u_B=g_n(i_A,i_B))\wedge(s\neq f_n(i_A,i_B))\} \leq\beta_n(G)+\operatorname O\left(\frac{1}{n^k}\right)$$
+									for some \(G\).
 								</p>
 								<p class="rp_annotation">
-									We can make a recovery algorithm good enough that the probability of B getting \(g_n\), but our recovery algorithm not working, is negligible, unless B just guessed by using \(G\).
+									We can make a recovery algorithm good enough that the probability of B getting \(g_n\), but our recovery algorithm not working, is <span class="load-definable">negligible</span>, unless B just guessed by using \(G\).
 								</p>
 								<p class="rp_original">
 									When B follows the protocol and A may cheat, we have a set of requirements obtained from the above ones by switching the roles of A and B.
@@ -580,13 +574,13 @@
 						<section id="sec6" data-section-name="Connections">
 							<h2>6. Connections</h2>
 							<p class="rp_original">
-								We have chosen a semantic definition of privacy, namely, that communications will not enable one to compute more accurately any polynomial-time predicates. In recent literature, an elegant concept of <i>minimum-knowledge transfer</i> protocol was introduced in <span class="reference" data-citation="GMR"></span> (and generalized in <span class="reference" data-citation="GHY"></span>) to capture the notion of no unintended information disclosure. It is easy to define privacy constraints for our problems in terms of this concept. We can show that the protocols used to prove the theorems also satisfy the minimum knowledge transfer requirements.
+								We have chosen a semantic definition of privacy, namely, that communications will not enable one to compute more accurately any polynomial-time predicates. In recent literature, an elegant concept of <i>minimum-knowledge transfer</i> protocol was introduced in <span class="reference" data-citation="GMR">[1]</span> (and generalized in <span class="reference" data-citation="GHY">[2]</span>) to capture the notion of no unintended information disclosure. It is easy to define privacy constraints for our problems in terms of this concept. We can show that the protocols used to prove the theorems also satisfy the minimum knowledge transfer requirements.
 							</p>
 							<span class="rp_theorem_header" id="theorem4">
 								Theorem 4
 							</span>
 							<p class="rp_original rp_theorem">
-								For any interactive computational problem \(\langle h_n,(f_n,g_n)\rangle\), there exists a minimum knowledge transfer protocol \(M\) that achieves validity and fairness.
+								For any interactive computational problem \(\langle\)<span class="load-equation" data-equation="h_n">\(h_n\)</span>\(,(f_n,g_n)\rangle\), there exists a minimum knowledge transfer protocol \(M\) that achieves validity and <span class="load-definable">fairness</span>.
 							</p>
 							<p class="rp_original">
 								The proofs of the theorems are lengthy, and will be given in the complete paper.

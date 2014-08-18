@@ -129,7 +129,7 @@
 							<h2>Theorems</h2>
 							<a href="#lemma1"><span class="rp_theorem_header">Lemma 1: (Linear Functional)</span></a>
 							<p class="rp_original rp_theorem">
-								For any \(t,\,(t\leq n-1)\), any linear functional $$F(x_0,\dots,x_{n-1})=a_0x_0+\cdots+a_{n-1}x_{n-1},$$ where each \(P_i\) has input \(x_i\) and the \(a_i\) are known constants, can be computed <span class="load-definable" data-define="t-private">\(t\)-privately</span>. 
+								For any \(t,\,(t\leq n-1)\), any linear functional $$F(x_0,\dots,x_{n-1})=a_0x_0+\cdots+a_{n-1}x_{n-1},$$ where each \(P_i\) has input \(x_i\) and the \(a_i\) are known constants, can be computed <span class="load-definable" data-define="t-private">\(t\)-privately</span>.
 							</p>
 							<a href="corollary1"><span class="rp_theorem_header">Corollary 1: (Matrix Multiplication)</span></a>
 							<p class="rp_original rp_theorem">
@@ -172,7 +172,7 @@
 							<h2>Referencing This Paper</h2>
 							<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
 							<p class="rp_self_reference">
-								M. Ben-Or, S. Goldwasser, and A. Wigderson. Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988. 
+								M. Ben-Or, S. Goldwasser, and A. Wigderson. Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation. <i>Proceedings of the Twentieth Annual ACM Symposium on Theory of Computing,</i> pages 1-10. ACM. 1988.
 							</p>
 						</section>
 					</section>
@@ -330,7 +330,7 @@
 							</p>
 							<span class="rp_theorem_header" id="lemma1">Lemma 1: (Linear Functional)</span>
 							<p class="rp_original rp_theorem">
-								For any \(t,\,(t\leq n-1)\), any linear functional $$F(x_0,\dots,x_{n-1})=a_0x_0+\cdots+a_{n-1}x_{n-1},$$ where each \(P_i\) has input \(x_i\) and the \(a_i\) are known constants, can be computed <span class="load-definable" data-define="t-private">\(t\)-privately</span>. 
+								For any \(t,\,(t\leq n-1)\), any linear functional $$F(x_0,\dots,x_{n-1})=a_0x_0+\cdots+a_{n-1}x_{n-1},$$ where each \(P_i\) has input \(x_i\) and the \(a_i\) are known constants, can be computed <span class="load-definable" data-define="t-private">\(t\)-privately</span>.
 							</p>
 							<p class="rp_original">
 								From the lemma we have
@@ -763,7 +763,7 @@
 								Claim: \(GF(q)\) has a primitive \(n\)th <span class="load-definable">root of unity</span> if and only if \(n\,|\,q-1\). To quickly demonstrate this, assume we have a primitive \(n\)th root of unity \(\omega\) for \(GF(q)\) where \(n\not|\;q-1\). Take any generator \(g\) in this field: by definition of a generator, there exists an \(a\) such that \(g^a=\omega\). Since the field is a multiplicative ring, \(g^{q-1}=g^0=1\). But \(g^{an}=1\), and by definition of a primitive root of unity, there is no smaller (non-zero) exponent such that this is true. So \(g^{an}=g^{q-1}\) therefore implies \(an=q-1\), clearly contradicting our assumption that \(n\not|\;q-1\).
 							</li>
 							<li id="footnote3" class="rp_annotation_footnote">
-								Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from the lower bound on \(\operatorname \phi(n)\): for any \(n\geq3,\,\phi(n)\geq\frac{n}{e^\gamma\log{\log n}}+\operatorname O\left(\frac{n}{(\log{\log n})^2}\right)\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^{\operatorname\phi(n)}\gt n\). Since we are minimizing \(\phi(n)\) anyway, for simplicity we can assume the big-oh is 0, leaving us with: <span style="font-size:200%">$$2^{\frac{e^{-\gamma}n}{\log{\log n}}}\geq n.$$</span> The left side clearly dominates the right side (both intuitively and through analysis of their derivatives), and the left is greater than the right starting at \(n=5\), so we are left only to demonstrate that \(p^{\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)) and for 4 (\(3^2\gt 4\)). With the exception of \(n=4\) (where we must use \(p=3\) but without weakening our claim) we have demonstrated that, for the lowest possible \(p,\,p^{\phi(n)}\gt n.\quad\blacksquare\)  
+								Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from the lower bound on \(\operatorname \phi(n)\): for any \(n\geq3,\,\phi(n)\geq\frac{n}{e^\gamma\log{\log n}}+\operatorname O\left(\frac{n}{(\log{\log n})^2}\right)\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^{\operatorname\phi(n)}\gt n\). Since we are minimizing \(\phi(n)\) anyway, for simplicity we can assume the big-oh is 0, leaving us with: <span style="font-size:200%">$$2^{\frac{e^{-\gamma}n}{\log{\log n}}}\geq n.$$</span> The left side clearly dominates the right side (both intuitively and through analysis of their derivatives), and the left is greater than the right starting at \(n=5\), so we are left only to demonstrate that \(p^{\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)) and for 4 (\(3^2\gt 4\)). With the exception of \(n=4\) (where we must use \(p=3\) but without weakening our claim) we have demonstrated that, for the lowest possible \(p,\,p^{\phi(n)}\gt n.\quad\blacksquare\)
 							</li>
 						</ol>
 					</section>
@@ -815,7 +815,7 @@
 		7.4. mark definitions
 		7.5. mark equations
 		7.6. link to previous research
-8. Write protocol descriptions 
+8. Write protocol descriptions
 9. Check previous research for places to link
 10. Write intro, goals, results
 11. Tags

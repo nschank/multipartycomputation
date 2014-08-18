@@ -76,7 +76,7 @@
 					</div>
 
 
-					<h1>Overview</h1>	
+					<h1>Overview</h1>
 					<div class="main_toc"></div>
 
 					<section id="intro" data-section-name="Introduction">
@@ -85,7 +85,7 @@
 							<b>Verifiable Secret Sharing and Multiparty Protocols with Honest Majority</b> is a 1989 by Tal Rabin and Michael Ben-Or, a combination of two separate papers they were working on, which provides some useful theorems for the powers of an adversary in multiparty computations. It is a culmination of several years in which multiparty computation research was mostly focused on fault tolerance in the face of adversarial behavior, and offers the strongest possible protections a multiparty protocol can offer (as always, under certain assumptions). The assumptions made are all related to networks and to the adversary, not to computational intractability, so the secrecy offered is <span class="load-definable" data-define="information-theoretic security">information-theoretic</span>.
 						</p>
 						<p class="rp_analysis">
-							This paper's main results relate to how <span class="load-definable" data-define="broadcast channel">broadcast channels</span> affect the tolerability of adversary structures. Since verifiable secret sharing is a primitive used by essentially all multiparty computation protocols presented before, the authors using broadcast as a primitive allows an honest majority to achieve information theoretic security, but requires an exponentially small error probability for \(n/3\leq t\lt n/2\) <span class="load-definable" data-define="malicious party">faulty players</span>. 
+							This paper's main results relate to how <span class="load-definable" data-define="broadcast channel">broadcast channels</span> affect the tolerability of adversary structures. Since verifiable secret sharing is a primitive used by essentially all multiparty computation protocols presented before, the authors using broadcast as a primitive allows an honest majority to achieve information theoretic security, but requires an exponentially small error probability for \(n/3\leq t\lt n/2\) <span class="load-definable" data-define="malicious party">faulty players</span>.
 						</p>
 					</section>
 					<section id="goals" data-section-name="Goals and Results">
@@ -97,7 +97,7 @@
 							In a complete network, assuming the existence of a broadcast channel, information-theoretically secure verifiable secret sharing is achievable for \(t\lt n/2\) <span class="load-definable" data-define="malicious party">faulty players</span>. However, for \(n/3\leq t\lt n/2\), it is not possible to avoid an exponentially small probability of error. As a result, <b>honest majority is sufficient to provide information-theoretically secure multiparty computation with a <span class="load-definable">negligible</span> probability of error.</b>
 						</p>
 						<p class="rp_analysis">
-							In an incomplete network, assuming \(2t+1\)-<span class="load-definable">connectivity</span>, and without a broadcast channel, information-theoretically secure verifiable secret sharing is achievable for \(t\lt n/3\) faulty players, with no probability of error. 
+							In an incomplete network, assuming \(2t+1\)-<span class="load-definable">connectivity</span>, and without a broadcast channel, information-theoretically secure verifiable secret sharing is achievable for \(t\lt n/3\) faulty players, with no probability of error.
 						</p>
 						<p class="rp_analysis">
 							We note that, as mentioned in some other papers for completeness, in the general case \(t=n/3\) (or \(t=n/2\) with broadcast) does not necessarily offer information-theoretic security.
@@ -153,7 +153,7 @@
 						<ol class="rp_annotation rp_theorem">
 							<li>If \(D\) and \(R\) (the recipient) are knights, then \(R\) will always accept \(s\) if it actually originated with \(D\), and will reject with probability \(\geq 1-\frac1{2^k}\) any other value \(s'\).</li>
 							<li>Regardless if \(D\) is a knight or a knave, \(INT\) (the intermediary) will know, with probability of mistake \(\leq\frac1{2^k}\), whether \(R\) will accept the \(s\) that \(INT\) holds.</li>
-							<li>If \(D\) is a knave then, after it has been decided (in a sense to be explained later on) that a secret has been distributed, either 
+							<li>If \(D\) is a knave then, after it has been decided (in a sense to be explained later on) that a secret has been distributed, either
 								<ul class="rp_original">
 									<li><i>All</i> knights will agree upon a secret \(s\) which they <span class="load-definable" data-define="define a secret">define</span> and which is the one shared to <i>them</i> by the dealer, or</li>
 									<li><i>All</i> knights decide to disqualify the dealer.</li>
@@ -343,7 +343,7 @@
 									We postulate a <i>dynamic adversary</i> who, at any time during a protocol, and having seen all public may choose which additional players will turn into knaves. The total number of players who are knaves is bounded by \(t\). In addition, the dealer may also be a knave.
 								</p>
 								<p class="rp_annotation">
-									The dynamic adversary concept is codified in the literature as an <i>adaptive adversary</i> a few years later. 
+									The dynamic adversary concept is codified in the literature as an <i>adaptive adversary</i> a few years later.
 								</p>
 								<p class="rp_original">
 									We choose a security parameter \(k\), so that \(2^{-k}\) is deemed a small enough error margin for our needs. Our protocols will be randomized in the sense that no matter what the adversary and the knaves will do, the probability of an error, i.e. improper outcome, will be smaller than \(2^{-k}\). All of our protocols and algorithms will be polynomial in the number of players \(n\), and in \(k\).
@@ -430,7 +430,7 @@
 								<li>The dealer chooses randomly \(a_1,\dots,a_t\in\mathbb Z_p\) and defines \(f(x)=a_tx^t+\dots+a_1x+s\).</li>
 								<li>The dealer computes \(f(\alpha_i)\) for all \(i\).</li>
 								<li>For each \(f(\alpha_i)\), the dealer chooses random \(b_{i1}\neq0,y_{i1},\dots,b_{in}\neq0,y_{in}\) and creates the check vectors as described above.</li>
-								<li>The dealer hands over to \(P_i\) the data:	
+								<li>The dealer hands over to \(P_i\) the data:
 									<ul>
 										<li>\(f(\alpha_i)\): \(P_i\)'s value on the graph of \(f(x)\).</li>
 										<li>\(y_{i1},\dots,y_{in}\): \(P_i\) will hand \(y_{ij}\) to \(P_j\), so \(P_j\) can authenticate \(P_i\)'s piece.</li>
@@ -471,7 +471,7 @@
 							</p>
 							<ol class="rp_original">
 								<li>The <a href="#sec1.2">properties</a> of the previous secret sharing protocol, when the dealer is a knight.</li>
-								<li>If \(D\) is a knave then, after it has been decided (in a sense to be explained later on) that a secret has been distributed, either 
+								<li>If \(D\) is a knave then, after it has been decided (in a sense to be explained later on) that a secret has been distributed, either
 									<ul class="rp_original">
 										<li><i>All</i> knights will agree upon a secret \(s\) which they <span class="load-definable" data-define="define a secret">define</span> and which is the one shared to <i>them</i> by the dealer, or</li>
 										<li><i>All</i> knights decide to disqualify the dealer.</li>
@@ -1013,7 +1013,7 @@
 		7.4. mark definitions
 		7.5. mark equations
 		7.6. link to previous research
-8. Write protocol descriptions 
+8. Write protocol descriptions
 9. Check previous research for places to link
 10. Write intro, goals, results
 11. Tags
