@@ -1,169 +1,183 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Title - Author, Year</title>
-        <link rel="stylesheet" type="text/css" href="../../style/main.css">
-        <link rel="stylesheet" type="text/css" href="../../style/equation.css">
-        <link rel="stylesheet" type="text/css" href="../../style/ref.css">
-        <link rel="stylesheet" type="text/css" href="../../style/glossary.css">
-        <link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
-        <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+	<head>
+		<meta charset="utf-8">
+		<title>Title - Author, Year</title>
+		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
+		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
+		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
+		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
+		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
-        <script type="text/javascript" src="../../script/equation.js"></script>
-        <script type="text/javascript" src="../../script/ref.js"></script>
-        <script type="text/javascript" src="../../script/fnote.js"></script>
-        <script type="text/javascript" src="../../script/glossary.js"></script>
-        <script type="text/javascript" src="../../script/def.js"></script>
+		<script type="text/javascript" src="../../script/difficulty.js"></script>
+		<script type="text/javascript" src="../../script/equation.js"></script>
+		<script type="text/javascript" src="../../script/ref.js"></script>
+		<script type="text/javascript" src="../../script/fnote.js"></script>
+		<script type="text/javascript" src="../../script/glossary.js"></script>
+		<script type="text/javascript" src="../../script/def.js"></script>
 		<script type="text/javascript" src="../../script/toc.js"></script>
-        <script type="text/javascript"
-                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-        <script type="text/javascript">
+		<script type="text/javascript"
+				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<script type="text/javascript">
 			<!--
-            function fill(box)
+			function fill(box)
 			{
 				switch (box)
 				{
 					default:
 						console.log("Developer note: Equation " + box + " undefined");
-						return [{type:"p",content:"No info on this equation yet."}];
+						return {difficulty: 5, blockName:"default", info: [{type: "p", content: "No info on this equation yet."}]};
 				}
 			}
 
-			self_def["non-general word"] = {title:"word", def:[]};
+			self_def["word"] = {title: "word", def: [{type: "p", difficulty: 5, blockName: "###blockname", content: "definition"}]};
 			//-->
-        </script>
-    </head>
-    <body>
-        <div class="main_foreground">
-            <div class="main_toplevel main_header">
-                <h1>Multiparty Computation</h1>
-            </div>
-            <div class="main_toplevel main_navigation">
-                <a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
-                <a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
-                <a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
-                <a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
-                <a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
-                <a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
-            </div>
-            <div class="main_toplevel main_section main_color1" id="overview">
-                <div class="main_section_nav_container">
-                    <div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
-                    <div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
-                    <div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
-                    <div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
-                </div>
-                <div class="main_window main_fullwidth">
-                    <div class="rp_linkbox"><a href="pdf/###.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
-					
-                    <span class="rp_title">Paper Title</span>
-                    <span class="rp_info">Year
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="rp_author" href="../authors/authorpage.html">Author</a>
-					</span>
-					
-					<div class="rp_snippet">
-						&ldquo;&rdquo;
-					</div>
-					
-					THIS PAGE IS UNDER CONSTRUCTION
-					<h1>Overview</h1>
-                    <div class="main_toc"></div>
-					
+		</script>
+	</head>
+	<body>
+		<div class="main_foreground">
+			<div class="main_toplevel main_header">
+				<h1>Multiparty Computation</h1>
+			</div>
+			<div class="main_toplevel main_navigation">
+				<a href="../../index.html"><div class="main_navbox"><h2>home</h2></div></a>
+				<a href="../../learn.html"><div class="main_navbox"><h2>learn</h2></div></a>
+				<a href="../../research.html"><div class="main_navbox"><h2>research</h2></div></a>
+				<a href="../../nextsteps.html"><div class="main_navbox"><h2>build</h2></div></a>
+				<a href="../../resources.html"><div class="main_navbox"><h2>resources</h2></div></a>
+				<a href="../../aboutus.html"><div class="main_navbox"><h2>about us</h2></div></a>
+			</div>
+			<div class="main_toplevel main_section main_color1" id="overview">
+				<div class="main_section_nav_container">
+					<div class="main_section_nav_box"><a href="../timeline.html">Timeline</a></div>
+					<div class="main_section_nav_box"><a href="../title.html">By Title</a></div>
+					<div class="main_section_nav_box"><a href="../authors.html">By Author</a></div>
+					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
+				</div>
+				<div class="main_window main_fullwidth">
+					<section class="top_section" id="overview" data-section-name="Overview">
+						<div class="rp_linkbox"><a href="pdf/###.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 						
-                    <section id="intro">
-						<h2>Introduction</h2>
-						<p class="rp_analysis">
-							<b>Paper Title</b> is...
-						</p>
+						<span class="rp_title">Paper Title</span>
+						<span class="rp_info">Year
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a class="rp_author" href="../authors/authorpage.html">Author</a>
+						</span>
+						
+						<div class="rp_snippet">
+							&ldquo;&rdquo;
+						</div>
+						
+						THIS PAGE IS UNDER CONSTRUCTION
+						<h1>Overview</h1>
+						<div class="main_toc"></div>
+						
+							
+						<section id="intro">
+							<h2>Introduction</h2>
+							<p class="rp_analysis">
+								<b>Paper Title</b> is...
+							</p>
+						</section>
+						<section id="goals">
+							<h2>Goals and Results</h2>
+							<p class="rp_analysis">
+								Some goals that they had.
+							</p>
+							<p class="rp_analysis">
+								Don't forget some results, too!
+							</p>
+						</section>
+						<section id="assumptions">
+							<h2>Assumptions</h2>
+						</section>
+						<section id="defs">
+							<h2>Definitions</h2>
+							<a href="#def1"><span class="rp_definition_header">Definition 1 - </span></a>
+							<p class="rp_original rp_definition">
+								A definition 
+							</p>
+						</section>
+						<section id="theorems">
+							<h2>Theorems</h2>
+							<p class="rp_original">Some general definitions used by several theorems</p>
+							<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
+							<p class="rp_original rp_theorem">
+								A theorem
+							</p>
+						</section>
+						<section id="protocol">
+							<h2>Protocols</h2>
+							<h3><a href="#secxx">Some Protocol Defined</a></h3>
+							<ul class="rp_analysis">
+								<li><b>Number of parties: </b></li>
+								<li><b>Function(s): </b></li>
+								<li><b>Privacy constraints: </b></li>
+								<li><b>Cheating: </b></li>
+								<li><b>Bits exchanged: </b></li>
+								<li><b>Subprotocols: </b></li>
+								<li><b>Runtime: </b></li>
+								<li><b>Assumptions: </b></li>
+								<li><b>Implementations: </b></li>
+								<li><b>Notes: </b></li>
+							</ul>
+						</section>
+						<section id="further">
+							<h2>Further Reading</h2>
+						</section>
+						<section id="ref">
+							<h2>Referencing This Paper</h2>
+							<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
+							<p class="rp_self_reference">
+								A reference for this paper
+							</p>
+						</section>
 					</section>
-					<section id="goals">
-						<h2>Goals and Results</h2>
-						<p class="rp_analysis">
-							Some goals that they had.
-						</p>
-						<p class="rp_analysis">
-							Don't forget some results, too!
-						</p>
+				</div>
+			</div>
+			<div class="main_toplevel main_section main_color5">
+				<div class="main_window main_fullwidth">
+					<section class="top_section" id="annotated_paper" data-section-name="Annotated Paper">
+						<h1>Annotated Paper</h1>
+						<div class="main_toc"></div>
+						
+						
 					</section>
-					<section id="assumptions">
-						<h2>Assumptions</h2>
-					</section>
-					<section id="defs">
-						<h2>Definitions</h2>
-						<a href="#def1"><span class="rp_definition_header">Definition 1 - </span></a>
-						<p class="rp_original rp_definition">
-							A definition 
-						</p>
-					</section>
-					<section id="theorems">
-						<h2>Theorems</h2>
-						<p class="rp_original">Some general definitions used by several theorems</p>
-						<a href="#theorem1"><span class="rp_theorem_header">Theorem 1</span></a>
-						<p class="rp_original rp_theorem">
-							A theorem
-						</p>
-					</section>
-					<section id="protocol">
-						<h2>Protocols</h2>
-						<h3><a href="#secxx">Some Protocol Defined</a></h3>
-						<ul class="rp_analysis">
-							<li><b>Number of parties: </b></li>
-							<li><b>Function(s): </b></li>
-							<li><b>Privacy constraints: </b></li>
-							<li><b>Cheating: </b></li>
-							<li><b>Bits exchanged: </b></li>
-							<li><b>Subprotocols: </b></li>
-							<li><b>Runtime: </b></li>
-							<li><b>Assumptions: </b></li>
-							<li><b>Implementations: </b></li>
-							<li><b>Notes: </b></li>
-						</ul>
-					</section>
-					<section id="further">
-						<h2>Further Reading</h2>
-					</section>
-					<section id="ref">
-						<h2>Referencing This Paper</h2>
-						<p class="rp_analysis">To cite this paper, simply copy and paste the below into your citation:</p>
-						<p class="rp_self_reference">
-							A reference for this paper
-						</p>
-					</section>
-                </div>
-            </div>
-            <div class="main_toplevel main_section main_color5" id="annotated_paper">
-                <div class="main_window main_fullwidth"></div>
-            </div>
+				</div>
+			</div>
 			<div class="main_toplevel main_section main_color7" id="footnotes">
 				<div class="main_fullwidth">
-					<h1>Footnotes</h1>
-					
-					<ol id="footnotelist">
-						<li id="footnote1"></li>
-					</ol>
+					<section class="top_section" id="footnotes" data-section-name="Footnotes">
+						<h1>Footnotes</h1>
+						
+						<ol id="footnotelist">
+							<li id="footnote1"></li>
+						</ol>
+					</section>
 				</div>
-            </div>
-            <div class="main_toplevel main_section main_color8" id="references">
+			</div>
+			<div class="main_toplevel main_section main_color8">
 				<div class="main_fullwidth">
-					<h1>References</h1>
-					<ol id="referencelist">
-						<li id="citation1">A citation</li>
-					</ol>
+					<section class="top_section" id="references" data-section-name="References">
+						<h1>References</h1>
+						<ol id="referencelist">
+							<li id="citation1">A citation</li>
+						</ol>
+					</section>
 				</div>
-            </div>
-            <div class="main_toplevel main_section main_color9">
-                <div class="rp_problems">
-                    <p><a href="mailto:multipartycomputationorg+###@gmail.com">Problem with this page?</a></p>
-                </div>
-                <p>Created by Nicolas Schank 2014, Brown University</p>
+			</div>
+			<div class="main_toplevel main_section main_color9">
+				<div class="rp_problems">
+					<p><a href="mailto:multipartycomputationorg+###@gmail.com">Problem with this page?</a></p>
+				</div>
+				<p>Created by Nicolas Schank 2014, Brown University</p>
 				<p>All original work is free for any use by anyone whatsoever.</p>
 				<p>For more information about liability and licensing of the original paper, see <a href="../liability.html">Liability</a>.</p>
-            </div>
-        </div>
-    </body>
+			</div>
+		</div>
+	</body>
 </html>
 <!--
 1. Save template page
