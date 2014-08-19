@@ -97,7 +97,7 @@ var authorList =
 	"Tal Geula Malkin":"",
 	"Tal Malkin":"",
 	"Tal Mor":"",
-	"Tal Rabin":"",
+	"Tal Rabin":"http://researcher.watson.ibm.com/researcher/view.php?person=us-talr",
 	"Tamir Tassa":"",
 	"Thomas Jakobsen":"",
 	"Thomas Schneider":"",
