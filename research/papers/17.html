@@ -71,14 +71,13 @@
 
 						<span class="rp_title">Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</span>
 						<span class="rp_info">1988
-							
 							<span class="rp_author">Michael Ben-Or</span>
 							<span class="rp_author">Shafi Goldwasser</span>
-							<span class="rp_author">Avi Wigderson	</span>
+							<span class="rp_author">Avi Wigderson</span>
 						</span>
 
 						<div class="rp_snippet">
-							&ldquo;[Chaum, Cr&eacute;peau, and Damg&aring;rd] have to allow an exponentially small error probability for both correctness and privacy (we can guarantee them with no errors).... In [their solution] the simulation is of Boolean operations while our solution allows direct simulation of arithmetic operations in large finite fields.&rdquo;
+							&ldquo;[Chaum, Cr&eacute;peau, and Damg&aring;rd] have to allow an exponentially small error probability for both correctness and privacy (we can guarantee them with no errors).... In [their solution] the simulation is of Boolean operations while our solution allows direct simulation of arithmetic operations in large <span class="load-definable" data-define="Galois field">finite fields</span>.&rdquo;
 						</div>
 						<h1>Overview</h1>
 
@@ -87,13 +86,13 @@
 						<section id="intro" data-section-name="Introduction">
 							<h2>Introduction</h2>
 							<p class="rp_analysis">
-								<b>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</b> is a 1988 paper by Ben-Or, Goldwasser, and Wigderson which demonstrated the bounds of (and described a protocol for) multiparty computation which is <span class="load-definable" data-define="information theoretic security">information theoretically secure</span>. It is one of <a href="34.html">two papers</a> in the same year which demonstrates that up to &frac13; parties can be actively <span class="load-definable" data-define="malicious adversary">malicious</span> without affecting correctness or privacy. The other paper offers information theoretic security in a very similar manner, while this paper additionally guarantees correctness (as opposed to a <span class="load-definable">negligible</span> probability of incorrectness).
+								<b>Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation</b> is a 1988 paper by Ben-Or, Goldwasser, and Wigderson which demonstrated the bounds of (and described a protocol for) multiparty computation which is <span class="load-definable" data-define="information theoretic security">information theoretically secure</span>. It is one of <a href="34.html">two papers</a> in the same year which demonstrates that up to &frac13; parties can be actively <span class="load-definable" data-define="malicious adversary">malicious</span> without affecting correctness or privacy. The other paper offers <span class="load-definable">information theoretic security</span> in a very similar manner, while this paper additionally guarantees correctness (as opposed to a <span class="load-definable">negligible</span> probability of incorrectness).
 							</p>
 							<p class="rp_analysis">
-								One major difference between this paper and <a href="34.html">its chronological counterpart</a> is the type of computation performed. Chaum's construction is based around Boolean operation simulations, while this protocol uses an arithmetic circuit within a finite field. Very significantly, this finite field is <u>not</u> arbitrary as implied in the paper: it must be of the form \(GF(p^{k\operatorname\phi(n)})\), where \(n\) is the number of parties who must participate, \(p\) is any prime that is not a factor of \(n\) (generally the minimal prime), and \(k\) is any<sup class="footnote" id="fref3" data-footnote="3"><a href="#footnote3">3</a></sup> positive integer. This is necessary in order to allow for the fault tolerance properties sought; more details can be found in <a href="#sec5">Section 5</a>.
+								One major difference between this paper and <a href="34.html">its chronological counterpart</a> is the type of computation performed. Chaum's construction is based around Boolean operation simulations, while this protocol uses an arithmetic circuit within a <span class="load-definable" data-define="Galois field">finite field</span>. Very significantly, this <span class="load-definable" data-define="Galois field">finite field</span> is <u>not</u> arbitrary as implied in the paper: it must be of the form \(GF(p^{k\operatorname\phi(n)})\), where \(n\) is the number of parties who must participate, \(p\) is any prime that is not a factor of \(n\) (generally the minimal prime), and \(k\) is any<sup class="footnote" id="fref3" data-footnote="3"><a href="#footnote3">3</a></sup> positive integer. This is necessary in order to allow for the fault tolerance properties sought; more details can be found in <a href="#sec5">Section 5</a>.
 							</p>
 							<p class="rp_analysis">
-								Note that a true protocol specification is not given in this work; it offers completeness theorems, and uses a more general specification in order to prove its purposes. For example, no particular algorithm for the error checking and correctness is given, but its existence is sufficient to prove their claims.
+								Note that a true protocol specification is not given in this work; it offers completeness theorems, and uses a more general specification in order to prove its purposes. For example, no particular <span class="load-definable" data-define="algorithm">algorithms</span> for the error checking or correctness is given, but its existence is sufficient to prove their claims.
 							</p>
 						</section>
 						<section id="goals" data-section-name="Goals and Results">
@@ -102,23 +101,23 @@
 								The authors intended to find upper bounds on what types of computation are possible in the <span class="load-definable" data-define="information-theoretic security">information-theoretic model</span>, and the bounds they found were optimal. This result is, of course, dependent on the specification of the network (which can be found in <a href="#assumptions">Assumptions</a>).
 							</p>
 							<p class="rp_analysis">
-								Simply put, protocols can guarantee both correctness and information-theoretic security in the case when \(t\lt\frac n 3\) parties are <span class="load-definable" data-define="malicious adversary">malicious</span>. This paper additionally extends the cryptographic privacy on <span class="load-definable" data-define="passive adversary">passive adversaries</span>&mdash;\(t\lt\frac n 2\)&mdash;to information-theoretic multiparty computation. These two limits are not achievable simultaneously through the protocol presented.
+								Simply put, protocols can guarantee both correctness and <span class="load-definable" data-define="information theoretic security">information-theoretic security</span> in the case when \(t\lt\frac n 3\) parties are <span class="load-definable" data-define="malicious adversary">malicious</span>. This paper additionally extends the cryptographic privacy on <span class="load-definable" data-define="passive adversary">passive adversaries</span>&mdash;\(t\lt\frac n 2\)&mdash;to information-theoretic multiparty computation. These two limits are not achievable simultaneously through the protocol presented.
 							</p>
 							<p class="rp_analysis">
-								The authors provided privacy using a familiar verifiable secret sharing scheme based on finite fields. Their methodology for correctness is more clever; by ensuring the VSS scheme was constructed such that it had an <span class="load-definable" data-define="error-correcting code">error correcting code</span> (using the <span class="load-definable">Discrete Fourier Transform</span>), they reduced fault tolerance within the scheme to known algorithms for error correction.
+								The authors provided privacy using a familiar verifiable secret sharing scheme based on <span class="load-definable" data-define="Galois field">finite fields</span>. Their methodology for correctness is more clever; by ensuring the VSS scheme was constructed such that it had an <span class="load-definable" data-define="error-correcting code">error correcting code</span> (using the <span class="load-definable">Discrete Fourier Transform</span>), they reduced fault tolerance within the scheme to known <span class="load-definable" data-define="algorithm">algorithms</span> for error correction.
 							</p>
 						</section>
 						<section id="assumptions" data-section-name="Assumptions">
 							<h2>Assumptions</h2>
 							<p class="rp_analysis">
-								This paper made a point of not relying on any cryptographic assumptions; its results are only based on the type of network, which is specified to be complete, <span class="load-definable" data-define="synchronous network">synchronous</span>, <span class="load-definable" data-define="secure network">secure</span>, and <span class="load-definable" data-define="authenticated network">authenticated</span>.
+								This paper made a point of not relying on any <span class="load-definable" data-define="cryptographic security">cryptographic</span> assumptions; its results are only based on the type of network, which is specified to be complete, <span class="load-definable" data-define="synchronous network">synchronous</span>, <span class="load-definable" data-define="secure network">secret</span>, and <span class="load-definable" data-define="authenticated network">authenticated</span>.
 							</p>
 						</section>
 						<section id="defs" data-section-name="Definitions">
 							<h2>Definitions</h2>
 							<a href="#appendix"><span class="rp_definition_header">Definition 1 - \(t\)-privacy</span></a>
 							<p class="rp_original rp_definition">
-								A protocol is \(t\)-<i>private</i> if any set of at most \(t\) players cannot compute after the protocol more than they could jointly compute solely from their set of privacy inputs and outputs.
+								A protocol is \(t\)-<i>private</i> if any set of at most \(t\) players cannot compute after the protocol more than they could have jointly compute solely from their set of privacy inputs and outputs.
 							</p>
 							<a href="#appendix"><span class="rp_definition_header">Definition 2 - \(t\)-resiliency</span></a>
 							<p class="rp_original rp_definition">
@@ -155,7 +154,7 @@
 						<section id="further" data-section-name="Further Reading">
 							<h2>Further Reading</h2>
 							<p class="rp_analysis">
-								For a similar but differently presented take on information-theoretic computation within a finite field, see Chaum, Cr&eacute;peau, and Damg&aring;rd's <a href="34.html">work of the same year</a>.
+								For a similar but differently presented take on <span class="load-definable" data-define="information theoretic security">information-theoretic</span> computation within a <span class="load-definable" data-define="Galois field">finite field</span>, see Chaum, Cr&eacute;peau, and Damg&aring;rd's <a href="34.html">work of the same year</a>.
 							</p>
 							<p class="rp_analysis">
 								This paper is part of a series covering the completeness theorems on <u>tolerability of adversarial structures</u>:
@@ -180,8 +179,8 @@
 			</div>
 			<div class="main_toplevel main_section main_color3">
 				<div class="main_window main_fullwidth">
-					<section class="top_section" id="annotated_paper" data-section-name="Annotated Paper (extended Abstract)">
-						<h1>Annotated Paper (extended Abstract)</h1>
+					<section class="top_section" id="annotated_paper" data-section-name="Annotated Paper (extended abstract)">
+						<h1>Annotated Paper (extended abstract)</h1>
 						<div class="main_toc"></div>
 						<section id="abstract" data-section-number="0" data-section-name="Abstract">
 							<h2>Abstract</h2>
@@ -202,19 +201,19 @@
 								The rapid development of distributed systems raised the natural question of what tasks can be performed by them (especially when faults occur). A large body of literature over the past ten years addressed this question. There are two approaches to this question, depending on whether a limit on the computational power of processors is assumed or not.
 							</p>
 							<p class="rp_original">
-								The cryptographic approach, inaugurated by Diffie and Hellman<sup class="reference" data-citation="DH"></sup>, assumes the players are computationally bounded, and further assumes the existence of certain (one-way) functions, that can be computed but not inverted by the player.
+								The <span class="load-definable" data-define="cryptographic security">cryptographic approach</span>, inaugurated by Diffie and Hellman<sup class="reference" data-citation="DH">[3]</sup>, assumes the players are computationally bounded, and further assumes the existence of certain (<span class="load-definable" data-define="one-way function">one-way</span>) functions, that can be computed but not inverted by the player.
 							</p>
 							<p class="rp_original">
-								This simple assumption was postulated in <span class="reference" data-citation="DH"></span> in order to achieve the basic task of secure message exchange between two of the processors, but turned out to be universal! In subsequent years, ingenious protocols based on the same assumption were given for increasingly harder tasks such as contract signing, secret exchange, joint coin flipping, voting, and playing poker. These results culminated, through the definition of zero-knowledge proofs<sup class="reference" data-citation="GMR"></sup> and their existence for NP-complete problems<sup class="reference" data-citation="GMW1"></sup>, in completeness theorems for two-party<sup class="reference" data-citation="Y1"></sup> and multiparty<sup class="reference" data-citation="GMW2"></sup> cryptographic distributed computation. In particular the results of Goldreich, Micali, and Wigderson in <span class="reference" data-citation="GMW2"></span> were the main inspiration to our work. They show that, if (non-uniform) <span class="load-definable" data-define="one-way function">one-way functions</span> exist, then every (probabilistic) function of \(n\) inputs can be computed by \(n\) computationally bounded processors in such a way that: (1) If no faults occur, no subset of the players can compute any additional information, and (2) Even if <span class="load-definable" data-define="Byzantine fault">Byzantine faults</span> are allowed, no set of size \(t\lt\frac n 2\) can either disrupt the computation or compute additional information.
+								This simple assumption was postulated in <span class="reference" data-citation="DH">[3]</span> in order to achieve the basic task of secure message exchange between two of the processors, but turned out to be universal! In subsequent years, ingenious protocols based on the same assumption were given for increasingly harder tasks such as contract signing, secret exchange, joint <span class="load-definable" data-define="coin flip">coin flipping</span>, voting, and playing poker. These results culminated, through the definition of <span class="load-definable" data-define="zero knowledge proof">zero-knowledge proofs</span><sup class="reference" data-citation="GMR">[8]</sup> and their existence for <span class="load-definable">NP-complete</span> problems<sup class="reference" data-citation="GMW1">[6]</sup>, in completeness theorems for two-party<sup class="reference" data-citation="Y1">[12]</sup> and multiparty<sup class="reference" data-citation="GMW2">[7]</sup> cryptographic distributed computation. In particular the results of Goldreich, Micali, and Wigderson in <span class="reference" data-citation="GMW2">[7]</span> were the main inspiration to our work. They show that, if (non-uniform) <span class="load-definable" data-define="one-way function">one-way functions</span> exist, then every (probabilistic) function of \(n\) inputs can be computed by \(n\) computationally bounded processors in such a way that: (1) If no faults occur, no subset of the players can compute any additional information, and (2) Even if <span class="load-definable" data-define="Byzantine fault">Byzantine faults</span> are allowed, no set of size \(t\lt\frac n 2\) can either disrupt the computation or compute additional information.
 							</p>
 							<p class="rp_original">
-								The non-cryptographic (or <span class="load-definable" data-define="information theoretic security">information-theoretic</span>) approach does not limit the computational power of the processors. Here, the notion of privacy is much stronger - for a piece of data to be unknown to a set of players it does not suffice that they cannot compute it within a certain time bound from what they know, but simply that it cannot be computed at all!
+								The non-cryptographic (or <span class="load-definable" data-define="information theoretic security">information-theoretic</span>) approach does not limit the computational power of the processors. Here, the notion of privacy is much stronger&mdash;for a piece of data to be unknown to a set of players it does not suffice that they cannot compute it within a certain time bound from what they know, but simply that it cannot be computed at all!
 							</p>
 							<p class="rp_original">
-								To facilitate the basic primitive of secret message exchange between a pair of players, we have <span class="load-definable" data-define="secure network">secure channels</span>. (For an excellent source of results and problems in the case no secure channels exist, see <span class="reference" data-citation="BL"></span>). Unlike the cryptographic case, very little was known about the capabilities of this model. Two main basic problems were studied and solved (in the synchronous case): Byzantine agreement<sup class="reference" data-citation="LPS"></sup><sup class="reference" data-citation="DS"></sup> and collective coin flipping<sup class="reference" data-citation="Y2"></sup>.
+								To facilitate the basic primitive of secret message exchange between a pair of players, we have <span class="load-definable" data-define="secure network">secure channels</span>. (For an excellent source of results and problems in the case no secure channels exist, see <span class="reference" data-citation="BL">[1]</span>). Unlike the <span class="load-definable" data-define="cryptographic security">cryptographic</span> case, very little was known about the capabilities of this model. Two main basic problems were studied and solved (in the <span class="load-definable" data-define="synchronous network">synchronous</span> case): <span class="load-definable">Byzantine agreement</span><sup class="reference" data-citation="LPS"></sup><sup class="reference" data-citation="DS">[4]</sup> and collective <span class="load-definable" data-define="coin flip">coin flipping</span><sup class="reference" data-citation="Y2">[13]</sup>.
 							</p>
 							<p class="rp_original">
-								This paper provides a full understanding of the power and limits of this model, by proving a few completeness theorems. Comparing these results to the cryptographic case of <span class="reference" data-citation="GMW2"></span>, one gets the impression that one-way functions are "more powerful" than secure channels. This should not be surprising, if one considers the case of \(n=2\). Clearly, here a secure channel is useless, and indeed two (non-fault) players can compute the OR function of their bits using cryptography, while the reader can be convinced (it will be proven later) that any protocol will leak information in the information-theoretic sense. The lower bounds we provide show that the same phenomenon is true for any value of \(n\). A similar situation arises in the Byzantine case where, using cryptography, one can allow \(t\lt\frac n 2\) fault players, but in the non-cryptographic case one must have \(t\lt\frac n 3\).
+								This paper provides a full understanding of the power and limits of this model, by proving a few completeness theorems. Comparing these results to the <span class="load-definable" data-define="cryptographic security">cryptographic</span> case of <span class="reference" data-citation="GMW2">[7]</span>, one gets the impression that <span class="load-definable" data-define="one-way function">one-way functions</span> are "more powerful" than <span class="load-definable" data-define="secure network">secure channels</span>. This should not be surprising, if one considers the case of \(n=2\). Clearly, here a <span class="load-definable" data-define="secure network">secure channel</span> is useless, and indeed two (non-fault) players can compute the OR function of their bits using cryptography, while the reader can be convinced (it will be proven later) that any protocol will leak information in the information-theoretic sense. The lower bounds we provide show that the same phenomenon is true for any value of \(n\). A similar situation arises in the Byzantine case where, using cryptography, one can allow \(t\lt\frac n 2\) fault players, but in the non-cryptographic case one must have \(t\lt\frac n 3\).
 							</p>
 							<p class="rp_original">
 								As happened in the cryptographic case, the protocols are based on a new method for computing with shared secrets. Our constructions are based on Algebraic Coding Theory, particularly the use of generalized BCH codes.
@@ -223,10 +222,10 @@
 								It is important to stress here that our main protocols require only a polynomial amount of work from the players. (In fact, they are efficient enough to be practical!). Putting no bound on the computational power serves only to allow the most stringent definition of privacy and the most liberal definition of faultiness, both of which we can handle.
 							</p>
 							<p class="rp_original">
-								Essentially the same results we obtain here were independently discovered by Chaum, Cr&eacute;peau, and Damg&aring;rd<sup class="reference" data-citation="CCD"></sup>. We briefly point out the small differences of this work from ours. The simple case of no faults is almost identical. Their solution in the case of Byzantine faults is elementary and requires no error correcting codes. The error correction is achieved using a clever scheme of zero knowledge proofs. This has two consequences: They have to allow an exponentially small error probability for both correctness and privacy (we can guarantee them with no errors), and the frequent zero knowledge proofs increase the complexity of their protocols. In the solution of <span class="reference" data-citation="CCD"></span> the simulation is of Boolean operations while our solution allows direct simulation of arithmetic operations in large finite fields. Thus, for example, computing the product of two \(n\)-bit numbers using <span class="reference" data-citation="CCD"></span> calls for \(O(\log{n})\) communication rounds. This can be done in \(O(1)\) rounds using our solution.
+								Essentially the same results we obtain here were independently discovered by Chaum, Cr&eacute;peau, and Damg&aring;rd<sup class="reference" data-citation="CCD">[2]</sup>. We briefly point out the small differences of this work from ours. The simple case of no faults is almost identical. Their solution in the case of <span class="load-definable" data-define="Byzantine fault">Byzantine faults</span> is elementary and requires no <span class="load-definable" data-define="error-correcting code">error correcting codes</span>. The error correction is achieved using a clever scheme of <span class="load-definable" data-define="zero knowledge proof">zero knowledge proofs</span>. This has two consequences: They have to allow an exponentially small error probability for both correctness and privacy (we can guarantee them with no errors), and the frequent <span class="load-definable" data-define="zero knowledge proof">zero knowledge proofs</span> increase the complexity of their protocols. In the solution of <span class="reference" data-citation="CCD">[2]</span> the simulation is of Boolean operations while our solution allows direct simulation of arithmetic operations in large <span class="load-definable" data-define="Galois field">finite fields</span>. Thus, for example, computing the product of two \(n\)-bit numbers using <span class="reference" data-citation="CCD">[2]</span> calls for \(O(\log{n})\) communication rounds. This can be done in \(O(1)\) rounds using our solution.
 							</p>
 							<p class="rp_original">
-								We mention that the above results already found application in the new constant expected number of rounds protocol for Byzantine agreement of Feldman and Micali<sup class="reference" data-citation="FM"></sup>.
+								We mention that the above results already found application in the new constant expected number of rounds protocol for Byzantine agreement of Feldman and Micali<sup class="reference" data-citation="FM">[5]</sup>.
 							</p>
 							<p class="rp_original">
 								We proceed to define the model, state the results and prove them. In the full paper we mention generalizations and extensions of our results to other tasks (playing games rather than computing functions), to other model parameters (<span class="load-definable" data-define="synchronous network">synchrony</span>, communication networks), and other complexity measures (number of rounds).
@@ -275,7 +274,7 @@
 						<section id="sec3" data-section-name="Proof of Theorem 1">
 							<h2>3. Proof of Theorem 1</h2>
 							<p class="rp_original">
-								Let \(P_0,\dots,P_{n-1}\) be a set of players, and let \(n\geq 2t+1\). Let \(F\) be the function which this set of players wants to compute <span class="load-definable" data-define="t-private">\(t\)-privately</span>, where each player holds some input variables to the function \(F\). Let \(E\) be some fixed finite field, with \(|E|\gt n\). Without loss of generality we may assume that all inputs are elements from \(E\) and that \(F\) is some polynomial (in the input variables) over \(E\), and that we are given some arithmetic circuit computing \(|F|\), using the operations \(+,\times\), and constants from \(E\).
+								Let \(P_0,\dots,P_{n-1}\) be a set of players, and let \(n\geq 2t+1\). Let \(F\) be the function which this set of players wants to compute <span class="load-definable" data-define="t-private">\(t\)-privately</span>, where each player holds some input variables to the function \(F\). Let \(E\) be some fixed <span class="load-definable" data-define="Galois field">finite field</span>, with \(|E|\gt n\). Without loss of generality we may assume that all inputs are elements from \(E\) and that \(F\) is some polynomial (in the input variables) over \(E\), and that we are given some arithmetic circuit computing \(|F|\), using the operations \(+,\times\), and constants from \(E\).
 							</p>
 							<p class="rp_original">
 								To simplify our explanation, we divide the computation into three stages.
@@ -298,10 +297,10 @@
 							<section id="sec3.1" data-section-name="The Input Stage">
 								<h3>3.1. The Input Stage</h3>
 								<p class="rp_original">
-									Let \(a_0,\dots,a_{n-1}\) be some \(n\) distinct non-zero points in our field \(E\). (This is why we need \(|E|\gt n\).) Each player holding some input \(s\in E\), introduces the input to the computation by selecting \(t\) random elements \(a_i\in E\), for \(i=1,\dots,t\), setting $$f(x)=s+a_1x+\cdots+a_tx^t$$ and sending to each player \(P_i\) the value \(s_i=f(a_i)\).
+									Let \(a_0,\dots,a_{n-1}\) be some \(n\) distinct non-zero points in our <span class="load-definable" data-define="Galois field">field</span> \(E\). (This is why we need \(|E|\gt n\).) Each player holding some input \(s\in E\), introduces the input to the computation by selecting \(t\) random elements \(a_i\in E\), for \(i=1,\dots,t\), setting $$f(x)=s+a_1x+\cdots+a_tx^t$$ and sending to each player \(P_i\) the value \(s_i=f(a_i)\).
 								</p>
 								<p class="rp_original">
-									As in Shamir's<sup class="reference" data-citation="Sh"></sup> secret sharing scheme, the sequence \((s_0,\dots,s_{n-1})\) is a sequence of \(t\)-wise independent random variables uniformly distributed over \(E\), thus the value of the input is completely independent from the shares \(\{s_i\}\) that are given to any set of \(t\) players that does not include the player holding the secret.
+									As in Shamir's<sup class="reference" data-citation="Sh">[11]</sup> secret sharing scheme, the sequence \((s_0,\dots,s_{n-1})\) is a sequence of \(t\)-wise independent random variables uniformly distributed over \(E\), thus the value of the input is completely independent from the shares \(\{s_i\}\) that are given to any set of \(t\) players that does not include the player holding the secret.
 								</p>
 								<p class="rp_annotation">
 									We proved the above (and otherwise discuss it further) in <a href="34.html#sec3">Chaum, Damg&aring;rd, and Cr&eacute;peau's paper</a> of the same year.
@@ -381,10 +380,10 @@
 							<section id="sec4.3" data-section-name="The Randomization Step">
 								<h3>4.3. The Randomization Step</h3>
 								<p class="rp_original">
-									As noted above, the coefficients of the product polynomial are not completely random, and likewise the coefficients of its truncation <span class="load-equation" data-equation="truncation">\(k(x)\)</span> may not be completely random. To randomize the coefficients, each player \(P_i\) randomly selects a polynomial \(q_i(x)\) of degree \(2t\) with a zero free coefficient, and distributes its shares among the player. By a simple generalization of the argument in Shamir's<sup class="reference" data-citation="Sh">[?]</sup> scheme, it is easy to see that knowing \(t\) values on this polynomial gives no information on the vector of coefficients of the monomials of \(x,x^2,\dots,x^t\) of \(q_i(x)\).
+									As noted above, the coefficients of the product polynomial are not completely random, and likewise the coefficients of its truncation <span class="load-equation" data-equation="truncation">\(k(x)\)</span> may not be completely random. To randomize the coefficients, each player \(P_i\) randomly selects a polynomial \(q_i(x)\) of degree \(2t\) with a zero free coefficient, and distributes its shares among the player. By a simple generalization of the argument in Shamir's<sup class="reference" data-citation="Sh">[11]</sup> scheme, it is easy to see that knowing \(t\) values on this polynomial gives no information on the vector of coefficients of the monomials of \(x,x^2,\dots,x^t\) of \(q_i(x)\).
 								</p>
 								<p class="rp_annotation">
-									This is also a simple generalization of the argument we make for the information-theoretic security of any \(k\leq x\) shares for any \(x\)-degree polynomial, <a href="34.html#sec3">here</a>.
+									This is also a simple generalization of the argument we make for the <span class="load-definable" data-define="information theoretic security">information-theoretic security</span> of any \(k\leq x\) shares for any \(x\)-degree polynomial, <a href="34.html#sec3">here</a>.
 								</p>
 								<p class="rp_original">
 									Thus instead of using \(h(x)\) in our reduction we can use $$\widetilde{h}(x)=h(x)+\sum\limits_{j=0}^{n-1}{q_j(x)}$$ which satisfies \(\widetilde{h}(0)=h(0)\) but the other coefficients of \(x^i,1\leq i\leq t\), are completely random. Since each player can evaluate his or her point \(\widetilde s_i = \widetilde h(\alpha_i)\), we can now apply the truncation procedure using the <a href="#corollary1">matrix multiplication lemma</a> to arrive at a completely random polynomial <span class="load-equation" data-equation="truncation">\(\widetilde k(x)\)</span> which satisfies both \(\operatorname{deg}\widetilde k(x)=t\) and \(\widetilde k(0)=a\cdot b\), and \(\widetilde k(x)\) is properly shared among all the players.
@@ -394,7 +393,7 @@
 								</p>
 							</section>
 							<p class="rp_original">
-								Thus (omitting many well known details, see <span class="reference" data-citation="GMW1">[?]</span>) we have proved
+								Thus (omitting many well known details, see <span class="reference" data-citation="GMW1">[6]</span>) we have proved
 							</p>
 							<span class="rp_theorem_header" id="theorem1">Theorem 1:</span>
 							<p class="rp_original rp_theorem">
@@ -402,8 +401,8 @@
 							</p>
 							<span class="rp_sub_header">Remarks:</span>
 							<ol class="rp_original rp_sub">
-								<li>The complexity of computing \(F\) \(t\)-privately is bounded by a factor polynomial in \(n\) multiplied by the complexity of computing \(F\).</li>
-								<li>If \(F\) can be computed by an arithmetic circuit over some field using unbounded fan-in linear operations and bounded fan-in multiplication, in depth \(d\), then \(F\) can be computed \(t\)-privately in \(O(d)\) rounds of exchange of information.</li>
+								<li>The complexity of computing \(F\) <span class="load-definable" data-define="t-private">\(t\)-privately</span> is bounded by a factor polynomial in \(n\) multiplied by the complexity of computing \(F\).</li>
+								<li>If \(F\) can be computed by an arithmetic circuit over some <span class="load-definable" data-define="Galois field">field</span> using unbounded fan-in linear operations and bounded fan-in multiplication, in depth \(d\), then \(F\) can be computed <span class="load-definable" data-define="t-private">\(t\)-privately</span> in \(\operatorname O(d)\) rounds of exchange of information.</li>
 								<li>
 									<p>
 										In our construction we have to reduce the degree of our polynomial only when its degree is about to pass \(n-1\). Thus if \(t=\operatorname O(n^{1-\epsilon})\), for some fixed \(\epsilon\gt 0\), and we start with polynomials of degree \(t\), the players can simulate many steps of the computation before the degree comes close to \(n\), by doing the computation each on their own shares, without any communication(!). When the degree does get close to \(n\), we reduce the degree back to \(t\) in one randomizing, degree reducing step.
@@ -445,19 +444,19 @@
 								The following scheme achieves both requirements:
 							</p>
 							<p class="rp_original">
-								Let \(E\) be a finite field with a primitive \(n\)-th <span class="load-definable">root of unity</span>, \(\omega\in E,\,\omega^n=1\) and for all \(1\leq j\lt n,\,\omega^j\neq 1\). Without loss of generality we can assume that our secret \(s\) is in \(E\).
+								Let \(E\) be a <span class="load-definable" data-define="Galois field">finite field</span> with a primitive \(n\)-th <span class="load-definable">root of unity</span>, \(\omega\in E,\,\omega^n=1\) and for all \(1\leq j\lt n,\,\omega^j\neq 1\). Without loss of generality we can assume that our secret \(s\) is in \(E\).
 							</p>
 							<p class="rp_annotation">
 								While originally the above stated \(1\lt j\lt n\), we can expand this to \(1\leq j\) because, if \(\omega^1=1\), then obviously \(\omega=1\) and therefore the statement would be false for all \(j\).
 							</p>
 							<p class="rp_annotation">
-								We note that the above requirement on \(E\)&mdash;that it have a primitive \(n\)th <span class="load-definable">root of unity</span>&mdash;is non-trivial. A finite field of order \(q\) has a primitive \(n\)th root of unity if and only if \(n\,|\,q-1\).<sup class="footnote" id="fref2" data-footnote="2"><a href="#footnote2">2</a></sup> We must therefore restrict ourselves to finite fields of order \(p^k\) such that \(n\,|\,p^k-1\). Since the statement \(n\,|\,p^k-1\) is equivalent to the statement \(p^k\equiv1\bmod n\), we can solve this congruency using the <span class="load-definable">Fermat-Euler theorem</span>: for any \(p\) coprime to \(n\), \(p^{\operatorname\phi(n)}\equiv1\bmod n\). Since \(p\) must be prime anyway, we come to the conclusion that we must use \(E=GF(p^{\phi(n)})\) for any \(p\in\mathbb P\) such that \(p\not|\;n\).  Notably, if \(n\) is even, \(p\) cannot be 2. For completeness, note that \(p^{\phi(n)}\) is always strictly greater than \(n\) for any valid choice of \(p\).<sup class="footnote" id="fref3" data-footnote="3"><a href="#footnote3">3</a></sup>
+								We note that the above requirement on \(E\)&mdash;that it have a primitive \(n\)th <span class="load-definable">root of unity</span>&mdash;is non-trivial. A <span class="load-definable" data-define="Galois field">finite field</span> of order \(q\) has a primitive \(n\)th <span class="load-definable">root of unity</span> if and only if \(n\,|\,q-1\).<sup class="footnote" id="fref2" data-footnote="2"><a href="#footnote2">2</a></sup> We must therefore restrict ourselves to <span class="load-definable" data-define="Galois field">finite fields</span> of order \(p^k\) such that \(n\,|\,p^k-1\). Since the statement \(n\,|\,p^k-1\) is equivalent to the statement \(p^k\equiv1\bmod n\), we can solve this congruency using the <span class="load-definable">Fermat-Euler theorem</span>: for any \(p\) coprime to \(n\), \(p^{\operatorname\phi(n)}\equiv1\bmod n\). Since \(p\) must be prime anyway, we come to the conclusion that we must use \(E=GF(p^{\phi(n)})\) for any \(p\in\mathbb P\) such that \(p\not|\;n\).  Notably, if \(n\) is even, \(p\) cannot be 2. For completeness, note that \(p^{\phi(n)}\) is always strictly greater than \(n\) for any valid choice of \(p\).<sup class="footnote" id="fref3" data-footnote="3"><a href="#footnote3">3</a></sup>
 							</p>
 							<p class="rp_original">
-								Pick a random polynomial \(f(x)\in\)<span class="load-equation" data-equation="E[x]">\(E[x]\)</span>, of degree \(t\) such that \(f(0)=s\). That is, set \(\alpha_0=s\) and pick random \(a_i\in E\) for \(i=1\dots t\) and set $$f(x)=a_0+a_1x+\cdots+a_tx^t.$$ Define the share of \(P_i,\,i=0\dots n-1,\) to be \(s_i=f(\omega^i)\). As in <span class="reference" data-citation="Sh">[?]</span>, the \(s_i\)'s are \(t\)-wise independent random variables that are uniformly distributed over \(E\), and thus our first requirement (A) is met.
+								Pick a random polynomial \(f(x)\in\)<span class="load-equation" data-equation="E[x]">\(E[x]\)</span>, of degree \(t\) such that \(f(0)=s\). That is, set \(\alpha_0=s\) and pick random \(a_i\in E\) for \(i=1\dots t\) and set $$f(x)=a_0+a_1x+\cdots+a_tx^t.$$ Define the share of \(P_i,\,i=0\dots n-1,\) to be \(s_i=f(\omega^i)\). As in <span class="reference" data-citation="Sh">[11]</span>, the \(s_i\)'s are \(t\)-wise independent random variables that are uniformly distributed over \(E\), and thus our first requirement (A) is met.
 							</p>
 							<p class="rp_original">
-								Note that setting \(a_i=0\) for \(i\gt t\) makes our secret shares the <span class="load-definable">Discrete Fourier Transform</span> of the sequence \((a_0,\dots,a_{n-1})\). Let \(\hat f(x)=s_0+s_1x+\cdots+s_{n-1}x^{n-1}\). By the well known formula for the inverse transform $$a_i=\frac 1 n\hat f(\omega^{-i})$$ and in particular \(\hat f(\omega^{-i})=0\) for \(i=t+1,\dots,n-1\). Explicitly the \(s_i\) satisfy the linear equations $$\sum\limits_{i=0}^{n-1}\omega^{r\cdot i}\cdot s_i=0\;\text{for}\;r=1,\dots,2t.$$ Thus the polynomial \(g(x)\,=\,\prod\nolimits_{i=t+1}^{n-1}(x-\omega^{-i})\) divides the polynomial \(\hat f(x)\), which in the language of <span class="load-definable" data-define="error-correcting code">Error Correcting Codes</span> says that the vector \(s=(s_0,\dots,s_{n-1})\) is a codeword in the <span class="load-definable" data-define="cyclic code">Cyclic Code</span> of length \(n\) generated by \(g(x)\). By our choice of \(g(x)\), this <span class="load-definable">cyclic code</span> is the well known Generalized Reed-M&uuml;ller code. Such codes have a simple error correction procedure to correct \(\frac 1 2\operatorname{deg}g(x)=t\) errors. See for example <span class="reference" data-citation="PW">[?]</span>, page 283.
+								Note that setting \(a_i=0\) for \(i\gt t\) makes our secret shares the <span class="load-definable">Discrete Fourier Transform</span> of the sequence \((a_0,\dots,a_{n-1})\). Let \(\hat f(x)=s_0+s_1x+\cdots+s_{n-1}x^{n-1}\). By the well known formula for the inverse transform $$a_i=\frac 1 n\hat f(\omega^{-i})$$ and in particular \(\hat f(\omega^{-i})=0\) for \(i=t+1,\dots,n-1\). Explicitly the \(s_i\) satisfy the linear equations $$\sum\limits_{i=0}^{n-1}\omega^{r\cdot i}\cdot s_i=0\;\text{for}\;r=1,\dots,2t.$$ Thus the polynomial \(g(x)\,=\,\prod\nolimits_{i=t+1}^{n-1}(x-\omega^{-i})\) divides the polynomial \(\hat f(x)\), which in the language of <span class="load-definable" data-define="error-correcting code">Error Correcting Codes</span> says that the vector \(s=(s_0,\dots,s_{n-1})\) is a codeword in the <span class="load-definable" data-define="cyclic code">Cyclic Code</span> of length \(n\) generated by \(g(x)\). By our choice of \(g(x)\), this <span class="load-definable">cyclic code</span> is the well known Generalized Reed-M&uuml;ller code. Such codes have a simple error correction procedure to correct \(\frac 1 2\operatorname{deg}g(x)=t\) errors. See for example <span class="reference" data-citation="PW">[10]</span>, page 283.
 							</p>
 							<p class="rp_annotation">
 								Intuitively, we can see that \(g(x)\,|\,\hat f(x)\) since they share the same zeroes.
@@ -528,7 +527,7 @@
 								</p>
 								<span class="rp_theorem_header">Lemma:</span>
 								<p class="rp_original rp_theorem">
-									If no correct player has to correct a value given by a correct player, then there is a polynomial of degree \(t\) that passes through the interpolation points of all the correct players.
+									If no correct player has to correct a value given by a correct player, then there is a polynomial of degree \(t\) that passes through the <span class="load-definable">interpolation</span> points of all the correct players.
 								</p>
 								<span class="rp_sub_header">Proof:</span>
 								<p class="rp_original rp_sub">
@@ -538,7 +537,7 @@
 									To make sure that the condition of this lemma is satisfied, each player \(P_j\) broadcasts a request to make public the coordinates \((i,j)\) that were incorrect. If \(P_j\) detects more than \(t\) wrong incoming values, or had to correct his or her own value, the dealer is clearly faulty. In such a case \(P_j\) broadcasts a request to make both \(f_j(x)\) and \(g_j(y)\) public. At this point the dealer broadcasts the (supposedly true) values \(s_{i,j}\) at all these points, and the polynomials that were to be made public. Note that making \(f_j\) and \(g_j\) public makes all the \(s_{k,j}\) and \(s_{j,k}\) public for \(0\leq k\lt n\), for that particular \(j\).
 								</p>
 								<p class="rp_original">
-									Now if some \(P_i\) observes that some new public \(s_{i,j}\) contradicts the polynomials in that player's possession, or finds out that the public information already contradicts itself, he or she broadcasts a request to make all of his or her information public. Here once more, the dealer makes public all the requested information. Finally, each \(P_i\) checks all the public and private information received from the dealer. If any \(P_i\) finds an inconsistencies, the player broadcasts a complaint by asking all his  or her private information to be made public.
+									Now if some \(P_i\) observes that some new public \(s_{i,j}\) contradicts the polynomials in that player's possession, or finds out that the public information already contradicts itself, he or she broadcasts a request to make all of his or her information public. Here once more, the dealer makes public all the requested information. Finally, each \(P_i\) checks all the public and private information received from the dealer. If any \(P_i\) finds an inconsistencies, the player broadcasts a complaint by asking all his or her private information to be made public.
 								</p>
 								<p class="rp_original">
 									If all this point \(t+1\) or more players have asked to make their information public, the dealer is clearly faulty and all the players pick the default zero polynomial as the dealer's polynomial. Likewise, if the dealer did not answer all the broadcasted requests, the dealer is declared faulty. On the other hand, if \(t\) or fewer players have complained, then there are at least \(t+1\) good players who are satisfied. These uniquely define the polynomial \(f(x,y)\) and they conform with all the information that was made public. In this case, the complaining players take the public information as their share.
@@ -582,7 +581,7 @@
 						<section id="sec8" data-section-name="Proof of Theorem 3">
 							<h2>8. Proof of Theorem 3</h2>
 							<p class="rp_original">
-								We separate again the computation to its Input, Computation, and Final stages. At the input stage, we let all players enter their inputs to the computation using our secret sharing scheme, while verifying that each secret shared is indeed some polynomial of degree \(t\). The secret verification assures that the inputs of any Byzantine player is well defined, but does not ensure that it is in the domain of our function. For example, in a 0-1 vote, we must verify that the input is 0 or 1. We defer this type of verification to the computation stage.
+								We separate again the computation to its Input, Computation, and Final stages. At the input stage, we let all players enter their inputs to the computation using our secret sharing scheme, while verifying that each secret shared is indeed some polynomial of degree \(t\). The secret verification assures that the inputs of any <span class="load-definable" data-define="Byzantine fault">Byzantine player</span> is well defined, but does not ensure that it is in the domain of our function. For example, in a 0-1 vote, we must verify that the input is 0 or 1. We defer this type of verification to the computation stage.
 							</p>
 							<p class="rp_original">
 								The final stage is exactly the same <a href="#sec3.2">as in the proof of Theorem 1</a>. When we have simulated the circuit, and the players are holding the pieces of a properly shared secret encoding the final output, they send all the pieces to one or all the players. As at most \(t\) pieces are wrong, each player can use the error correcting procedure and recover the result.
@@ -632,7 +631,7 @@
 								</p>
 								<span class="rp_sub_header">Proof:</span>
 								<p class="rp_original rp_sub">
-									Follows immediately from the lower bound for Byzantine Agreement in this model. We note that even if we allow broadcast as a primitive operation, theorem 4 remains true. This is because we can exhibit functions for three players that cannot be computed <span class="load-definable" data-define="t-resilient">resiliently</span>, when one player is bad. This generalizes immediately to \(\frac n 3\).
+									Follows immediately from the lower bound for <span class="load-definable" data-define="Byzantine agreement">Byzantine Agreement</span> in this model. We note that even if we allow broadcast as a primitive operation, theorem 4 remains true. This is because we can exhibit functions for three players that cannot be computed <span class="load-definable" data-define="t-resilient">resiliently</span>, when one player is bad. This generalizes immediately to \(\frac n 3\).
 								</p>
 								<span class="rp_sub_header">Remark:</span>
 								<p class="rp_original rp_sub">
@@ -650,7 +649,7 @@
 						<section id="appendixnotation" data-section-name="Formal Notation">
 							<h3>Formal Notation</h3>
 							<p class="rp_original">
-								Let \(F\) be a field. Let \(U=F^n\) denote the standard \(n\)-dimensional vector space over \(F\) and \(M_n(F)\) the ring of \(n\times n\) matrices over \(F\).
+								Let \(F\) be a <span class="load-definable" data-define="Galois field">field</span>. Let \(U=F^n\) denote the standard \(n\)-dimensional vector space over \(F\) and \(M_n(F)\) the ring of \(n\times n\) matrices over \(F\).
 							</p>
 							<p class="rp_original">
 								Let \(R\) be a random variable with distribution \(D\) over \(F\). Then \(R^k\,(R^*)\) denotes \(k\) (finitely many) independent draws from \(D\).
@@ -663,13 +662,13 @@
 						<section id="appendix1.1" data-section-name="The Basic Model">
 							<h3>The Basic Model</h3>
 							<p class="rp_original">
-								Fix \(n\gt 0\) and a field \(F\). Intuitively, an \((n,F)\)-<i>network</i> is a complete synchronous network of \(n\) probabilistic machines (players) \(P_0,P_1,\dots,P_{n-1}\). At every round each players can send one message (element of \(F\)) to each other player, receive a message from each other player, and perform arbitrary computation.
+								Fix \(n\gt 0\) and a <span class="load-definable" data-define="Galois field">field</span> \(F\). Intuitively, an \((n,F)\)-<i>network</i> is a complete <span class="load-definable">synchronous network</span> of \(n\) probabilistic machines (players) \(P_0,P_1,\dots,P_{n-1}\). At every round each players can send one message (element of \(F\)) to each other player, receive a message from each other player, and perform arbitrary computation.
 							</p>
 							<p class="rp_original">
-								If we assume for convenience that players send messages to themselves too, a round of communication is neatly described by a matrix \(M\in M_n(F)\), where each \(P_i\) sent the \(i\)-th row of \(M\), and receives the \(i\)-th column of \(M\). (This formalizes the security of private channels).
+								If we assume for convenience that players send messages to themselves too, a round of communication is neatly described by a matrix \(M\in M_n(F)\), where each \(P_i\) sent the \(i\)th row of \(M\), and receives the \(i\)th column of \(M\). (This formalizes the security of private channels).
 							</p>
 							<p class="rp_original">
-								Formally, a \(T\) round \((n,F)\)-<i>network</i> is a set of players \(\{P_0,P_1,\dots,P_{n-1}\}\). Each \(P_i\) is a tuple $$P_i=\left\langle Q_i,q_i^{(0)},R_i,\delta_i\right\rangle,$$ where \(Q_i\) is a set of states, \(q_i^{0}\) the initial state, \(R_i\) is a random variable over \(F\) (distributed like \(R\)) and $$\delta_i:\,[T]\times Q_i\times F^n\times R_i^*\rightarrow Q_i\times F^n$$ is a transition function that, given a round number, state, previous round input, and private coin tosses, computes the next state and this round's output.
+								Formally, a \(T\) round \((n,F)\)-<i>network</i> is a set of players \(\{P_0,P_1,\dots,P_{n-1}\}\). Each \(P_i\) is a tuple $$P_i=\left\langle Q_i,q_i^{(0)},R_i,\delta_i\right\rangle,$$ where \(Q_i\) is a set of states, \(q_i^{0}\) the initial state, \(R_i\) is a random variable over \(F\) (distributed like \(R\)) and $$\delta_i:\,[T]\times Q_i\times F^n\times R_i^*\rightarrow Q_i\times F^n$$ is a transition function that, given a round number, state, previous round input, and private <span class="load-definable" data-define="coin flip">coin tosses</span>, computes the next state and this round's output.
 							</p>
 							<p class="rp_original">
 								A <i>protocol</i> is simply \(\delta=\left\langle\delta_0,\delta_1,\dots,\delta_{n-1}\right\rangle\), the transition functions prescribing to each player what to do in each round.
@@ -693,7 +692,7 @@
 								The bad players in our model can completely coordinate their actions. Hence, for a bad set (coalition) \(C\subseteq[n]=\{0,1,2,\dots,n-1\}\), the transition functions \(\delta_i,\,i\in C\) are replaced by arbitrary functions \(\delta_i'\) that compute the next state and messages of \(P_i\) from the joint information of the current state, previously received messages and random choices of all \(\{P_i\},\,i\in C\). We denote any protocol in which a set of \(C\) is bad (in this sense) by \(\delta_C\).
 							</p>
 							<p class="rp_original">
-								We distinguish two types of bad behavior. The benign (gossip) kind, in which bad players send messages according to the original protocol \(\delta\), but try to learn as much as they can from it by joining their forces. The malign (Byzantine) kind puts no restrictions on the bad players, i.e. the \(\delta_i'\) can really be arbitrary.
+								We distinguish two types of bad behavior. The <span class="load-definable" data-define="passive adversary">benign (gossip) kind</span>, in which bad players send messages according to the original protocol \(\delta\), but try to learn as much as they can from it by joining their forces. The <span class="load-definable" data-define="malicious adversary">malign</span> (<span class="load-definable" data-define="Byzantine fault">Byzantine</span>) kind puts no restrictions on the bad players, i.e. the \(\delta_i'\) can really be arbitrary.
 							</p>
 							<p class="rp_original">
 								To formalize the benign kind of bad behavior we need the following definition: Two protocols \(\delta\) and \(\delta'\) <i>look alike</i> if their runs have the same distribution, i.e. \(M=M'\) as random variables, for every fixed initial state \(\left\langle q_i^{(0)}\right\rangle\) of all players.
@@ -702,7 +701,7 @@
 								A bad coalition \(C\) is called <i>gossip</i> if the protocol \(\delta_C\) looks like \(\delta\), otherwise it is called <i>Byzantine</i>.
 							</p>
 							<p class="rp_original">
-								In the case of gossip, we don't have to worry about the correctness of computing \(f\)&mdash;this follows from the definition "look alike". Here all we shall have to prevent is leakage of information. In case of Byzantine faults, we will have to guarantee also the correctness of the computation. We proceed now to define the important notions of Privacy and Correctness.
+								In the case of gossip, we don't have to worry about the correctness of computing \(f\)&mdash;this follows from the definition "look alike". Here all we shall have to prevent is leakage of information. In case of <span class="load-definable" data-define="Byzantine fault">Byzantine faults</span>, we will have to guarantee also the correctness of the computation. We proceed now to define the important notions of Privacy and Correctness.
 							</p>
 						</section>
 						<section id="appendix1.3" data-section-name="Privacy (preliminary):">
@@ -723,10 +722,10 @@
 						<section id="appendix1.4" data-section-name="Correctness:">
 							<h3>Correctness:</h3>
 							<p class="rp_original">
-								This issue is problematic, since some of the bad players can obliterate their initial inputs, and the function value is not well defined (a simple example is Byzantine agreement). To ignore bad inputs for every set \(B\subseteq[n]\), we need a (sub)function of \(f\) that depends on the input coordinates of only \([n]\backslash B\). (A special case is assigned default values to input coordinates in \(B\)).
+								This issue is problematic, since some of the bad players can obliterate their initial inputs, and the function value is not well defined (a simple example is <span class="load-definable">Byzantine agreement</span>). To ignore bad inputs for every set \(B\subseteq[n]\), we need a (sub)function of \(f\) that depends on the input coordinates of only \([n]\backslash B\). (A special case is assigned default values to input coordinates in \(B\)).
 							</p>
 							<p class="rp_original">
-								So now by \(f\) we mean a family of functions \(\{f_B:\;F^{n\backslash B}\times R^m\rightarrow F^n\}\;B\subseteq[n]\), with \(f_\varnothing\) being the original function \(f\). Typically, (as in Byzantine agreement) this exponential size family is very succinctly described.
+								So now by \(f\) we mean a family of functions \(\{f_B:\;F^{n\backslash B}\times R^m\rightarrow F^n\}\;B\subseteq[n]\), with \(f_\varnothing\) being the original function \(f\). Typically, (as in <span class="load-definable">Byzantine agreement</span>) this exponential size family is very succinctly described.
 							</p>
 							<p class="rp_original">
 								So now, a computation is correct if all good players compute a function \(f_B\), where \(B\) is a subset of the bad players.
@@ -760,10 +759,10 @@
 								Our original protocol was simplified by Paul Feldman who independently observed that the verification procedure can be accomplished in a constant number of communication rounds.
 							</li>
 							<li id="footnote2" class="rp_annotation_footnote">
-								Claim: \(GF(q)\) has a primitive \(n\)th <span class="load-definable">root of unity</span> if and only if \(n\,|\,q-1\). To quickly demonstrate this, assume we have a primitive \(n\)th root of unity \(\omega\) for \(GF(q)\) where \(n\not|\;q-1\). Take any generator \(g\) in this field: by definition of a generator, there exists an \(a\) such that \(g^a=\omega\). Since the field is a multiplicative ring, \(g^{q-1}=g^0=1\). But \(g^{an}=1\), and by definition of a primitive root of unity, there is no smaller (non-zero) exponent such that this is true. So \(g^{an}=g^{q-1}\) therefore implies \(an=q-1\), clearly contradicting our assumption that \(n\not|\;q-1\).
+								Claim: \(GF(q)\) has a primitive \(n\)th <span class="load-definable">root of unity</span> if and only if \(n\,|\,q-1\). To quickly demonstrate this, assume we have a primitive \(n\)th <span class="load-definable">root of unity</span> \(\omega\) for \(GF(q)\) where \(n\not|\;q-1\). Take any generator \(g\) in this field: by definition of a generator, there exists an \(a\) such that \(g^a=\omega\). Since the <span class="load-definable" data-define="Galois field">field</span> is a multiplicative ring, \(g^{q-1}=g^0=1\). But \(g^{an}=1\), and by definition of a primitive <span class="load-definable">root of unity</span>, there is no smaller (non-zero) exponent such that this is true. So \(g^{an}=g^{q-1}\) therefore implies \(an=q-1\), clearly contradicting our assumption that \(n\not|\;q-1\).
 							</li>
 							<li id="footnote3" class="rp_annotation_footnote">
-								Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from the lower bound on \(\operatorname \phi(n)\): for any \(n\geq3,\,\phi(n)\geq\frac{n}{e^\gamma\log{\log n}}+\operatorname O\left(\frac{n}{(\log{\log n})^2}\right)\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^{\operatorname\phi(n)}\gt n\). Since we are minimizing \(\phi(n)\) anyway, for simplicity we can assume the big-oh is 0, leaving us with: <span style="font-size:200%">$$2^{\frac{e^{-\gamma}n}{\log{\log n}}}\geq n.$$</span> The left side clearly dominates the right side (both intuitively and through analysis of their derivatives), and the left is greater than the right starting at \(n=5\), so we are left only to demonstrate that \(p^{\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)) and for 4 (\(3^2\gt 4\)). With the exception of \(n=4\) (where we must use \(p=3\) but without weakening our claim) we have demonstrated that, for the lowest possible \(p,\,p^{\phi(n)}\gt n.\quad\blacksquare\)
+								Claim: \(p^{\phi(n)}\gt n\) for any \(n\in\mathbb Z^{\gt2},\;p\in\mathbb P,\,p\not|\;n\). This follows simply from a (loose) lower bound on \(\operatorname\phi:\;\operatorname\phi(n)\geq\sqrt n,\;n\gt6\). The lower bound on \(p\) is clearly 2, so we simply need to prove that \(2^{\sqrt n}\gt n\). Keeping in mind that the logarithm function is monotonically increasing, this statement is equivalent to <span style="font-size:200%">$$\begin{align}\log{2^{\sqrt n}}\;&\gt\;\log n\\\sqrt n\cdot\log2\;&\gt\;\log n\end{align}$$</span> which is true for all \(n\gt0\). We are left only to demonstrate that \(p^{\operatorname\phi(n)}\gt n\) for 3 (\(2^2\gt 3\)), 4 (\(3^2\gt 4\)), 5 (\(2^4\gt5\)), and 6 (\(5^2\gt6\)). We have therefore demonstrated that, for all \(n\), and for the lowest valid \(p,\,p^{\phi(n)}\gt n.\quad\blacksquare\)
 							</li>
 						</ol>
 					</section>
