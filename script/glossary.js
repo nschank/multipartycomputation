@@ -5,9 +5,6 @@ window.addEventListener("load", addGlossaryListeners, true);
  */
 function addGlossaryListeners()
 {
-	//A difficulty of 6 means no glossary
-	if(difficulty == 6)
-		return;
 	var allDefinables = document.getElementsByClassName("load-definable");
 	
 	//Attempt to organize the DOM a bit better by putting the definition boxes in their own div; 
@@ -37,16 +34,18 @@ function addGlossaryListeners()
 			continue;
 		}
 		
-		//If we have a difficulty set, we check to see if set difficulty <= word difficulty
-		if(difficulty > definitionObject.difficulty)
-			continue;
-		
 		createFloatingDiv(blockDiv, span, 
 			"gl_block" + definitionObject.blockName, 
-			defBlockConstructor(definitionObject));
-		span.className += " definable";
+			defBlockConstructor(definitionObject),
+			metaOpenPredicate(definitionObject.difficulty));
+			
+		span.setAttribute("data-define", word)
+		span.setAttribute("data-difficulty", definitionObject.difficulty);
+		span.className += " loaded-definable";
 	}
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+	
+	updateGlossary(difficulty);
 }
 
 /**
@@ -73,6 +72,20 @@ function defBlockConstructor(definitionObject)
 		block.appendChild(help);
 
 		return block;
+	}
+}
+
+function updateGlossary(difficulty)
+{
+	var allDefinables = document.getElementsByClassName("loaded-definable");
+	
+	for(var i = 0; i < allDefinables.length; i++)
+	{
+		var updateSpan = allDefinables.item(i);
+		
+		if(difficulty > updateSpan.getAttribute("data-difficulty"))
+			$(updateSpan).removeClass("definable");
+		else $(updateSpan).addClass("definable");
 	}
 }
 

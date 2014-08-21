@@ -4,11 +4,15 @@
 		<meta charset="utf-8">
 		<title>Protocols for Secure Computation - Andrew Yao, 1982</title>
 		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+		<link rel="stylesheet" type="text/css" href="../../style/difficulty.css">
 		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
 		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
 		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
 		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
 		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
 		<script type="text/javascript" src="../../script/difficulty.js"></script>
 		<script type="text/javascript" src="../../script/ref.js"></script>
@@ -19,12 +23,13 @@
 		<script type="text/javascript" src="../../script/toc.js"></script>
 		<script type="text/javascript" src="../../script/authorlist.js"></script>
 		<script type="text/javascript" src="../../script/authorload.js"></script>
+		<script type="text/javascript" src="../../script/difficultyload.js"></script>
 		<script type="text/javascript"
 				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 		</script>
 		<script type="text/javascript">
 			<!--
-				function fill(box)
+			function fill(box)
 			{
 				switch (box)
 				{
@@ -82,7 +87,10 @@
 					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
 				</div>
 				<div class="main_window main_fullwidth">
-					<section class="top_section" id="overview" data-section-name="Overview">
+					<section class="top_section" id="overview" data-section-name="Editor's Overview">
+						<div id="slider_holder">
+							<div id="slider"></div>
+						</div>
 						<div class="rp_linkbox"><a href="pdf/49.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 						<span class="rp_title">Protocols for Secure Computations</span>
 						<span class="rp_info">1982<span class="rp_author">Andrew C. Yao</span></span>
@@ -90,7 +98,7 @@
 						<div class="rp_snippet">
 							&ldquo;Suppose \(m\) people wish to compute the value of a function <span class="load-equation" data-equation="fx1xm">\(f(x_1, x_2, x_3,&hellip;, x_m)\)</span>, which is an integer-valued function of \(m\) integer variables \(x_i\) of bounded range. Assume initially person \(P_i\) knows the value of \(x_i\) and no other \(x\)'s. Is it possible for them to compute the value of \(f\), by communicating among themselves, without unduly giving away any information about the values of their own variables?&rdquo;
 						</div>
-						<h1>Overview</h1>
+						<h1>Editor's Overview</h1>
 
 						<div class="main_toc"></div>
 						<section id="intro" data-section-name="Introduction">

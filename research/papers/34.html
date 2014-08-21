@@ -4,11 +4,15 @@
 		<meta charset="utf-8">
 		<title>Multiparty Unconditionally Secure Protocols - Chaum, Cr&eacute;peau, Damg&aring;rd, 1988</title>
 		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+<link rel="stylesheet" type="text/css" href="../../style/difficulty.css">
 		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
 		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
 		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
 		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
 		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
 		<script type="text/javascript" src="../../script/difficulty.js"></script>
 		<script type="text/javascript" src="../../script/equation.js"></script>
@@ -19,6 +23,7 @@
 		<script type="text/javascript" src="../../script/toc.js"></script>
 		<script type="text/javascript" src="../../script/authorlist.js"></script>
 		<script type="text/javascript" src="../../script/authorload.js"></script>
+		<script type="text/javascript" src="../../script/difficultyload.js"></script>
 		<script type="text/javascript"
 				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 		</script>
@@ -53,7 +58,10 @@
 					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
 				</div>
 				<div class="main_window main_fullwidth">
-					<section class="top_section" id="overview" data-section-name="Overview">
+					<section class="top_section" id="overview" data-section-name="Editor's Overview">
+						<div id="slider_holder">
+							<div id="slider"></div>
+						</div>
 						<div class="rp_linkbox"><a href="pdf/34.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 
 						<span class="rp_title">Multiparty Unconditionally Secure Protocols</span>
@@ -69,7 +77,7 @@
 						<div class="rp_snippet">
 							&ldquo;[U]nder the assumption that each pair of participants can communicate secretly, any reasonable function can be computed if at least \(\frac{2n}{3}\) of the participants are honest...&rdquo;
 						</div>
-						<h1>Overview</h1>
+						<h1>Editor's Overview</h1>
 						<div class="main_toc"></div>
 						<section id="intro" data-section-name="Introduction">
 							<h2>Introduction</h2>

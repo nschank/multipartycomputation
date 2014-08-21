@@ -4,11 +4,15 @@
 		<meta charset="utf-8">
 		<title>How to Play Any Mental Game - Goldreich, Micali, Wigderson, 1987</title>
 		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+<link rel="stylesheet" type="text/css" href="../../style/difficulty.css">
 		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
 		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
 		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
 		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
 		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
 		<script type="text/javascript" src="../../script/difficulty.js"></script>
 		<script type="text/javascript" src="../../script/equation.js"></script>
@@ -19,6 +23,7 @@
 		<script type="text/javascript" src="../../script/toc.js"></script>
 		<script type="text/javascript" src="../../script/authorlist.js"></script>
 		<script type="text/javascript" src="../../script/authorload.js"></script>
+		<script type="text/javascript" src="../../script/difficultyload.js"></script>
 		<script type="text/javascript"
 				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 		</script>
@@ -87,7 +92,10 @@
 					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
 				</div>
 				<div class="main_window main_fullwidth">
-					<section class="top_section" id="overview" data-section-name="Overview">
+					<section class="top_section" id="overview" data-section-name="Editor's Overview">
+						<div id="slider_holder">
+							<div id="slider"></div>
+						</div>
 						<div class="rp_linkbox"><a href="pdf/81.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 
 						<span class="rp_title">How to Play Any Mental Game or A Completeness Theorem for Protocols with Honest Majority</span>
@@ -98,7 +106,7 @@
 							&ldquo;As long as the majority of the players is honest, all protocols may be correctly played.&rdquo;
 						</div>
 
-						<h1>Overview</h1>
+						<h1>Editor's Overview</h1>
 						<div class="main_toc"></div>
 
 
@@ -248,7 +256,7 @@
 										<li>\(k\) is the security parameter, \(n\) is the number of parties, \(l\) is the bit-length of their inputs.</li>
 										<li>The <span class="load-definable">encryption</span> protocol requires the exchange of \(\operatorname O(k)\) bits.</li>
 										<li>The verifiable secret sharing scheme shares \(n\) inputs of size \(l\) using \(\operatorname O(kln^2)\) bits (\(\operatorname O(knl)\) bits for \(n\) inputs).</li>
-										<li>The <span class="load-definable" data-define="coin flip">coin flipping</span> protocol requires an exchange of \(\operatornme O(S(k))\) bits per party.</li>
+										<li>The <span class="load-definable" data-define="coin flip">coin flipping</span> protocol requires an exchange of \(\operatorname O(S(k))\) bits per party.</li>
 										<li>Each run of the <span class="load-definable" data-define="zero knowledge proof">zero-knowledge proof</span> system exchanges \(\operatorname O(k)\) bits.</li>
 										<li>We are computing a function with a <span class="load-definable">straight-line program</span> of size \(C(f,l)\).</li>
 									</ul>

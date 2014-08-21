@@ -1,0 +1,10 @@
+#slider {
+	max-width:70%;
+	max-height:10px;
+	margin:0px auto;
+}
+
+#slider-holder {
+	display:inline-block;
+	margin:5px;
+}

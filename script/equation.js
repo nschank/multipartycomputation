@@ -9,9 +9,6 @@ window.addEventListener("load", addEquationListeners, true);
  */
 function addEquationListeners()
 {
-	//A difficulty of 6 means no equation info
-	if(difficulty == 6)
-		return;
 	//All equations set for loading
     var allEquations = document.getElementsByClassName("load-equation");
 	
@@ -27,15 +24,16 @@ function addEquationListeners()
 		
 		var equationInfo = fill(equationID);
 		
-		//If we have a difficulty set, we check to see if set difficulty <= equation difficulty
-		if(difficulty > equationInfo.difficulty)
-			continue;
 		createFloatingDiv(blockDiv, equation, 
 			"eq_block" + equationInfo.blockName, 
-			eqBlockConstructor(equationInfo));
-		equation.className += " equation";
+			eqBlockConstructor(equationInfo),
+			metaOpenPredicate(equationInfo.difficulty));
+		equation.setAttribute("data-difficulty",equationInfo.difficulty);
+		equation.className += " loaded-equation";
     }
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+	
+	updateEquations(difficulty);
 }
 
 /**
@@ -55,5 +53,19 @@ function eqBlockConstructor(equationInfo)
 
 		blockConstruct(block, equationInfo.info, "equationinfo");
 		return block;
+	}
+}
+
+function updateEquations(difficulty)
+{
+	var allEquations = document.getElementsByClassName("loaded-equation");
+	
+	for(var i = 0; i < allEquations.length; i++)
+	{
+		var updateSpan = allEquations.item(i);
+		
+		if(difficulty > updateSpan.getAttribute("data-difficulty"))
+			$(updateSpan).removeClass("equation");
+		else $(updateSpan).addClass("equation");
 	}
 }

@@ -38,3 +38,16 @@ function createCookie(name,value,days) {
 	else var expires = "";
 	document.cookie = name+"="+value+expires+"; path=/";
 }
+
+/**
+ * Returns a predicate which will return true only if the
+ * comparison difficulty is higher than (or equal to) the
+ * set difficulty.
+ */
+function metaOpenPredicate(comparisonValue)
+{
+	return function()
+	{
+		return difficulty <= comparisonValue;
+	}
+}

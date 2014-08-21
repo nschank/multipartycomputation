@@ -4,11 +4,15 @@
 		<meta charset="utf-8">
 		<title>Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result - David Chaum, Ivan B. Damg&aring;rd, Jeroen van de Graaf, 1988</title>
 		<link rel="stylesheet" type="text/css" href="../../style/main.css">
+<link rel="stylesheet" type="text/css" href="../../style/difficulty.css">
 		<link rel="stylesheet" type="text/css" href="../../style/equation.css">
 		<link rel="stylesheet" type="text/css" href="../../style/ref.css">
 		<link rel="stylesheet" type="text/css" href="../../style/glossary.css">
 		<link rel="stylesheet" type="text/css" href="../../style/researchPaper.css">
 		<link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 		<script type="text/javascript" src="../../script/blockShare.js"></script>
 		<script type="text/javascript" src="../../script/difficulty.js"></script>
 		<script type="text/javascript" src="../../script/equation.js"></script>
@@ -19,6 +23,7 @@
 		<script type="text/javascript" src="../../script/toc.js"></script>
 		<script type="text/javascript" src="../../script/authorlist.js"></script>
 		<script type="text/javascript" src="../../script/authorload.js"></script>
+		<script type="text/javascript" src="../../script/difficultyload.js"></script>
 		<script type="text/javascript"
 				src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 		</script>
@@ -83,7 +88,10 @@
 					<div class="main_section_nav_box"><a href="../tag.html">By Category</a></div>
 				</div>
 				<div class="main_window main_fullwidth">
-					<section class="top_section" id="overview" data-section-name="Overview">
+					<section class="top_section" id="overview" data-section-name="Editor's Overview">
+						<div id="slider_holder">
+							<div id="slider"></div>
+						</div>
 						<div class="rp_linkbox"><a href="pdf/82.pdf"><img src="../../img/PDF.png" class="rp_link" alt="view pdf" /></a></div>
 
 						<span class="rp_title">Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result</span>
@@ -100,13 +108,13 @@
 							&ldquo;[A] participant with bounded resources can perform computations securely with a participant who may have unlimited computing power.&rdquo;
 						</div>
 
-						<h1>Overview</h1>
+						<h1>Editor's Overview</h1>
 						<div class="main_toc"></div>
 
 						<section id="intro" data-section-name="Introduction">
 							<h2>Introduction</h2>
 							<p class="rp_analysis">
-								<b>Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result</b> is a 1988 paper by Chaum, Damg&aring;rd, and van de Graaf which presented the first example of a protocol offering <span class="load-definable">information theoretic security</span>, even if only to a single participant. Later that same year, Chaum and Damg&aring;ard (along with Claude Cr&eacute;peau) would follow up this work with a <a href="34.html">feasibility result</a> demonstrating that it was possible to offer <span class="load-definable">information theoretic security</span> to <i>all participants</i> (under certain assumptions). While this paper is important in its own right, the results of that following paper had a much larger effect on multiparty computation research as a whole.
+								<b>Multiparty Computation Ensuring Privacy of Each Party's Input and Correctness of the Result</b> is a 1988 paper by Chaum, Damg&aring;rd, and van de Graaf which presented the first example of a protocol offering <span class="load-definable">information theoretic security</span>, even if only to a single participant. Later that same year, Chaum and Damg&aring;rd (along with Claude Cr&eacute;peau) would follow up this work with a <a href="34.html">feasibility result</a> demonstrating that it was possible to offer <span class="load-definable">information theoretic security</span> to <i>all participants</i> (under certain assumptions). While this paper is important in its own right, the results of that following paper had a much larger effect on multiparty computation research as a whole.
 							</p>
 							<p class="rp_analysis">
 								The protocol presented offers a different perspective to computation than the papers before it. It is in some ways similar to Yao's garbled circuit construction, but offers very different characteristics (e.g. the <span class="load-definable">information theoretic security</span> of one party) and operates in an \(n\) party case as opposed to the 2 party case.

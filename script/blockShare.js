@@ -14,10 +14,13 @@ function bs_remove(lm) {
 		bs_open.splice(i,1);
 }
 
-function mouseOverListener(elem, block)
+function mouseOverListener(elem, block, openPredicate)
 {
     return function()
     {
+		if(openPredicate && !openPredicate())
+			return;
+	
 		block.style.display="block";
 		block.style.left=Math.min(window.innerWidth-block.clientWidth, elem.getBoundingClientRect().left + 10)+"px";
 		block.style.top=Math.min(window.innerHeight-block.clientHeight, elem.getBoundingClientRect().bottom)+"px";
@@ -121,7 +124,7 @@ function construct(constructible, className)
 	return elem;
 }
 
-function createFloatingDiv(container, activatingSpan, id, constructor)
+function createFloatingDiv(container, activatingSpan, id, constructor, openPredicate)
 {
 	var block = document.getElementById(id);
 	if(!block)
@@ -133,6 +136,6 @@ function createFloatingDiv(container, activatingSpan, id, constructor)
 		block.addEventListener('mouseout',maybeClose(block));
         window.addEventListener('scroll', definitelyClose(block));
 	}
-	activatingSpan.addEventListener('mouseover',mouseOverListener(activatingSpan, block));
+	activatingSpan.addEventListener('mouseover',mouseOverListener(activatingSpan, block, openPredicate));
 	activatingSpan.addEventListener('mouseout',mouseOutListener(activatingSpan, block));
 }
