@@ -632,7 +632,7 @@
 										This allows the output wire to become an input wire of another gate. If the <span class="load-definable">encryption</span> <span class="load-definable" data-define="algorithm">algorithms</span> of this second gate are publicly labelled 0/1 (see fig. 2), we see that A may evaluate any 2-gates function on her and B's inputs, without knowing intermediate results. Better said, B can "COTransfer" the value of any 2-gates function. By cascading this way COT AND-gates and COT NOT-gates (which are trivial to design), we can see that B can COTransfer the value of any function, provided that there is an upper bound to the length of A's and B's inputs, (else, the length of the inputs will be betrayed).
 									</p>
 									<p class="rp_annotation">
-										Note that the NAND gate is complete on <span class="load-definable" data-define="GF(2)">GF(2)</span>, so we can indeed create any function.
+										Note that the NAND gate is complete on <span class="load-definable" data-define="Galois field">GF(2)</span>, so we can indeed create any function.
 									</p>
 									<p class="rp_annotation" data-broken-link=true>
 										There is soon to be an implementation of this within the site's implementation GitHub. Currently, we have a regular circuit correctly implemented; garbling will follow.
